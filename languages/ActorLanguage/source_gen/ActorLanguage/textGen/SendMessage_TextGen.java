@@ -16,12 +16,16 @@ public class SendMessage_TextGen extends TextGenDescriptorBase {
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.indent();
-    tgs.append("int receiver_address = ");
+    tgs.append("receiver_address = ");
     tgs.append(String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.receiver$4HbI), PROPS.address$Eakk)));
     tgs.append(";");
     tgs.newLine();
     tgs.indent();
-    tgs.append("ssize_t bytes_written = write(data->map[receiver_address].write_fd, message, strlen(message));");
+    tgs.append("bytes_written = write(data->map[receiver_address].write_fd, ");
+    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.message$4GHG), PROPS.name$MnvL));
+    tgs.append(", strlen(");
+    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.message$4GHG), PROPS.name$MnvL));
+    tgs.append("));");
     tgs.newLine();
     tgs.indent();
     tgs.append("if (bytes_written == -1) {");
@@ -42,9 +46,11 @@ public class SendMessage_TextGen extends TextGenDescriptorBase {
 
   private static final class LINKS {
     /*package*/ static final SReferenceLink receiver$4HbI = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, 0x35a5eccbf2f26df7L, "receiver");
+    /*package*/ static final SReferenceLink message$4GHG = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, 0x35a5eccbf2f26df5L, "message");
   }
 
   private static final class PROPS {
     /*package*/ static final SProperty address$Eakk = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23308L, 0x35a5eccbf2f23360L, "address");
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

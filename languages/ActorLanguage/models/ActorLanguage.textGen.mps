@@ -666,6 +666,20 @@
               </node>
               <node concept="l8MVK" id="2LRe1VcbF3X" role="lcghm" />
             </node>
+            <node concept="lc7rE" id="2LRe1Vclymp" role="3cqZAp">
+              <node concept="la8eA" id="2LRe1Vclyoc" role="lcghm">
+                <property role="lacIc" value="int receiver_address;" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l8MVK" id="2LRe1Vclyqu" role="lcghm" />
+            </node>
+            <node concept="lc7rE" id="2LRe1Vcnu1G" role="3cqZAp">
+              <node concept="la8eA" id="2LRe1Vcnu3v" role="lcghm">
+                <property role="lacIc" value="ssize_t bytes_read, bytes_written;" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l8MVK" id="2LRe1Vcnu7$" role="lcghm" />
+            </node>
             <node concept="lc7rE" id="2LRe1VccxKQ" role="3cqZAp">
               <node concept="la8eA" id="2LRe1VccxN4" role="lcghm">
                 <property role="lacIc" value="char *actor_name = &quot;" />
@@ -697,77 +711,90 @@
               </node>
             </node>
             <node concept="3clFbH" id="2LRe1VceUrt" role="3cqZAp" />
-            <node concept="lc7rE" id="2LRe1VcbEX4" role="3cqZAp">
-              <node concept="la8eA" id="2LRe1VcbEY1" role="lcghm">
-                <property role="lacIc" value="ssize_t bytes_read = read(data-&gt;read_fd, buffer, BUFFER_SIZE);" />
+            <node concept="lc7rE" id="2LRe1VcnMGX" role="3cqZAp">
+              <node concept="la8eA" id="2LRe1VcnMIN" role="lcghm">
+                <property role="lacIc" value="while(1) {" />
                 <property role="ldcpH" value="true" />
               </node>
-              <node concept="l8MVK" id="2LRe1VcbF6s" role="lcghm" />
+              <node concept="l8MVK" id="2LRe1VcnMLN" role="lcghm" />
             </node>
-            <node concept="lc7rE" id="2LRe1VcbF9s" role="3cqZAp">
-              <node concept="la8eA" id="2LRe1VcbFc_" role="lcghm">
-                <property role="lacIc" value="if (bytes_read &gt; 0) {" />
-                <property role="ldcpH" value="true" />
+            <node concept="3izx1p" id="2LRe1VcnMO1" role="3cqZAp">
+              <node concept="3clFbS" id="2LRe1VcnMO3" role="3izTki">
+                <node concept="lc7rE" id="2LRe1VcbEX4" role="3cqZAp">
+                  <node concept="la8eA" id="2LRe1VcbEY1" role="lcghm">
+                    <property role="lacIc" value="bytes_read = read(data-&gt;read_fd, buffer, BUFFER_SIZE);" />
+                    <property role="ldcpH" value="true" />
+                  </node>
+                  <node concept="l8MVK" id="2LRe1VcbF6s" role="lcghm" />
+                </node>
+                <node concept="lc7rE" id="2LRe1VcbF9s" role="3cqZAp">
+                  <node concept="la8eA" id="2LRe1VcbFc_" role="lcghm">
+                    <property role="lacIc" value="if (bytes_read &gt; 0) {" />
+                    <property role="ldcpH" value="true" />
+                  </node>
+                  <node concept="l8MVK" id="2LRe1VcbFdM" role="lcghm" />
+                </node>
+                <node concept="3izx1p" id="2LRe1VcbFhj" role="3cqZAp">
+                  <node concept="3clFbS" id="2LRe1VcbFhl" role="3izTki">
+                    <node concept="lc7rE" id="2LRe1VcbFk0" role="3cqZAp">
+                      <node concept="la8eA" id="2LRe1Vccyf7" role="lcghm">
+                        <property role="lacIc" value="printf(&quot;%s received message: %s&quot;, actor_name, buffer);" />
+                        <property role="ldcpH" value="true" />
+                      </node>
+                      <node concept="l8MVK" id="2LRe1VcbFRp" role="lcghm" />
+                    </node>
+                    <node concept="lc7rE" id="2LRe1VcfVv$" role="3cqZAp">
+                      <node concept="la8eA" id="2LRe1VcfVw8" role="lcghm">
+                        <property role="lacIc" value="puts(&quot;&quot;);" />
+                        <property role="ldcpH" value="true" />
+                      </node>
+                      <node concept="l8MVK" id="2LRe1VcfVyi" role="lcghm" />
+                    </node>
+                  </node>
+                </node>
+                <node concept="lc7rE" id="2LRe1VcbFVB" role="3cqZAp">
+                  <node concept="la8eA" id="2LRe1VcbFZn" role="lcghm">
+                    <property role="lacIc" value="} else {" />
+                    <property role="ldcpH" value="true" />
+                  </node>
+                  <node concept="l8MVK" id="2LRe1VcdjKP" role="lcghm" />
+                </node>
+                <node concept="3izx1p" id="2LRe1VcbGLN" role="3cqZAp">
+                  <node concept="3clFbS" id="2LRe1VcbGLP" role="3izTki">
+                    <node concept="lc7rE" id="2LRe1VcbG5h" role="3cqZAp">
+                      <node concept="la8eA" id="2LRe1VcbGwY" role="lcghm">
+                        <property role="lacIc" value="printf(&quot;%s: Error reading from pipe&quot;, actor_name);" />
+                        <property role="ldcpH" value="true" />
+                      </node>
+                      <node concept="l8MVK" id="2LRe1VcbG$x" role="lcghm" />
+                    </node>
+                    <node concept="lc7rE" id="2LRe1VcfVxn" role="3cqZAp">
+                      <node concept="la8eA" id="2LRe1VcfVxo" role="lcghm">
+                        <property role="lacIc" value="puts(&quot;&quot;);" />
+                        <property role="ldcpH" value="true" />
+                      </node>
+                      <node concept="l8MVK" id="2LRe1VcfVz9" role="lcghm" />
+                    </node>
+                  </node>
+                </node>
+                <node concept="lc7rE" id="2LRe1VcbGFp" role="3cqZAp">
+                  <node concept="la8eA" id="2LRe1VcbGRm" role="lcghm">
+                    <property role="lacIc" value="}" />
+                    <property role="ldcpH" value="true" />
+                  </node>
+                  <node concept="l8MVK" id="2LRe1VcdjLG" role="lcghm" />
+                </node>
               </node>
-              <node concept="l8MVK" id="2LRe1VcbFdM" role="lcghm" />
             </node>
-            <node concept="3izx1p" id="2LRe1VcbFhj" role="3cqZAp">
-              <node concept="3clFbS" id="2LRe1VcbFhl" role="3izTki">
-                <node concept="lc7rE" id="2LRe1VcbFio" role="3cqZAp">
-                  <node concept="la8eA" id="2LRe1VcbFiO" role="lcghm">
-                    <property role="lacIc" value="buffer[bytes_read] = '\0';" />
-                    <property role="ldcpH" value="true" />
-                  </node>
-                  <node concept="l8MVK" id="2LRe1VcclxH" role="lcghm" />
-                </node>
-                <node concept="lc7rE" id="2LRe1VcbFk0" role="3cqZAp">
-                  <node concept="la8eA" id="2LRe1Vccyf7" role="lcghm">
-                    <property role="lacIc" value="printf(&quot;%s received message: %s&quot;, actor_name, buffer);" />
-                    <property role="ldcpH" value="true" />
-                  </node>
-                  <node concept="l8MVK" id="2LRe1VcbFRp" role="lcghm" />
-                </node>
-                <node concept="lc7rE" id="2LRe1VcfVv$" role="3cqZAp">
-                  <node concept="la8eA" id="2LRe1VcfVw8" role="lcghm">
-                    <property role="lacIc" value="puts(&quot;&quot;);" />
-                    <property role="ldcpH" value="true" />
-                  </node>
-                  <node concept="l8MVK" id="2LRe1VcfVyi" role="lcghm" />
-                </node>
-              </node>
-            </node>
-            <node concept="lc7rE" id="2LRe1VcbFVB" role="3cqZAp">
-              <node concept="la8eA" id="2LRe1VcbFZn" role="lcghm">
-                <property role="lacIc" value="} else {" />
-                <property role="ldcpH" value="true" />
-              </node>
-              <node concept="l8MVK" id="2LRe1VcdjKP" role="lcghm" />
-            </node>
-            <node concept="3izx1p" id="2LRe1VcbGLN" role="3cqZAp">
-              <node concept="3clFbS" id="2LRe1VcbGLP" role="3izTki">
-                <node concept="lc7rE" id="2LRe1VcbG5h" role="3cqZAp">
-                  <node concept="la8eA" id="2LRe1VcbGwY" role="lcghm">
-                    <property role="lacIc" value="printf(&quot;%s: Error reading from pipe&quot;, actor_name);" />
-                    <property role="ldcpH" value="true" />
-                  </node>
-                  <node concept="l8MVK" id="2LRe1VcbG$x" role="lcghm" />
-                </node>
-                <node concept="lc7rE" id="2LRe1VcfVxn" role="3cqZAp">
-                  <node concept="la8eA" id="2LRe1VcfVxo" role="lcghm">
-                    <property role="lacIc" value="puts(&quot;&quot;);" />
-                    <property role="ldcpH" value="true" />
-                  </node>
-                  <node concept="l8MVK" id="2LRe1VcfVz9" role="lcghm" />
-                </node>
-              </node>
-            </node>
-            <node concept="lc7rE" id="2LRe1VcbGFp" role="3cqZAp">
-              <node concept="la8eA" id="2LRe1VcbGRm" role="lcghm">
+            <node concept="lc7rE" id="2LRe1VcnNfu" role="3cqZAp">
+              <node concept="la8eA" id="2LRe1VcnNhp" role="lcghm">
                 <property role="lacIc" value="}" />
                 <property role="ldcpH" value="true" />
               </node>
-              <node concept="l8MVK" id="2LRe1VcdjLG" role="lcghm" />
+              <node concept="l8MVK" id="2LRe1VcnNii" role="lcghm" />
+              <node concept="l8MVK" id="2LRe1VcnNl1" role="lcghm" />
             </node>
+            <node concept="3clFbH" id="2LRe1VcnNiI" role="3cqZAp" />
           </node>
         </node>
         <node concept="lc7rE" id="2LRe1VcbGUN" role="3cqZAp">
@@ -788,7 +815,7 @@
       <node concept="3clFbS" id="2LRe1VceMmY" role="2VODD2">
         <node concept="lc7rE" id="2LRe1VcfJnK" role="3cqZAp">
           <node concept="la8eA" id="2LRe1VcfJpw" role="lcghm">
-            <property role="lacIc" value="int receiver_address = " />
+            <property role="lacIc" value="receiver_address = " />
             <property role="ldcpH" value="true" />
           </node>
           <node concept="l9hG8" id="2LRe1VcfOn7" role="lcghm">
@@ -815,8 +842,40 @@
         </node>
         <node concept="lc7rE" id="2LRe1VceMnq" role="3cqZAp">
           <node concept="la8eA" id="2LRe1VceMnQ" role="lcghm">
-            <property role="lacIc" value="ssize_t bytes_written = write(data-&gt;map[receiver_address].write_fd, message, strlen(message));" />
+            <property role="lacIc" value="bytes_written = write(data-&gt;map[receiver_address].write_fd, " />
             <property role="ldcpH" value="true" />
+          </node>
+          <node concept="l9hG8" id="2LRe1VcmMN8" role="lcghm">
+            <node concept="2OqwBi" id="2LRe1VcmNfg" role="lb14g">
+              <node concept="2OqwBi" id="2LRe1VcmMVB" role="2Oq$k0">
+                <node concept="117lpO" id="2LRe1VcmMOK" role="2Oq$k0" />
+                <node concept="3TrEf2" id="2LRe1VcmN4M" role="2OqNvi">
+                  <ref role="3Tt5mk" to="o1mc:3m_VcJMWARP" resolve="message" />
+                </node>
+              </node>
+              <node concept="3TrcHB" id="2LRe1VcmNyl" role="2OqNvi">
+                <ref role="3TsBF5" to="tpck:h0TrG11" resolve="name" />
+              </node>
+            </node>
+          </node>
+          <node concept="la8eA" id="2LRe1VcmN_f" role="lcghm">
+            <property role="lacIc" value=", strlen(" />
+          </node>
+          <node concept="l9hG8" id="2LRe1VcmNKv" role="lcghm">
+            <node concept="2OqwBi" id="2LRe1VcmNTq" role="lb14g">
+              <node concept="2OqwBi" id="2LRe1VcmNN8" role="2Oq$k0">
+                <node concept="117lpO" id="2LRe1VcmNMF" role="2Oq$k0" />
+                <node concept="3TrEf2" id="2LRe1VcmNRU" role="2OqNvi">
+                  <ref role="3Tt5mk" to="o1mc:3m_VcJMWARP" resolve="message" />
+                </node>
+              </node>
+              <node concept="3TrcHB" id="2LRe1VcmOdg" role="2OqNvi">
+                <ref role="3TsBF5" to="tpck:h0TrG11" resolve="name" />
+              </node>
+            </node>
+          </node>
+          <node concept="la8eA" id="2LRe1VcmPSp" role="lcghm">
+            <property role="lacIc" value="));" />
           </node>
           <node concept="l8MVK" id="2LRe1VceNBW" role="lcghm" />
         </node>
@@ -870,8 +929,19 @@
         </node>
         <node concept="lc7rE" id="2LRe1VcgoXR" role="3cqZAp">
           <node concept="la8eA" id="2LRe1VcgoYj" role="lcghm">
-            <property role="lacIc" value="char *message = &quot;" />
+            <property role="lacIc" value="char *" />
             <property role="ldcpH" value="true" />
+          </node>
+          <node concept="l9hG8" id="2LRe1VclxVG" role="lcghm">
+            <node concept="2OqwBi" id="2LRe1Vcly4a" role="lb14g">
+              <node concept="117lpO" id="2LRe1VclxWJ" role="2Oq$k0" />
+              <node concept="3TrcHB" id="2LRe1VclyeL" role="2OqNvi">
+                <ref role="3TsBF5" to="tpck:h0TrG11" resolve="name" />
+              </node>
+            </node>
+          </node>
+          <node concept="la8eA" id="2LRe1VclygU" role="lcghm">
+            <property role="lacIc" value="= &quot;" />
           </node>
           <node concept="l9hG8" id="2LRe1Vcgp0e" role="lcghm">
             <node concept="2OqwBi" id="2LRe1Vcgp8d" role="lb14g">

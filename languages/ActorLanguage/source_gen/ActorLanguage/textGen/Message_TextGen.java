@@ -17,7 +17,9 @@ public class Message_TextGen extends TextGenDescriptorBase {
     tgs.append("// message to send");
     tgs.newLine();
     tgs.indent();
-    tgs.append("char *message = \"");
+    tgs.append("char *");
+    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
+    tgs.append("= \"");
     tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.text$EvHa));
     tgs.append("\";");
     tgs.newLine();
@@ -25,6 +27,7 @@ public class Message_TextGen extends TextGenDescriptorBase {
   }
 
   private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
     /*package*/ static final SProperty text$EvHa = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x35a5eccbf2f23372L, "text");
   }
 }

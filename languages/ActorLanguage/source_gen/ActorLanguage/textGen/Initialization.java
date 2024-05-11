@@ -28,10 +28,10 @@ public abstract class Initialization {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("int address");
+    tgs.append("int address;");
     tgs.newLine();
     tgs.indent();
-    tgs.append("int write_fd");
+    tgs.append("int write_fd;");
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     tgs.append("} map_item;");

@@ -45,7 +45,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
 
     tgs.indent();
-    tgs.append("for (int i = 0; i < NUM_THREADS; i++) {");
+    tgs.append("for (int i = 0; i < num_threads; i++) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
@@ -97,9 +97,9 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("map[");
       tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$Eakk)));
-      tgs.append("].write_fd = pipes[");
+      tgs.append("].write_fd = pipes_fd[");
       tgs.append(String.valueOf(SNodeOperations.getIndexInParent(actor)));
-      tgs.append("][1]");
+      tgs.append("][1];");
       tgs.newLine();
     }
     tgs.newLine();

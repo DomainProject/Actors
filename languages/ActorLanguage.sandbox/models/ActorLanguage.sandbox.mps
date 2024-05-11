@@ -47,6 +47,30 @@
     <node concept="37lXYJ" id="3m_VcJN0cT$" role="37lXYW">
       <property role="TrG5h" value="actor2" />
       <property role="37lXYF" value="34" />
+      <node concept="37lXYU" id="2LRe1VclxPt" role="37ngyo">
+        <property role="TrG5h" value="message1" />
+        <property role="37lXYT" value="hi" />
+      </node>
+      <node concept="37lS4T" id="2LRe1VclxPy" role="37ngyo">
+        <ref role="37lS4Y" node="2LRe1VclxPt" resolve="message1" />
+        <ref role="37lS4W" node="3m_VcJN0cTf" resolve="actor1" />
+      </node>
+    </node>
+    <node concept="37lXYJ" id="2LRe1VclxPI" role="37lXYW">
+      <property role="TrG5h" value="actor3" />
+      <property role="37lXYF" value="99" />
+      <node concept="37lXYU" id="2LRe1VclxPR" role="37ngyo">
+        <property role="TrG5h" value="message2" />
+        <property role="37lXYT" value="hello world" />
+      </node>
+      <node concept="37lS4T" id="2LRe1VclxPW" role="37ngyo">
+        <ref role="37lS4Y" node="2LRe1VclxPR" resolve="message2" />
+        <ref role="37lS4W" node="3m_VcJN0cTf" resolve="actor1" />
+      </node>
+      <node concept="37lS4T" id="2LRe1VclxQ4" role="37ngyo">
+        <ref role="37lS4Y" node="2LRe1VclxPR" resolve="message2" />
+        <ref role="37lS4W" node="3m_VcJN0cT$" resolve="actor2" />
+      </node>
     </node>
   </node>
 </model>

@@ -28,6 +28,12 @@ public class Actor_TextGen extends TextGenDescriptorBase {
     tgs.append("char buffer[BUFFER_SIZE];");
     tgs.newLine();
     tgs.indent();
+    tgs.append("int receiver_address;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("ssize_t bytes_read, bytes_written;");
+    tgs.newLine();
+    tgs.indent();
     tgs.append("char *actor_name = \"");
     tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
     tgs.append("\";");
@@ -39,15 +45,16 @@ public class Actor_TextGen extends TextGenDescriptorBase {
     }
 
     tgs.indent();
-    tgs.append("ssize_t bytes_read = read(data->read_fd, buffer, BUFFER_SIZE);");
+    tgs.append("while(1) {");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append("bytes_read = read(data->read_fd, buffer, BUFFER_SIZE);");
     tgs.newLine();
     tgs.indent();
     tgs.append("if (bytes_read > 0) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append("buffer[bytes_read] = '\0';");
-    tgs.newLine();
     tgs.indent();
     tgs.append("printf(\"%s received message: %s\", actor_name, buffer);");
     tgs.newLine();
@@ -69,6 +76,12 @@ public class Actor_TextGen extends TextGenDescriptorBase {
     tgs.indent();
     tgs.append("}");
     tgs.newLine();
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.indent();
+    tgs.append("}");
+    tgs.newLine();
+    tgs.newLine();
+
     ctx.getBuffer().area().decreaseIndent();
     tgs.indent();
     tgs.append("}");
