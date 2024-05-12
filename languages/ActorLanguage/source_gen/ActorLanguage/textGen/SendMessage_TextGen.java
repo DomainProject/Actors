@@ -20,6 +20,10 @@ public class SendMessage_TextGen extends TextGenDescriptorBase {
     tgs.append(String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.receiver$4HbI), PROPS.address$Eakk)));
     tgs.append(";");
     tgs.newLine();
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("pthread_mutex_lock(&data->map[receiver_address].mutex);");
+    tgs.newLine();
     tgs.indent();
     tgs.append("bytes_written = write(data->map[receiver_address].write_fd, ");
     tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.message$4GHG), PROPS.name$MnvL));
@@ -35,13 +39,20 @@ public class SendMessage_TextGen extends TextGenDescriptorBase {
     tgs.append("perror(\"write\");");
     tgs.newLine();
     tgs.indent();
+    tgs.append("pthread_mutex_unlock(&data->map[receiver_address].mutex);");
+    tgs.newLine();
+    tgs.indent();
     tgs.append("exit(EXIT_FAILURE);");
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     tgs.indent();
     tgs.append("}");
     tgs.newLine();
+    tgs.indent();
+    tgs.append("pthread_mutex_unlock(&data->map[receiver_address].mutex);");
     tgs.newLine();
+    tgs.newLine();
+
   }
 
   private static final class LINKS {

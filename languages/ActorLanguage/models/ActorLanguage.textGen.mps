@@ -200,12 +200,100 @@
                 <property role="ldcpH" value="true" />
               </node>
               <node concept="l8MVK" id="2LRe1Vcj$1C" role="lcghm" />
-              <node concept="l8MVK" id="2LRe1Vcj$tK" role="lcghm" />
+            </node>
+            <node concept="lc7rE" id="1g0n0JfjOr7" role="3cqZAp">
+              <node concept="la8eA" id="1g0n0JfjOPK" role="lcghm">
+                <property role="lacIc" value="int i;" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l8MVK" id="1g0n0JfjOR0" role="lcghm" />
+            </node>
+            <node concept="lc7rE" id="1g0n0Jfjf9$" role="3cqZAp">
+              <node concept="la8eA" id="1g0n0Jfjfqd" role="lcghm">
+                <property role="lacIc" value="int addresses[" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l9hG8" id="1g0n0Jfjkws" role="lcghm">
+                <node concept="2YIFZM" id="1g0n0Jfjkwt" role="lb14g">
+                  <ref role="37wK5l" to="wyt6:~String.valueOf(int)" resolve="valueOf" />
+                  <ref role="1Pybhc" to="wyt6:~String" resolve="String" />
+                  <node concept="2OqwBi" id="1g0n0Jfjkwu" role="37wK5m">
+                    <node concept="2OqwBi" id="1g0n0Jfjkwv" role="2Oq$k0">
+                      <node concept="117lpO" id="1g0n0Jfjkww" role="2Oq$k0" />
+                      <node concept="3Tsc0h" id="1g0n0Jfjkwx" role="2OqNvi">
+                        <ref role="3TtcxE" to="o1mc:3m_VcJMWzdR" resolve="actors" />
+                      </node>
+                    </node>
+                    <node concept="liA8E" id="1g0n0Jfjkwy" role="2OqNvi">
+                      <ref role="37wK5l" to="33ny:~List.size()" resolve="size" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+              <node concept="la8eA" id="1g0n0Jfjmvz" role="lcghm">
+                <property role="lacIc" value="];" />
+              </node>
+              <node concept="l8MVK" id="1g0n0JfjKKa" role="lcghm" />
+            </node>
+            <node concept="2Gpval" id="1g0n0JfjAmJ" role="3cqZAp">
+              <node concept="2GrKxI" id="1g0n0JfjAmL" role="2Gsz3X">
+                <property role="TrG5h" value="actor" />
+              </node>
+              <node concept="2OqwBi" id="1g0n0JfjAQH" role="2GsD0m">
+                <node concept="117lpO" id="1g0n0JfjAHV" role="2Oq$k0" />
+                <node concept="3Tsc0h" id="1g0n0JfjB2J" role="2OqNvi">
+                  <ref role="3TtcxE" to="o1mc:3m_VcJMWzdR" resolve="actors" />
+                </node>
+              </node>
+              <node concept="3clFbS" id="1g0n0JfjAmP" role="2LFqv$">
+                <node concept="lc7rE" id="1g0n0JfjB6v" role="3cqZAp">
+                  <node concept="la8eA" id="1g0n0JfjB6V" role="lcghm">
+                    <property role="lacIc" value="addresses[" />
+                    <property role="ldcpH" value="true" />
+                  </node>
+                  <node concept="l9hG8" id="1g0n0JfjB9g" role="lcghm">
+                    <node concept="2YIFZM" id="1g0n0JfjD7F" role="lb14g">
+                      <ref role="37wK5l" to="wyt6:~String.valueOf(int)" resolve="valueOf" />
+                      <ref role="1Pybhc" to="wyt6:~String" resolve="String" />
+                      <node concept="2OqwBi" id="1g0n0JfjDwN" role="37wK5m">
+                        <node concept="2GrUjf" id="1g0n0JfjDfd" role="2Oq$k0">
+                          <ref role="2Gs0qQ" node="1g0n0JfjAmL" resolve="actor" />
+                        </node>
+                        <node concept="2bSWHS" id="1g0n0JfjElX" role="2OqNvi" />
+                      </node>
+                    </node>
+                  </node>
+                  <node concept="la8eA" id="1g0n0JfjEI6" role="lcghm">
+                    <property role="lacIc" value="] = " />
+                  </node>
+                  <node concept="l9hG8" id="1g0n0JfjEPG" role="lcghm">
+                    <node concept="2YIFZM" id="1g0n0JfjGQf" role="lb14g">
+                      <ref role="37wK5l" to="wyt6:~String.valueOf(int)" resolve="valueOf" />
+                      <ref role="1Pybhc" to="wyt6:~String" resolve="String" />
+                      <node concept="2OqwBi" id="1g0n0JfjHnp" role="37wK5m">
+                        <node concept="2GrUjf" id="1g0n0JfjGYH" role="2Oq$k0">
+                          <ref role="2Gs0qQ" node="1g0n0JfjAmL" resolve="actor" />
+                        </node>
+                        <node concept="3TrcHB" id="1g0n0JfjItZ" role="2OqNvi">
+                          <ref role="3TsBF5" to="o1mc:3m_VcJMWzdw" resolve="address" />
+                        </node>
+                      </node>
+                    </node>
+                  </node>
+                  <node concept="la8eA" id="1g0n0JfjKQi" role="lcghm">
+                    <property role="lacIc" value=";" />
+                  </node>
+                  <node concept="l8MVK" id="1g0n0JfjKZr" role="lcghm" />
+                </node>
+              </node>
+            </node>
+            <node concept="lc7rE" id="1g0n0JfkW3C" role="3cqZAp">
+              <node concept="l8MVK" id="1g0n0JfkWq2" role="lcghm" />
             </node>
             <node concept="3clFbH" id="2LRe1VcjHKL" role="3cqZAp" />
             <node concept="lc7rE" id="2LRe1Vcj$Ke" role="3cqZAp">
               <node concept="la8eA" id="2LRe1Vcj$QT" role="lcghm">
-                <property role="lacIc" value="for (int i = 0; i &lt; num_threads; i++) {" />
+                <property role="lacIc" value="for (i = 0; i &lt; num_threads; i++) {" />
                 <property role="ldcpH" value="true" />
               </node>
               <node concept="l8MVK" id="2LRe1Vcj$YP" role="lcghm" />
@@ -310,87 +398,38 @@
               <node concept="l8MVK" id="2LRe1VcjUaA" role="lcghm" />
             </node>
             <node concept="3clFbH" id="2LRe1VcjMyr" role="3cqZAp" />
-            <node concept="2Gpval" id="2LRe1Vck06c" role="3cqZAp">
-              <node concept="2GrKxI" id="2LRe1Vck06e" role="2Gsz3X">
-                <property role="TrG5h" value="actor" />
-              </node>
-              <node concept="2OqwBi" id="2LRe1Vck0mB" role="2GsD0m">
-                <node concept="117lpO" id="2LRe1Vck0ea" role="2Oq$k0" />
-                <node concept="3Tsc0h" id="2LRe1Vck0D_" role="2OqNvi">
-                  <ref role="3TtcxE" to="o1mc:3m_VcJMWzdR" resolve="actors" />
-                </node>
-              </node>
-              <node concept="3clFbS" id="2LRe1Vck06i" role="2LFqv$">
-                <node concept="lc7rE" id="2LRe1Vck30O" role="3cqZAp">
-                  <node concept="la8eA" id="2LRe1Vck4LJ" role="lcghm">
-                    <property role="lacIc" value="map[" />
-                    <property role="ldcpH" value="true" />
-                  </node>
-                  <node concept="l9hG8" id="2LRe1Vck4Nj" role="lcghm">
-                    <node concept="2YIFZM" id="2LRe1Vck8WT" role="lb14g">
-                      <ref role="37wK5l" to="wyt6:~String.valueOf(int)" resolve="valueOf" />
-                      <ref role="1Pybhc" to="wyt6:~String" resolve="String" />
-                      <node concept="2OqwBi" id="2LRe1Vck9UD" role="37wK5m">
-                        <node concept="2GrUjf" id="2LRe1Vck9_i" role="2Oq$k0">
-                          <ref role="2Gs0qQ" node="2LRe1Vck06e" resolve="actor" />
-                        </node>
-                        <node concept="3TrcHB" id="2LRe1VckaZt" role="2OqNvi">
-                          <ref role="3TsBF5" to="o1mc:3m_VcJMWzdw" resolve="address" />
-                        </node>
-                      </node>
-                    </node>
-                  </node>
-                  <node concept="la8eA" id="2LRe1Vckbqo" role="lcghm">
-                    <property role="lacIc" value="].write_fd = pipes_fd[" />
-                  </node>
-                  <node concept="l9hG8" id="2LRe1VckdaC" role="lcghm">
-                    <node concept="2YIFZM" id="2LRe1VckeI3" role="lb14g">
-                      <ref role="37wK5l" to="wyt6:~String.valueOf(int)" resolve="valueOf" />
-                      <ref role="1Pybhc" to="wyt6:~String" resolve="String" />
-                      <node concept="2OqwBi" id="2LRe1VckeXz" role="37wK5m">
-                        <node concept="2GrUjf" id="2LRe1VckeMt" role="2Oq$k0">
-                          <ref role="2Gs0qQ" node="2LRe1Vck06e" resolve="actor" />
-                        </node>
-                        <node concept="2bSWHS" id="2LRe1VckhkS" role="2OqNvi" />
-                      </node>
-                    </node>
-                  </node>
-                  <node concept="la8eA" id="2LRe1VckhKN" role="lcghm">
-                    <property role="lacIc" value="][1];" />
-                  </node>
-                  <node concept="l8MVK" id="2LRe1Vcki9d" role="lcghm" />
-                </node>
-              </node>
-            </node>
-            <node concept="lc7rE" id="2LRe1Vckip6" role="3cqZAp">
-              <node concept="l8MVK" id="2LRe1Vcki$y" role="lcghm" />
-            </node>
-            <node concept="3clFbH" id="2LRe1Vcki_I" role="3cqZAp" />
-            <node concept="lc7rE" id="2LRe1VckkrE" role="3cqZAp">
-              <node concept="la8eA" id="2LRe1VckkB9" role="lcghm">
-                <property role="lacIc" value="for (int i = 0; i &lt; num_threads; i++) {" />
+            <node concept="lc7rE" id="1g0n0JfjRu0" role="3cqZAp">
+              <node concept="la8eA" id="1g0n0JfjTwl" role="lcghm">
+                <property role="lacIc" value="for (i = 0; i &lt; num_threads; i++) {" />
                 <property role="ldcpH" value="true" />
               </node>
-              <node concept="l8MVK" id="2LRe1VckkPd" role="lcghm" />
+              <node concept="l8MVK" id="1g0n0JfjTxz" role="lcghm" />
             </node>
-            <node concept="3izx1p" id="2LRe1Vckn1G" role="3cqZAp">
-              <node concept="3clFbS" id="2LRe1Vckn1I" role="3izTki">
-                <node concept="lc7rE" id="2LRe1Vckndb" role="3cqZAp">
-                  <node concept="la8eA" id="2LRe1VckndC" role="lcghm">
+            <node concept="3izx1p" id="1g0n0JfjTS7" role="3cqZAp">
+              <node concept="3clFbS" id="1g0n0JfjTS9" role="3izTki">
+                <node concept="lc7rE" id="1g0n0JfjUek" role="3cqZAp">
+                  <node concept="la8eA" id="1g0n0JfjUeK" role="lcghm">
+                    <property role="lacIc" value="init_map_entry(map, addresses[i], pipes_fd[i][1]);" />
+                    <property role="ldcpH" value="true" />
+                  </node>
+                  <node concept="l8MVK" id="1g0n0JfjUfD" role="lcghm" />
+                </node>
+                <node concept="lc7rE" id="1g0n0JfjUgw" role="3cqZAp">
+                  <node concept="la8eA" id="1g0n0JfjUh1" role="lcghm">
                     <property role="lacIc" value="threads_data[i].map = map;" />
                     <property role="ldcpH" value="true" />
                   </node>
-                  <node concept="l8MVK" id="2LRe1VckneP" role="lcghm" />
+                  <node concept="l8MVK" id="1g0n0JfjUhU" role="lcghm" />
                 </node>
               </node>
             </node>
-            <node concept="lc7rE" id="2LRe1Vcknr8" role="3cqZAp">
-              <node concept="la8eA" id="2LRe1VckpfK" role="lcghm">
+            <node concept="lc7rE" id="1g0n0JfjWkJ" role="3cqZAp">
+              <node concept="la8eA" id="1g0n0JfjWF6" role="lcghm">
                 <property role="lacIc" value="}" />
                 <property role="ldcpH" value="true" />
               </node>
-              <node concept="l8MVK" id="2LRe1Vckphk" role="lcghm" />
-              <node concept="l8MVK" id="2LRe1Vckpic" role="lcghm" />
+              <node concept="l8MVK" id="1g0n0JfjWGj" role="lcghm" />
+              <node concept="l8MVK" id="1g0n0JfjWHb" role="lcghm" />
             </node>
             <node concept="3clFbH" id="2LRe1VckpiD" role="3cqZAp" />
             <node concept="2Gpval" id="2LRe1VckpvY" role="3cqZAp">
@@ -580,6 +619,13 @@
               </node>
               <node concept="l8MVK" id="2LRe1VcaxFs" role="lcghm" />
             </node>
+            <node concept="lc7rE" id="4uPBxu3gUHM" role="3cqZAp">
+              <node concept="la8eA" id="4uPBxu3gUJ5" role="lcghm">
+                <property role="lacIc" value="pthread_mutex_t mutex;" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l8MVK" id="4uPBxu3gUJL" role="lcghm" />
+            </node>
           </node>
         </node>
         <node concept="lc7rE" id="2LRe1Vca2zF" role="3cqZAp">
@@ -624,7 +670,63 @@
           <node concept="l8MVK" id="2LRe1Vcb4Wb" role="lcghm" />
           <node concept="l8MVK" id="2LRe1VcbsAf" role="lcghm" />
         </node>
-        <node concept="3clFbH" id="2LRe1VcbgQs" role="3cqZAp" />
+        <node concept="3clFbH" id="4uPBxu3gUKR" role="3cqZAp" />
+        <node concept="lc7rE" id="1g0n0Jfj3Hp" role="3cqZAp">
+          <node concept="la8eA" id="1g0n0Jfj3IL" role="lcghm">
+            <property role="lacIc" value="void init_map_entry(map_item *map, int index, int fd) {" />
+          </node>
+          <node concept="l8MVK" id="1g0n0Jfj3JL" role="lcghm" />
+        </node>
+        <node concept="3izx1p" id="1g0n0Jfj3Ls" role="3cqZAp">
+          <node concept="3clFbS" id="1g0n0Jfj3Lu" role="3izTki">
+            <node concept="lc7rE" id="1g0n0Jfj3Nr" role="3cqZAp">
+              <node concept="la8eA" id="1g0n0Jfj3NM" role="lcghm">
+                <property role="lacIc" value="map[index].write_fd = fd;" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l8MVK" id="1g0n0Jfj3Ou" role="lcghm" />
+            </node>
+            <node concept="lc7rE" id="1g0n0Jfj3Pb" role="3cqZAp">
+              <node concept="la8eA" id="1g0n0Jfj3PB" role="lcghm">
+                <property role="lacIc" value="if (pthread_mutex_init(&amp;map[index].mutex, NULL) != 0) {" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l8MVK" id="1g0n0Jfj3QA" role="lcghm" />
+            </node>
+            <node concept="3izx1p" id="1g0n0Jfj3Rl" role="3cqZAp">
+              <node concept="3clFbS" id="1g0n0Jfj3Rn" role="3izTki">
+                <node concept="lc7rE" id="1g0n0Jfj3RL" role="3cqZAp">
+                  <node concept="la8eA" id="1g0n0Jfj3S8" role="lcghm">
+                    <property role="lacIc" value="perror(&quot;pthread_mutex_init&quot;);" />
+                    <property role="ldcpH" value="true" />
+                  </node>
+                  <node concept="l8MVK" id="1g0n0Jfj3Ts" role="lcghm" />
+                </node>
+                <node concept="lc7rE" id="1g0n0Jfj3TN" role="3cqZAp">
+                  <node concept="la8eA" id="1g0n0Jfj3Uf" role="lcghm">
+                    <property role="lacIc" value="exit(EXIT_FAILURE);" />
+                    <property role="ldcpH" value="true" />
+                  </node>
+                  <node concept="l8MVK" id="1g0n0Jfj3UZ" role="lcghm" />
+                </node>
+              </node>
+            </node>
+            <node concept="lc7rE" id="1g0n0Jfj3WP" role="3cqZAp">
+              <node concept="la8eA" id="1g0n0Jfj3Xs" role="lcghm">
+                <property role="lacIc" value="}" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l8MVK" id="1g0n0Jfj3Yr" role="lcghm" />
+            </node>
+          </node>
+        </node>
+        <node concept="lc7rE" id="1g0n0Jfj40q" role="3cqZAp">
+          <node concept="la8eA" id="1g0n0Jfj428" role="lcghm">
+            <property role="lacIc" value="}" />
+            <property role="ldcpH" value="true" />
+          </node>
+          <node concept="l8MVK" id="1g0n0Jfj42R" role="lcghm" />
+        </node>
       </node>
     </node>
   </node>
@@ -658,13 +760,6 @@
                 <property role="ldcpH" value="true" />
               </node>
               <node concept="l8MVK" id="2LRe1VcbEPO" role="lcghm" />
-            </node>
-            <node concept="lc7rE" id="2LRe1VcbF1L" role="3cqZAp">
-              <node concept="la8eA" id="2LRe1VcbF2K" role="lcghm">
-                <property role="lacIc" value="char buffer[BUFFER_SIZE];" />
-                <property role="ldcpH" value="true" />
-              </node>
-              <node concept="l8MVK" id="2LRe1VcbF3X" role="lcghm" />
             </node>
             <node concept="lc7rE" id="2LRe1Vclymp" role="3cqZAp">
               <node concept="la8eA" id="2LRe1Vclyoc" role="lcghm">
@@ -720,12 +815,26 @@
             </node>
             <node concept="3izx1p" id="2LRe1VcnMO1" role="3cqZAp">
               <node concept="3clFbS" id="2LRe1VcnMO3" role="3izTki">
+                <node concept="lc7rE" id="2LRe1VcbF1L" role="3cqZAp">
+                  <node concept="la8eA" id="2LRe1VcbF2K" role="lcghm">
+                    <property role="lacIc" value="char buffer[BUFFER_SIZE];" />
+                    <property role="ldcpH" value="true" />
+                  </node>
+                  <node concept="l8MVK" id="2LRe1VcbF3X" role="lcghm" />
+                </node>
                 <node concept="lc7rE" id="2LRe1VcbEX4" role="3cqZAp">
                   <node concept="la8eA" id="2LRe1VcbEY1" role="lcghm">
                     <property role="lacIc" value="bytes_read = read(data-&gt;read_fd, buffer, BUFFER_SIZE);" />
                     <property role="ldcpH" value="true" />
                   </node>
                   <node concept="l8MVK" id="2LRe1VcbF6s" role="lcghm" />
+                </node>
+                <node concept="lc7rE" id="4uPBxu3gYTm" role="3cqZAp">
+                  <node concept="la8eA" id="4uPBxu3gYUg" role="lcghm">
+                    <property role="lacIc" value="buffer[bytes_read] = 0x00;" />
+                    <property role="ldcpH" value="true" />
+                  </node>
+                  <node concept="l8MVK" id="4uPBxu3gYVt" role="lcghm" />
                 </node>
                 <node concept="lc7rE" id="2LRe1VcbF9s" role="3cqZAp">
                   <node concept="la8eA" id="2LRe1VcbFc_" role="lcghm">
@@ -839,6 +948,14 @@
             <property role="lacIc" value=";" />
           </node>
           <node concept="l8MVK" id="2LRe1VcfVsf" role="lcghm" />
+          <node concept="l8MVK" id="4uPBxu3gWMp" role="lcghm" />
+        </node>
+        <node concept="lc7rE" id="4uPBxu3gWCM" role="3cqZAp">
+          <node concept="la8eA" id="4uPBxu3gWFW" role="lcghm">
+            <property role="lacIc" value="pthread_mutex_lock(&amp;data-&gt;map[receiver_address].mutex);" />
+            <property role="ldcpH" value="true" />
+          </node>
+          <node concept="l8MVK" id="4uPBxu3gWJf" role="lcghm" />
         </node>
         <node concept="lc7rE" id="2LRe1VceMnq" role="3cqZAp">
           <node concept="la8eA" id="2LRe1VceMnQ" role="lcghm">
@@ -895,6 +1012,13 @@
               </node>
               <node concept="l8MVK" id="2LRe1Vchj0m" role="lcghm" />
             </node>
+            <node concept="lc7rE" id="4uPBxu3gWOT" role="3cqZAp">
+              <node concept="la8eA" id="4uPBxu3gWPt" role="lcghm">
+                <property role="lacIc" value="pthread_mutex_unlock(&amp;data-&gt;map[receiver_address].mutex);" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l8MVK" id="4uPBxu3gWR1" role="lcghm" />
+            </node>
             <node concept="lc7rE" id="2LRe1VceOtp" role="3cqZAp">
               <node concept="la8eA" id="2LRe1VceOtT" role="lcghm">
                 <property role="lacIc" value="exit(EXIT_FAILURE);" />
@@ -910,8 +1034,16 @@
             <property role="ldcpH" value="true" />
           </node>
           <node concept="l8MVK" id="2LRe1Vchj24" role="lcghm" />
-          <node concept="l8MVK" id="2LRe1Vchj2W" role="lcghm" />
         </node>
+        <node concept="lc7rE" id="4uPBxu3gYGA" role="3cqZAp">
+          <node concept="la8eA" id="4uPBxu3gYGB" role="lcghm">
+            <property role="lacIc" value="pthread_mutex_unlock(&amp;data-&gt;map[receiver_address].mutex);" />
+            <property role="ldcpH" value="true" />
+          </node>
+          <node concept="l8MVK" id="4uPBxu3gYGC" role="lcghm" />
+          <node concept="l8MVK" id="4uPBxu3gYLl" role="lcghm" />
+        </node>
+        <node concept="3clFbH" id="4uPBxu3gYBn" role="3cqZAp" />
       </node>
     </node>
   </node>

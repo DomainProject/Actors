@@ -72,6 +72,18 @@
         <ref role="37lS4W" node="3m_VcJN0cT$" resolve="actor2" />
       </node>
     </node>
+    <node concept="37lXYJ" id="4uPBxu3iLrw" role="37lXYW">
+      <property role="TrG5h" value="actor4" />
+      <property role="37lXYF" value="23" />
+      <node concept="37lXYU" id="4uPBxu3iLrJ" role="37ngyo">
+        <property role="TrG5h" value="message3" />
+        <property role="37lXYT" value="test" />
+      </node>
+      <node concept="37lS4T" id="4uPBxu3iLrP" role="37ngyo">
+        <ref role="37lS4Y" node="4uPBxu3iLrJ" resolve="message3" />
+        <ref role="37lS4W" node="3m_VcJN0cTf" resolve="actor1" />
+      </node>
+    </node>
   </node>
 </model>
 

@@ -8,8 +8,8 @@ import jetbrains.mps.text.impl.TextGenSupport;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SProperty;
@@ -42,10 +42,27 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.indent();
     tgs.append("int pipes_fd[num_threads][2];");
     tgs.newLine();
+    tgs.indent();
+    tgs.append("int i;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("int addresses[");
+    tgs.append(String.valueOf(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a).size()));
+    tgs.append("];");
+    tgs.newLine();
+    for (SNode actor : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a))) {
+      tgs.indent();
+      tgs.append("addresses[");
+      tgs.append(String.valueOf(SNodeOperations.getIndexInParent(actor)));
+      tgs.append("] = ");
+      tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$Eakk)));
+      tgs.append(";");
+      tgs.newLine();
+    }
     tgs.newLine();
 
     tgs.indent();
-    tgs.append("for (int i = 0; i < num_threads; i++) {");
+    tgs.append("for (i = 0; i < num_threads; i++) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
@@ -93,21 +110,13 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.newLine();
 
-    for (SNode actor : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a))) {
-      tgs.indent();
-      tgs.append("map[");
-      tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$Eakk)));
-      tgs.append("].write_fd = pipes_fd[");
-      tgs.append(String.valueOf(SNodeOperations.getIndexInParent(actor)));
-      tgs.append("][1];");
-      tgs.newLine();
-    }
-    tgs.newLine();
-
     tgs.indent();
-    tgs.append("for (int i = 0; i < num_threads; i++) {");
+    tgs.append("for (i = 0; i < num_threads; i++) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append("init_map_entry(map, addresses[i], pipes_fd[i][1]);");
+    tgs.newLine();
     tgs.indent();
     tgs.append("threads_data[i].map = map;");
     tgs.newLine();

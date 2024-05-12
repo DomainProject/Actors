@@ -25,9 +25,6 @@ public class Actor_TextGen extends TextGenDescriptorBase {
     tgs.append("ThreadData *data = (ThreadData *)arg;");
     tgs.newLine();
     tgs.indent();
-    tgs.append("char buffer[BUFFER_SIZE];");
-    tgs.newLine();
-    tgs.indent();
     tgs.append("int receiver_address;");
     tgs.newLine();
     tgs.indent();
@@ -49,7 +46,13 @@ public class Actor_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
+    tgs.append("char buffer[BUFFER_SIZE];");
+    tgs.newLine();
+    tgs.indent();
     tgs.append("bytes_read = read(data->read_fd, buffer, BUFFER_SIZE);");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("buffer[bytes_read] = 0x00;");
     tgs.newLine();
     tgs.indent();
     tgs.append("if (bytes_read > 0) {");

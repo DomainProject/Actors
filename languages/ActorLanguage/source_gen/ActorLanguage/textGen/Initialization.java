@@ -33,6 +33,9 @@ public abstract class Initialization {
     tgs.indent();
     tgs.append("int write_fd;");
     tgs.newLine();
+    tgs.indent();
+    tgs.append("pthread_mutex_t mutex;");
+    tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     tgs.append("} map_item;");
     tgs.newLine();
@@ -55,5 +58,29 @@ public abstract class Initialization {
     tgs.newLine();
     tgs.newLine();
 
+    tgs.append("void init_map_entry(map_item *map, int index, int fd) {");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append("map[index].write_fd = fd;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("if (pthread_mutex_init(&map[index].mutex, NULL) != 0) {");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append("perror(\"pthread_mutex_init\");");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("exit(EXIT_FAILURE);");
+    tgs.newLine();
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.indent();
+    tgs.append("}");
+    tgs.newLine();
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.indent();
+    tgs.append("}");
+    tgs.newLine();
   }
 }
