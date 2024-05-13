@@ -27,8 +27,8 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new Actor_TextGen();
       case LanguageConceptSwitch.ActorScript:
         return new ActorScript_TextGen();
-      case LanguageConceptSwitch.Message:
-        return new Message_TextGen();
+      case LanguageConceptSwitch.CreateMessage:
+        return new CreateMessage_TextGen();
       case LanguageConceptSwitch.SendMessage:
         return new SendMessage_TextGen();
     }

@@ -134,7 +134,7 @@
   </node>
   <node concept="24kQdi" id="3m_VcJMWBpa">
     <property role="3GE5qa" value="actions" />
-    <ref role="1XX52x" to="o1mc:3m_VcJMWzdL" resolve="Message" />
+    <ref role="1XX52x" to="o1mc:3m_VcJMWzdL" resolve="CreateMessage" />
     <node concept="3EZMnI" id="3m_VcJMWBpf" role="2wV5jI">
       <node concept="3F0ifn" id="3m_VcJMWBpm" role="3EZMnx">
         <property role="3F0ifm" value="create_message" />

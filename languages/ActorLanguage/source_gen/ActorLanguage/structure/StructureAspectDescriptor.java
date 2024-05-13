@@ -21,7 +21,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptActorAction = createDescriptorForActorAction();
   /*package*/ final ConceptDescriptor myConceptActorScript = createDescriptorForActorScript();
   /*package*/ final ConceptDescriptor myConceptBecomeBehavior = createDescriptorForBecomeBehavior();
-  /*package*/ final ConceptDescriptor myConceptMessage = createDescriptorForMessage();
+  /*package*/ final ConceptDescriptor myConceptCreateMessage = createDescriptorForCreateMessage();
   /*package*/ final ConceptDescriptor myConceptSendMessage = createDescriptorForSendMessage();
   /*package*/ final EnumerationDescriptor myEnumerationBehavior = new EnumerationDescriptor_Behavior();
   private final LanguageConceptSwitch myIndexSwitch;
@@ -38,7 +38,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<ConceptDescriptor> getDescriptors() {
-    return Arrays.asList(myConceptAbstractActor, myConceptActor, myConceptActorAction, myConceptActorScript, myConceptBecomeBehavior, myConceptMessage, myConceptSendMessage);
+    return Arrays.asList(myConceptAbstractActor, myConceptActor, myConceptActorAction, myConceptActorScript, myConceptBecomeBehavior, myConceptCreateMessage, myConceptSendMessage);
   }
 
   @Override
@@ -55,8 +55,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptActorScript;
       case LanguageConceptSwitch.BecomeBehavior:
         return myConceptBecomeBehavior;
-      case LanguageConceptSwitch.Message:
-        return myConceptMessage;
+      case LanguageConceptSwitch.CreateMessage:
+        return myConceptCreateMessage;
       case LanguageConceptSwitch.SendMessage:
         return myConceptSendMessage;
       default:
@@ -76,6 +76,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   private static ConceptDescriptor createDescriptorForAbstractActor() {
     ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "AbstractActor", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23308L);
     b.class_(false, true, false);
+    // extends: ActorLanguage.structure.ActorAction
+    b.super_(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f8e44bL);
     b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/3865756215865914120");
     b.version(3);
@@ -119,8 +121,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.alias("become");
     return b.create();
   }
-  private static ConceptDescriptor createDescriptorForMessage() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "Message", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L);
+  private static ConceptDescriptor createDescriptorForCreateMessage() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "CreateMessage", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L);
     b.class_(false, false, false);
     // extends: ActorLanguage.structure.ActorAction
     b.super_(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f8e44bL);

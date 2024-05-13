@@ -61,7 +61,7 @@
     <property role="TrG5h" value="AbstractActor" />
     <property role="R5$K7" value="true" />
     <property role="3GE5qa" value="actor" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" node="3m_VcJMYehb" resolve="ActorAction" />
     <node concept="1TJgyi" id="3m_VcJMWzdw" role="1TKVEl">
       <property role="IQ2nx" value="3865756215865914208" />
       <property role="TrG5h" value="address" />
@@ -87,7 +87,7 @@
   </node>
   <node concept="1TIwiD" id="3m_VcJMWzdL">
     <property role="EcuMT" value="3865756215865914225" />
-    <property role="TrG5h" value="Message" />
+    <property role="TrG5h" value="CreateMessage" />
     <property role="3GE5qa" value="actions" />
     <property role="34LRSv" value="create_message" />
     <ref role="1TJDcQ" node="3m_VcJMYehb" resolve="ActorAction" />
@@ -147,7 +147,7 @@
       <property role="IQ2ns" value="3865756215865929205" />
       <property role="20kJfa" value="message" />
       <property role="20lbJX" value="fLJekj4/_1" />
-      <ref role="20lvS9" node="3m_VcJMWzdL" resolve="Message" />
+      <ref role="20lvS9" node="3m_VcJMWzdL" resolve="CreateMessage" />
     </node>
     <node concept="1TJgyj" id="3m_VcJMWARR" role="1TKVEi">
       <property role="IQ2ns" value="3865756215865929207" />

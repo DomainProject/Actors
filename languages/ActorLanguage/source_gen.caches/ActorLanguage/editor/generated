@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<product version="3" modelHash="-c1lmsyr3pzngo1b2v3w9e05hzbtyko4">
-  <files names="ActorScript_Editor.java:ActorScript_EditorBuilder_a.java:Actor_Editor.java:Actor_EditorBuilder_a.java:BecomeBehavior_Editor.java:BecomeBehavior_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:Message_Editor.java:Message_EditorBuilder_a.java:SendMessage_Editor.java:SendMessage_EditorBuilder_a.java" />
+<product version="3" modelHash="543tiuhyx7p3sipugqgqa4r8m1hdhn3">
+  <files names="ActorScript_Editor.java:ActorScript_EditorBuilder_a.java:Actor_Editor.java:Actor_EditorBuilder_a.java:BecomeBehavior_Editor.java:BecomeBehavior_EditorBuilder_a.java:CreateMessage_Editor.java:CreateMessage_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:SendMessage_Editor.java:SendMessage_EditorBuilder_a.java" />
 </product>
 

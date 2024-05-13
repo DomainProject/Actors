@@ -19,10 +19,10 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     Initialization.init(ctx);
+
     for (SNode item : SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a)) {
       tgs.appendNode(item);
     }
-
     tgs.newLine();
 
     tgs.append("int main() {");
@@ -35,12 +35,6 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.indent();
     tgs.append("pthread_t threads[num_threads];");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("ThreadData threads_data[num_threads];");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("int pipes_fd[num_threads][2];");
     tgs.newLine();
     tgs.indent();
     tgs.append("int i;");
@@ -62,32 +56,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
 
     tgs.indent();
-    tgs.append("for (i = 0; i < num_threads; i++) {");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append("if (pipe(pipes_fd[i])) {");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append("perror(\"pipe\");");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("exit(EXIT_FAILURE);");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("}");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("threads_data[i].read_fd = pipes_fd[i][0];");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("threads_data[i].write_fd = pipes_fd[i][1];");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("}");
+    tgs.append("pthread_mutex_init(&map_mutex, NULL);");
     tgs.newLine();
     tgs.newLine();
 
@@ -111,32 +80,29 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
 
     tgs.indent();
-    tgs.append("for (i = 0; i < num_threads; i++) {");
+    tgs.append("for (int i = 0; i < SIZE; ++i) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("init_map_entry(map, addresses[i], pipes_fd[i][1]);");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("threads_data[i].map = map;");
+    tgs.append("pthread_mutex_init(&map[i].mutex, NULL);");
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     tgs.indent();
     tgs.append("}");
     tgs.newLine();
-    tgs.newLine();
 
     for (SNode actor : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a))) {
       tgs.indent();
-      tgs.append("pthread_create(&threads[");
+      tgs.append("create_thread(addresses[");
       tgs.append(String.valueOf(SNodeOperations.getIndexInParent(actor)));
-      tgs.append("], NULL, ");
+      tgs.append("], map, ");
       tgs.append(SPropertyOperations.getString(actor, PROPS.name$MnvL));
-      tgs.append(", (void *)&threads_data[");
+      tgs.append(", &threads[");
       tgs.append(String.valueOf(SNodeOperations.getIndexInParent(actor)));
       tgs.append("]);");
       tgs.newLine();
     }
+
     tgs.newLine();
 
     tgs.indent();
@@ -152,6 +118,9 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.newLine();
 
+    tgs.indent();
+    tgs.append("free(map);");
+    tgs.newLine();
     tgs.indent();
     tgs.append("return 0;");
     tgs.newLine();

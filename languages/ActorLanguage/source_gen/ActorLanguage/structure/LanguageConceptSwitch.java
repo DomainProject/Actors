@@ -14,7 +14,7 @@ public final class LanguageConceptSwitch {
   public static final int ActorAction = 2;
   public static final int ActorScript = 3;
   public static final int BecomeBehavior = 4;
-  public static final int Message = 5;
+  public static final int CreateMessage = 5;
   public static final int SendMessage = 6;
 
   public LanguageConceptSwitch() {
@@ -24,7 +24,7 @@ public final class LanguageConceptSwitch {
     builder.put(0x35a5eccbf2f8e44bL, ActorAction);
     builder.put(0x35a5eccbf2f23376L, ActorScript);
     builder.put(0x35a5eccbf2f26dfaL, BecomeBehavior);
-    builder.put(0x35a5eccbf2f23371L, Message);
+    builder.put(0x35a5eccbf2f23371L, CreateMessage);
     builder.put(0x35a5eccbf2f26df2L, SendMessage);
     myIndex = builder.seal();
   }

@@ -500,18 +500,18 @@
     </file>
   </root>
   <root nodeRef="r:69381955-c8b5-4c14-b1e0-ddad66dcca70(ActorLanguage.editor)/3865756215865931338">
-    <file name="Message_Editor.java">
-      <node id="3865756215865931338" at="11,79,12,73" concept="6" />
+    <file name="CreateMessage_Editor.java">
+      <node id="3865756215865931338" at="11,79,12,79" concept="6" />
       <node id="3865756215865931338" at="11,0,14,0" concept="4" trace="createEditorCell#(Ljetbrains/mps/openapi/editor/EditorContext;Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/openapi/editor/cells/EditorCell;" />
-      <scope id="3865756215865931338" at="11,79,12,73" />
+      <scope id="3865756215865931338" at="11,79,12,79" />
       <scope id="3865756215865931338" at="11,0,14,0">
         <var name="editorContext" id="3865756215865931338" />
         <var name="node" id="3865756215865931338" />
       </scope>
-      <unit id="3865756215865931338" at="10,0,15,0" name="ActorLanguage.editor.Message_Editor" />
+      <unit id="3865756215865931338" at="10,0,15,0" name="ActorLanguage.editor.CreateMessage_Editor" />
     </file>
-    <file name="Message_EditorBuilder_a.java">
-      <node id="3865756215865931338" at="32,87,33,19" concept="9" />
+    <file name="CreateMessage_EditorBuilder_a.java">
+      <node id="3865756215865931338" at="32,93,33,19" concept="9" />
       <node id="3865756215865931338" at="33,19,34,18" concept="1" />
       <node id="3865756215865931338" at="39,26,40,18" concept="6" />
       <node id="3865756215865931338" at="43,39,44,32" concept="6" />
@@ -575,7 +575,7 @@
       <node id="3865756215865931338" at="133,0,134,0" concept="8" trace="PropertyAttribute$Gb" />
       <node id="3865756215865931338" at="29,0,31,0" concept="2" trace="myNode" />
       <node id="3865756215865931338" at="43,0,46,0" concept="4" trace="createCell#()Ljetbrains/mps/openapi/editor/cells/EditorCell;" />
-      <node id="3865756215865931338" at="32,0,36,0" concept="0" trace="Message_EditorBuilder_a#(Ljetbrains/mps/openapi/editor/EditorContext;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="3865756215865931338" at="32,0,36,0" concept="0" trace="CreateMessage_EditorBuilder_a#(Ljetbrains/mps/openapi/editor/EditorContext;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
       <node id="3865756215865931338" at="37,0,42,0" concept="4" trace="getNode#()Lorg/jetbrains/mps/openapi/model/SNode;" />
       <node id="3865756215865931400" at="83,208,88,24" concept="3" />
       <node id="3865756215865931369" at="110,208,115,24" concept="3" />
@@ -592,7 +592,7 @@
       <scope id="3865756215865931338" at="43,39,44,32" />
       <scope id="3865756215865931400" at="89,15,90,40" />
       <scope id="3865756215865931369" at="116,15,117,40" />
-      <scope id="3865756215865931338" at="32,87,34,18" />
+      <scope id="3865756215865931338" at="32,93,34,18" />
       <scope id="3865756215865931400" at="84,74,86,145">
         <var name="manager" id="3865756215865931400" />
       </scope>
@@ -641,9 +641,9 @@
       <scope id="3865756215865931369" at="99,41,118,5" />
       <scope id="3865756215865931400" at="72,0,93,0" />
       <scope id="3865756215865931369" at="99,0,120,0" />
-      <unit id="3865756215865931338" at="132,0,135,0" name="ActorLanguage.editor.Message_EditorBuilder_a$CONCEPTS" />
-      <unit id="3865756215865931338" at="127,0,131,0" name="ActorLanguage.editor.Message_EditorBuilder_a$PROPS" />
-      <unit id="3865756215865931338" at="28,0,136,0" name="ActorLanguage.editor.Message_EditorBuilder_a" />
+      <unit id="3865756215865931338" at="132,0,135,0" name="ActorLanguage.editor.CreateMessage_EditorBuilder_a$CONCEPTS" />
+      <unit id="3865756215865931338" at="127,0,131,0" name="ActorLanguage.editor.CreateMessage_EditorBuilder_a$PROPS" />
+      <unit id="3865756215865931338" at="28,0,136,0" name="ActorLanguage.editor.CreateMessage_EditorBuilder_a" />
     </file>
   </root>
   <root nodeRef="r:69381955-c8b5-4c14-b1e0-ddad66dcca70(ActorLanguage.editor)/3865756215865931422">

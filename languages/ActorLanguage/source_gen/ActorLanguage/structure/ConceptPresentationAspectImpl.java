@@ -14,7 +14,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_ActorAction;
   private ConceptPresentation props_ActorScript;
   private ConceptPresentation props_BecomeBehavior;
-  private ConceptPresentation props_Message;
+  private ConceptPresentation props_CreateMessage;
   private ConceptPresentation props_SendMessage;
 
   @Override
@@ -55,13 +55,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_BecomeBehavior = cpb.create();
         }
         return props_BecomeBehavior;
-      case LanguageConceptSwitch.Message:
-        if (props_Message == null) {
+      case LanguageConceptSwitch.CreateMessage:
+        if (props_CreateMessage == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
           cpb.presentationByName();
-          props_Message = cpb.create();
+          props_CreateMessage = cpb.create();
         }
-        return props_Message;
+        return props_CreateMessage;
       case LanguageConceptSwitch.SendMessage:
         if (props_SendMessage == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

@@ -24,7 +24,7 @@ public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
       case 2:
         return Collections.<ConceptEditor>singletonList(new BecomeBehavior_Editor());
       case 3:
-        return Collections.<ConceptEditor>singletonList(new Message_Editor());
+        return Collections.<ConceptEditor>singletonList(new CreateMessage_Editor());
       case 4:
         return Collections.<ConceptEditor>singletonList(new SendMessage_Editor());
       default:

@@ -5,17 +5,27 @@ package ActorLanguage.textGen;
 import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class Actor_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
+
+    for (SNode action : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actions$7fVV))) {
+      if (SNodeOperations.isInstanceOf(action, CONCEPTS.AbstractActor$R3)) {
+        tgs.appendNode(action);
+      }
+    }
+
     tgs.append("void *");
     tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
     tgs.append("(void *arg) {");
@@ -37,10 +47,62 @@ public class Actor_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.newLine();
 
-    for (SNode item : SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actions$7fVV)) {
-      tgs.appendNode(item);
+    int count = ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actions$7fVV)).where((it) -> SNodeOperations.isInstanceOf(it, CONCEPTS.AbstractActor$R3)).count();
+
+    for (SNode action : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actions$7fVV))) {
+      if (SNodeOperations.isInstanceOf(action, CONCEPTS.CreateMessage$aX)) {
+        tgs.appendNode(action);
+      }
     }
 
+    if (count > 1) {
+      tgs.indent();
+      tgs.append("pthread_t threads[");
+      tgs.append(String.valueOf(count));
+      tgs.append("];");
+      tgs.newLine();
+      tgs.newLine();
+    } else if (count == 1) {
+      tgs.indent();
+      tgs.append("pthread_t thread;");
+      tgs.newLine();
+      tgs.newLine();
+    }
+
+    for (SNode action : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actions$7fVV))) {
+      if (SNodeOperations.isInstanceOf(action, CONCEPTS.AbstractActor$R3)) {
+        if (count > 1) {
+          tgs.indent();
+          tgs.append("create_thread(");
+          tgs.append(String.valueOf(SPropertyOperations.getInteger(SNodeOperations.cast(action, CONCEPTS.AbstractActor$R3), PROPS.address$Eakk)));
+          tgs.append(", data->map, ");
+          tgs.append(SPropertyOperations.getString(SNodeOperations.cast(action, CONCEPTS.AbstractActor$R3), PROPS.name$MnvL));
+          tgs.append(", &threads[");
+          tgs.append(String.valueOf(SNodeOperations.getIndexInParent(action)));
+          tgs.append("]);");
+          tgs.newLine();
+        } else {
+          tgs.indent();
+          tgs.append("create_thread(");
+          tgs.append(String.valueOf(SPropertyOperations.getInteger(SNodeOperations.cast(action, CONCEPTS.AbstractActor$R3), PROPS.address$Eakk)));
+          tgs.append(", data->map, ");
+          tgs.append(SPropertyOperations.getString(SNodeOperations.cast(action, CONCEPTS.AbstractActor$R3), PROPS.name$MnvL));
+          tgs.append(", &thread);");
+          tgs.newLine();
+        }
+      }
+    }
+    tgs.newLine();
+
+    for (SNode action : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actions$7fVV))) {
+      if (SNodeOperations.isInstanceOf(action, CONCEPTS.SendMessage$$2)) {
+        tgs.appendNode(action);
+      }
+    }
+
+    tgs.indent();
+    tgs.append("// wait for messages");
+    tgs.newLine();
     tgs.indent();
     tgs.append("while(1) {");
     tgs.newLine();
@@ -92,11 +154,18 @@ public class Actor_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
   }
 
-  private static final class PROPS {
-    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept AbstractActor$R3 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23308L, "ActorLanguage.structure.AbstractActor");
+    /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
+    /*package*/ static final SConcept SendMessage$$2 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, "ActorLanguage.structure.SendMessage");
   }
 
   private static final class LINKS {
     /*package*/ static final SContainmentLink actions$7fVV = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x35a5eccbf2f8e453L, "actions");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SProperty address$Eakk = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23308L, 0x35a5eccbf2f23360L, "address");
   }
 }

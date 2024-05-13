@@ -14,7 +14,7 @@
       <concept id="3865756215865914212" name="ActorLanguage.structure.Actor" flags="ng" index="37lXYJ">
         <child id="3865756215866352723" name="actions" index="37ngyo" />
       </concept>
-      <concept id="3865756215865914225" name="ActorLanguage.structure.Message" flags="ng" index="37lXYU">
+      <concept id="3865756215865914225" name="ActorLanguage.structure.CreateMessage" flags="ng" index="37lXYU">
         <property id="3865756215865914226" name="text" index="37lXYT" />
       </concept>
       <concept id="3865756215865914230" name="ActorLanguage.structure.ActorScript" flags="ng" index="37lXYX">
@@ -32,56 +32,32 @@
   </registry>
   <node concept="37lXYX" id="3m_VcJMYeha">
     <property role="TrG5h" value="script" />
-    <node concept="37lXYJ" id="3m_VcJN0cTf" role="37lXYW">
+    <node concept="37lXYJ" id="518QUjC0Hr4" role="37lXYW">
       <property role="TrG5h" value="actor1" />
-      <property role="37lXYF" value="10" />
-      <node concept="37lXYU" id="3m_VcJN0cTh" role="37ngyo">
-        <property role="TrG5h" value="message" />
-        <property role="37lXYT" value="hello" />
-      </node>
-      <node concept="37lS4T" id="2LRe1VceMmS" role="37ngyo">
-        <ref role="37lS4Y" node="3m_VcJN0cTh" resolve="message" />
-        <ref role="37lS4W" node="3m_VcJN0cT$" resolve="actor2" />
+      <property role="37lXYF" value="1" />
+      <node concept="37lXYJ" id="518QUjC0Hr8" role="37ngyo">
+        <property role="TrG5h" value="actor11" />
+        <property role="37lXYF" value="11" />
+        <node concept="37lXYU" id="518QUjC0Hrd" role="37ngyo">
+          <property role="TrG5h" value="message11" />
+          <property role="37lXYT" value="Hello from actor 11!" />
+        </node>
+        <node concept="37lS4T" id="518QUjC0Hrx" role="37ngyo">
+          <ref role="37lS4Y" node="518QUjC0Hrd" resolve="message11" />
+          <ref role="37lS4W" node="518QUjC0Hro" resolve="actor2" />
+        </node>
       </node>
     </node>
-    <node concept="37lXYJ" id="3m_VcJN0cT$" role="37lXYW">
+    <node concept="37lXYJ" id="518QUjC0Hro" role="37lXYW">
       <property role="TrG5h" value="actor2" />
-      <property role="37lXYF" value="34" />
-      <node concept="37lXYU" id="2LRe1VclxPt" role="37ngyo">
-        <property role="TrG5h" value="message1" />
-        <property role="37lXYT" value="hi" />
-      </node>
-      <node concept="37lS4T" id="2LRe1VclxPy" role="37ngyo">
-        <ref role="37lS4Y" node="2LRe1VclxPt" resolve="message1" />
-        <ref role="37lS4W" node="3m_VcJN0cTf" resolve="actor1" />
-      </node>
-    </node>
-    <node concept="37lXYJ" id="2LRe1VclxPI" role="37lXYW">
-      <property role="TrG5h" value="actor3" />
-      <property role="37lXYF" value="99" />
-      <node concept="37lXYU" id="2LRe1VclxPR" role="37ngyo">
+      <property role="37lXYF" value="2" />
+      <node concept="37lXYU" id="518QUjCdiV7" role="37ngyo">
         <property role="TrG5h" value="message2" />
-        <property role="37lXYT" value="hello world" />
+        <property role="37lXYT" value="Hello actor1!" />
       </node>
-      <node concept="37lS4T" id="2LRe1VclxPW" role="37ngyo">
-        <ref role="37lS4Y" node="2LRe1VclxPR" resolve="message2" />
-        <ref role="37lS4W" node="3m_VcJN0cTf" resolve="actor1" />
-      </node>
-      <node concept="37lS4T" id="2LRe1VclxQ4" role="37ngyo">
-        <ref role="37lS4Y" node="2LRe1VclxPR" resolve="message2" />
-        <ref role="37lS4W" node="3m_VcJN0cT$" resolve="actor2" />
-      </node>
-    </node>
-    <node concept="37lXYJ" id="4uPBxu3iLrw" role="37lXYW">
-      <property role="TrG5h" value="actor4" />
-      <property role="37lXYF" value="23" />
-      <node concept="37lXYU" id="4uPBxu3iLrJ" role="37ngyo">
-        <property role="TrG5h" value="message3" />
-        <property role="37lXYT" value="test" />
-      </node>
-      <node concept="37lS4T" id="4uPBxu3iLrP" role="37ngyo">
-        <ref role="37lS4Y" node="4uPBxu3iLrJ" resolve="message3" />
-        <ref role="37lS4W" node="3m_VcJN0cTf" resolve="actor1" />
+      <node concept="37lS4T" id="518QUjCdiVc" role="37ngyo">
+        <ref role="37lS4Y" node="518QUjCdiV7" resolve="message2" />
+        <ref role="37lS4W" node="518QUjC0Hr4" resolve="actor1" />
       </node>
     </node>
   </node>
