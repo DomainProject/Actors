@@ -13,8 +13,10 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_Actor;
   private ConceptPresentation props_ActorAction;
   private ConceptPresentation props_ActorScript;
-  private ConceptPresentation props_BecomeBehavior;
+  private ConceptPresentation props_Behavior;
   private ConceptPresentation props_CreateMessage;
+  private ConceptPresentation props_Envelope;
+  private ConceptPresentation props_Payload;
   private ConceptPresentation props_SendMessage;
 
   @Override
@@ -48,13 +50,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ActorScript = cpb.create();
         }
         return props_ActorScript;
-      case LanguageConceptSwitch.BecomeBehavior:
-        if (props_BecomeBehavior == null) {
+      case LanguageConceptSwitch.Behavior:
+        if (props_Behavior == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.rawPresentation("become");
-          props_BecomeBehavior = cpb.create();
+          cpb.presentationByName();
+          props_Behavior = cpb.create();
         }
-        return props_BecomeBehavior;
+        return props_Behavior;
       case LanguageConceptSwitch.CreateMessage:
         if (props_CreateMessage == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -62,6 +64,20 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_CreateMessage = cpb.create();
         }
         return props_CreateMessage;
+      case LanguageConceptSwitch.Envelope:
+        if (props_Envelope == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Envelope = cpb.create();
+        }
+        return props_Envelope;
+      case LanguageConceptSwitch.Payload:
+        if (props_Payload == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Payload = cpb.create();
+        }
+        return props_Payload;
       case LanguageConceptSwitch.SendMessage:
         if (props_SendMessage == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

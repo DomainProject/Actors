@@ -16,12 +16,6 @@ public class SendMessage_TextGen extends TextGenDescriptorBase {
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.indent();
-    tgs.append("receiver_address = ");
-    tgs.append(String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.receiver$4HbI), PROPS.address$Eakk)));
-    tgs.append(";");
-    tgs.newLine();
-    tgs.newLine();
-    tgs.indent();
     tgs.append("pthread_mutex_lock(&data->map[receiver_address].mutex);");
     tgs.newLine();
     tgs.indent();
@@ -56,12 +50,10 @@ public class SendMessage_TextGen extends TextGenDescriptorBase {
   }
 
   private static final class LINKS {
-    /*package*/ static final SReferenceLink receiver$4HbI = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, 0x35a5eccbf2f26df7L, "receiver");
     /*package*/ static final SReferenceLink message$4GHG = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, 0x35a5eccbf2f26df5L, "message");
   }
 
   private static final class PROPS {
-    /*package*/ static final SProperty address$Eakk = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23308L, 0x35a5eccbf2f23360L, "address");
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }
