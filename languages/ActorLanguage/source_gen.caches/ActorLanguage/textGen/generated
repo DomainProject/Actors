@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<product version="3" modelHash="dx1t0ia4d6eteig5khf5zxhe5omk128">
-  <files names="ActorScript_TextGen.java:Actor_TextGen.java:CreateMessage_TextGen.java:Initialization.java:SendMessage_TextGen.java:TextGenAspectDescriptor.java" />
+<product version="3" modelHash="7oa3yt7a1kiul5loykxvcmpy5me0mig">
+  <files names="ActorScript_TextGen.java:Actor_TextGen.java:CreateBehavior_TextGen.java:CreateMessage_TextGen.java:Initialization.java:SelectBehavior_TextGen.java:SendMessage_TextGen.java:TextGenAspectDescriptor.java" />
 </product>
 

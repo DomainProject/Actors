@@ -4,8 +4,8 @@
     <projectModules>
       <modulePath path="$PROJECT_DIR$/languages/ActorLanguage.sandbox/ActorLanguage.sandbox.msd" folder="" />
       <modulePath path="$PROJECT_DIR$/languages/ActorLanguage/ActorLanguage.mpl" folder="" />
-      <modulePath path="$PROJECT_DIR$/languages/Echoes.sandbox/Echoes.sandbox.msd" folder="" />
-      <modulePath path="$PROJECT_DIR$/languages/Echoes/Echoes.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/languages/QueryLanguage.sandbox/QueryLanguage.sandbox.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/languages/QueryLanguage/QueryLanguage.mpl" folder="" />
     </projectModules>
   </component>
 </project>

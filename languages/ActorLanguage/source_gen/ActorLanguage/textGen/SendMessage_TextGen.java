@@ -15,6 +15,11 @@ public class SendMessage_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
+
+    tgs.append("tag:");
+    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.message$4GHG), PROPS.tag$9Hck));
+    tgs.newLine();
+
     tgs.indent();
     tgs.append("pthread_mutex_lock(&data->map[receiver_address].mutex);");
     tgs.newLine();
@@ -54,6 +59,7 @@ public class SendMessage_TextGen extends TextGenDescriptorBase {
   }
 
   private static final class PROPS {
+    /*package*/ static final SProperty tag$9Hck = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x2176abe574acf08eL, "tag");
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }
