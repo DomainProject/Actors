@@ -20,11 +20,13 @@ public final class LanguageConceptSwitch {
   public static final int CreatePayload = 8;
   public static final int Envelope = 9;
   public static final int Fetch = 10;
-  public static final int Payload = 11;
-  public static final int SelectBehavior = 12;
-  public static final int SelectEnvelope = 13;
-  public static final int SelectPayload = 14;
-  public static final int SendMessage = 15;
+  public static final int MessageQueue = 11;
+  public static final int MessageRef = 12;
+  public static final int Payload = 13;
+  public static final int SelectBehavior = 14;
+  public static final int SelectEnvelope = 15;
+  public static final int SelectPayload = 16;
+  public static final int SendMessage = 17;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x10eda99958984cdeL, 0x9416196c5eca1268L);
@@ -39,6 +41,8 @@ public final class LanguageConceptSwitch {
     builder.put(0x2176abe574366688L, CreatePayload);
     builder.put(0x9de89b125c73205L, Envelope);
     builder.put(0x619ceb90241d8975L, Fetch);
+    builder.put(0x6ac9b580f420bed7L, MessageQueue);
+    builder.put(0x6ac9b580f420bedcL, MessageRef);
     builder.put(0x4658738496c93a81L, Payload);
     builder.put(0x619ceb9024171024L, SelectBehavior);
     builder.put(0x9de89b125bf6283L, SelectEnvelope);

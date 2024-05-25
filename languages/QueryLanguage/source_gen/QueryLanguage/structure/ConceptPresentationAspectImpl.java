@@ -13,9 +13,12 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_ColumnRef;
   private ConceptPresentation props_Condition;
   private ConceptPresentation props_CreateTable;
+  private ConceptPresentation props_InsertInto;
   private ConceptPresentation props_Script;
   private ConceptPresentation props_Select;
   private ConceptPresentation props_Statement;
+  private ConceptPresentation props_Update;
+  private ConceptPresentation props_Value;
   private ConceptPresentation props_Where;
 
   @Override
@@ -51,6 +54,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_CreateTable = cpb.create();
         }
         return props_CreateTable;
+      case LanguageConceptSwitch.InsertInto:
+        if (props_InsertInto == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("INSERT INTO");
+          props_InsertInto = cpb.create();
+        }
+        return props_InsertInto;
       case LanguageConceptSwitch.Script:
         if (props_Script == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -71,6 +81,20 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Statement = cpb.create();
         }
         return props_Statement;
+      case LanguageConceptSwitch.Update:
+        if (props_Update == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("UPDATE");
+          props_Update = cpb.create();
+        }
+        return props_Update;
+      case LanguageConceptSwitch.Value:
+        if (props_Value == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Value");
+          props_Value = cpb.create();
+        }
+        return props_Value;
       case LanguageConceptSwitch.Where:
         if (props_Where == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

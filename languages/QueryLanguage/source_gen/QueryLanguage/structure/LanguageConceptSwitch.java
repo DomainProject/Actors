@@ -13,10 +13,13 @@ public final class LanguageConceptSwitch {
   public static final int ColumnRef = 1;
   public static final int Condition = 2;
   public static final int CreateTable = 3;
-  public static final int Script = 4;
-  public static final int Select = 5;
-  public static final int Statement = 6;
-  public static final int Where = 7;
+  public static final int InsertInto = 4;
+  public static final int Script = 5;
+  public static final int Select = 6;
+  public static final int Statement = 7;
+  public static final int Update = 8;
+  public static final int Value = 9;
+  public static final int Where = 10;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L);
@@ -24,9 +27,12 @@ public final class LanguageConceptSwitch {
     builder.put(0x11100ee7375157f4L, ColumnRef);
     builder.put(0x11100ee737470ff3L, Condition);
     builder.put(0x11100ee737443b2eL, CreateTable);
+    builder.put(0x625a3ba00f1c72c8L, InsertInto);
     builder.put(0x11100ee737443bcdL, Script);
     builder.put(0x619ceb902420e379L, Select);
     builder.put(0x11100ee737443b30L, Statement);
+    builder.put(0x625a3ba00f23853fL, Update);
+    builder.put(0x625a3ba00f1cc88bL, Value);
     builder.put(0x619ceb902420e37bL, Where);
     myIndex = builder.seal();
   }

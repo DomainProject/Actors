@@ -49,10 +49,27 @@ public class CreateEnvelope_Constraints extends BaseConstraintsDescriptor {
       return true;
     }
   }
+  public static class Priority_Property extends BasePropertyConstraintsDescriptor {
+    public Priority_Property(ConstraintsDescriptor container) {
+      super(PROPS.priority$YWiN, container, false, false, true);
+    }
+    @Override
+    public boolean validateValue(SNode node, Object propertyValue, CheckingNodeContext checkingNodeContext) {
+      boolean result = staticValidateProperty(node, SPropertyOperations.castInteger(propertyValue));
+      if (!(result) && checkingNodeContext != null) {
+        checkingNodeContext.setBreakingNode(new SNodePointer("r:ae140228-36a4-4270-a859-e66d990ac219(ActorLanguage.constraints)", "7694881003800157413"));
+      }
+      return result;
+    }
+    private static boolean staticValidateProperty(SNode node, int propertyValue) {
+      return propertyValue >= 0 && propertyValue <= 5;
+    }
+  }
   @Override
   protected Map<SProperty, PropertyConstraintsDescriptor> getSpecifiedProperties() {
     Map<SProperty, PropertyConstraintsDescriptor> properties = new HashMap<SProperty, PropertyConstraintsDescriptor>();
     properties.put(PROPS.name$MnvL, new Name_Property(this));
+    properties.put(PROPS.priority$YWiN, new Priority_Property(this));
     return properties;
   }
 
@@ -62,5 +79,6 @@ public class CreateEnvelope_Constraints extends BaseConstraintsDescriptor {
 
   private static final class PROPS {
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SProperty priority$YWiN = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, 0x6ac9b580f468d377L, "priority");
   }
 }

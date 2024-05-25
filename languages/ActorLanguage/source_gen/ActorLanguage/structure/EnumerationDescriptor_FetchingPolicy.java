@@ -24,7 +24,7 @@ public class EnumerationDescriptor_FetchingPolicy extends EnumerationDescriptorB
   @Nullable
   @Override
   public EnumerationDescriptor.MemberDescriptor getDefault() {
-    return myMember_FIFO_0;
+    return null;
   }
 
   @NotNull

@@ -20,6 +20,8 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_CreatePayload;
   private ConceptPresentation props_Envelope;
   private ConceptPresentation props_Fetch;
+  private ConceptPresentation props_MessageQueue;
+  private ConceptPresentation props_MessageRef;
   private ConceptPresentation props_Payload;
   private ConceptPresentation props_SelectBehavior;
   private ConceptPresentation props_SelectEnvelope;
@@ -104,6 +106,20 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Fetch = cpb.create();
         }
         return props_Fetch;
+      case LanguageConceptSwitch.MessageQueue:
+        if (props_MessageQueue == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_MessageQueue = cpb.create();
+        }
+        return props_MessageQueue;
+      case LanguageConceptSwitch.MessageRef:
+        if (props_MessageRef == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6ac9b580f420bedcL, 0x6ac9b580f420beddL, "message", "", "");
+          props_MessageRef = cpb.create();
+        }
+        return props_MessageRef;
       case LanguageConceptSwitch.Payload:
         if (props_Payload == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
