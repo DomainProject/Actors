@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<product version="3" modelHash="-crsl55so9yiw43tmcoynya7hrpx1as1">
-  <files names="AbstractActor_Constraints.java:Actor_Constraints.java:ConstraintsAspectDescriptor.java:CreateBehavior_Constraints.java:CreateEnvelope_Constraints.java:CreateMessage_Constraints.java:CreatePayload_Constraints.java:Envelope_Constraints.java:Fetch_Constraints.java:ReplyToMessage_Constraints.java:SelectEnvelope_Constraints.java:SelectPayload_Constraints.java:SendMessage_Constraints.java" />
-</product>
-
