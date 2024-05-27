@@ -23,6 +23,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_MessageQueue;
   private ConceptPresentation props_MessageRef;
   private ConceptPresentation props_Payload;
+  private ConceptPresentation props_ReplyToMessage;
   private ConceptPresentation props_SelectBehavior;
   private ConceptPresentation props_SelectEnvelope;
   private ConceptPresentation props_SelectPayload;
@@ -126,6 +127,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Payload = cpb.create();
         }
         return props_Payload;
+      case LanguageConceptSwitch.ReplyToMessage:
+        if (props_ReplyToMessage == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("reply_to_message");
+          props_ReplyToMessage = cpb.create();
+        }
+        return props_ReplyToMessage;
       case LanguageConceptSwitch.SelectBehavior:
         if (props_SelectBehavior == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

@@ -149,7 +149,7 @@
               <node concept="2OqwBi" id="6F9Ho3OaRPg" role="2Oq$k0">
                 <node concept="1r4Lsj" id="6F9Ho3OaRDd" role="2Oq$k0" />
                 <node concept="3TrEf2" id="6F9Ho3OaS1x" role="2OqNvi">
-                  <ref role="3Tt5mk" to="o1mc:6F9Ho3Oc6ML" />
+                  <ref role="3Tt5mk" to="o1mc:6F9Ho3Oc6ML" resolve="messageQueue" />
                 </node>
               </node>
               <node concept="2oxUTD" id="6F9Ho3OaSXV" role="2OqNvi">

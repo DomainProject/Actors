@@ -117,7 +117,6 @@
       <property role="IQ2ns" value="3269545992594456658" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="envelope" />
-      <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" node="Buyr4_LN85" resolve="Envelope" />
     </node>
   </node>
@@ -125,7 +124,7 @@
     <property role="EcuMT" value="3865756215865914230" />
     <property role="TrG5h" value="ActorScript" />
     <property role="19KtqR" value="true" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="3m_VcJMWzdR" role="1TKVEi">
       <property role="IQ2ns" value="3865756215865914231" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
@@ -155,7 +154,7 @@
     <property role="TrG5h" value="ActorAction" />
     <property role="R5$K7" value="true" />
     <property role="3GE5qa" value="actions" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
   </node>
   <node concept="1TIwiD" id="25QEYlOdAq7">
     <property role="EcuMT" value="2411303652489062023" />
@@ -172,7 +171,6 @@
     <node concept="1TJgyj" id="25QEYlOdAqb" role="1TKVEi">
       <property role="IQ2ns" value="2411303652489062027" />
       <property role="20kJfa" value="receiver" />
-      <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" node="3m_VcJMWzc8" resolve="AbstractActor" />
     </node>
     <node concept="PrWs8" id="25QEYlOdAsi" role="PzmwI">
@@ -226,7 +224,7 @@
     <property role="TrG5h" value="AbstractBehavior" />
     <property role="R5$K7" value="true" />
     <property role="3GE5qa" value="behavior" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
   </node>
   <node concept="1TIwiD" id="66sUT0$5L0$">
     <property role="EcuMT" value="7033755722359181348" />
@@ -301,7 +299,7 @@
     <property role="EcuMT" value="5068928393908140674" />
     <property role="3GE5qa" value="payload" />
     <property role="TrG5h" value="SelectPayload" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="PrWs8" id="4posSimMjE3" role="PzmwI">
       <ref role="PrY4T" node="4posSimMjE1" resolve="Payload" />
     </node>
@@ -316,7 +314,7 @@
     <property role="EcuMT" value="7694881003795431127" />
     <property role="TrG5h" value="MessageQueue" />
     <property role="3GE5qa" value="message_queue" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="6F9Ho3O8bVv" role="1TKVEi">
       <property role="IQ2ns" value="7694881003795431135" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
@@ -332,12 +330,47 @@
     <property role="EcuMT" value="7694881003795431132" />
     <property role="3GE5qa" value="message" />
     <property role="TrG5h" value="MessageRef" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="6F9Ho3O8bVt" role="1TKVEi">
       <property role="IQ2ns" value="7694881003795431133" />
       <property role="20kJfa" value="message" />
       <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" node="3m_VcJMWzdL" resolve="CreateMessage" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="2sIU3umt2_W">
+    <property role="EcuMT" value="2823449341852920188" />
+    <property role="3GE5qa" value="message" />
+    <property role="TrG5h" value="ReplyToMessage" />
+    <property role="34LRSv" value="reply_to_message" />
+    <ref role="1TJDcQ" node="3m_VcJMYehb" resolve="ActorAction" />
+    <node concept="1TJgyj" id="2sIU3umt2_X" role="1TKVEi">
+      <property role="IQ2ns" value="2823449341852920189" />
+      <property role="20kJfa" value="receivedMessage" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="3m_VcJMWzdL" resolve="CreateMessage" />
+    </node>
+    <node concept="1TJgyj" id="2sIU3umt2A1" role="1TKVEi">
+      <property role="IQ2ns" value="2823449341852920193" />
+      <property role="20kJfa" value="newMessage" />
+      <ref role="20lvS9" node="3m_VcJMWzdL" resolve="CreateMessage" />
+    </node>
+  </node>
+  <node concept="25R3W" id="2sIU3umyTfo">
+    <property role="3F6X1D" value="2823449341854454744" />
+    <property role="3GE5qa" value="message" />
+    <property role="TrG5h" value="MessageType" />
+    <node concept="25R33" id="2sIU3umyTfp" role="25R1y">
+      <property role="3tVfz5" value="2823449341854454745" />
+      <property role="TrG5h" value="EXECUTE" />
+    </node>
+    <node concept="25R33" id="2sIU3umyTfq" role="25R1y">
+      <property role="3tVfz5" value="2823449341854454746" />
+      <property role="TrG5h" value="BECOME" />
+    </node>
+    <node concept="25R33" id="2sIU3umyTft" role="25R1y">
+      <property role="3tVfz5" value="2823449341854454749" />
+      <property role="TrG5h" value="KILL" />
     </node>
   </node>
 </model>

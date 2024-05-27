@@ -8,11 +8,13 @@ import jetbrains.mps.smodel.runtime.ConstraintsDescriptor;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import org.jetbrains.mps.openapi.language.SEnumerationLiteral;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SEnumOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.internal.collections.runtime.Sequence;
 import java.util.Map;
 import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.runtime.PropertyConstraintsDescriptor;
@@ -34,54 +36,37 @@ public class Fetch_Constraints extends BaseConstraintsDescriptor {
     public void setPropertyValue(SNode node, Object propertyValue) {
       staticSetPropertyValue(node, SPropertyOperations.castEnummember(propertyValue));
     }
-    private static void staticSetPropertyValue(SNode node, SEnumerationLiteral propertyValue) {
+    private static void staticSetPropertyValue(final SNode node, SEnumerationLiteral propertyValue) {
       SPropertyOperations.assignEnum(node, PROPS.policy$Ol3f, propertyValue);
 
-      if (propertyValue.equals(SEnumOperations.getMember(MetaAdapterFactory.getEnumeration(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8976L, "ActorLanguage.structure.FetchingPolicy"), 0x619ceb90241d8977L, "FIFO"))) {
+      /*
+        The following code implements the receive operation 
+        
+        if
 
-        SLinkOperations.setTarget(node, LINKS.message$diNF, SNodeOperations.copyNode(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(node, CONCEPTS.Actor$Uv, false, false), LINKS.messageQueue$afFg), LINKS.messages$FwF6)).getElement(0)));
-        SLinkOperations.getChildren(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(node, CONCEPTS.Actor$Uv, false, false), LINKS.messageQueue$afFg), LINKS.messages$FwF6).remove(0);
+      */
 
-      } else if (propertyValue.equals(SEnumOperations.getMember(MetaAdapterFactory.getEnumeration(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8976L, "ActorLanguage.structure.FetchingPolicy"), 0x619ceb90241d8978L, "HIGHEST_PRIORITY"))) {
 
-        SNode m = SNodeOperations.copyNode(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(node, CONCEPTS.Actor$Uv, false, false), LINKS.messageQueue$afFg), LINKS.messages$FwF6)).getElement(0));
-        int priority = 5;
+      // the following code creates a generic message that models the message to be received
 
-        {
-          final SNode env = SLinkOperations.getTarget(m, LINKS.envelope$eoPh);
-          if (SNodeOperations.isInstanceOf(env, CONCEPTS.CreateEnvelope$OK)) {
-            priority = SPropertyOperations.getInteger(env, PROPS.priority$YWiN);
+      SLinkOperations.setTarget(node, LINKS.message$diNF, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage")));
+
+      int receivedMessages = 0;
+
+      Iterable<SNode> existingMessages = ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(node, CONCEPTS.AbstractActor$R3, false, false), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{})).where((it) -> it != SLinkOperations.getTarget(node, LINKS.message$diNF));
+
+      if (Sequence.fromIterable(existingMessages).isNotEmpty()) {
+        for (SNode message : Sequence.fromIterable(existingMessages)) {
+          if (SPropertyOperations.getString(message, PROPS.name$MnvL).contains("rec_message")) {
+            receivedMessages++;
           }
         }
-        {
-          final SNode env = SLinkOperations.getTarget(m, LINKS.envelope$eoPh);
-          if (SNodeOperations.isInstanceOf(env, CONCEPTS.SelectEnvelope$S6)) {
-            priority = SPropertyOperations.getInteger(SLinkOperations.getTarget(env, LINKS.envelope$EmhE), PROPS.priority$YWiN);
-          }
-        }
-
-        for (SNode message : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(node, CONCEPTS.Actor$Uv, false, false), LINKS.messageQueue$afFg), LINKS.messages$FwF6))) {
-          int p = 5;
-          {
-            final SNode env = SLinkOperations.getTarget(message, LINKS.envelope$eoPh);
-            if (SNodeOperations.isInstanceOf(env, CONCEPTS.CreateEnvelope$OK)) {
-              p = SPropertyOperations.getInteger(env, PROPS.priority$YWiN);
-            }
-          }
-          {
-            final SNode env = SLinkOperations.getTarget(message, LINKS.envelope$eoPh);
-            if (SNodeOperations.isInstanceOf(env, CONCEPTS.SelectEnvelope$S6)) {
-              p = SPropertyOperations.getInteger(SLinkOperations.getTarget(env, LINKS.envelope$EmhE), PROPS.priority$YWiN);
-            }
-          }
-          if (p < priority) {
-            m = message;
-          }
-        }
-
-        ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(node, CONCEPTS.Actor$Uv, false, false), LINKS.messageQueue$afFg), LINKS.messages$FwF6)).removeElement(m);
-        SLinkOperations.setTarget(node, LINKS.message$diNF, m);
       }
+
+      SPropertyOperations.assign(SLinkOperations.getTarget(node, LINKS.message$diNF), PROPS.name$MnvL, "rec_message" + receivedMessages);
+
+      SLinkOperations.setTarget(SLinkOperations.getTarget(node, LINKS.message$diNF), LINKS.payload$N_RC, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, "ActorLanguage.structure.CreatePayload")));
+      SPropertyOperations.assign(SNodeOperations.cast(SLinkOperations.getTarget(SLinkOperations.getTarget(node, LINKS.message$diNF), LINKS.payload$N_RC), CONCEPTS.CreatePayload$Pf), PROPS.name$MnvL, SPropertyOperations.getString(SLinkOperations.getTarget(node, LINKS.message$diNF), PROPS.name$MnvL) + ".payload");
 
     }
   }
@@ -97,11 +82,15 @@ public class Fetch_Constraints extends BaseConstraintsDescriptor {
     /*package*/ static final SConcept Actor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.Actor");
     /*package*/ static final SConcept CreateEnvelope$OK = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, "ActorLanguage.structure.CreateEnvelope");
     /*package*/ static final SConcept SelectEnvelope$S6 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L, "ActorLanguage.structure.SelectEnvelope");
+    /*package*/ static final SConcept AbstractActor$R3 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23308L, "ActorLanguage.structure.AbstractActor");
+    /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
+    /*package*/ static final SConcept CreatePayload$Pf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, "ActorLanguage.structure.CreatePayload");
   }
 
   private static final class PROPS {
     /*package*/ static final SProperty policy$Ol3f = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8975L, 0x619ceb90241d897bL, "policy");
     /*package*/ static final SProperty priority$YWiN = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, 0x6ac9b580f468d377L, "priority");
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 
   private static final class LINKS {
@@ -110,5 +99,6 @@ public class Fetch_Constraints extends BaseConstraintsDescriptor {
     /*package*/ static final SContainmentLink messages$FwF6 = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6ac9b580f420bed7L, 0x6ac9b580f420bedfL, "messages");
     /*package*/ static final SContainmentLink envelope$eoPh = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x2d5fc2c1e9650052L, "envelope");
     /*package*/ static final SReferenceLink envelope$EmhE = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L, 0x9de89b125bf6284L, "envelope");
+    /*package*/ static final SContainmentLink payload$N_RC = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x9de89b125a71571L, "payload");
   }
 }

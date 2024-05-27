@@ -42,6 +42,14 @@
       <concept id="1186414536763" name="jetbrains.mps.lang.editor.structure.BooleanStyleSheetItem" flags="ln" index="VOi$J">
         <property id="1186414551515" name="flag" index="VOm3f" />
       </concept>
+      <concept id="1139535219966" name="jetbrains.mps.lang.editor.structure.CellActionMapDeclaration" flags="ig" index="1h_SRR">
+        <child id="1139535219969" name="item" index="1h_SK8" />
+      </concept>
+      <concept id="1139535280617" name="jetbrains.mps.lang.editor.structure.CellActionMapItem" flags="lg" index="1hA7zw">
+        <property id="1139535298778" name="actionId" index="1hAc7j" />
+        <child id="1139535280620" name="executeFunction" index="1hA7z_" />
+      </concept>
+      <concept id="1139535439104" name="jetbrains.mps.lang.editor.structure.CellActionMap_ExecuteFunction" flags="in" index="1hAIg9" />
       <concept id="1088013125922" name="jetbrains.mps.lang.editor.structure.CellModel_RefCell" flags="sg" stub="730538219795941030" index="1iCGBv">
         <child id="1088186146602" name="editorComponent" index="1sWHZn" />
       </concept>
@@ -54,6 +62,7 @@
         <reference id="1140103550593" name="relationDeclaration" index="1NtTu8" />
       </concept>
       <concept id="1073389214265" name="jetbrains.mps.lang.editor.structure.EditorCellModel" flags="ng" index="3EYTF0">
+        <reference id="1139959269582" name="actionMap" index="1ERwB7" />
         <child id="1142887637401" name="renderingCondition" index="pqm2j" />
       </concept>
       <concept id="1073389446423" name="jetbrains.mps.lang.editor.structure.CellModel_Collection" flags="sn" stub="3013115976261988961" index="3EZMnI">
@@ -97,6 +106,9 @@
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
       <concept id="1133920641626" name="jetbrains.mps.lang.core.structure.BaseConcept" flags="ng" index="2VYdi">
         <property id="1193676396447" name="virtualPackage" index="3GE5qa" />
+      </concept>
+      <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ngI" index="TrEIO">
+        <property id="1169194664001" name="name" index="TrG5h" />
       </concept>
     </language>
   </registry>
@@ -165,7 +177,7 @@
         <property role="3F0ifm" value="(" />
       </node>
       <node concept="3F1sOY" id="25QEYlOKN1W" role="3EZMnx">
-        <ref role="1NtTu8" to="o1mc:Buyr4_DLlL" />
+        <ref role="1NtTu8" to="o1mc:Buyr4_DLlL" resolve="payload" />
         <node concept="pVoyu" id="25QEYlOL_YC" role="3F10Kt">
           <property role="VOm3f" value="true" />
         </node>
@@ -187,6 +199,7 @@
       </node>
       <node concept="3F0ifn" id="25QEYlOdArr" role="3EZMnx">
         <property role="3F0ifm" value=")" />
+        <ref role="1ERwB7" node="2sIU3umx1RO" resolve="NewLine" />
         <node concept="pVoyu" id="25QEYlOL_YR" role="3F10Kt">
           <property role="VOm3f" value="true" />
         </node>
@@ -258,7 +271,7 @@
         </node>
       </node>
       <node concept="3F2HdR" id="3m_VcJMWBtQ" role="3EZMnx">
-        <ref role="1NtTu8" to="o1mc:3m_VcJMWzdR" />
+        <ref role="1NtTu8" to="o1mc:3m_VcJMWzdR" resolve="actors" />
         <node concept="l2Vlx" id="3m_VcJMWBtT" role="2czzBx" />
         <node concept="pj6Ft" id="3m_VcJMWBu3" role="3F10Kt">
           <property role="VOm3f" value="true" />
@@ -513,6 +526,55 @@
         </node>
       </node>
       <node concept="l2Vlx" id="4posSimMjEd" role="2iSdaV" />
+    </node>
+  </node>
+  <node concept="24kQdi" id="2sIU3umt2_Z">
+    <property role="3GE5qa" value="message" />
+    <ref role="1XX52x" to="o1mc:2sIU3umt2_W" resolve="ReplyToMessage" />
+    <node concept="3EZMnI" id="2sIU3umt2A4" role="2wV5jI">
+      <node concept="3F0ifn" id="2sIU3umt2Ah" role="3EZMnx">
+        <property role="3F0ifm" value="reply_to_message" />
+        <node concept="VechU" id="2sIU3umweO5" role="3F10Kt">
+          <property role="Vb096" value="fLwANPu/blue" />
+        </node>
+      </node>
+      <node concept="3F0ifn" id="2sIU3umt2An" role="3EZMnx">
+        <property role="3F0ifm" value="(" />
+      </node>
+      <node concept="1iCGBv" id="2sIU3umt2AD" role="3EZMnx">
+        <ref role="1NtTu8" to="o1mc:2sIU3umt2_X" resolve="receivedMessage" />
+        <node concept="1sVBvm" id="2sIU3umt2AF" role="1sWHZn">
+          <node concept="3F0A7n" id="2sIU3umt2AS" role="2wV5jI">
+            <property role="1Intyy" value="true" />
+            <ref role="1NtTu8" to="tpck:h0TrG11" resolve="name" />
+          </node>
+        </node>
+      </node>
+      <node concept="3F0ifn" id="2sIU3umt2B3" role="3EZMnx">
+        <property role="3F0ifm" value="," />
+      </node>
+      <node concept="1iCGBv" id="2sIU3umt2Bl" role="3EZMnx">
+        <ref role="1NtTu8" to="o1mc:2sIU3umt2A1" resolve="newMessage" />
+        <node concept="1sVBvm" id="2sIU3umt2Bn" role="1sWHZn">
+          <node concept="3F0A7n" id="2sIU3umt2BC" role="2wV5jI">
+            <property role="1Intyy" value="true" />
+            <ref role="1NtTu8" to="tpck:h0TrG11" resolve="name" />
+          </node>
+        </node>
+      </node>
+      <node concept="3F0ifn" id="2sIU3umt2Av" role="3EZMnx">
+        <property role="3F0ifm" value=")" />
+      </node>
+      <node concept="l2Vlx" id="2sIU3umt2A7" role="2iSdaV" />
+    </node>
+  </node>
+  <node concept="1h_SRR" id="2sIU3umx1RO">
+    <property role="TrG5h" value="NewLine" />
+    <node concept="1hA7zw" id="2sIU3umx1RR" role="1h_SK8">
+      <property role="1hAc7j" value="13S4mXuSN7V/insert_action_id" />
+      <node concept="1hAIg9" id="2sIU3umx1RS" role="1hA7z_">
+        <node concept="3clFbS" id="2sIU3umx1RT" role="2VODD2" />
+      </node>
     </node>
   </node>
 </model>

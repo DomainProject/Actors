@@ -11,9 +11,16 @@
       <concept id="711157185106633347" name="ActorLanguage.structure.SelectEnvelope" flags="ng" index="GouGM">
         <reference id="711157185106633348" name="envelope" index="GouGP" />
       </concept>
+      <concept id="2823449341852920188" name="ActorLanguage.structure.ReplyToMessage" flags="ng" index="2LmG5b">
+        <reference id="2823449341852920189" name="receivedMessage" index="2LmG5a" />
+        <reference id="2823449341852920193" name="newMessage" index="2LmG6Q" />
+      </concept>
       <concept id="7033755722359605621" name="ActorLanguage.structure.Fetch" flags="ng" index="15wmb_">
         <property id="7033755722359605627" name="policy" index="15wmbF" />
         <child id="7694881003795133521" name="message" index="2uPo7h" />
+      </concept>
+      <concept id="7033755722359181348" name="ActorLanguage.structure.SelectBehavior" flags="ng" index="15yZIO">
+        <reference id="7033755722359181349" name="behavior" index="15yZIP" />
       </concept>
       <concept id="3865756215865929202" name="ActorLanguage.structure.SendMessage" flags="ng" index="37lS4T">
         <reference id="3865756215865929205" name="message" index="37lS4Y" />
@@ -92,11 +99,17 @@
             <ref role="1lgcPI" node="6CMnlJwL$Sm" resolve="a2" />
           </node>
         </node>
-        <node concept="37lS4T" id="6CMnlJwL$Tz" role="37ngyo">
+        <node concept="37lS4T" id="6CMnlJwS9ns" role="37ngyo">
           <ref role="37lS4Y" node="6CMnlJwL$SL" resolve="m1" />
         </node>
-        <node concept="37lS4T" id="6CMnlJwL$Ua" role="37ngyo">
+        <node concept="37lS4T" id="6CMnlJwS9nQ" role="37ngyo">
           <ref role="37lS4Y" node="6CMnlJwL$T7" resolve="m2" />
+        </node>
+        <node concept="37lXYU" id="2sIU3umxO0O" role="37ngyo">
+          <property role="TrG5h" value="m" />
+          <node concept="3g$k$6" id="2sIU3umxO1v" role="GupN0">
+            <ref role="3g$k$l" node="6CMnlJwL$SD" resolve="p1" />
+          </node>
         </node>
       </node>
     </node>
@@ -106,38 +119,60 @@
       <node concept="2uUgHn" id="6CMnlJwL$So" role="2uYt$L" />
       <node concept="1lj4MQ" id="6CMnlJwL$Sx" role="1lj4M2">
         <property role="TrG5h" value="b2" />
-        <node concept="15wmb_" id="6CMnlJwL$UI" role="37ngyo">
-          <property role="15wmbF" value="66sUT0$7o_S/HIGHEST_PRIORITY" />
-          <node concept="37lXYU" id="6CMnlJwL$Ux" role="2uPo7h">
-            <property role="TrG5h" value="a1.m2" />
-            <node concept="1lgcPy" id="6CMnlJwL$Uv" role="34eGaj">
-              <property role="TrG5h" value="a1.m2.e2" />
-              <property role="2uCmrR" value="0" />
-              <ref role="1lgcPG" node="6CMnlJwL$S8" resolve="a1" />
-              <ref role="1lgcPI" node="6CMnlJwL$Sm" resolve="a2" />
-            </node>
-            <node concept="1lgcPH" id="6CMnlJwL$Uw" role="GupN0">
-              <property role="TrG5h" value="a1.m2.p1" />
-              <property role="1lgcdb" value="test" />
-            </node>
-          </node>
-        </node>
-        <node concept="15wmb_" id="6CMnlJwL$Vh" role="37ngyo">
+        <node concept="15wmb_" id="2sIU3umsd1P" role="37ngyo">
           <property role="15wmbF" value="66sUT0$7o_R/FIFO" />
-          <node concept="37lXYU" id="6CMnlJwL$Vz" role="2uPo7h">
-            <property role="TrG5h" value="a1.m1" />
-            <node concept="1lgcPy" id="6CMnlJwL$V$" role="34eGaj">
-              <property role="TrG5h" value="a1.m1.e1" />
-              <property role="2uCmrR" value="5" />
-              <ref role="1lgcPG" node="6CMnlJwL$S8" resolve="a1" />
-              <ref role="1lgcPI" node="6CMnlJwL$Sm" resolve="a2" />
-            </node>
-            <node concept="1lgcPH" id="6CMnlJwL$V_" role="GupN0">
-              <property role="TrG5h" value="a1.m1.p1" />
-              <property role="1lgcdb" value="test" />
+          <node concept="37lXYU" id="2sIU3umsd1Z" role="2uPo7h">
+            <property role="TrG5h" value="rec_message0" />
+            <node concept="1lgcPH" id="2sIU3umsd20" role="GupN0">
+              <property role="TrG5h" value="rec_message0.payload" />
             </node>
           </node>
         </node>
+        <node concept="15wmb_" id="2sIU3umt1kU" role="37ngyo">
+          <property role="15wmbF" value="66sUT0$7o_S/HIGHEST_PRIORITY" />
+          <node concept="37lXYU" id="2sIU3umt1l9" role="2uPo7h">
+            <property role="TrG5h" value="rec_message1" />
+            <node concept="1lgcPH" id="2sIU3umt1la" role="GupN0">
+              <property role="TrG5h" value="rec_message1.payload" />
+            </node>
+          </node>
+        </node>
+        <node concept="37lXYU" id="2sIU3umuWe6" role="37ngyo">
+          <property role="TrG5h" value="reply" />
+          <node concept="1lgcPH" id="2sIU3umuWeu" role="GupN0">
+            <property role="TrG5h" value="reply_p" />
+            <property role="1lgcdb" value="reply" />
+          </node>
+          <node concept="1lgcPy" id="2sIU3umw7ot" role="34eGaj">
+            <property role="TrG5h" value="reply_e" />
+            <property role="2uCmrR" value="0" />
+            <ref role="1lgcPG" node="6CMnlJwL$Sm" resolve="a2" />
+          </node>
+        </node>
+        <node concept="2LmG5b" id="2sIU3umw7qg" role="37ngyo">
+          <ref role="2LmG5a" node="2sIU3umsd1Z" resolve="rec_message0" />
+          <ref role="2LmG6Q" node="2sIU3umuWe6" resolve="reply" />
+        </node>
+        <node concept="2LmG5b" id="2sIU3umw7r9" role="37ngyo">
+          <ref role="2LmG5a" node="2sIU3umt1l9" resolve="rec_message1" />
+          <ref role="2LmG6Q" node="2sIU3umuWe6" resolve="reply" />
+        </node>
+      </node>
+    </node>
+    <node concept="37lXYJ" id="6CMnlJwUfiP" role="37lXYW">
+      <property role="TrG5h" value="a3" />
+      <property role="37lXYF" value="3" />
+      <node concept="2uUgHn" id="6CMnlJwUfiR" role="2uYt$L" />
+      <node concept="1lj4MQ" id="6CMnlJwUfjx" role="1lj4M2">
+        <property role="TrG5h" value="b3" />
+      </node>
+    </node>
+    <node concept="37lXYJ" id="2sIU3umyTdP" role="37lXYW">
+      <property role="TrG5h" value="a4" />
+      <property role="37lXYF" value="4" />
+      <node concept="2uUgHn" id="2sIU3umyTdR" role="2uYt$L" />
+      <node concept="15yZIO" id="2sIU3umyTf7" role="1lj4M2">
+        <ref role="15yZIP" node="6CMnlJwUfjx" resolve="b3" />
       </node>
     </node>
   </node>

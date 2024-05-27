@@ -12,8 +12,14 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_Column;
   private ConceptPresentation props_ColumnRef;
   private ConceptPresentation props_Condition;
+  private ConceptPresentation props_ConditionSet;
+  private ConceptPresentation props_ConditionsSequence;
   private ConceptPresentation props_CreateTable;
+  private ConceptPresentation props_DBOperation;
+  private ConceptPresentation props_Delete;
+  private ConceptPresentation props_GroupBy;
   private ConceptPresentation props_InsertInto;
+  private ConceptPresentation props_OrderBy;
   private ConceptPresentation props_Script;
   private ConceptPresentation props_Select;
   private ConceptPresentation props_Statement;
@@ -47,6 +53,20 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Condition = cpb.create();
         }
         return props_Condition;
+      case LanguageConceptSwitch.ConditionSet:
+        if (props_ConditionSet == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ConditionSet");
+          props_ConditionSet = cpb.create();
+        }
+        return props_ConditionSet;
+      case LanguageConceptSwitch.ConditionsSequence:
+        if (props_ConditionsSequence == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ConditionsSequence");
+          props_ConditionsSequence = cpb.create();
+        }
+        return props_ConditionsSequence;
       case LanguageConceptSwitch.CreateTable:
         if (props_CreateTable == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -54,6 +74,26 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_CreateTable = cpb.create();
         }
         return props_CreateTable;
+      case LanguageConceptSwitch.DBOperation:
+        if (props_DBOperation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_DBOperation = cpb.create();
+        }
+        return props_DBOperation;
+      case LanguageConceptSwitch.Delete:
+        if (props_Delete == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("DELETE");
+          props_Delete = cpb.create();
+        }
+        return props_Delete;
+      case LanguageConceptSwitch.GroupBy:
+        if (props_GroupBy == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("GROUP BY");
+          props_GroupBy = cpb.create();
+        }
+        return props_GroupBy;
       case LanguageConceptSwitch.InsertInto:
         if (props_InsertInto == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -61,6 +101,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_InsertInto = cpb.create();
         }
         return props_InsertInto;
+      case LanguageConceptSwitch.OrderBy:
+        if (props_OrderBy == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ORDER BY");
+          props_OrderBy = cpb.create();
+        }
+        return props_OrderBy;
       case LanguageConceptSwitch.Script:
         if (props_Script == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

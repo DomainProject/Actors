@@ -234,7 +234,7 @@
                     <node concept="2OqwBi" id="2LRe1Vcj2Db" role="2Oq$k0">
                       <node concept="117lpO" id="2LRe1Vcj1j$" role="2Oq$k0" />
                       <node concept="3Tsc0h" id="2LRe1Vcj2Ra" role="2OqNvi">
-                        <ref role="3TtcxE" to="o1mc:3m_VcJMWzdR" />
+                        <ref role="3TtcxE" to="o1mc:3m_VcJMWzdR" resolve="actors" />
                       </node>
                     </node>
                     <node concept="liA8E" id="2LRe1VcjdQU" role="2OqNvi">

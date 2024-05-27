@@ -24,7 +24,7 @@ import jetbrains.mps.openapi.editor.cells.CellActionType;
 import jetbrains.mps.nodeEditor.cellActions.CellAction_DeleteNode;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
 /*package*/ class Script_EditorBuilder_a extends AbstractEditorBuilder {
   @NotNull
@@ -55,20 +55,20 @@ import org.jetbrains.mps.openapi.language.SConcept;
     return editorCell;
   }
   private EditorCell createRefNodeList_0() {
-    AbstractCellListHandler handler = new queriesListHandler_udqu28_a0(myNode, getEditorContext());
+    AbstractCellListHandler handler = new operationsListHandler_udqu28_a0(myNode, getEditorContext());
     EditorCell_Collection editorCell = handler.createCells(new CellLayout_Indent(), false);
-    editorCell.setCellId("refNodeList_queries");
+    editorCell.setCellId("refNodeList_operations");
     Style style = new StyleImpl();
     style.set(StyleAttributes.INDENT_LAYOUT_CHILDREN_NEWLINE, true);
     editorCell.getStyle().putAll(style);
     editorCell.setSRole(handler.getElementSRole());
     return editorCell;
   }
-  private static class queriesListHandler_udqu28_a0 extends RefNodeListHandler {
+  private static class operationsListHandler_udqu28_a0 extends RefNodeListHandler {
     @NotNull
     private SNode myNode;
 
-    public queriesListHandler_udqu28_a0(SNode ownerNode, EditorContext context) {
+    public operationsListHandler_udqu28_a0(SNode ownerNode, EditorContext context) {
       super(context, false);
       myNode = ownerNode;
     }
@@ -78,10 +78,10 @@ import org.jetbrains.mps.openapi.language.SConcept;
       return myNode;
     }
     public SContainmentLink getSLink() {
-      return LINKS.queries$Vvrw;
+      return LINKS.operations$az69;
     }
     public SAbstractConcept getChildSConcept() {
-      return CONCEPTS.Statement$d8;
+      return CONCEPTS.DBOperation$CA;
     }
 
     public EditorCell createNodeCell(SNode elementNode) {
@@ -91,7 +91,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
     }
     public EditorCell createEmptyCell() {
       getCellFactory().pushCellContext();
-      getCellFactory().setNodeLocation(new SNodeLocation.FromParentAndLink(queriesListHandler_udqu28_a0.this.getNode(), LINKS.queries$Vvrw));
+      getCellFactory().setNodeLocation(new SNodeLocation.FromParentAndLink(operationsListHandler_udqu28_a0.this.getNode(), LINKS.operations$az69));
       try {
         EditorCell emptyCell = null;
         emptyCell = super.createEmptyCell();
@@ -139,10 +139,10 @@ import org.jetbrains.mps.openapi.language.SConcept;
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink queries$Vvrw = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443bcdL, 0x11100ee737443bd0L, "queries");
+    /*package*/ static final SContainmentLink operations$az69 = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443bcdL, 0x2b087ec3aa655166L, "operations");
   }
 
   private static final class CONCEPTS {
-    /*package*/ static final SConcept Statement$d8 = MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b30L, "QueryLanguage.structure.Statement");
+    /*package*/ static final SInterfaceConcept DBOperation$CA = MetaAdapterFactory.getInterfaceConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x2b087ec3aa655164L, "QueryLanguage.structure.DBOperation");
   }
 }
