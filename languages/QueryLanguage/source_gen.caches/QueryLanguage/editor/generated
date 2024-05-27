@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="3" modelHash="55fhnohhfns022uzjb4kawmuppw54h9">
+  <files names="ColumnRef_Editor.java:ColumnRef_EditorBuilder_a.java:ColumnRef_SubstituteMenu.java:Column_Editor.java:Column_EditorBuilder_a.java:ConditionSet_Editor.java:ConditionSet_EditorBuilder_a.java:Condition_Editor.java:Condition_EditorBuilder_a.java:Condition_SubstituteMenu.java:ConditionsSequence_Editor.java:ConditionsSequence_EditorBuilder_a.java:CreateTable_Editor.java:CreateTable_EditorBuilder_a.java:Delete_Editor.java:Delete_EditorBuilder_a.java:EditorAspectDescriptorImpl.java:GroupBy_Editor.java:GroupBy_EditorBuilder_a.java:InsertInto_Editor.java:InsertInto_EditorBuilder_a.java:OrderBy_Editor.java:OrderBy_EditorBuilder_a.java:Script_Editor.java:Script_EditorBuilder_a.java:Select_Editor.java:Select_EditorBuilder_a.java:Update_Editor.java:Update_EditorBuilder_a.java:Value_Editor.java:Value_EditorBuilder_a.java:Where_Editor.java:Where_EditorBuilder_a.java" />
+</product>
+
