@@ -36,6 +36,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptSelectPayload = createDescriptorForSelectPayload();
   /*package*/ final ConceptDescriptor myConceptSendMessage = createDescriptorForSendMessage();
   /*package*/ final EnumerationDescriptor myEnumerationFetchingPolicy = new EnumerationDescriptor_FetchingPolicy();
+  /*package*/ final EnumerationDescriptor myEnumerationMessageType = new EnumerationDescriptor_MessageType();
   private final LanguageConceptSwitch myIndexSwitch;
 
   public StructureAspectDescriptor() {
@@ -102,7 +103,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<DataTypeDescriptor> getDataTypeDescriptors() {
-    return Arrays.asList(myEnumerationFetchingPolicy);
+    return Arrays.asList(myEnumerationFetchingPolicy, myEnumerationMessageType);
   }
 
   /*package*/ int internalIndex(SAbstractConcept c) {
