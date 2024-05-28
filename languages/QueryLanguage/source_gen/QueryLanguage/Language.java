@@ -11,6 +11,8 @@ import jetbrains.mps.smodel.runtime.BehaviorAspectDescriptor;
 import jetbrains.mps.smodel.runtime.ConstraintsAspectDescriptor;
 import jetbrains.mps.openapi.editor.descriptor.EditorAspectDescriptor;
 import QueryLanguage.editor.EditorAspectDescriptorImpl;
+import jetbrains.mps.openapi.intentions.IntentionAspectDescriptor;
+import QueryLanguage.intentions.IntentionsDescriptor;
 import jetbrains.mps.lang.typesystem.runtime.IHelginsDescriptor;
 import QueryLanguage.typesystem.TypesystemDescriptor;
 import jetbrains.mps.smodel.runtime.StructureAspectDescriptor;
@@ -54,6 +56,9 @@ public class Language extends LanguageRuntime {
     }
     if (aspectClass == EditorAspectDescriptor.class) {
       return aspectClass.cast(new EditorAspectDescriptorImpl());
+    }
+    if (aspectClass == IntentionAspectDescriptor.class) {
+      return aspectClass.cast(new IntentionsDescriptor());
     }
     if (aspectClass == IHelginsDescriptor.class) {
       return aspectClass.cast(new TypesystemDescriptor());

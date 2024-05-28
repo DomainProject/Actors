@@ -37,12 +37,12 @@
         <child id="8471277724064440123" name="columns" index="1_6_$e" />
       </concept>
       <concept id="1229499084499783667" name="QueryLanguage.structure.Condition" flags="ng" index="AlK4k">
-        <property id="2582920951876036255" name="conditionOperator" index="2oD4pO" />
         <property id="1229499084499783750" name="operator" index="AlLUx" />
         <reference id="1229499084500534239" name="column" index="AgCOS" />
         <child id="7087042522255247528" name="value" index="1HhJc8" />
       </concept>
       <concept id="7033755722359825273" name="QueryLanguage.structure.Select" flags="ng" index="15J0zD">
+        <property id="8521615295528819822" name="tableAlias" index="1cLguo" />
         <child id="3100867722287388537" name="groupBy" index="21oAAU" />
         <child id="3100867722286851113" name="orderBy" index="21qpFE" />
         <child id="1229499084499654445" name="where" index="AlhBa" />
@@ -117,6 +117,29 @@
       <node concept="Agl$j" id="2G8vGeErJqt" role="1_6_$e">
         <ref role="Agl$i" node="2G8vGeEqNB5" resolve="name" />
       </node>
+      <node concept="15J0zF" id="7Umbw08Dc2M" role="AlhBa">
+        <node concept="2onE27" id="7Umbw08Dc2O" role="AmyPj">
+          <node concept="2oD4pY" id="7Umbw08Dc2W" role="2onE26">
+            <property role="2onE1o" value="2fooeIVv2qs/OR" />
+            <node concept="AlK4k" id="7Umbw08Dc2X" role="2oD4pi">
+              <property role="AlLUx" value="14g3IsRhL0p/NOT_EQUAL" />
+              <ref role="AgCOS" node="2G8vGeEqNB7" resolve="age" />
+              <node concept="1HhJcF" id="7Umbw08Dc2Y" role="1HhJc8">
+                <property role="1HhJcI" value="23" />
+              </node>
+            </node>
+          </node>
+          <node concept="2oD4pY" id="7Umbw08Dc32" role="2onE26">
+            <node concept="AlK4k" id="7Umbw08Dc33" role="2oD4pi">
+              <property role="AlLUx" value="14g3IsRhL0p/NOT_EQUAL" />
+              <ref role="AgCOS" node="2G8vGeEqNBa" resolve="birthDate" />
+              <node concept="1HhJcF" id="7Umbw08Dc34" role="1HhJc8">
+                <property role="1HhJcI" value="2000/12/01" />
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
     </node>
     <node concept="1Hh$_C" id="2fooeIVqlB9" role="21riY_">
       <ref role="1Hv4z6" node="2G8vGeEqNB3" resolve="Person" />
@@ -133,50 +156,11 @@
         <property role="1HhJcI" value="2000/12/01" />
       </node>
     </node>
-    <node concept="15J0zD" id="2fooeIVrXyW" role="21riY_">
+    <node concept="15J0zD" id="7p2QZoUzieJ" role="21riY_">
+      <property role="1cLguo" value="Person_alias" />
       <ref role="1Hv4z6" node="2G8vGeEqNB3" resolve="Person" />
-      <node concept="Agl$j" id="2fooeIVrXzr" role="1_6_$e">
+      <node concept="Agl$j" id="7p2QZoUzifg" role="1_6_$e">
         <ref role="Agl$i" node="2G8vGeEqNB7" resolve="age" />
-      </node>
-      <node concept="15J0zF" id="2fooeIVwVQN" role="AlhBa">
-        <node concept="2onE27" id="2fooeIVy51g" role="AmyPj">
-          <node concept="2oD4pY" id="2fooeIVy51h" role="2onE26">
-            <property role="2onE1o" value="2fooeIVv2qs/OR" />
-            <node concept="AlK4k" id="2fooeIVy51i" role="2oD4pi">
-              <property role="AlLUx" value="14g3IsRhL0p/NOT_EQUAL" />
-              <property role="2oD4pO" value="2fooeIVv2qr/AND" />
-              <ref role="AgCOS" node="2G8vGeEqNB7" resolve="age" />
-              <node concept="1HhJcF" id="2fooeIVy51j" role="1HhJc8">
-                <property role="1HhJcI" value="23" />
-              </node>
-            </node>
-            <node concept="AlK4k" id="2fooeIVy51o" role="2oD4pi">
-              <property role="AlLUx" value="14g3IsRhL0j/LOWER_EQUAL" />
-              <ref role="AgCOS" node="2G8vGeEqNBa" resolve="birthDate" />
-              <node concept="1HhJcF" id="2fooeIVy51p" role="1HhJc8">
-                <property role="1HhJcI" value="2000/12/01" />
-              </node>
-            </node>
-          </node>
-          <node concept="2oD4pY" id="2fooeIVyu0s" role="2onE26">
-            <property role="2onE1o" value="2fooeIVv2qr/AND" />
-            <node concept="AlK4k" id="2fooeIVyu0t" role="2oD4pi">
-              <property role="AlLUx" value="14g3IsRhL0j/LOWER_EQUAL" />
-              <property role="2oD4pO" value="2fooeIVv2qr/AND" />
-              <ref role="AgCOS" node="2G8vGeEqNB7" resolve="age" />
-              <node concept="1HhJcF" id="2fooeIVyu0u" role="1HhJc8">
-                <property role="1HhJcI" value="15" />
-              </node>
-            </node>
-            <node concept="AlK4k" id="2fooeIVyu0B" role="2oD4pi">
-              <property role="AlLUx" value="14g3IsRhL0p/NOT_EQUAL" />
-              <ref role="AgCOS" node="2G8vGeEqNB5" resolve="name" />
-              <node concept="1HhJcF" id="2fooeIVyu0C" role="1HhJc8">
-                <property role="1HhJcI" value="Mario" />
-              </node>
-            </node>
-          </node>
-        </node>
       </node>
     </node>
   </node>

@@ -9,20 +9,26 @@ import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
+  private ConceptPresentation props_AggregateFunction;
+  private ConceptPresentation props_Average;
   private ConceptPresentation props_Column;
   private ConceptPresentation props_ColumnRef;
   private ConceptPresentation props_Condition;
   private ConceptPresentation props_ConditionSet;
   private ConceptPresentation props_ConditionsSequence;
+  private ConceptPresentation props_Count;
   private ConceptPresentation props_CreateTable;
   private ConceptPresentation props_DBOperation;
   private ConceptPresentation props_Delete;
   private ConceptPresentation props_GroupBy;
   private ConceptPresentation props_InsertInto;
+  private ConceptPresentation props_Max;
+  private ConceptPresentation props_Min;
   private ConceptPresentation props_OrderBy;
   private ConceptPresentation props_Script;
   private ConceptPresentation props_Select;
   private ConceptPresentation props_Statement;
+  private ConceptPresentation props_Sum;
   private ConceptPresentation props_Update;
   private ConceptPresentation props_Value;
   private ConceptPresentation props_Where;
@@ -32,6 +38,19 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
+      case LanguageConceptSwitch.AggregateFunction:
+        if (props_AggregateFunction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_AggregateFunction = cpb.create();
+        }
+        return props_AggregateFunction;
+      case LanguageConceptSwitch.Average:
+        if (props_Average == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("AVG");
+          props_Average = cpb.create();
+        }
+        return props_Average;
       case LanguageConceptSwitch.Column:
         if (props_Column == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -67,6 +86,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ConditionsSequence = cpb.create();
         }
         return props_ConditionsSequence;
+      case LanguageConceptSwitch.Count:
+        if (props_Count == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("COUNT");
+          props_Count = cpb.create();
+        }
+        return props_Count;
       case LanguageConceptSwitch.CreateTable:
         if (props_CreateTable == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -101,6 +127,20 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_InsertInto = cpb.create();
         }
         return props_InsertInto;
+      case LanguageConceptSwitch.Max:
+        if (props_Max == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MAX");
+          props_Max = cpb.create();
+        }
+        return props_Max;
+      case LanguageConceptSwitch.Min:
+        if (props_Min == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MIN");
+          props_Min = cpb.create();
+        }
+        return props_Min;
       case LanguageConceptSwitch.OrderBy:
         if (props_OrderBy == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -128,6 +168,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Statement = cpb.create();
         }
         return props_Statement;
+      case LanguageConceptSwitch.Sum:
+        if (props_Sum == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("SUM");
+          props_Sum = cpb.create();
+        }
+        return props_Sum;
       case LanguageConceptSwitch.Update:
         if (props_Update == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

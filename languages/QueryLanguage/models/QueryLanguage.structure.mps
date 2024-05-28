@@ -80,8 +80,19 @@
       <property role="20kJfa" value="orderBy" />
       <ref role="20lvS9" node="2G8vGeEou9h" resolve="OrderBy" />
     </node>
+    <node concept="1TJgyj" id="5PYs8dV0Cem" role="1TKVEi">
+      <property role="IQ2ns" value="6736945802599629718" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="aggregateFunction" />
+      <ref role="20lvS9" node="5PYs8dV0yTO" resolve="AggregateFunction" />
+    </node>
     <node concept="PrWs8" id="2G8vGeEpl5N" role="PzmwI">
       <ref role="PrY4T" node="2G8vGeEpl5$" resolve="DBOperation" />
+    </node>
+    <node concept="1TJgyi" id="7p2QZoUxXLI" role="1TKVEl">
+      <property role="IQ2nx" value="8521615295528819822" />
+      <property role="TrG5h" value="tableAlias" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
     </node>
   </node>
   <node concept="1TIwiD" id="66sUT0$8edV">
@@ -422,6 +433,86 @@
       <property role="20kJfa" value="conditions" />
       <property role="20lbJX" value="fLJekj6/_1__n" />
       <ref role="20lvS9" node="2fooeIVv2ql" resolve="ConditionsSequence" />
+    </node>
+  </node>
+  <node concept="PlHQZ" id="5PYs8dV0yTO">
+    <property role="EcuMT" value="6736945802599607924" />
+    <property role="TrG5h" value="AggregateFunction" />
+    <property role="3GE5qa" value="aggregateFunctions" />
+  </node>
+  <node concept="1TIwiD" id="5PYs8dV0Ced">
+    <property role="EcuMT" value="6736945802599629709" />
+    <property role="TrG5h" value="Min" />
+    <property role="34LRSv" value="MIN" />
+    <property role="3GE5qa" value="aggregateFunctions" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="PrWs8" id="7p2QZoUt$S8" role="PzmwI">
+      <ref role="PrY4T" node="5PYs8dV0yTO" resolve="AggregateFunction" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="5PYs8dV0Ceg">
+    <property role="EcuMT" value="6736945802599629712" />
+    <property role="3GE5qa" value="aggregateFunctions" />
+    <property role="TrG5h" value="Max" />
+    <property role="34LRSv" value="MAX" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="PrWs8" id="7p2QZoUt$S4" role="PzmwI">
+      <ref role="PrY4T" node="5PYs8dV0yTO" resolve="AggregateFunction" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="5PYs8dV0Cei">
+    <property role="EcuMT" value="6736945802599629714" />
+    <property role="3GE5qa" value="aggregateFunctions" />
+    <property role="TrG5h" value="Count" />
+    <property role="34LRSv" value="COUNT" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="PrWs8" id="7p2QZoUt$S0" role="PzmwI">
+      <ref role="PrY4T" node="5PYs8dV0yTO" resolve="AggregateFunction" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="5PYs8dV0Cej">
+    <property role="EcuMT" value="6736945802599629715" />
+    <property role="3GE5qa" value="aggregateFunctions" />
+    <property role="TrG5h" value="Sum" />
+    <property role="34LRSv" value="SUM" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="PrWs8" id="7p2QZoUt$Sa" role="PzmwI">
+      <ref role="PrY4T" node="5PYs8dV0yTO" resolve="AggregateFunction" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="5PYs8dV0Cek">
+    <property role="EcuMT" value="6736945802599629716" />
+    <property role="3GE5qa" value="aggregateFunctions" />
+    <property role="TrG5h" value="Average" />
+    <property role="34LRSv" value="AVG" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="PrWs8" id="7p2QZoUt$RV" role="PzmwI">
+      <ref role="PrY4T" node="5PYs8dV0yTO" resolve="AggregateFunction" />
+    </node>
+  </node>
+  <node concept="25R3W" id="7p2QZoUr_4S">
+    <property role="3F6X1D" value="8521615295527145784" />
+    <property role="3GE5qa" value="aggregateFunctions" />
+    <property role="TrG5h" value="AggregateFunctionTypes" />
+    <node concept="25R33" id="7p2QZoUr_4U" role="25R1y">
+      <property role="3tVfz5" value="8521615295527145786" />
+      <property role="TrG5h" value="COUNT" />
+    </node>
+    <node concept="25R33" id="7p2QZoUr_4X" role="25R1y">
+      <property role="3tVfz5" value="8521615295527145789" />
+      <property role="TrG5h" value="MIN" />
+    </node>
+    <node concept="25R33" id="7p2QZoUr_51" role="25R1y">
+      <property role="3tVfz5" value="8521615295527145793" />
+      <property role="TrG5h" value="MAX" />
+    </node>
+    <node concept="25R33" id="7p2QZoUr_56" role="25R1y">
+      <property role="3tVfz5" value="8521615295527145798" />
+      <property role="TrG5h" value="SUM" />
+    </node>
+    <node concept="25R33" id="7p2QZoUrUfm" role="25R1y">
+      <property role="3tVfz5" value="8521615295527232470" />
+      <property role="TrG5h" value="AVG" />
     </node>
   </node>
 </model>
