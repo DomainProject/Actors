@@ -36,6 +36,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptSelect = createDescriptorForSelect();
   /*package*/ final ConceptDescriptor myConceptStatement = createDescriptorForStatement();
   /*package*/ final ConceptDescriptor myConceptSum = createDescriptorForSum();
+  /*package*/ final ConceptDescriptor myConceptTableReference = createDescriptorForTableReference();
   /*package*/ final ConceptDescriptor myConceptUpdate = createDescriptorForUpdate();
   /*package*/ final ConceptDescriptor myConceptValue = createDescriptorForValue();
   /*package*/ final ConceptDescriptor myConceptWhere = createDescriptorForWhere();
@@ -57,7 +58,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<ConceptDescriptor> getDescriptors() {
-    return Arrays.asList(myConceptAggregateFunction, myConceptAverage, myConceptColumn, myConceptColumnRef, myConceptCondition, myConceptConditionSet, myConceptConditionsSequence, myConceptCount, myConceptCreateTable, myConceptDBOperation, myConceptDelete, myConceptGroupBy, myConceptInsertInto, myConceptMax, myConceptMin, myConceptOrderBy, myConceptScript, myConceptSelect, myConceptStatement, myConceptSum, myConceptUpdate, myConceptValue, myConceptWhere);
+    return Arrays.asList(myConceptAggregateFunction, myConceptAverage, myConceptColumn, myConceptColumnRef, myConceptCondition, myConceptConditionSet, myConceptConditionsSequence, myConceptCount, myConceptCreateTable, myConceptDBOperation, myConceptDelete, myConceptGroupBy, myConceptInsertInto, myConceptMax, myConceptMin, myConceptOrderBy, myConceptScript, myConceptSelect, myConceptStatement, myConceptSum, myConceptTableReference, myConceptUpdate, myConceptValue, myConceptWhere);
   }
 
   @Override
@@ -104,6 +105,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptStatement;
       case LanguageConceptSwitch.Sum:
         return myConceptSum;
+      case LanguageConceptSwitch.TableReference:
+        return myConceptTableReference;
       case LanguageConceptSwitch.Update:
         return myConceptUpdate;
       case LanguageConceptSwitch.Value:
@@ -147,6 +150,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499598131");
     b.version(3);
     b.property("type", 0x11100ee737443b37L).type(MetaIdFactory.dataTypeId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b39L)).origin("1229499084499598135").done();
+    b.property("fullName", 0x207f13a8b5691efbL).type(PrimitiveTypeId.STRING).origin("2341611946574946043").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForColumnRef() {
@@ -163,9 +167,9 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783667");
     b.version(3);
     b.property("operator", 0x11100ee737471046L).type(MetaIdFactory.dataTypeId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737470ff9L)).origin("1229499084499783750").done();
-    b.property("conditionOperator", 0x23d860ebbb7c269fL).type(MetaIdFactory.dataTypeId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x23d860ebbb7c269aL)).origin("2582920951876036255").done();
-    b.associate("column", 0x11100ee7375283dfL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b33L).optional(false).origin("1229499084500534239").done();
+    b.property("conditionOperator", 0x269884dd81b2ce21L).type(MetaIdFactory.dataTypeId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x23d860ebbb7c269aL)).origin("2781118856799899169").done();
     b.aggregate("value", 0x625a3ba00f1cc8a8L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x625a3ba00f1cc88bL).optional(false).ordered(true).multiple(false).origin("7087042522255247528").done();
+    b.aggregate("column", 0x207f13a8b5c31a63L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee7375157f4L).optional(false).ordered(true).multiple(false).origin("2341611946580843107").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForConditionSet() {
@@ -286,6 +290,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     // extends: QueryLanguage.structure.Statement
     b.super_(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b30L);
     b.parent(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x2b087ec3aa655164L);
+    b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x33d23ee961a0cbf3L);
     b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/7033755722359825273");
     b.version(3);
     b.property("tableAlias", 0x7642dbf63a87dc6eL).type(PrimitiveTypeId.STRING).origin("8521615295528819822").done();
@@ -293,6 +298,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.aggregate("groupBy", 0x2b087ec3aa6a1779L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x2b087ec3aa6a16ceL).optional(true).ordered(true).multiple(false).origin("3100867722287388537").done();
     b.aggregate("orderBy", 0x2b087ec3aa61e429L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x2b087ec3aa61e251L).optional(true).ordered(true).multiple(false).origin("3100867722286851113").done();
     b.aggregate("aggregateFunction", 0x5d7e70837b028396L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b022e74L).optional(true).ordered(true).multiple(false).origin("6736945802599629718").done();
+    b.aggregate("tables", 0x207f13a8b54616bfL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL).optional(false).ordered(true).multiple(true).origin("2341611946572650175").done();
     b.alias("SELECT");
     return b.create();
   }
@@ -302,7 +308,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x33d23ee961a0cbf3L);
     b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499598128");
     b.version(3);
-    b.associate("table", 0x625a3ba00f267366L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b2eL).optional(false).origin("7087042522255881062").done();
+    b.associate("table", 0x207f13a8b5460e46L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b2eL).optional(true).origin("2341611946572648006").done();
     b.aggregate("columns", 0x75900635108a5f3bL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee7375157f4L).optional(true).ordered(true).multiple(true).origin("8471277724064440123").done();
     return b.create();
   }
@@ -313,6 +319,14 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/6736945802599629715");
     b.version(3);
     b.alias("SUM");
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForTableReference() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("QueryLanguage", "TableReference", 0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL);
+    b.class_(false, false, false);
+    b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/2341611946572642014");
+    b.version(3);
+    b.associate("tableRef", 0x207f13a8b545f6dfL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b2eL).optional(false).origin("2341611946572642015").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForUpdate() {

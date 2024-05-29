@@ -29,9 +29,10 @@ public final class LanguageConceptSwitch {
   public static final int Select = 17;
   public static final int Statement = 18;
   public static final int Sum = 19;
-  public static final int Update = 20;
-  public static final int Value = 21;
-  public static final int Where = 22;
+  public static final int TableReference = 20;
+  public static final int Update = 21;
+  public static final int Value = 22;
+  public static final int Where = 23;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L);
@@ -55,6 +56,7 @@ public final class LanguageConceptSwitch {
     builder.put(0x619ceb902420e379L, Select);
     builder.put(0x11100ee737443b30L, Statement);
     builder.put(0x5d7e70837b028393L, Sum);
+    builder.put(0x207f13a8b545f6deL, TableReference);
     builder.put(0x625a3ba00f23853fL, Update);
     builder.put(0x625a3ba00f1cc88bL, Value);
     builder.put(0x619ceb902420e37bL, Where);

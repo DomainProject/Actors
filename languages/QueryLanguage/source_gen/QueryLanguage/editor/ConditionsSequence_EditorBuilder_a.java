@@ -161,7 +161,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
       final SProperty property = PROPS.conditionOperator$9I_s;
       getCellFactory().setPropertyInfo(new SPropertyInfo(myNode, property));
       EditorCell_Property editorCell = EditorCell_Property.create(getEditorContext(), new SPropertyAccessor(myNode, property, false, true), myNode);
-      editorCell.setDefaultText("Add condition");
+      editorCell.setDefaultText("Add Condition");
       editorCell.setCellId("property_conditionOperator");
       Style style = new StyleImpl();
       style.set(StyleAttributes.TEXT_COLOR, getStyleRegistry().getSimpleColor(MPSColors.DARK_MAGENTA));

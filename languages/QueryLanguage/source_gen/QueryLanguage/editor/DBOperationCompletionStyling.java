@@ -16,20 +16,20 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SConcept;
 
-public class CompletionStyling implements EditorMenuItemCustomizer {
+public class DBOperationCompletionStyling implements EditorMenuItemCustomizer {
 
   @Override
   public void customize(EditorMenuItemStyle customization, EditorMenuItemCustomizationContext context) {
     if (context.get(CompletionMenuItemCustomizationContext.COMPLETION_ITEM_INFORMATION) == null) {
       return;
     }
-    CompletionStylingSpecific customizer = new CompletionStylingSpecific();
+    DBOperationCompletionStylingSpecific customizer = new DBOperationCompletionStylingSpecific();
     if (customizer.matches(context)) {
       customizer.customize(customization, context);
     }
   }
 
-  private static class CompletionStylingSpecific implements EditorMenuItemCustomizer {
+  private static class DBOperationCompletionStylingSpecific implements EditorMenuItemCustomizer {
 
     public boolean matches(EditorMenuItemCustomizationContext context) {
       return new EditorMenuItemCreatingConceptContextMatcher(CONCEPTS.DBOperation$CA).matchesContext(context) && getCompletionItemInformation(context) != null;

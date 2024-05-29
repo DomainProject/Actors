@@ -14,23 +14,21 @@ import java.util.Collections;
 import jetbrains.mps.intentions.AbstractIntentionExecutable;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.openapi.intentions.IntentionDescriptor;
-import org.jetbrains.mps.openapi.language.SReferenceLink;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.openapi.intentions.IntentionDescriptor;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
-import org.jetbrains.mps.openapi.language.SProperty;
 
-public final class AddAlias_Intention extends AbstractIntentionDescriptor implements IntentionFactory {
+public final class AddCondition_Intention extends AbstractIntentionDescriptor implements IntentionFactory {
   private Collection<IntentionExecutable> myCachedExecutable;
 
-  public AddAlias_Intention() {
-    super(Kind.NORMAL, false, new SNodePointer("r:13f8d904-8637-4da1-85d7-c23d81f5a561(QueryLanguage.intentions)", "8521615295528849613"));
+  public AddCondition_Intention() {
+    super(Kind.NORMAL, false, new SNodePointer("r:13f8d904-8637-4da1-85d7-c23d81f5a561(QueryLanguage.intentions)", "2781118856798744325"));
   }
 
   @Override
   public String getPresentation() {
-    return "AddAlias";
+    return "AddCondition";
   }
 
   @Override
@@ -50,17 +48,12 @@ public final class AddAlias_Intention extends AbstractIntentionDescriptor implem
 
     @Override
     public String getDescription(final SNode node, final EditorContext editorContext) {
-      return "Add Alias";
+      return "Add New Condition";
     }
 
     @Override
     public void execute(final SNode node, final EditorContext editorContext) {
-      String alias = "";
-      for (SNode table : ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.tables$IXdn))) {
-        alias += SPropertyOperations.getString(SLinkOperations.getTarget(table, LINKS.tableRef$boeY), PROPS.name$MnvL) + "_";
-      }
-      alias += "alias";
-      SPropertyOperations.assign(node, PROPS.tableAlias$yY2f, alias);
+      ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.conditions$V94u)).addElement(SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x23d860ebbb7c2695L, "QueryLanguage.structure.ConditionsSequence")));
     }
 
     @Override
@@ -72,18 +65,12 @@ public final class AddAlias_Intention extends AbstractIntentionDescriptor implem
 
     @Override
     public IntentionDescriptor getDescriptor() {
-      return AddAlias_Intention.this;
+      return AddCondition_Intention.this;
     }
 
   }
 
   private static final class LINKS {
-    /*package*/ static final SReferenceLink tableRef$boeY = MetaAdapterFactory.getReferenceLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL, 0x207f13a8b545f6dfL, "tableRef");
-    /*package*/ static final SContainmentLink tables$IXdn = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x207f13a8b54616bfL, "tables");
-  }
-
-  private static final class PROPS {
-    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
-    /*package*/ static final SProperty tableAlias$yY2f = MetaAdapterFactory.getProperty(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x7642dbf63a87dc6eL, "tableAlias");
+    /*package*/ static final SContainmentLink conditions$V94u = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x23d860ebbb86c06cL, 0x23d860ebbb86c06dL, "conditions");
   }
 }

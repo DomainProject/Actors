@@ -22,34 +22,34 @@ import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 
-public class Condition_SubstituteMenu extends SubstituteMenuBase {
-  public Condition_SubstituteMenu() {
-    super(false, new EditorMenuDescriptorBase("default substitute menu for Condition. Generated from implicit smart reference attribute.", new SNodePointer("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)", "1229499084499783667")));
+public class TableReference_SubstituteMenu extends SubstituteMenuBase {
+  public TableReference_SubstituteMenu() {
+    super(false, new EditorMenuDescriptorBase("default substitute menu for TableReference. Generated from implicit smart reference attribute.", new SNodePointer("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)", "2341611946572642014")));
   }
   @NotNull
   @Override
   protected List<MenuPart<SubstituteMenuItem, SubstituteMenuContext>> getParts(final SubstituteMenuContext _context) {
     List<MenuPart<SubstituteMenuItem, SubstituteMenuContext>> result = new ArrayList<MenuPart<SubstituteMenuItem, SubstituteMenuContext>>();
-    result.add(new ConstraintsFilteringSubstituteMenuPartDecorator(new SMP_ReferenceScope_ivmgla_a(), CONCEPTS.Condition$1A));
-    result.add(new SMP_Subconcepts_ivmgla_b());
+    result.add(new ConstraintsFilteringSubstituteMenuPartDecorator(new SMP_ReferenceScope_51bm0t_a(), CONCEPTS.TableReference$DN));
+    result.add(new SMP_Subconcepts_51bm0t_b());
     return result;
   }
 
-  public class SMP_ReferenceScope_ivmgla_a extends ReferenceScopeSubstituteMenuPart {
+  public class SMP_ReferenceScope_51bm0t_a extends ReferenceScopeSubstituteMenuPart {
 
-    public SMP_ReferenceScope_ivmgla_a() {
-      super(CONCEPTS.Condition$1A, LINKS.column$rrbV, new EditorMenuDescriptorBase("reference scope substitute menu part", null));
+    public SMP_ReferenceScope_51bm0t_a() {
+      super(CONCEPTS.TableReference$DN, LINKS.tableRef$boeY, new EditorMenuDescriptorBase("reference scope substitute menu part", null));
     }
 
   }
-  public class SMP_Subconcepts_ivmgla_b extends ConceptMenusPart<SubstituteMenuItem, SubstituteMenuContext> {
-    public SMP_Subconcepts_ivmgla_b() {
-      super(new EditorMenuDescriptorBase("include menus for all the direct subconcepts of " + "Condition", null));
+  public class SMP_Subconcepts_51bm0t_b extends ConceptMenusPart<SubstituteMenuItem, SubstituteMenuContext> {
+    public SMP_Subconcepts_51bm0t_b() {
+      super(new EditorMenuDescriptorBase("include menus for all the direct subconcepts of " + "TableReference", null));
     }
 
     @Override
     protected Collection<SAbstractConcept> getConcepts(final SubstituteMenuContext _context) {
-      return getDirectDescendants(_context, CONCEPTS.Condition$1A);
+      return getDirectDescendants(_context, CONCEPTS.TableReference$DN);
     }
 
     @Override
@@ -59,10 +59,10 @@ public class Condition_SubstituteMenu extends SubstituteMenuBase {
   }
 
   private static final class CONCEPTS {
-    /*package*/ static final SConcept Condition$1A = MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737470ff3L, "QueryLanguage.structure.Condition");
+    /*package*/ static final SConcept TableReference$DN = MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL, "QueryLanguage.structure.TableReference");
   }
 
   private static final class LINKS {
-    /*package*/ static final SReferenceLink column$rrbV = MetaAdapterFactory.getReferenceLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737470ff3L, 0x11100ee7375283dfL, "column");
+    /*package*/ static final SReferenceLink tableRef$boeY = MetaAdapterFactory.getReferenceLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL, 0x207f13a8b545f6dfL, "tableRef");
   }
 }

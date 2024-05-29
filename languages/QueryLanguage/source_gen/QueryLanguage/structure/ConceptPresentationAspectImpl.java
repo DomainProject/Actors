@@ -29,6 +29,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_Select;
   private ConceptPresentation props_Statement;
   private ConceptPresentation props_Sum;
+  private ConceptPresentation props_TableReference;
   private ConceptPresentation props_Update;
   private ConceptPresentation props_Value;
   private ConceptPresentation props_Where;
@@ -68,7 +69,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
       case LanguageConceptSwitch.Condition:
         if (props_Condition == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.presentationByReference(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737470ff3L, 0x11100ee7375283dfL, "column", "", "");
+          cpb.rawPresentation("Condition");
           props_Condition = cpb.create();
         }
         return props_Condition;
@@ -175,6 +176,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Sum = cpb.create();
         }
         return props_Sum;
+      case LanguageConceptSwitch.TableReference:
+        if (props_TableReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL, 0x207f13a8b545f6dfL, "tableRef", "", "");
+          props_TableReference = cpb.create();
+        }
+        return props_TableReference;
       case LanguageConceptSwitch.Update:
         if (props_Update == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
