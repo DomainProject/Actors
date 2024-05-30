@@ -14,12 +14,9 @@ import org.jetbrains.mps.openapi.model.SNodeReference;
 import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.scope.Scope;
 import jetbrains.mps.smodel.runtime.ReferenceConstraintsContext;
-import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
+import jetbrains.mps.scope.ListScope;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.scope.ListScope;
 import java.util.HashMap;
 import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
@@ -42,8 +39,14 @@ public class SelectEnvelope_Constraints extends BaseConstraintsDescriptor {
           }
           @Override
           public Scope createScope(final ReferenceConstraintsContext _context) {
-            final Iterable<SNode> envelopes = ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getContextNode(), CONCEPTS.AbstractBehavior$Dm, false, false), CONCEPTS.CreateEnvelope$OK, false, new SAbstractConcept[]{})).where((it) -> SLinkOperations.getTarget(it, LINKS.sender$OOPF) == SNodeOperations.getNodeAncestor(_context.getContextNode(), CONCEPTS.AbstractActor$R3, false, false));
-            return ListScope.forNamedElements(envelopes);
+            /*
+              envelopes 
+              ExpressionStatement 
+
+            */
+
+            // this return is temporary
+            return ListScope.forNamedElements(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getContextNode(), CONCEPTS.AbstractBehavior$Dm, false, false), CONCEPTS.CreateEnvelope$OK, false, new SAbstractConcept[]{}));
           }
         };
       }

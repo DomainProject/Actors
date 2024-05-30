@@ -55,14 +55,17 @@ public class CreateEnvelope_Constraints extends BaseConstraintsDescriptor {
     }
     @Override
     public boolean validateValue(SNode node, Object propertyValue, CheckingNodeContext checkingNodeContext) {
-      boolean result = staticValidateProperty(node, SPropertyOperations.castInteger(propertyValue));
+      boolean result = staticValidateProperty(node, SPropertyOperations.castString(propertyValue));
       if (!(result) && checkingNodeContext != null) {
         checkingNodeContext.setBreakingNode(new SNodePointer("r:ae140228-36a4-4270-a859-e66d990ac219(ActorLanguage.constraints)", "7694881003800157413"));
       }
       return result;
     }
-    private static boolean staticValidateProperty(SNode node, int propertyValue) {
-      return propertyValue >= 0 && propertyValue <= 5;
+    private static boolean staticValidateProperty(SNode node, String propertyValue) {
+      if (propertyValue != null) {
+        return Double.valueOf(propertyValue) >= 0.0 && Double.valueOf(propertyValue) <= 5.0;
+      }
+      return true;
     }
   }
   @Override

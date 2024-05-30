@@ -16,10 +16,12 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
   public Collection<NodeFactory> getFactories(SAbstractConcept concept) {
     if (LANGUAGE_FQ_NAME.equals(concept.getLanguage().getQualifiedName())) {
       switch (concept.getName()) {
-        case "Actor":
+        case "CreateActor":
           return Collections.<NodeFactory>singletonList(new ActorFactory.NodeFactory_7694881003795581833());
         case "CreateEnvelope":
           return Collections.<NodeFactory>singletonList(new EnvelopeFactory.NodeFactory_2411303652493859819());
+        case "Receptionist":
+          return Collections.<NodeFactory>singletonList(new ReceptionistFactory.NodeFactory_6739934483259132151());
         default:
       }
     }

@@ -257,7 +257,6 @@ import org.jetbrains.mps.openapi.language.SConcept;
     style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, true);
     style.set(StyleAttributes.PADDING_BOTTOM, new Padding(0.5, Measure.SPACES));
     editorCell.getStyle().putAll(style);
-    NewLine.setCellActions(editorCell, myNode, getEditorContext());
     editorCell.setDefaultText("");
     return editorCell;
   }

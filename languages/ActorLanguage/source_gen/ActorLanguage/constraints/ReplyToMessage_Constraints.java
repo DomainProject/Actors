@@ -56,13 +56,11 @@ public class ReplyToMessage_Constraints extends BaseConstraintsDescriptor {
                 {
                   final SNode envelope = SLinkOperations.getTarget(message, LINKS.envelope$eoPh);
                   if (SNodeOperations.isInstanceOf(envelope, CONCEPTS.CreateEnvelope$OK)) {
-                    sender = SLinkOperations.getTarget(envelope, LINKS.sender$OOPF);
                   }
                 }
                 {
                   final SNode envelope = SLinkOperations.getTarget(message, LINKS.envelope$eoPh);
                   if (SNodeOperations.isInstanceOf(envelope, CONCEPTS.SelectEnvelope$S6)) {
-                    sender = SLinkOperations.getTarget(SLinkOperations.getTarget(envelope, LINKS.envelope$EmhE), LINKS.sender$OOPF);
                   }
                 }
 
@@ -110,8 +108,6 @@ public class ReplyToMessage_Constraints extends BaseConstraintsDescriptor {
   private static final class LINKS {
     /*package*/ static final SReferenceLink newMessage$f833 = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x272ee8379674297cL, 0x272ee83796742981L, "newMessage");
     /*package*/ static final SContainmentLink envelope$eoPh = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x2d5fc2c1e9650052L, "envelope");
-    /*package*/ static final SReferenceLink sender$OOPF = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, 0x2176abe574366689L, "sender");
-    /*package*/ static final SReferenceLink envelope$EmhE = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L, 0x9de89b125bf6284L, "envelope");
     /*package*/ static final SReferenceLink receivedMessage$f2bE = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x272ee8379674297cL, 0x272ee8379674297dL, "receivedMessage");
   }
 

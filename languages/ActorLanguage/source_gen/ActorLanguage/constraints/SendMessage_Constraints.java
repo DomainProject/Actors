@@ -7,7 +7,6 @@ import java.util.Map;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import jetbrains.mps.smodel.runtime.ReferenceConstraintsDescriptor;
 import jetbrains.mps.smodel.runtime.base.BaseReferenceConstraintsDescriptor;
-import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.smodel.runtime.ReferenceScopeProvider;
 import jetbrains.mps.smodel.runtime.base.BaseScopeProvider;
@@ -16,6 +15,7 @@ import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.scope.Scope;
 import jetbrains.mps.smodel.runtime.ReferenceConstraintsContext;
 import java.util.List;
+import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
@@ -27,7 +27,6 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
-import org.jetbrains.mps.openapi.language.SProperty;
 
 public class SendMessage_Constraints extends BaseConstraintsDescriptor {
   public SendMessage_Constraints() {
@@ -36,41 +35,7 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
 
   @Override
   protected Map<SReferenceLink, ReferenceConstraintsDescriptor> getSpecifiedReferences() {
-    BaseReferenceConstraintsDescriptor d0 = new BaseReferenceConstraintsDescriptor(LINKS.message$4GHG, this, true, true) {
-      @Override
-      public boolean validate(final SNode referenceNode, final SNode oldReferentNode, final SNode newReferentNode) {
-        return true;
-      }
-      @Override
-      public void onReferenceSet(final SNode referenceNode, final SNode oldReferentNode, final SNode newReferentNode) {
-
-        /*
-          This code implements the effective send operation
-          
-          <type> <var>;
-          <type> <var>;
-          <type> <var>;
-          
-          {
-          {
-          
-          {
-          {
-          
-          
-          <type> <var>;
-          ExpressionStatement
-          ExpressionStatement
-          ExpressionStatement
-          
-          ExpressionStatement
-          ExpressionStatement
-          ExpressionStatement
-
-        */
-
-
-      }
+    BaseReferenceConstraintsDescriptor d0 = new BaseReferenceConstraintsDescriptor(LINKS.message$4GHG, this, true, false) {
       @Nullable
       @Override
       public ReferenceScopeProvider getScopeProvider() {
@@ -107,13 +72,11 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
     {
       final SNode envelope = SLinkOperations.getTarget(message, LINKS.envelope$eoPh);
       if (SNodeOperations.isInstanceOf(envelope, CONCEPTS.CreateEnvelope$OK)) {
-        sender = SLinkOperations.getTarget(envelope, LINKS.sender$OOPF);
       }
     }
     {
       final SNode envelope = SLinkOperations.getTarget(message, LINKS.envelope$eoPh);
       if (SNodeOperations.isInstanceOf(envelope, CONCEPTS.SelectEnvelope$S6)) {
-        sender = SLinkOperations.getTarget(SLinkOperations.getTarget(envelope, LINKS.envelope$EmhE), LINKS.sender$OOPF);
       }
     }
     return sender;
@@ -123,13 +86,11 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
     {
       final SNode envelope = SLinkOperations.getTarget(message, LINKS.envelope$eoPh);
       if (SNodeOperations.isInstanceOf(envelope, CONCEPTS.CreateEnvelope$OK)) {
-        receiver = SLinkOperations.getTarget(envelope, LINKS.receiver$OPjH);
       }
     }
     {
       final SNode envelope = SLinkOperations.getTarget(message, LINKS.envelope$eoPh);
       if (SNodeOperations.isInstanceOf(envelope, CONCEPTS.SelectEnvelope$S6)) {
-        receiver = SLinkOperations.getTarget(SLinkOperations.getTarget(envelope, LINKS.envelope$EmhE), LINKS.receiver$OPjH);
       }
     }
     return receiver;
@@ -137,28 +98,14 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept SendMessage$$2 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, "ActorLanguage.structure.SendMessage");
-    /*package*/ static final SConcept CreateEnvelope$OK = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, "ActorLanguage.structure.CreateEnvelope");
-    /*package*/ static final SConcept Actor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.Actor");
-    /*package*/ static final SConcept SelectEnvelope$S6 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L, "ActorLanguage.structure.SelectEnvelope");
-    /*package*/ static final SConcept CreatePayload$Pf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, "ActorLanguage.structure.CreatePayload");
-    /*package*/ static final SConcept SelectPayload$Hf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L, "ActorLanguage.structure.SelectPayload");
     /*package*/ static final SConcept AbstractActor$R3 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23308L, "ActorLanguage.structure.AbstractActor");
     /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
+    /*package*/ static final SConcept CreateEnvelope$OK = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, "ActorLanguage.structure.CreateEnvelope");
+    /*package*/ static final SConcept SelectEnvelope$S6 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L, "ActorLanguage.structure.SelectEnvelope");
   }
 
   private static final class LINKS {
     /*package*/ static final SReferenceLink message$4GHG = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, 0x35a5eccbf2f26df5L, "message");
     /*package*/ static final SContainmentLink envelope$eoPh = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x2d5fc2c1e9650052L, "envelope");
-    /*package*/ static final SReferenceLink receiver$OPjH = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, 0x2176abe57436668bL, "receiver");
-    /*package*/ static final SReferenceLink envelope$EmhE = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L, 0x9de89b125bf6284L, "envelope");
-    /*package*/ static final SContainmentLink payload$N_RC = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x9de89b125a71571L, "payload");
-    /*package*/ static final SReferenceLink payload$ZT3H = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L, 0x4658738496c93a91L, "payload");
-    /*package*/ static final SReferenceLink sender$OOPF = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, 0x2176abe574366689L, "sender");
-    /*package*/ static final SContainmentLink messageQueue$afFg = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x6ac9b580f4306cb1L, "messageQueue");
-    /*package*/ static final SContainmentLink messages$FwF6 = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6ac9b580f420bed7L, 0x6ac9b580f420bedfL, "messages");
-  }
-
-  private static final class PROPS {
-    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

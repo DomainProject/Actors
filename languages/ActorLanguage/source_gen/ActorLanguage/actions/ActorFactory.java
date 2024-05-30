@@ -14,11 +14,11 @@ public class ActorFactory {
   public static class NodeFactory_7694881003795581833 implements NodeFactory {
     public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, int index, SModel model) {
       SNode mQueue = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6ac9b580f420bed7L, "ActorLanguage.structure.MessageQueue"));
-      SLinkOperations.setTarget(newNode, LINKS.messageQueue$afFg, mQueue);
+      SLinkOperations.setTarget(newNode, LINKS.messageQueue$L0ws, mQueue);
     }
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink messageQueue$afFg = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x6ac9b580f4306cb1L, "messageQueue");
+    /*package*/ static final SContainmentLink messageQueue$L0ws = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x5d890eb3ec03cef9L, "messageQueue");
   }
 }

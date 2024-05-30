@@ -5,17 +5,14 @@ package ActorLanguage.textGen;
 import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import org.jetbrains.mps.openapi.language.SContainmentLink;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
-public class Actor_TextGen extends TextGenDescriptorBase {
+public class CreateActor_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
-    tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.behavior$JKzN));
 
     tgs.append("void *");
     tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
@@ -25,10 +22,6 @@ public class Actor_TextGen extends TextGenDescriptorBase {
     tgs.append("}");
     tgs.newLine();
     tgs.newLine();
-  }
-
-  private static final class LINKS {
-    /*package*/ static final SContainmentLink behavior$JKzN = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x2176abe5743ae767L, "behavior");
   }
 
   private static final class PROPS {

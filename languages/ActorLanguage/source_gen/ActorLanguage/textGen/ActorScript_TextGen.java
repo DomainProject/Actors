@@ -8,11 +8,8 @@ import jetbrains.mps.text.impl.TextGenSupport;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import org.jetbrains.mps.openapi.language.SProperty;
 
 public class ActorScript_TextGen extends TextGenDescriptorBase {
   @Override
@@ -45,13 +42,6 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.append("];");
     tgs.newLine();
     for (SNode actor : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a))) {
-      tgs.indent();
-      tgs.append("addresses[");
-      tgs.append(String.valueOf(SNodeOperations.getIndexInParent(actor)));
-      tgs.append("] = ");
-      tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$Eakk)));
-      tgs.append(";");
-      tgs.newLine();
     }
     tgs.newLine();
 
@@ -92,15 +82,6 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
 
     for (SNode actor : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a))) {
-      tgs.indent();
-      tgs.append("create_thread(addresses[");
-      tgs.append(String.valueOf(SNodeOperations.getIndexInParent(actor)));
-      tgs.append("], map, ");
-      tgs.append(SPropertyOperations.getString(actor, PROPS.name$MnvL));
-      tgs.append(", &threads[");
-      tgs.append(String.valueOf(SNodeOperations.getIndexInParent(actor)));
-      tgs.append("]);");
-      tgs.newLine();
     }
 
     tgs.newLine();
@@ -130,10 +111,5 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
 
   private static final class LINKS {
     /*package*/ static final SContainmentLink actors$EA0a = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x35a5eccbf2f23377L, "actors");
-  }
-
-  private static final class PROPS {
-    /*package*/ static final SProperty address$Eakk = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23308L, 0x35a5eccbf2f23360L, "address");
-    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

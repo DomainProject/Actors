@@ -20,9 +20,9 @@ import java.util.HashMap;
 import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
-public class Actor_Constraints extends BaseConstraintsDescriptor {
-  public Actor_Constraints() {
-    super(CONCEPTS.Actor$Uv);
+public class CreateActor_Constraints extends BaseConstraintsDescriptor {
+  public CreateActor_Constraints() {
+    super(CONCEPTS.CreateActor$Uv);
   }
 
   public static class Name_Property extends BasePropertyConstraintsDescriptor {
@@ -41,7 +41,7 @@ public class Actor_Constraints extends BaseConstraintsDescriptor {
       if ((propertyValue == null || propertyValue.length() == 0)) {
         return false;
       }
-      for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getParent(node), CONCEPTS.Actor$Uv, false, new SAbstractConcept[]{})).subtract(ListSequence.fromList(ListSequence.fromListAndArray(new ArrayList<>(), node)))) {
+      for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getParent(node), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{})).subtract(ListSequence.fromList(ListSequence.fromListAndArray(new ArrayList<>(), node)))) {
         if (SPropertyOperations.getString(actor, PROPS.name$MnvL) == null) {
           continue;
         }
@@ -65,7 +65,10 @@ public class Actor_Constraints extends BaseConstraintsDescriptor {
       return result;
     }
     private static boolean staticValidateProperty(SNode node, int propertyValue) {
-      for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getParent(node), CONCEPTS.Actor$Uv, false, new SAbstractConcept[]{})).subtract(ListSequence.fromList(ListSequence.fromListAndArray(new ArrayList<>(), node)))) {
+      if (propertyValue <= 0 || propertyValue >= 100) {
+        return false;
+      }
+      for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getParent(node), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{})).subtract(ListSequence.fromList(ListSequence.fromListAndArray(new ArrayList<>(), node)))) {
         if (SPropertyOperations.getInteger(actor, PROPS.address$Eakk) == propertyValue) {
           return false;
         }
@@ -82,7 +85,7 @@ public class Actor_Constraints extends BaseConstraintsDescriptor {
   }
 
   private static final class CONCEPTS {
-    /*package*/ static final SConcept Actor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.Actor");
+    /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
   }
 
   private static final class PROPS {

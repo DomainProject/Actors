@@ -21,7 +21,6 @@ import jetbrains.mps.smodel.runtime.PropertyConstraintsDescriptor;
 import java.util.HashMap;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
-import org.jetbrains.mps.openapi.language.SReferenceLink;
 
 public class Fetch_Constraints extends BaseConstraintsDescriptor {
   public Fetch_Constraints() {
@@ -38,14 +37,6 @@ public class Fetch_Constraints extends BaseConstraintsDescriptor {
     }
     private static void staticSetPropertyValue(final SNode node, SEnumerationLiteral propertyValue) {
       SPropertyOperations.assignEnum(node, PROPS.policy$Ol3f, propertyValue);
-
-      /*
-        The following code implements the receive operation 
-        
-        if
-
-      */
-
 
       // the following code creates a generic message that models the message to be received
 
@@ -79,9 +70,6 @@ public class Fetch_Constraints extends BaseConstraintsDescriptor {
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept Fetch$Nj = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8975L, "ActorLanguage.structure.Fetch");
-    /*package*/ static final SConcept Actor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.Actor");
-    /*package*/ static final SConcept CreateEnvelope$OK = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, "ActorLanguage.structure.CreateEnvelope");
-    /*package*/ static final SConcept SelectEnvelope$S6 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L, "ActorLanguage.structure.SelectEnvelope");
     /*package*/ static final SConcept AbstractActor$R3 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23308L, "ActorLanguage.structure.AbstractActor");
     /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
     /*package*/ static final SConcept CreatePayload$Pf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, "ActorLanguage.structure.CreatePayload");
@@ -89,16 +77,11 @@ public class Fetch_Constraints extends BaseConstraintsDescriptor {
 
   private static final class PROPS {
     /*package*/ static final SProperty policy$Ol3f = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8975L, 0x619ceb90241d897bL, "policy");
-    /*package*/ static final SProperty priority$YWiN = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, 0x6ac9b580f468d377L, "priority");
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 
   private static final class LINKS {
     /*package*/ static final SContainmentLink message$diNF = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8975L, 0x6ac9b580f41c3451L, "message");
-    /*package*/ static final SContainmentLink messageQueue$afFg = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x6ac9b580f4306cb1L, "messageQueue");
-    /*package*/ static final SContainmentLink messages$FwF6 = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6ac9b580f420bed7L, 0x6ac9b580f420bedfL, "messages");
-    /*package*/ static final SContainmentLink envelope$eoPh = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x2d5fc2c1e9650052L, "envelope");
-    /*package*/ static final SReferenceLink envelope$EmhE = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L, 0x9de89b125bf6284L, "envelope");
     /*package*/ static final SContainmentLink payload$N_RC = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x9de89b125a71571L, "payload");
   }
 }

@@ -11,9 +11,12 @@ import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
   private ConceptPresentation props_AbstractActor;
   private ConceptPresentation props_AbstractBehavior;
-  private ConceptPresentation props_Actor;
   private ConceptPresentation props_ActorAction;
+  private ConceptPresentation props_ActorCreation;
+  private ConceptPresentation props_ActorReference;
   private ConceptPresentation props_ActorScript;
+  private ConceptPresentation props_CreateActor;
+  private ConceptPresentation props_CreateActors;
   private ConceptPresentation props_CreateBehavior;
   private ConceptPresentation props_CreateEnvelope;
   private ConceptPresentation props_CreateMessage;
@@ -23,6 +26,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_MessageQueue;
   private ConceptPresentation props_MessageRef;
   private ConceptPresentation props_Payload;
+  private ConceptPresentation props_Receptionist;
   private ConceptPresentation props_ReplyToMessage;
   private ConceptPresentation props_SelectBehavior;
   private ConceptPresentation props_SelectEnvelope;
@@ -46,19 +50,25 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_AbstractBehavior = cpb.create();
         }
         return props_AbstractBehavior;
-      case LanguageConceptSwitch.Actor:
-        if (props_Actor == null) {
-          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.presentationByName();
-          props_Actor = cpb.create();
-        }
-        return props_Actor;
       case LanguageConceptSwitch.ActorAction:
         if (props_ActorAction == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
           props_ActorAction = cpb.create();
         }
         return props_ActorAction;
+      case LanguageConceptSwitch.ActorCreation:
+        if (props_ActorCreation == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_ActorCreation = cpb.create();
+        }
+        return props_ActorCreation;
+      case LanguageConceptSwitch.ActorReference:
+        if (props_ActorReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ActorReference");
+          props_ActorReference = cpb.create();
+        }
+        return props_ActorReference;
       case LanguageConceptSwitch.ActorScript:
         if (props_ActorScript == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -66,6 +76,20 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ActorScript = cpb.create();
         }
         return props_ActorScript;
+      case LanguageConceptSwitch.CreateActor:
+        if (props_CreateActor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CreateActor = cpb.create();
+        }
+        return props_CreateActor;
+      case LanguageConceptSwitch.CreateActors:
+        if (props_CreateActors == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("create_actors");
+          props_CreateActors = cpb.create();
+        }
+        return props_CreateActors;
       case LanguageConceptSwitch.CreateBehavior:
         if (props_CreateBehavior == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -127,6 +151,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Payload = cpb.create();
         }
         return props_Payload;
+      case LanguageConceptSwitch.Receptionist:
+        if (props_Receptionist == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Receptionist = cpb.create();
+        }
+        return props_Receptionist;
       case LanguageConceptSwitch.ReplyToMessage:
         if (props_ReplyToMessage == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
