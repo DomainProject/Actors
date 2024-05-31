@@ -15,6 +15,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_ActorReference;
   private ConceptPresentation props_ActorScript;
   private ConceptPresentation props_CreateActor;
+  private ConceptPresentation props_CreateActorReference;
   private ConceptPresentation props_CreateActors;
   private ConceptPresentation props_CreateBehavior;
   private ConceptPresentation props_CreateEnvelope;
@@ -23,12 +24,14 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_Envelope;
   private ConceptPresentation props_Fetch;
   private ConceptPresentation props_GetActorFromReceptionist;
-  private ConceptPresentation props_GetActorPolicy;
   private ConceptPresentation props_MessageQueue;
   private ConceptPresentation props_MessageRef;
   private ConceptPresentation props_Payload;
+  private ConceptPresentation props_RandomActor;
   private ConceptPresentation props_Receptionist;
+  private ConceptPresentation props_ReceptionistPolicy;
   private ConceptPresentation props_ReplyToMessage;
+  private ConceptPresentation props_ReturnActorReference;
   private ConceptPresentation props_SelectBehavior;
   private ConceptPresentation props_SelectEnvelope;
   private ConceptPresentation props_SelectPayload;
@@ -79,6 +82,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_CreateActor = cpb.create();
         }
         return props_CreateActor;
+      case LanguageConceptSwitch.CreateActorReference:
+        if (props_CreateActorReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CreateActorReference = cpb.create();
+        }
+        return props_CreateActorReference;
       case LanguageConceptSwitch.CreateActors:
         if (props_CreateActors == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -130,17 +140,11 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
       case LanguageConceptSwitch.GetActorFromReceptionist:
         if (props_GetActorFromReceptionist == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("This function gets an actor reference from the receptionist, depending on the specified policy");
           cpb.rawPresentation("get_actor");
           props_GetActorFromReceptionist = cpb.create();
         }
         return props_GetActorFromReceptionist;
-      case LanguageConceptSwitch.GetActorPolicy:
-        if (props_GetActorPolicy == null) {
-          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.rawPresentation("receptionist_policy");
-          props_GetActorPolicy = cpb.create();
-        }
-        return props_GetActorPolicy;
       case LanguageConceptSwitch.MessageQueue:
         if (props_MessageQueue == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -161,6 +165,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Payload = cpb.create();
         }
         return props_Payload;
+      case LanguageConceptSwitch.RandomActor:
+        if (props_RandomActor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("RandomActor");
+          props_RandomActor = cpb.create();
+        }
+        return props_RandomActor;
       case LanguageConceptSwitch.Receptionist:
         if (props_Receptionist == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -168,6 +179,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Receptionist = cpb.create();
         }
         return props_Receptionist;
+      case LanguageConceptSwitch.ReceptionistPolicy:
+        if (props_ReceptionistPolicy == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("receptionist_policy");
+          props_ReceptionistPolicy = cpb.create();
+        }
+        return props_ReceptionistPolicy;
       case LanguageConceptSwitch.ReplyToMessage:
         if (props_ReplyToMessage == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -175,6 +193,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ReplyToMessage = cpb.create();
         }
         return props_ReplyToMessage;
+      case LanguageConceptSwitch.ReturnActorReference:
+        if (props_ReturnActorReference == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("return_actor_reference");
+          props_ReturnActorReference = cpb.create();
+        }
+        return props_ReturnActorReference;
       case LanguageConceptSwitch.SelectBehavior:
         if (props_SelectBehavior == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

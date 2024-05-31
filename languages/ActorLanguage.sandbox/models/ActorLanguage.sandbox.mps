@@ -10,23 +10,64 @@
   <registry>
     <language id="10eda999-5898-4cde-9416-196c5eca1268" name="ActorLanguage">
       <concept id="1411682935494907365" name="ActorLanguage.structure.SwitchPolicy" flags="ng" index="2icdJ3" />
-      <concept id="1411682935492097494" name="ActorLanguage.structure.GetActorPolicy" flags="ng" index="2iUZJK">
+      <concept id="1411682935492097494" name="ActorLanguage.structure.ReceptionistPolicy" flags="ng" index="2iUZJK">
         <property id="1411682935492097495" name="policy" index="2iUZJL" />
       </concept>
       <concept id="1411682935490806610" name="ActorLanguage.structure.GetActorFromReceptionist" flags="ng" index="2iZ$PO">
-        <reference id="1411682935491377520" name="actorReference" index="2iTJtm" />
         <child id="1411682935492097502" name="policy" index="2iUZJS" />
+        <child id="13109696840883591" name="actorReference" index="BvGUO" />
       </concept>
       <concept id="7694881003795431127" name="ActorLanguage.structure.MessageQueue" flags="ng" index="2uUgHn" />
-      <concept id="6739934483261025217" name="ActorLanguage.structure.ActorReference" flags="ng" index="2LDelM" />
+      <concept id="13109696839640188" name="ActorLanguage.structure.ReturnActorReference" flags="ng" index="B4Ztf">
+        <reference id="13109696840066127" name="actorReference" index="BrntW" />
+      </concept>
+      <concept id="13109696842003203" name="ActorLanguage.structure.CreateActorReference" flags="ng" index="BjY0K">
+        <reference id="13109696845252031" name="actor" index="BJpqc" />
+        <child id="13109696843925076" name="actorReference" index="Bk5lB" />
+      </concept>
+      <concept id="13109696843924945" name="ActorLanguage.structure.ActorReference" flags="ng" index="Bk5ry">
+        <reference id="13109696843924946" name="actor" index="Bk5rx" />
+      </concept>
+      <concept id="711157185106633347" name="ActorLanguage.structure.SelectEnvelope" flags="ng" index="GouGM">
+        <reference id="711157185106633348" name="envelope" index="GouGP" />
+      </concept>
+      <concept id="6739934483258184740" name="ActorLanguage.structure.CreateActors" flags="ng" index="2LyTEn">
+        <property id="6739934483258184771" name="number" index="2LyTFK" />
+        <property id="6739934483258184773" name="baseName" index="2LyTFQ" />
+        <reference id="1411682935489267791" name="behavior" index="2iLGpD" />
+        <child id="13109696846325256" name="actors" index="BzvkV" />
+      </concept>
       <concept id="6739934483257929413" name="ActorLanguage.structure.Receptionist" flags="ng" index="2QtU1Q">
         <property id="1411682935489275238" name="address" index="2iLIH0" />
         <child id="6739934483257929414" name="behavior" index="2QtU1P" />
         <child id="6739934483257929416" name="messageQueue" index="2QtU1V" />
       </concept>
+      <concept id="3865756215865929202" name="ActorLanguage.structure.SendMessage" flags="ng" index="37lS4T">
+        <reference id="3865756215865929205" name="message" index="37lS4Y" />
+      </concept>
+      <concept id="3865756215865914212" name="ActorLanguage.structure.CreateActor" flags="ng" index="37lXYJ">
+        <property id="1411682935489244212" name="address" index="2iLA8i" />
+        <reference id="1411682935489260658" name="behavior" index="2iLy9k" />
+        <child id="6739934483258265337" name="messageQueue" index="2LyG1a" />
+      </concept>
+      <concept id="3865756215865914225" name="ActorLanguage.structure.CreateMessage" flags="ng" index="37lXYU">
+        <child id="711157185105040753" name="payload" index="GupN0" />
+        <child id="3269545992594456658" name="envelope" index="34eGaj" />
+      </concept>
       <concept id="3865756215865914230" name="ActorLanguage.structure.ActorScript" flags="ng" index="37lXYX">
         <child id="6739934483257959573" name="receptionist" index="2QtyCA" />
         <child id="6739934483257929410" name="behaviors" index="2QtU1L" />
+        <child id="3865756215865914231" name="actors" index="37lXYW" />
+      </concept>
+      <concept id="5068928393908140674" name="ActorLanguage.structure.SelectPayload" flags="ng" index="3g$k$6">
+        <reference id="5068928393908140689" name="payload" index="3g$k$l" />
+      </concept>
+      <concept id="2411303652489062023" name="ActorLanguage.structure.CreateEnvelope" flags="ng" index="1lgcPy">
+        <property id="7694881003800154999" name="priority" index="2uCmrR" />
+        <reference id="2411303652489062027" name="receiver" index="1lgcPI" />
+      </concept>
+      <concept id="2411303652489062024" name="ActorLanguage.structure.CreatePayload" flags="ng" index="1lgcPH">
+        <property id="2411303652489062574" name="body" index="1lgcdb" />
       </concept>
       <concept id="2411303652489357139" name="ActorLanguage.structure.CreateBehavior" flags="ng" index="1lj4MQ">
         <child id="3865756215866352723" name="actions" index="37ngyo" />
@@ -99,8 +140,17 @@
           <node concept="2iUZJK" id="1enjyq1OKmY" role="3Kbmr1">
             <property role="2iUZJL" value="1enjyq1qgdk/RANDOM" />
           </node>
-          <node concept="3clFbS" id="1enjyq1PHNK" role="3Kbo56">
-            <node concept="3cpWs6" id="1enjyq1PHNZ" role="3cqZAp" />
+          <node concept="3clFbS" id="I$NcByL7N" role="3Kbo56">
+            <node concept="BjY0K" id="I$NcBYVCD" role="3cqZAp">
+              <ref role="BJpqc" node="I$NcBYVRv" resolve="act0" />
+              <node concept="Bk5ry" id="I$NcBYVCF" role="Bk5lB">
+                <property role="TrG5h" value="ref1" />
+                <ref role="Bk5rx" node="I$NcBYVRv" resolve="act0" />
+              </node>
+            </node>
+            <node concept="B4Ztf" id="I$NcBYVRX" role="3cqZAp">
+              <ref role="BrntW" node="I$NcBYVCF" resolve="ref1" />
+            </node>
           </node>
         </node>
         <node concept="3clFbS" id="1enjyq1PHO2" role="3Kb1Dw">
@@ -119,14 +169,34 @@
           </node>
         </node>
         <node concept="3clFbS" id="1enjyq1rx08" role="2LFqv$">
-          <node concept="2LDelM" id="1enjyq1sr_B" role="3cqZAp">
-            <property role="TrG5h" value="ref1" />
-          </node>
-          <node concept="2iZ$PO" id="1enjyq1JLfw" role="3cqZAp">
-            <ref role="2iTJtm" node="1enjyq1sr_B" resolve="ref1" />
-            <node concept="2iUZJK" id="1enjyq1JLfy" role="2iUZJS">
+          <node concept="2iZ$PO" id="I$NcBxILy" role="3cqZAp">
+            <node concept="2iUZJK" id="I$NcBxILz" role="2iUZJS">
               <property role="2iUZJL" value="1enjyq1qgdk/RANDOM" />
             </node>
+            <node concept="Bk5ry" id="I$NcBxIL$" role="BvGUO">
+              <property role="TrG5h" value="ref" />
+            </node>
+          </node>
+          <node concept="1lgcPy" id="I$NcBxILH" role="3cqZAp">
+            <property role="TrG5h" value="e" />
+            <property role="2uCmrR" value="3.4" />
+            <ref role="1lgcPI" node="I$NcBxIL$" resolve="ref" />
+          </node>
+          <node concept="1lgcPH" id="I$NcByL1a" role="3cqZAp">
+            <property role="TrG5h" value="p" />
+            <property role="1lgcdb" value="text" />
+          </node>
+          <node concept="37lXYU" id="I$NcByL1o" role="3cqZAp">
+            <property role="TrG5h" value="m" />
+            <node concept="3g$k$6" id="I$NcByL1z" role="GupN0">
+              <ref role="3g$k$l" node="I$NcByL1a" resolve="p" />
+            </node>
+            <node concept="GouGM" id="I$NcByL1A" role="34eGaj">
+              <ref role="GouGP" node="I$NcBxILH" resolve="e" />
+            </node>
+          </node>
+          <node concept="37lS4T" id="I$NcByL1M" role="3cqZAp">
+            <ref role="37lS4Y" node="I$NcByL1o" resolve="m" />
           </node>
         </node>
         <node concept="3eOVzh" id="1enjyq1ryxu" role="1Dwp0S">
@@ -142,6 +212,51 @@
             <ref role="3cqZAo" node="1enjyq1rx07" resolve="i" />
           </node>
         </node>
+      </node>
+    </node>
+    <node concept="1lj4MQ" id="I$NcBRdSu" role="2QtU1L">
+      <property role="TrG5h" value="b2" />
+    </node>
+    <node concept="37lXYJ" id="I$NcByL82" role="37lXYW">
+      <property role="TrG5h" value="a1" />
+      <property role="2iLA8i" value="1" />
+      <ref role="2iLy9k" node="1enjyq1lUQ3" resolve="b1" />
+      <node concept="2uUgHn" id="I$NcByL83" role="2LyG1a" />
+    </node>
+    <node concept="37lXYJ" id="I$NcByL8a" role="37lXYW">
+      <property role="TrG5h" value="a2" />
+      <property role="2iLA8i" value="2" />
+      <ref role="2iLy9k" node="1enjyq1lUQ3" resolve="b1" />
+      <node concept="2uUgHn" id="I$NcByL8c" role="2LyG1a" />
+    </node>
+    <node concept="2LyTEn" id="I$NcBYVPO" role="37lXYW">
+      <property role="2LyTFK" value="5" />
+      <property role="2LyTFQ" value="act" />
+      <ref role="2iLGpD" node="1enjyq1lUQ3" resolve="b1" />
+      <node concept="37lXYJ" id="I$NcBYVRv" role="BzvkV">
+        <property role="TrG5h" value="act0" />
+        <ref role="2iLy9k" node="1enjyq1lUQ3" resolve="b1" />
+        <node concept="2uUgHn" id="I$NcBYVRw" role="2LyG1a" />
+      </node>
+      <node concept="37lXYJ" id="I$NcBYVRx" role="BzvkV">
+        <property role="TrG5h" value="act1" />
+        <ref role="2iLy9k" node="1enjyq1lUQ3" resolve="b1" />
+        <node concept="2uUgHn" id="I$NcBYVRy" role="2LyG1a" />
+      </node>
+      <node concept="37lXYJ" id="I$NcBYVRz" role="BzvkV">
+        <property role="TrG5h" value="act2" />
+        <ref role="2iLy9k" node="1enjyq1lUQ3" resolve="b1" />
+        <node concept="2uUgHn" id="I$NcBYVR$" role="2LyG1a" />
+      </node>
+      <node concept="37lXYJ" id="I$NcBYVR_" role="BzvkV">
+        <property role="TrG5h" value="act3" />
+        <ref role="2iLy9k" node="1enjyq1lUQ3" resolve="b1" />
+        <node concept="2uUgHn" id="I$NcBYVRA" role="2LyG1a" />
+      </node>
+      <node concept="37lXYJ" id="I$NcBYVRB" role="BzvkV">
+        <property role="TrG5h" value="act4" />
+        <ref role="2iLy9k" node="1enjyq1lUQ3" resolve="b1" />
+        <node concept="2uUgHn" id="I$NcBYVRC" role="2LyG1a" />
       </node>
     </node>
   </node>

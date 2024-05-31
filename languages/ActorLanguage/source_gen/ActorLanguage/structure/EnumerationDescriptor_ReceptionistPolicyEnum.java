@@ -9,10 +9,10 @@ import java.util.List;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-public class EnumerationDescriptor_GetActorPolicyEnum extends EnumerationDescriptorBase {
+public class EnumerationDescriptor_ReceptionistPolicyEnum extends EnumerationDescriptorBase {
 
-  public EnumerationDescriptor_GetActorPolicyEnum() {
-    super(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681690353L, "GetActorPolicyEnum", "r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/1411682935490806611");
+  public EnumerationDescriptor_ReceptionistPolicyEnum() {
+    super(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681690353L, "ReceptionistPolicyEnum", "r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/1411682935490806611");
   }
 
   private final EnumerationDescriptor.MemberDescriptor myMember_RANDOM_0 = new EnumerationDescriptor.MemberDescriptor("RANDOM", "RANDOM", 0x13974e2681690354L, "r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/1411682935490806612");

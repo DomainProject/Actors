@@ -14,17 +14,14 @@ import org.jetbrains.mps.openapi.model.SNodeReference;
 import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.scope.Scope;
 import jetbrains.mps.smodel.runtime.ReferenceConstraintsContext;
-import java.util.List;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
-import java.util.ArrayList;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.scope.ListScope;
 import java.util.HashMap;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 
@@ -47,18 +44,16 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
           @Override
           public Scope createScope(final ReferenceConstraintsContext _context) {
 
-            List<SNode> messages = ListSequence.fromList(new ArrayList<SNode>());
+            /*
+              <type> <var>;
+              
+              for
 
-            for (SNode message : ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateActor$Uv, false, false), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{}))) {
-              if ((SLinkOperations.getTarget(message, LINKS.envelope$eoPh) != null) && (SendMessage_Constraints.this._additional_getReceiver(message) != null)) {
-                final SNode sender = SendMessage_Constraints.this._additional_getSender(message);
-                if (sender == SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateActor$Uv, false, false)) {
-                  ListSequence.fromList(messages).addElement(message);
-                }
-              }
-            }
+            */
 
-            return ListScope.forNamedElements(ListSequence.fromList(messages).toList());
+
+            final Iterable<SNode> messages = SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.AbstractBehavior$Dm, false, false), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{});
+            return ListScope.forNamedElements(messages);
           }
         };
       }
@@ -100,6 +95,7 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
     /*package*/ static final SConcept SendMessage$$2 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, "ActorLanguage.structure.SendMessage");
     /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
     /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
+    /*package*/ static final SConcept AbstractBehavior$Dm = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb9024127367L, "ActorLanguage.structure.AbstractBehavior");
     /*package*/ static final SConcept CreateEnvelope$OK = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, "ActorLanguage.structure.CreateEnvelope");
     /*package*/ static final SConcept SelectEnvelope$S6 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L, "ActorLanguage.structure.SelectEnvelope");
   }

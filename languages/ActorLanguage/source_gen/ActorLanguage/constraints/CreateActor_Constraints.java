@@ -65,14 +65,12 @@ public class CreateActor_Constraints extends BaseConstraintsDescriptor {
       return result;
     }
     private static boolean staticValidateProperty(SNode node, int propertyValue) {
-      if (propertyValue <= 0 || propertyValue >= 100) {
-        return false;
-      }
-      for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getParent(node), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{})).subtract(ListSequence.fromList(ListSequence.fromListAndArray(new ArrayList<>(), node)))) {
-        if (SPropertyOperations.getInteger(actor, PROPS.address$DqJ_) == propertyValue) {
-          return false;
-        }
-      }
+      /*
+        if
+        for
+
+      */
+
       return true;
     }
   }
