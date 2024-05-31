@@ -404,7 +404,7 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
       return LINKS.actors$EA0a;
     }
     public SAbstractConcept getChildSConcept() {
-      return CONCEPTS.ActorCreation$bc;
+      return CONCEPTS.ActorCreation$3s;
     }
 
     public EditorCell createNodeCell(SNode elementNode) {
@@ -462,7 +462,7 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
   private static final class CONCEPTS {
     /*package*/ static final SConcept PropertyAttribute$Gb = MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da56L, "jetbrains.mps.lang.core.structure.PropertyAttribute");
     /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
-    /*package*/ static final SInterfaceConcept ActorCreation$bc = MetaAdapterFactory.getInterfaceConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec089803L, "ActorLanguage.structure.ActorCreation");
+    /*package*/ static final SInterfaceConcept ActorCreation$3s = MetaAdapterFactory.getInterfaceConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e268157ad87L, "ActorLanguage.structure.ActorCreation");
   }
 
   private static final class LINKS {

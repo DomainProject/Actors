@@ -44,7 +44,7 @@ public class Fetch_Constraints extends BaseConstraintsDescriptor {
 
       int receivedMessages = 0;
 
-      Iterable<SNode> existingMessages = ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(node, CONCEPTS.AbstractActor$R3, false, false), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{})).where((it) -> it != SLinkOperations.getTarget(node, LINKS.message$diNF));
+      Iterable<SNode> existingMessages = ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(node, CONCEPTS.CreateActor$Uv, false, false), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{})).where((it) -> it != SLinkOperations.getTarget(node, LINKS.message$diNF));
 
       if (Sequence.fromIterable(existingMessages).isNotEmpty()) {
         for (SNode message : Sequence.fromIterable(existingMessages)) {
@@ -70,7 +70,7 @@ public class Fetch_Constraints extends BaseConstraintsDescriptor {
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept Fetch$Nj = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8975L, "ActorLanguage.structure.Fetch");
-    /*package*/ static final SConcept AbstractActor$R3 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23308L, "ActorLanguage.structure.AbstractActor");
+    /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
     /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
     /*package*/ static final SConcept CreatePayload$Pf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, "ActorLanguage.structure.CreatePayload");
   }

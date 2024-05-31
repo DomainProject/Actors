@@ -410,7 +410,7 @@
     <property role="EcuMT" value="2582920951876036245" />
     <property role="3GE5qa" value="where.condition" />
     <property role="TrG5h" value="ConditionsSequence" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="2fooeIVv2qT" role="1TKVEi">
       <property role="IQ2ns" value="2582920951876036281" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
@@ -421,7 +421,7 @@
     <node concept="1TJgyi" id="2fooeIVxG2N" role="1TKVEl">
       <property role="IQ2nx" value="2582920951876731059" />
       <property role="TrG5h" value="conditionOperator" />
-      <ref role="AX2Wp" node="2fooeIVv2qq" resolve="CondOperator" />
+      <ref role="AX2Wp" node="2fooeIVv2qq" resolve="ConditionOperator" />
     </node>
   </node>
   <node concept="25R3W" id="2fooeIVv2qq">
@@ -441,7 +441,7 @@
     <property role="EcuMT" value="2582920951876730988" />
     <property role="3GE5qa" value="where.condition" />
     <property role="TrG5h" value="ConditionSet" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="2fooeIVxG1H" role="1TKVEi">
       <property role="IQ2ns" value="2582920951876730989" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
@@ -460,7 +460,7 @@
     <property role="TrG5h" value="Min" />
     <property role="34LRSv" value="MIN" />
     <property role="3GE5qa" value="aggregateFunctions" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="PrWs8" id="7p2QZoUt$S8" role="PzmwI">
       <ref role="PrY4T" node="5PYs8dV0yTO" resolve="AggregateFunction" />
     </node>
@@ -470,7 +470,7 @@
     <property role="3GE5qa" value="aggregateFunctions" />
     <property role="TrG5h" value="Max" />
     <property role="34LRSv" value="MAX" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="PrWs8" id="7p2QZoUt$S4" role="PzmwI">
       <ref role="PrY4T" node="5PYs8dV0yTO" resolve="AggregateFunction" />
     </node>
@@ -480,7 +480,7 @@
     <property role="3GE5qa" value="aggregateFunctions" />
     <property role="TrG5h" value="Count" />
     <property role="34LRSv" value="COUNT" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="PrWs8" id="7p2QZoUt$S0" role="PzmwI">
       <ref role="PrY4T" node="5PYs8dV0yTO" resolve="AggregateFunction" />
     </node>
@@ -490,7 +490,7 @@
     <property role="3GE5qa" value="aggregateFunctions" />
     <property role="TrG5h" value="Sum" />
     <property role="34LRSv" value="SUM" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="PrWs8" id="7p2QZoUt$Sa" role="PzmwI">
       <ref role="PrY4T" node="5PYs8dV0yTO" resolve="AggregateFunction" />
     </node>
@@ -500,7 +500,7 @@
     <property role="3GE5qa" value="aggregateFunctions" />
     <property role="TrG5h" value="Average" />
     <property role="34LRSv" value="AVG" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="PrWs8" id="7p2QZoUt$RV" role="PzmwI">
       <ref role="PrY4T" node="5PYs8dV0yTO" resolve="AggregateFunction" />
     </node>

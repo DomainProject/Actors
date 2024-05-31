@@ -160,7 +160,7 @@
                   <node concept="2OqwBi" id="6cx3kQ$9I4I" role="2Oq$k0">
                     <node concept="13iPFW" id="6cx3kQ$9HSZ" role="2Oq$k0" />
                     <node concept="3TrEf2" id="6cx3kQ$9KhF" role="2OqNvi">
-                      <ref role="3Tt5mk" to="p6im:21Z4UyPhwT6" />
+                      <ref role="3Tt5mk" to="p6im:21Z4UyPhwT6" resolve="table" />
                     </node>
                   </node>
                   <node concept="3Tsc0h" id="6cx3kQ$9KUZ" role="2OqNvi">

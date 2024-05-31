@@ -9,6 +9,7 @@
     <import index="o8zo" ref="r:314576fc-3aee-4386-a0a5-a38348ac317d(jetbrains.mps.scope)" />
     <import index="o1mc" ref="r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)" implicit="true" />
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
+    <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" implicit="true" />
   </imports>
   <registry>
     <language id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage">
@@ -231,7 +232,7 @@
               <node concept="2OqwBi" id="6F9Ho3OaRPg" role="2Oq$k0">
                 <node concept="1r4Lsj" id="6F9Ho3OaRDd" role="2Oq$k0" />
                 <node concept="3TrEf2" id="6F9Ho3OaS1x" role="2OqNvi">
-                  <ref role="3Tt5mk" to="o1mc:5Q93FfG0WVT" />
+                  <ref role="3Tt5mk" to="o1mc:5Q93FfG0WVT" resolve="messageQueue" />
                 </node>
               </node>
               <node concept="2oxUTD" id="6F9Ho3OaSXV" role="2OqNvi">
@@ -260,7 +261,7 @@
               <node concept="2OqwBi" id="5Q93FfG4gJZ" role="37vLTJ">
                 <node concept="1r4Lsj" id="5Q93FfG4g$c" role="2Oq$k0" />
                 <node concept="3TrcHB" id="5Q93FfG4hao" role="2OqNvi">
-                  <ref role="3TsBF5" to="o1mc:3m_VcJMWzdw" resolve="address" />
+                  <ref role="3TsBF5" to="o1mc:1enjyq1kqlA" resolve="address" />
                 </node>
               </node>
             </node>
@@ -274,6 +275,62 @@
                 <node concept="1r4Lsj" id="5Q93FfG4m9B" role="2Oq$k0" />
                 <node concept="3TrcHB" id="5Q93FfG4m$3" role="2OqNvi">
                   <ref role="3TsBF5" to="tpck:h0TrG11" resolve="name" />
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+  </node>
+  <node concept="37WguZ" id="1enjyq1KL2P">
+    <property role="3GE5qa" value="receptionist" />
+    <property role="TrG5h" value="SwitchPolicyFactory" />
+    <node concept="37WvkG" id="1enjyq1KL2Q" role="37WGs$">
+      <ref role="37XkoT" to="o1mc:1enjyq1DTn_" resolve="SwitchPolicy" />
+      <node concept="37Y9Zx" id="1enjyq1KL2R" role="37ZfLb">
+        <node concept="3clFbS" id="1enjyq1KL2S" role="2VODD2">
+          <node concept="3SKdUt" id="1enjyq1NGuH" role="3cqZAp">
+            <node concept="1PaTwC" id="1enjyq1NGuI" role="1aUNEU">
+              <node concept="3oM_SD" id="1enjyq1NGvP" role="1PaTwD">
+                <property role="3oM_SC" value="this" />
+              </node>
+              <node concept="3oM_SD" id="1enjyq1NGvR" role="1PaTwD">
+                <property role="3oM_SC" value="allows" />
+              </node>
+              <node concept="3oM_SD" id="1enjyq1NGvV" role="1PaTwD">
+                <property role="3oM_SC" value="us" />
+              </node>
+              <node concept="3oM_SD" id="1enjyq1NGvZ" role="1PaTwD">
+                <property role="3oM_SC" value="to" />
+              </node>
+              <node concept="3oM_SD" id="1enjyq1NGw4" role="1PaTwD">
+                <property role="3oM_SC" value="ignore" />
+              </node>
+              <node concept="3oM_SD" id="1enjyq1NGwp" role="1PaTwD">
+                <property role="3oM_SC" value="the" />
+              </node>
+              <node concept="3oM_SD" id="1enjyq1NGww" role="1PaTwD">
+                <property role="3oM_SC" value="child" />
+              </node>
+              <node concept="3oM_SD" id="1enjyq1NGwC" role="1PaTwD">
+                <property role="3oM_SC" value="expression" />
+              </node>
+            </node>
+          </node>
+          <node concept="3clFbF" id="1enjyq1KL3c" role="3cqZAp">
+            <node concept="37vLTI" id="1enjyq1KLS7" role="3clFbG">
+              <node concept="2ShNRf" id="1enjyq1KLUK" role="37vLTx">
+                <node concept="3zrR0B" id="1enjyq1KNhE" role="2ShVmc">
+                  <node concept="3Tqbb2" id="1enjyq1KNhG" role="3zrR0E">
+                    <ref role="ehGHo" to="tpee:htXhb8r" resolve="CharConstant" />
+                  </node>
+                </node>
+              </node>
+              <node concept="2OqwBi" id="1enjyq1KLhk" role="37vLTJ">
+                <node concept="1r4Lsj" id="1enjyq1KL3b" role="2Oq$k0" />
+                <node concept="3TrEf2" id="1enjyq1KLy5" role="2OqNvi">
+                  <ref role="3Tt5mk" to="tpee:gVKbG91" resolve="expression" />
                 </node>
               </node>
             </node>

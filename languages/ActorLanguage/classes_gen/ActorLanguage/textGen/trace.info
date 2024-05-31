@@ -173,26 +173,32 @@
   </root>
   <root nodeRef="r:5c12de31-eabc-4138-b711-95b52bc1fc4c(ActorLanguage.textGen)/3204091364823173251">
     <file name="CreateActor_TextGen.java">
-      <node id="3204091364823173251" at="14,54,15,55" concept="5" />
-      <node id="711157185105394426" at="15,55,16,0" concept="7" />
-      <node id="3204091364823173308" at="16,0,17,25" concept="1" />
-      <node id="3204091364823173477" at="17,25,18,86" concept="1" />
-      <node id="3204091364823181644" at="18,86,19,32" concept="1" />
-      <node id="3204091364823181871" at="19,32,20,18" concept="1" />
-      <node id="3204091364823191220" at="20,18,21,17" concept="1" />
-      <node id="3204091364823191220" at="21,17,22,20" concept="1" />
-      <node id="3204091364823612579" at="22,20,23,18" concept="1" />
-      <node id="3204091364823612635" at="23,18,24,18" concept="1" />
-      <node id="3204091364823173251" at="28,0,29,0" concept="8" trace="name$MnvL" />
-      <node id="3204091364823173251" at="13,0,26,0" concept="4" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
-      <scope id="3204091364823173251" at="14,54,24,18">
+      <node id="3204091364823173251" at="17,54,18,55" concept="5" />
+      <node id="3204091364823173251" at="18,55,19,29" concept="1" />
+      <node id="711157185105394426" at="19,29,20,0" concept="7" />
+      <node id="3204091364823173308" at="20,0,21,25" concept="1" />
+      <node id="3204091364823173477" at="21,25,22,86" concept="1" />
+      <node id="3204091364823181644" at="22,86,23,32" concept="1" />
+      <node id="3204091364823181871" at="23,32,24,18" concept="1" />
+      <node id="3204091364823191220" at="24,18,25,17" concept="1" />
+      <node id="3204091364823191220" at="25,17,26,20" concept="1" />
+      <node id="3204091364823612579" at="26,20,27,18" concept="1" />
+      <node id="3204091364823612635" at="27,18,28,18" concept="1" />
+      <node id="3204091364823173251" at="29,30,30,181" concept="1" />
+      <node id="3204091364823173251" at="35,0,36,0" concept="8" trace="name$MnvL" />
+      <node id="3204091364823173251" at="39,0,40,0" concept="8" trace="TraceableConcept$L" />
+      <node id="3204091364823173251" at="28,18,31,5" concept="3" />
+      <node id="3204091364823173251" at="16,0,33,0" concept="4" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
+      <scope id="3204091364823173251" at="29,30,30,181" />
+      <scope id="3204091364823173251" at="17,54,31,5">
         <var name="tgs" id="3204091364823173251" />
       </scope>
-      <scope id="3204091364823173251" at="13,0,26,0">
+      <scope id="3204091364823173251" at="16,0,33,0">
         <var name="ctx" id="3204091364823173251" />
       </scope>
-      <unit id="3204091364823173251" at="27,0,30,0" name="ActorLanguage.textGen.CreateActor_TextGen$PROPS" />
-      <unit id="3204091364823173251" at="12,0,31,0" name="ActorLanguage.textGen.CreateActor_TextGen" />
+      <unit id="3204091364823173251" at="34,0,37,0" name="ActorLanguage.textGen.CreateActor_TextGen$PROPS" />
+      <unit id="3204091364823173251" at="38,0,41,0" name="ActorLanguage.textGen.CreateActor_TextGen$CONCEPTS" />
+      <unit id="3204091364823173251" at="15,0,42,0" name="ActorLanguage.textGen.CreateActor_TextGen" />
     </file>
     <file name="TextGenAspectDescriptor.java">
       <node id="3204091364823173251" at="28,45,29,41" concept="6" />
@@ -201,57 +207,63 @@
   </root>
   <root nodeRef="r:5c12de31-eabc-4138-b711-95b52bc1fc4c(ActorLanguage.textGen)/3204091364823999932">
     <file name="SendMessage_TextGen.java">
-      <node id="3204091364823999932" at="16,54,17,55" concept="5" />
-      <node id="711157185105235298" at="17,55,18,0" concept="7" />
-      <node id="711157185105645994" at="18,0,19,23" concept="1" />
-      <node id="711157185105235776" at="19,23,20,132" concept="1" />
-      <node id="711157185105766913" at="20,132,21,18" concept="1" />
-      <node id="711157185105235356" at="21,18,22,0" concept="7" />
-      <node id="5167209971301206780" at="22,0,23,17" concept="1" />
-      <node id="5167209971301206780" at="23,17,24,74" concept="1" />
-      <node id="5167209971301206991" at="24,74,25,18" concept="1" />
-      <node id="3204091364823999990" at="25,18,26,17" concept="1" />
-      <node id="3204091364823999990" at="26,17,27,79" concept="1" />
-      <node id="3204091364826098888" at="27,79,28,133" concept="1" />
-      <node id="3204091364826102095" at="28,133,29,28" concept="1" />
-      <node id="3204091364826102815" at="29,28,30,133" concept="1" />
-      <node id="3204091364826111513" at="30,133,31,22" concept="1" />
-      <node id="3204091364824005116" at="31,22,32,18" concept="1" />
-      <node id="3204091364824006418" at="32,18,33,17" concept="1" />
-      <node id="3204091364824006418" at="33,17,34,45" concept="1" />
-      <node id="3204091364824006475" at="34,45,35,18" concept="1" />
-      <node id="3204091364823999932" at="35,18,36,44" concept="1" />
-      <node id="3204091364824007688" at="36,44,37,17" concept="1" />
-      <node id="3204091364824007688" at="37,17,38,37" concept="1" />
-      <node id="3204091364824657942" at="38,37,39,18" concept="1" />
-      <node id="5167209971301207389" at="39,18,40,17" concept="1" />
-      <node id="5167209971301207389" at="40,17,41,76" concept="1" />
-      <node id="5167209971301207489" at="41,76,42,18" concept="1" />
-      <node id="3204091364824008569" at="42,18,43,17" concept="1" />
-      <node id="3204091364824008569" at="43,17,44,38" concept="1" />
-      <node id="3204091364824657997" at="44,38,45,18" concept="1" />
-      <node id="3204091364823999932" at="45,18,46,44" concept="1" />
-      <node id="3204091364824008857" at="46,44,47,17" concept="1" />
-      <node id="3204091364824008857" at="47,17,48,20" concept="1" />
-      <node id="3204091364824658052" at="48,20,49,18" concept="1" />
-      <node id="5167209971301215015" at="49,18,50,17" concept="1" />
-      <node id="5167209971301215015" at="50,17,51,76" concept="1" />
-      <node id="5167209971301215016" at="51,76,52,18" concept="1" />
-      <node id="5167209971301215317" at="52,18,53,18" concept="1" />
-      <node id="5167209971301214679" at="53,18,54,0" concept="7" />
-      <node id="3204091364823999932" at="58,0,59,0" concept="8" trace="message$4GHG" />
-      <node id="3204091364823999932" at="62,0,63,0" concept="8" trace="tag$9Hck" />
-      <node id="3204091364823999932" at="63,0,64,0" concept="8" trace="name$MnvL" />
-      <node id="3204091364823999932" at="15,0,56,0" concept="4" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
-      <scope id="3204091364823999932" at="16,54,54,0">
+      <node id="3204091364823999932" at="19,54,20,55" concept="5" />
+      <node id="3204091364823999932" at="20,55,21,29" concept="1" />
+      <node id="711157185105235298" at="21,29,22,0" concept="7" />
+      <node id="711157185105645994" at="22,0,23,23" concept="1" />
+      <node id="711157185105235776" at="23,23,24,132" concept="1" />
+      <node id="711157185105766913" at="24,132,25,18" concept="1" />
+      <node id="711157185105235356" at="25,18,26,0" concept="7" />
+      <node id="5167209971301206780" at="26,0,27,17" concept="1" />
+      <node id="5167209971301206780" at="27,17,28,74" concept="1" />
+      <node id="5167209971301206991" at="28,74,29,18" concept="1" />
+      <node id="3204091364823999990" at="29,18,30,17" concept="1" />
+      <node id="3204091364823999990" at="30,17,31,79" concept="1" />
+      <node id="3204091364826098888" at="31,79,32,133" concept="1" />
+      <node id="3204091364826102095" at="32,133,33,28" concept="1" />
+      <node id="3204091364826102815" at="33,28,34,133" concept="1" />
+      <node id="3204091364826111513" at="34,133,35,22" concept="1" />
+      <node id="3204091364824005116" at="35,22,36,18" concept="1" />
+      <node id="3204091364824006418" at="36,18,37,17" concept="1" />
+      <node id="3204091364824006418" at="37,17,38,45" concept="1" />
+      <node id="3204091364824006475" at="38,45,39,18" concept="1" />
+      <node id="3204091364823999932" at="39,18,40,44" concept="1" />
+      <node id="3204091364824007688" at="40,44,41,17" concept="1" />
+      <node id="3204091364824007688" at="41,17,42,37" concept="1" />
+      <node id="3204091364824657942" at="42,37,43,18" concept="1" />
+      <node id="5167209971301207389" at="43,18,44,17" concept="1" />
+      <node id="5167209971301207389" at="44,17,45,76" concept="1" />
+      <node id="5167209971301207489" at="45,76,46,18" concept="1" />
+      <node id="3204091364824008569" at="46,18,47,17" concept="1" />
+      <node id="3204091364824008569" at="47,17,48,38" concept="1" />
+      <node id="3204091364824657997" at="48,38,49,18" concept="1" />
+      <node id="3204091364823999932" at="49,18,50,44" concept="1" />
+      <node id="3204091364824008857" at="50,44,51,17" concept="1" />
+      <node id="3204091364824008857" at="51,17,52,20" concept="1" />
+      <node id="3204091364824658052" at="52,20,53,18" concept="1" />
+      <node id="5167209971301215015" at="53,18,54,17" concept="1" />
+      <node id="5167209971301215015" at="54,17,55,76" concept="1" />
+      <node id="5167209971301215016" at="55,76,56,18" concept="1" />
+      <node id="5167209971301215317" at="56,18,57,18" concept="1" />
+      <node id="5167209971301214679" at="57,18,58,0" concept="7" />
+      <node id="3204091364823999932" at="59,30,60,181" concept="1" />
+      <node id="3204091364823999932" at="65,0,66,0" concept="8" trace="message$4GHG" />
+      <node id="3204091364823999932" at="69,0,70,0" concept="8" trace="tag$9Hck" />
+      <node id="3204091364823999932" at="70,0,71,0" concept="8" trace="name$MnvL" />
+      <node id="3204091364823999932" at="74,0,75,0" concept="8" trace="TraceableConcept$L" />
+      <node id="3204091364823999932" at="58,0,61,5" concept="3" />
+      <node id="3204091364823999932" at="18,0,63,0" concept="4" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
+      <scope id="3204091364823999932" at="59,30,60,181" />
+      <scope id="3204091364823999932" at="19,54,61,5">
         <var name="tgs" id="3204091364823999932" />
       </scope>
-      <scope id="3204091364823999932" at="15,0,56,0">
+      <scope id="3204091364823999932" at="18,0,63,0">
         <var name="ctx" id="3204091364823999932" />
       </scope>
-      <unit id="3204091364823999932" at="57,0,60,0" name="ActorLanguage.textGen.SendMessage_TextGen$LINKS" />
-      <unit id="3204091364823999932" at="61,0,65,0" name="ActorLanguage.textGen.SendMessage_TextGen$PROPS" />
-      <unit id="3204091364823999932" at="14,0,66,0" name="ActorLanguage.textGen.SendMessage_TextGen" />
+      <unit id="3204091364823999932" at="64,0,67,0" name="ActorLanguage.textGen.SendMessage_TextGen$LINKS" />
+      <unit id="3204091364823999932" at="73,0,76,0" name="ActorLanguage.textGen.SendMessage_TextGen$CONCEPTS" />
+      <unit id="3204091364823999932" at="68,0,72,0" name="ActorLanguage.textGen.SendMessage_TextGen$PROPS" />
+      <unit id="3204091364823999932" at="17,0,77,0" name="ActorLanguage.textGen.SendMessage_TextGen" />
     </file>
     <file name="TextGenAspectDescriptor.java">
       <node id="3204091364823999932" at="36,45,37,41" concept="6" />
@@ -260,18 +272,24 @@
   </root>
   <root nodeRef="r:5c12de31-eabc-4138-b711-95b52bc1fc4c(ActorLanguage.textGen)/3204091364824420186">
     <file name="CreateMessage_TextGen.java">
-      <node id="3204091364824420186" at="11,54,12,55" concept="5" />
-      <node id="3204091364824896554" at="12,55,13,17" concept="1" />
-      <node id="3204091364824896554" at="13,17,14,37" concept="1" />
-      <node id="3204091364824896654" at="14,37,15,18" concept="1" />
-      <node id="3204091364824420186" at="10,0,17,0" concept="4" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
-      <scope id="3204091364824420186" at="11,54,15,18">
+      <node id="3204091364824420186" at="15,54,16,55" concept="5" />
+      <node id="3204091364824420186" at="16,55,17,29" concept="1" />
+      <node id="3204091364824896554" at="17,29,18,17" concept="1" />
+      <node id="3204091364824896554" at="18,17,19,37" concept="1" />
+      <node id="3204091364824896654" at="19,37,20,18" concept="1" />
+      <node id="3204091364824420186" at="21,30,22,181" concept="1" />
+      <node id="3204091364824420186" at="27,0,28,0" concept="8" trace="TraceableConcept$L" />
+      <node id="3204091364824420186" at="20,18,23,5" concept="3" />
+      <node id="3204091364824420186" at="14,0,25,0" concept="4" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
+      <scope id="3204091364824420186" at="21,30,22,181" />
+      <scope id="3204091364824420186" at="15,54,23,5">
         <var name="tgs" id="3204091364824420186" />
       </scope>
-      <scope id="3204091364824420186" at="10,0,17,0">
+      <scope id="3204091364824420186" at="14,0,25,0">
         <var name="ctx" id="3204091364824420186" />
       </scope>
-      <unit id="3204091364824420186" at="9,0,18,0" name="ActorLanguage.textGen.CreateMessage_TextGen" />
+      <unit id="3204091364824420186" at="26,0,29,0" name="ActorLanguage.textGen.CreateMessage_TextGen$CONCEPTS" />
+      <unit id="3204091364824420186" at="13,0,30,0" name="ActorLanguage.textGen.CreateMessage_TextGen" />
     </file>
     <file name="TextGenAspectDescriptor.java">
       <node id="3204091364824420186" at="32,47,33,43" concept="6" />

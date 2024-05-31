@@ -411,7 +411,7 @@
         </node>
       </node>
       <node concept="3F2HdR" id="21Z4UyPhwd6" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:21Z4UyPhxqZ" />
+        <ref role="1NtTu8" to="p6im:21Z4UyPhxqZ" resolve="tables" />
         <node concept="l2Vlx" id="21Z4UyPhwd8" role="2czzBx" />
         <node concept="2o9xnK" id="21Z4UyPhwi7" role="2gpyvW">
           <node concept="3clFbS" id="21Z4UyPhwi8" role="2VODD2">
@@ -465,7 +465,7 @@
         </node>
       </node>
       <node concept="3F1sOY" id="2fooeIVvqIF" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:14g3IsRiyeO" />
+        <ref role="1NtTu8" to="p6im:14g3IsRiyeO" resolve="conditions" />
       </node>
       <node concept="l2Vlx" id="14g3IsRhhts" role="2iSdaV" />
     </node>
@@ -625,7 +625,7 @@
         </node>
       </node>
       <node concept="1iCGBv" id="69qeU0f7cvZ" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:21Z4UyPhwT6" />
+        <ref role="1NtTu8" to="p6im:21Z4UyPhwT6" resolve="table" />
         <node concept="1sVBvm" id="69qeU0f7cw1" role="1sWHZn">
           <node concept="3F0A7n" id="69qeU0f7cwc" role="2wV5jI">
             <property role="1Intyy" value="true" />
@@ -709,7 +709,7 @@
         </node>
       </node>
       <node concept="1iCGBv" id="69qeU0f8SlC" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:21Z4UyPhwT6" />
+        <ref role="1NtTu8" to="p6im:21Z4UyPhwT6" resolve="table" />
         <node concept="1sVBvm" id="69qeU0f8SlE" role="1sWHZn">
           <node concept="3F0A7n" id="69qeU0f8SlP" role="2wV5jI">
             <property role="1Intyy" value="true" />
@@ -818,7 +818,7 @@
         </node>
       </node>
       <node concept="1iCGBv" id="2G8vGeEp2qN" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:21Z4UyPhwT6" />
+        <ref role="1NtTu8" to="p6im:21Z4UyPhwT6" resolve="table" />
         <node concept="1sVBvm" id="2G8vGeEp2qP" role="1sWHZn">
           <node concept="3F0A7n" id="2G8vGeEpUk4" role="2wV5jI">
             <property role="1Intyy" value="true" />
@@ -1062,7 +1062,7 @@
       <node concept="1sVBvm" id="21Z4UyPhvry" role="1sWHZn">
         <node concept="3F0A7n" id="21Z4UyPhvrz" role="2wV5jI">
           <property role="1Intyy" value="true" />
-          <ref role="1NtTu8" to="tpck:h0TrG11" />
+          <ref role="1NtTu8" to="tpck:h0TrG11" resolve="name" />
         </node>
       </node>
     </node>

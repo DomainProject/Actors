@@ -25,7 +25,7 @@ import jetbrains.mps.nodeEditor.cellMenu.SChildSubstituteInfo;
 import jetbrains.mps.openapi.editor.cells.CellActionType;
 import jetbrains.mps.nodeEditor.cellActions.CellAction_DeleteNode;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 /*package*/ class Receptionist_EditorBuilder_a extends AbstractEditorBuilder {
   @NotNull
@@ -101,7 +101,7 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
       return LINKS.behavior$DPHa;
     }
     public SAbstractConcept getChildSConcept() {
-      return CONCEPTS.ActorAction$Xm;
+      return CONCEPTS.Statement$P6;
     }
 
     public EditorCell createNodeCell(SNode elementNode) {
@@ -163,6 +163,6 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
   }
 
   private static final class CONCEPTS {
-    /*package*/ static final SInterfaceConcept ActorAction$Xm = MetaAdapterFactory.getInterfaceConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec2e7e7dL, "ActorLanguage.structure.ActorAction");
+    /*package*/ static final SConcept Statement$P6 = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b215L, "jetbrains.mps.baseLanguage.structure.Statement");
   }
 }

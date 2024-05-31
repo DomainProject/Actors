@@ -22,6 +22,8 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
           return Collections.<NodeFactory>singletonList(new EnvelopeFactory.NodeFactory_2411303652493859819());
         case "Receptionist":
           return Collections.<NodeFactory>singletonList(new ReceptionistFactory.NodeFactory_6739934483259132151());
+        case "SwitchPolicy":
+          return Collections.<NodeFactory>singletonList(new SwitchPolicyFactory.NodeFactory_1411682935496708278());
         default:
       }
     }

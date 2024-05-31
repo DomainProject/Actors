@@ -49,10 +49,10 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
 
             List<SNode> messages = ListSequence.fromList(new ArrayList<SNode>());
 
-            for (SNode message : ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.AbstractActor$R3, false, false), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{}))) {
+            for (SNode message : ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateActor$Uv, false, false), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{}))) {
               if ((SLinkOperations.getTarget(message, LINKS.envelope$eoPh) != null) && (SendMessage_Constraints.this._additional_getReceiver(message) != null)) {
                 final SNode sender = SendMessage_Constraints.this._additional_getSender(message);
-                if (sender == SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.AbstractActor$R3, false, false)) {
+                if (sender == SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateActor$Uv, false, false)) {
                   ListSequence.fromList(messages).addElement(message);
                 }
               }
@@ -68,7 +68,7 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
     return references;
   }
   private SNode _additional_getSender(SNode message) {
-    SNode sender = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23308L, "ActorLanguage.structure.AbstractActor"));
+    SNode sender = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor"));
     {
       final SNode envelope = SLinkOperations.getTarget(message, LINKS.envelope$eoPh);
       if (SNodeOperations.isInstanceOf(envelope, CONCEPTS.CreateEnvelope$OK)) {
@@ -82,7 +82,7 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
     return sender;
   }
   private SNode _additional_getReceiver(SNode message) {
-    SNode receiver = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23308L, "ActorLanguage.structure.AbstractActor"));
+    SNode receiver = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor"));
     {
       final SNode envelope = SLinkOperations.getTarget(message, LINKS.envelope$eoPh);
       if (SNodeOperations.isInstanceOf(envelope, CONCEPTS.CreateEnvelope$OK)) {
@@ -98,7 +98,7 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept SendMessage$$2 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, "ActorLanguage.structure.SendMessage");
-    /*package*/ static final SConcept AbstractActor$R3 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23308L, "ActorLanguage.structure.AbstractActor");
+    /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
     /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
     /*package*/ static final SConcept CreateEnvelope$OK = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, "ActorLanguage.structure.CreateEnvelope");
     /*package*/ static final SConcept SelectEnvelope$S6 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L, "ActorLanguage.structure.SelectEnvelope");

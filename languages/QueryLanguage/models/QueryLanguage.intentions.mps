@@ -296,7 +296,7 @@
                   <node concept="2OqwBi" id="7p2QZoUur8w" role="37vLTJ">
                     <node concept="2Sf5sV" id="7p2QZoUur8x" role="2Oq$k0" />
                     <node concept="3TrEf2" id="7p2QZoUur8y" role="2OqNvi">
-                      <ref role="3Tt5mk" to="p6im:5PYs8dV0Cem" />
+                      <ref role="3Tt5mk" to="p6im:5PYs8dV0Cem" resolve="aggregateFunction" />
                     </node>
                   </node>
                 </node>
@@ -320,7 +320,7 @@
                   <node concept="2OqwBi" id="7p2QZoUurbP" role="37vLTJ">
                     <node concept="2Sf5sV" id="7p2QZoUurbQ" role="2Oq$k0" />
                     <node concept="3TrEf2" id="7p2QZoUurbR" role="2OqNvi">
-                      <ref role="3Tt5mk" to="p6im:5PYs8dV0Cem" />
+                      <ref role="3Tt5mk" to="p6im:5PYs8dV0Cem" resolve="aggregateFunction" />
                     </node>
                   </node>
                 </node>
@@ -344,7 +344,7 @@
                   <node concept="2OqwBi" id="7p2QZoUure4" role="37vLTJ">
                     <node concept="2Sf5sV" id="7p2QZoUure5" role="2Oq$k0" />
                     <node concept="3TrEf2" id="7p2QZoUure6" role="2OqNvi">
-                      <ref role="3Tt5mk" to="p6im:5PYs8dV0Cem" />
+                      <ref role="3Tt5mk" to="p6im:5PYs8dV0Cem" resolve="aggregateFunction" />
                     </node>
                   </node>
                 </node>
@@ -368,7 +368,7 @@
                   <node concept="2OqwBi" id="7p2QZoUuriH" role="37vLTJ">
                     <node concept="2Sf5sV" id="7p2QZoUuriI" role="2Oq$k0" />
                     <node concept="3TrEf2" id="7p2QZoUuriJ" role="2OqNvi">
-                      <ref role="3Tt5mk" to="p6im:5PYs8dV0Cem" />
+                      <ref role="3Tt5mk" to="p6im:5PYs8dV0Cem" resolve="aggregateFunction" />
                     </node>
                   </node>
                 </node>
