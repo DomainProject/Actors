@@ -11,9 +11,12 @@ import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
   private ConceptPresentation props_AbstractBehavior;
   private ConceptPresentation props_ActorAction;
+  private ConceptPresentation props_ActorBox;
   private ConceptPresentation props_ActorCreation;
+  private ConceptPresentation props_ActorLink;
   private ConceptPresentation props_ActorReference;
   private ConceptPresentation props_ActorScript;
+  private ConceptPresentation props_ActorsGraph;
   private ConceptPresentation props_CreateActor;
   private ConceptPresentation props_CreateActorReference;
   private ConceptPresentation props_CreateActors;
@@ -55,12 +58,26 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ActorAction = cpb.create();
         }
         return props_ActorAction;
+      case LanguageConceptSwitch.ActorBox:
+        if (props_ActorBox == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57937L, 0x262cd812cfe57939L, "actor", "", "");
+          props_ActorBox = cpb.create();
+        }
+        return props_ActorBox;
       case LanguageConceptSwitch.ActorCreation:
         if (props_ActorCreation == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
           props_ActorCreation = cpb.create();
         }
         return props_ActorCreation;
+      case LanguageConceptSwitch.ActorLink:
+        if (props_ActorLink == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ActorLink");
+          props_ActorLink = cpb.create();
+        }
+        return props_ActorLink;
       case LanguageConceptSwitch.ActorReference:
         if (props_ActorReference == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -75,6 +92,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ActorScript = cpb.create();
         }
         return props_ActorScript;
+      case LanguageConceptSwitch.ActorsGraph:
+        if (props_ActorsGraph == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ActorsGraph");
+          props_ActorsGraph = cpb.create();
+        }
+        return props_ActorsGraph;
       case LanguageConceptSwitch.CreateActor:
         if (props_CreateActor == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

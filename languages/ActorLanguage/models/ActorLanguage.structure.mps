@@ -144,6 +144,12 @@
       <property role="20lbJX" value="fLJekj5/_0__n" />
       <ref role="20lvS9" node="1enjyq1lUQ7" resolve="ActorCreation" />
     </node>
+    <node concept="1TJgyj" id="2oGQ1bfTGMt" role="1TKVEi">
+      <property role="IQ2ns" value="2750811047725550749" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="topology" />
+      <ref role="20lvS9" node="2oGQ1bfTn$Q" resolve="ActorsGraph" />
+    </node>
     <node concept="PrWs8" id="3m_VcJMWAw4" role="PzmwI">
       <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
@@ -462,6 +468,10 @@
       <property role="3tVfz5" value="1411682935490806612" />
       <property role="TrG5h" value="RANDOM" />
     </node>
+    <node concept="25R33" id="2oGQ1bfXVEv" role="25R1y">
+      <property role="3tVfz5" value="2750811047726660255" />
+      <property role="TrG5h" value="TOPOLOGY" />
+    </node>
   </node>
   <node concept="1TIwiD" id="1enjyq1vbnm">
     <property role="EcuMT" value="1411682935492097494" />
@@ -535,6 +545,54 @@
     </node>
     <node concept="PrWs8" id="I$NcBvGoK" role="PzmwI">
       <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="2oGQ1bfTn$Q">
+    <property role="EcuMT" value="2750811047725463862" />
+    <property role="TrG5h" value="ActorsGraph" />
+    <property role="3GE5qa" value="topology" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="1TJgyj" id="2oGQ1bfTn_U" role="1TKVEi">
+      <property role="IQ2ns" value="2750811047725463930" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="actors" />
+      <property role="20lbJX" value="fLJekj5/_0__n" />
+      <ref role="20lvS9" node="2oGQ1bfTn$R" resolve="ActorBox" />
+    </node>
+    <node concept="1TJgyj" id="2oGQ1bfTn_W" role="1TKVEi">
+      <property role="IQ2ns" value="2750811047725463932" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="links" />
+      <property role="20lbJX" value="fLJekj5/_0__n" />
+      <ref role="20lvS9" node="2oGQ1bfTn$S" resolve="ActorLink" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="2oGQ1bfTn$R">
+    <property role="EcuMT" value="2750811047725463863" />
+    <property role="3GE5qa" value="topology" />
+    <property role="TrG5h" value="ActorBox" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="1TJgyj" id="2oGQ1bfTn$T" role="1TKVEi">
+      <property role="IQ2ns" value="2750811047725463865" />
+      <property role="20kJfa" value="actor" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="3m_VcJMWzd$" resolve="CreateActor" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="2oGQ1bfTn$S">
+    <property role="EcuMT" value="2750811047725463864" />
+    <property role="3GE5qa" value="topology" />
+    <property role="TrG5h" value="ActorLink" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="1TJgyj" id="2oGQ1bfTn_O" role="1TKVEi">
+      <property role="IQ2ns" value="2750811047725463924" />
+      <property role="20kJfa" value="actorFrom" />
+      <ref role="20lvS9" node="2oGQ1bfTn$R" resolve="ActorBox" />
+    </node>
+    <node concept="1TJgyj" id="2oGQ1bfTn_Q" role="1TKVEi">
+      <property role="IQ2ns" value="2750811047725463926" />
+      <property role="20kJfa" value="actorTo" />
+      <ref role="20lvS9" node="2oGQ1bfTn$R" resolve="ActorBox" />
     </node>
   </node>
 </model>
