@@ -31,6 +31,10 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new CreateBehavior_TextGen();
       case LanguageConceptSwitch.CreateMessage:
         return new CreateMessage_TextGen();
+      case LanguageConceptSwitch.GetActorFromReceptionist:
+        return new GetActorFromReceptionist_TextGen();
+      case LanguageConceptSwitch.Receptionist:
+        return new Receptionist_TextGen();
       case LanguageConceptSwitch.SelectBehavior:
         return new SelectBehavior_TextGen();
       case LanguageConceptSwitch.SendMessage:

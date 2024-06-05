@@ -5,89 +5,95 @@ package ActorLanguage.textGen;
 import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
-import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class ActorScript_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
-    Initialization.init(ctx);
+    Header.header(ctx);
+    tgs.newLine();
 
-    for (SNode item : SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a)) {
+    UtilityFunctions.functions(ctx);
+    tgs.newLine();
+
+    tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.receptionist$GJcH));
+
+    for (SNode item : SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.behaviors$VQhG)) {
       tgs.appendNode(item);
     }
-    tgs.newLine();
 
     tgs.append("int main() {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
     tgs.append("int num_threads = ");
-    tgs.append(String.valueOf(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a).size()));
+    tgs.append(String.valueOf(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{}).size()));
     tgs.append(";");
     tgs.newLine();
     tgs.indent();
     tgs.append("pthread_t threads[num_threads];");
     tgs.newLine();
     tgs.indent();
+    tgs.append("pthread_t rec;");
+    tgs.newLine();
+    tgs.indent();
     tgs.append("int i;");
     tgs.newLine();
-    tgs.indent();
-    tgs.append("int addresses[");
-    tgs.append(String.valueOf(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a).size()));
-    tgs.append("];");
     tgs.newLine();
-    for (SNode actor : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a))) {
+
+    tgs.indent();
+    tgs.append("/* TOPOLOGY INITIALIZATION */");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("topology map;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("init_topology(&map);");
+    tgs.newLine();
+    tgs.newLine();
+
+    for (SNode link : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), LINKS.links$3jtH))) {
+      tgs.indent();
+      tgs.append("add_to_topology(&map, \"");
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(link, LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.name$MnvL));
+      tgs.append("\", \"");
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(link, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.name$MnvL));
+      tgs.append("\");");
+      tgs.newLine();
     }
     tgs.newLine();
 
     tgs.indent();
-    tgs.append("pthread_mutex_init(&map_mutex, NULL);");
+    tgs.append("pthread_create(&rec, NULL, receptionist, (void *)&map);");
     tgs.newLine();
     tgs.newLine();
 
-    tgs.indent();
-    tgs.append("map_item *map = malloc(sizeof(map_item)*SIZE);");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("if (!map) {");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append("perror(\"malloc\");");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("exit(EXIT_FAILURE);");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("}");
-    tgs.newLine();
-    tgs.newLine();
-
-    tgs.indent();
-    tgs.append("for (int i = 0; i < SIZE; ++i) {");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append("pthread_mutex_init(&map[i].mutex, NULL);");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("}");
-    tgs.newLine();
-
-    for (SNode actor : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a))) {
+    for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{}))) {
+      tgs.indent();
+      tgs.append("create_actor(\"");
+      tgs.append(SPropertyOperations.getString(actor, PROPS.name$MnvL));
+      tgs.append("\", threads[");
+      tgs.append(String.valueOf(SNodeOperations.getIndexInParent(actor)));
+      tgs.append("], ");
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$QgnL), PROPS.name$MnvL));
+      tgs.append(");");
+      tgs.newLine();
     }
-
     tgs.newLine();
 
     tgs.indent();
-    tgs.append("for (int i = 0; i < num_threads; i++) {");
+    tgs.append("for (i = 0; i < num_threads; i++) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
@@ -99,17 +105,31 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.newLine();
 
+    tgs.append("pthread_join(rec, NULL);");
+
     tgs.indent();
-    tgs.append("free(map);");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("return 0;");
+    tgs.append("exit(EXIT_SUCCESS);");
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     tgs.append("}");
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink actors$EA0a = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x35a5eccbf2f23377L, "actors");
+    /*package*/ static final SContainmentLink receptionist$GJcH = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x5d890eb3ebff2495L, "receptionist");
+    /*package*/ static final SContainmentLink behaviors$VQhG = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x5d890eb3ebfeaec2L, "behaviors");
+    /*package*/ static final SReferenceLink actorFrom$3cFe = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57974L, "actorFrom");
+    /*package*/ static final SReferenceLink actor$8xF = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57937L, 0x262cd812cfe57939L, "actor");
+    /*package*/ static final SReferenceLink actorTo$3d9g = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57976L, "actorTo");
+    /*package*/ static final SContainmentLink topology$GORc = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x262cd812cfe6cc9dL, "topology");
+    /*package*/ static final SContainmentLink links$3jtH = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57936L, 0x262cd812cfe5797cL, "links");
+    /*package*/ static final SReferenceLink behavior$QgnL = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681516c72L, "behavior");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

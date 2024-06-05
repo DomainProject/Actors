@@ -294,7 +294,6 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/3865756215865914225");
     b.version(3);
-    b.property("tag", 0x2176abe574acf08eL).type(PrimitiveTypeId.STRING).origin("2411303652496830606").done();
     b.aggregate("payload", 0x9de89b125a71571L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681521590L).optional(false).ordered(true).multiple(false).origin("711157185105040753").done();
     b.aggregate("envelope", 0x2d5fc2c1e9650052L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e268151b855L).optional(true).ordered(true).multiple(false).origin("3269545992594456658").done();
     b.alias("create_message");

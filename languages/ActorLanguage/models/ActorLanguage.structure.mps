@@ -99,11 +99,6 @@
     <node concept="PrWs8" id="25QEYlOdAyc" role="PzmwI">
       <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
-    <node concept="1TJgyi" id="25QEYlOFf2e" role="1TKVEl">
-      <property role="IQ2nx" value="2411303652496830606" />
-      <property role="TrG5h" value="tag" />
-      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
-    </node>
     <node concept="1TJgyj" id="Buyr4_DLlL" role="1TKVEi">
       <property role="IQ2ns" value="711157185105040753" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />

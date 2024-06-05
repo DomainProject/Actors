@@ -99,8 +99,8 @@
     </language>
   </registry>
   <node concept="1M2fIO" id="14g3IsRiF_H">
-    <property role="3GE5qa" value="where.condition" />
-    <ref role="1M2myG" to="p6im:14g3IsRhKZN" resolve="Condition" />
+    <property role="3GE5qa" value="where.oldCondition" />
+    <ref role="1M2myG" to="p6im:14g3IsRhKZN" resolve="OldCondition" />
   </node>
   <node concept="1M2fIO" id="2sIU3umyTfy">
     <property role="3GE5qa" value="column" />

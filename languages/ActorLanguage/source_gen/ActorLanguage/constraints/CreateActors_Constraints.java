@@ -10,6 +10,11 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import ActorLanguage.behavior.CreateActors__BehaviorDescriptor;
 import jetbrains.mps.smodel.runtime.CheckingNodeContext;
 import jetbrains.mps.smodel.SNodePointer;
+import java.util.List;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
+import java.util.ArrayList;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.Map;
 import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.runtime.PropertyConstraintsDescriptor;
@@ -51,7 +56,7 @@ public class CreateActors_Constraints extends BaseConstraintsDescriptor {
   }
   public static class BaseName_Property extends BasePropertyConstraintsDescriptor {
     public BaseName_Property(ConstraintsDescriptor container) {
-      super(PROPS.baseName$$Y79, container, false, true, false);
+      super(PROPS.baseName$$Y79, container, false, true, true);
     }
     @Override
     public void setPropertyValue(SNode node, Object propertyValue) {
@@ -60,6 +65,24 @@ public class CreateActors_Constraints extends BaseConstraintsDescriptor {
     private static void staticSetPropertyValue(SNode node, String propertyValue) {
       SPropertyOperations.assign(node, PROPS.baseName$$Y79, propertyValue);
       CreateActors__BehaviorDescriptor.createActors_idI$NcBTsrE.invoke(node);
+    }
+    @Override
+    public boolean validateValue(SNode node, Object propertyValue, CheckingNodeContext checkingNodeContext) {
+      boolean result = staticValidateProperty(node, SPropertyOperations.castString(propertyValue));
+      if (!(result) && checkingNodeContext != null) {
+        checkingNodeContext.setBreakingNode(new SNodePointer("r:ae140228-36a4-4270-a859-e66d990ac219(ActorLanguage.constraints)", "6839590609874005035"));
+      }
+      return result;
+    }
+    private static boolean staticValidateProperty(SNode node, String propertyValue) {
+      List<SNode> thisNode = ListSequence.fromList(new ArrayList<SNode>());
+      ListSequence.fromList(thisNode).addElement(node);
+      for (SNode creation : ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(node, CONCEPTS.ActorScript$nz, false, false), CONCEPTS.CreateActors$rc, false, new SAbstractConcept[]{})).subtract(ListSequence.fromList(thisNode))) {
+        if (propertyValue.equals(SPropertyOperations.getString(creation, PROPS.baseName$$Y79))) {
+          return false;
+        }
+      }
+      return true;
     }
   }
   @Override
@@ -88,6 +111,7 @@ public class CreateActors_Constraints extends BaseConstraintsDescriptor {
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept CreateActors$rc = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, "ActorLanguage.structure.CreateActors");
+    /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
   }
 
   private static final class PROPS {

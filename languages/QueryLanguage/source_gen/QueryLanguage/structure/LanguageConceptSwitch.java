@@ -24,15 +24,18 @@ public final class LanguageConceptSwitch {
   public static final int InsertInto = 12;
   public static final int Max = 13;
   public static final int Min = 14;
-  public static final int OrderBy = 15;
-  public static final int Script = 16;
-  public static final int Select = 17;
-  public static final int Statement = 18;
-  public static final int Sum = 19;
-  public static final int TableReference = 20;
-  public static final int Update = 21;
-  public static final int Value = 22;
-  public static final int Where = 23;
+  public static final int MultipleCondition = 15;
+  public static final int OldCondition = 16;
+  public static final int OrderBy = 17;
+  public static final int Script = 18;
+  public static final int Select = 19;
+  public static final int SimpleCondition = 20;
+  public static final int Statement = 21;
+  public static final int Sum = 22;
+  public static final int TableReference = 23;
+  public static final int Update = 24;
+  public static final int Value = 25;
+  public static final int Where = 26;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L);
@@ -40,7 +43,7 @@ public final class LanguageConceptSwitch {
     builder.put(0x5d7e70837b028394L, Average);
     builder.put(0x11100ee737443b33L, Column);
     builder.put(0x11100ee7375157f4L, ColumnRef);
-    builder.put(0x11100ee737470ff3L, Condition);
+    builder.put(0x5eeb1b6c0699ea17L, Condition);
     builder.put(0x23d860ebbb86c06cL, ConditionSet);
     builder.put(0x23d860ebbb7c2695L, ConditionsSequence);
     builder.put(0x5d7e70837b028392L, Count);
@@ -51,9 +54,12 @@ public final class LanguageConceptSwitch {
     builder.put(0x625a3ba00f1c72c8L, InsertInto);
     builder.put(0x5d7e70837b028390L, Max);
     builder.put(0x5d7e70837b02838dL, Min);
+    builder.put(0x5eeb1b6c0699ea1bL, MultipleCondition);
+    builder.put(0x11100ee737470ff3L, OldCondition);
     builder.put(0x2b087ec3aa61e251L, OrderBy);
     builder.put(0x11100ee737443bcdL, Script);
     builder.put(0x619ceb902420e379L, Select);
+    builder.put(0x5eeb1b6c0699ea18L, SimpleCondition);
     builder.put(0x11100ee737443b30L, Statement);
     builder.put(0x5d7e70837b028393L, Sum);
     builder.put(0x207f13a8b545f6deL, TableReference);

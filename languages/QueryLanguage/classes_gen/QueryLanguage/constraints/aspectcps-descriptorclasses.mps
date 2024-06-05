@@ -916,100 +916,88 @@
     </node>
   </node>
   <node concept="312cEu" id="2W">
-    <property role="3GE5qa" value="where.condition" />
-    <property role="TrG5h" value="Condition_Constraints" />
-    <uo k="s:originTrace" v="n:1229499084500023661" />
-    <node concept="3Tm1VV" id="2X" role="1B3o_S">
-      <uo k="s:originTrace" v="n:1229499084500023661" />
-    </node>
-    <node concept="3uibUv" id="2Y" role="1zkMxy">
-      <ref role="3uigEE" to="79pl:~BaseConstraintsDescriptor" resolve="BaseConstraintsDescriptor" />
-      <uo k="s:originTrace" v="n:1229499084500023661" />
-    </node>
-    <node concept="3clFbW" id="2Z" role="jymVt">
-      <uo k="s:originTrace" v="n:1229499084500023661" />
-      <node concept="3cqZAl" id="31" role="3clF45">
-        <uo k="s:originTrace" v="n:1229499084500023661" />
-      </node>
-      <node concept="3clFbS" id="32" role="3clF47">
-        <uo k="s:originTrace" v="n:1229499084500023661" />
-        <node concept="XkiVB" id="34" role="3cqZAp">
-          <ref role="37wK5l" to="79pl:~BaseConstraintsDescriptor.&lt;init&gt;(org.jetbrains.mps.openapi.language.SAbstractConcept)" resolve="BaseConstraintsDescriptor" />
-          <uo k="s:originTrace" v="n:1229499084500023661" />
-          <node concept="1BaE9c" id="35" role="37wK5m">
-            <property role="1ouuDV" value="CONCEPTS" />
-            <property role="1BaxDp" value="Condition$1A" />
-            <uo k="s:originTrace" v="n:1229499084500023661" />
-            <node concept="2YIFZM" id="36" role="1Bazha">
-              <ref role="1Pybhc" to="2k9e:~MetaAdapterFactory" resolve="MetaAdapterFactory" />
-              <ref role="37wK5l" to="2k9e:~MetaAdapterFactory.getConcept(long,long,long,java.lang.String)" resolve="getConcept" />
-              <uo k="s:originTrace" v="n:1229499084500023661" />
-              <node concept="1adDum" id="37" role="37wK5m">
-                <property role="1adDun" value="0x26d1395b1ee643adL" />
-                <uo k="s:originTrace" v="n:1229499084500023661" />
-              </node>
-              <node concept="1adDum" id="38" role="37wK5m">
-                <property role="1adDun" value="0xb522c0cdd699ded3L" />
-                <uo k="s:originTrace" v="n:1229499084500023661" />
-              </node>
-              <node concept="1adDum" id="39" role="37wK5m">
-                <property role="1adDun" value="0x11100ee737470ff3L" />
-                <uo k="s:originTrace" v="n:1229499084500023661" />
-              </node>
-              <node concept="Xl_RD" id="3a" role="37wK5m">
-                <property role="Xl_RC" value="QueryLanguage.structure.Condition" />
-                <uo k="s:originTrace" v="n:1229499084500023661" />
-              </node>
-            </node>
-          </node>
-        </node>
-      </node>
-      <node concept="3Tm1VV" id="33" role="1B3o_S">
-        <uo k="s:originTrace" v="n:1229499084500023661" />
-      </node>
-    </node>
-    <node concept="2tJIrI" id="30" role="jymVt">
-      <uo k="s:originTrace" v="n:1229499084500023661" />
-    </node>
-  </node>
-  <node concept="312cEu" id="3b">
     <property role="TrG5h" value="ConstraintsAspectDescriptor" />
     <property role="3GE5qa" value="Constraints" />
-    <node concept="3uibUv" id="3c" role="1zkMxy">
+    <node concept="3uibUv" id="2X" role="1zkMxy">
       <ref role="3uigEE" to="ze1j:~BaseConstraintsAspectDescriptor" resolve="BaseConstraintsAspectDescriptor" />
     </node>
-    <node concept="3Tm1VV" id="3d" role="1B3o_S" />
-    <node concept="3clFbW" id="3e" role="jymVt">
-      <node concept="3cqZAl" id="3h" role="3clF45" />
-      <node concept="3Tm1VV" id="3i" role="1B3o_S" />
-      <node concept="3clFbS" id="3j" role="3clF47" />
+    <node concept="3Tm1VV" id="2Y" role="1B3o_S" />
+    <node concept="3clFbW" id="2Z" role="jymVt">
+      <node concept="3cqZAl" id="32" role="3clF45" />
+      <node concept="3Tm1VV" id="33" role="1B3o_S" />
+      <node concept="3clFbS" id="34" role="3clF47" />
     </node>
-    <node concept="2tJIrI" id="3f" role="jymVt" />
-    <node concept="3clFb_" id="3g" role="jymVt">
+    <node concept="2tJIrI" id="30" role="jymVt" />
+    <node concept="3clFb_" id="31" role="jymVt">
       <property role="1EzhhJ" value="false" />
       <property role="TrG5h" value="getConstraints" />
       <property role="DiZV1" value="false" />
-      <node concept="2AHcQZ" id="3k" role="2AJF6D">
+      <node concept="2AHcQZ" id="35" role="2AJF6D">
         <ref role="2AI5Lk" to="wyt6:~Override" resolve="Override" />
       </node>
-      <node concept="3Tm1VV" id="3l" role="1B3o_S" />
-      <node concept="3uibUv" id="3m" role="3clF45">
+      <node concept="3Tm1VV" id="36" role="1B3o_S" />
+      <node concept="3uibUv" id="37" role="3clF45">
         <ref role="3uigEE" to="ze1j:~ConstraintsDescriptor" resolve="ConstraintsDescriptor" />
       </node>
-      <node concept="37vLTG" id="3n" role="3clF46">
+      <node concept="37vLTG" id="38" role="3clF46">
         <property role="TrG5h" value="concept" />
-        <node concept="3bZ5Sz" id="3p" role="1tU5fm" />
+        <node concept="3bZ5Sz" id="3a" role="1tU5fm" />
       </node>
-      <node concept="3clFbS" id="3o" role="3clF47">
-        <node concept="1_3QMa" id="3q" role="3cqZAp">
-          <node concept="37vLTw" id="3s" role="1_3QMn">
-            <ref role="3cqZAo" node="3n" resolve="concept" />
+      <node concept="3clFbS" id="39" role="3clF47">
+        <node concept="1_3QMa" id="3b" role="3cqZAp">
+          <node concept="37vLTw" id="3d" role="1_3QMn">
+            <ref role="3cqZAo" node="38" resolve="concept" />
           </node>
-          <node concept="1pnPoh" id="3t" role="1_3QMm">
+          <node concept="1pnPoh" id="3e" role="1_3QMm">
+            <node concept="3clFbS" id="3j" role="1pnPq1">
+              <node concept="3cpWs6" id="3l" role="3cqZAp">
+                <node concept="1nCR9W" id="3m" role="3cqZAk">
+                  <property role="1nD$Q0" value="QueryLanguage.constraints.OldCondition_Constraints" />
+                  <node concept="3uibUv" id="3n" role="2lIhxL">
+                    <ref role="3uigEE" to="ze1j:~ConstraintsDescriptor" resolve="ConstraintsDescriptor" />
+                  </node>
+                </node>
+              </node>
+            </node>
+            <node concept="3gn64h" id="3k" role="1pnPq6">
+              <ref role="3gnhBz" to="p6im:14g3IsRhKZN" resolve="OldCondition" />
+            </node>
+          </node>
+          <node concept="1pnPoh" id="3f" role="1_3QMm">
+            <node concept="3clFbS" id="3o" role="1pnPq1">
+              <node concept="3cpWs6" id="3q" role="3cqZAp">
+                <node concept="1nCR9W" id="3r" role="3cqZAk">
+                  <property role="1nD$Q0" value="QueryLanguage.constraints.ColumnRef_Constraints" />
+                  <node concept="3uibUv" id="3s" role="2lIhxL">
+                    <ref role="3uigEE" to="ze1j:~ConstraintsDescriptor" resolve="ConstraintsDescriptor" />
+                  </node>
+                </node>
+              </node>
+            </node>
+            <node concept="3gn64h" id="3p" role="1pnPq6">
+              <ref role="3gnhBz" to="p6im:14g3IsRklvO" resolve="ColumnRef" />
+            </node>
+          </node>
+          <node concept="1pnPoh" id="3g" role="1_3QMm">
+            <node concept="3clFbS" id="3t" role="1pnPq1">
+              <node concept="3cpWs6" id="3v" role="3cqZAp">
+                <node concept="1nCR9W" id="3w" role="3cqZAk">
+                  <property role="1nD$Q0" value="QueryLanguage.constraints.OrderBy_Constraints" />
+                  <node concept="3uibUv" id="3x" role="2lIhxL">
+                    <ref role="3uigEE" to="ze1j:~ConstraintsDescriptor" resolve="ConstraintsDescriptor" />
+                  </node>
+                </node>
+              </node>
+            </node>
+            <node concept="3gn64h" id="3u" role="1pnPq6">
+              <ref role="3gnhBz" to="p6im:2G8vGeEou9h" resolve="OrderBy" />
+            </node>
+          </node>
+          <node concept="1pnPoh" id="3h" role="1_3QMm">
             <node concept="3clFbS" id="3y" role="1pnPq1">
               <node concept="3cpWs6" id="3$" role="3cqZAp">
                 <node concept="1nCR9W" id="3_" role="3cqZAk">
-                  <property role="1nD$Q0" value="QueryLanguage.constraints.Condition_Constraints" />
+                  <property role="1nD$Q0" value="QueryLanguage.constraints.Column_Constraints" />
                   <node concept="3uibUv" id="3A" role="2lIhxL">
                     <ref role="3uigEE" to="ze1j:~ConstraintsDescriptor" resolve="ConstraintsDescriptor" />
                   </node>
@@ -1017,62 +1005,17 @@
               </node>
             </node>
             <node concept="3gn64h" id="3z" role="1pnPq6">
-              <ref role="3gnhBz" to="p6im:14g3IsRhKZN" resolve="Condition" />
-            </node>
-          </node>
-          <node concept="1pnPoh" id="3u" role="1_3QMm">
-            <node concept="3clFbS" id="3B" role="1pnPq1">
-              <node concept="3cpWs6" id="3D" role="3cqZAp">
-                <node concept="1nCR9W" id="3E" role="3cqZAk">
-                  <property role="1nD$Q0" value="QueryLanguage.constraints.ColumnRef_Constraints" />
-                  <node concept="3uibUv" id="3F" role="2lIhxL">
-                    <ref role="3uigEE" to="ze1j:~ConstraintsDescriptor" resolve="ConstraintsDescriptor" />
-                  </node>
-                </node>
-              </node>
-            </node>
-            <node concept="3gn64h" id="3C" role="1pnPq6">
-              <ref role="3gnhBz" to="p6im:14g3IsRklvO" resolve="ColumnRef" />
-            </node>
-          </node>
-          <node concept="1pnPoh" id="3v" role="1_3QMm">
-            <node concept="3clFbS" id="3G" role="1pnPq1">
-              <node concept="3cpWs6" id="3I" role="3cqZAp">
-                <node concept="1nCR9W" id="3J" role="3cqZAk">
-                  <property role="1nD$Q0" value="QueryLanguage.constraints.OrderBy_Constraints" />
-                  <node concept="3uibUv" id="3K" role="2lIhxL">
-                    <ref role="3uigEE" to="ze1j:~ConstraintsDescriptor" resolve="ConstraintsDescriptor" />
-                  </node>
-                </node>
-              </node>
-            </node>
-            <node concept="3gn64h" id="3H" role="1pnPq6">
-              <ref role="3gnhBz" to="p6im:2G8vGeEou9h" resolve="OrderBy" />
-            </node>
-          </node>
-          <node concept="1pnPoh" id="3w" role="1_3QMm">
-            <node concept="3clFbS" id="3L" role="1pnPq1">
-              <node concept="3cpWs6" id="3N" role="3cqZAp">
-                <node concept="1nCR9W" id="3O" role="3cqZAk">
-                  <property role="1nD$Q0" value="QueryLanguage.constraints.Column_Constraints" />
-                  <node concept="3uibUv" id="3P" role="2lIhxL">
-                    <ref role="3uigEE" to="ze1j:~ConstraintsDescriptor" resolve="ConstraintsDescriptor" />
-                  </node>
-                </node>
-              </node>
-            </node>
-            <node concept="3gn64h" id="3M" role="1pnPq6">
               <ref role="3gnhBz" to="p6im:14g3IsRh3GN" resolve="Column" />
             </node>
           </node>
-          <node concept="3clFbS" id="3x" role="1prKM_" />
+          <node concept="3clFbS" id="3i" role="1prKM_" />
         </node>
-        <node concept="3cpWs6" id="3r" role="3cqZAp">
-          <node concept="2ShNRf" id="3Q" role="3cqZAk">
-            <node concept="1pGfFk" id="3R" role="2ShVmc">
+        <node concept="3cpWs6" id="3c" role="3cqZAp">
+          <node concept="2ShNRf" id="3B" role="3cqZAk">
+            <node concept="1pGfFk" id="3C" role="2ShVmc">
               <ref role="37wK5l" to="79pl:~BaseConstraintsDescriptor.&lt;init&gt;(org.jetbrains.mps.openapi.language.SAbstractConcept)" resolve="BaseConstraintsDescriptor" />
-              <node concept="37vLTw" id="3S" role="37wK5m">
-                <ref role="3cqZAo" node="3n" resolve="concept" />
+              <node concept="37vLTw" id="3D" role="37wK5m">
+                <ref role="3cqZAo" node="38" resolve="concept" />
               </node>
             </node>
           </node>
@@ -1080,66 +1023,123 @@
       </node>
     </node>
   </node>
-  <node concept="39dXUE" id="3T">
-    <node concept="39e2AJ" id="3U" role="39e2AI">
+  <node concept="39dXUE" id="3E">
+    <node concept="39e2AJ" id="3F" role="39e2AI">
       <property role="39e3Y2" value="constraintClass" />
-      <node concept="39e2AG" id="3W" role="39e3Y0">
+      <node concept="39e2AG" id="3H" role="39e3Y0">
         <ref role="39e2AK" to="bkxw:2sIU3umyTfy" resolve="ColumnRef_Constraints" />
-        <node concept="385nmt" id="40" role="385vvn">
+        <node concept="385nmt" id="3L" role="385vvn">
           <property role="385vuF" value="ColumnRef_Constraints" />
-          <node concept="3u3nmq" id="42" role="385v07">
+          <node concept="3u3nmq" id="3N" role="385v07">
             <property role="3u3nmv" value="2823449341854454754" />
           </node>
         </node>
-        <node concept="39e2AT" id="41" role="39e2AY">
+        <node concept="39e2AT" id="3M" role="39e2AY">
           <ref role="39e2AS" node="0" resolve="ColumnRef_Constraints" />
         </node>
       </node>
-      <node concept="39e2AG" id="3X" role="39e3Y0">
+      <node concept="39e2AG" id="3I" role="39e3Y0">
         <ref role="39e2AK" to="bkxw:21Z4UyPqhVY" resolve="Column_Constraints" />
-        <node concept="385nmt" id="43" role="385vvn">
+        <node concept="385nmt" id="3O" role="385vvn">
           <property role="385vuF" value="Column_Constraints" />
-          <node concept="3u3nmq" id="45" role="385v07">
+          <node concept="3u3nmq" id="3Q" role="385v07">
             <property role="3u3nmv" value="2341611946574946046" />
           </node>
         </node>
-        <node concept="39e2AT" id="44" role="39e2AY">
+        <node concept="39e2AT" id="3P" role="39e2AY">
           <ref role="39e2AS" node="17" resolve="Column_Constraints" />
         </node>
       </node>
-      <node concept="39e2AG" id="3Y" role="39e3Y0">
-        <ref role="39e2AK" to="bkxw:14g3IsRiF_H" resolve="Condition_Constraints" />
-        <node concept="385nmt" id="46" role="385vvn">
-          <property role="385vuF" value="Condition_Constraints" />
-          <node concept="3u3nmq" id="48" role="385v07">
+      <node concept="39e2AG" id="3J" role="39e3Y0">
+        <ref role="39e2AK" to="bkxw:14g3IsRiF_H" resolve="OldCondition_Constraints" />
+        <node concept="385nmt" id="3R" role="385vvn">
+          <property role="385vuF" value="OldCondition_Constraints" />
+          <node concept="3u3nmq" id="3T" role="385v07">
             <property role="3u3nmv" value="1229499084500023661" />
           </node>
         </node>
-        <node concept="39e2AT" id="47" role="39e2AY">
-          <ref role="39e2AS" node="2W" resolve="Condition_Constraints" />
+        <node concept="39e2AT" id="3S" role="39e2AY">
+          <ref role="39e2AS" node="3Z" resolve="OldCondition_Constraints" />
         </node>
       </node>
-      <node concept="39e2AG" id="3Z" role="39e3Y0">
+      <node concept="39e2AG" id="3K" role="39e3Y0">
         <ref role="39e2AK" to="bkxw:2G8vGeEou9W" resolve="OrderBy_Constraints" />
-        <node concept="385nmt" id="49" role="385vvn">
+        <node concept="385nmt" id="3U" role="385vvn">
           <property role="385vuF" value="OrderBy_Constraints" />
-          <node concept="3u3nmq" id="4b" role="385v07">
+          <node concept="3u3nmq" id="3W" role="385v07">
             <property role="3u3nmv" value="3100867722286850684" />
           </node>
         </node>
-        <node concept="39e2AT" id="4a" role="39e2AY">
+        <node concept="39e2AT" id="3V" role="39e2AY">
           <ref role="39e2AS" node="4e" resolve="OrderBy_Constraints" />
         </node>
       </node>
     </node>
-    <node concept="39e2AJ" id="3V" role="39e2AI">
+    <node concept="39e2AJ" id="3G" role="39e2AI">
       <property role="39e3Y2" value="aspectDescriptorClass" />
-      <node concept="39e2AG" id="4c" role="39e3Y0">
+      <node concept="39e2AG" id="3X" role="39e3Y0">
         <property role="2mV_xN" value="true" />
-        <node concept="39e2AT" id="4d" role="39e2AY">
-          <ref role="39e2AS" node="3b" resolve="ConstraintsAspectDescriptor" />
+        <node concept="39e2AT" id="3Y" role="39e2AY">
+          <ref role="39e2AS" node="2W" resolve="ConstraintsAspectDescriptor" />
         </node>
       </node>
+    </node>
+  </node>
+  <node concept="312cEu" id="3Z">
+    <property role="3GE5qa" value="where.oldCondition" />
+    <property role="TrG5h" value="OldCondition_Constraints" />
+    <uo k="s:originTrace" v="n:1229499084500023661" />
+    <node concept="3Tm1VV" id="40" role="1B3o_S">
+      <uo k="s:originTrace" v="n:1229499084500023661" />
+    </node>
+    <node concept="3uibUv" id="41" role="1zkMxy">
+      <ref role="3uigEE" to="79pl:~BaseConstraintsDescriptor" resolve="BaseConstraintsDescriptor" />
+      <uo k="s:originTrace" v="n:1229499084500023661" />
+    </node>
+    <node concept="3clFbW" id="42" role="jymVt">
+      <uo k="s:originTrace" v="n:1229499084500023661" />
+      <node concept="3cqZAl" id="44" role="3clF45">
+        <uo k="s:originTrace" v="n:1229499084500023661" />
+      </node>
+      <node concept="3clFbS" id="45" role="3clF47">
+        <uo k="s:originTrace" v="n:1229499084500023661" />
+        <node concept="XkiVB" id="47" role="3cqZAp">
+          <ref role="37wK5l" to="79pl:~BaseConstraintsDescriptor.&lt;init&gt;(org.jetbrains.mps.openapi.language.SAbstractConcept)" resolve="BaseConstraintsDescriptor" />
+          <uo k="s:originTrace" v="n:1229499084500023661" />
+          <node concept="1BaE9c" id="48" role="37wK5m">
+            <property role="1ouuDV" value="CONCEPTS" />
+            <property role="1BaxDp" value="OldCondition$1A" />
+            <uo k="s:originTrace" v="n:1229499084500023661" />
+            <node concept="2YIFZM" id="49" role="1Bazha">
+              <ref role="1Pybhc" to="2k9e:~MetaAdapterFactory" resolve="MetaAdapterFactory" />
+              <ref role="37wK5l" to="2k9e:~MetaAdapterFactory.getConcept(long,long,long,java.lang.String)" resolve="getConcept" />
+              <uo k="s:originTrace" v="n:1229499084500023661" />
+              <node concept="1adDum" id="4a" role="37wK5m">
+                <property role="1adDun" value="0x26d1395b1ee643adL" />
+                <uo k="s:originTrace" v="n:1229499084500023661" />
+              </node>
+              <node concept="1adDum" id="4b" role="37wK5m">
+                <property role="1adDun" value="0xb522c0cdd699ded3L" />
+                <uo k="s:originTrace" v="n:1229499084500023661" />
+              </node>
+              <node concept="1adDum" id="4c" role="37wK5m">
+                <property role="1adDun" value="0x11100ee737470ff3L" />
+                <uo k="s:originTrace" v="n:1229499084500023661" />
+              </node>
+              <node concept="Xl_RD" id="4d" role="37wK5m">
+                <property role="Xl_RC" value="QueryLanguage.structure.OldCondition" />
+                <uo k="s:originTrace" v="n:1229499084500023661" />
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+      <node concept="3Tm1VV" id="46" role="1B3o_S">
+        <uo k="s:originTrace" v="n:1229499084500023661" />
+      </node>
+    </node>
+    <node concept="2tJIrI" id="43" role="jymVt">
+      <uo k="s:originTrace" v="n:1229499084500023661" />
     </node>
   </node>
   <node concept="312cEu" id="4e">

@@ -24,9 +24,12 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_InsertInto;
   private ConceptPresentation props_Max;
   private ConceptPresentation props_Min;
+  private ConceptPresentation props_MultipleCondition;
+  private ConceptPresentation props_OldCondition;
   private ConceptPresentation props_OrderBy;
   private ConceptPresentation props_Script;
   private ConceptPresentation props_Select;
+  private ConceptPresentation props_SimpleCondition;
   private ConceptPresentation props_Statement;
   private ConceptPresentation props_Sum;
   private ConceptPresentation props_TableReference;
@@ -69,7 +72,6 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
       case LanguageConceptSwitch.Condition:
         if (props_Condition == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.rawPresentation("Condition");
           props_Condition = cpb.create();
         }
         return props_Condition;
@@ -142,6 +144,20 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Min = cpb.create();
         }
         return props_Min;
+      case LanguageConceptSwitch.MultipleCondition:
+        if (props_MultipleCondition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("MultipleCondition");
+          props_MultipleCondition = cpb.create();
+        }
+        return props_MultipleCondition;
+      case LanguageConceptSwitch.OldCondition:
+        if (props_OldCondition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("OldCondition");
+          props_OldCondition = cpb.create();
+        }
+        return props_OldCondition;
       case LanguageConceptSwitch.OrderBy:
         if (props_OrderBy == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -163,6 +179,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Select = cpb.create();
         }
         return props_Select;
+      case LanguageConceptSwitch.SimpleCondition:
+        if (props_SimpleCondition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("SimpleCondition");
+          props_SimpleCondition = cpb.create();
+        }
+        return props_SimpleCondition;
       case LanguageConceptSwitch.Statement:
         if (props_Statement == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

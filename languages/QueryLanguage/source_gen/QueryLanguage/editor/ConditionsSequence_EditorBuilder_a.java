@@ -99,7 +99,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
       return LINKS.conditions$D5xP;
     }
     public SAbstractConcept getChildSConcept() {
-      return CONCEPTS.Condition$1A;
+      return CONCEPTS.OldCondition$1A;
     }
 
     public EditorCell createNodeCell(SNode elementNode) {
@@ -185,7 +185,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
   }
 
   private static final class CONCEPTS {
-    /*package*/ static final SConcept Condition$1A = MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737470ff3L, "QueryLanguage.structure.Condition");
+    /*package*/ static final SConcept OldCondition$1A = MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737470ff3L, "QueryLanguage.structure.OldCondition");
     /*package*/ static final SConcept PropertyAttribute$Gb = MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da56L, "jetbrains.mps.lang.core.structure.PropertyAttribute");
   }
 

@@ -465,14 +465,14 @@
         </node>
       </node>
       <node concept="3F1sOY" id="2fooeIVvqIF" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:14g3IsRiyeO" resolve="conditions" />
+        <ref role="1NtTu8" to="p6im:14g3IsRiyeO" resolve="condition" />
       </node>
       <node concept="l2Vlx" id="14g3IsRhhts" role="2iSdaV" />
     </node>
   </node>
   <node concept="24kQdi" id="14g3IsRhL1d">
-    <property role="3GE5qa" value="where.condition" />
-    <ref role="1XX52x" to="p6im:14g3IsRhKZN" resolve="Condition" />
+    <property role="3GE5qa" value="where.oldCondition" />
+    <ref role="1XX52x" to="p6im:14g3IsRhKZN" resolve="OldCondition" />
     <node concept="3EZMnI" id="14g3IsRhL1f" role="2wV5jI">
       <node concept="3F1sOY" id="21Z4UyPKM3k" role="3EZMnx">
         <ref role="1NtTu8" to="p6im:21Z4UyPKLDz" resolve="column" />
@@ -867,7 +867,7 @@
     </node>
   </node>
   <node concept="24kQdi" id="2fooeIVv2qV">
-    <property role="3GE5qa" value="where.condition" />
+    <property role="3GE5qa" value="where.oldCondition" />
     <ref role="1XX52x" to="p6im:2fooeIVv2ql" resolve="ConditionsSequence" />
     <node concept="3EZMnI" id="2fooeIVv2qX" role="2wV5jI">
       <node concept="3F0ifn" id="2fooeIVxG2i" role="3EZMnx">
@@ -892,7 +892,7 @@
     </node>
   </node>
   <node concept="24kQdi" id="2fooeIVxG1J">
-    <property role="3GE5qa" value="where.condition" />
+    <property role="3GE5qa" value="where.oldCondition" />
     <ref role="1XX52x" to="p6im:2fooeIVxG1G" resolve="ConditionSet" />
     <node concept="3EZMnI" id="2fooeIVy525" role="2wV5jI">
       <node concept="3F2HdR" id="2fooeIVy52c" role="3EZMnx">
@@ -1159,6 +1159,53 @@
           </node>
         </node>
       </node>
+    </node>
+  </node>
+  <node concept="24kQdi" id="5VF6QK6AuCL">
+    <property role="3GE5qa" value="where.condition" />
+    <ref role="1XX52x" to="p6im:5VF6QK6AuCo" resolve="SimpleCondition" />
+    <node concept="3EZMnI" id="5VF6QK6AuCN" role="2wV5jI">
+      <node concept="3F1sOY" id="5VF6QK6AuCO" role="3EZMnx">
+        <ref role="1NtTu8" to="p6im:5VF6QK6AuCF" />
+      </node>
+      <node concept="3F0A7n" id="5VF6QK6AuCP" role="3EZMnx">
+        <ref role="1NtTu8" to="p6im:5VF6QK6AuC$" resolve="operator" />
+      </node>
+      <node concept="3F1sOY" id="5VF6QK6AuCQ" role="3EZMnx">
+        <ref role="1NtTu8" to="p6im:5VF6QK6AuCA" />
+      </node>
+      <node concept="l2Vlx" id="5VF6QK6AuCT" role="2iSdaV" />
+    </node>
+  </node>
+  <node concept="24kQdi" id="5VF6QK6AuD4">
+    <property role="3GE5qa" value="where.condition" />
+    <ref role="1XX52x" to="p6im:5VF6QK6AuCr" resolve="MultipleCondition" />
+    <node concept="3EZMnI" id="5VF6QK6AuD6" role="2wV5jI">
+      <node concept="3F0ifn" id="5VF6QK6C0xV" role="3EZMnx">
+        <property role="3F0ifm" value="(" />
+      </node>
+      <node concept="3F1sOY" id="5VF6QK6AuDy" role="3EZMnx">
+        <ref role="1NtTu8" to="p6im:5VF6QK6AuDp" />
+      </node>
+      <node concept="3F0ifn" id="5VF6QK6C0y9" role="3EZMnx">
+        <property role="3F0ifm" value=")" />
+      </node>
+      <node concept="3F0A7n" id="5VF6QK6AuDG" role="3EZMnx">
+        <ref role="1NtTu8" to="p6im:5VF6QK6AuCw" resolve="operator" />
+        <node concept="VechU" id="5VF6QK6AuDY" role="3F10Kt">
+          <property role="Vb096" value="g1_qVrt/darkMagenta" />
+        </node>
+      </node>
+      <node concept="3F0ifn" id="5VF6QK6C0yp" role="3EZMnx">
+        <property role="3F0ifm" value="(" />
+      </node>
+      <node concept="3F1sOY" id="5VF6QK6AuDT" role="3EZMnx">
+        <ref role="1NtTu8" to="p6im:5VF6QK6AuDd" />
+      </node>
+      <node concept="3F0ifn" id="5VF6QK6C0yF" role="3EZMnx">
+        <property role="3F0ifm" value=")" />
+      </node>
+      <node concept="l2Vlx" id="5VF6QK6AuD9" role="2iSdaV" />
     </node>
   </node>
 </model>

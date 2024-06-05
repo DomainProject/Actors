@@ -23,7 +23,7 @@ public class ConstraintsAspectDescriptor extends BaseConstraintsAspectDescriptor
       case 1:
         return new ColumnRef_Constraints();
       case 2:
-        return new Condition_Constraints();
+        return new OldCondition_Constraints();
       case 3:
         return new OrderBy_Constraints();
       default:

@@ -7,8 +7,8 @@ import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
 
-public class Condition_Editor extends DefaultNodeEditor {
+public class MultipleCondition_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return new Condition_EditorBuilder_a(editorContext, node).createCell();
+    return new MultipleCondition_EditorBuilder_a(editorContext, node).createCell();
   }
 }

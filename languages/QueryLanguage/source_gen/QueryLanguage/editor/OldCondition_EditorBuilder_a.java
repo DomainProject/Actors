@@ -36,11 +36,11 @@ import jetbrains.mps.nodeEditor.MPSColors;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SConcept;
 
-/*package*/ class Condition_EditorBuilder_a extends AbstractEditorBuilder {
+/*package*/ class OldCondition_EditorBuilder_a extends AbstractEditorBuilder {
   @NotNull
   private SNode myNode;
 
-  public Condition_EditorBuilder_a(@NotNull EditorContext context, @NotNull SNode node) {
+  public OldCondition_EditorBuilder_a(@NotNull EditorContext context, @NotNull SNode node) {
     super(context);
     myNode = node;
   }
@@ -57,7 +57,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
 
   private EditorCell createCollection_0() {
     EditorCell_Collection editorCell = new EditorCell_Collection(getEditorContext(), myNode, new CellLayout_Indent());
-    editorCell.setCellId("Collection_2lgv54_a");
+    editorCell.setCellId("Collection_ypjulo_a");
     editorCell.setBig(true);
     setCellContext(editorCell);
     editorCell.addEditorCell(createRefNode_0());
@@ -67,14 +67,14 @@ import org.jetbrains.mps.openapi.language.SConcept;
     return editorCell;
   }
   private EditorCell createRefNode_0() {
-    SingleRoleCellProvider provider = new columnSingleRoleHandler_2lgv54_a0(myNode, LINKS.column$yYBf, getEditorContext());
+    SingleRoleCellProvider provider = new columnSingleRoleHandler_ypjulo_a0(myNode, LINKS.column$yYBf, getEditorContext());
     return provider.createCell();
   }
-  private static class columnSingleRoleHandler_2lgv54_a0 extends SingleRoleCellProvider {
+  private static class columnSingleRoleHandler_ypjulo_a0 extends SingleRoleCellProvider {
     @NotNull
     private SNode myNode;
 
-    public columnSingleRoleHandler_2lgv54_a0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+    public columnSingleRoleHandler_ypjulo_a0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
       super(containmentLink, context);
       myNode = ownerNode;
     }
@@ -143,14 +143,14 @@ import org.jetbrains.mps.openapi.language.SConcept;
     }
   }
   private EditorCell createRefNode_1() {
-    SingleRoleCellProvider provider = new valueSingleRoleHandler_2lgv54_c0(myNode, LINKS.value$AQJX, getEditorContext());
+    SingleRoleCellProvider provider = new valueSingleRoleHandler_ypjulo_c0(myNode, LINKS.value$AQJX, getEditorContext());
     return provider.createCell();
   }
-  private static class valueSingleRoleHandler_2lgv54_c0 extends SingleRoleCellProvider {
+  private static class valueSingleRoleHandler_ypjulo_c0 extends SingleRoleCellProvider {
     @NotNull
     private SNode myNode;
 
-    public valueSingleRoleHandler_2lgv54_c0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+    public valueSingleRoleHandler_ypjulo_c0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
       super(containmentLink, context);
       myNode = ownerNode;
     }
