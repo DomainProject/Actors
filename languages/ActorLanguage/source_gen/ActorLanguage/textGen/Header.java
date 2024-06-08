@@ -62,7 +62,7 @@ public abstract class Header {
     tgs.append("envelope *envelope;");
     tgs.newLine();
     tgs.indent();
-    tgs.append("payload *payload");
+    tgs.append("payload *payload;");
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     tgs.append("} message;");
@@ -118,18 +118,33 @@ public abstract class Header {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("map_entry *entries");
+    tgs.append("map_entry *entries;");
     tgs.newLine();
     tgs.indent();
     tgs.append("size_t size;");
     tgs.newLine();
     tgs.indent();
-    tgs.append("size_t capacity");
+    tgs.append("size_t capacity;");
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     tgs.append("} topology;");
     tgs.newLine();
     tgs.newLine();
+
+    tgs.append("typedef struct {");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append("char **strings;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("size_t size;");
+    tgs.newLine();
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.append("} strings_array;");
+    tgs.newLine();
+    tgs.newLine();
+
 
   }
 }

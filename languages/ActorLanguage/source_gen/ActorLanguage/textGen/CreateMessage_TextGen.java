@@ -5,25 +5,93 @@ package ActorLanguage.textGen;
 import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
-import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
+import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class CreateMessage_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
+
+    String envelope_name = "";
+    String payload_name = "";
+
+    {
+      final SNode envelope = SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.envelope$eoPh);
+      if (SNodeOperations.isInstanceOf(envelope, CONCEPTS.CreateEnvelope$OK)) {
+        tgs.appendNode(envelope);
+        tgs.newLine();
+        envelope_name = SPropertyOperations.getString(envelope, PROPS.name$MnvL);
+      }
+    }
+
+    {
+      final SNode payload = SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$N_RC);
+      if (SNodeOperations.isInstanceOf(payload, CONCEPTS.CreatePayload$Pf)) {
+        tgs.appendNode(payload);
+        tgs.newLine();
+        payload_name = SPropertyOperations.getString(payload, PROPS.name$MnvL);
+      }
+    }
+
+    {
+      final SNode envRef = SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.envelope$eoPh);
+      if (SNodeOperations.isInstanceOf(envRef, CONCEPTS.SelectEnvelope$S6)) {
+        envelope_name = SPropertyOperations.getString(SLinkOperations.getTarget(envRef, LINKS.envelope$EmhE), PROPS.name$MnvL);
+      }
+    }
+
+    {
+      final SNode payloadRef = SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$N_RC);
+      if (SNodeOperations.isInstanceOf(payloadRef, CONCEPTS.SelectPayload$Hf)) {
+        payload_name = SPropertyOperations.getString(SLinkOperations.getTarget(payloadRef, LINKS.payload$ZT3H), PROPS.name$MnvL);
+      }
+    }
+
     tgs.indent();
-    tgs.append("// message to send");
+    tgs.append("/* MESSAGE CREATION */");
+    tgs.newLine();
+
+    // default message type is 1
+    tgs.indent();
+    tgs.append("send_buf = create_message(");
+    tgs.append(envelope_name);
+    tgs.append(", ");
+    tgs.append(payload_name);
+    tgs.append(", 1);");
+    tgs.newLine();
     tgs.newLine();
     if (tgs.needPositions()) {
       tgs.fillPositionInfo(TraceableConcept__BehaviorDescriptor.getTraceableProperty_id4pl5GY7LKmH.invoke(SNodeOperations.cast(ctx.getPrimaryInput(), CONCEPTS.TraceableConcept$L)));
     }
   }
 
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink envelope$eoPh = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x2d5fc2c1e9650052L, "envelope");
+    /*package*/ static final SContainmentLink payload$N_RC = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x9de89b125a71571L, "payload");
+    /*package*/ static final SReferenceLink envelope$EmhE = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L, 0x9de89b125bf6284L, "envelope");
+    /*package*/ static final SReferenceLink payload$ZT3H = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L, 0x4658738496c93a91L, "payload");
+  }
+
   private static final class CONCEPTS {
+    /*package*/ static final SConcept CreateEnvelope$OK = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, "ActorLanguage.structure.CreateEnvelope");
+    /*package*/ static final SConcept CreatePayload$Pf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, "ActorLanguage.structure.CreatePayload");
+    /*package*/ static final SConcept SelectEnvelope$S6 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L, "ActorLanguage.structure.SelectEnvelope");
+    /*package*/ static final SConcept SelectPayload$Hf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L, "ActorLanguage.structure.SelectPayload");
     /*package*/ static final SInterfaceConcept TraceableConcept$L = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a3L, "jetbrains.mps.lang.traceable.structure.TraceableConcept");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

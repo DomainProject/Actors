@@ -79,16 +79,19 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.newLine();
 
+    int i = 0;
+
     for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{}))) {
       tgs.indent();
       tgs.append("create_actor(\"");
       tgs.append(SPropertyOperations.getString(actor, PROPS.name$MnvL));
       tgs.append("\", threads[");
-      tgs.append(String.valueOf(SNodeOperations.getIndexInParent(actor)));
+      tgs.append(String.valueOf(i));
       tgs.append("], ");
       tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$QgnL), PROPS.name$MnvL));
       tgs.append(");");
       tgs.newLine();
+      i++;
     }
     tgs.newLine();
 
@@ -105,7 +108,9 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.newLine();
 
+    tgs.indent();
     tgs.append("pthread_join(rec, NULL);");
+    tgs.newLine();
 
     tgs.indent();
     tgs.append("exit(EXIT_SUCCESS);");

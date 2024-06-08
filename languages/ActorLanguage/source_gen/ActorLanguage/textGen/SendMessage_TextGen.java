@@ -5,41 +5,28 @@ package ActorLanguage.textGen;
 import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import org.jetbrains.mps.openapi.language.SReferenceLink;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class SendMessage_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
-
-
     tgs.indent();
-    tgs.append("pthread_mutex_lock(&data->map[receiver_address].mutex);");
+    tgs.append("/* SENDING MESSAGE */");
     tgs.newLine();
     tgs.indent();
-    tgs.append("bytes_written = write(data->map[receiver_address].write_fd, ");
-    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.message$4GHG), PROPS.name$MnvL));
-    tgs.append(", strlen(");
-    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.message$4GHG), PROPS.name$MnvL));
-    tgs.append("));");
+    tgs.append("ret = msgsnd(get_mqid(send_buf.msg->envelope->receiver), (void *)&send_buf, sizeof(send_buf.msg), 0);");
     tgs.newLine();
     tgs.indent();
-    tgs.append("if (bytes_written == -1) {");
+    tgs.append("if (ret == -1) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("perror(\"write\");");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("pthread_mutex_unlock(&data->map[receiver_address].mutex);");
+    tgs.append("perror(\"msgsnd\");");
     tgs.newLine();
     tgs.indent();
     tgs.append("exit(EXIT_FAILURE);");
@@ -48,22 +35,10 @@ public class SendMessage_TextGen extends TextGenDescriptorBase {
     tgs.indent();
     tgs.append("}");
     tgs.newLine();
-    tgs.indent();
-    tgs.append("pthread_mutex_unlock(&data->map[receiver_address].mutex);");
     tgs.newLine();
-    tgs.newLine();
-
     if (tgs.needPositions()) {
       tgs.fillPositionInfo(TraceableConcept__BehaviorDescriptor.getTraceableProperty_id4pl5GY7LKmH.invoke(SNodeOperations.cast(ctx.getPrimaryInput(), CONCEPTS.TraceableConcept$L)));
     }
-  }
-
-  private static final class LINKS {
-    /*package*/ static final SReferenceLink message$4GHG = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, 0x35a5eccbf2f26df5L, "message");
-  }
-
-  private static final class PROPS {
-    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 
   private static final class CONCEPTS {

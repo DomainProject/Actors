@@ -45,7 +45,7 @@ public class Receptionist_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
 
     tgs.indent();
-    tgs.append("ret = msgrcv(get_mqid(\"receptionist\"), (void *)&rec_buf, sizeof(rec_buf.msg), 2, 0);");
+    tgs.append("ret = msgrcv(get_mqid(\"receptionist\"), (void *)&rec_buf, sizeof(rec_buf.msg), 1, 0);");
     tgs.newLine();
     tgs.indent();
     tgs.append("if (ret == -1) {");
@@ -171,10 +171,15 @@ public class Receptionist_TextGen extends TextGenDescriptorBase {
     tgs.indent();
     tgs.append("free(rec_buf.msg);");
     tgs.newLine();
+    tgs.newLine();
+
     ctx.getBuffer().area().decreaseIndent();
     tgs.indent();
     tgs.append("}");
     tgs.newLine();
+    tgs.newLine();
+
+
     ctx.getBuffer().area().decreaseIndent();
     tgs.append("}");
     tgs.newLine();

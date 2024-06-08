@@ -6,11 +6,14 @@ import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class CreateBehavior_TextGen extends TextGenDescriptorBase {
@@ -25,14 +28,31 @@ public class CreateBehavior_TextGen extends TextGenDescriptorBase {
     tgs.indent();
     tgs.append("char *name = (char *)arg;");
     tgs.newLine();
-    for (SNode action : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actions$MLkf))) {
+    tgs.indent();
+    tgs.append("int ret;");
+    tgs.newLine();
+
+    if (ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{})).isNotEmpty()) {
       tgs.indent();
-      tgs.appendNode(action);
+      tgs.append("msgbuf send_buf;");
       tgs.newLine();
     }
-    tgs.indent();
-    tgs.append("exit(EXIT_SUCCESS);");
     tgs.newLine();
+
+    for (SNode action : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actions$MLkf))) {
+      tgs.appendNode(action);
+    }
+
+    tgs.indent();
+    tgs.append("return 0;");
+    tgs.newLine();
+    tgs.newLine();
+
+    /*
+      if
+
+    */
+
     ctx.getBuffer().area().decreaseIndent();
     tgs.append("}");
     tgs.newLine();
@@ -41,6 +61,12 @@ public class CreateBehavior_TextGen extends TextGenDescriptorBase {
 
   private static final class PROPS {
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
+    /*package*/ static final SConcept ActorReferenceList$4g = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5ba7cb3L, "ActorLanguage.structure.ActorReferenceList");
+    /*package*/ static final SConcept GetActorsFromReceptionist$XR = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681690352L, "ActorLanguage.structure.GetActorsFromReceptionist");
   }
 
   private static final class LINKS {

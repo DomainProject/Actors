@@ -29,16 +29,24 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new CreateActor_TextGen();
       case LanguageConceptSwitch.CreateBehavior:
         return new CreateBehavior_TextGen();
+      case LanguageConceptSwitch.CreateEnvelope:
+        return new CreateEnvelope_TextGen();
       case LanguageConceptSwitch.CreateMessage:
         return new CreateMessage_TextGen();
-      case LanguageConceptSwitch.GetActorFromReceptionist:
-        return new GetActorFromReceptionist_TextGen();
+      case LanguageConceptSwitch.CreatePayload:
+        return new CreatePayload_TextGen();
+      case LanguageConceptSwitch.ForEachActorReference:
+        return new ForEachActorReference_TextGen();
+      case LanguageConceptSwitch.GetActorsFromReceptionist:
+        return new GetActorsFromReceptionist_TextGen();
       case LanguageConceptSwitch.Receptionist:
         return new Receptionist_TextGen();
       case LanguageConceptSwitch.SelectBehavior:
         return new SelectBehavior_TextGen();
       case LanguageConceptSwitch.SendMessage:
         return new SendMessage_TextGen();
+      case LanguageConceptSwitch.StringBody:
+        return new StringBody_TextGen();
     }
     return null;
   }

@@ -22,6 +22,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptActorCreation = createDescriptorForActorCreation();
   /*package*/ final ConceptDescriptor myConceptActorLink = createDescriptorForActorLink();
   /*package*/ final ConceptDescriptor myConceptActorReference = createDescriptorForActorReference();
+  /*package*/ final ConceptDescriptor myConceptActorReferenceList = createDescriptorForActorReferenceList();
   /*package*/ final ConceptDescriptor myConceptActorScript = createDescriptorForActorScript();
   /*package*/ final ConceptDescriptor myConceptActorsGraph = createDescriptorForActorsGraph();
   /*package*/ final ConceptDescriptor myConceptCreateActor = createDescriptorForCreateActor();
@@ -33,7 +34,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptCreatePayload = createDescriptorForCreatePayload();
   /*package*/ final ConceptDescriptor myConceptEnvelope = createDescriptorForEnvelope();
   /*package*/ final ConceptDescriptor myConceptFetch = createDescriptorForFetch();
-  /*package*/ final ConceptDescriptor myConceptGetActorFromReceptionist = createDescriptorForGetActorFromReceptionist();
+  /*package*/ final ConceptDescriptor myConceptForEachActorReference = createDescriptorForForEachActorReference();
+  /*package*/ final ConceptDescriptor myConceptGetActorsFromReceptionist = createDescriptorForGetActorsFromReceptionist();
   /*package*/ final ConceptDescriptor myConceptMessageQueue = createDescriptorForMessageQueue();
   /*package*/ final ConceptDescriptor myConceptMessageRef = createDescriptorForMessageRef();
   /*package*/ final ConceptDescriptor myConceptPayload = createDescriptorForPayload();
@@ -46,6 +48,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptSelectEnvelope = createDescriptorForSelectEnvelope();
   /*package*/ final ConceptDescriptor myConceptSelectPayload = createDescriptorForSelectPayload();
   /*package*/ final ConceptDescriptor myConceptSendMessage = createDescriptorForSendMessage();
+  /*package*/ final ConceptDescriptor myConceptStringBody = createDescriptorForStringBody();
   /*package*/ final ConceptDescriptor myConceptSwitchPolicy = createDescriptorForSwitchPolicy();
   /*package*/ final EnumerationDescriptor myEnumerationFetchingPolicy = new EnumerationDescriptor_FetchingPolicy();
   /*package*/ final EnumerationDescriptor myEnumerationReceptionistPolicyEnum = new EnumerationDescriptor_ReceptionistPolicyEnum();
@@ -65,7 +68,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<ConceptDescriptor> getDescriptors() {
-    return Arrays.asList(myConceptAbstractBehavior, myConceptActorAction, myConceptActorBox, myConceptActorCreation, myConceptActorLink, myConceptActorReference, myConceptActorScript, myConceptActorsGraph, myConceptCreateActor, myConceptCreateActorReference, myConceptCreateActors, myConceptCreateBehavior, myConceptCreateEnvelope, myConceptCreateMessage, myConceptCreatePayload, myConceptEnvelope, myConceptFetch, myConceptGetActorFromReceptionist, myConceptMessageQueue, myConceptMessageRef, myConceptPayload, myConceptRandomActor, myConceptReceptionist, myConceptReceptionistPolicy, myConceptReplyToMessage, myConceptReturnActorReference, myConceptSelectBehavior, myConceptSelectEnvelope, myConceptSelectPayload, myConceptSendMessage, myConceptSwitchPolicy);
+    return Arrays.asList(myConceptAbstractBehavior, myConceptActorAction, myConceptActorBox, myConceptActorCreation, myConceptActorLink, myConceptActorReference, myConceptActorReferenceList, myConceptActorScript, myConceptActorsGraph, myConceptCreateActor, myConceptCreateActorReference, myConceptCreateActors, myConceptCreateBehavior, myConceptCreateEnvelope, myConceptCreateMessage, myConceptCreatePayload, myConceptEnvelope, myConceptFetch, myConceptForEachActorReference, myConceptGetActorsFromReceptionist, myConceptMessageQueue, myConceptMessageRef, myConceptPayload, myConceptRandomActor, myConceptReceptionist, myConceptReceptionistPolicy, myConceptReplyToMessage, myConceptReturnActorReference, myConceptSelectBehavior, myConceptSelectEnvelope, myConceptSelectPayload, myConceptSendMessage, myConceptStringBody, myConceptSwitchPolicy);
   }
 
   @Override
@@ -84,6 +87,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptActorLink;
       case LanguageConceptSwitch.ActorReference:
         return myConceptActorReference;
+      case LanguageConceptSwitch.ActorReferenceList:
+        return myConceptActorReferenceList;
       case LanguageConceptSwitch.ActorScript:
         return myConceptActorScript;
       case LanguageConceptSwitch.ActorsGraph:
@@ -106,8 +111,10 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptEnvelope;
       case LanguageConceptSwitch.Fetch:
         return myConceptFetch;
-      case LanguageConceptSwitch.GetActorFromReceptionist:
-        return myConceptGetActorFromReceptionist;
+      case LanguageConceptSwitch.ForEachActorReference:
+        return myConceptForEachActorReference;
+      case LanguageConceptSwitch.GetActorsFromReceptionist:
+        return myConceptGetActorsFromReceptionist;
       case LanguageConceptSwitch.MessageQueue:
         return myConceptMessageQueue;
       case LanguageConceptSwitch.MessageRef:
@@ -132,6 +139,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptSelectPayload;
       case LanguageConceptSwitch.SendMessage:
         return myConceptSendMessage;
+      case LanguageConceptSwitch.StringBody:
+        return myConceptStringBody;
       case LanguageConceptSwitch.SwitchPolicy:
         return myConceptSwitchPolicy;
       default:
@@ -195,6 +204,14 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/13109696843924945");
     b.version(3);
     b.associate("actor", 0x2e9333277ec5d2L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L).optional(true).origin("13109696843924946").done();
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForActorReferenceList() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ActorReferenceList", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5ba7cb3L);
+    b.class_(false, false, false);
+    b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
+    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/4619656042768923827");
+    b.version(3);
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForActorScript() {
@@ -307,7 +324,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/2411303652489062024");
     b.version(3);
-    b.property("body", 0x2176abe5743668aeL).type(PrimitiveTypeId.STRING).origin("2411303652489062574").done();
+    b.aggregate("strings", 0x3db738e392dd2178L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x3db738e392e4ce51L).optional(true).ordered(true).multiple(true).origin("4447085707124351352").done();
     b.alias("create_payload");
     return b.create();
   }
@@ -332,16 +349,28 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.alias("fetch_message");
     return b.create();
   }
-  private static ConceptDescriptor createDescriptorForGetActorFromReceptionist() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "GetActorFromReceptionist", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681690352L);
+  private static ConceptDescriptor createDescriptorForForEachActorReference() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ForEachActorReference", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5dbf567L);
+    b.class_(false, false, false);
+    // extends: jetbrains.mps.baseLanguage.structure.AbstractLoopStatement
+    b.super_(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10cb1ac5adeL);
+    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/4619656042771117415");
+    b.version(3);
+    b.associate("actorReferenceList", 0x401c50b1e5dbf568L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5ba7cb3L).optional(false).origin("4619656042771117416").done();
+    b.aggregate("actorReference", 0x401c50b1e5eebd15L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e9333277ec5d1L).optional(false).ordered(true).multiple(false).origin("4619656042772348181").done();
+    b.alias("for each actor reference");
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForGetActorsFromReceptionist() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "GetActorsFromReceptionist", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681690352L);
     b.class_(false, false, false);
     // extends: ActorLanguage.structure.ActorAction
     b.super_(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681512684L);
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/1411682935490806610");
     b.version(3);
     b.aggregate("policy", 0x13974e26817cb5deL).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e26817cb5d6L).optional(false).ordered(true).multiple(false).origin("1411682935492097502").done();
-    b.aggregate("actorReference", 0x2e933327505d87L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e9333277ec5d1L).optional(false).ordered(true).multiple(false).origin("13109696840883591").done();
-    b.alias("get_actor");
+    b.aggregate("actorReferences", 0x2e933327505d87L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5ba7cb3L).optional(false).ordered(true).multiple(false).origin("13109696840883591").done();
+    b.alias("get_actors");
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForMessageQueue() {
@@ -463,6 +492,14 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.version(3);
     b.associate("message", 0x35a5eccbf2f26df5L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L).optional(false).origin("3865756215865929205").done();
     b.alias("send_message");
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForStringBody() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "StringBody", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x3db738e392e4ce51L);
+    b.class_(false, false, false);
+    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/4447085707124854353");
+    b.version(3);
+    b.property("body", 0x3db738e392e4ce52L).type(PrimitiveTypeId.STRING).origin("4447085707124854354").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForSwitchPolicy() {
