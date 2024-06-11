@@ -20,18 +20,19 @@ public class CreateBehavior_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
-    tgs.append("void *");
+    tgs.append("void ");
     tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
-    tgs.append("(void *arg) {");
+    tgs.append("(char *name) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("char *name = (char *)arg;");
-    tgs.newLine();
-    tgs.indent();
     tgs.append("int ret;");
     tgs.newLine();
-
+    if (ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.Fetch$Nj, false, new SAbstractConcept[]{})).isNotEmpty()) {
+      tgs.indent();
+      tgs.append("msgbuf rcv_buf;");
+      tgs.newLine();
+    }
     if (ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{})).isNotEmpty()) {
       tgs.indent();
       tgs.append("msgbuf send_buf;");
@@ -43,15 +44,60 @@ public class CreateBehavior_TextGen extends TextGenDescriptorBase {
       tgs.appendNode(action);
     }
 
+    // free allocated memory
+
+    for (SNode getActorAction : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.GetActorsFromReceptionist$XR, false, new SAbstractConcept[]{}))) {
+      tgs.indent();
+      tgs.append("for(int i = 0; i < ");
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(getActorAction, LINKS.actorReferences$8P4C), PROPS.name$MnvL));
+      tgs.append("->size; i++) {");
+      tgs.newLine();
+      ctx.getBuffer().area().increaseIndent();
+      tgs.indent();
+      tgs.append("free(");
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(getActorAction, LINKS.actorReferences$8P4C), PROPS.name$MnvL));
+      tgs.append("->strings[i]);");
+      tgs.newLine();
+      ctx.getBuffer().area().decreaseIndent();
+      tgs.indent();
+      tgs.append("}");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("free(");
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(getActorAction, LINKS.actorReferences$8P4C), PROPS.name$MnvL));
+      tgs.append("->strings);");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("free(");
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(getActorAction, LINKS.actorReferences$8P4C), PROPS.name$MnvL));
+      tgs.append(");");
+      tgs.newLine();
+      tgs.newLine();
+    }
+
+    if (ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.Fetch$Nj, false, new SAbstractConcept[]{})).isNotEmpty()) {
+      tgs.indent();
+      tgs.append("free(rcv_buf.msg->envelope->sender);");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("free(rcv_buf.msg->envelope->receiver);");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("free(rcv_buf.msg->envelope);");
+      tgs.newLine();
+
+      // payload should be freed if the message is not forwarded
+
+      tgs.indent();
+      tgs.append("free(rcv_buf.msg);");
+      tgs.newLine();
+      tgs.newLine();
+    }
+
     tgs.indent();
     tgs.append("return 0;");
     tgs.newLine();
     tgs.newLine();
-
-    /*
-      if
-
-    */
 
     ctx.getBuffer().area().decreaseIndent();
     tgs.append("}");
@@ -64,12 +110,13 @@ public class CreateBehavior_TextGen extends TextGenDescriptorBase {
   }
 
   private static final class CONCEPTS {
+    /*package*/ static final SConcept Fetch$Nj = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8975L, "ActorLanguage.structure.Fetch");
     /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
-    /*package*/ static final SConcept ActorReferenceList$4g = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5ba7cb3L, "ActorLanguage.structure.ActorReferenceList");
     /*package*/ static final SConcept GetActorsFromReceptionist$XR = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681690352L, "ActorLanguage.structure.GetActorsFromReceptionist");
   }
 
   private static final class LINKS {
     /*package*/ static final SContainmentLink actions$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "actions");
+    /*package*/ static final SContainmentLink actorReferences$8P4C = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681690352L, 0x2e933327505d87L, "actorReferences");
   }
 }

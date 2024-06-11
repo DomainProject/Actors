@@ -78,7 +78,14 @@ public abstract class UtilityFunctions {
 
     tgs.append("void add_to_topology(topology *map, const char *key, const char *value) {");
     tgs.newLine();
+    tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
+
+    tgs.indent();
+    tgs.append("pthread_mutex_lock(&topology_mutex);");
+    tgs.newLine();
+    tgs.newLine();
+
     tgs.indent();
     tgs.append("for (size_t i = 0; i < map->size; i++) {");
     tgs.newLine();
@@ -89,6 +96,9 @@ public abstract class UtilityFunctions {
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
     tgs.append("add_to_linked_actors(&map->entries[i].values, value);");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("pthread_mutex_unlock(&topology_mutex);");
     tgs.newLine();
     tgs.indent();
     tgs.append("return;");
@@ -131,6 +141,13 @@ public abstract class UtilityFunctions {
     tgs.indent();
     tgs.append("map->size++;");
     tgs.newLine();
+
+    tgs.indent();
+    tgs.append("pthread_mutex_unlock(&topology_mutex);");
+    tgs.newLine();
+    tgs.newLine();
+
+
     ctx.getBuffer().area().decreaseIndent();
     tgs.append("}");
     tgs.newLine();

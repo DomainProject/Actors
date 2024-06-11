@@ -145,6 +145,12 @@ public abstract class Header {
     tgs.newLine();
     tgs.newLine();
 
+    tgs.append("pthread_mutex_t topology_mutex;");
+    tgs.newLine();
+    tgs.append("topology map;");
+    tgs.newLine();
+    tgs.newLine();
+
 
   }
 }

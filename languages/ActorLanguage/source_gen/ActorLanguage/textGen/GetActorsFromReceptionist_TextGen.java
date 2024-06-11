@@ -27,13 +27,11 @@ public class GetActorsFromReceptionist_TextGen extends TextGenDescriptorBase {
       tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.actorReferences$8P4C), PROPS.name$MnvL));
       tgs.append(" = get_actors(name);");
       tgs.newLine();
-      tgs.newLine();
     } else {
       tgs.indent();
       tgs.append("strings_array *");
       tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.actorReferences$8P4C), PROPS.name$MnvL));
       tgs.append(" = get_actors(name);");
-      tgs.newLine();
       tgs.newLine();
     }
     if (tgs.needPositions()) {

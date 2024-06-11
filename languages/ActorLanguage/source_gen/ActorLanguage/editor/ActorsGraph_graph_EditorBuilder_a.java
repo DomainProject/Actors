@@ -27,6 +27,7 @@ import de.itemis.mps.editor.diagram.runtime.model.GeneratedConnectionType;
 import de.itemis.mps.editor.diagram.runtime.model.IConnectionEndpoint;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import de.itemis.mps.editor.diagram.runtime.model.DiagramModel;
+import de.itemis.mps.editor.diagram.runtime.jgraph.ElkLayouter;
 import de.itemis.mps.editor.diagram.runtime.model.IPaletteEntryProvider;
 import de.itemis.mps.editor.diagram.runtime.model.CompositePaletteEntryProvider;
 import de.itemis.mps.editor.diagram.runtime.model.SubstituteInfoPaletteEntryProvider;
@@ -119,9 +120,23 @@ import org.jetbrains.mps.openapi.language.SConcept;
                 return connectionTypes;
               }
 
+
+
+
+
+
+
+              @Override
+              public boolean runAutoLayout() {
+                boolean autoLayoutFlag = false;
+                return autoLayoutFlag;
+              }
+
             };
 
             DiagramModel model = DiagramModel.getModel(editorContext, node, "2750811047725496301", accessor);
+
+            ElkLayouter layouter;
 
             IPaletteEntryProvider paletteEntryProvider = new CompositePaletteEntryProvider(new SubstituteInfoPaletteEntryProvider(new SubstituteInfoFactory(editorContext, node).forChildLink(node, SLinkOperations.findLinkDeclaration(LINKS.actors$3iZF))));
             model.setPaletteEntryProvider(paletteEntryProvider);
@@ -130,6 +145,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
               editorCell.value = new SubDiagramECell(editorContext, node, model);
             } else {
               editorCell.value = new RootDiagramECell(editorContext, node, model);
+              ((RootDiagramECell) editorCell.value).runAutoLayouterOnInit(node, accessor.runAutoLayout());
             }
             editorCell.value.setCellId("Diagram_9dsbqe_a");
             editorCell.value.setBig(true);
@@ -144,6 +160,8 @@ import org.jetbrains.mps.openapi.language.SConcept;
         });
       });
     });
+
+
 
     return editorCell.value;
   }

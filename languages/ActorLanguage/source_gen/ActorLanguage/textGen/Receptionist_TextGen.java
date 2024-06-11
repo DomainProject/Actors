@@ -31,11 +31,6 @@ public class Receptionist_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
 
     tgs.indent();
-    tgs.append("topology *map = (topology *)arg;");
-    tgs.newLine();
-    tgs.newLine();
-
-    tgs.indent();
     tgs.append("while(1) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
@@ -69,11 +64,11 @@ public class Receptionist_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
 
     tgs.indent();
-    tgs.append("for (size_t i = 0; i < map->size; i++) {");
+    tgs.append("for (size_t i = 0; i < map.size; i++) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("if (!strcmp(rec_buf.msg->envelope->sender, map->entries[i].key)) {");
+    tgs.append("if (!strcmp(rec_buf.msg->envelope->sender, map.entries[i].key)) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
@@ -82,7 +77,7 @@ public class Receptionist_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
 
     tgs.indent();
-    tgs.append("char **strings = malloc(map->entries[i].values.size * sizeof(char *));");
+    tgs.append("char **strings = malloc(map.entries[i].values.size * sizeof(char *));");
     tgs.newLine();
     tgs.indent();
     tgs.append("if (!strings) {");
@@ -101,11 +96,11 @@ public class Receptionist_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
 
     tgs.indent();
-    tgs.append("for (size_t j = 0; j < map->entries[i].values.size; j++) {");
+    tgs.append("for (size_t j = 0; j < map.entries[i].values.size; j++) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("strings[j] = map->entries[i].values.strings[j];");
+    tgs.append("strings[j] = map.entries[i].values.strings[j];");
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     tgs.indent();
@@ -114,7 +109,7 @@ public class Receptionist_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
 
     tgs.indent();
-    tgs.append("p = create_payload(strings, map->entries[i].values.size);");
+    tgs.append("p = create_payload(strings, map.entries[i].values.size);");
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     tgs.indent();

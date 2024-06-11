@@ -72,7 +72,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "create_actors");
     editorCell.setCellId("Constant_7g9p8p_a0");
     Style style = new StyleImpl();
-    style.set(StyleAttributes.TEXT_COLOR, getStyleRegistry().getSimpleColor(MPSColors.magenta));
+    style.set(StyleAttributes.TEXT_COLOR, getStyleRegistry().getSimpleColor(MPSColors.blue));
     editorCell.getStyle().putAll(style);
     editorCell.setDefaultText("");
     return editorCell;
@@ -209,7 +209,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
     }
   }
   private EditorCell createConstant_4() {
-    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, ")");
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, ");");
     editorCell.setCellId("Constant_7g9p8p_h0");
     editorCell.setDefaultText("");
     return editorCell;

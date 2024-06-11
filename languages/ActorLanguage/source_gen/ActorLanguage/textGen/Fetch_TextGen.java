@@ -9,28 +9,41 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import org.jetbrains.mps.openapi.language.SReferenceLink;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
-public class ForEachActorReference_TextGen extends TextGenDescriptorBase {
+public class Fetch_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
-
     tgs.indent();
-    tgs.append("for (int i = 0; i < ");
-    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.actorReferenceList$RLVE), PROPS.name$MnvL));
-    tgs.append("->size; i++) {");
+    tgs.append("/* RECEIVE MESSAGE */");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("ret = msgrcv(get_mqid(name), (void *)&rcv_buf, sizeof(rcv_buf.msg), 1, 0);");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("if (ret == -1) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
-    tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.body$c1sm));
+    tgs.indent();
+    tgs.append("perror(\"msgrcv\");");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("exit(EXIT_FAILURE);");
+    tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     tgs.indent();
     tgs.append("}");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("message ");
+    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.message$diNF), PROPS.name$MnvL));
+    tgs.append(" = *rcv_buf.msg;");
+    tgs.newLine();
     tgs.newLine();
     if (tgs.needPositions()) {
       tgs.fillPositionInfo(TraceableConcept__BehaviorDescriptor.getTraceableProperty_id4pl5GY7LKmH.invoke(SNodeOperations.cast(ctx.getPrimaryInput(), CONCEPTS.TraceableConcept$L)));
@@ -38,8 +51,7 @@ public class ForEachActorReference_TextGen extends TextGenDescriptorBase {
   }
 
   private static final class LINKS {
-    /*package*/ static final SReferenceLink actorReferenceList$RLVE = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5dbf567L, 0x401c50b1e5dbf568L, "actorReferenceList");
-    /*package*/ static final SContainmentLink body$c1sm = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10cb1ac5adeL, 0x10cb1ada6e8L, "body");
+    /*package*/ static final SContainmentLink message$diNF = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8975L, 0x6ac9b580f41c3451L, "message");
   }
 
   private static final class PROPS {

@@ -18,6 +18,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_ActorReferenceList;
   private ConceptPresentation props_ActorScript;
   private ConceptPresentation props_ActorsGraph;
+  private ConceptPresentation props_Become;
   private ConceptPresentation props_CreateActor;
   private ConceptPresentation props_CreateActorReference;
   private ConceptPresentation props_CreateActors;
@@ -35,7 +36,6 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_RandomActor;
   private ConceptPresentation props_Receptionist;
   private ConceptPresentation props_ReceptionistPolicy;
-  private ConceptPresentation props_ReplyToMessage;
   private ConceptPresentation props_ReturnActorReference;
   private ConceptPresentation props_SelectBehavior;
   private ConceptPresentation props_SelectEnvelope;
@@ -109,6 +109,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ActorsGraph = cpb.create();
         }
         return props_ActorsGraph;
+      case LanguageConceptSwitch.Become:
+        if (props_Become == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("become");
+          props_Become = cpb.create();
+        }
+        return props_Become;
       case LanguageConceptSwitch.CreateActor:
         if (props_CreateActor == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -227,13 +234,6 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ReceptionistPolicy = cpb.create();
         }
         return props_ReceptionistPolicy;
-      case LanguageConceptSwitch.ReplyToMessage:
-        if (props_ReplyToMessage == null) {
-          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.rawPresentation("reply_to_message");
-          props_ReplyToMessage = cpb.create();
-        }
-        return props_ReplyToMessage;
       case LanguageConceptSwitch.ReturnActorReference:
         if (props_ReturnActorReference == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

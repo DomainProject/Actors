@@ -27,6 +27,8 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new ActorScript_TextGen();
       case LanguageConceptSwitch.CreateActor:
         return new CreateActor_TextGen();
+      case LanguageConceptSwitch.CreateActors:
+        return new CreateActors_TextGen();
       case LanguageConceptSwitch.CreateBehavior:
         return new CreateBehavior_TextGen();
       case LanguageConceptSwitch.CreateEnvelope:
@@ -35,6 +37,8 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new CreateMessage_TextGen();
       case LanguageConceptSwitch.CreatePayload:
         return new CreatePayload_TextGen();
+      case LanguageConceptSwitch.Fetch:
+        return new Fetch_TextGen();
       case LanguageConceptSwitch.ForEachActorReference:
         return new ForEachActorReference_TextGen();
       case LanguageConceptSwitch.GetActorsFromReceptionist:

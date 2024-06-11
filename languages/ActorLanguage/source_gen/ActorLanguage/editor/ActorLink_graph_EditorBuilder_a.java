@@ -10,7 +10,6 @@ import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
 import de.itemis.mps.editor.diagram.runtime.model.EditorCell_DiagramElement;
 import de.itemis.mps.editor.diagram.runtime.ContextVariables;
-import de.itemis.mps.editor.diagram.runtime.model.IEdgeAccessor;
 import de.itemis.mps.editor.diagram.runtime.model.SNodeEdgeAccessor;
 import de.itemis.mps.editor.diagram.runtime.DiagramUtil;
 import de.itemis.mps.editor.diagram.runtime.shape.IShape;
@@ -52,8 +51,7 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
     ContextVariables.withValue("thisNode", node, () -> {
       final ContextVariables _variablesContext = ContextVariables.getCurrent();
-      IEdgeAccessor accessor = new SNodeEdgeAccessor(node) {
-        private EditorCell labelCell = DiagramUtil.getCellIfNotEmpty(null);
+      SNodeEdgeAccessor accessor = new SNodeEdgeAccessor(node) {
         private EditorCell startRoleCell = DiagramUtil.getCellIfNotEmpty(null);
         private EditorCell endRoleCell = DiagramUtil.getCellIfNotEmpty(null);
         private IShape endShape = null;
@@ -67,19 +65,19 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
           if (reverse) {
 
             {
-              Tuples._2<IConnectionEndpointReference, IConnectionEndpointReference> _tmp_2sn20n_b0b0j0a0a1a2a3a8 = MultiTuple.<IConnectionEndpointReference,IConnectionEndpointReference>from(endpointTo, endpointFrom);
-              endpointFrom = _tmp_2sn20n_b0b0j0a0a1a2a3a8._0();
-              endpointTo = _tmp_2sn20n_b0b0j0a0a1a2a3a8._1();
+              Tuples._2<IConnectionEndpointReference, IConnectionEndpointReference> _tmp_2sn20n_b0b0i0a0a1a2a3a8 = MultiTuple.<IConnectionEndpointReference,IConnectionEndpointReference>from(endpointTo, endpointFrom);
+              endpointFrom = _tmp_2sn20n_b0b0i0a0a1a2a3a8._0();
+              endpointTo = _tmp_2sn20n_b0b0i0a0a1a2a3a8._1();
             }
             {
-              Tuples._2<EditorCell, EditorCell> _tmp_2sn20n_c0b0j0a0a1a2a3a8 = MultiTuple.<EditorCell,EditorCell>from(endRoleCell, startRoleCell);
-              startRoleCell = _tmp_2sn20n_c0b0j0a0a1a2a3a8._0();
-              endRoleCell = _tmp_2sn20n_c0b0j0a0a1a2a3a8._1();
+              Tuples._2<EditorCell, EditorCell> _tmp_2sn20n_c0b0i0a0a1a2a3a8 = MultiTuple.<EditorCell,EditorCell>from(endRoleCell, startRoleCell);
+              startRoleCell = _tmp_2sn20n_c0b0i0a0a1a2a3a8._0();
+              endRoleCell = _tmp_2sn20n_c0b0i0a0a1a2a3a8._1();
             }
             {
-              Tuples._2<IShape, IShape> _tmp_2sn20n_d0b0j0a0a1a2a3a8 = MultiTuple.<IShape,IShape>from(endShape, startShape);
-              startShape = _tmp_2sn20n_d0b0j0a0a1a2a3a8._0();
-              endShape = _tmp_2sn20n_d0b0j0a0a1a2a3a8._1();
+              Tuples._2<IShape, IShape> _tmp_2sn20n_d0b0i0a0a1a2a3a8 = MultiTuple.<IShape,IShape>from(endShape, startShape);
+              startShape = _tmp_2sn20n_d0b0i0a0a1a2a3a8._0();
+              endShape = _tmp_2sn20n_d0b0i0a0a1a2a3a8._1();
             }
           }
         }
@@ -113,10 +111,6 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
           return endShape;
         }
         @Override
-        public EditorCell getLabelCell() {
-          return labelCell;
-        }
-        @Override
         public EditorCell getStartRoleCell() {
           return startRoleCell;
         }
@@ -138,6 +132,10 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
         }
 
       };
+
+      EditorCell label = DiagramUtil.getCellIfNotEmpty(null);
+
+      accessor.setLabelCell(label);
 
       editorCell.value = new EditorCell_DiagramElement(editorContext, node, accessor);
       editorCell.value.setCellId("DiagramConnector_thpcfr_a");

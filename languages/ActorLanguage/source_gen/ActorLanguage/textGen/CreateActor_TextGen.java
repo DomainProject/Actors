@@ -6,10 +6,12 @@ import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
 public class CreateActor_TextGen extends TextGenDescriptorBase {
@@ -17,13 +19,27 @@ public class CreateActor_TextGen extends TextGenDescriptorBase {
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
-
-    tgs.append("void *");
-    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
-    tgs.append("(void *arg) {");
+    tgs.indent();
+    tgs.append("/* NEW ACTOR CREATION */");
     tgs.newLine();
     tgs.indent();
-    tgs.append("}");
+    tgs.append("pthread_t ");
+    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
+    tgs.append("_thread;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("create_actor(\"");
+    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
+    tgs.append("\", ");
+    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
+    tgs.append("_thread, ");
+    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.behavior$QgnL), PROPS.name$MnvL));
+    tgs.append(");");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("add_to_topology(&map, name, \"");
+    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
+    tgs.append("\");");
     tgs.newLine();
     tgs.newLine();
     if (tgs.needPositions()) {
@@ -33,6 +49,10 @@ public class CreateActor_TextGen extends TextGenDescriptorBase {
 
   private static final class PROPS {
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SReferenceLink behavior$QgnL = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681516c72L, "behavior");
   }
 
   private static final class CONCEPTS {
