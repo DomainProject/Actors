@@ -22,9 +22,9 @@ import java.util.HashMap;
 import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
-public class ForEachActorReference_Constraints extends BaseConstraintsDescriptor {
-  public ForEachActorReference_Constraints() {
-    super(CONCEPTS.ForEachActorReference$Jq);
+public class ForEachActorReferenceStatement_Constraints extends BaseConstraintsDescriptor {
+  public ForEachActorReferenceStatement_Constraints() {
+    super(CONCEPTS.ForEachActorReferenceStatement$Jq);
   }
 
   @Override
@@ -52,7 +52,7 @@ public class ForEachActorReference_Constraints extends BaseConstraintsDescriptor
   }
 
   private static final class CONCEPTS {
-    /*package*/ static final SConcept ForEachActorReference$Jq = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5dbf567L, "ActorLanguage.structure.ForEachActorReference");
+    /*package*/ static final SConcept ForEachActorReferenceStatement$Jq = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5dbf567L, "ActorLanguage.structure.ForEachActorReferenceStatement");
     /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
     /*package*/ static final SConcept ActorReferenceList$4g = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5ba7cb3L, "ActorLanguage.structure.ActorReferenceList");
   }

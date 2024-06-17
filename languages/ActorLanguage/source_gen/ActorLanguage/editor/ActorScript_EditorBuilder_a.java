@@ -89,6 +89,12 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
     editorCell.addEditorCell(createConstant_17());
     editorCell.addEditorCell(createRefNode_1());
     editorCell.addEditorCell(createConstant_18());
+    editorCell.addEditorCell(createConstant_19());
+    editorCell.addEditorCell(createConstant_20());
+    editorCell.addEditorCell(createConstant_21());
+    editorCell.addEditorCell(createConstant_22());
+    editorCell.addEditorCell(createRefNode_2());
+    editorCell.addEditorCell(createConstant_23());
     return editorCell;
   }
   private EditorCell createProperty_0() {
@@ -491,7 +497,7 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
     return editorCell;
   }
   private EditorCell createConstant_16() {
-    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "Topology:");
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "Initializer:");
     editorCell.setCellId("Constant_pclfx2_u0");
     Style style = new StyleImpl();
     style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, true);
@@ -511,14 +517,123 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
     return editorCell;
   }
   private EditorCell createRefNode_1() {
-    SingleRoleCellProvider provider = new topologySingleRoleHandler_pclfx2_w0(myNode, LINKS.topology$GORc, getEditorContext());
+    SingleRoleCellProvider provider = new initializerSingleRoleHandler_pclfx2_w0(myNode, LINKS.initializer$1tQJ, getEditorContext());
     return provider.createCell();
   }
-  private static class topologySingleRoleHandler_pclfx2_w0 extends SingleRoleCellProvider {
+  private static class initializerSingleRoleHandler_pclfx2_w0 extends SingleRoleCellProvider {
     @NotNull
     private SNode myNode;
 
-    public topologySingleRoleHandler_pclfx2_w0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+    public initializerSingleRoleHandler_pclfx2_w0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+      super(containmentLink, context);
+      myNode = ownerNode;
+    }
+
+    @Override
+    @NotNull
+    public SNode getNode() {
+      return myNode;
+    }
+
+    protected EditorCell createChildCell(SNode child) {
+      EditorCell editorCell = getUpdateSession().updateChildNodeCell(child);
+      editorCell.setAction(CellActionType.DELETE, new CellAction_DeleteSmart(getNode(), LINKS.initializer$1tQJ, child));
+      editorCell.setAction(CellActionType.BACKSPACE, new CellAction_DeleteSmart(getNode(), LINKS.initializer$1tQJ, child));
+      installCellInfo(child, editorCell, false);
+      return editorCell;
+    }
+
+
+
+    private void installCellInfo(SNode child, EditorCell editorCell, boolean isEmpty) {
+      if (editorCell.getSubstituteInfo() == null || editorCell.getSubstituteInfo() instanceof DefaultSubstituteInfo) {
+        editorCell.setSubstituteInfo((isEmpty ? new SEmptyContainmentSubstituteInfo(editorCell) : new SChildSubstituteInfo(editorCell)));
+      }
+      if (editorCell.getSRole() == null) {
+        editorCell.setSRole(LINKS.initializer$1tQJ);
+      }
+      Style style = new StyleImpl();
+      style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, true);
+      style.set(StyleAttributes.INDENT_LAYOUT_INDENT, true);
+      editorCell.getStyle().putAll(style);
+    }
+    @Override
+    protected EditorCell createEmptyCell() {
+      getCellFactory().pushCellContext();
+      getCellFactory().setNodeLocation(new SNodeLocation.FromParentAndLink(getNode(), LINKS.initializer$1tQJ));
+      try {
+        EditorCell editorCell = super.createEmptyCell();
+        editorCell.setCellId("empty_initializer");
+        installCellInfo(null, editorCell, true);
+        setCellContext(editorCell);
+        return editorCell;
+      } finally {
+        getCellFactory().popCellContext();
+      }
+    }
+    protected String getNoTargetText() {
+      return "<no initializer>";
+    }
+  }
+  private EditorCell createConstant_18() {
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "");
+    editorCell.setCellId("Constant_pclfx2_x0");
+    Style style = new StyleImpl();
+    style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, true);
+    style.set(StyleAttributes.INDENT_LAYOUT_INDENT, true);
+    editorCell.getStyle().putAll(style);
+    editorCell.setDefaultText("");
+    return editorCell;
+  }
+  private EditorCell createConstant_19() {
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "----------------------------------------------------------------------------------------------");
+    editorCell.setCellId("Constant_pclfx2_y0");
+    Style style = new StyleImpl();
+    style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, true);
+    style.set(StyleAttributes.INDENT_LAYOUT_INDENT, true);
+    editorCell.getStyle().putAll(style);
+    editorCell.setDefaultText("");
+    return editorCell;
+  }
+  private EditorCell createConstant_20() {
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "");
+    editorCell.setCellId("Constant_pclfx2_z0");
+    Style style = new StyleImpl();
+    style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, true);
+    style.set(StyleAttributes.INDENT_LAYOUT_INDENT, true);
+    editorCell.getStyle().putAll(style);
+    editorCell.setDefaultText("");
+    return editorCell;
+  }
+  private EditorCell createConstant_21() {
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "Topology:");
+    editorCell.setCellId("Constant_pclfx2_ab0");
+    Style style = new StyleImpl();
+    style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, true);
+    style.set(StyleAttributes.INDENT_LAYOUT_INDENT, true);
+    editorCell.getStyle().putAll(style);
+    editorCell.setDefaultText("");
+    return editorCell;
+  }
+  private EditorCell createConstant_22() {
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "");
+    editorCell.setCellId("Constant_pclfx2_bb0");
+    Style style = new StyleImpl();
+    style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, true);
+    style.set(StyleAttributes.INDENT_LAYOUT_INDENT, true);
+    editorCell.getStyle().putAll(style);
+    editorCell.setDefaultText("");
+    return editorCell;
+  }
+  private EditorCell createRefNode_2() {
+    SingleRoleCellProvider provider = new topologySingleRoleHandler_pclfx2_cb0(myNode, LINKS.topology$GORc, getEditorContext());
+    return provider.createCell();
+  }
+  private static class topologySingleRoleHandler_pclfx2_cb0 extends SingleRoleCellProvider {
+    @NotNull
+    private SNode myNode;
+
+    public topologySingleRoleHandler_pclfx2_cb0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
       super(containmentLink, context);
       myNode = ownerNode;
     }
@@ -569,9 +684,9 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
       return "<no topology>";
     }
   }
-  private EditorCell createConstant_18() {
+  private EditorCell createConstant_23() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "");
-    editorCell.setCellId("Constant_pclfx2_x0");
+    editorCell.setCellId("Constant_pclfx2_db0");
     Style style = new StyleImpl();
     style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, true);
     style.set(StyleAttributes.INDENT_LAYOUT_INDENT, true);
@@ -594,6 +709,7 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
     /*package*/ static final SContainmentLink behaviors$VQhG = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x5d890eb3ebfeaec2L, "behaviors");
     /*package*/ static final SContainmentLink receptionist$GJcH = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x5d890eb3ebff2495L, "receptionist");
     /*package*/ static final SContainmentLink actors$EA0a = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x35a5eccbf2f23377L, "actors");
+    /*package*/ static final SContainmentLink initializer$1tQJ = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0xe2178aac28bdcbL, "initializer");
     /*package*/ static final SContainmentLink topology$GORc = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x262cd812cfe6cc9dL, "topology");
   }
 }

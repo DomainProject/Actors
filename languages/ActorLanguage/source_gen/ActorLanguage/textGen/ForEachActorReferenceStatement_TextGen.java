@@ -11,11 +11,10 @@ import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescripto
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
-public class ForEachActorReference_TextGen extends TextGenDescriptorBase {
+public class ForEachActorReferenceStatement_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
@@ -27,7 +26,6 @@ public class ForEachActorReference_TextGen extends TextGenDescriptorBase {
     tgs.append("->size; i++) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
-    tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.body$c1sm));
     ctx.getBuffer().area().decreaseIndent();
     tgs.indent();
     tgs.append("}");
@@ -39,7 +37,6 @@ public class ForEachActorReference_TextGen extends TextGenDescriptorBase {
 
   private static final class LINKS {
     /*package*/ static final SReferenceLink actorReferenceList$RLVE = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5dbf567L, 0x401c50b1e5dbf568L, "actorReferenceList");
-    /*package*/ static final SContainmentLink body$c1sm = MetaAdapterFactory.getContainmentLink(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10cb1ac5adeL, 0x10cb1ada6e8L, "body");
   }
 
   private static final class PROPS {

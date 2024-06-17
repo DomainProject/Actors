@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root>
     <file name="ActionAspectDescriptorImpl.java">
-      <unit at="12,0,34,0" name="ActorLanguage.actions.ActionAspectDescriptorImpl" />
+      <unit at="12,0,36,0" name="ActorLanguage.actions.ActionAspectDescriptorImpl" />
     </file>
   </root>
   <root nodeRef="r:4117b66e-6773-4ea8-8d65-4682755ba8ec(ActorLanguage.actions)/1411682935496708277">
     <file name="SwitchPolicyFactory.java">
-      <node id="1411682935497476013" at="15,102,16,54" concept="3" />
+      <node id="1411682935497476013" at="15,102,16,54" concept="5" />
       <node id="1411682935496708300" at="16,54,17,240" concept="0" />
-      <node id="1411682935496708277" at="22,0,23,0" concept="4" trace="expression$CjpY" />
-      <node id="1411682935496708278" at="15,0,19,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="1411682935496708277" at="22,0,23,0" concept="7" trace="expression$CjpY" />
+      <node id="1411682935496708278" at="15,0,19,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
       <scope id="1411682935496708278" at="15,102,17,240" />
       <scope id="1411682935496708278" at="15,0,19,0">
         <var name="enclosingNode" id="1411682935496708278" />
@@ -29,29 +32,82 @@
       <unit id="1411682935496708277" at="13,0,25,0" name="ActorLanguage.actions.SwitchPolicyFactory" />
     </file>
   </root>
-  <root nodeRef="r:4117b66e-6773-4ea8-8d65-4682755ba8ec(ActorLanguage.actions)/2411303652493859818">
-    <file name="EnvelopeFactory.java">
-      <node id="6739934483261635026" at="11,102,12,98" concept="3" />
-      <node id="2411303652493859819" at="11,0,14,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
-      <scope id="2411303652493859819" at="11,102,12,98" />
-      <scope id="2411303652493859819" at="11,0,14,0">
-        <var name="enclosingNode" id="2411303652493859819" />
-        <var name="index" id="2411303652493859819" />
-        <var name="model" id="2411303652493859819" />
-        <var name="newNode" id="2411303652493859819" />
-        <var name="sampleNode" id="2411303652493859819" />
+  <root nodeRef="r:4117b66e-6773-4ea8-8d65-4682755ba8ec(ActorLanguage.actions)/4813801747211756765">
+    <file name="BehaviorFactory.java">
+      <node id="4813801747214656527" at="17,102,18,160" concept="0" />
+      <node id="4813801747211756765" at="23,0,24,0" concept="7" trace="actions$MLkf" />
+      <node id="4813801747211756765" at="27,0,28,0" concept="7" trace="Fetch$Nj" />
+      <node id="4813801747211756767" at="17,0,20,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="4813801747211756767" at="17,102,18,160" />
+      <scope id="4813801747211756767" at="17,0,20,0">
+        <var name="enclosingNode" id="4813801747211756767" />
+        <var name="index" id="4813801747211756767" />
+        <var name="model" id="4813801747211756767" />
+        <var name="newNode" id="4813801747211756767" />
+        <var name="sampleNode" id="4813801747211756767" />
       </scope>
-      <unit id="2411303652493859819" at="10,0,15,0" name="ActorLanguage.actions.EnvelopeFactory$NodeFactory_2411303652493859819" />
-      <unit id="2411303652493859818" at="9,0,16,0" name="ActorLanguage.actions.EnvelopeFactory" />
+      <unit id="4813801747211756765" at="22,0,25,0" name="ActorLanguage.actions.BehaviorFactory$LINKS" />
+      <unit id="4813801747211756765" at="26,0,29,0" name="ActorLanguage.actions.BehaviorFactory$CONCEPTS" />
+      <unit id="4813801747211756767" at="16,0,21,0" name="ActorLanguage.actions.BehaviorFactory$NodeFactory_4813801747211756767" />
+      <unit id="4813801747211756765" at="15,0,30,0" name="ActorLanguage.actions.BehaviorFactory" />
+    </file>
+  </root>
+  <root nodeRef="r:4117b66e-6773-4ea8-8d65-4682755ba8ec(ActorLanguage.actions)/4813801747213164450">
+    <file name="FetchFactory.java">
+      <node id="7652281366052117920" at="22,108,23,230" concept="0" />
+      <node id="4813801747213174598" at="23,230,24,0" concept="6" />
+      <node id="7652281366052694501" at="24,0,25,31" concept="4" />
+      <node id="4813801747213174720" at="25,31,26,0" concept="6" />
+      <node id="7652281366053286226" at="26,0,27,316" concept="4" />
+      <node id="4813801747213174736" at="27,316,28,0" concept="6" />
+      <node id="7652281366052695701" at="31,96,32,31" concept="0" />
+      <node id="4813801747213199955" at="35,7,36,0" concept="6" />
+      <node id="4813801747213200422" at="36,0,37,140" concept="0" />
+      <node id="4813801747213200019" at="37,140,38,0" concept="6" />
+      <node id="7652281366052152427" at="38,0,39,277" concept="0" />
+      <node id="4813801747213218829" at="39,277,40,319" concept="0" />
+      <node id="4813801747213192138" at="40,319,41,0" concept="6" />
+      <node id="4813801747213164450" at="46,0,47,0" concept="7" trace="message$diNF" />
+      <node id="4813801747213164450" at="47,0,48,0" concept="7" trace="payload$N_RC" />
+      <node id="4813801747213164450" at="51,0,52,0" concept="7" trace="CreateActor$Uv" />
+      <node id="4813801747213164450" at="52,0,53,0" concept="7" trace="CreateMessage$aX" />
+      <node id="4813801747213164450" at="53,0,54,0" concept="7" trace="CreatePayload$Pf" />
+      <node id="4813801747213164450" at="57,0,58,0" concept="7" trace="name$MnvL" />
+      <node id="7652281366052676991" at="30,71,33,11" concept="2" />
+      <node id="7652281366052669877" at="29,65,34,9" concept="1" />
+      <node id="7652281366052935315" at="28,0,35,7" concept="2" />
+      <node id="4813801747213164451" at="22,0,43,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="7652281366052676993" at="31,96,32,31" />
+      <scope id="7652281366052669883" at="30,71,33,11" />
+      <scope id="7652281366052669877" at="29,65,34,9">
+        <var name="message" id="7652281366052669879" />
+      </scope>
+      <scope id="7652281366052935317" at="29,65,34,9" />
+      <scope id="4813801747213164451" at="22,108,41,0">
+        <var name="existingMessages" id="7652281366053286229" />
+        <var name="receivedMessages" id="7652281366052694504" />
+      </scope>
+      <scope id="4813801747213164451" at="22,0,43,0">
+        <var name="enclosingNode" id="4813801747213164451" />
+        <var name="index" id="4813801747213164451" />
+        <var name="model" id="4813801747213164451" />
+        <var name="newNode" id="4813801747213164451" />
+        <var name="sampleNode" id="4813801747213164451" />
+      </scope>
+      <unit id="4813801747213164450" at="56,0,59,0" name="ActorLanguage.actions.FetchFactory$PROPS" />
+      <unit id="4813801747213164450" at="45,0,49,0" name="ActorLanguage.actions.FetchFactory$LINKS" />
+      <unit id="4813801747213164450" at="50,0,55,0" name="ActorLanguage.actions.FetchFactory$CONCEPTS" />
+      <unit id="4813801747213164451" at="21,0,44,0" name="ActorLanguage.actions.FetchFactory$NodeFactory_4813801747213164451" />
+      <unit id="4813801747213164450" at="20,0,60,0" name="ActorLanguage.actions.FetchFactory" />
     </file>
   </root>
   <root nodeRef="r:4117b66e-6773-4ea8-8d65-4682755ba8ec(ActorLanguage.actions)/6739934483259132150">
     <file name="ReceptionistFactory.java">
       <node id="6739934483259132173" at="14,102,15,65" concept="0" />
       <node id="6739934483259155048" at="15,65,16,75" concept="0" />
-      <node id="6739934483259132150" at="21,0,22,0" concept="4" trace="address$LyiD" />
-      <node id="6739934483259132150" at="22,0,23,0" concept="4" trace="name$MnvL" />
-      <node id="6739934483259132151" at="14,0,18,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="6739934483259132150" at="21,0,22,0" concept="7" trace="address$LyiD" />
+      <node id="6739934483259132150" at="22,0,23,0" concept="7" trace="name$MnvL" />
+      <node id="6739934483259132151" at="14,0,18,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
       <scope id="6739934483259132151" at="14,102,16,75" />
       <scope id="6739934483259132151" at="14,0,18,0">
         <var name="enclosingNode" id="6739934483259132151" />
@@ -67,10 +123,10 @@
   </root>
   <root nodeRef="r:4117b66e-6773-4ea8-8d65-4682755ba8ec(ActorLanguage.actions)/7694881003795581832">
     <file name="ActorFactory.java">
-      <node id="7694881003796292577" at="15,102,16,188" concept="2" />
+      <node id="7694881003796292577" at="15,102,16,188" concept="4" />
       <node id="7694881003796134478" at="16,188,17,74" concept="0" />
-      <node id="7694881003795581832" at="22,0,23,0" concept="4" trace="messageQueue$L0ws" />
-      <node id="7694881003795581833" at="15,0,19,0" concept="1" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="7694881003795581832" at="22,0,23,0" concept="7" trace="messageQueue$L0ws" />
+      <node id="7694881003795581833" at="15,0,19,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
       <scope id="7694881003795581833" at="15,102,17,74">
         <var name="mQueue" id="7694881003796292580" />
       </scope>

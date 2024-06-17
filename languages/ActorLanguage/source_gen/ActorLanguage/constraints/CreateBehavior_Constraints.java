@@ -13,17 +13,12 @@ import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.ArrayList;
-import org.jetbrains.mps.openapi.language.SEnumerationLiteral;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SEnumOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
 import java.util.Map;
 import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.runtime.PropertyConstraintsDescriptor;
 import java.util.HashMap;
 import org.jetbrains.mps.openapi.language.SConcept;
-import org.jetbrains.mps.openapi.language.SContainmentLink;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class CreateBehavior_Constraints extends BaseConstraintsDescriptor {
   public CreateBehavior_Constraints() {
@@ -54,27 +49,10 @@ public class CreateBehavior_Constraints extends BaseConstraintsDescriptor {
       return true;
     }
   }
-  public static class Type_Property extends BasePropertyConstraintsDescriptor {
-    public Type_Property(ConstraintsDescriptor container) {
-      super(PROPS.type$HE4q, container, false, true, false);
-    }
-    @Override
-    public void setPropertyValue(SNode node, Object propertyValue) {
-      staticSetPropertyValue(node, SPropertyOperations.castEnummember(propertyValue));
-    }
-    private static void staticSetPropertyValue(SNode node, SEnumerationLiteral propertyValue) {
-      if (propertyValue.equals(SEnumOperations.getMember(MetaAdapterFactory.getEnumeration(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5366e9c2d9a6b813L, "ActorLanguage.structure.BehaviorType"), 0x5366e9c2d9a6b815L, "RESPONSIVE"))) {
-        SLinkOperations.getChildren(node, LINKS.actions$MLkf).add(0, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8975L, "ActorLanguage.structure.Fetch")));
-      }
-
-      SPropertyOperations.assignEnum(node, PROPS.type$HE4q, propertyValue);
-    }
-  }
   @Override
   protected Map<SProperty, PropertyConstraintsDescriptor> getSpecifiedProperties() {
     Map<SProperty, PropertyConstraintsDescriptor> properties = new HashMap<SProperty, PropertyConstraintsDescriptor>();
     properties.put(PROPS.name$MnvL, new Name_Property(this));
-    properties.put(PROPS.type$HE4q, new Type_Property(this));
     return properties;
   }
 
@@ -85,10 +63,5 @@ public class CreateBehavior_Constraints extends BaseConstraintsDescriptor {
 
   private static final class PROPS {
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
-    /*package*/ static final SProperty type$HE4q = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5366e9c2d9a6b818L, "type");
-  }
-
-  private static final class LINKS {
-    /*package*/ static final SContainmentLink actions$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "actions");
   }
 }

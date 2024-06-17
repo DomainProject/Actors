@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<product version="3" modelHash="c93g9sel171074irm6dm72shpsej5g5">
-  <files names="ConceptPresentationAspectImpl.java:EnumerationDescriptor_BehaviorType.java:EnumerationDescriptor_FetchingPolicy.java:EnumerationDescriptor_ReceptionistPolicyEnum.java:LanguageConceptSwitch.java:StructureAspectDescriptor.java" />
+<product version="3" modelHash="-7u9ftfpmpcrbsptd5dy5rbvs155p8ko">
+  <files names="ConceptPresentationAspectImpl.java:EnumerationDescriptor_FetchingPolicy.java:EnumerationDescriptor_ReceptionistPolicyEnum.java:LanguageConceptSwitch.java:StructureAspectDescriptor.java" />
 </product>
 
