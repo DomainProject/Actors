@@ -31,9 +31,6 @@
       <concept id="13109696843924945" name="ActorLanguage.structure.ActorReference" flags="ng" index="Bk5ry">
         <reference id="13109696843924946" name="actor" index="Bk5rx" />
       </concept>
-      <concept id="711157185106633347" name="ActorLanguage.structure.SelectEnvelope" flags="ng" index="GouGM">
-        <reference id="711157185106633348" name="envelope" index="GouGP" />
-      </concept>
       <concept id="63639229097850239" name="ActorLanguage.structure.Initializer" flags="ng" index="2GMybP">
         <child id="63639229097872036" name="actions" index="2GMDOI" />
       </concept>
@@ -72,12 +69,18 @@
         <child id="6739934483257959573" name="receptionist" index="2QtyCA" />
         <child id="6739934483257929410" name="behaviors" index="2QtU1L" />
         <child id="3865756215865914231" name="actors" index="37lXYW" />
+        <child id="7051067309802828086" name="externalFunctions" index="1hWdPE" />
       </concept>
       <concept id="7051067309796483633" name="ActorLanguage.structure.ActorLanguageStatement" flags="ngI" index="1e4STH">
         <child id="7051067309796483634" name="statements" index="1e4STI" />
       </concept>
       <concept id="5068928393908140674" name="ActorLanguage.structure.SelectPayload" flags="ng" index="3g$k$6">
         <reference id="5068928393908140689" name="payload" index="3g$k$l" />
+      </concept>
+      <concept id="7051067309802826947" name="ActorLanguage.structure.ExternalFunction" flags="ng" index="1hWc2v" />
+      <concept id="7051067309802828018" name="ActorLanguage.structure.ExecuteExternalFunction" flags="ng" index="1hWdMI">
+        <reference id="7051067309803752890" name="message" index="1hSE7A" />
+        <reference id="7051067309802828019" name="function" index="1hWdMJ" />
       </concept>
       <concept id="2411303652489062023" name="ActorLanguage.structure.CreateEnvelope" flags="ng" index="1lgcPy">
         <property id="7694881003800154999" name="priority" index="2uCmrR" />
@@ -270,14 +273,9 @@
         </node>
       </node>
       <node concept="3clFbH" id="67qr5KK4FlF" role="37ngyo" />
-      <node concept="37lXYU" id="67qr5KK8iOq" role="37ngyo">
-        <property role="TrG5h" value="m1" />
-        <node concept="3g$k$6" id="67qr5KK8iOH" role="GupN0">
-          <ref role="3g$k$l" node="67qr5KJWq2F" resolve="rec_message0.payload" />
-        </node>
-        <node concept="GouGM" id="67qr5KK8iOK" role="34eGaj">
-          <ref role="GouGP" node="67qr5KJWq5c" resolve="e" />
-        </node>
+      <node concept="1hWdMI" id="67qr5KKjBy$" role="37ngyo">
+        <ref role="1hWdMJ" node="67qr5KKcstY" resolve="compute" />
+        <ref role="1hSE7A" node="67qr5KJWq55" resolve="m" />
       </node>
     </node>
     <node concept="1lj4MQ" id="67qr5KJWq2K" role="2QtU1L">
@@ -290,6 +288,10 @@
           </node>
         </node>
       </node>
+      <node concept="1hWdMI" id="67qr5KKecQO" role="37ngyo">
+        <ref role="1hWdMJ" node="67qr5KKcsu0" resolve="process" />
+        <ref role="1hSE7A" node="67qr5KJWq2M" resolve="rec_message0" />
+      </node>
     </node>
     <node concept="1lj4MQ" id="67qr5KJWq34" role="2QtU1L">
       <property role="TrG5h" value="b3" />
@@ -301,6 +303,12 @@
           </node>
         </node>
       </node>
+    </node>
+    <node concept="1hWc2v" id="67qr5KKcstY" role="1hWdPE">
+      <property role="TrG5h" value="compute" />
+    </node>
+    <node concept="1hWc2v" id="67qr5KKcsu0" role="1hWdPE">
+      <property role="TrG5h" value="process" />
     </node>
   </node>
 </model>

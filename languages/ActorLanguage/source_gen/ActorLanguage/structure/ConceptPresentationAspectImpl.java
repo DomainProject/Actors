@@ -33,6 +33,8 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_CreateMessage;
   private ConceptPresentation props_CreatePayload;
   private ConceptPresentation props_Envelope;
+  private ConceptPresentation props_ExecuteExternalFunction;
+  private ConceptPresentation props_ExternalFunction;
   private ConceptPresentation props_Fetch;
   private ConceptPresentation props_ForEachActorReferenceStatement;
   private ConceptPresentation props_GetActorsFromReceptionist;
@@ -228,6 +230,20 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Envelope = cpb.create();
         }
         return props_Envelope;
+      case LanguageConceptSwitch.ExecuteExternalFunction:
+        if (props_ExecuteExternalFunction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("execute");
+          props_ExecuteExternalFunction = cpb.create();
+        }
+        return props_ExecuteExternalFunction;
+      case LanguageConceptSwitch.ExternalFunction:
+        if (props_ExternalFunction == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ExternalFunction = cpb.create();
+        }
+        return props_ExternalFunction;
       case LanguageConceptSwitch.Fetch:
         if (props_Fetch == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

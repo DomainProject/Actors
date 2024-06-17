@@ -1633,5 +1633,55 @@
       </node>
     </node>
   </node>
+  <node concept="1M2fIO" id="67qr5KKecSv">
+    <property role="3GE5qa" value="externalFunction" />
+    <ref role="1M2myG" to="o1mc:67qr5KKaF3M" resolve="ExecuteExternalFunction" />
+    <node concept="1N5Pfh" id="67qr5KKecSw" role="1Mr941">
+      <ref role="1N5Vy1" to="o1mc:67qr5KKecQU" resolve="message" />
+      <node concept="3dgokm" id="67qr5KKecT_" role="1N6uqs">
+        <node concept="3clFbS" id="67qr5KKecTA" role="2VODD2">
+          <node concept="3cpWs8" id="67qr5KKecYv" role="3cqZAp">
+            <node concept="3cpWsn" id="67qr5KKecYt" role="3cpWs9">
+              <property role="3TUv4t" value="true" />
+              <property role="TrG5h" value="messages" />
+              <node concept="A3Dl8" id="67qr5KKed35" role="1tU5fm">
+                <node concept="3Tqbb2" id="67qr5KKed4P" role="A3Ik2">
+                  <ref role="ehGHo" to="o1mc:3m_VcJMWzdL" resolve="CreateMessage" />
+                </node>
+              </node>
+              <node concept="2OqwBi" id="67qr5KKeepC" role="33vP2m">
+                <node concept="2OqwBi" id="67qr5KKedn7" role="2Oq$k0">
+                  <node concept="3kakTB" id="67qr5KKed7r" role="2Oq$k0" />
+                  <node concept="2Xjw5R" id="67qr5KKee8Z" role="2OqNvi">
+                    <node concept="1xMEDy" id="67qr5KKee91" role="1xVPHs">
+                      <node concept="chp4Y" id="67qr5KKeebK" role="ri$Ld">
+                        <ref role="cht4Q" to="o1mc:25QEYlOeItj" resolve="CreateBehavior" />
+                      </node>
+                    </node>
+                  </node>
+                </node>
+                <node concept="2Rf3mk" id="67qr5KKef5q" role="2OqNvi">
+                  <node concept="1xMEDy" id="67qr5KKef5s" role="1xVPHs">
+                    <node concept="chp4Y" id="67qr5KKef9C" role="ri$Ld">
+                      <ref role="cht4Q" to="o1mc:3m_VcJMWzdL" resolve="CreateMessage" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+          <node concept="3clFbF" id="67qr5KKefgq" role="3cqZAp">
+            <node concept="2YIFZM" id="67qr5KKefwb" role="3clFbG">
+              <ref role="37wK5l" to="o8zo:4IP40Bi3eAf" resolve="forNamedElements" />
+              <ref role="1Pybhc" to="o8zo:4IP40Bi3e_R" resolve="ListScope" />
+              <node concept="37vLTw" id="67qr5KKef$I" role="37wK5m">
+                <ref role="3cqZAo" node="67qr5KKecYt" resolve="messages" />
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+  </node>
 </model>
 
