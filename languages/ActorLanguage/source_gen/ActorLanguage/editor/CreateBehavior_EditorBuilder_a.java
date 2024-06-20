@@ -126,11 +126,11 @@ import org.jetbrains.mps.openapi.language.SConcept;
   private EditorCell createProperty_1() {
     getCellFactory().pushCellContext();
     try {
-      final SProperty property = PROPS.type$HE4q;
+      final SProperty property = PROPS.receivedMessageName$AwKe;
       getCellFactory().setPropertyInfo(new SPropertyInfo(myNode, property));
       EditorCell_Property editorCell = EditorCell_Property.create(getEditorContext(), new SPropertyAccessor(myNode, property, false, false), myNode);
-      editorCell.setDefaultText("<no type>");
-      editorCell.setCellId("property_type");
+      editorCell.setDefaultText("<no receivedMessageName>");
+      editorCell.setCellId("property_receivedMessageName");
       editorCell.setSubstituteInfo(new SPropertySubstituteInfo(editorCell, property));
       setCellContext(editorCell);
       Iterable<SNode> propertyAttributes = SNodeOperations.ofConcept(new IAttributeDescriptor.AllAttributes().list(myNode), CONCEPTS.PropertyAttribute$Gb);
@@ -303,7 +303,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
       }
     }
     protected String getNoTargetText() {
-      return "No Become Statement (actor terminates)";
+      return "No Become Statement";
     }
   }
   private EditorCell createConstant_6() {
@@ -328,7 +328,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
 
   private static final class PROPS {
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
-    /*package*/ static final SProperty type$HE4q = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5366e9c2d9a6b818L, "type");
+    /*package*/ static final SProperty receivedMessageName$AwKe = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5ef413f8f5ef4191L, "receivedMessageName");
   }
 
   private static final class CONCEPTS {

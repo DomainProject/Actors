@@ -15,13 +15,15 @@ import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.scope.Scope;
 import jetbrains.mps.smodel.runtime.ReferenceConstraintsContext;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.scope.ListScope;
 import java.util.HashMap;
 import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class SendMessage_Constraints extends BaseConstraintsDescriptor {
   public SendMessage_Constraints() {
@@ -41,8 +43,14 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
           }
           @Override
           public Scope createScope(final ReferenceConstraintsContext _context) {
-            final Iterable<SNode> messages = ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.AbstractBehavior$Dm, false, false), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{})).where((it) -> !(SNodeOperations.isInstanceOf(SNodeOperations.getParent(it), CONCEPTS.Fetch$Nj)));
+            final Iterable<SNode> messages;
+            if (SNodeOperations.isInstanceOf(SNodeOperations.getParent(_context.getReferenceNode()), CONCEPTS.Initializer$mM)) {
+              messages = SNodeOperations.getNodeDescendants(SNodeOperations.getParent(_context.getReferenceNode()), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{});
+            } else {
+              messages = ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.AbstractBehavior$Dm, false, false), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{})).where((it) -> it != SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateBehavior$iN, false, false), LINKS.receivedMessage$DtsG));
+            }
             return ListScope.forNamedElements(messages);
+
           }
         };
       }
@@ -54,12 +62,14 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept SendMessage$$2 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, "ActorLanguage.structure.SendMessage");
-    /*package*/ static final SConcept AbstractBehavior$Dm = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb9024127367L, "ActorLanguage.structure.AbstractBehavior");
     /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
-    /*package*/ static final SConcept Fetch$Nj = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8975L, "ActorLanguage.structure.Fetch");
+    /*package*/ static final SConcept Initializer$mM = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xe2178aac28357fL, "ActorLanguage.structure.Initializer");
+    /*package*/ static final SConcept AbstractBehavior$Dm = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb9024127367L, "ActorLanguage.structure.AbstractBehavior");
+    /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
   }
 
   private static final class LINKS {
     /*package*/ static final SReferenceLink message$4GHG = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, 0x35a5eccbf2f26df5L, "message");
+    /*package*/ static final SContainmentLink receivedMessage$DtsG = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5ef413f8f5ff2c54L, "receivedMessage");
   }
 }

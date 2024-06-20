@@ -9,10 +9,10 @@ import java.util.List;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
-public class EnumerationDescriptor_FetchingPolicy extends EnumerationDescriptorBase {
+public class EnumerationDescriptor_FetchPolicy extends EnumerationDescriptorBase {
 
-  public EnumerationDescriptor_FetchingPolicy() {
-    super(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8976L, "FetchingPolicy", "r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7033755722359605622");
+  public EnumerationDescriptor_FetchPolicy() {
+    super(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8976L, "FetchPolicy", "r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7033755722359605622");
   }
 
   private final EnumerationDescriptor.MemberDescriptor myMember_FIFO_0 = new EnumerationDescriptor.MemberDescriptor("FIFO", "FIFO", 0x619ceb90241d8977L, "r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7033755722359605623");

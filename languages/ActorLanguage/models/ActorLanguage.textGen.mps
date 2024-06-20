@@ -172,9 +172,17 @@
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
       <concept id="1133920641626" name="jetbrains.mps.lang.core.structure.BaseConcept" flags="ng" index="2VYdi">
         <property id="1193676396447" name="virtualPackage" index="3GE5qa" />
+        <child id="5169995583184591170" name="smodelAttribute" index="lGtFl" />
       </concept>
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ngI" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
+      </concept>
+      <concept id="709746936026466394" name="jetbrains.mps.lang.core.structure.ChildAttribute" flags="ng" index="3VBwX9">
+        <property id="709746936026609031" name="linkId" index="3V$3ak" />
+        <property id="709746936026609029" name="role_DebugInfo" index="3V$3am" />
+      </concept>
+      <concept id="4452961908202556907" name="jetbrains.mps.lang.core.structure.BaseCommentAttribute" flags="ng" index="1X3_iC">
+        <child id="3078666699043039389" name="commentedNode" index="8Wnug" />
       </concept>
     </language>
     <language id="c7fb639f-be78-4307-89b0-b5959c3fa8c8" name="jetbrains.mps.lang.text">
@@ -1502,28 +1510,32 @@
               </node>
               <node concept="l8MVK" id="3QReeeiZIyV" role="lcghm" />
             </node>
-            <node concept="3clFbJ" id="5dAUsbqfW04" role="3cqZAp">
-              <node concept="3clFbS" id="5dAUsbqfW06" role="3clFbx">
-                <node concept="lc7rE" id="5dAUsbqg6fJ" role="3cqZAp">
-                  <node concept="la8eA" id="5dAUsbqg6gd" role="lcghm">
-                    <property role="lacIc" value="msgbuf rcv_buf;" />
-                    <property role="ldcpH" value="true" />
+            <node concept="1X3_iC" id="5VO4ZzQ6aOm" role="lGtFl">
+              <property role="3V$3am" value="statement" />
+              <property role="3V$3ak" value="f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123136/1068581517665" />
+              <node concept="3clFbJ" id="5dAUsbqfW04" role="8Wnug">
+                <node concept="3clFbS" id="5dAUsbqfW06" role="3clFbx">
+                  <node concept="lc7rE" id="5dAUsbqg6fJ" role="3cqZAp">
+                    <node concept="la8eA" id="5dAUsbqg6gd" role="lcghm">
+                      <property role="lacIc" value="msgbuf rcv_buf;" />
+                      <property role="ldcpH" value="true" />
+                    </node>
+                    <node concept="l8MVK" id="5dAUsbqg6j$" role="lcghm" />
                   </node>
-                  <node concept="l8MVK" id="5dAUsbqg6j$" role="lcghm" />
                 </node>
-              </node>
-              <node concept="2OqwBi" id="5dAUsbqg0hU" role="3clFbw">
-                <node concept="2OqwBi" id="5dAUsbqfWen" role="2Oq$k0">
-                  <node concept="117lpO" id="5dAUsbqfW4v" role="2Oq$k0" />
-                  <node concept="2Rf3mk" id="5dAUsbqfWFp" role="2OqNvi">
-                    <node concept="1xMEDy" id="5dAUsbqfWFr" role="1xVPHs">
-                      <node concept="chp4Y" id="5dAUsbqfX0Y" role="ri$Ld">
-                        <ref role="cht4Q" to="o1mc:66sUT0$7o_P" resolve="Fetch" />
+                <node concept="2OqwBi" id="5dAUsbqg0hU" role="3clFbw">
+                  <node concept="2OqwBi" id="5dAUsbqfWen" role="2Oq$k0">
+                    <node concept="117lpO" id="5dAUsbqfW4v" role="2Oq$k0" />
+                    <node concept="2Rf3mk" id="5dAUsbqfWFp" role="2OqNvi">
+                      <node concept="1xMEDy" id="5dAUsbqfWFr" role="1xVPHs">
+                        <node concept="chp4Y" id="5dAUsbqfX0Y" role="ri$Ld">
+                          <ref role="cht4Q" to="o1mc:66sUT0$7o_P" resolve="Fetch" />
+                        </node>
                       </node>
                     </node>
                   </node>
+                  <node concept="3GX2aA" id="5dAUsbqg6eC" role="2OqNvi" />
                 </node>
-                <node concept="3GX2aA" id="5dAUsbqg6eC" role="2OqNvi" />
               </node>
             </node>
             <node concept="3clFbJ" id="3QReeeiXQlp" role="3cqZAp">
@@ -1719,86 +1731,90 @@
               </node>
             </node>
             <node concept="3clFbH" id="yb$BgnHm6V" role="3cqZAp" />
-            <node concept="3clFbJ" id="yb$BgnGDJe" role="3cqZAp">
-              <node concept="3clFbS" id="yb$BgnGDJf" role="3clFbx">
-                <node concept="lc7rE" id="yb$BgnGDJg" role="3cqZAp">
-                  <node concept="la8eA" id="yb$BgnGDJh" role="lcghm">
-                    <property role="lacIc" value="free(rcv_buf.msg-&gt;envelope-&gt;sender);" />
-                    <property role="ldcpH" value="true" />
+            <node concept="1X3_iC" id="5VO4ZzQ6b8G" role="lGtFl">
+              <property role="3V$3am" value="statement" />
+              <property role="3V$3ak" value="f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123136/1068581517665" />
+              <node concept="3clFbJ" id="yb$BgnGDJe" role="8Wnug">
+                <node concept="3clFbS" id="yb$BgnGDJf" role="3clFbx">
+                  <node concept="lc7rE" id="yb$BgnGDJg" role="3cqZAp">
+                    <node concept="la8eA" id="yb$BgnGDJh" role="lcghm">
+                      <property role="lacIc" value="free(rcv_buf.msg-&gt;envelope-&gt;sender);" />
+                      <property role="ldcpH" value="true" />
+                    </node>
+                    <node concept="l8MVK" id="yb$BgnGDJi" role="lcghm" />
                   </node>
-                  <node concept="l8MVK" id="yb$BgnGDJi" role="lcghm" />
-                </node>
-                <node concept="lc7rE" id="yb$BgnGE6J" role="3cqZAp">
-                  <node concept="la8eA" id="yb$BgnGE6K" role="lcghm">
-                    <property role="lacIc" value="free(rcv_buf.msg-&gt;envelope-&gt;receiver);" />
-                    <property role="ldcpH" value="true" />
+                  <node concept="lc7rE" id="yb$BgnGE6J" role="3cqZAp">
+                    <node concept="la8eA" id="yb$BgnGE6K" role="lcghm">
+                      <property role="lacIc" value="free(rcv_buf.msg-&gt;envelope-&gt;receiver);" />
+                      <property role="ldcpH" value="true" />
+                    </node>
+                    <node concept="l8MVK" id="yb$BgnGE6L" role="lcghm" />
                   </node>
-                  <node concept="l8MVK" id="yb$BgnGE6L" role="lcghm" />
-                </node>
-                <node concept="lc7rE" id="yb$BgnGE9e" role="3cqZAp">
-                  <node concept="la8eA" id="yb$BgnGE9f" role="lcghm">
-                    <property role="lacIc" value="free(rcv_buf.msg-&gt;envelope);" />
-                    <property role="ldcpH" value="true" />
+                  <node concept="lc7rE" id="yb$BgnGE9e" role="3cqZAp">
+                    <node concept="la8eA" id="yb$BgnGE9f" role="lcghm">
+                      <property role="lacIc" value="free(rcv_buf.msg-&gt;envelope);" />
+                      <property role="ldcpH" value="true" />
+                    </node>
+                    <node concept="l8MVK" id="yb$BgnGE9g" role="lcghm" />
                   </node>
-                  <node concept="l8MVK" id="yb$BgnGE9g" role="lcghm" />
-                </node>
-                <node concept="3clFbH" id="yb$BgnStvL" role="3cqZAp" />
-                <node concept="3SKdUt" id="yb$BgnZDZ_" role="3cqZAp">
-                  <node concept="1PaTwC" id="yb$BgnZDZA" role="1aUNEU">
-                    <node concept="3oM_SD" id="yb$BgnZE0f" role="1PaTwD">
-                      <property role="3oM_SC" value="payload" />
-                    </node>
-                    <node concept="3oM_SD" id="yb$Bgo1aX7" role="1PaTwD">
-                      <property role="3oM_SC" value="should" />
-                    </node>
-                    <node concept="3oM_SD" id="yb$Bgo1aW$" role="1PaTwD">
-                      <property role="3oM_SC" value="be" />
-                    </node>
-                    <node concept="3oM_SD" id="yb$Bgo1aUJ" role="1PaTwD">
-                      <property role="3oM_SC" value="freed" />
-                    </node>
-                    <node concept="3oM_SD" id="yb$BgnZE0Z" role="1PaTwD">
-                      <property role="3oM_SC" value="if" />
-                    </node>
-                    <node concept="3oM_SD" id="yb$BgnZE19" role="1PaTwD">
-                      <property role="3oM_SC" value="the" />
-                    </node>
-                    <node concept="3oM_SD" id="yb$BgnZE1l" role="1PaTwD">
-                      <property role="3oM_SC" value="message" />
-                    </node>
-                    <node concept="3oM_SD" id="yb$BgnZE1A" role="1PaTwD">
-                      <property role="3oM_SC" value="is" />
-                    </node>
-                    <node concept="3oM_SD" id="yb$BgnZE1N" role="1PaTwD">
-                      <property role="3oM_SC" value="not" />
-                    </node>
-                    <node concept="3oM_SD" id="yb$BgnZE22" role="1PaTwD">
-                      <property role="3oM_SC" value="forwarded" />
-                    </node>
-                  </node>
-                </node>
-                <node concept="3clFbH" id="yb$BgnZDYZ" role="3cqZAp" />
-                <node concept="lc7rE" id="yb$BgnH8WE" role="3cqZAp">
-                  <node concept="la8eA" id="yb$BgnH9gM" role="lcghm">
-                    <property role="lacIc" value="free(rcv_buf.msg);" />
-                    <property role="ldcpH" value="true" />
-                  </node>
-                  <node concept="l8MVK" id="yb$BgnH9im" role="lcghm" />
-                  <node concept="l8MVK" id="yb$BgnHqJH" role="lcghm" />
-                </node>
-              </node>
-              <node concept="2OqwBi" id="yb$BgnGDJj" role="3clFbw">
-                <node concept="2OqwBi" id="yb$BgnGDJk" role="2Oq$k0">
-                  <node concept="117lpO" id="yb$BgnGDJl" role="2Oq$k0" />
-                  <node concept="2Rf3mk" id="yb$BgnGDJm" role="2OqNvi">
-                    <node concept="1xMEDy" id="yb$BgnGDJn" role="1xVPHs">
-                      <node concept="chp4Y" id="yb$BgnGDJo" role="ri$Ld">
-                        <ref role="cht4Q" to="o1mc:66sUT0$7o_P" resolve="Fetch" />
+                  <node concept="3clFbH" id="yb$BgnStvL" role="3cqZAp" />
+                  <node concept="3SKdUt" id="yb$BgnZDZ_" role="3cqZAp">
+                    <node concept="1PaTwC" id="yb$BgnZDZA" role="1aUNEU">
+                      <node concept="3oM_SD" id="yb$BgnZE0f" role="1PaTwD">
+                        <property role="3oM_SC" value="payload" />
+                      </node>
+                      <node concept="3oM_SD" id="yb$Bgo1aX7" role="1PaTwD">
+                        <property role="3oM_SC" value="should" />
+                      </node>
+                      <node concept="3oM_SD" id="yb$Bgo1aW$" role="1PaTwD">
+                        <property role="3oM_SC" value="be" />
+                      </node>
+                      <node concept="3oM_SD" id="yb$Bgo1aUJ" role="1PaTwD">
+                        <property role="3oM_SC" value="freed" />
+                      </node>
+                      <node concept="3oM_SD" id="yb$BgnZE0Z" role="1PaTwD">
+                        <property role="3oM_SC" value="if" />
+                      </node>
+                      <node concept="3oM_SD" id="yb$BgnZE19" role="1PaTwD">
+                        <property role="3oM_SC" value="the" />
+                      </node>
+                      <node concept="3oM_SD" id="yb$BgnZE1l" role="1PaTwD">
+                        <property role="3oM_SC" value="message" />
+                      </node>
+                      <node concept="3oM_SD" id="yb$BgnZE1A" role="1PaTwD">
+                        <property role="3oM_SC" value="is" />
+                      </node>
+                      <node concept="3oM_SD" id="yb$BgnZE1N" role="1PaTwD">
+                        <property role="3oM_SC" value="not" />
+                      </node>
+                      <node concept="3oM_SD" id="yb$BgnZE22" role="1PaTwD">
+                        <property role="3oM_SC" value="forwarded" />
                       </node>
                     </node>
                   </node>
+                  <node concept="3clFbH" id="yb$BgnZDYZ" role="3cqZAp" />
+                  <node concept="lc7rE" id="yb$BgnH8WE" role="3cqZAp">
+                    <node concept="la8eA" id="yb$BgnH9gM" role="lcghm">
+                      <property role="lacIc" value="free(rcv_buf.msg);" />
+                      <property role="ldcpH" value="true" />
+                    </node>
+                    <node concept="l8MVK" id="yb$BgnH9im" role="lcghm" />
+                    <node concept="l8MVK" id="yb$BgnHqJH" role="lcghm" />
+                  </node>
                 </node>
-                <node concept="3GX2aA" id="yb$BgnGDJp" role="2OqNvi" />
+                <node concept="2OqwBi" id="yb$BgnGDJj" role="3clFbw">
+                  <node concept="2OqwBi" id="yb$BgnGDJk" role="2Oq$k0">
+                    <node concept="117lpO" id="yb$BgnGDJl" role="2Oq$k0" />
+                    <node concept="2Rf3mk" id="yb$BgnGDJm" role="2OqNvi">
+                      <node concept="1xMEDy" id="yb$BgnGDJn" role="1xVPHs">
+                        <node concept="chp4Y" id="yb$BgnGDJo" role="ri$Ld">
+                          <ref role="cht4Q" to="o1mc:66sUT0$7o_P" resolve="Fetch" />
+                        </node>
+                      </node>
+                    </node>
+                  </node>
+                  <node concept="3GX2aA" id="yb$BgnGDJp" role="2OqNvi" />
+                </node>
               </node>
             </node>
             <node concept="3clFbH" id="yb$BgnGCL8" role="3cqZAp" />
@@ -3727,7 +3743,7 @@
                       <node concept="2Xjw5R" id="7fAv2aKzmw0" role="2OqNvi">
                         <node concept="1xMEDy" id="7fAv2aKzmw2" role="1xVPHs">
                           <node concept="chp4Y" id="7fAv2aKzmz2" role="ri$Ld">
-                            <ref role="cht4Q" to="o1mc:40skb7_QZlB" resolve="ForEachActorReference" />
+                            <ref role="cht4Q" to="o1mc:40skb7_QZlB" resolve="ForEachActorReferenceStatement" />
                           </node>
                         </node>
                       </node>
@@ -3764,7 +3780,7 @@
               <node concept="2Xjw5R" id="4PfcJeiOB1o" role="2OqNvi">
                 <node concept="1xMEDy" id="4PfcJeiOB1q" role="1xVPHs">
                   <node concept="chp4Y" id="4PfcJeiOB64" role="ri$Ld">
-                    <ref role="cht4Q" to="o1mc:40skb7_QZlB" resolve="ForEachActorReference" />
+                    <ref role="cht4Q" to="o1mc:40skb7_QZlB" resolve="ForEachActorReferenceStatement" />
                   </node>
                 </node>
               </node>
@@ -4050,8 +4066,8 @@
     </node>
   </node>
   <node concept="WtQ9Q" id="40skb7A9VgN">
-    <property role="3GE5qa" value="actor.actorReference" />
-    <ref role="WuzLi" to="o1mc:40skb7_QZlB" resolve="ForEachActorReference" />
+    <property role="3GE5qa" value="statement" />
+    <ref role="WuzLi" to="o1mc:40skb7_QZlB" resolve="ForEachActorReferenceStatement" />
     <node concept="11bSqf" id="40skb7A9VgO" role="11c4hB">
       <node concept="3clFbS" id="40skb7A9VgP" role="2VODD2">
         <node concept="3clFbH" id="7fAv2aKwkYI" role="3cqZAp" />
@@ -4080,12 +4096,16 @@
         </node>
         <node concept="3izx1p" id="40skb7A9Zvg" role="3cqZAp">
           <node concept="3clFbS" id="40skb7A9Zvi" role="3izTki">
-            <node concept="lc7rE" id="40skb7A9ZwQ" role="3cqZAp">
-              <node concept="l9hG8" id="40skb7Aa00F" role="lcghm">
-                <node concept="2OqwBi" id="40skb7Aa0c7" role="lb14g">
-                  <node concept="117lpO" id="40skb7Aa01c" role="2Oq$k0" />
-                  <node concept="3TrEf2" id="40skb7Aa0Qo" role="2OqNvi">
-                    <ref role="3Tt5mk" to="tpee:gMLFqrC" resolve="body" />
+            <node concept="1X3_iC" id="67qr5KJA2GO" role="lGtFl">
+              <property role="3V$3am" value="statement" />
+              <property role="3V$3ak" value="f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123136/1068581517665" />
+              <node concept="lc7rE" id="40skb7A9ZwQ" role="8Wnug">
+                <node concept="l9hG8" id="40skb7Aa00F" role="lcghm">
+                  <node concept="2OqwBi" id="40skb7Aa0c7" role="lb14g">
+                    <node concept="117lpO" id="40skb7Aa01c" role="2Oq$k0" />
+                    <node concept="3Tsc0h" id="67qr5KJA14V" role="2OqNvi">
+                      <ref role="3TtcxE" to="o1mc:67qr5KJ_lZk" resolve="body" />
+                    </node>
                   </node>
                 </node>
               </node>
@@ -4255,82 +4275,6 @@
         </node>
         <node concept="lc7rE" id="5dAUsbppM9a" role="3cqZAp">
           <node concept="l8MVK" id="5dAUsbppMiK" role="lcghm" />
-        </node>
-      </node>
-    </node>
-  </node>
-  <node concept="WtQ9Q" id="5dAUsbqg6$j">
-    <property role="3GE5qa" value="fetch" />
-    <ref role="WuzLi" to="o1mc:66sUT0$7o_P" resolve="Fetch" />
-    <node concept="11bSqf" id="5dAUsbqg6$k" role="11c4hB">
-      <node concept="3clFbS" id="5dAUsbqg6$l" role="2VODD2">
-        <node concept="lc7rE" id="5dAUsbqg71o" role="3cqZAp">
-          <node concept="la8eA" id="5dAUsbqg727" role="lcghm">
-            <property role="lacIc" value="/* RECEIVE MESSAGE */" />
-            <property role="ldcpH" value="true" />
-          </node>
-          <node concept="l8MVK" id="5dAUsbqg742" role="lcghm" />
-        </node>
-        <node concept="lc7rE" id="5dAUsbqg6$K" role="3cqZAp">
-          <node concept="la8eA" id="5dAUsbqg6_c" role="lcghm">
-            <property role="lacIc" value="ret = msgrcv(get_mqid(name), (void *)&amp;rcv_buf, sizeof(rcv_buf.msg), 1, 0);" />
-            <property role="ldcpH" value="true" />
-          </node>
-          <node concept="l8MVK" id="5dAUsbqg6J1" role="lcghm" />
-        </node>
-        <node concept="lc7rE" id="5dAUsbqg6JR" role="3cqZAp">
-          <node concept="la8eA" id="5dAUsbqg6Ko" role="lcghm">
-            <property role="lacIc" value="if (ret == -1) {" />
-            <property role="ldcpH" value="true" />
-          </node>
-          <node concept="l8MVK" id="5dAUsbqg6Ow" role="lcghm" />
-        </node>
-        <node concept="3izx1p" id="5dAUsbqg6Qc" role="3cqZAp">
-          <node concept="3clFbS" id="5dAUsbqg6Qe" role="3izTki">
-            <node concept="lc7rE" id="5dAUsbqg6QH" role="3cqZAp">
-              <node concept="la8eA" id="5dAUsbqg6R9" role="lcghm">
-                <property role="lacIc" value="perror(&quot;msgrcv&quot;);" />
-                <property role="ldcpH" value="true" />
-              </node>
-              <node concept="l8MVK" id="5dAUsbqg6Tu" role="lcghm" />
-              <node concept="la8eA" id="5dAUsbqg6U2" role="lcghm">
-                <property role="lacIc" value="exit(EXIT_FAILURE);" />
-                <property role="ldcpH" value="true" />
-              </node>
-              <node concept="l8MVK" id="5dAUsbqg6VH" role="lcghm" />
-            </node>
-          </node>
-        </node>
-        <node concept="lc7rE" id="5dAUsbqg6WJ" role="3cqZAp">
-          <node concept="la8eA" id="5dAUsbqg6Xq" role="lcghm">
-            <property role="lacIc" value="}" />
-            <property role="ldcpH" value="true" />
-          </node>
-          <node concept="l8MVK" id="5dAUsbqg6Yj" role="lcghm" />
-        </node>
-        <node concept="lc7rE" id="5dAUsbqg76N" role="3cqZAp">
-          <node concept="la8eA" id="5dAUsbqg77$" role="lcghm">
-            <property role="lacIc" value="message " />
-            <property role="ldcpH" value="true" />
-          </node>
-          <node concept="l9hG8" id="5dAUsbqg798" role="lcghm">
-            <node concept="2OqwBi" id="5dAUsbqg7Tx" role="lb14g">
-              <node concept="2OqwBi" id="5dAUsbqg7kf" role="2Oq$k0">
-                <node concept="117lpO" id="5dAUsbqg79G" role="2Oq$k0" />
-                <node concept="3TrEf2" id="5dAUsbqg7Bn" role="2OqNvi">
-                  <ref role="3Tt5mk" to="o1mc:6F9Ho3O73hh" resolve="message" />
-                </node>
-              </node>
-              <node concept="3TrcHB" id="5dAUsbqg8iW" role="2OqNvi">
-                <ref role="3TsBF5" to="tpck:h0TrG11" resolve="name" />
-              </node>
-            </node>
-          </node>
-          <node concept="la8eA" id="5dAUsbqg8qn" role="lcghm">
-            <property role="lacIc" value=" = *rcv_buf.msg;" />
-          </node>
-          <node concept="l8MVK" id="5dAUsbqg8t6" role="lcghm" />
-          <node concept="l8MVK" id="5dAUsbqg8ui" role="lcghm" />
         </node>
       </node>
     </node>

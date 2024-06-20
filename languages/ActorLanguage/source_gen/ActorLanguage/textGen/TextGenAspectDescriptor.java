@@ -37,10 +37,8 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new CreateMessage_TextGen();
       case LanguageConceptSwitch.CreatePayload:
         return new CreatePayload_TextGen();
-      case LanguageConceptSwitch.Fetch:
-        return new Fetch_TextGen();
-      case LanguageConceptSwitch.ForEachActorReference:
-        return new ForEachActorReference_TextGen();
+      case LanguageConceptSwitch.ForEachActorReferenceStatement:
+        return new ForEachActorReferenceStatement_TextGen();
       case LanguageConceptSwitch.GetActorsFromReceptionist:
         return new GetActorsFromReceptionist_TextGen();
       case LanguageConceptSwitch.Receptionist:

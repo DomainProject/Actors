@@ -24,12 +24,12 @@ public class CreateEnvelope_TextGen extends TextGenDescriptorBase {
     tgs.append("/* ENVELOPE CREATION */");
     tgs.newLine();
 
-    if ((SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ForEachActorReference$Jq, false, false) != null)) {
+    if ((SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ForEachActorReferenceStatement$Jq, false, false) != null)) {
       tgs.indent();
       tgs.append("envelope *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
       tgs.append(" = create_envelope(name, ");
-      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ForEachActorReference$Jq, false, false), LINKS.actorReferenceList$RLVE), PROPS.name$MnvL));
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ForEachActorReferenceStatement$Jq, false, false), LINKS.actorReferenceList$RLVE), PROPS.name$MnvL));
       tgs.append("->strings[i], ");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.priority$YWiN));
       tgs.append(");");
@@ -57,7 +57,7 @@ public class CreateEnvelope_TextGen extends TextGenDescriptorBase {
   }
 
   private static final class CONCEPTS {
-    /*package*/ static final SConcept ForEachActorReference$Jq = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5dbf567L, "ActorLanguage.structure.ForEachActorReference");
+    /*package*/ static final SConcept ForEachActorReferenceStatement$Jq = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5dbf567L, "ActorLanguage.structure.ForEachActorReferenceStatement");
     /*package*/ static final SInterfaceConcept TraceableConcept$L = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a3L, "jetbrains.mps.lang.traceable.structure.TraceableConcept");
   }
 

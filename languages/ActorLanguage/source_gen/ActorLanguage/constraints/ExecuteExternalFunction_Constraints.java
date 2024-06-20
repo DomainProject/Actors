@@ -22,26 +22,26 @@ import java.util.HashMap;
 import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
-public class ForEachActorReference_Constraints extends BaseConstraintsDescriptor {
-  public ForEachActorReference_Constraints() {
-    super(CONCEPTS.ForEachActorReference$Jq);
+public class ExecuteExternalFunction_Constraints extends BaseConstraintsDescriptor {
+  public ExecuteExternalFunction_Constraints() {
+    super(CONCEPTS.ExecuteExternalFunction$6o);
   }
 
   @Override
   protected Map<SReferenceLink, ReferenceConstraintsDescriptor> getSpecifiedReferences() {
-    BaseReferenceConstraintsDescriptor d0 = new BaseReferenceConstraintsDescriptor(LINKS.actorReferenceList$RLVE, this, true, false) {
+    BaseReferenceConstraintsDescriptor d0 = new BaseReferenceConstraintsDescriptor(LINKS.message$nfgc, this, true, false) {
       @Nullable
       @Override
       public ReferenceScopeProvider getScopeProvider() {
         return new BaseScopeProvider() {
           @Override
           public SNodeReference getSearchScopeValidatorNode() {
-            return new SNodePointer("r:ae140228-36a4-4270-a859-e66d990ac219(ActorLanguage.constraints)", "6009747775866145823");
+            return new SNodePointer("r:ae140228-36a4-4270-a859-e66d990ac219(ActorLanguage.constraints)", "7051067309803753061");
           }
           @Override
           public Scope createScope(final ReferenceConstraintsContext _context) {
-            final Iterable<SNode> list = SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateBehavior$iN, false, false), CONCEPTS.ActorReferenceList$4g, false, new SAbstractConcept[]{});
-            return ListScope.forNamedElements(list);
+            final Iterable<SNode> messages = SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateBehavior$iN, false, false), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{});
+            return ListScope.forNamedElements(messages);
           }
         };
       }
@@ -52,12 +52,12 @@ public class ForEachActorReference_Constraints extends BaseConstraintsDescriptor
   }
 
   private static final class CONCEPTS {
-    /*package*/ static final SConcept ForEachActorReference$Jq = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5dbf567L, "ActorLanguage.structure.ForEachActorReference");
+    /*package*/ static final SConcept ExecuteExternalFunction$6o = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302ab0f2L, "ActorLanguage.structure.ExecuteExternalFunction");
     /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
-    /*package*/ static final SConcept ActorReferenceList$4g = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5ba7cb3L, "ActorLanguage.structure.ActorReferenceList");
+    /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
   }
 
   private static final class LINKS {
-    /*package*/ static final SReferenceLink actorReferenceList$RLVE = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5dbf567L, 0x401c50b1e5dbf568L, "actorReferenceList");
+    /*package*/ static final SReferenceLink message$nfgc = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302ab0f2L, 0x61da6c5c3038cdbaL, "message");
   }
 }

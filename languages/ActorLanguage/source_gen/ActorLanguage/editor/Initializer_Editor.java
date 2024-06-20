@@ -7,8 +7,8 @@ import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
 
-public class ForEachActorReference_Editor extends DefaultNodeEditor {
+public class Initializer_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return new ForEachActorReference_EditorBuilder_a(editorContext, node).createCell();
+    return new Initializer_EditorBuilder_a(editorContext, node).createCell();
   }
 }
