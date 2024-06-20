@@ -28,11 +28,6 @@ public class CreateBehavior_TextGen extends TextGenDescriptorBase {
     tgs.indent();
     tgs.append("int ret;");
     tgs.newLine();
-    if (ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.Fetch$Nj, false, new SAbstractConcept[]{})).isNotEmpty()) {
-      tgs.indent();
-      tgs.append("msgbuf rcv_buf;");
-      tgs.newLine();
-    }
     if (ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{})).isNotEmpty()) {
       tgs.indent();
       tgs.append("msgbuf send_buf;");
@@ -75,24 +70,6 @@ public class CreateBehavior_TextGen extends TextGenDescriptorBase {
       tgs.newLine();
     }
 
-    if (ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.Fetch$Nj, false, new SAbstractConcept[]{})).isNotEmpty()) {
-      tgs.indent();
-      tgs.append("free(rcv_buf.msg->envelope->sender);");
-      tgs.newLine();
-      tgs.indent();
-      tgs.append("free(rcv_buf.msg->envelope->receiver);");
-      tgs.newLine();
-      tgs.indent();
-      tgs.append("free(rcv_buf.msg->envelope);");
-      tgs.newLine();
-
-      // payload should be freed if the message is not forwarded
-
-      tgs.indent();
-      tgs.append("free(rcv_buf.msg);");
-      tgs.newLine();
-      tgs.newLine();
-    }
 
     tgs.indent();
     tgs.append("return 0;");
@@ -110,7 +87,6 @@ public class CreateBehavior_TextGen extends TextGenDescriptorBase {
   }
 
   private static final class CONCEPTS {
-    /*package*/ static final SConcept Fetch$Nj = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8975L, "ActorLanguage.structure.Fetch");
     /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
     /*package*/ static final SConcept GetActorsFromReceptionist$XR = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681690352L, "ActorLanguage.structure.GetActorsFromReceptionist");
   }

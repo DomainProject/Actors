@@ -71,12 +71,14 @@ import org.jetbrains.mps.openapi.language.SConcept;
     editorCell.addEditorCell(createConstant_1());
     editorCell.addEditorCell(createProperty_0());
     editorCell.addEditorCell(createConstant_2());
+    editorCell.addEditorCell(createProperty_1());
     editorCell.addEditorCell(createConstant_3());
-    editorCell.addEditorCell(createRefNodeList_0());
     editorCell.addEditorCell(createConstant_4());
-    editorCell.addEditorCell(createRefNode_0());
+    editorCell.addEditorCell(createRefNodeList_0());
     editorCell.addEditorCell(createConstant_5());
+    editorCell.addEditorCell(createRefNode_0());
     editorCell.addEditorCell(createConstant_6());
+    editorCell.addEditorCell(createConstant_7());
     return editorCell;
   }
   private EditorCell createConstant_0() {
@@ -116,14 +118,41 @@ import org.jetbrains.mps.openapi.language.SConcept;
     }
   }
   private EditorCell createConstant_2() {
-    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, ")");
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, ",");
     editorCell.setCellId("Constant_6o6lrj_d0");
     editorCell.setDefaultText("");
     return editorCell;
   }
+  private EditorCell createProperty_1() {
+    getCellFactory().pushCellContext();
+    try {
+      final SProperty property = PROPS.receivedMessageName$AwKe;
+      getCellFactory().setPropertyInfo(new SPropertyInfo(myNode, property));
+      EditorCell_Property editorCell = EditorCell_Property.create(getEditorContext(), new SPropertyAccessor(myNode, property, false, false), myNode);
+      editorCell.setDefaultText("<no receivedMessageName>");
+      editorCell.setCellId("property_receivedMessageName");
+      editorCell.setSubstituteInfo(new SPropertySubstituteInfo(editorCell, property));
+      setCellContext(editorCell);
+      Iterable<SNode> propertyAttributes = SNodeOperations.ofConcept(new IAttributeDescriptor.AllAttributes().list(myNode), CONCEPTS.PropertyAttribute$Gb);
+      Iterable<SNode> currentPropertyAttributes = Sequence.fromIterable(propertyAttributes).where((it) -> Objects.equals(PropertyAttribute__BehaviorDescriptor.getProperty_id1avfQ4BBzOo.invoke(it), property));
+      if (Sequence.fromIterable(currentPropertyAttributes).isNotEmpty()) {
+        EditorManager manager = EditorManager.getInstanceFromContext(getEditorContext());
+        return manager.createNodeRoleAttributeCell(Sequence.fromIterable(currentPropertyAttributes).first(), AttributeKind.PROPERTY, editorCell);
+      } else
+      return editorCell;
+    } finally {
+      getCellFactory().popCellContext();
+    }
+  }
   private EditorCell createConstant_3() {
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, ")");
+    editorCell.setCellId("Constant_6o6lrj_f0");
+    editorCell.setDefaultText("");
+    return editorCell;
+  }
+  private EditorCell createConstant_4() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "{");
-    editorCell.setCellId("Constant_6o6lrj_e0");
+    editorCell.setCellId("Constant_6o6lrj_g0");
     Style style = new StyleImpl();
     style.set(StyleAttributes.PADDING_BOTTOM, new Padding(0.3, Measure.SPACES));
     editorCell.getStyle().putAll(style);
@@ -131,7 +160,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
     return editorCell;
   }
   private EditorCell createRefNodeList_0() {
-    AbstractCellListHandler handler = new actionsListHandler_6o6lrj_f0(myNode, getEditorContext());
+    AbstractCellListHandler handler = new actionsListHandler_6o6lrj_h0(myNode, getEditorContext());
     EditorCell_Collection editorCell = handler.createCells(new CellLayout_Indent(), false);
     editorCell.setCellId("refNodeList_actions");
     Style style = new StyleImpl();
@@ -142,11 +171,11 @@ import org.jetbrains.mps.openapi.language.SConcept;
     editorCell.setSRole(handler.getElementSRole());
     return editorCell;
   }
-  private static class actionsListHandler_6o6lrj_f0 extends RefNodeListHandler {
+  private static class actionsListHandler_6o6lrj_h0 extends RefNodeListHandler {
     @NotNull
     private SNode myNode;
 
-    public actionsListHandler_6o6lrj_f0(SNode ownerNode, EditorContext context) {
+    public actionsListHandler_6o6lrj_h0(SNode ownerNode, EditorContext context) {
       super(context, false);
       myNode = ownerNode;
     }
@@ -169,7 +198,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
     }
     public EditorCell createEmptyCell() {
       getCellFactory().pushCellContext();
-      getCellFactory().setNodeLocation(new SNodeLocation.FromParentAndLink(actionsListHandler_6o6lrj_f0.this.getNode(), LINKS.actions$MLkf));
+      getCellFactory().setNodeLocation(new SNodeLocation.FromParentAndLink(actionsListHandler_6o6lrj_h0.this.getNode(), LINKS.actions$MLkf));
       try {
         EditorCell emptyCell = null;
         emptyCell = super.createEmptyCell();
@@ -209,9 +238,9 @@ import org.jetbrains.mps.openapi.language.SConcept;
       }
     }
   }
-  private EditorCell createConstant_4() {
+  private EditorCell createConstant_5() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "");
-    editorCell.setCellId("Constant_6o6lrj_g0");
+    editorCell.setCellId("Constant_6o6lrj_i0");
     Style style = new StyleImpl();
     style.set(StyleAttributes.INDENT_LAYOUT_INDENT, true);
     editorCell.getStyle().putAll(style);
@@ -219,14 +248,14 @@ import org.jetbrains.mps.openapi.language.SConcept;
     return editorCell;
   }
   private EditorCell createRefNode_0() {
-    SingleRoleCellProvider provider = new becomeSingleRoleHandler_6o6lrj_h0(myNode, LINKS.become$KDXz, getEditorContext());
+    SingleRoleCellProvider provider = new becomeSingleRoleHandler_6o6lrj_j0(myNode, LINKS.become$KDXz, getEditorContext());
     return provider.createCell();
   }
-  private static class becomeSingleRoleHandler_6o6lrj_h0 extends SingleRoleCellProvider {
+  private static class becomeSingleRoleHandler_6o6lrj_j0 extends SingleRoleCellProvider {
     @NotNull
     private SNode myNode;
 
-    public becomeSingleRoleHandler_6o6lrj_h0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+    public becomeSingleRoleHandler_6o6lrj_j0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
       super(containmentLink, context);
       myNode = ownerNode;
     }
@@ -274,12 +303,12 @@ import org.jetbrains.mps.openapi.language.SConcept;
       }
     }
     protected String getNoTargetText() {
-      return "No Become Statement (actor terminates)";
+      return "No Become Statement";
     }
   }
-  private EditorCell createConstant_5() {
+  private EditorCell createConstant_6() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "}");
-    editorCell.setCellId("Constant_6o6lrj_i0");
+    editorCell.setCellId("Constant_6o6lrj_k0");
     Style style = new StyleImpl();
     style.set(StyleAttributes.PADDING_TOP, new Padding(0.3, Measure.SPACES));
     style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, true);
@@ -287,9 +316,9 @@ import org.jetbrains.mps.openapi.language.SConcept;
     editorCell.setDefaultText("");
     return editorCell;
   }
-  private EditorCell createConstant_6() {
+  private EditorCell createConstant_7() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "");
-    editorCell.setCellId("Constant_6o6lrj_j0");
+    editorCell.setCellId("Constant_6o6lrj_l0");
     Style style = new StyleImpl();
     style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, true);
     editorCell.getStyle().putAll(style);
@@ -299,6 +328,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
 
   private static final class PROPS {
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SProperty receivedMessageName$AwKe = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5ef413f8f5ef4191L, "receivedMessageName");
   }
 
   private static final class CONCEPTS {

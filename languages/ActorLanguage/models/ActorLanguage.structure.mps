@@ -89,13 +89,18 @@
     <node concept="1TJgyi" id="4be3MWTKrBc" role="1TKVEl">
       <property role="IQ2nx" value="4813801747212515788" />
       <property role="TrG5h" value="fetchPolicy" />
-      <ref role="AX2Wp" node="66sUT0$7o_Q" resolve="FetchingPolicy" />
+      <ref role="AX2Wp" node="66sUT0$7o_Q" resolve="FetchPolicy" />
     </node>
     <node concept="1TJgyj" id="1enjyq1kmLM" role="1TKVEi">
       <property role="IQ2ns" value="1411682935489260658" />
       <property role="20kJfa" value="behavior" />
       <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" node="25QEYlOeItj" resolve="CreateBehavior" />
+    </node>
+    <node concept="1TJgyj" id="5VO4ZzQfhHA" role="1TKVEi">
+      <property role="IQ2ns" value="6842115693886643046" />
+      <property role="20kJfa" value="initializer" />
+      <ref role="20lvS9" node="3y5SEGa3lZ" resolve="Initializer" />
     </node>
   </node>
   <node concept="1TIwiD" id="3m_VcJMWzdL">
@@ -160,8 +165,8 @@
     <node concept="1TJgyj" id="3y5SEGabRb" role="1TKVEi">
       <property role="IQ2ns" value="63639229097885131" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="initializer" />
-      <property role="20lbJX" value="fLJekj4/_1" />
+      <property role="20kJfa" value="initializers" />
+      <property role="20lbJX" value="fLJekj5/_0__n" />
       <ref role="20lvS9" node="3y5SEGa3lZ" resolve="Initializer" />
     </node>
     <node concept="1TJgyj" id="67qr5KKaF4Q" role="1TKVEi">
@@ -254,11 +259,23 @@
       <property role="20kJfa" value="become" />
       <ref role="20lvS9" node="5dAUsbpsTbf" resolve="Become" />
     </node>
+    <node concept="1TJgyj" id="5VO4ZzPZMLk" role="1TKVEi">
+      <property role="IQ2ns" value="6842115693882584148" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="receivedMessage" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="3m_VcJMWzdL" resolve="CreateMessage" />
+    </node>
     <node concept="PrWs8" id="25QEYlOfjrw" role="PzmwI">
       <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
     <node concept="PrWs8" id="67qr5KJMFS4" role="PzmwI">
       <ref role="PrY4T" node="67qr5KJM_rR" resolve="StatementConstraint" />
+    </node>
+    <node concept="1TJgyi" id="5VO4ZzPVO6h" role="1TKVEl">
+      <property role="IQ2nx" value="6842115693881541009" />
+      <property role="TrG5h" value="receivedMessageName" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
     </node>
   </node>
   <node concept="1TIwiD" id="66sUT0$4BdB">
@@ -280,24 +297,9 @@
       <ref role="20lvS9" node="25QEYlOeItj" resolve="CreateBehavior" />
     </node>
   </node>
-  <node concept="1TIwiD" id="66sUT0$7o_P">
-    <property role="EcuMT" value="7033755722359605621" />
-    <property role="TrG5h" value="Fetch" />
-    <property role="34LRSv" value="fetch_message" />
-    <property role="3GE5qa" value="fetch" />
-    <property role="R4oN_" value="fetch message from the queue" />
-    <ref role="1TJDcQ" node="1enjyq1kiq4" resolve="ActorAction" />
-    <node concept="1TJgyj" id="6F9Ho3O73hh" role="1TKVEi">
-      <property role="IQ2ns" value="7694881003795133521" />
-      <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="message" />
-      <property role="20lbJX" value="fLJekj4/_1" />
-      <ref role="20lvS9" node="3m_VcJMWzdL" resolve="CreateMessage" />
-    </node>
-  </node>
   <node concept="25R3W" id="66sUT0$7o_Q">
     <property role="3F6X1D" value="7033755722359605622" />
-    <property role="TrG5h" value="FetchingPolicy" />
+    <property role="TrG5h" value="FetchPolicy" />
     <property role="3GE5qa" value="fetch" />
     <node concept="25R33" id="66sUT0$7o_R" role="25R1y">
       <property role="3tVfz5" value="7033755722359605623" />
@@ -415,13 +417,18 @@
     <node concept="1TJgyi" id="4be3MWTKrDt" role="1TKVEl">
       <property role="IQ2nx" value="4813801747212515933" />
       <property role="TrG5h" value="fetchPolicy" />
-      <ref role="AX2Wp" node="66sUT0$7o_Q" resolve="FetchingPolicy" />
+      <ref role="AX2Wp" node="66sUT0$7o_Q" resolve="FetchPolicy" />
     </node>
     <node concept="1TJgyj" id="1enjyq1koxf" role="1TKVEi">
       <property role="IQ2ns" value="1411682935489267791" />
       <property role="20kJfa" value="behavior" />
       <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" node="25QEYlOeItj" resolve="CreateBehavior" />
+    </node>
+    <node concept="1TJgyj" id="5VO4ZzQfhJ1" role="1TKVEi">
+      <property role="IQ2ns" value="6842115693886643137" />
+      <property role="20kJfa" value="initializer" />
+      <ref role="20lvS9" node="3y5SEGa3lZ" resolve="Initializer" />
     </node>
     <node concept="PrWs8" id="1enjyq1lUQc" role="PzmwI">
       <ref role="PrY4T" node="1enjyq1lUQ7" resolve="ActorCreation" />
@@ -697,7 +704,10 @@
       <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="actions" />
       <property role="20lbJX" value="fLJekj5/_0__n" />
-      <ref role="20lvS9" node="3y5SEGa8Ep" resolve="InitializerAction" />
+      <ref role="20lvS9" node="1enjyq1kiq4" resolve="ActorAction" />
+    </node>
+    <node concept="PrWs8" id="5VO4ZzQfgQ6" role="PzmwI">
+      <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
   </node>
   <node concept="PlHQZ" id="3y5SEGa8Ep">
@@ -814,6 +824,19 @@
       <property role="20kJfa" value="message" />
       <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" node="3m_VcJMWzdL" resolve="CreateMessage" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="5VO4ZzQ7TK4">
+    <property role="EcuMT" value="6842115693884709892" />
+    <property role="3GE5qa" value="fetch" />
+    <property role="TrG5h" value="ChangeFetchPolicy" />
+    <property role="34LRSv" value="change_fetch_policy" />
+    <property role="R4oN_" value="change fetching policy for the actor executing this behavior" />
+    <ref role="1TJDcQ" node="1enjyq1kiq4" resolve="ActorAction" />
+    <node concept="1TJgyi" id="5VO4ZzQ7TK5" role="1TKVEl">
+      <property role="IQ2nx" value="6842115693884709893" />
+      <property role="TrG5h" value="newPolicy" />
+      <ref role="AX2Wp" node="66sUT0$7o_Q" resolve="FetchPolicy" />
     </node>
   </node>
 </model>

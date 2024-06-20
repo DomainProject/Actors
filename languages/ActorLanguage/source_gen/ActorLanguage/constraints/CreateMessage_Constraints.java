@@ -38,7 +38,7 @@ public class CreateMessage_Constraints extends BaseConstraintsDescriptor {
       return result;
     }
     private static boolean staticValidateProperty(SNode node, String propertyValue) {
-      for (SNode message : ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getParent(node), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{})).subtract(ListSequence.fromList(ListSequence.fromListAndArray(new ArrayList<>(), node)))) {
+      for (SNode message : ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(node, CONCEPTS.CreateBehavior$iN, false, false), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{})).subtract(ListSequence.fromList(ListSequence.fromListAndArray(new ArrayList<>(), node)))) {
         if (SPropertyOperations.getString(message, PROPS.name$MnvL) == null) {
           continue;
         }
@@ -58,6 +58,7 @@ public class CreateMessage_Constraints extends BaseConstraintsDescriptor {
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
+    /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
   }
 
   private static final class PROPS {

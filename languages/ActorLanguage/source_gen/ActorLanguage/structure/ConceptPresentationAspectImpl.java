@@ -25,6 +25,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_ActorScript;
   private ConceptPresentation props_ActorsGraph;
   private ConceptPresentation props_Become;
+  private ConceptPresentation props_ChangeFetchPolicy;
   private ConceptPresentation props_CreateActor;
   private ConceptPresentation props_CreateActorReference;
   private ConceptPresentation props_CreateActors;
@@ -35,7 +36,6 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_Envelope;
   private ConceptPresentation props_ExecuteExternalFunction;
   private ConceptPresentation props_ExternalFunction;
-  private ConceptPresentation props_Fetch;
   private ConceptPresentation props_ForEachActorReferenceStatement;
   private ConceptPresentation props_GetActorsFromReceptionist;
   private ConceptPresentation props_Initializer;
@@ -169,6 +169,14 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Become = cpb.create();
         }
         return props_Become;
+      case LanguageConceptSwitch.ChangeFetchPolicy:
+        if (props_ChangeFetchPolicy == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("change fetching policy for the actor executing this behavior");
+          cpb.rawPresentation("change_fetch_policy");
+          props_ChangeFetchPolicy = cpb.create();
+        }
+        return props_ChangeFetchPolicy;
       case LanguageConceptSwitch.CreateActor:
         if (props_CreateActor == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -244,14 +252,6 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ExternalFunction = cpb.create();
         }
         return props_ExternalFunction;
-      case LanguageConceptSwitch.Fetch:
-        if (props_Fetch == null) {
-          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.shortDesc("fetch message from the queue");
-          cpb.rawPresentation("fetch_message");
-          props_Fetch = cpb.create();
-        }
-        return props_Fetch;
       case LanguageConceptSwitch.ForEachActorReferenceStatement:
         if (props_ForEachActorReferenceStatement == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -271,7 +271,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
       case LanguageConceptSwitch.Initializer:
         if (props_Initializer == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.rawPresentation("Initializer");
+          cpb.presentationByName();
           props_Initializer = cpb.create();
         }
         return props_Initializer;

@@ -13,12 +13,15 @@ import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.ArrayList;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import java.util.Map;
 import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.runtime.PropertyConstraintsDescriptor;
 import java.util.HashMap;
 import org.jetbrains.mps.openapi.language.SConcept;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class CreateBehavior_Constraints extends BaseConstraintsDescriptor {
   public CreateBehavior_Constraints() {
@@ -49,10 +52,32 @@ public class CreateBehavior_Constraints extends BaseConstraintsDescriptor {
       return true;
     }
   }
+  public static class ReceivedMessageName_Property extends BasePropertyConstraintsDescriptor {
+    public ReceivedMessageName_Property(ConstraintsDescriptor container) {
+      super(PROPS.receivedMessageName$AwKe, container, false, true, false);
+    }
+    @Override
+    public void setPropertyValue(SNode node, Object propertyValue) {
+      staticSetPropertyValue(node, SPropertyOperations.castString(propertyValue));
+    }
+    private static void staticSetPropertyValue(SNode node, String propertyValue) {
+
+      SPropertyOperations.assign(node, PROPS.receivedMessageName$AwKe, propertyValue);
+
+      SNode receivedMessage = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage"));
+      SPropertyOperations.assign(receivedMessage, PROPS.name$MnvL, propertyValue);
+      SNode payload = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, "ActorLanguage.structure.CreatePayload"));
+      SPropertyOperations.assign(payload, PROPS.name$MnvL, propertyValue + ".payload");
+      SLinkOperations.setTarget(receivedMessage, LINKS.payload$N_RC, payload);
+
+      SLinkOperations.setTarget(node, LINKS.receivedMessage$DtsG, receivedMessage);
+    }
+  }
   @Override
   protected Map<SProperty, PropertyConstraintsDescriptor> getSpecifiedProperties() {
     Map<SProperty, PropertyConstraintsDescriptor> properties = new HashMap<SProperty, PropertyConstraintsDescriptor>();
     properties.put(PROPS.name$MnvL, new Name_Property(this));
+    properties.put(PROPS.receivedMessageName$AwKe, new ReceivedMessageName_Property(this));
     return properties;
   }
 
@@ -63,5 +88,11 @@ public class CreateBehavior_Constraints extends BaseConstraintsDescriptor {
 
   private static final class PROPS {
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SProperty receivedMessageName$AwKe = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5ef413f8f5ef4191L, "receivedMessageName");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink payload$N_RC = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x9de89b125a71571L, "payload");
+    /*package*/ static final SContainmentLink receivedMessage$DtsG = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5ef413f8f5ff2c54L, "receivedMessage");
   }
 }
