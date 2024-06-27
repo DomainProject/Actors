@@ -100,15 +100,15 @@ GROUP BY city
 ```
 
 ```sql
-SELECT name, COUNT(*)
+SELECT COUNT(name)
 FROM Person
-WHERE height >= 1.8 && weight <= 80.0
+WHERE height >= 1.8 AND weight <= 80.0
 ```
 
 ```sql
 SELECT * 
 FROM Person JOIN University
-WHERE Person.age <= 30 && University.country != "Italy"
+WHERE Person.age <= 30 AND University.country != "Italy"
 ```
 
 il grafo risultante è:
