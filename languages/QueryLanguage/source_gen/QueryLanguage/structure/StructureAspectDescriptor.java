@@ -16,7 +16,7 @@ import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 import jetbrains.mps.smodel.adapter.ids.PrimitiveTypeId;
 
 public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
-  /*package*/ final ConceptDescriptor myConceptAggregateFunction = createDescriptorForAggregateFunction();
+  /*package*/ final ConceptDescriptor myConceptAggregationFunction = createDescriptorForAggregationFunction();
   /*package*/ final ConceptDescriptor myConceptAllColumns = createDescriptorForAllColumns();
   /*package*/ final ConceptDescriptor myConceptAverage = createDescriptorForAverage();
   /*package*/ final ConceptDescriptor myConceptColumn = createDescriptorForColumn();
@@ -62,15 +62,15 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<ConceptDescriptor> getDescriptors() {
-    return Arrays.asList(myConceptAggregateFunction, myConceptAllColumns, myConceptAverage, myConceptColumn, myConceptColumnRef, myConceptCondition, myConceptConditionSet, myConceptConditionsSequence, myConceptCount, myConceptCreateTable, myConceptDBOperation, myConceptDelete, myConceptGroupBy, myConceptInsertInto, myConceptMax, myConceptMin, myConceptMultipleCondition, myConceptOldCondition, myConceptOrderBy, myConceptScript, myConceptSelect, myConceptSelectColumn, myConceptSimpleCondition, myConceptStatement, myConceptSum, myConceptTableReference, myConceptUpdate, myConceptValue, myConceptWhere);
+    return Arrays.asList(myConceptAggregationFunction, myConceptAllColumns, myConceptAverage, myConceptColumn, myConceptColumnRef, myConceptCondition, myConceptConditionSet, myConceptConditionsSequence, myConceptCount, myConceptCreateTable, myConceptDBOperation, myConceptDelete, myConceptGroupBy, myConceptInsertInto, myConceptMax, myConceptMin, myConceptMultipleCondition, myConceptOldCondition, myConceptOrderBy, myConceptScript, myConceptSelect, myConceptSelectColumn, myConceptSimpleCondition, myConceptStatement, myConceptSum, myConceptTableReference, myConceptUpdate, myConceptValue, myConceptWhere);
   }
 
   @Override
   @Nullable
   public ConceptDescriptor getDescriptor(SConceptId id) {
     switch (myIndexSwitch.index(id)) {
-      case LanguageConceptSwitch.AggregateFunction:
-        return myConceptAggregateFunction;
+      case LanguageConceptSwitch.AggregationFunction:
+        return myConceptAggregationFunction;
       case LanguageConceptSwitch.AllColumns:
         return myConceptAllColumns;
       case LanguageConceptSwitch.Average:
@@ -141,8 +141,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     return myIndexSwitch.index(c);
   }
 
-  private static ConceptDescriptor createDescriptorForAggregateFunction() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("QueryLanguage", "AggregateFunction", 0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b022e74L);
+  private static ConceptDescriptor createDescriptorForAggregationFunction() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("QueryLanguage", "AggregationFunction", 0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b022e74L);
     b.interface_();
     b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/6736945802599607924");
     b.version(3);
@@ -342,6 +342,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.aggregate("aggregateFunction", 0x5d7e70837b028396L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b022e74L).optional(true).ordered(true).multiple(false).origin("6736945802599629718").done();
     b.aggregate("tables", 0x207f13a8b54616bfL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL).optional(false).ordered(true).multiple(true).origin("2341611946572650175").done();
     b.aggregate("cols", 0xe8aecd6b255930cL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L).optional(true).ordered(true).multiple(true).origin("1047910270176170764").done();
+    b.aggregate("aliasTable", 0xb59df187aa1e081L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b2eL).optional(true).ordered(true).multiple(false).origin("817930103574093953").done();
     b.alias("SELECT");
     return b.create();
   }
@@ -350,6 +351,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.interface_();
     b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1047910270175909650");
     b.version(3);
+    b.aggregate("aggregateFunction", 0xb59df187aaa4b3dL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b022e74L).optional(true).ordered(true).multiple(false).origin("817930103574645565").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForSimpleCondition() {

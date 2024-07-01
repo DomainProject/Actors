@@ -29,7 +29,7 @@ import org.jetbrains.mps.openapi.language.SContainmentLink;
 public final class AddAggregationFunction_Intention extends AbstractIntentionDescriptor implements IntentionFactory {
 
   public AddAggregationFunction_Intention() {
-    super(Kind.NORMAL, false, new SNodePointer("r:13f8d904-8637-4da1-85d7-c23d81f5a561(QueryLanguage.intentions)", "6736945802599957474"));
+    super(Kind.NORMAL, false, new SNodePointer("r:13f8d904-8637-4da1-85d7-c23d81f5a561(QueryLanguage.intentions)", "817930103574711502"));
   }
 
   @Override
@@ -59,7 +59,6 @@ public final class AddAggregationFunction_Intention extends AbstractIntentionDes
     ListSequence.fromList(concepts).addElement(CONCEPTS.Min$Qb);
     ListSequence.fromList(concepts).addElement(CONCEPTS.Max$1N);
     ListSequence.fromList(concepts).addElement(CONCEPTS.Sum$3g);
-
     return concepts;
   }
   /*package*/ final class IntentionImplementation extends AbstractIntentionExecutable implements ParameterizedIntentionExecutable {
@@ -79,27 +78,27 @@ public final class AddAggregationFunction_Intention extends AbstractIntentionDes
       switch (conceptIndex.index(cncpt)) {
         case 0:
           if (true) {
-            SLinkOperations.setTarget(node, LINKS.aggregateFunction$GMhu, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028394L, "QueryLanguage.structure.Average")));
+            SLinkOperations.setTarget(node, LINKS.aggregateFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028394L, "QueryLanguage.structure.Average")));
           }
           break;
         case 1:
           if (true) {
-            SLinkOperations.setTarget(node, LINKS.aggregateFunction$GMhu, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028392L, "QueryLanguage.structure.Count")));
+            SLinkOperations.setTarget(node, LINKS.aggregateFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028392L, "QueryLanguage.structure.Count")));
           }
           break;
         case 2:
           if (true) {
-            SLinkOperations.setTarget(node, LINKS.aggregateFunction$GMhu, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028390L, "QueryLanguage.structure.Max")));
+            SLinkOperations.setTarget(node, LINKS.aggregateFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028390L, "QueryLanguage.structure.Max")));
           }
           break;
         case 3:
           if (true) {
-            SLinkOperations.setTarget(node, LINKS.aggregateFunction$GMhu, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b02838dL, "QueryLanguage.structure.Min")));
+            SLinkOperations.setTarget(node, LINKS.aggregateFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b02838dL, "QueryLanguage.structure.Min")));
           }
           break;
         case 4:
           if (true) {
-            SLinkOperations.setTarget(node, LINKS.aggregateFunction$GMhu, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028393L, "QueryLanguage.structure.Sum")));
+            SLinkOperations.setTarget(node, LINKS.aggregateFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028393L, "QueryLanguage.structure.Sum")));
           }
           break;
         default:
@@ -133,6 +132,6 @@ public final class AddAggregationFunction_Intention extends AbstractIntentionDes
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink aggregateFunction$GMhu = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x5d7e70837b028396L, "aggregateFunction");
+    /*package*/ static final SContainmentLink aggregateFunction$8ryB = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L, 0xb59df187aaa4b3dL, "aggregateFunction");
   }
 }

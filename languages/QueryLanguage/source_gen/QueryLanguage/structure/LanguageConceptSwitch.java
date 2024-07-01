@@ -9,7 +9,7 @@ import org.jetbrains.mps.openapi.language.SAbstractConcept;
 
 public final class LanguageConceptSwitch {
   private final LanguageConceptIndex myIndex;
-  public static final int AggregateFunction = 0;
+  public static final int AggregationFunction = 0;
   public static final int AllColumns = 1;
   public static final int Average = 2;
   public static final int Column = 3;
@@ -41,7 +41,7 @@ public final class LanguageConceptSwitch {
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L);
-    builder.put(0x5d7e70837b022e74L, AggregateFunction);
+    builder.put(0x5d7e70837b022e74L, AggregationFunction);
     builder.put(0xe8aecd6b2519713L, AllColumns);
     builder.put(0x5d7e70837b028394L, Average);
     builder.put(0x11100ee737443b33L, Column);

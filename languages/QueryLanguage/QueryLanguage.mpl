@@ -69,6 +69,7 @@
     <dependency reexport="false">1ed103c3-3aa6-49b7-9c21-6765ee11f224(MPS.Editor)</dependency>
     <dependency reexport="false">34e84b8f-afa8-4364-abcd-a279fddddbe7(jetbrains.mps.editor.runtime)</dependency>
     <dependency reexport="false" scope="generate-into">b401a680-8325-4110-8fd3-84331ff25bef(jetbrains.mps.lang.generator)</dependency>
+    <dependency reexport="false">cddf55b3-117e-46ec-837c-ff50eb7b89b0(jetbrains.mps.lang.feedback.problem.childAndProp)</dependency>
   </dependencies>
   <languageVersions>
     <language slang="l:10eda999-5898-4cde-9416-196c5eca1268:ActorLanguage" version="0" />
@@ -93,6 +94,13 @@
     <language slang="l:ceab5195-25ea-4f22-9b92-103b95ca8c0c:jetbrains.mps.lang.core" version="2" />
     <language slang="l:f4ad079d-bc71-4ffb-9600-9328705cf998:jetbrains.mps.lang.descriptor" version="0" />
     <language slang="l:18bc6592-03a6-4e29-a83a-7ff23bde13ba:jetbrains.mps.lang.editor" version="14" />
+    <language slang="l:cd17a113-ca4e-472f-a8de-c49008f9eea8:jetbrains.mps.lang.feedback" version="0" />
+    <language slang="l:16e76fe3-9534-4def-afb7-925a169a7c0b:jetbrains.mps.lang.feedback.messages" version="0" />
+    <language slang="l:033598a4-76a9-47e1-ac89-a300c0fceab8:jetbrains.mps.lang.feedback.problem" version="0" />
+    <language slang="l:cddf55b3-117e-46ec-837c-ff50eb7b89b0:jetbrains.mps.lang.feedback.problem.childAndProp" version="0" />
+    <language slang="l:feec32f9-bc8f-4da8-8efd-7f3f9dd4101b:jetbrains.mps.lang.feedback.problem.scopes" version="0" />
+    <language slang="l:7127d409-29f0-43e8-917f-f016ea288944:jetbrains.mps.lang.feedback.problem.structural" version="0" />
+    <language slang="l:517077fd-e44f-4338-a475-1d29781dfdb8:jetbrains.mps.lang.feedback.skeleton" version="0" />
     <language slang="l:d7a92d38-f7db-40d0-8431-763b0c3c9f20:jetbrains.mps.lang.intentions" version="1" />
     <language slang="l:ad93155d-79b2-4759-b10c-55123e763903:jetbrains.mps.lang.messages" version="0" />
     <language slang="l:446c26eb-2b7b-4bf0-9b35-f83fa582753e:jetbrains.mps.lang.modelapi" version="0" />
@@ -124,6 +132,8 @@
     <module reference="2d3c70e9-aab2-4870-8d8d-6036800e4103(jetbrains.mps.kernel)" version="0" />
     <module reference="ceab5195-25ea-4f22-9b92-103b95ca8c0c(jetbrains.mps.lang.core)" version="0" />
     <module reference="a9e4c532-c5f5-4bb7-99ef-42abb73bbb70(jetbrains.mps.lang.descriptor.aspects)" version="0" />
+    <module reference="033598a4-76a9-47e1-ac89-a300c0fceab8(jetbrains.mps.lang.feedback.problem)" version="0" />
+    <module reference="cddf55b3-117e-46ec-837c-ff50eb7b89b0(jetbrains.mps.lang.feedback.problem.childAndProp)" version="1" />
     <module reference="b401a680-8325-4110-8fd3-84331ff25bef(jetbrains.mps.lang.generator)" version="0" />
     <module reference="9ded098b-ad6a-4657-bfd9-48636cfe8bc3(jetbrains.mps.lang.traceable)" version="0" />
   </dependencyVersions>

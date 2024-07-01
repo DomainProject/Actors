@@ -9,7 +9,7 @@ import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
-  private ConceptPresentation props_AggregateFunction;
+  private ConceptPresentation props_AggregationFunction;
   private ConceptPresentation props_AllColumns;
   private ConceptPresentation props_Average;
   private ConceptPresentation props_Column;
@@ -44,12 +44,12 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
-      case LanguageConceptSwitch.AggregateFunction:
-        if (props_AggregateFunction == null) {
+      case LanguageConceptSwitch.AggregationFunction:
+        if (props_AggregationFunction == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          props_AggregateFunction = cpb.create();
+          props_AggregationFunction = cpb.create();
         }
-        return props_AggregateFunction;
+        return props_AggregationFunction;
       case LanguageConceptSwitch.AllColumns:
         if (props_AllColumns == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

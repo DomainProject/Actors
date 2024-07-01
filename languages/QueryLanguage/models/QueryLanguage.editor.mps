@@ -49,6 +49,8 @@
       <concept id="1186414536763" name="jetbrains.mps.lang.editor.structure.BooleanStyleSheetItem" flags="ln" index="VOi$J">
         <property id="1186414551515" name="flag" index="VOm3f" />
       </concept>
+      <concept id="1233758997495" name="jetbrains.mps.lang.editor.structure.PunctuationLeftStyleClassItem" flags="ln" index="11L4FC" />
+      <concept id="1233759184865" name="jetbrains.mps.lang.editor.structure.PunctuationRightStyleClassItem" flags="ln" index="11LMrY" />
       <concept id="7818019076292260194" name="jetbrains.mps.lang.editor.structure.CompletionStyling" flags="ig" index="3dRTYf">
         <child id="7250830207897909099" name="specificator" index="KNiz3" />
         <child id="772883491827840107" name="customizeFunction" index="3l$a4r" />
@@ -498,6 +500,45 @@
     <property role="3GE5qa" value="column" />
     <ref role="1XX52x" to="p6im:14g3IsRklvO" resolve="ColumnRef" />
     <node concept="3EZMnI" id="14g3IsRku6I" role="2wV5jI">
+      <node concept="3F1sOY" id="HpRLxUEDwT" role="3EZMnx">
+        <ref role="1NtTu8" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+        <node concept="pkWqt" id="HpRLxUEEkr" role="pqm2j">
+          <node concept="3clFbS" id="HpRLxUEEks" role="2VODD2">
+            <node concept="3clFbF" id="HpRLxUEEkx" role="3cqZAp">
+              <node concept="2OqwBi" id="HpRLxUEFQg" role="3clFbG">
+                <node concept="2OqwBi" id="HpRLxUEEIS" role="2Oq$k0">
+                  <node concept="pncrf" id="HpRLxUEEkw" role="2Oq$k0" />
+                  <node concept="3TrEf2" id="HpRLxUEFex" role="2OqNvi">
+                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                  </node>
+                </node>
+                <node concept="3x8VRR" id="HpRLxUEGy9" role="2OqNvi" />
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+      <node concept="3F0ifn" id="HpRLxUEE5e" role="3EZMnx">
+        <property role="3F0ifm" value="(" />
+        <node concept="pkWqt" id="HpRLxUEGNP" role="pqm2j">
+          <node concept="3clFbS" id="HpRLxUEGNQ" role="2VODD2">
+            <node concept="3clFbF" id="HpRLxUEGNU" role="3cqZAp">
+              <node concept="2OqwBi" id="HpRLxUEGNW" role="3clFbG">
+                <node concept="2OqwBi" id="HpRLxUEGNX" role="2Oq$k0">
+                  <node concept="pncrf" id="HpRLxUEGNY" role="2Oq$k0" />
+                  <node concept="3TrEf2" id="HpRLxUEGNZ" role="2OqNvi">
+                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                  </node>
+                </node>
+                <node concept="3x8VRR" id="HpRLxUEGO0" role="2OqNvi" />
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="11LMrY" id="HpRLxUGTa8" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+      </node>
       <node concept="1iCGBv" id="14g3IsRku6P" role="3EZMnx">
         <ref role="1NtTu8" to="p6im:14g3IsRklvP" resolve="column" />
         <node concept="1sVBvm" id="14g3IsRku6R" role="1sWHZn">
@@ -609,6 +650,27 @@
               </node>
             </node>
           </node>
+        </node>
+      </node>
+      <node concept="3F0ifn" id="HpRLxUEEfm" role="3EZMnx">
+        <property role="3F0ifm" value=")" />
+        <node concept="pkWqt" id="HpRLxUEGPo" role="pqm2j">
+          <node concept="3clFbS" id="HpRLxUEGPp" role="2VODD2">
+            <node concept="3clFbF" id="HpRLxUEGPt" role="3cqZAp">
+              <node concept="2OqwBi" id="HpRLxUEGPv" role="3clFbG">
+                <node concept="2OqwBi" id="HpRLxUEGPw" role="2Oq$k0">
+                  <node concept="pncrf" id="HpRLxUEGPx" role="2Oq$k0" />
+                  <node concept="3TrEf2" id="HpRLxUEGPy" role="2OqNvi">
+                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                  </node>
+                </node>
+                <node concept="3x8VRR" id="HpRLxUEGPz" role="2OqNvi" />
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="11L4FC" id="HpRLxUGTtS" role="3F10Kt">
+          <property role="VOm3f" value="true" />
         </node>
       </node>
       <node concept="l2Vlx" id="14g3IsRku6L" role="2iSdaV" />
@@ -1045,12 +1107,15 @@
     </node>
   </node>
   <node concept="24kQdi" id="7p2QZoUvpjX">
-    <property role="3GE5qa" value="aggregateFunctions" />
-    <ref role="1XX52x" to="p6im:5PYs8dV0yTO" resolve="AggregateFunction" />
+    <property role="3GE5qa" value="aggregationFunctions" />
+    <ref role="1XX52x" to="p6im:5PYs8dV0yTO" resolve="AggregationFunction" />
     <node concept="PMmxH" id="7p2QZoUvpk3" role="2wV5jI">
       <ref role="PMmxG" to="tpco:2wZex4PafBj" resolve="alias" />
       <node concept="VechU" id="7p2QZoUvpk5" role="3F10Kt">
         <property role="Vb096" value="g1_qVrt/darkMagenta" />
+      </node>
+      <node concept="11LMrY" id="HpRLxUGRRZ" role="3F10Kt">
+        <property role="VOm3f" value="true" />
       </node>
     </node>
   </node>
@@ -1211,8 +1276,71 @@
   <node concept="24kQdi" id="UaVdqMkpsk">
     <property role="3GE5qa" value="column" />
     <ref role="1XX52x" to="p6im:UaVdqMkpsj" resolve="AllColumns" />
-    <node concept="3F0ifn" id="UaVdqMkpsm" role="2wV5jI">
-      <property role="3F0ifm" value="*" />
+    <node concept="3EZMnI" id="HpRLxUEGQV" role="2wV5jI">
+      <node concept="3F1sOY" id="HpRLxUEGR2" role="3EZMnx">
+        <ref role="1NtTu8" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+        <node concept="pkWqt" id="HpRLxUEGRE" role="pqm2j">
+          <node concept="3clFbS" id="HpRLxUEGRF" role="2VODD2">
+            <node concept="3clFbF" id="HpRLxUEGRJ" role="3cqZAp">
+              <node concept="2OqwBi" id="HpRLxUEGRL" role="3clFbG">
+                <node concept="2OqwBi" id="HpRLxUEGRM" role="2Oq$k0">
+                  <node concept="pncrf" id="HpRLxUEGRN" role="2Oq$k0" />
+                  <node concept="3TrEf2" id="HpRLxUEGRO" role="2OqNvi">
+                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                  </node>
+                </node>
+                <node concept="3x8VRR" id="HpRLxUEGRP" role="2OqNvi" />
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+      <node concept="3F0ifn" id="HpRLxUEGR8" role="3EZMnx">
+        <property role="3F0ifm" value="(" />
+        <node concept="pkWqt" id="HpRLxUEHpd" role="pqm2j">
+          <node concept="3clFbS" id="HpRLxUEHpe" role="2VODD2">
+            <node concept="3clFbF" id="HpRLxUEHpi" role="3cqZAp">
+              <node concept="2OqwBi" id="HpRLxUEHpk" role="3clFbG">
+                <node concept="2OqwBi" id="HpRLxUEHpl" role="2Oq$k0">
+                  <node concept="pncrf" id="HpRLxUEHpm" role="2Oq$k0" />
+                  <node concept="3TrEf2" id="HpRLxUEHpn" role="2OqNvi">
+                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                  </node>
+                </node>
+                <node concept="3x8VRR" id="HpRLxUEHpo" role="2OqNvi" />
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="11LMrY" id="HpRLxUGSdM" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+      </node>
+      <node concept="3F0ifn" id="HpRLxUEGRg" role="3EZMnx">
+        <property role="3F0ifm" value="*" />
+      </node>
+      <node concept="3F0ifn" id="HpRLxUEGR$" role="3EZMnx">
+        <property role="3F0ifm" value=")" />
+        <node concept="pkWqt" id="HpRLxUEHBO" role="pqm2j">
+          <node concept="3clFbS" id="HpRLxUEHBP" role="2VODD2">
+            <node concept="3clFbF" id="HpRLxUEHCj" role="3cqZAp">
+              <node concept="2OqwBi" id="HpRLxUEHCl" role="3clFbG">
+                <node concept="2OqwBi" id="HpRLxUEHCm" role="2Oq$k0">
+                  <node concept="pncrf" id="HpRLxUEHCn" role="2Oq$k0" />
+                  <node concept="3TrEf2" id="HpRLxUEHCo" role="2OqNvi">
+                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                  </node>
+                </node>
+                <node concept="3x8VRR" id="HpRLxUEHCp" role="2OqNvi" />
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="11L4FC" id="HpRLxUGSxy" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+      </node>
+      <node concept="l2Vlx" id="HpRLxUEGQY" role="2iSdaV" />
     </node>
   </node>
 </model>

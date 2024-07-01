@@ -8,8 +8,8 @@
   </languages>
   <imports>
     <import index="p6im" ref="r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)" implicit="true" />
-    <import index="c17a" ref="8865b7a8-5271-43d3-884c-6fd1d9cfdd34/java:org.jetbrains.mps.openapi.language(MPS.OpenAPI/)" implicit="true" />
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
+    <import index="c17a" ref="8865b7a8-5271-43d3-884c-6fd1d9cfdd34/java:org.jetbrains.mps.openapi.language(MPS.OpenAPI/)" implicit="true" />
   </imports>
   <registry>
     <language id="f3061a53-9226-4cc5-a443-f952ceaf5816" name="jetbrains.mps.baseLanguage">
@@ -49,7 +49,6 @@
       <concept id="1068580123155" name="jetbrains.mps.baseLanguage.structure.ExpressionStatement" flags="nn" index="3clFbF">
         <child id="1068580123156" name="expression" index="3clFbG" />
       </concept>
-      <concept id="1068580123157" name="jetbrains.mps.baseLanguage.structure.Statement" flags="nn" index="3clFbH" />
       <concept id="1068580123136" name="jetbrains.mps.baseLanguage.structure.StatementList" flags="sn" stub="5293379017992965193" index="3clFbS">
         <child id="1068581517665" name="statement" index="3cqZAp" />
       </concept>
@@ -146,239 +145,6 @@
       <concept id="1160612413312" name="jetbrains.mps.baseLanguage.collections.structure.AddElementOperation" flags="nn" index="TSZUe" />
     </language>
   </registry>
-  <node concept="3dkpOd" id="5PYs8dV1Sfy">
-    <property role="3GE5qa" value="statements" />
-    <property role="TrG5h" value="AddAggregationFunction" />
-    <ref role="2ZfgGC" to="p6im:66sUT0$8edT" resolve="Select" />
-    <node concept="38BcoT" id="5PYs8dV1Sfz" role="3dlsAV">
-      <node concept="3clFbS" id="5PYs8dV1Sf_" role="2VODD2">
-        <node concept="3cpWs8" id="7p2QZoUsnlk" role="3cqZAp">
-          <node concept="3cpWsn" id="7p2QZoUsnln" role="3cpWs9">
-            <property role="TrG5h" value="concepts" />
-            <node concept="_YKpA" id="7p2QZoUsnli" role="1tU5fm">
-              <node concept="3bZ5Sz" id="7p2QZoUsnmS" role="_ZDj9" />
-            </node>
-            <node concept="2ShNRf" id="7p2QZoUsnsJ" role="33vP2m">
-              <node concept="Tc6Ow" id="7p2QZoUsnsF" role="2ShVmc">
-                <node concept="3bZ5Sz" id="7p2QZoUsnsG" role="HW$YZ" />
-              </node>
-            </node>
-          </node>
-        </node>
-        <node concept="3clFbF" id="7p2QZoUsnw7" role="3cqZAp">
-          <node concept="2OqwBi" id="7p2QZoUsnDK" role="3clFbG">
-            <node concept="37vLTw" id="7p2QZoUsnw5" role="2Oq$k0">
-              <ref role="3cqZAo" node="7p2QZoUsnln" resolve="concepts" />
-            </node>
-            <node concept="TSZUe" id="7p2QZoUsqPu" role="2OqNvi">
-              <node concept="35c_gC" id="7p2QZoUsr5$" role="25WWJ7">
-                <ref role="35c_gD" to="p6im:5PYs8dV0Cek" resolve="Average" />
-              </node>
-            </node>
-          </node>
-        </node>
-        <node concept="3clFbF" id="7p2QZoUsrgj" role="3cqZAp">
-          <node concept="2OqwBi" id="7p2QZoUsrrd" role="3clFbG">
-            <node concept="37vLTw" id="7p2QZoUsrgh" role="2Oq$k0">
-              <ref role="3cqZAo" node="7p2QZoUsnln" resolve="concepts" />
-            </node>
-            <node concept="TSZUe" id="7p2QZoUsrQh" role="2OqNvi">
-              <node concept="35c_gC" id="7p2QZoUssMh" role="25WWJ7">
-                <ref role="35c_gD" to="p6im:5PYs8dV0Cei" resolve="Count" />
-              </node>
-            </node>
-          </node>
-        </node>
-        <node concept="3clFbF" id="7p2QZoUstAs" role="3cqZAp">
-          <node concept="2OqwBi" id="7p2QZoUstAt" role="3clFbG">
-            <node concept="37vLTw" id="7p2QZoUstAu" role="2Oq$k0">
-              <ref role="3cqZAo" node="7p2QZoUsnln" resolve="concepts" />
-            </node>
-            <node concept="TSZUe" id="7p2QZoUstAv" role="2OqNvi">
-              <node concept="35c_gC" id="7p2QZoUstAw" role="25WWJ7">
-                <ref role="35c_gD" to="p6im:5PYs8dV0Ced" resolve="Min" />
-              </node>
-            </node>
-          </node>
-        </node>
-        <node concept="3clFbF" id="7p2QZoUstBl" role="3cqZAp">
-          <node concept="2OqwBi" id="7p2QZoUstBm" role="3clFbG">
-            <node concept="37vLTw" id="7p2QZoUstBn" role="2Oq$k0">
-              <ref role="3cqZAo" node="7p2QZoUsnln" resolve="concepts" />
-            </node>
-            <node concept="TSZUe" id="7p2QZoUstBo" role="2OqNvi">
-              <node concept="35c_gC" id="7p2QZoUstBp" role="25WWJ7">
-                <ref role="35c_gD" to="p6im:5PYs8dV0Ceg" resolve="Max" />
-              </node>
-            </node>
-          </node>
-        </node>
-        <node concept="3clFbF" id="7p2QZoUstIE" role="3cqZAp">
-          <node concept="2OqwBi" id="7p2QZoUstIF" role="3clFbG">
-            <node concept="37vLTw" id="7p2QZoUstIG" role="2Oq$k0">
-              <ref role="3cqZAo" node="7p2QZoUsnln" resolve="concepts" />
-            </node>
-            <node concept="TSZUe" id="7p2QZoUstIH" role="2OqNvi">
-              <node concept="35c_gC" id="7p2QZoUstII" role="25WWJ7">
-                <ref role="35c_gD" to="p6im:5PYs8dV0Cej" resolve="Sum" />
-              </node>
-            </node>
-          </node>
-        </node>
-        <node concept="3clFbH" id="7p2QZoUstBT" role="3cqZAp" />
-        <node concept="3clFbF" id="7p2QZoUsudA" role="3cqZAp">
-          <node concept="37vLTw" id="7p2QZoUsud$" role="3clFbG">
-            <ref role="3cqZAo" node="7p2QZoUsnln" resolve="concepts" />
-          </node>
-        </node>
-      </node>
-      <node concept="3bZ5Sz" id="7p2QZoUsgZA" role="3ddBve" />
-    </node>
-    <node concept="2S6ZIM" id="5PYs8dV1SfA" role="2ZfVej">
-      <node concept="3clFbS" id="5PYs8dV1SfB" role="2VODD2">
-        <node concept="3clFbF" id="7p2QZoUs7Rl" role="3cqZAp">
-          <node concept="3cpWs3" id="7p2QZoUscPL" role="3clFbG">
-            <node concept="2OqwBi" id="7p2QZoUsvnQ" role="3uHU7w">
-              <node concept="38Zlrr" id="7p2QZoUsd6d" role="2Oq$k0" />
-              <node concept="liA8E" id="7p2QZoUsvQy" role="2OqNvi">
-                <ref role="37wK5l" to="c17a:~SAbstractConcept.getName()" resolve="getName" />
-              </node>
-            </node>
-            <node concept="Xl_RD" id="7p2QZoUs8Mw" role="3uHU7B">
-              <property role="Xl_RC" value="Add Aggregation Function " />
-            </node>
-          </node>
-        </node>
-      </node>
-    </node>
-    <node concept="2Sbjvc" id="5PYs8dV1SfC" role="2ZfgGD">
-      <node concept="3clFbS" id="5PYs8dV1SfD" role="2VODD2">
-        <node concept="1_3QMa" id="7p2QZoUuq5A" role="3cqZAp">
-          <node concept="38Zlrr" id="7p2QZoUuq5Z" role="1_3QMn" />
-          <node concept="1pnPoh" id="7p2QZoUuq6p" role="1_3QMm">
-            <node concept="3gn64h" id="7p2QZoUuq6q" role="1pnPq6">
-              <ref role="3gnhBz" to="p6im:5PYs8dV0Cek" resolve="Average" />
-            </node>
-            <node concept="3clFbS" id="7p2QZoUuq6r" role="1pnPq1">
-              <node concept="3clFbF" id="7p2QZoUuq7h" role="3cqZAp">
-                <node concept="37vLTI" id="7p2QZoUuqR9" role="3clFbG">
-                  <node concept="2ShNRf" id="7p2QZoUuqRJ" role="37vLTx">
-                    <node concept="3zrR0B" id="7p2QZoUur3n" role="2ShVmc">
-                      <node concept="3Tqbb2" id="7p2QZoUur3p" role="3zrR0E">
-                        <ref role="ehGHo" to="p6im:5PYs8dV0Cek" resolve="Average" />
-                      </node>
-                    </node>
-                  </node>
-                  <node concept="2OqwBi" id="7p2QZoUuqj3" role="37vLTJ">
-                    <node concept="2Sf5sV" id="7p2QZoUuq7g" role="2Oq$k0" />
-                    <node concept="3TrEf2" id="7p2QZoUuqxA" role="2OqNvi">
-                      <ref role="3Tt5mk" to="p6im:5PYs8dV0Cem" resolve="aggregateFunction" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-          </node>
-          <node concept="1pnPoh" id="7p2QZoUur8o" role="1_3QMm">
-            <node concept="3gn64h" id="7p2QZoUur8p" role="1pnPq6">
-              <ref role="3gnhBz" to="p6im:5PYs8dV0Cei" resolve="Count" />
-            </node>
-            <node concept="3clFbS" id="7p2QZoUur8q" role="1pnPq1">
-              <node concept="3clFbF" id="7p2QZoUur8r" role="3cqZAp">
-                <node concept="37vLTI" id="7p2QZoUur8s" role="3clFbG">
-                  <node concept="2ShNRf" id="7p2QZoUur8t" role="37vLTx">
-                    <node concept="3zrR0B" id="7p2QZoUur8u" role="2ShVmc">
-                      <node concept="3Tqbb2" id="7p2QZoUur8v" role="3zrR0E">
-                        <ref role="ehGHo" to="p6im:5PYs8dV0Cei" resolve="Count" />
-                      </node>
-                    </node>
-                  </node>
-                  <node concept="2OqwBi" id="7p2QZoUur8w" role="37vLTJ">
-                    <node concept="2Sf5sV" id="7p2QZoUur8x" role="2Oq$k0" />
-                    <node concept="3TrEf2" id="7p2QZoUur8y" role="2OqNvi">
-                      <ref role="3Tt5mk" to="p6im:5PYs8dV0Cem" resolve="aggregateFunction" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-          </node>
-          <node concept="1pnPoh" id="7p2QZoUurbH" role="1_3QMm">
-            <node concept="3gn64h" id="7p2QZoUurbI" role="1pnPq6">
-              <ref role="3gnhBz" to="p6im:5PYs8dV0Ced" resolve="Min" />
-            </node>
-            <node concept="3clFbS" id="7p2QZoUurbJ" role="1pnPq1">
-              <node concept="3clFbF" id="7p2QZoUurbK" role="3cqZAp">
-                <node concept="37vLTI" id="7p2QZoUurbL" role="3clFbG">
-                  <node concept="2ShNRf" id="7p2QZoUurbM" role="37vLTx">
-                    <node concept="3zrR0B" id="7p2QZoUurbN" role="2ShVmc">
-                      <node concept="3Tqbb2" id="7p2QZoUurbO" role="3zrR0E">
-                        <ref role="ehGHo" to="p6im:5PYs8dV0Ced" resolve="Min" />
-                      </node>
-                    </node>
-                  </node>
-                  <node concept="2OqwBi" id="7p2QZoUurbP" role="37vLTJ">
-                    <node concept="2Sf5sV" id="7p2QZoUurbQ" role="2Oq$k0" />
-                    <node concept="3TrEf2" id="7p2QZoUurbR" role="2OqNvi">
-                      <ref role="3Tt5mk" to="p6im:5PYs8dV0Cem" resolve="aggregateFunction" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-          </node>
-          <node concept="1pnPoh" id="7p2QZoUurdW" role="1_3QMm">
-            <node concept="3gn64h" id="7p2QZoUurdX" role="1pnPq6">
-              <ref role="3gnhBz" to="p6im:5PYs8dV0Ceg" resolve="Max" />
-            </node>
-            <node concept="3clFbS" id="7p2QZoUurdY" role="1pnPq1">
-              <node concept="3clFbF" id="7p2QZoUurdZ" role="3cqZAp">
-                <node concept="37vLTI" id="7p2QZoUure0" role="3clFbG">
-                  <node concept="2ShNRf" id="7p2QZoUure1" role="37vLTx">
-                    <node concept="3zrR0B" id="7p2QZoUure2" role="2ShVmc">
-                      <node concept="3Tqbb2" id="7p2QZoUure3" role="3zrR0E">
-                        <ref role="ehGHo" to="p6im:5PYs8dV0Ceg" resolve="Max" />
-                      </node>
-                    </node>
-                  </node>
-                  <node concept="2OqwBi" id="7p2QZoUure4" role="37vLTJ">
-                    <node concept="2Sf5sV" id="7p2QZoUure5" role="2Oq$k0" />
-                    <node concept="3TrEf2" id="7p2QZoUure6" role="2OqNvi">
-                      <ref role="3Tt5mk" to="p6im:5PYs8dV0Cem" resolve="aggregateFunction" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-          </node>
-          <node concept="1pnPoh" id="7p2QZoUuri_" role="1_3QMm">
-            <node concept="3gn64h" id="7p2QZoUuriA" role="1pnPq6">
-              <ref role="3gnhBz" to="p6im:5PYs8dV0Cej" resolve="Sum" />
-            </node>
-            <node concept="3clFbS" id="7p2QZoUuriB" role="1pnPq1">
-              <node concept="3clFbF" id="7p2QZoUuriC" role="3cqZAp">
-                <node concept="37vLTI" id="7p2QZoUuriD" role="3clFbG">
-                  <node concept="2ShNRf" id="7p2QZoUuriE" role="37vLTx">
-                    <node concept="3zrR0B" id="7p2QZoUuriF" role="2ShVmc">
-                      <node concept="3Tqbb2" id="7p2QZoUuriG" role="3zrR0E">
-                        <ref role="ehGHo" to="p6im:5PYs8dV0Cej" resolve="Sum" />
-                      </node>
-                    </node>
-                  </node>
-                  <node concept="2OqwBi" id="7p2QZoUuriH" role="37vLTJ">
-                    <node concept="2Sf5sV" id="7p2QZoUuriI" role="2Oq$k0" />
-                    <node concept="3TrEf2" id="7p2QZoUuriJ" role="2OqNvi">
-                      <ref role="3Tt5mk" to="p6im:5PYs8dV0Cem" resolve="aggregateFunction" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-          </node>
-        </node>
-      </node>
-    </node>
-  </node>
   <node concept="2S6QgY" id="7p2QZoUy53d">
     <property role="3GE5qa" value="statements" />
     <property role="TrG5h" value="AddAlias" />
@@ -495,6 +261,238 @@
                 <node concept="3zrR0B" id="2qoxdQ1CNkf" role="2ShVmc">
                   <node concept="3Tqbb2" id="2qoxdQ1CNkh" role="3zrR0E">
                     <ref role="ehGHo" to="p6im:2fooeIVv2ql" resolve="ConditionsSequence" />
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+  </node>
+  <node concept="3dkpOd" id="HpRLxUEONe">
+    <property role="3GE5qa" value="column" />
+    <property role="TrG5h" value="AddAggregationFunction" />
+    <ref role="2ZfgGC" to="p6im:UaVdqMkpsi" resolve="SelectColumn" />
+    <node concept="38BcoT" id="HpRLxUEONf" role="3dlsAV">
+      <node concept="3bZ5Sz" id="HpRLxUEPkU" role="3ddBve" />
+      <node concept="3clFbS" id="HpRLxUEONh" role="2VODD2">
+        <node concept="3cpWs8" id="HpRLxUEP$Q" role="3cqZAp">
+          <node concept="3cpWsn" id="HpRLxUEP$R" role="3cpWs9">
+            <property role="TrG5h" value="concepts" />
+            <node concept="_YKpA" id="HpRLxUEP$S" role="1tU5fm">
+              <node concept="3bZ5Sz" id="HpRLxUEP$T" role="_ZDj9" />
+            </node>
+            <node concept="2ShNRf" id="HpRLxUEP$U" role="33vP2m">
+              <node concept="Tc6Ow" id="HpRLxUEP$V" role="2ShVmc">
+                <node concept="3bZ5Sz" id="HpRLxUEP$W" role="HW$YZ" />
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbF" id="HpRLxUEPVE" role="3cqZAp">
+          <node concept="2OqwBi" id="HpRLxUEPVF" role="3clFbG">
+            <node concept="37vLTw" id="HpRLxUEPVG" role="2Oq$k0">
+              <ref role="3cqZAo" node="HpRLxUEP$R" resolve="concepts" />
+            </node>
+            <node concept="TSZUe" id="HpRLxUEPVH" role="2OqNvi">
+              <node concept="35c_gC" id="HpRLxUEPVI" role="25WWJ7">
+                <ref role="35c_gD" to="p6im:5PYs8dV0Cek" resolve="Average" />
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbF" id="HpRLxUER_i" role="3cqZAp">
+          <node concept="2OqwBi" id="HpRLxUER_j" role="3clFbG">
+            <node concept="37vLTw" id="HpRLxUER_k" role="2Oq$k0">
+              <ref role="3cqZAo" node="HpRLxUEP$R" resolve="concepts" />
+            </node>
+            <node concept="TSZUe" id="HpRLxUER_l" role="2OqNvi">
+              <node concept="35c_gC" id="HpRLxUER_m" role="25WWJ7">
+                <ref role="35c_gD" to="p6im:5PYs8dV0Cei" resolve="Count" />
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbF" id="HpRLxUES4g" role="3cqZAp">
+          <node concept="2OqwBi" id="HpRLxUES4h" role="3clFbG">
+            <node concept="37vLTw" id="HpRLxUES4i" role="2Oq$k0">
+              <ref role="3cqZAo" node="HpRLxUEP$R" resolve="concepts" />
+            </node>
+            <node concept="TSZUe" id="HpRLxUES4j" role="2OqNvi">
+              <node concept="35c_gC" id="HpRLxUES4k" role="25WWJ7">
+                <ref role="35c_gD" to="p6im:5PYs8dV0Ced" resolve="Min" />
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbF" id="HpRLxUES93" role="3cqZAp">
+          <node concept="2OqwBi" id="HpRLxUES94" role="3clFbG">
+            <node concept="37vLTw" id="HpRLxUES95" role="2Oq$k0">
+              <ref role="3cqZAo" node="HpRLxUEP$R" resolve="concepts" />
+            </node>
+            <node concept="TSZUe" id="HpRLxUES96" role="2OqNvi">
+              <node concept="35c_gC" id="HpRLxUES97" role="25WWJ7">
+                <ref role="35c_gD" to="p6im:5PYs8dV0Ceg" resolve="Max" />
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbF" id="HpRLxUESH1" role="3cqZAp">
+          <node concept="2OqwBi" id="HpRLxUESH2" role="3clFbG">
+            <node concept="37vLTw" id="HpRLxUESH3" role="2Oq$k0">
+              <ref role="3cqZAo" node="HpRLxUEP$R" resolve="concepts" />
+            </node>
+            <node concept="TSZUe" id="HpRLxUESH4" role="2OqNvi">
+              <node concept="35c_gC" id="HpRLxUESH5" role="25WWJ7">
+                <ref role="35c_gD" to="p6im:5PYs8dV0Cej" resolve="Sum" />
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbF" id="HpRLxUETrx" role="3cqZAp">
+          <node concept="37vLTw" id="HpRLxUETrv" role="3clFbG">
+            <ref role="3cqZAo" node="HpRLxUEP$R" resolve="concepts" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="2S6ZIM" id="HpRLxUEONi" role="2ZfVej">
+      <node concept="3clFbS" id="HpRLxUEONj" role="2VODD2">
+        <node concept="3clFbF" id="HpRLxUEUCX" role="3cqZAp">
+          <node concept="3cpWs3" id="HpRLxUEUCY" role="3clFbG">
+            <node concept="2OqwBi" id="HpRLxUEUCZ" role="3uHU7w">
+              <node concept="38Zlrr" id="HpRLxUEUD0" role="2Oq$k0" />
+              <node concept="liA8E" id="HpRLxUEUD1" role="2OqNvi">
+                <ref role="37wK5l" to="c17a:~SAbstractConcept.getName()" resolve="getName" />
+              </node>
+            </node>
+            <node concept="Xl_RD" id="HpRLxUEUD2" role="3uHU7B">
+              <property role="Xl_RC" value="Add Aggregation Function " />
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="2Sbjvc" id="HpRLxUEONk" role="2ZfgGD">
+      <node concept="3clFbS" id="HpRLxUEONl" role="2VODD2">
+        <node concept="1_3QMa" id="HpRLxUEVri" role="3cqZAp">
+          <node concept="38Zlrr" id="HpRLxUEVrj" role="1_3QMn" />
+          <node concept="1pnPoh" id="HpRLxUEVrk" role="1_3QMm">
+            <node concept="3gn64h" id="HpRLxUEVrl" role="1pnPq6">
+              <ref role="3gnhBz" to="p6im:5PYs8dV0Cek" resolve="Average" />
+            </node>
+            <node concept="3clFbS" id="HpRLxUEVrm" role="1pnPq1">
+              <node concept="3clFbF" id="HpRLxUEVrn" role="3cqZAp">
+                <node concept="37vLTI" id="HpRLxUEVro" role="3clFbG">
+                  <node concept="2ShNRf" id="HpRLxUEVrp" role="37vLTx">
+                    <node concept="3zrR0B" id="HpRLxUEVrq" role="2ShVmc">
+                      <node concept="3Tqbb2" id="HpRLxUEVrr" role="3zrR0E">
+                        <ref role="ehGHo" to="p6im:5PYs8dV0Cek" resolve="Average" />
+                      </node>
+                    </node>
+                  </node>
+                  <node concept="2OqwBi" id="HpRLxUEVrs" role="37vLTJ">
+                    <node concept="2Sf5sV" id="HpRLxUEVrt" role="2Oq$k0" />
+                    <node concept="3TrEf2" id="HpRLxUEVru" role="2OqNvi">
+                      <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+          <node concept="1pnPoh" id="HpRLxUEVrv" role="1_3QMm">
+            <node concept="3gn64h" id="HpRLxUEVrw" role="1pnPq6">
+              <ref role="3gnhBz" to="p6im:5PYs8dV0Cei" resolve="Count" />
+            </node>
+            <node concept="3clFbS" id="HpRLxUEVrx" role="1pnPq1">
+              <node concept="3clFbF" id="HpRLxUEVry" role="3cqZAp">
+                <node concept="37vLTI" id="HpRLxUEVrz" role="3clFbG">
+                  <node concept="2ShNRf" id="HpRLxUEVr$" role="37vLTx">
+                    <node concept="3zrR0B" id="HpRLxUEVr_" role="2ShVmc">
+                      <node concept="3Tqbb2" id="HpRLxUEVrA" role="3zrR0E">
+                        <ref role="ehGHo" to="p6im:5PYs8dV0Cei" resolve="Count" />
+                      </node>
+                    </node>
+                  </node>
+                  <node concept="2OqwBi" id="HpRLxUEVrB" role="37vLTJ">
+                    <node concept="2Sf5sV" id="HpRLxUEVrC" role="2Oq$k0" />
+                    <node concept="3TrEf2" id="HpRLxUEVrD" role="2OqNvi">
+                      <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+          <node concept="1pnPoh" id="HpRLxUEVrE" role="1_3QMm">
+            <node concept="3gn64h" id="HpRLxUEVrF" role="1pnPq6">
+              <ref role="3gnhBz" to="p6im:5PYs8dV0Ced" resolve="Min" />
+            </node>
+            <node concept="3clFbS" id="HpRLxUEVrG" role="1pnPq1">
+              <node concept="3clFbF" id="HpRLxUEVrH" role="3cqZAp">
+                <node concept="37vLTI" id="HpRLxUEVrI" role="3clFbG">
+                  <node concept="2ShNRf" id="HpRLxUEVrJ" role="37vLTx">
+                    <node concept="3zrR0B" id="HpRLxUEVrK" role="2ShVmc">
+                      <node concept="3Tqbb2" id="HpRLxUEVrL" role="3zrR0E">
+                        <ref role="ehGHo" to="p6im:5PYs8dV0Ced" resolve="Min" />
+                      </node>
+                    </node>
+                  </node>
+                  <node concept="2OqwBi" id="HpRLxUEVrM" role="37vLTJ">
+                    <node concept="2Sf5sV" id="HpRLxUEVrN" role="2Oq$k0" />
+                    <node concept="3TrEf2" id="HpRLxUEVrO" role="2OqNvi">
+                      <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+          <node concept="1pnPoh" id="HpRLxUEVrP" role="1_3QMm">
+            <node concept="3gn64h" id="HpRLxUEVrQ" role="1pnPq6">
+              <ref role="3gnhBz" to="p6im:5PYs8dV0Ceg" resolve="Max" />
+            </node>
+            <node concept="3clFbS" id="HpRLxUEVrR" role="1pnPq1">
+              <node concept="3clFbF" id="HpRLxUEVrS" role="3cqZAp">
+                <node concept="37vLTI" id="HpRLxUEVrT" role="3clFbG">
+                  <node concept="2ShNRf" id="HpRLxUEVrU" role="37vLTx">
+                    <node concept="3zrR0B" id="HpRLxUEVrV" role="2ShVmc">
+                      <node concept="3Tqbb2" id="HpRLxUEVrW" role="3zrR0E">
+                        <ref role="ehGHo" to="p6im:5PYs8dV0Ceg" resolve="Max" />
+                      </node>
+                    </node>
+                  </node>
+                  <node concept="2OqwBi" id="HpRLxUEVrX" role="37vLTJ">
+                    <node concept="2Sf5sV" id="HpRLxUEVrY" role="2Oq$k0" />
+                    <node concept="3TrEf2" id="HpRLxUEVrZ" role="2OqNvi">
+                      <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+          <node concept="1pnPoh" id="HpRLxUEVs0" role="1_3QMm">
+            <node concept="3gn64h" id="HpRLxUEVs1" role="1pnPq6">
+              <ref role="3gnhBz" to="p6im:5PYs8dV0Cej" resolve="Sum" />
+            </node>
+            <node concept="3clFbS" id="HpRLxUEVs2" role="1pnPq1">
+              <node concept="3clFbF" id="HpRLxUEVs3" role="3cqZAp">
+                <node concept="37vLTI" id="HpRLxUEVs4" role="3clFbG">
+                  <node concept="2ShNRf" id="HpRLxUEVs5" role="37vLTx">
+                    <node concept="3zrR0B" id="HpRLxUEVs6" role="2ShVmc">
+                      <node concept="3Tqbb2" id="HpRLxUEVs7" role="3zrR0E">
+                        <ref role="ehGHo" to="p6im:5PYs8dV0Cej" resolve="Sum" />
+                      </node>
+                    </node>
+                  </node>
+                  <node concept="2OqwBi" id="HpRLxUEVs8" role="37vLTJ">
+                    <node concept="2Sf5sV" id="HpRLxUEVs9" role="2Oq$k0" />
+                    <node concept="3TrEf2" id="HpRLxUEVsa" role="2OqNvi">
+                      <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                    </node>
                   </node>
                 </node>
               </node>

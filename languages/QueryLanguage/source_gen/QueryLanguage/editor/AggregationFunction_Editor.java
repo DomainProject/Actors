@@ -7,8 +7,8 @@ import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
 
-public class AggregateFunction_Editor extends DefaultNodeEditor {
+public class AggregationFunction_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return new AggregateFunction_EditorBuilder_a(editorContext, node).createCell();
+    return new AggregationFunction_EditorBuilder_a(editorContext, node).createCell();
   }
 }

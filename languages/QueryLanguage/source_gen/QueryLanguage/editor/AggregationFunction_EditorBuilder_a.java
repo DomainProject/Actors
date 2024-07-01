@@ -13,11 +13,11 @@ import jetbrains.mps.editor.runtime.style.StyleImpl;
 import jetbrains.mps.editor.runtime.style.StyleAttributes;
 import jetbrains.mps.nodeEditor.MPSColors;
 
-/*package*/ class AggregateFunction_EditorBuilder_a extends AbstractEditorBuilder {
+/*package*/ class AggregationFunction_EditorBuilder_a extends AbstractEditorBuilder {
   @NotNull
   private SNode myNode;
 
-  public AggregateFunction_EditorBuilder_a(@NotNull EditorContext context, @NotNull SNode node) {
+  public AggregationFunction_EditorBuilder_a(@NotNull EditorContext context, @NotNull SNode node) {
     super(context);
     myNode = node;
   }
@@ -41,6 +41,7 @@ import jetbrains.mps.nodeEditor.MPSColors;
     }
     Style style = new StyleImpl();
     style.set(StyleAttributes.TEXT_COLOR, getStyleRegistry().getSimpleColor(MPSColors.DARK_MAGENTA));
+    style.set(StyleAttributes.PUNCTUATION_RIGHT, true);
     editorCell.getStyle().putAll(style);
     return editorCell;
   }

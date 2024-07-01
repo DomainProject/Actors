@@ -10,6 +10,9 @@
       <concept id="3100867722287388366" name="QueryLanguage.structure.GroupBy" flags="ng" index="21oAwd">
         <child id="3100867722287388505" name="columns" index="21oAAq" />
       </concept>
+      <concept id="3100867722286850641" name="QueryLanguage.structure.OrderBy" flags="ng" index="21qpMi">
+        <child id="3100867722287388367" name="columns" index="21oAwc" />
+      </concept>
       <concept id="2341611946572642014" name="QueryLanguage.structure.TableReference" flags="ng" index="2leIlQ">
         <reference id="2341611946572642015" name="tableRef" index="2leIlR" />
       </concept>
@@ -27,13 +30,20 @@
         <property id="1229499084499598135" name="type" index="Al3ng" />
       </concept>
       <concept id="6736945802599629714" name="QueryLanguage.structure.Count" flags="ng" index="Avfch" />
+      <concept id="6736945802599629716" name="QueryLanguage.structure.Average" flags="ng" index="Avfcn" />
+      <concept id="1047910270175909650" name="QueryLanguage.structure.SelectColumn" flags="ngI" index="2WQRJ4">
+        <child id="817930103574645565" name="aggregateFunction" index="1LWTg_" />
+      </concept>
       <concept id="1047910270175909651" name="QueryLanguage.structure.AllColumns" flags="ng" index="2WQRJ5" />
       <concept id="7033755722359825273" name="QueryLanguage.structure.Select" flags="ng" index="15J0zD">
+        <property id="8521615295528819822" name="tableAlias" index="1cLguo" />
         <child id="3100867722287388537" name="groupBy" index="21oAAU" />
+        <child id="3100867722286851113" name="orderBy" index="21qpFE" />
         <child id="2341611946572650175" name="tables" index="2legkn" />
         <child id="1229499084499654445" name="where" index="AlhBa" />
         <child id="6736945802599629718" name="aggregateFunction" index="Avfcl" />
         <child id="1047910270176170764" name="cols" index="2WRRZq" />
+        <child id="817930103574093953" name="aliasTable" index="1LY3Yp" />
       </concept>
       <concept id="7033755722359825275" name="QueryLanguage.structure.Where" flags="ng" index="15J0zF">
         <child id="1229499084499985332" name="condition" index="AmyPj" />
@@ -118,6 +128,7 @@
       </node>
     </node>
     <node concept="15J0zD" id="6eYilKnl7WP" role="21riY_">
+      <property role="1cLguo" value="University_alias" />
       <node concept="2leIlQ" id="6eYilKnl7WR" role="2legkn">
         <ref role="2leIlR" node="5VF6QK6C0wF" resolve="University" />
       </node>
@@ -176,34 +187,193 @@
         </node>
       </node>
     </node>
-    <node concept="15J0zD" id="6eYilKnl7Zy" role="21riY_">
-      <node concept="2leIlQ" id="6eYilKnl7Z$" role="2legkn">
-        <ref role="2leIlR" node="5Q93FfFUJYh" resolve="Person" />
+  </node>
+  <node concept="Al3kE" id="HpRLxUoZRY">
+    <node concept="Al3n9" id="HpRLxUoZRZ" role="21riY_">
+      <property role="TrG5h" value="agent" />
+      <node concept="Al3nk" id="HpRLxUurU0" role="1_7Ipx">
+        <property role="TrG5h" value="id" />
+        <property role="2l5wPj" value="agent.id" />
+        <property role="Al3ng" value="14g3IsRh3GU/Integer" />
       </node>
-      <node concept="2leIlQ" id="6eYilKnl80e" role="2legkn">
-        <ref role="2leIlR" node="5VF6QK6C0wF" resolve="University" />
+      <node concept="Al3nk" id="HpRLxUurUd" role="1_7Ipx">
+        <property role="TrG5h" value="ts" />
+        <property role="2l5wPj" value="agent.ts" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
       </node>
-      <node concept="2WQRJ5" id="6eYilKnl80h" role="2WRRZq" />
-      <node concept="15J0zF" id="6eYilKnl80j" role="AlhBa">
-        <node concept="1osJ5R" id="6eYilKnl80l" role="AmyPj">
-          <property role="1osJ5c" value="2fooeIVv2qr/AND" />
-          <node concept="1osJ5O" id="6eYilKnl80$" role="1osJ4x">
-            <property role="1osJ58" value="14g3IsRhL0p/NOT_EQUAL" />
-            <node concept="1HhJcF" id="6eYilKnl80A" role="1osJ5a">
-              <property role="1HhJcI" value="&quot;Italy&quot;" />
-            </node>
-            <node concept="Agl$j" id="6eYilKnl80C" role="1osJ57">
-              <ref role="Agl$i" node="6eYilKnl7TR" resolve="country" />
-            </node>
+      <node concept="Al3nk" id="HpRLxUoZS3" role="1_7Ipx">
+        <property role="TrG5h" value="regionId" />
+        <property role="2l5wPj" value="agent.regionId" />
+        <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+      </node>
+      <node concept="Al3nk" id="HpRLxUoZS6" role="1_7Ipx">
+        <property role="TrG5h" value="speed" />
+        <property role="2l5wPj" value="agent.speed" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
+      </node>
+      <node concept="Al3nk" id="HpRLxUoZSa" role="1_7Ipx">
+        <property role="TrG5h" value="onRoadFlag" />
+        <property role="2l5wPj" value="agent.onRoadFlag" />
+        <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+      </node>
+      <node concept="Al3nk" id="HpRLxUoZS_" role="1_7Ipx">
+        <property role="TrG5h" value="traveledDistance" />
+        <property role="2l5wPj" value="agent.traveledDistance" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
+      </node>
+      <node concept="Al3nk" id="HpRLxUurU6" role="1_7Ipx">
+        <property role="TrG5h" value="traveledTime" />
+        <property role="2l5wPj" value="agent.traveledTime" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
+      </node>
+    </node>
+    <node concept="15J0zD" id="HpRLxUurUO" role="21riY_">
+      <property role="1cLguo" value="TraveledTimeTable" />
+      <node concept="2leIlQ" id="HpRLxUurUQ" role="2legkn">
+        <ref role="2leIlR" node="HpRLxUoZRZ" resolve="agent" />
+      </node>
+      <node concept="Agl$j" id="HpRLxUurVn" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUurUd" resolve="ts" />
+      </node>
+      <node concept="Agl$j" id="HpRLxUurVs" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUurU0" resolve="id" />
+      </node>
+      <node concept="Agl$j" id="HpRLxUurV$" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUurU6" resolve="traveledTime" />
+      </node>
+      <node concept="15J0zF" id="HpRLxUurVD" role="AlhBa">
+        <node concept="1osJ5O" id="HpRLxUurVF" role="AmyPj">
+          <property role="1osJ58" value="14g3IsRhKZU/EQUALS" />
+          <node concept="1HhJcF" id="HpRLxUurVG" role="1osJ5a">
+            <property role="1HhJcI" value="1" />
           </node>
-          <node concept="1osJ5O" id="6eYilKnl80r" role="1osJ4P">
-            <property role="1osJ58" value="14g3IsRhL0j/LOWER_EQUAL" />
-            <node concept="1HhJcF" id="6eYilKnl80t" role="1osJ5a">
-              <property role="1HhJcI" value="30" />
-            </node>
-            <node concept="Agl$j" id="6eYilKnl80v" role="1osJ57">
-              <ref role="Agl$i" node="5Q93FfFUJYl" resolve="age" />
-            </node>
+          <node concept="Agl$j" id="HpRLxUurVH" role="1osJ57">
+            <ref role="Agl$i" node="HpRLxUoZSa" resolve="onRoadFlag" />
+          </node>
+        </node>
+      </node>
+      <node concept="21qpMi" id="HpRLxUurVL" role="21qpFE">
+        <node concept="Agl$j" id="HpRLxUurVM" role="21oAwc">
+          <ref role="Agl$i" node="HpRLxUurU6" resolve="traveledTime" />
+        </node>
+      </node>
+      <node concept="Al3n9" id="HpRLxUE$DM" role="1LY3Yp">
+        <property role="TrG5h" value="TraveledTimeTable" />
+        <node concept="Al3nk" id="HpRLxUE$DN" role="1_7Ipx">
+          <property role="TrG5h" value="ts" />
+          <property role="2l5wPj" value="agent.ts" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        </node>
+        <node concept="Al3nk" id="HpRLxUE$DO" role="1_7Ipx">
+          <property role="TrG5h" value="id" />
+          <property role="2l5wPj" value="agent.id" />
+          <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+        </node>
+        <node concept="Al3nk" id="HpRLxUE$DP" role="1_7Ipx">
+          <property role="TrG5h" value="traveledTime" />
+          <property role="2l5wPj" value="agent.traveledTime" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        </node>
+      </node>
+    </node>
+    <node concept="15J0zD" id="HpRLxUurWz" role="21riY_">
+      <property role="1cLguo" value="TraveledDistanceTable" />
+      <node concept="2leIlQ" id="HpRLxUurW_" role="2legkn">
+        <ref role="2leIlR" node="HpRLxUoZRZ" resolve="agent" />
+      </node>
+      <node concept="Agl$j" id="HpRLxUurXh" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUurUd" resolve="ts" />
+      </node>
+      <node concept="Agl$j" id="HpRLxUurXm" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUurU0" resolve="id" />
+      </node>
+      <node concept="Agl$j" id="HpRLxUurXu" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUoZS_" resolve="traveledDistance" />
+      </node>
+      <node concept="15J0zF" id="HpRLxUurXz" role="AlhBa">
+        <node concept="1osJ5O" id="HpRLxUurX_" role="AmyPj">
+          <property role="1osJ58" value="14g3IsRhKZU/EQUALS" />
+          <node concept="1HhJcF" id="HpRLxUurXA" role="1osJ5a">
+            <property role="1HhJcI" value="1" />
+          </node>
+          <node concept="Agl$j" id="HpRLxUurXB" role="1osJ57">
+            <ref role="Agl$i" node="HpRLxUoZSa" resolve="onRoadFlag" />
+          </node>
+        </node>
+      </node>
+      <node concept="21qpMi" id="HpRLxUurXF" role="21qpFE">
+        <node concept="Agl$j" id="HpRLxUurXG" role="21oAwc">
+          <ref role="Agl$i" node="HpRLxUoZS_" resolve="traveledDistance" />
+        </node>
+      </node>
+      <node concept="Al3n9" id="HpRLxUE$GP" role="1LY3Yp">
+        <property role="TrG5h" value="TraveledDistanceTable" />
+        <node concept="Al3nk" id="HpRLxUE$GQ" role="1_7Ipx">
+          <property role="TrG5h" value="ts" />
+          <property role="2l5wPj" value="agent.ts" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        </node>
+        <node concept="Al3nk" id="HpRLxUE$GR" role="1_7Ipx">
+          <property role="TrG5h" value="id" />
+          <property role="2l5wPj" value="agent.id" />
+          <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+        </node>
+        <node concept="Al3nk" id="HpRLxUE$GS" role="1_7Ipx">
+          <property role="TrG5h" value="traveledDistance" />
+          <property role="2l5wPj" value="agent.traveledDistance" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        </node>
+      </node>
+    </node>
+    <node concept="15J0zD" id="HpRLxUIQn9" role="21riY_">
+      <node concept="2leIlQ" id="HpRLxUIQnb" role="2legkn">
+        <ref role="2leIlR" node="HpRLxUoZRZ" resolve="agent" />
+      </node>
+      <node concept="Agl$j" id="HpRLxUIQnP" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUurUd" resolve="ts" />
+      </node>
+      <node concept="Agl$j" id="HpRLxUIQnU" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUoZS3" resolve="regionId" />
+      </node>
+      <node concept="Agl$j" id="HpRLxUIQo2" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUoZS6" resolve="speed" />
+        <node concept="Avfcn" id="HpRLxUIQo7" role="1LWTg_" />
+      </node>
+      <node concept="15J0zF" id="HpRLxUIQo9" role="AlhBa">
+        <node concept="1osJ5O" id="HpRLxUIQob" role="AmyPj">
+          <property role="1osJ58" value="14g3IsRhKZU/EQUALS" />
+          <node concept="1HhJcF" id="HpRLxUIQoc" role="1osJ5a">
+            <property role="1HhJcI" value="1" />
+          </node>
+          <node concept="Agl$j" id="HpRLxUIQod" role="1osJ57">
+            <ref role="Agl$i" node="HpRLxUoZSa" resolve="onRoadFlag" />
+          </node>
+        </node>
+      </node>
+      <node concept="21oAwd" id="HpRLxUIQoh" role="21oAAU">
+        <node concept="Agl$j" id="HpRLxUIQoi" role="21oAAq">
+          <ref role="Agl$i" node="HpRLxUoZS3" resolve="regionId" />
+        </node>
+      </node>
+    </node>
+    <node concept="15J0zD" id="HpRLxUIQp9" role="21riY_">
+      <node concept="2leIlQ" id="HpRLxUIQpb" role="2legkn">
+        <ref role="2leIlR" node="HpRLxUoZRZ" resolve="agent" />
+      </node>
+      <node concept="Agl$j" id="HpRLxUIQq1" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUurUd" resolve="ts" />
+      </node>
+      <node concept="2WQRJ5" id="HpRLxUIQq6" role="2WRRZq">
+        <node concept="Avfch" id="HpRLxUIQqa" role="1LWTg_" />
+      </node>
+      <node concept="15J0zF" id="HpRLxUIQqc" role="AlhBa">
+        <node concept="1osJ5O" id="HpRLxUIQqe" role="AmyPj">
+          <property role="1osJ58" value="14g3IsRhKZU/EQUALS" />
+          <node concept="1HhJcF" id="HpRLxUIQqk" role="1osJ5a">
+            <property role="1HhJcI" value="1" />
+          </node>
+          <node concept="Agl$j" id="HpRLxUIQqg" role="1osJ57">
+            <ref role="Agl$i" node="HpRLxUoZSa" resolve="onRoadFlag" />
           </node>
         </node>
       </node>
