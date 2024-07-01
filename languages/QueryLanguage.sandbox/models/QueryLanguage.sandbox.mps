@@ -10,9 +10,6 @@
       <concept id="3100867722287388366" name="QueryLanguage.structure.GroupBy" flags="ng" index="21oAwd">
         <child id="3100867722287388505" name="columns" index="21oAAq" />
       </concept>
-      <concept id="3100867722286850641" name="QueryLanguage.structure.OrderBy" flags="ng" index="21qpMi">
-        <child id="3100867722287388367" name="columns" index="21oAwc" />
-      </concept>
       <concept id="2341611946572642014" name="QueryLanguage.structure.TableReference" flags="ng" index="2leIlQ">
         <reference id="2341611946572642015" name="tableRef" index="2leIlR" />
       </concept>
@@ -29,14 +26,14 @@
         <property id="2341611946574946043" name="fullName" index="2l5wPj" />
         <property id="1229499084499598135" name="type" index="Al3ng" />
       </concept>
-      <concept id="1229499084499598128" name="QueryLanguage.structure.Statement" flags="ng" index="Al3nn">
-        <child id="8471277724064440123" name="columns" index="1_6_$e" />
-      </concept>
+      <concept id="6736945802599629714" name="QueryLanguage.structure.Count" flags="ng" index="Avfch" />
+      <concept id="1047910270175909651" name="QueryLanguage.structure.AllColumns" flags="ng" index="2WQRJ5" />
       <concept id="7033755722359825273" name="QueryLanguage.structure.Select" flags="ng" index="15J0zD">
         <child id="3100867722287388537" name="groupBy" index="21oAAU" />
-        <child id="3100867722286851113" name="orderBy" index="21qpFE" />
         <child id="2341611946572650175" name="tables" index="2legkn" />
         <child id="1229499084499654445" name="where" index="AlhBa" />
+        <child id="6736945802599629718" name="aggregateFunction" index="Avfcl" />
+        <child id="1047910270176170764" name="cols" index="2WRRZq" />
       </concept>
       <concept id="7033755722359825275" name="QueryLanguage.structure.Where" flags="ng" index="15J0zF">
         <child id="1229499084499985332" name="condition" index="AmyPj" />
@@ -97,60 +94,117 @@
         <property role="2l5wPj" value="University.city" />
         <property role="Al3ng" value="14g3IsRh3GV/String" />
       </node>
+      <node concept="Al3nk" id="6eYilKnl7TR" role="1_7Ipx">
+        <property role="TrG5h" value="country" />
+        <property role="2l5wPj" value="University.country" />
+        <property role="Al3ng" value="14g3IsRh3GV/String" />
+      </node>
     </node>
-    <node concept="15J0zD" id="5VF6QK6C0x4" role="21riY_">
-      <node concept="2leIlQ" id="5VF6QK6C0x6" role="2legkn">
+    <node concept="15J0zD" id="6eYilKnl7Wa" role="21riY_">
+      <node concept="2leIlQ" id="6eYilKnl7Wc" role="2legkn">
         <ref role="2leIlR" node="5Q93FfFUJYh" resolve="Person" />
       </node>
-      <node concept="Agl$j" id="5VF6QK6C0xg" role="1_6_$e">
+      <node concept="2WQRJ5" id="6eYilKnl7Wp" role="2WRRZq" />
+      <node concept="15J0zF" id="6eYilKnl7Wr" role="AlhBa">
+        <node concept="1osJ5O" id="6eYilKnl7Wt" role="AmyPj">
+          <property role="1osJ58" value="14g3IsRhL0d/GREATER_EQUAL" />
+          <node concept="1HhJcF" id="6eYilKnl7Wu" role="1osJ5a">
+            <property role="1HhJcI" value="18" />
+          </node>
+          <node concept="Agl$j" id="6eYilKnl7Wv" role="1osJ57">
+            <ref role="Agl$i" node="5Q93FfFUJYl" resolve="age" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="15J0zD" id="6eYilKnl7WP" role="21riY_">
+      <node concept="2leIlQ" id="6eYilKnl7WR" role="2legkn">
+        <ref role="2leIlR" node="5VF6QK6C0wF" resolve="University" />
+      </node>
+      <node concept="Agl$j" id="6eYilKnl7Xb" role="2WRRZq">
+        <ref role="Agl$i" node="5VF6QK6C0wL" resolve="name" />
+      </node>
+      <node concept="Agl$j" id="6eYilKnl7Xg" role="2WRRZq">
+        <ref role="Agl$i" node="5VF6QK6C0wQ" resolve="city" />
+      </node>
+      <node concept="15J0zF" id="6eYilKnl7Xk" role="AlhBa">
+        <node concept="1osJ5O" id="6eYilKnl7Xm" role="AmyPj">
+          <property role="1osJ58" value="14g3IsRhKZU/EQUALS" />
+          <node concept="1HhJcF" id="6eYilKnl7Xn" role="1osJ5a">
+            <property role="1HhJcI" value="&quot;Italy&quot;" />
+          </node>
+          <node concept="Agl$j" id="6eYilKnl7Xo" role="1osJ57">
+            <ref role="Agl$i" node="6eYilKnl7TR" resolve="country" />
+          </node>
+        </node>
+      </node>
+      <node concept="21oAwd" id="6eYilKnl7Xs" role="21oAAU">
+        <node concept="Agl$j" id="6eYilKnl7Xt" role="21oAAq">
+          <ref role="Agl$i" node="5VF6QK6C0wQ" resolve="city" />
+        </node>
+      </node>
+    </node>
+    <node concept="15J0zD" id="6eYilKnl7XW" role="21riY_">
+      <node concept="2leIlQ" id="6eYilKnl7XY" role="2legkn">
+        <ref role="2leIlR" node="5Q93FfFUJYh" resolve="Person" />
+      </node>
+      <node concept="Agl$j" id="6eYilKnl7Ys" role="2WRRZq">
         <ref role="Agl$i" node="5Q93FfFUJYj" resolve="name" />
       </node>
-      <node concept="Agl$j" id="5VF6QK6C0xi" role="1_6_$e">
-        <ref role="Agl$i" node="5Q93FfFUJYl" resolve="age" />
-      </node>
-      <node concept="15J0zF" id="5VF6QK6C0xl" role="AlhBa">
-        <node concept="1osJ5R" id="5VF6QK6CGBN" role="AmyPj">
+      <node concept="Avfch" id="6eYilKnl7Yu" role="Avfcl" />
+      <node concept="15J0zF" id="6eYilKnl7Yw" role="AlhBa">
+        <node concept="1osJ5R" id="6eYilKnl7Yy" role="AmyPj">
           <property role="1osJ5c" value="2fooeIVv2qr/AND" />
-          <node concept="1osJ5R" id="5VF6QK6CGBT" role="1osJ4P">
-            <property role="1osJ5c" value="2fooeIVv2qs/OR" />
-            <node concept="1osJ5O" id="5VF6QK6CGCi" role="1osJ4x">
-              <property role="1osJ58" value="14g3IsRhL0j/LOWER_EQUAL" />
-              <node concept="1HhJcF" id="5VF6QK6CGCk" role="1osJ5a">
-                <property role="1HhJcI" value="25" />
-              </node>
-              <node concept="Agl$j" id="5VF6QK6CGCm" role="1osJ57">
-                <ref role="Agl$i" node="5Q93FfFUJYl" resolve="age" />
-              </node>
+          <node concept="1osJ5O" id="6eYilKnl7YL" role="1osJ4x">
+            <property role="1osJ58" value="14g3IsRhL0j/LOWER_EQUAL" />
+            <node concept="1HhJcF" id="6eYilKnl7YN" role="1osJ5a">
+              <property role="1HhJcI" value="80.0" />
             </node>
-            <node concept="1osJ5O" id="5VF6QK6CGC0" role="1osJ4P">
-              <property role="1osJ58" value="14g3IsRhL0j/LOWER_EQUAL" />
-              <node concept="1HhJcF" id="5VF6QK6CGC2" role="1osJ5a">
-                <property role="1HhJcI" value="1.80" />
-              </node>
-              <node concept="Agl$j" id="5VF6QK6CGC4" role="1osJ57">
-                <ref role="Agl$i" node="5VF6QK6CGC9" resolve="height" />
-              </node>
-            </node>
-          </node>
-          <node concept="1osJ5O" id="5VF6QK6CGCA" role="1osJ4x">
-            <property role="1osJ58" value="14g3IsRhL0d/GREATER_EQUAL" />
-            <node concept="1HhJcF" id="5VF6QK6CGCC" role="1osJ5a">
-              <property role="1HhJcI" value="70.5" />
-            </node>
-            <node concept="Agl$j" id="5VF6QK6CGCE" role="1osJ57">
+            <node concept="Agl$j" id="6eYilKnl7YP" role="1osJ57">
               <ref role="Agl$i" node="5VF6QK6CGCd" resolve="weight" />
             </node>
           </node>
+          <node concept="1osJ5O" id="6eYilKnl7YC" role="1osJ4P">
+            <property role="1osJ58" value="14g3IsRhL0d/GREATER_EQUAL" />
+            <node concept="1HhJcF" id="6eYilKnl7YE" role="1osJ5a">
+              <property role="1HhJcI" value="1.8" />
+            </node>
+            <node concept="Agl$j" id="6eYilKnl7YG" role="1osJ57">
+              <ref role="Agl$i" node="5VF6QK6CGC9" resolve="height" />
+            </node>
+          </node>
         </node>
       </node>
-      <node concept="21oAwd" id="5VF6QK6CGCJ" role="21oAAU">
-        <node concept="Agl$j" id="5VF6QK6CGCK" role="21oAAq">
-          <ref role="Agl$i" node="5VF6QK6CGC9" resolve="height" />
-        </node>
+    </node>
+    <node concept="15J0zD" id="6eYilKnl7Zy" role="21riY_">
+      <node concept="2leIlQ" id="6eYilKnl7Z$" role="2legkn">
+        <ref role="2leIlR" node="5Q93FfFUJYh" resolve="Person" />
       </node>
-      <node concept="21qpMi" id="5VF6QK6CGCN" role="21qpFE">
-        <node concept="Agl$j" id="5VF6QK6CGCO" role="21oAwc">
-          <ref role="Agl$i" node="5Q93FfFUJYl" resolve="age" />
+      <node concept="2leIlQ" id="6eYilKnl80e" role="2legkn">
+        <ref role="2leIlR" node="5VF6QK6C0wF" resolve="University" />
+      </node>
+      <node concept="2WQRJ5" id="6eYilKnl80h" role="2WRRZq" />
+      <node concept="15J0zF" id="6eYilKnl80j" role="AlhBa">
+        <node concept="1osJ5R" id="6eYilKnl80l" role="AmyPj">
+          <property role="1osJ5c" value="2fooeIVv2qr/AND" />
+          <node concept="1osJ5O" id="6eYilKnl80$" role="1osJ4x">
+            <property role="1osJ58" value="14g3IsRhL0p/NOT_EQUAL" />
+            <node concept="1HhJcF" id="6eYilKnl80A" role="1osJ5a">
+              <property role="1HhJcI" value="&quot;Italy&quot;" />
+            </node>
+            <node concept="Agl$j" id="6eYilKnl80C" role="1osJ57">
+              <ref role="Agl$i" node="6eYilKnl7TR" resolve="country" />
+            </node>
+          </node>
+          <node concept="1osJ5O" id="6eYilKnl80r" role="1osJ4P">
+            <property role="1osJ58" value="14g3IsRhL0j/LOWER_EQUAL" />
+            <node concept="1HhJcF" id="6eYilKnl80t" role="1osJ5a">
+              <property role="1HhJcI" value="30" />
+            </node>
+            <node concept="Agl$j" id="6eYilKnl80v" role="1osJ57">
+              <ref role="Agl$i" node="5Q93FfFUJYl" resolve="age" />
+            </node>
+          </node>
         </node>
       </node>
     </node>

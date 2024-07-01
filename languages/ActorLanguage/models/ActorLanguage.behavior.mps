@@ -414,5 +414,12 @@
       </node>
     </node>
   </node>
+  <node concept="13h7C7" id="ft6S0wV3ht">
+    <property role="3GE5qa" value="actor" />
+    <ref role="13h7C2" to="o1mc:3m_VcJMWzd$" resolve="CreateActor" />
+    <node concept="13hLZK" id="ft6S0wV3hu" role="13h7CW">
+      <node concept="3clFbS" id="ft6S0wV3hv" role="2VODD2" />
+    </node>
+  </node>
 </model>
 

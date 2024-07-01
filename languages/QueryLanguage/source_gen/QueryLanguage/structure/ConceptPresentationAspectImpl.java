@@ -10,6 +10,7 @@ import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
   private ConceptPresentation props_AggregateFunction;
+  private ConceptPresentation props_AllColumns;
   private ConceptPresentation props_Average;
   private ConceptPresentation props_Column;
   private ConceptPresentation props_ColumnRef;
@@ -29,6 +30,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_OrderBy;
   private ConceptPresentation props_Script;
   private ConceptPresentation props_Select;
+  private ConceptPresentation props_SelectColumn;
   private ConceptPresentation props_SimpleCondition;
   private ConceptPresentation props_Statement;
   private ConceptPresentation props_Sum;
@@ -48,6 +50,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_AggregateFunction = cpb.create();
         }
         return props_AggregateFunction;
+      case LanguageConceptSwitch.AllColumns:
+        if (props_AllColumns == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("*");
+          props_AllColumns = cpb.create();
+        }
+        return props_AllColumns;
       case LanguageConceptSwitch.Average:
         if (props_Average == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -179,6 +188,12 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Select = cpb.create();
         }
         return props_Select;
+      case LanguageConceptSwitch.SelectColumn:
+        if (props_SelectColumn == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_SelectColumn = cpb.create();
+        }
+        return props_SelectColumn;
       case LanguageConceptSwitch.SimpleCondition:
         if (props_SimpleCondition == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

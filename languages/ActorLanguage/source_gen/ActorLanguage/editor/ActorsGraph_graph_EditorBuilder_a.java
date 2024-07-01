@@ -70,7 +70,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
             IDiagramAccessor accessor = new AbstractDiagramAccessor(node) {
               public List<? extends IDiagramElementAccessor> getElements(IAccessorFactory accessorFactory) {
                 final List<IDiagramElementAccessor> elements = new ArrayList<IDiagramElementAccessor>();
-                for (SNode e : ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.actors$3iZF))) {
+                for (SNode e : ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.actors$PE1V))) {
                   elements.addAll(accessorFactory.fromSNode(e));
                 }
                 for (SNode e : ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.links$3jtH))) {
@@ -93,7 +93,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
                     final String toPort = to.getPortName();
 
                     {
-                      SNode link = SLinkOperations.addNewChild(((SNode) _variablesContext.getValue("thisNode")), LINKS.links$3jtH, null);
+                      SNode link = SLinkOperations.addNewChild(ListSequence.fromList(SLinkOperations.getChildren(((SNode) _variablesContext.getValue("thisNode")), LINKS.links$3jtH)).getElement(0), LINKS.links$O5ec, null);
                       SLinkOperations.setTarget(link, LINKS.actorFrom$3cFe, fromNode);
                       SLinkOperations.setTarget(link, LINKS.actorTo$3d9g, toNode);
                     }
@@ -138,7 +138,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
 
             ElkLayouter layouter;
 
-            IPaletteEntryProvider paletteEntryProvider = new CompositePaletteEntryProvider(new SubstituteInfoPaletteEntryProvider(new SubstituteInfoFactory(editorContext, node).forChildLink(node, SLinkOperations.findLinkDeclaration(LINKS.actors$3iZF))));
+            IPaletteEntryProvider paletteEntryProvider = new CompositePaletteEntryProvider(new SubstituteInfoPaletteEntryProvider(new SubstituteInfoFactory(editorContext, node).forChildLink(node, SLinkOperations.findLinkDeclaration(LINKS.actors$PE1V))));
             model.setPaletteEntryProvider(paletteEntryProvider);
 
             if (DiagramCreationContext.isSubdiagram()) {
@@ -170,8 +170,9 @@ import org.jetbrains.mps.openapi.language.SConcept;
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink actors$3iZF = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57936L, 0x262cd812cfe5797aL, "actors");
+    /*package*/ static final SContainmentLink actors$PE1V = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57936L, 0x6b33cca64056ab36L, "actors");
     /*package*/ static final SContainmentLink links$3jtH = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57936L, 0x262cd812cfe5797cL, "links");
+    /*package*/ static final SContainmentLink links$O5ec = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6b33cca6412e20a5L, 0x6b33cca6412e20a8L, "links");
     /*package*/ static final SReferenceLink actorFrom$3cFe = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57974L, "actorFrom");
     /*package*/ static final SReferenceLink actorTo$3d9g = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57976L, "actorTo");
   }

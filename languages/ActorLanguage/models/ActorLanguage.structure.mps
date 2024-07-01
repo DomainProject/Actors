@@ -250,8 +250,7 @@
       <property role="IQ2ns" value="3865756215866352723" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="actions" />
-      <property role="20lbJX" value="fLJekj5/_0__n" />
-      <ref role="20lvS9" to="tpee:fzclF8l" resolve="Statement" />
+      <ref role="20lvS9" node="37YNBneN5Ra" resolve="ActorLanguageStatementList" />
     </node>
     <node concept="1TJgyj" id="5dAUsbpt5Px" role="1TKVEi">
       <property role="IQ2ns" value="6009747775853714785" />
@@ -593,19 +592,19 @@
     <property role="TrG5h" value="ActorsGraph" />
     <property role="3GE5qa" value="topology" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" />
-    <node concept="1TJgyj" id="2oGQ1bfTn_U" role="1TKVEi">
-      <property role="IQ2ns" value="2750811047725463930" />
+    <node concept="1TJgyj" id="6GNNap0lEGQ" role="1TKVEi">
+      <property role="IQ2ns" value="7724742800286591798" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="actors" />
       <property role="20lbJX" value="fLJekj5/_0__n" />
-      <ref role="20lvS9" node="2oGQ1bfTn$R" resolve="ActorBox" />
+      <ref role="20lvS9" node="6GNNap0lEG7" resolve="ActorBoxesList" />
     </node>
     <node concept="1TJgyj" id="2oGQ1bfTn_W" role="1TKVEi">
       <property role="IQ2ns" value="2750811047725463932" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="links" />
       <property role="20lbJX" value="fLJekj5/_0__n" />
-      <ref role="20lvS9" node="2oGQ1bfTn$S" resolve="ActorLink" />
+      <ref role="20lvS9" node="6GNNap1by2_" resolve="ActorLinksList" />
     </node>
   </node>
   <node concept="1TIwiD" id="2oGQ1bfTn$R">
@@ -837,6 +836,48 @@
       <property role="IQ2nx" value="6842115693884709893" />
       <property role="TrG5h" value="newPolicy" />
       <ref role="AX2Wp" node="66sUT0$7o_Q" resolve="FetchPolicy" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="37YNBneN5Ra">
+    <property role="EcuMT" value="3602543757318970826" />
+    <property role="3GE5qa" value="statement" />
+    <property role="TrG5h" value="ActorLanguageStatementList" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="1TJgyj" id="37YNBneN5Rf" role="1TKVEi">
+      <property role="IQ2ns" value="3602543757318970831" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="statements" />
+      <property role="20lbJX" value="fLJekj5/_0__n" />
+      <ref role="20lvS9" to="tpee:fzclF8l" resolve="Statement" />
+    </node>
+    <node concept="PrWs8" id="37YNBneN5Rb" role="PzmwI">
+      <ref role="PrY4T" node="67qr5KJM_rR" resolve="StatementConstraint" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="6GNNap0lEG7">
+    <property role="EcuMT" value="7724742800286591751" />
+    <property role="3GE5qa" value="topology" />
+    <property role="TrG5h" value="ActorBoxesList" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="1TJgyj" id="6GNNap0lEG8" role="1TKVEi">
+      <property role="IQ2ns" value="7724742800286591752" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="actorBoxes" />
+      <property role="20lbJX" value="fLJekj5/_0__n" />
+      <ref role="20lvS9" node="2oGQ1bfTn$R" resolve="ActorBox" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="6GNNap1by2_">
+    <property role="EcuMT" value="7724742800300712101" />
+    <property role="3GE5qa" value="topology" />
+    <property role="TrG5h" value="ActorLinksList" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="1TJgyj" id="6GNNap1by2C" role="1TKVEi">
+      <property role="IQ2ns" value="7724742800300712104" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="links" />
+      <property role="20lbJX" value="fLJekj5/_0__n" />
+      <ref role="20lvS9" node="2oGQ1bfTn$S" resolve="ActorLink" />
     </node>
   </node>
 </model>

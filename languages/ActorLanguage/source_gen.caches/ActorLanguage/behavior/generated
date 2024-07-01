@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<product version="3" modelHash="-etkawkmy9vnepwpc0z94qj5pg2dc6d4">
-  <files names="BehaviorAspectDescriptor.java:CreateActors__BehaviorDescriptor.java" />
+<product version="3" modelHash="ec1126rx17gp3m3ygxiv0tq0h9myrb2">
+  <files names="BehaviorAspectDescriptor.java:CreateActor__BehaviorDescriptor.java:CreateActors__BehaviorDescriptor.java" />
 </product>
 

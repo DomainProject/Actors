@@ -17,7 +17,7 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070475587102:jetbrains.mps.baseLanguage.structure.SuperConstructorInvocation" />
   <root>
     <file name="ConstraintsAspectDescriptor.java">
-      <unit at="13,0,59,0" name="ActorLanguage.constraints.ConstraintsAspectDescriptor" />
+      <unit at="13,0,57,0" name="ActorLanguage.constraints.ConstraintsAspectDescriptor" />
     </file>
   </root>
   <root nodeRef="r:ae140228-36a4-4270-a859-e66d990ac219(ActorLanguage.constraints)/1229499084496954935">
@@ -765,32 +765,20 @@
       <node id="5358399129737177634" at="45,76,46,19" concept="2" />
       <node id="5358399129736734095" at="48,90,49,23" concept="9" />
       <node id="5358399129736735379" at="51,7,52,18" concept="9" />
-      <node id="5358399129737549764" at="56,62,57,63" concept="14" />
-      <node id="5358399129737549764" at="60,109,61,100" concept="7" />
-      <node id="5358399129737549764" at="62,53,63,154" concept="3" />
-      <node id="5358399129737549764" at="64,7,65,20" concept="9" />
-      <node id="5358399129737552026" at="73,0,74,18" concept="9" />
-      <node id="5358399129734674219" at="78,84,79,119" concept="7" />
-      <node id="5358399129734674220" at="79,119,80,61" concept="3" />
-      <node id="5358399129737549764" at="80,61,81,67" concept="3" />
-      <node id="5358399129734674219" at="81,67,82,22" concept="9" />
-      <node id="5358399129734674219" at="86,0,87,0" concept="12" trace="CreateActor$Uv" />
-      <node id="5358399129734674219" at="90,0,91,0" concept="12" trace="name$MnvL" />
-      <node id="5358399129734674219" at="91,0,92,0" concept="12" trace="address$DqJ_" />
+      <node id="5358399129734674219" at="56,84,57,119" concept="7" />
+      <node id="5358399129734674220" at="57,119,58,61" concept="3" />
+      <node id="5358399129734674219" at="58,61,59,22" concept="9" />
+      <node id="5358399129734674219" at="63,0,64,0" concept="12" trace="CreateActor$Uv" />
+      <node id="5358399129734674219" at="67,0,68,0" concept="12" trace="name$MnvL" />
       <node id="5358399129734674219" at="24,0,27,0" concept="1" trace="CreateActor_Constraints#()V" />
       <node id="5358399129734674220" at="29,0,32,0" concept="1" trace="Name_Property#(Ljetbrains/mps/smodel/runtime/ConstraintsDescriptor;)V" />
       <node id="5358399129734674220" at="34,99,37,7" concept="5" />
       <node id="5358399129736927030" at="40,85,43,7" concept="5" />
       <node id="5358399129737156602" at="44,264,47,9" concept="5" />
       <node id="5358399129736711129" at="47,9,50,9" concept="5" />
-      <node id="5358399129737549764" at="56,0,59,0" concept="1" trace="Address_Property#(Ljetbrains/mps/smodel/runtime/ConstraintsDescriptor;)V" />
-      <node id="5358399129737549764" at="61,100,64,7" concept="5" />
-      <node id="13109696849502986" at="67,82,73,0" concept="8" />
-      <node id="5358399129734674219" at="77,0,84,0" concept="6" trace="getSpecifiedProperties#()Ljava/util/Map;" />
+      <node id="5358399129734674219" at="55,0,61,0" concept="6" trace="getSpecifiedProperties#()Ljava/util/Map;" />
       <node id="5358399129734674220" at="32,0,40,0" concept="6" trace="validateValue#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/Object;Ljetbrains/mps/smodel/runtime/CheckingNodeContext;)Z" />
       <node id="5358399129736664227" at="43,7,51,7" concept="4" />
-      <node id="5358399129737549764" at="59,0,67,0" concept="6" trace="validateValue#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/Object;Ljetbrains/mps/smodel/runtime/CheckingNodeContext;)Z" />
-      <node id="5358399129737549764" at="67,0,76,0" concept="13" trace="staticValidateProperty#(Lorg/jetbrains/mps/openapi/model/SNode;I)Z" />
       <node id="5358399129734674220" at="40,0,54,0" concept="13" trace="staticValidateProperty#(Lorg/jetbrains/mps/openapi/model/SNode;Ljava/lang/String;)Z" />
       <scope id="5358399129734674219" at="24,36,25,35" />
       <scope id="5358399129734674220" at="29,59,30,60" />
@@ -798,27 +786,18 @@
       <scope id="5358399129736927032" at="41,67,42,21" />
       <scope id="5358399129737156604" at="45,76,46,19" />
       <scope id="5358399129736711131" at="48,90,49,23" />
-      <scope id="5358399129737549764" at="56,62,57,63" />
-      <scope id="5358399129737549764" at="62,53,63,154" />
       <scope id="5358399129734674219" at="24,0,27,0" />
       <scope id="5358399129734674220" at="29,0,32,0">
         <var name="container" id="5358399129734674220" />
       </scope>
-      <scope id="5358399129737549764" at="56,0,59,0">
-        <var name="container" id="5358399129737549764" />
-      </scope>
-      <scope id="5358399129734674219" at="78,84,82,22">
+      <scope id="5358399129734674219" at="56,84,59,22">
         <var name="properties" id="5358399129734674219" />
       </scope>
       <scope id="5358399129734674220" at="33,109,38,20">
         <var name="result" id="5358399129734674220" />
       </scope>
-      <scope id="5358399129737549764" at="60,109,65,20">
-        <var name="result" id="5358399129737549764" />
-      </scope>
       <scope id="5358399129736664233" at="44,264,50,9" />
-      <scope id="5358399129737551914" at="67,82,74,18" />
-      <scope id="5358399129734674219" at="77,0,84,0" />
+      <scope id="5358399129734674219" at="55,0,61,0" />
       <scope id="5358399129734674220" at="32,0,40,0">
         <var name="checkingNodeContext" id="5358399129734674220" />
         <var name="node" id="5358399129734674220" />
@@ -827,25 +806,15 @@
       <scope id="5358399129736664227" at="43,7,51,7">
         <var name="actor" id="5358399129736664229" />
       </scope>
-      <scope id="5358399129737549764" at="59,0,67,0">
-        <var name="checkingNodeContext" id="5358399129737549764" />
-        <var name="node" id="5358399129737549764" />
-        <var name="propertyValue" id="5358399129737549764" />
-      </scope>
-      <scope id="5358399129737549764" at="67,0,76,0">
-        <var name="node" id="5358399129737549764" />
-        <var name="propertyValue" id="5358399129737549764" />
-      </scope>
       <scope id="5358399129735929298" at="40,85,52,18" />
       <scope id="5358399129734674220" at="40,0,54,0">
         <var name="node" id="5358399129734674220" />
         <var name="propertyValue" id="5358399129734674220" />
       </scope>
-      <unit id="5358399129734674219" at="85,0,88,0" name="ActorLanguage.constraints.CreateActor_Constraints$CONCEPTS" />
-      <unit id="5358399129734674219" at="89,0,93,0" name="ActorLanguage.constraints.CreateActor_Constraints$PROPS" />
-      <unit id="5358399129737549764" at="55,0,77,0" name="ActorLanguage.constraints.CreateActor_Constraints$Address_Property" />
+      <unit id="5358399129734674219" at="62,0,65,0" name="ActorLanguage.constraints.CreateActor_Constraints$CONCEPTS" />
+      <unit id="5358399129734674219" at="66,0,69,0" name="ActorLanguage.constraints.CreateActor_Constraints$PROPS" />
       <unit id="5358399129734674220" at="28,0,55,0" name="ActorLanguage.constraints.CreateActor_Constraints$Name_Property" />
-      <unit id="5358399129734674219" at="23,0,94,0" name="ActorLanguage.constraints.CreateActor_Constraints" />
+      <unit id="5358399129734674219" at="23,0,70,0" name="ActorLanguage.constraints.CreateActor_Constraints" />
     </file>
   </root>
   <root nodeRef="r:ae140228-36a4-4270-a859-e66d990ac219(ActorLanguage.constraints)/6009747775866145818">
@@ -935,17 +904,6 @@
       <unit id="6842115693884739947" at="49,0,53,0" name="ActorLanguage.constraints.ChangeFetchPolicy_Constraints$PROPS" />
       <unit id="6842115693884739948" at="24,0,37,0" name="ActorLanguage.constraints.ChangeFetchPolicy_Constraints$NewPolicy_Property" />
       <unit id="6842115693884739947" at="19,0,54,0" name="ActorLanguage.constraints.ChangeFetchPolicy_Constraints" />
-    </file>
-  </root>
-  <root nodeRef="r:ae140228-36a4-4270-a859-e66d990ac219(ActorLanguage.constraints)/7051067309796483636">
-    <file name="ActorLanguageStatement_Constraints.java">
-      <node id="7051067309796483636" at="10,47,11,46" concept="14" />
-      <node id="7051067309796483636" at="15,0,16,0" concept="12" trace="ActorLanguageStatement$Pg" />
-      <node id="7051067309796483636" at="10,0,13,0" concept="1" trace="ActorLanguageStatement_Constraints#()V" />
-      <scope id="7051067309796483636" at="10,47,11,46" />
-      <scope id="7051067309796483636" at="10,0,13,0" />
-      <unit id="7051067309796483636" at="14,0,17,0" name="ActorLanguage.constraints.ActorLanguageStatement_Constraints$CONCEPTS" />
-      <unit id="7051067309796483636" at="9,0,18,0" name="ActorLanguage.constraints.ActorLanguageStatement_Constraints" />
     </file>
   </root>
   <root nodeRef="r:ae140228-36a4-4270-a859-e66d990ac219(ActorLanguage.constraints)/7051067309796518063">

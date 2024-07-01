@@ -17,6 +17,7 @@ import jetbrains.mps.smodel.adapter.ids.PrimitiveTypeId;
 
 public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptAggregateFunction = createDescriptorForAggregateFunction();
+  /*package*/ final ConceptDescriptor myConceptAllColumns = createDescriptorForAllColumns();
   /*package*/ final ConceptDescriptor myConceptAverage = createDescriptorForAverage();
   /*package*/ final ConceptDescriptor myConceptColumn = createDescriptorForColumn();
   /*package*/ final ConceptDescriptor myConceptColumnRef = createDescriptorForColumnRef();
@@ -36,6 +37,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptOrderBy = createDescriptorForOrderBy();
   /*package*/ final ConceptDescriptor myConceptScript = createDescriptorForScript();
   /*package*/ final ConceptDescriptor myConceptSelect = createDescriptorForSelect();
+  /*package*/ final ConceptDescriptor myConceptSelectColumn = createDescriptorForSelectColumn();
   /*package*/ final ConceptDescriptor myConceptSimpleCondition = createDescriptorForSimpleCondition();
   /*package*/ final ConceptDescriptor myConceptStatement = createDescriptorForStatement();
   /*package*/ final ConceptDescriptor myConceptSum = createDescriptorForSum();
@@ -43,7 +45,6 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptUpdate = createDescriptorForUpdate();
   /*package*/ final ConceptDescriptor myConceptValue = createDescriptorForValue();
   /*package*/ final ConceptDescriptor myConceptWhere = createDescriptorForWhere();
-  /*package*/ final EnumerationDescriptor myEnumerationAggregateFunctionTypes = new EnumerationDescriptor_AggregateFunctionTypes();
   /*package*/ final EnumerationDescriptor myEnumerationConditionOperator = new EnumerationDescriptor_ConditionOperator();
   /*package*/ final EnumerationDescriptor myEnumerationOperator = new EnumerationDescriptor_Operator();
   /*package*/ final EnumerationDescriptor myEnumerationType = new EnumerationDescriptor_Type();
@@ -61,7 +62,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<ConceptDescriptor> getDescriptors() {
-    return Arrays.asList(myConceptAggregateFunction, myConceptAverage, myConceptColumn, myConceptColumnRef, myConceptCondition, myConceptConditionSet, myConceptConditionsSequence, myConceptCount, myConceptCreateTable, myConceptDBOperation, myConceptDelete, myConceptGroupBy, myConceptInsertInto, myConceptMax, myConceptMin, myConceptMultipleCondition, myConceptOldCondition, myConceptOrderBy, myConceptScript, myConceptSelect, myConceptSimpleCondition, myConceptStatement, myConceptSum, myConceptTableReference, myConceptUpdate, myConceptValue, myConceptWhere);
+    return Arrays.asList(myConceptAggregateFunction, myConceptAllColumns, myConceptAverage, myConceptColumn, myConceptColumnRef, myConceptCondition, myConceptConditionSet, myConceptConditionsSequence, myConceptCount, myConceptCreateTable, myConceptDBOperation, myConceptDelete, myConceptGroupBy, myConceptInsertInto, myConceptMax, myConceptMin, myConceptMultipleCondition, myConceptOldCondition, myConceptOrderBy, myConceptScript, myConceptSelect, myConceptSelectColumn, myConceptSimpleCondition, myConceptStatement, myConceptSum, myConceptTableReference, myConceptUpdate, myConceptValue, myConceptWhere);
   }
 
   @Override
@@ -70,6 +71,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     switch (myIndexSwitch.index(id)) {
       case LanguageConceptSwitch.AggregateFunction:
         return myConceptAggregateFunction;
+      case LanguageConceptSwitch.AllColumns:
+        return myConceptAllColumns;
       case LanguageConceptSwitch.Average:
         return myConceptAverage;
       case LanguageConceptSwitch.Column:
@@ -108,6 +111,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptScript;
       case LanguageConceptSwitch.Select:
         return myConceptSelect;
+      case LanguageConceptSwitch.SelectColumn:
+        return myConceptSelectColumn;
       case LanguageConceptSwitch.SimpleCondition:
         return myConceptSimpleCondition;
       case LanguageConceptSwitch.Statement:
@@ -129,7 +134,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<DataTypeDescriptor> getDataTypeDescriptors() {
-    return Arrays.asList(myEnumerationAggregateFunctionTypes, myEnumerationConditionOperator, myEnumerationOperator, myEnumerationType);
+    return Arrays.asList(myEnumerationConditionOperator, myEnumerationOperator, myEnumerationType);
   }
 
   /*package*/ int internalIndex(SAbstractConcept c) {
@@ -141,6 +146,15 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.interface_();
     b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/6736945802599607924");
     b.version(3);
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForAllColumns() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("QueryLanguage", "AllColumns", 0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519713L);
+    b.class_(false, false, false);
+    b.parent(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L);
+    b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1047910270175909651");
+    b.version(3);
+    b.alias("*");
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForAverage() {
@@ -165,6 +179,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   private static ConceptDescriptor createDescriptorForColumnRef() {
     ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("QueryLanguage", "ColumnRef", 0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee7375157f4L);
     b.class_(false, false, false);
+    b.parent(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L);
     b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084500457460");
     b.version(3);
     b.associate("column", 0x11100ee7375157f5L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b33L).optional(false).origin("1229499084500457461").done();
@@ -326,7 +341,15 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.aggregate("orderBy", 0x2b087ec3aa61e429L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x2b087ec3aa61e251L).optional(true).ordered(true).multiple(false).origin("3100867722286851113").done();
     b.aggregate("aggregateFunction", 0x5d7e70837b028396L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b022e74L).optional(true).ordered(true).multiple(false).origin("6736945802599629718").done();
     b.aggregate("tables", 0x207f13a8b54616bfL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL).optional(false).ordered(true).multiple(true).origin("2341611946572650175").done();
+    b.aggregate("cols", 0xe8aecd6b255930cL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L).optional(true).ordered(true).multiple(true).origin("1047910270176170764").done();
     b.alias("SELECT");
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForSelectColumn() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("QueryLanguage", "SelectColumn", 0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L);
+    b.interface_();
+    b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1047910270175909650");
+    b.version(3);
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForSimpleCondition() {

@@ -93,6 +93,13 @@
       <property role="20lbJX" value="fLJekj6/_1__n" />
       <ref role="20lvS9" node="21Z4UyPhvru" resolve="TableReference" />
     </node>
+    <node concept="1TJgyj" id="UaVdqMlpcc" role="1TKVEi">
+      <property role="IQ2ns" value="1047910270176170764" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="cols" />
+      <property role="20lbJX" value="fLJekj5/_0__n" />
+      <ref role="20lvS9" node="UaVdqMkpsi" resolve="SelectColumn" />
+    </node>
     <node concept="PrWs8" id="2G8vGeEpl5N" role="PzmwI">
       <ref role="PrY4T" node="2G8vGeEpl5$" resolve="DBOperation" />
     </node>
@@ -300,6 +307,9 @@
       <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" node="14g3IsRh3GN" resolve="Column" />
     </node>
+    <node concept="PrWs8" id="UaVdqMkpsr" role="PzmwI">
+      <ref role="PrY4T" node="UaVdqMkpsi" resolve="SelectColumn" />
+    </node>
   </node>
   <node concept="1TIwiD" id="69qeU0f77b8">
     <property role="EcuMT" value="7087042522255225544" />
@@ -505,31 +515,6 @@
       <ref role="PrY4T" node="5PYs8dV0yTO" resolve="AggregateFunction" />
     </node>
   </node>
-  <node concept="25R3W" id="7p2QZoUr_4S">
-    <property role="3F6X1D" value="8521615295527145784" />
-    <property role="3GE5qa" value="aggregateFunctions" />
-    <property role="TrG5h" value="AggregateFunctionTypes" />
-    <node concept="25R33" id="7p2QZoUr_4U" role="25R1y">
-      <property role="3tVfz5" value="8521615295527145786" />
-      <property role="TrG5h" value="COUNT" />
-    </node>
-    <node concept="25R33" id="7p2QZoUr_4X" role="25R1y">
-      <property role="3tVfz5" value="8521615295527145789" />
-      <property role="TrG5h" value="MIN" />
-    </node>
-    <node concept="25R33" id="7p2QZoUr_51" role="25R1y">
-      <property role="3tVfz5" value="8521615295527145793" />
-      <property role="TrG5h" value="MAX" />
-    </node>
-    <node concept="25R33" id="7p2QZoUr_56" role="25R1y">
-      <property role="3tVfz5" value="8521615295527145798" />
-      <property role="TrG5h" value="SUM" />
-    </node>
-    <node concept="25R33" id="7p2QZoUrUfm" role="25R1y">
-      <property role="3tVfz5" value="8521615295527232470" />
-      <property role="TrG5h" value="AVG" />
-    </node>
-  </node>
   <node concept="1TIwiD" id="21Z4UyPhvru">
     <property role="EcuMT" value="2341611946572642014" />
     <property role="TrG5h" value="TableReference" />
@@ -600,6 +585,21 @@
       <property role="20kJfa" value="conditionSx" />
       <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" node="5VF6QK6AuCn" resolve="Condition" />
+    </node>
+  </node>
+  <node concept="PlHQZ" id="UaVdqMkpsi">
+    <property role="EcuMT" value="1047910270175909650" />
+    <property role="3GE5qa" value="column" />
+    <property role="TrG5h" value="SelectColumn" />
+  </node>
+  <node concept="1TIwiD" id="UaVdqMkpsj">
+    <property role="EcuMT" value="1047910270175909651" />
+    <property role="3GE5qa" value="column" />
+    <property role="TrG5h" value="AllColumns" />
+    <property role="34LRSv" value="*" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="PrWs8" id="UaVdqMkpsp" role="PzmwI">
+      <ref role="PrY4T" node="UaVdqMkpsi" resolve="SelectColumn" />
     </node>
   </node>
 </model>

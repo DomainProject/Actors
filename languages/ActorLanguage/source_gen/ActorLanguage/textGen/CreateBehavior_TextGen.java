@@ -34,10 +34,7 @@ public class CreateBehavior_TextGen extends TextGenDescriptorBase {
       tgs.newLine();
     }
     tgs.newLine();
-
-    for (SNode action : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actions$MLkf))) {
-      tgs.appendNode(action);
-    }
+    // for
 
     // free allocated memory
 

@@ -5,12 +5,12 @@ package ActorLanguage.textGen;
 import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import java.util.Objects;
 import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
@@ -25,12 +25,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     Header.header(ctx);
     tgs.newLine();
 
-    for (SNode behavior : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.behaviors$VQhG))) {
-      tgs.append("void ");
-      tgs.append(SPropertyOperations.getString(behavior, PROPS.name$MnvL));
-      tgs.append("(char *name);");
-      tgs.newLine();
-    }
+    // for
     tgs.newLine();
 
     UtilityFunctions.functions(ctx);
@@ -38,9 +33,6 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
 
     tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.receptionist$GJcH));
 
-    for (SNode item : SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.behaviors$VQhG)) {
-      tgs.appendNode(item);
-    }
 
     for (SNode a : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{}))) {
       tgs.append("void *");
@@ -175,13 +167,6 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
 
     for (SNode link : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), LINKS.links$3jtH))) {
-      tgs.indent();
-      tgs.append("add_to_topology(&map, \"");
-      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(link, LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.name$MnvL));
-      tgs.append("\", \"");
-      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(link, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.name$MnvL));
-      tgs.append("\");");
-      tgs.newLine();
     }
     tgs.newLine();
 
@@ -271,9 +256,6 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     /*package*/ static final SContainmentLink become$KDXz = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5366e9c2d9745d61L, "become");
     /*package*/ static final SReferenceLink newBehavior$ISpz = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5366e9c2d97392cfL, 0x5366e9c2d973e7e8L, "newBehavior");
     /*package*/ static final SContainmentLink actors$EA0a = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x35a5eccbf2f23377L, "actors");
-    /*package*/ static final SReferenceLink actorFrom$3cFe = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57974L, "actorFrom");
-    /*package*/ static final SReferenceLink actor$8xF = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57937L, 0x262cd812cfe57939L, "actor");
-    /*package*/ static final SReferenceLink actorTo$3d9g = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57976L, "actorTo");
     /*package*/ static final SContainmentLink topology$GORc = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x262cd812cfe6cc9dL, "topology");
     /*package*/ static final SContainmentLink links$3jtH = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57936L, 0x262cd812cfe5797cL, "links");
     /*package*/ static final SContainmentLink actors$HQEA = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x2e933327a36608L, "actors");
