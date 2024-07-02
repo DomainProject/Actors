@@ -23,21 +23,22 @@ public final class LanguageConceptSwitch {
   public static final int Delete = 11;
   public static final int GroupBy = 12;
   public static final int InsertInto = 13;
-  public static final int Max = 14;
-  public static final int Min = 15;
-  public static final int MultipleCondition = 16;
-  public static final int OldCondition = 17;
-  public static final int OrderBy = 18;
-  public static final int Script = 19;
-  public static final int Select = 20;
-  public static final int SelectColumn = 21;
-  public static final int SimpleCondition = 22;
-  public static final int Statement = 23;
-  public static final int Sum = 24;
-  public static final int TableReference = 25;
-  public static final int Update = 26;
-  public static final int Value = 27;
-  public static final int Where = 28;
+  public static final int JoinCondition = 14;
+  public static final int Max = 15;
+  public static final int Min = 16;
+  public static final int MultipleCondition = 17;
+  public static final int OldCondition = 18;
+  public static final int OrderBy = 19;
+  public static final int Script = 20;
+  public static final int Select = 21;
+  public static final int SelectColumn = 22;
+  public static final int SimpleCondition = 23;
+  public static final int Statement = 24;
+  public static final int Sum = 25;
+  public static final int TableReference = 26;
+  public static final int Update = 27;
+  public static final int Value = 28;
+  public static final int Where = 29;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L);
@@ -55,6 +56,7 @@ public final class LanguageConceptSwitch {
     builder.put(0x2b087ec3aa642699L, Delete);
     builder.put(0x2b087ec3aa6a16ceL, GroupBy);
     builder.put(0x625a3ba00f1c72c8L, InsertInto);
+    builder.put(0x6c94f05b7ec9d046L, JoinCondition);
     builder.put(0x5d7e70837b028390L, Max);
     builder.put(0x5d7e70837b02838dL, Min);
     builder.put(0x5eeb1b6c0699ea1bL, MultipleCondition);

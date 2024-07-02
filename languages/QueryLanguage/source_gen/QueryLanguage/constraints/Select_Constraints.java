@@ -8,12 +8,10 @@ import jetbrains.mps.smodel.runtime.ConstraintsDescriptor;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.smodel.runtime.CheckingNodeContext;
-import jetbrains.mps.smodel.SNodePointer;
 import java.util.Map;
 import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.runtime.PropertyConstraintsDescriptor;
@@ -29,7 +27,7 @@ public class Select_Constraints extends BaseConstraintsDescriptor {
 
   public static class TableAlias_Property extends BasePropertyConstraintsDescriptor {
     public TableAlias_Property(ConstraintsDescriptor container) {
-      super(PROPS.tableAlias$yY2f, container, false, true, true);
+      super(PROPS.tableAlias$yY2f, container, false, true, false);
     }
     @Override
     public void setPropertyValue(SNode node, Object propertyValue) {
@@ -40,6 +38,11 @@ public class Select_Constraints extends BaseConstraintsDescriptor {
       if (isNotEmptyString(SPropertyOperations.getString(node, PROPS.tableAlias$yY2f))) {
         SPropertyOperations.assign(SLinkOperations.getTarget(node, LINKS.aliasTable$4dXf), PROPS.name$MnvL, propertyValue);
         SPropertyOperations.assign(node, PROPS.tableAlias$yY2f, propertyValue);
+
+        for (SNode col : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(node, LINKS.aliasTable$4dXf), LINKS.columns$ubIo))) {
+          SPropertyOperations.assign(col, PROPS.fullName$t1KL, propertyValue + "." + SPropertyOperations.getString(col, PROPS.fullName$t1KL).split("\\.")[1]);
+        }
+
         return;
       }
 
@@ -52,6 +55,7 @@ public class Select_Constraints extends BaseConstraintsDescriptor {
         {
           final SNode columnRef = col;
           if (SNodeOperations.isInstanceOf(columnRef, CONCEPTS.ColumnRef$XM)) {
+            SPropertyOperations.assign(SLinkOperations.getTarget(columnRef, LINKS.column$Wyeu), PROPS.fullName$t1KL, propertyValue + "." + SPropertyOperations.getString(SLinkOperations.getTarget(columnRef, LINKS.column$Wyeu), PROPS.fullName$t1KL).split("\\.")[1]);
             ListSequence.fromList(SLinkOperations.getChildren(newTable, LINKS.columns$ubIo)).addElement(SNodeOperations.copyNode(SLinkOperations.getTarget(columnRef, LINKS.column$Wyeu)));
           }
         }
@@ -60,6 +64,7 @@ public class Select_Constraints extends BaseConstraintsDescriptor {
           if (SNodeOperations.isInstanceOf(allColumns, CONCEPTS.AllColumns$eP)) {
             for (SNode column : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.tables$IXdn)).getElement(0), LINKS.tableRef$boeY), LINKS.columns$ubIo))) {
               if (!(ListSequence.fromList(SLinkOperations.getChildren(newTable, LINKS.columns$ubIo)).contains(column))) {
+                SPropertyOperations.assign(column, PROPS.fullName$t1KL, propertyValue + "." + SPropertyOperations.getString(column, PROPS.fullName$t1KL).split("\\.")[1]);
                 ListSequence.fromList(SLinkOperations.getChildren(newTable, LINKS.columns$ubIo)).addElement(SNodeOperations.copyNode(column));
               }
             }
@@ -69,18 +74,6 @@ public class Select_Constraints extends BaseConstraintsDescriptor {
 
       SLinkOperations.setTarget(node, LINKS.aliasTable$4dXf, newTable);
 
-    }
-    @Override
-    public boolean validateValue(SNode node, Object propertyValue, CheckingNodeContext checkingNodeContext) {
-      boolean result = staticValidateProperty(node, SPropertyOperations.castString(propertyValue));
-      if (!(result) && checkingNodeContext != null) {
-        checkingNodeContext.setBreakingNode(new SNodePointer("r:7edf4f40-f81a-49df-87e2-b00351b83558(QueryLanguage.constraints)", "817930103570200137"));
-      }
-      return result;
-    }
-    private static boolean staticValidateProperty(SNode node, String propertyValue) {
-      // alias is not supported for joined tables
-      return ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.tables$IXdn)).count() == 1;
     }
     private static boolean isNotEmptyString(String str) {
       return str != null && str.length() > 0;
@@ -102,6 +95,7 @@ public class Select_Constraints extends BaseConstraintsDescriptor {
   private static final class PROPS {
     /*package*/ static final SProperty tableAlias$yY2f = MetaAdapterFactory.getProperty(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x7642dbf63a87dc6eL, "tableAlias");
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SProperty fullName$t1KL = MetaAdapterFactory.getProperty(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b33L, 0x207f13a8b5691efbL, "fullName");
   }
 
   private static final class LINKS {

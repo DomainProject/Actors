@@ -106,6 +106,12 @@
       <property role="20kJfa" value="aliasTable" />
       <ref role="20lvS9" node="14g3IsRh3GI" resolve="CreateTable" />
     </node>
+    <node concept="1TJgyj" id="6MkW5HYMt1M" role="1TKVEi">
+      <property role="IQ2ns" value="7824142728409239666" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="joinCondition" />
+      <ref role="20lvS9" node="6MkW5HYMt16" resolve="JoinCondition" />
+    </node>
     <node concept="PrWs8" id="2G8vGeEpl5N" role="PzmwI">
       <ref role="PrY4T" node="2G8vGeEpl5$" resolve="DBOperation" />
     </node>
@@ -612,6 +618,25 @@
     <ref role="1TJDcQ" to="tpck:gw2VY9q" />
     <node concept="PrWs8" id="UaVdqMkpsp" role="PzmwI">
       <ref role="PrY4T" node="UaVdqMkpsi" resolve="SelectColumn" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="6MkW5HYMt16">
+    <property role="EcuMT" value="7824142728409239622" />
+    <property role="TrG5h" value="JoinCondition" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="1TJgyj" id="6MkW5HYMt19" role="1TKVEi">
+      <property role="IQ2ns" value="7824142728409239625" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="leftColumn" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="14g3IsRklvO" resolve="ColumnRef" />
+    </node>
+    <node concept="1TJgyj" id="6MkW5HYMt1b" role="1TKVEi">
+      <property role="IQ2ns" value="7824142728409239627" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="rightColumn" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="14g3IsRklvO" resolve="ColumnRef" />
     </node>
   </node>
 </model>

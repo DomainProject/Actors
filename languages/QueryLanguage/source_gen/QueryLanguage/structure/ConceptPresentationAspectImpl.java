@@ -23,6 +23,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_Delete;
   private ConceptPresentation props_GroupBy;
   private ConceptPresentation props_InsertInto;
+  private ConceptPresentation props_JoinCondition;
   private ConceptPresentation props_Max;
   private ConceptPresentation props_Min;
   private ConceptPresentation props_MultipleCondition;
@@ -139,6 +140,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_InsertInto = cpb.create();
         }
         return props_InsertInto;
+      case LanguageConceptSwitch.JoinCondition:
+        if (props_JoinCondition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("JoinCondition");
+          props_JoinCondition = cpb.create();
+        }
+        return props_JoinCondition;
       case LanguageConceptSwitch.Max:
         if (props_Max == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

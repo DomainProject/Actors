@@ -30,6 +30,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptDelete = createDescriptorForDelete();
   /*package*/ final ConceptDescriptor myConceptGroupBy = createDescriptorForGroupBy();
   /*package*/ final ConceptDescriptor myConceptInsertInto = createDescriptorForInsertInto();
+  /*package*/ final ConceptDescriptor myConceptJoinCondition = createDescriptorForJoinCondition();
   /*package*/ final ConceptDescriptor myConceptMax = createDescriptorForMax();
   /*package*/ final ConceptDescriptor myConceptMin = createDescriptorForMin();
   /*package*/ final ConceptDescriptor myConceptMultipleCondition = createDescriptorForMultipleCondition();
@@ -62,7 +63,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<ConceptDescriptor> getDescriptors() {
-    return Arrays.asList(myConceptAggregationFunction, myConceptAllColumns, myConceptAverage, myConceptColumn, myConceptColumnRef, myConceptCondition, myConceptConditionSet, myConceptConditionsSequence, myConceptCount, myConceptCreateTable, myConceptDBOperation, myConceptDelete, myConceptGroupBy, myConceptInsertInto, myConceptMax, myConceptMin, myConceptMultipleCondition, myConceptOldCondition, myConceptOrderBy, myConceptScript, myConceptSelect, myConceptSelectColumn, myConceptSimpleCondition, myConceptStatement, myConceptSum, myConceptTableReference, myConceptUpdate, myConceptValue, myConceptWhere);
+    return Arrays.asList(myConceptAggregationFunction, myConceptAllColumns, myConceptAverage, myConceptColumn, myConceptColumnRef, myConceptCondition, myConceptConditionSet, myConceptConditionsSequence, myConceptCount, myConceptCreateTable, myConceptDBOperation, myConceptDelete, myConceptGroupBy, myConceptInsertInto, myConceptJoinCondition, myConceptMax, myConceptMin, myConceptMultipleCondition, myConceptOldCondition, myConceptOrderBy, myConceptScript, myConceptSelect, myConceptSelectColumn, myConceptSimpleCondition, myConceptStatement, myConceptSum, myConceptTableReference, myConceptUpdate, myConceptValue, myConceptWhere);
   }
 
   @Override
@@ -97,6 +98,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptGroupBy;
       case LanguageConceptSwitch.InsertInto:
         return myConceptInsertInto;
+      case LanguageConceptSwitch.JoinCondition:
+        return myConceptJoinCondition;
       case LanguageConceptSwitch.Max:
         return myConceptMax;
       case LanguageConceptSwitch.Min:
@@ -269,6 +272,15 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.alias("INSERT INTO");
     return b.create();
   }
+  private static ConceptDescriptor createDescriptorForJoinCondition() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("QueryLanguage", "JoinCondition", 0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x6c94f05b7ec9d046L);
+    b.class_(false, false, false);
+    b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/7824142728409239622");
+    b.version(3);
+    b.aggregate("leftColumn", 0x6c94f05b7ec9d049L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee7375157f4L).optional(false).ordered(true).multiple(false).origin("7824142728409239625").done();
+    b.aggregate("rightColumn", 0x6c94f05b7ec9d04bL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee7375157f4L).optional(false).ordered(true).multiple(false).origin("7824142728409239627").done();
+    return b.create();
+  }
   private static ConceptDescriptor createDescriptorForMax() {
     ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("QueryLanguage", "Max", 0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028390L);
     b.class_(false, false, false);
@@ -343,6 +355,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.aggregate("tables", 0x207f13a8b54616bfL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL).optional(false).ordered(true).multiple(true).origin("2341611946572650175").done();
     b.aggregate("cols", 0xe8aecd6b255930cL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L).optional(true).ordered(true).multiple(true).origin("1047910270176170764").done();
     b.aggregate("aliasTable", 0xb59df187aa1e081L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b2eL).optional(true).ordered(true).multiple(false).origin("817930103574093953").done();
+    b.aggregate("joinCondition", 0x6c94f05b7ec9d072L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x6c94f05b7ec9d046L).optional(true).ordered(true).multiple(false).origin("7824142728409239666").done();
     b.alias("SELECT");
     return b.create();
   }
