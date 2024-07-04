@@ -127,19 +127,78 @@ graph LR
 	F --> E0
 ```
 
-Idea di procedura:
+## Creazione topologia
 
-* Si crea un behavior per ognuna delle seguenti operazioni:
-	* Selezione: riceve in input una sequenza di tuple;
-	* Proiezione: riceve in input una sequenza di tuple ed una sequenza di attributi, ed effettua la proiezione;
-	* JOIN (se presente): riceve due o più sequenze di tuple e le unisce;
-	* Operatore aggregato (se presente): riceve una lista di tuple ed effettua un'operazione su queste (e.g., COUNT: conta il numero di tuple);
-	* GROUP BY/ORDER BY (se presenti): ricevono una sequenza di tuple e applicano una trasformazione su questa.
+### Creazione attori
+Date tutte le query:
+1. $\forall$ diversa condizione in tutte le query:
+	* `create_actor(Select)`
+2. $\forall$ diversa condizione in tutte le query che effettuano join:
+	* `create_actor(Join)` 
+3. $\forall$ query q:
+	* Se `query.cols != AllColumns` -> `create_actor(Proj)`;
+	* Se `query.groupBy != NULL` -> `create_actor(GroupBy)`;
+	* Se `query.orderBy != NULL` -> `create_actor(OrderBy)`;
+	* Se `query.aggOp != NULL` -> `create_actor(AggOp)`.
 
-* Per ogni diversa condizione:
-	* Si crea un attore di selezione S, che riceve in input le tuple che rispettano la condizione.
-* Per ogni SELECT con argomento != *:
-	* Si crea un attore di proiezione P, che riceve in input i nomi delle colonne che deve selezionare.
-	* Se la SELECT contiene un operatore aggregato, P crea un attore C per l'operatore aggregato, che riceve in input tutte le tuple di P (idem se esistono statement del tipo groupBy, orderBy, ...).
-* Per ogni JOIN, viene creato un attore J che è raggiungibile dagli attori di selezione delle SELECT presenti nella stessa query.
-* Per ogni operatore aggregato (o per statement orderBy/groupBy) viene creato un attore con behavior corrispondente, raggiungibile da almeno un attore di selezione o proiezione, in base alla query.
+Nel caso di attori di Select e Join, ogni attore viene associato alla condizione per la quale è stato creato, mentre negli altri casi ogni attore viene associato alla query di select corrispondente, quindi sono definite le seguenti etichette:
+* `SelectionActor: Condition -> Actor`
+* `JoinActor: Condition -> Actor`
+* `ProjectionActor: Select -> Actor`
+* `GroupByActor: Select -> Actor`
+* `OrderByActor: Select -> Actor`
+* `AggregateFunctionActor: Select -> Actor`
+
+Di conseguenza, da ogni query si può risalire agli attori relativi ad essa, in base alla condizione o alla query stessa.
+
+___
+
+### Creazione link
+$\forall$ query su tabella **non** alias **senza** join:
+1. DataSource:
+	* Se `query.where != NULL` -> `create_link(DataSource, Select)`;
+	* Altrimenti, se `query.cols != AllColumns` -> `create_link(DataSource, Proj)`;
+	* Altrimenti, se `query.groupBy != NULL` -> `create_link(DataSource, GroupBy)`;
+	* Altrimenti, se `query.orderBy != NULL` -> `create_link(DataSource, OrderBy)`;
+	* Altrimenti, se `query.aggOp != NULL` -> `create_link(DataSource, AggOp)`.
+2. Select (se `query.where != NULL`):
+	* Se `query.cols != AllColumns` -> `create_link(Select, Proj)`;
+	* Altrimenti, se `query.groupBy != NULL` -> `create_link(Select, GroupBy)`;
+	* Altrimenti, se `query.orderBy != NULL` -> `create_link(Select, OrderBy)`;
+	* Altrimenti, se `query.aggOp != NULL` -> `create_link(Select, AggOp)`.
+3. Proj (se `query.cols != AllColumns`):
+	* Se `query.groupBy != NULL` -> `create_link(Proj, GroupBy)`;
+	* Altrimenti, se `query.orderBy != NULL` -> `create_link(Proj, OrderBy)`;
+	* Altrimenti, se `query.aggOp != NULL` -> `create_link(Proj, AggOp)`.
+4. GroupBy (se `query.groupBy != NULL`):
+	* Se `query.orderBy != NULL` -> `create_link(GroupBy, OrderBy)`;
+	* Altrimenti, se `query.aggOp != NULL` -> `create_link(GroupBy, AggOp)`.
+5. OrderBy (se `query.orderBy != NULL`):
+	* Se `query.aggOp != NULL` -> `create_link(GroupBy, AggOp)`.
+
+---
+
+$\forall$ query su tabella **non** alias **con** join:
+1. DataSource:
+	* $\forall$ select collegato alla query:
+		* `create_link(DataSource, Select)`;
+		* `create_link(Select, Join)`.
+2. Join:
+	* Se `query.cols != AllColumns` -> `create_link(Join, Proj)`;
+	* Altrimenti, se `query.groupBy != NULL` -> `create_link(Join, GroupBy)`;
+	* Altrimenti, se `query.orderBy != NULL` -> `create_link(Join, OrderBy)`;
+	* Altrimenti, se `query.aggOp != NULL` -> `create_link(Join, AggOp)`.
+3. Passi 3, 4, 5.
+
+---
+
+$\forall$ query su tabella alias:
+1. Data la query `q` che definisce la tabella alias:
+	* Se `q.aggOp != NULL`, `AliasTable = q.AggOp`;
+	* Altrimenti, se `q.orderBy != NULL`, `AliasTable = q.OrderBy`;
+	* Altrimenti, se `q.groupBy != NULL`, `AliasTable = q.GroupBy`;
+	* Altrimenti, se `q.cols != AllColumns`, `AliasTable = q.Proj`;
+	* Altrimenti, se `q.tables.size > 1` (join), `AliasTable = q.Join`.
+2. Ripeti i due algoritmi visti sopra, a seconda che la query sulla tabella alias preveda oppure no l'operazione di join, sostituendo DataSource con AliasTable.
+
+(`AliasTable` è un attore; `q.Actor` indica un attore relativo alla query `q`)
