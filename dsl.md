@@ -151,8 +151,6 @@ Nel caso di attori di Select e Join, ogni attore viene associato alla condizione
 
 Di conseguenza, da ogni query si può risalire agli attori relativi ad essa, in base alla condizione o alla query stessa.
 
-___
-
 ### Creazione link
 $\forall$ query su tabella **non** alias **senza** join:
 1. DataSource:
@@ -176,7 +174,6 @@ $\forall$ query su tabella **non** alias **senza** join:
 5. OrderBy (se `query.orderBy != NULL`):
 	* Se `query.aggOp != NULL` -> `create_link(GroupBy, AggOp)`.
 
----
 
 $\forall$ query su tabella **non** alias **con** join:
 1. DataSource:
@@ -190,7 +187,6 @@ $\forall$ query su tabella **non** alias **con** join:
 	* Altrimenti, se `query.aggOp != NULL` -> `create_link(Join, AggOp)`.
 3. Passi 3, 4, 5.
 
----
 
 $\forall$ query su tabella alias:
 1. Data la query `q` che definisce la tabella alias:
