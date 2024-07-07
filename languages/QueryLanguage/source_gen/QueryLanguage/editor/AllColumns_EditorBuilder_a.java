@@ -61,23 +61,23 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
     return editorCell;
   }
   private boolean nodeCondition_v427t4_a0a() {
-    return (SLinkOperations.getTarget(myNode, LINKS.aggregateFunction$8ryB) != null);
+    return (SLinkOperations.getTarget(myNode, LINKS.aggregationFunction$8ryB) != null);
   }
   private boolean nodeCondition_v427t4_a1a() {
-    return (SLinkOperations.getTarget(myNode, LINKS.aggregateFunction$8ryB) != null);
+    return (SLinkOperations.getTarget(myNode, LINKS.aggregationFunction$8ryB) != null);
   }
   private boolean nodeCondition_v427t4_a3a() {
-    return (SLinkOperations.getTarget(myNode, LINKS.aggregateFunction$8ryB) != null);
+    return (SLinkOperations.getTarget(myNode, LINKS.aggregationFunction$8ryB) != null);
   }
   private EditorCell createRefNode_0() {
-    SingleRoleCellProvider provider = new aggregateFunctionSingleRoleHandler_v427t4_a0(myNode, LINKS.aggregateFunction$8ryB, getEditorContext());
+    SingleRoleCellProvider provider = new aggregationFunctionSingleRoleHandler_v427t4_a0(myNode, LINKS.aggregationFunction$8ryB, getEditorContext());
     return provider.createCell();
   }
-  private static class aggregateFunctionSingleRoleHandler_v427t4_a0 extends SingleRoleCellProvider {
+  private static class aggregationFunctionSingleRoleHandler_v427t4_a0 extends SingleRoleCellProvider {
     @NotNull
     private SNode myNode;
 
-    public aggregateFunctionSingleRoleHandler_v427t4_a0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+    public aggregationFunctionSingleRoleHandler_v427t4_a0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
       super(containmentLink, context);
       myNode = ownerNode;
     }
@@ -90,8 +90,8 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
     protected EditorCell createChildCell(SNode child) {
       EditorCell editorCell = getUpdateSession().updateChildNodeCell(child);
-      editorCell.setAction(CellActionType.DELETE, new CellAction_DeleteSmart(getNode(), LINKS.aggregateFunction$8ryB, child));
-      editorCell.setAction(CellActionType.BACKSPACE, new CellAction_DeleteSmart(getNode(), LINKS.aggregateFunction$8ryB, child));
+      editorCell.setAction(CellActionType.DELETE, new CellAction_DeleteSmart(getNode(), LINKS.aggregationFunction$8ryB, child));
+      editorCell.setAction(CellActionType.BACKSPACE, new CellAction_DeleteSmart(getNode(), LINKS.aggregationFunction$8ryB, child));
       installCellInfo(child, editorCell, false);
       return editorCell;
     }
@@ -103,16 +103,16 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
         editorCell.setSubstituteInfo((isEmpty ? new SEmptyContainmentSubstituteInfo(editorCell) : new SChildSubstituteInfo(editorCell)));
       }
       if (editorCell.getSRole() == null) {
-        editorCell.setSRole(LINKS.aggregateFunction$8ryB);
+        editorCell.setSRole(LINKS.aggregationFunction$8ryB);
       }
     }
     @Override
     protected EditorCell createEmptyCell() {
       getCellFactory().pushCellContext();
-      getCellFactory().setNodeLocation(new SNodeLocation.FromParentAndLink(getNode(), LINKS.aggregateFunction$8ryB));
+      getCellFactory().setNodeLocation(new SNodeLocation.FromParentAndLink(getNode(), LINKS.aggregationFunction$8ryB));
       try {
         EditorCell editorCell = super.createEmptyCell();
-        editorCell.setCellId("empty_aggregateFunction");
+        editorCell.setCellId("empty_aggregationFunction");
         installCellInfo(null, editorCell, true);
         setCellContext(editorCell);
         return editorCell;
@@ -121,7 +121,7 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
       }
     }
     protected String getNoTargetText() {
-      return "<no aggregateFunction>";
+      return "<no aggregationFunction>";
     }
   }
   private EditorCell createConstant_0() {
@@ -150,6 +150,6 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink aggregateFunction$8ryB = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L, 0xb59df187aaa4b3dL, "aggregateFunction");
+    /*package*/ static final SContainmentLink aggregationFunction$8ryB = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L, 0xb59df187aaa4b3dL, "aggregationFunction");
   }
 }

@@ -11,6 +11,7 @@ import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
 import jetbrains.mps.nodeEditor.cellLayout.CellLayout_Indent;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
 import jetbrains.mps.openapi.editor.style.Style;
 import jetbrains.mps.editor.runtime.style.StyleImpl;
@@ -87,10 +88,16 @@ import org.jetbrains.mps.openapi.language.SConcept;
     }
     editorCell.addEditorCell(createConstant_4());
     editorCell.addEditorCell(createRefNodeList_1());
-    editorCell.addEditorCell(createRefNode_1());
+    if (nodeCondition_2tw2dk_a9a()) {
+      editorCell.addEditorCell(createConstant_5());
+    }
+    if (nodeCondition_2tw2dk_a01a()) {
+      editorCell.addEditorCell(createRefNode_1());
+    }
     editorCell.addEditorCell(createRefNode_2());
     editorCell.addEditorCell(createRefNode_3());
-    editorCell.addEditorCell(createConstant_5());
+    editorCell.addEditorCell(createRefNode_4());
+    editorCell.addEditorCell(createConstant_6());
     return editorCell;
   }
   private boolean nodeCondition_2tw2dk_a1a() {
@@ -107,6 +114,12 @@ import org.jetbrains.mps.openapi.language.SConcept;
   }
   private boolean nodeCondition_2tw2dk_a6a() {
     return isNotEmptyString(SPropertyOperations.getString(myNode, PROPS.tableAlias$yY2f));
+  }
+  private boolean nodeCondition_2tw2dk_a9a() {
+    return ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.tables$IXdn)).count() > 1;
+  }
+  private boolean nodeCondition_2tw2dk_a01a() {
+    return ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.tables$IXdn)).count() > 1;
   }
   private EditorCell createConstant_0() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "SELECT");
@@ -403,15 +416,79 @@ import org.jetbrains.mps.openapi.language.SConcept;
       return editorCell;
     }
   }
+  private EditorCell createConstant_5() {
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "ON");
+    editorCell.setCellId("Constant_2tw2dk_j0");
+    Style style = new StyleImpl();
+    style.set(StyleAttributes.TEXT_COLOR, getStyleRegistry().getSimpleColor(MPSColors.DARK_MAGENTA));
+    editorCell.getStyle().putAll(style);
+    editorCell.setDefaultText("");
+    return editorCell;
+  }
   private EditorCell createRefNode_1() {
-    SingleRoleCellProvider provider = new whereSingleRoleHandler_2tw2dk_j0(myNode, LINKS.where$e1s0, getEditorContext());
+    SingleRoleCellProvider provider = new joinConditionSingleRoleHandler_2tw2dk_k0(myNode, LINKS.joinCondition$rc3m, getEditorContext());
     return provider.createCell();
   }
-  private static class whereSingleRoleHandler_2tw2dk_j0 extends SingleRoleCellProvider {
+  private static class joinConditionSingleRoleHandler_2tw2dk_k0 extends SingleRoleCellProvider {
     @NotNull
     private SNode myNode;
 
-    public whereSingleRoleHandler_2tw2dk_j0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+    public joinConditionSingleRoleHandler_2tw2dk_k0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+      super(containmentLink, context);
+      myNode = ownerNode;
+    }
+
+    @Override
+    @NotNull
+    public SNode getNode() {
+      return myNode;
+    }
+
+    protected EditorCell createChildCell(SNode child) {
+      EditorCell editorCell = getUpdateSession().updateChildNodeCell(child);
+      editorCell.setAction(CellActionType.DELETE, new CellAction_DeleteSmart(getNode(), LINKS.joinCondition$rc3m, child));
+      editorCell.setAction(CellActionType.BACKSPACE, new CellAction_DeleteSmart(getNode(), LINKS.joinCondition$rc3m, child));
+      installCellInfo(child, editorCell, false);
+      return editorCell;
+    }
+
+
+
+    private void installCellInfo(SNode child, EditorCell editorCell, boolean isEmpty) {
+      if (editorCell.getSubstituteInfo() == null || editorCell.getSubstituteInfo() instanceof DefaultSubstituteInfo) {
+        editorCell.setSubstituteInfo((isEmpty ? new SEmptyContainmentSubstituteInfo(editorCell) : new SChildSubstituteInfo(editorCell)));
+      }
+      if (editorCell.getSRole() == null) {
+        editorCell.setSRole(LINKS.joinCondition$rc3m);
+      }
+    }
+    @Override
+    protected EditorCell createEmptyCell() {
+      getCellFactory().pushCellContext();
+      getCellFactory().setNodeLocation(new SNodeLocation.FromParentAndLink(getNode(), LINKS.joinCondition$rc3m));
+      try {
+        EditorCell editorCell = super.createEmptyCell();
+        editorCell.setCellId("empty_joinCondition");
+        installCellInfo(null, editorCell, true);
+        setCellContext(editorCell);
+        return editorCell;
+      } finally {
+        getCellFactory().popCellContext();
+      }
+    }
+    protected String getNoTargetText() {
+      return "<no joinCondition>";
+    }
+  }
+  private EditorCell createRefNode_2() {
+    SingleRoleCellProvider provider = new whereSingleRoleHandler_2tw2dk_l0(myNode, LINKS.where$e1s0, getEditorContext());
+    return provider.createCell();
+  }
+  private static class whereSingleRoleHandler_2tw2dk_l0 extends SingleRoleCellProvider {
+    @NotNull
+    private SNode myNode;
+
+    public whereSingleRoleHandler_2tw2dk_l0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
       super(containmentLink, context);
       myNode = ownerNode;
     }
@@ -461,15 +538,15 @@ import org.jetbrains.mps.openapi.language.SConcept;
       return "<no where>";
     }
   }
-  private EditorCell createRefNode_2() {
-    SingleRoleCellProvider provider = new groupBySingleRoleHandler_2tw2dk_k0(myNode, LINKS.groupBy$vhgB, getEditorContext());
+  private EditorCell createRefNode_3() {
+    SingleRoleCellProvider provider = new groupBySingleRoleHandler_2tw2dk_m0(myNode, LINKS.groupBy$vhgB, getEditorContext());
     return provider.createCell();
   }
-  private static class groupBySingleRoleHandler_2tw2dk_k0 extends SingleRoleCellProvider {
+  private static class groupBySingleRoleHandler_2tw2dk_m0 extends SingleRoleCellProvider {
     @NotNull
     private SNode myNode;
 
-    public groupBySingleRoleHandler_2tw2dk_k0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+    public groupBySingleRoleHandler_2tw2dk_m0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
       super(containmentLink, context);
       myNode = ownerNode;
     }
@@ -519,15 +596,15 @@ import org.jetbrains.mps.openapi.language.SConcept;
       return "<no groupBy>";
     }
   }
-  private EditorCell createRefNode_3() {
-    SingleRoleCellProvider provider = new orderBySingleRoleHandler_2tw2dk_l0(myNode, LINKS.orderBy$K96v, getEditorContext());
+  private EditorCell createRefNode_4() {
+    SingleRoleCellProvider provider = new orderBySingleRoleHandler_2tw2dk_n0(myNode, LINKS.orderBy$K96v, getEditorContext());
     return provider.createCell();
   }
-  private static class orderBySingleRoleHandler_2tw2dk_l0 extends SingleRoleCellProvider {
+  private static class orderBySingleRoleHandler_2tw2dk_n0 extends SingleRoleCellProvider {
     @NotNull
     private SNode myNode;
 
-    public orderBySingleRoleHandler_2tw2dk_l0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+    public orderBySingleRoleHandler_2tw2dk_n0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
       super(containmentLink, context);
       myNode = ownerNode;
     }
@@ -577,9 +654,9 @@ import org.jetbrains.mps.openapi.language.SConcept;
       return "<no orderBy>";
     }
   }
-  private EditorCell createConstant_5() {
+  private EditorCell createConstant_6() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "");
-    editorCell.setCellId("Constant_2tw2dk_m0");
+    editorCell.setCellId("Constant_2tw2dk_o0");
     Style style = new StyleImpl();
     style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, true);
     editorCell.getStyle().putAll(style);
@@ -592,8 +669,9 @@ import org.jetbrains.mps.openapi.language.SConcept;
 
   private static final class LINKS {
     /*package*/ static final SContainmentLink aggregateFunction$GMhu = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x5d7e70837b028396L, "aggregateFunction");
-    /*package*/ static final SContainmentLink cols$kMcM = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0xe8aecd6b255930cL, "cols");
     /*package*/ static final SContainmentLink tables$IXdn = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x207f13a8b54616bfL, "tables");
+    /*package*/ static final SContainmentLink cols$kMcM = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0xe8aecd6b255930cL, "cols");
+    /*package*/ static final SContainmentLink joinCondition$rc3m = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x6c94f05b7ec9d072L, "joinCondition");
     /*package*/ static final SContainmentLink where$e1s0 = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x11100ee73745172dL, "where");
     /*package*/ static final SContainmentLink groupBy$vhgB = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x2b087ec3aa6a1779L, "groupBy");
     /*package*/ static final SContainmentLink orderBy$K96v = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x2b087ec3aa61e429L, "orderBy");

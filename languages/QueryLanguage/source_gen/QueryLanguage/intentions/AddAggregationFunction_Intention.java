@@ -78,27 +78,27 @@ public final class AddAggregationFunction_Intention extends AbstractIntentionDes
       switch (conceptIndex.index(cncpt)) {
         case 0:
           if (true) {
-            SLinkOperations.setTarget(node, LINKS.aggregateFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028394L, "QueryLanguage.structure.Average")));
+            SLinkOperations.setTarget(node, LINKS.aggregationFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028394L, "QueryLanguage.structure.Average")));
           }
           break;
         case 1:
           if (true) {
-            SLinkOperations.setTarget(node, LINKS.aggregateFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028392L, "QueryLanguage.structure.Count")));
+            SLinkOperations.setTarget(node, LINKS.aggregationFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028392L, "QueryLanguage.structure.Count")));
           }
           break;
         case 2:
           if (true) {
-            SLinkOperations.setTarget(node, LINKS.aggregateFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028390L, "QueryLanguage.structure.Max")));
+            SLinkOperations.setTarget(node, LINKS.aggregationFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028390L, "QueryLanguage.structure.Max")));
           }
           break;
         case 3:
           if (true) {
-            SLinkOperations.setTarget(node, LINKS.aggregateFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b02838dL, "QueryLanguage.structure.Min")));
+            SLinkOperations.setTarget(node, LINKS.aggregationFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b02838dL, "QueryLanguage.structure.Min")));
           }
           break;
         case 4:
           if (true) {
-            SLinkOperations.setTarget(node, LINKS.aggregateFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028393L, "QueryLanguage.structure.Sum")));
+            SLinkOperations.setTarget(node, LINKS.aggregationFunction$8ryB, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028393L, "QueryLanguage.structure.Sum")));
           }
           break;
         default:
@@ -132,6 +132,6 @@ public final class AddAggregationFunction_Intention extends AbstractIntentionDes
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink aggregateFunction$8ryB = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L, 0xb59df187aaa4b3dL, "aggregateFunction");
+    /*package*/ static final SContainmentLink aggregationFunction$8ryB = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L, 0xb59df187aaa4b3dL, "aggregationFunction");
   }
 }

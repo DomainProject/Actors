@@ -15,18 +15,16 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_Column;
   private ConceptPresentation props_ColumnRef;
   private ConceptPresentation props_Condition;
-  private ConceptPresentation props_ConditionSet;
-  private ConceptPresentation props_ConditionsSequence;
   private ConceptPresentation props_Count;
   private ConceptPresentation props_CreateTable;
   private ConceptPresentation props_DBOperation;
   private ConceptPresentation props_Delete;
   private ConceptPresentation props_GroupBy;
   private ConceptPresentation props_InsertInto;
+  private ConceptPresentation props_JoinCondition;
   private ConceptPresentation props_Max;
   private ConceptPresentation props_Min;
   private ConceptPresentation props_MultipleCondition;
-  private ConceptPresentation props_OldCondition;
   private ConceptPresentation props_OrderBy;
   private ConceptPresentation props_Script;
   private ConceptPresentation props_Select;
@@ -84,20 +82,6 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Condition = cpb.create();
         }
         return props_Condition;
-      case LanguageConceptSwitch.ConditionSet:
-        if (props_ConditionSet == null) {
-          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.rawPresentation("ConditionSet");
-          props_ConditionSet = cpb.create();
-        }
-        return props_ConditionSet;
-      case LanguageConceptSwitch.ConditionsSequence:
-        if (props_ConditionsSequence == null) {
-          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.rawPresentation("ConditionsSequence");
-          props_ConditionsSequence = cpb.create();
-        }
-        return props_ConditionsSequence;
       case LanguageConceptSwitch.Count:
         if (props_Count == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -139,6 +123,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_InsertInto = cpb.create();
         }
         return props_InsertInto;
+      case LanguageConceptSwitch.JoinCondition:
+        if (props_JoinCondition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("JoinCondition");
+          props_JoinCondition = cpb.create();
+        }
+        return props_JoinCondition;
       case LanguageConceptSwitch.Max:
         if (props_Max == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -160,13 +151,6 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_MultipleCondition = cpb.create();
         }
         return props_MultipleCondition;
-      case LanguageConceptSwitch.OldCondition:
-        if (props_OldCondition == null) {
-          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.rawPresentation("OldCondition");
-          props_OldCondition = cpb.create();
-        }
-        return props_OldCondition;
       case LanguageConceptSwitch.OrderBy:
         if (props_OrderBy == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -177,7 +161,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
       case LanguageConceptSwitch.Script:
         if (props_Script == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.rawPresentation("Script");
+          cpb.presentationByName();
           props_Script = cpb.create();
         }
         return props_Script;

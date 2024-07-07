@@ -19,6 +19,7 @@
       <concept id="1070475926800" name="jetbrains.mps.baseLanguage.structure.StringLiteral" flags="nn" index="Xl_RD">
         <property id="1070475926801" name="value" index="Xl_RC" />
       </concept>
+      <concept id="1225271408483" name="jetbrains.mps.baseLanguage.structure.IsNotEmptyOperation" flags="nn" index="17RvpY" />
       <concept id="1068580123159" name="jetbrains.mps.baseLanguage.structure.IfStatement" flags="nn" index="3clFbJ">
         <child id="1068580123160" name="condition" index="3clFbw" />
         <child id="1068580123161" name="ifTrue" index="3clFbx" />
@@ -26,11 +27,16 @@
       <concept id="1068580123136" name="jetbrains.mps.baseLanguage.structure.StatementList" flags="sn" stub="5293379017992965193" index="3clFbS">
         <child id="1068581517665" name="statement" index="3cqZAp" />
       </concept>
+      <concept id="1068580320020" name="jetbrains.mps.baseLanguage.structure.IntegerConstant" flags="nn" index="3cmrfG">
+        <property id="1068580320021" name="value" index="3cmrfH" />
+      </concept>
+      <concept id="1081506762703" name="jetbrains.mps.baseLanguage.structure.GreaterThanExpression" flags="nn" index="3eOSWO" />
       <concept id="1081773326031" name="jetbrains.mps.baseLanguage.structure.BinaryOperation" flags="nn" index="3uHJSO">
         <child id="1081773367579" name="rightExpression" index="3uHU7w" />
         <child id="1081773367580" name="leftExpression" index="3uHU7B" />
       </concept>
       <concept id="1073239437375" name="jetbrains.mps.baseLanguage.structure.NotEqualsExpression" flags="nn" index="3y3z36" />
+      <concept id="1080120340718" name="jetbrains.mps.baseLanguage.structure.AndExpression" flags="nn" index="1Wc70l" />
     </language>
     <language id="7a5dda62-9140-4668-ab76-d5ed1746f2b2" name="jetbrains.mps.lang.typesystem">
       <concept id="1175517767210" name="jetbrains.mps.lang.typesystem.structure.ReportErrorStatement" flags="nn" index="2MkqsV">
@@ -54,6 +60,9 @@
       </concept>
     </language>
     <language id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel">
+      <concept id="1138056022639" name="jetbrains.mps.lang.smodel.structure.SPropertyAccess" flags="nn" index="3TrcHB">
+        <reference id="1138056395725" name="property" index="3TsBF5" />
+      </concept>
       <concept id="1138056282393" name="jetbrains.mps.lang.smodel.structure.SLinkListAccess" flags="nn" index="3Tsc0h">
         <reference id="1138056546658" name="link" index="3TtcxE" />
       </concept>
@@ -160,6 +169,57 @@
     <node concept="1YaCAy" id="2fooeIVr7h2" role="1YuTPh">
       <property role="TrG5h" value="update" />
       <ref role="1YaFvo" to="p6im:69qeU0f8SkZ" resolve="Update" />
+    </node>
+  </node>
+  <node concept="18kY7G" id="6MkW5HYCIQ2">
+    <property role="TrG5h" value="check_Select" />
+    <property role="3GE5qa" value="statements" />
+    <node concept="3clFbS" id="6MkW5HYCIQ3" role="18ibNy">
+      <node concept="3clFbJ" id="6MkW5HYCIQi" role="3cqZAp">
+        <node concept="1Wc70l" id="6MkW5HYCPxI" role="3clFbw">
+          <node concept="3eOSWO" id="6MkW5HYD1RB" role="3uHU7w">
+            <node concept="3cmrfG" id="6MkW5HYD1RE" role="3uHU7w">
+              <property role="3cmrfH" value="1" />
+            </node>
+            <node concept="2OqwBi" id="6MkW5HYCSsg" role="3uHU7B">
+              <node concept="2OqwBi" id="6MkW5HYCPMx" role="2Oq$k0">
+                <node concept="1YBJjd" id="6MkW5HYCP$Z" role="2Oq$k0">
+                  <ref role="1YBMHb" node="6MkW5HYCIQ5" resolve="select" />
+                </node>
+                <node concept="3Tsc0h" id="6MkW5HYCQ8k" role="2OqNvi">
+                  <ref role="3TtcxE" to="p6im:21Z4UyPhxqZ" resolve="tables" />
+                </node>
+              </node>
+              <node concept="34oBXx" id="6MkW5HYCZ8c" role="2OqNvi" />
+            </node>
+          </node>
+          <node concept="2OqwBi" id="6MkW5HYCMtv" role="3uHU7B">
+            <node concept="2OqwBi" id="6MkW5HYCJfj" role="2Oq$k0">
+              <node concept="1YBJjd" id="6MkW5HYCJ2b" role="2Oq$k0">
+                <ref role="1YBMHb" node="6MkW5HYCIQ5" resolve="select" />
+              </node>
+              <node concept="3TrcHB" id="6MkW5HYCLaP" role="2OqNvi">
+                <ref role="3TsBF5" to="p6im:7p2QZoUxXLI" resolve="tableAlias" />
+              </node>
+            </node>
+            <node concept="17RvpY" id="6MkW5HYCOhN" role="2OqNvi" />
+          </node>
+        </node>
+        <node concept="3clFbS" id="6MkW5HYCIQk" role="3clFbx">
+          <node concept="2MkqsV" id="6MkW5HYD1ZX" role="3cqZAp">
+            <node concept="Xl_RD" id="6MkW5HYD209" role="2MkJ7o">
+              <property role="Xl_RC" value="Alias is not supported for joined tables" />
+            </node>
+            <node concept="1YBJjd" id="6MkW5HYD21s" role="1urrMF">
+              <ref role="1YBMHb" node="6MkW5HYCIQ5" resolve="select" />
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="1YaCAy" id="6MkW5HYCIQ5" role="1YuTPh">
+      <property role="TrG5h" value="select" />
+      <ref role="1YaFvo" to="p6im:66sUT0$8edT" resolve="Select" />
     </node>
   </node>
 </model>
