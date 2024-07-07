@@ -22,8 +22,6 @@
         <child id="928328222691832421" name="separatorTextQuery" index="2gpyvW" />
         <child id="1233141163694" name="separatorStyle" index="sWeuL" />
       </concept>
-      <concept id="1106270549637" name="jetbrains.mps.lang.editor.structure.CellLayout_Horizontal" flags="nn" index="2iRfu4" />
-      <concept id="1106270571710" name="jetbrains.mps.lang.editor.structure.CellLayout_Vertical" flags="nn" index="2iRkQZ" />
       <concept id="1237303669825" name="jetbrains.mps.lang.editor.structure.CellLayout_Indent" flags="nn" index="l2Vlx" />
       <concept id="1237307900041" name="jetbrains.mps.lang.editor.structure.IndentLayoutIndentStyleClassItem" flags="ln" index="lj46D" />
       <concept id="709996738298806197" name="jetbrains.mps.lang.editor.structure.QueryFunction_SeparatorText" flags="in" index="2o9xnK" />
@@ -63,9 +61,7 @@
       <concept id="772883491827671446" name="jetbrains.mps.lang.editor.structure.ConceptFunctionParameterCustomize_Style" flags="ng" index="3lBNjA" />
       <concept id="1088185857835" name="jetbrains.mps.lang.editor.structure.InlineEditorComponent" flags="ig" index="1sVBvm" />
       <concept id="1139848536355" name="jetbrains.mps.lang.editor.structure.CellModel_WithRole" flags="ng" index="1$h60E">
-        <property id="1139852716018" name="noTargetText" index="1$x2rV" />
         <property id="1140017977771" name="readOnly" index="1Intyy" />
-        <property id="1140114345053" name="allowEmptyText" index="1O74Pk" />
         <reference id="1140103550593" name="relationDeclaration" index="1NtTu8" />
       </concept>
       <concept id="1073389214265" name="jetbrains.mps.lang.editor.structure.EditorCellModel" flags="ng" index="3EYTF0">
@@ -276,10 +272,21 @@
   <node concept="24kQdi" id="14g3IsRh3JO">
     <ref role="1XX52x" to="p6im:14g3IsRh3Jd" resolve="Script" />
     <node concept="3EZMnI" id="14g3IsRh3JQ" role="2wV5jI">
+      <node concept="3F0A7n" id="1SzaAQ8CXif" role="3EZMnx">
+        <ref role="1NtTu8" to="tpck:h0TrG11" resolve="name" />
+      </node>
+      <node concept="3F0ifn" id="1SzaAQ8CXi_" role="3EZMnx">
+        <node concept="pVoyu" id="1SzaAQ8CXiH" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+      </node>
       <node concept="3F2HdR" id="2G8vGeEpBFg" role="3EZMnx">
         <ref role="1NtTu8" to="p6im:2G8vGeEpl5A" resolve="operations" />
         <node concept="l2Vlx" id="2G8vGeEpBFi" role="2czzBx" />
         <node concept="pj6Ft" id="2G8vGeEpBFm" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+        <node concept="pVoyu" id="1SzaAQ8CXiJ" role="3F10Kt">
           <property role="VOm3f" value="true" />
         </node>
       </node>
@@ -521,36 +528,12 @@
       <node concept="l2Vlx" id="14g3IsRhhts" role="2iSdaV" />
     </node>
   </node>
-  <node concept="24kQdi" id="14g3IsRhL1d">
-    <property role="3GE5qa" value="where.oldCondition" />
-    <ref role="1XX52x" to="p6im:14g3IsRhKZN" resolve="OldCondition" />
-    <node concept="3EZMnI" id="14g3IsRhL1f" role="2wV5jI">
-      <node concept="3F1sOY" id="21Z4UyPKM3k" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:21Z4UyPKLDz" resolve="column" />
-      </node>
-      <node concept="3F0A7n" id="14g3IsRhL1s" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:14g3IsRhL16" resolve="operator" />
-      </node>
-      <node concept="3F1sOY" id="69qeU0f7czC" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:69qeU0f7cyC" resolve="value" />
-      </node>
-      <node concept="3F0A7n" id="2qoxdQ1GGSK" role="3EZMnx">
-        <property role="1O74Pk" value="true" />
-        <property role="1$x2rV" value="Add Condition" />
-        <ref role="1NtTu8" to="p6im:2qoxdQ1GGSx" resolve="conditionOperator" />
-        <node concept="VechU" id="2qoxdQ1GGSS" role="3F10Kt">
-          <property role="Vb096" value="g1_qVrt/darkMagenta" />
-        </node>
-      </node>
-      <node concept="l2Vlx" id="14g3IsRhL1i" role="2iSdaV" />
-    </node>
-  </node>
   <node concept="24kQdi" id="14g3IsRku6G">
     <property role="3GE5qa" value="column" />
     <ref role="1XX52x" to="p6im:14g3IsRklvO" resolve="ColumnRef" />
     <node concept="3EZMnI" id="14g3IsRku6I" role="2wV5jI">
       <node concept="3F1sOY" id="HpRLxUEDwT" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+        <ref role="1NtTu8" to="p6im:HpRLxUE$GX" resolve="aggregationFunction" />
         <node concept="pkWqt" id="HpRLxUEEkr" role="pqm2j">
           <node concept="3clFbS" id="HpRLxUEEks" role="2VODD2">
             <node concept="3clFbF" id="HpRLxUEEkx" role="3cqZAp">
@@ -558,7 +541,7 @@
                 <node concept="2OqwBi" id="HpRLxUEEIS" role="2Oq$k0">
                   <node concept="pncrf" id="HpRLxUEEkw" role="2Oq$k0" />
                   <node concept="3TrEf2" id="HpRLxUEFex" role="2OqNvi">
-                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregationFunction" />
                   </node>
                 </node>
                 <node concept="3x8VRR" id="HpRLxUEGy9" role="2OqNvi" />
@@ -576,7 +559,7 @@
                 <node concept="2OqwBi" id="HpRLxUEGNX" role="2Oq$k0">
                   <node concept="pncrf" id="HpRLxUEGNY" role="2Oq$k0" />
                   <node concept="3TrEf2" id="HpRLxUEGNZ" role="2OqNvi">
-                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregationFunction" />
                   </node>
                 </node>
                 <node concept="3x8VRR" id="HpRLxUEGO0" role="2OqNvi" />
@@ -710,7 +693,7 @@
                 <node concept="2OqwBi" id="HpRLxUEGPw" role="2Oq$k0">
                   <node concept="pncrf" id="HpRLxUEGPx" role="2Oq$k0" />
                   <node concept="3TrEf2" id="HpRLxUEGPy" role="2OqNvi">
-                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregationFunction" />
                   </node>
                 </node>
                 <node concept="3x8VRR" id="HpRLxUEGPz" role="2OqNvi" />
@@ -975,42 +958,6 @@
         </node>
       </node>
       <node concept="l2Vlx" id="2G8vGeEqxtw" role="2iSdaV" />
-    </node>
-  </node>
-  <node concept="24kQdi" id="2fooeIVv2qV">
-    <property role="3GE5qa" value="where.oldCondition" />
-    <ref role="1XX52x" to="p6im:2fooeIVv2ql" resolve="ConditionsSequence" />
-    <node concept="3EZMnI" id="2fooeIVv2qX" role="2wV5jI">
-      <node concept="3F0ifn" id="2fooeIVxG2i" role="3EZMnx">
-        <property role="3F0ifm" value="(" />
-      </node>
-      <node concept="3F2HdR" id="2fooeIVv2r4" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:2fooeIVv2qT" resolve="conditions" />
-        <node concept="2iRfu4" id="2fooeIVv2r6" role="2czzBx" />
-      </node>
-      <node concept="3F0ifn" id="2fooeIVxG2s" role="3EZMnx">
-        <property role="3F0ifm" value=")" />
-      </node>
-      <node concept="3F0A7n" id="2fooeIVxG2V" role="3EZMnx">
-        <property role="1O74Pk" value="true" />
-        <property role="1$x2rV" value="Add Condition" />
-        <ref role="1NtTu8" to="p6im:2fooeIVxG2N" resolve="conditionOperator" />
-        <node concept="VechU" id="2fooeIVxG32" role="3F10Kt">
-          <property role="Vb096" value="g1_qVrt/darkMagenta" />
-        </node>
-      </node>
-      <node concept="2iRfu4" id="2fooeIVv2r0" role="2iSdaV" />
-    </node>
-  </node>
-  <node concept="24kQdi" id="2fooeIVxG1J">
-    <property role="3GE5qa" value="where.oldCondition" />
-    <ref role="1XX52x" to="p6im:2fooeIVxG1G" resolve="ConditionSet" />
-    <node concept="3EZMnI" id="2fooeIVy525" role="2wV5jI">
-      <node concept="3F2HdR" id="2fooeIVy52c" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:2fooeIVxG1H" resolve="conditions" />
-        <node concept="2iRkQZ" id="2fooeIVy52e" role="2czzBx" />
-      </node>
-      <node concept="2iRkQZ" id="2fooeIVy528" role="2iSdaV" />
     </node>
   </node>
   <node concept="3dRTYf" id="2k0K6Kz$udF">
@@ -1327,7 +1274,7 @@
     <ref role="1XX52x" to="p6im:UaVdqMkpsj" resolve="AllColumns" />
     <node concept="3EZMnI" id="HpRLxUEGQV" role="2wV5jI">
       <node concept="3F1sOY" id="HpRLxUEGR2" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+        <ref role="1NtTu8" to="p6im:HpRLxUE$GX" resolve="aggregationFunction" />
         <node concept="pkWqt" id="HpRLxUEGRE" role="pqm2j">
           <node concept="3clFbS" id="HpRLxUEGRF" role="2VODD2">
             <node concept="3clFbF" id="HpRLxUEGRJ" role="3cqZAp">
@@ -1335,7 +1282,7 @@
                 <node concept="2OqwBi" id="HpRLxUEGRM" role="2Oq$k0">
                   <node concept="pncrf" id="HpRLxUEGRN" role="2Oq$k0" />
                   <node concept="3TrEf2" id="HpRLxUEGRO" role="2OqNvi">
-                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregationFunction" />
                   </node>
                 </node>
                 <node concept="3x8VRR" id="HpRLxUEGRP" role="2OqNvi" />
@@ -1353,7 +1300,7 @@
                 <node concept="2OqwBi" id="HpRLxUEHpl" role="2Oq$k0">
                   <node concept="pncrf" id="HpRLxUEHpm" role="2Oq$k0" />
                   <node concept="3TrEf2" id="HpRLxUEHpn" role="2OqNvi">
-                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregationFunction" />
                   </node>
                 </node>
                 <node concept="3x8VRR" id="HpRLxUEHpo" role="2OqNvi" />
@@ -1377,7 +1324,7 @@
                 <node concept="2OqwBi" id="HpRLxUEHCm" role="2Oq$k0">
                   <node concept="pncrf" id="HpRLxUEHCn" role="2Oq$k0" />
                   <node concept="3TrEf2" id="HpRLxUEHCo" role="2OqNvi">
-                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregateFunction" />
+                    <ref role="3Tt5mk" to="p6im:HpRLxUE$GX" resolve="aggregationFunction" />
                   </node>
                 </node>
                 <node concept="3x8VRR" id="HpRLxUEHCp" role="2OqNvi" />

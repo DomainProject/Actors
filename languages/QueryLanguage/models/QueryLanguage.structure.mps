@@ -231,41 +231,14 @@
       <property role="20lbJX" value="fLJekj5/_0__n" />
       <ref role="20lvS9" node="2G8vGeEpl5$" resolve="DBOperation" />
     </node>
-  </node>
-  <node concept="1TIwiD" id="14g3IsRhKZN">
-    <property role="EcuMT" value="1229499084499783667" />
-    <property role="TrG5h" value="OldCondition" />
-    <property role="3GE5qa" value="where.oldCondition" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
-    <node concept="1TJgyi" id="14g3IsRhL16" role="1TKVEl">
-      <property role="IQ2nx" value="1229499084499783750" />
-      <property role="TrG5h" value="operator" />
-      <ref role="AX2Wp" node="14g3IsRhKZT" resolve="Operator" />
-    </node>
-    <node concept="1TJgyi" id="2qoxdQ1GGSx" role="1TKVEl">
-      <property role="IQ2nx" value="2781118856799899169" />
-      <property role="TrG5h" value="conditionOperator" />
-      <ref role="AX2Wp" node="2fooeIVv2qq" resolve="ConditionOperator" />
-    </node>
-    <node concept="1TJgyj" id="69qeU0f7cyC" role="1TKVEi">
-      <property role="IQ2ns" value="7087042522255247528" />
-      <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="value" />
-      <property role="20lbJX" value="fLJekj4/_1" />
-      <ref role="20lvS9" node="69qeU0f7cyb" resolve="Value" />
-    </node>
-    <node concept="1TJgyj" id="21Z4UyPKLDz" role="1TKVEi">
-      <property role="IQ2ns" value="2341611946580843107" />
-      <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="column" />
-      <property role="20lbJX" value="fLJekj4/_1" />
-      <ref role="20lvS9" node="14g3IsRklvO" resolve="ColumnRef" />
+    <node concept="PrWs8" id="1SzaAQ8CXi0" role="PzmwI">
+      <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
   </node>
   <node concept="25R3W" id="14g3IsRhKZT">
     <property role="3F6X1D" value="1229499084499783673" />
     <property role="TrG5h" value="Operator" />
-    <property role="3GE5qa" value="where.oldCondition" />
+    <property role="3GE5qa" value="where.condition" />
     <node concept="25R33" id="14g3IsRhKZU" role="25R1y">
       <property role="3tVfz5" value="1229499084499783674" />
       <property role="TrG5h" value="EQUALS" />
@@ -428,27 +401,9 @@
       <ref role="20lvS9" node="14g3IsRklvO" resolve="ColumnRef" />
     </node>
   </node>
-  <node concept="1TIwiD" id="2fooeIVv2ql">
-    <property role="EcuMT" value="2582920951876036245" />
-    <property role="3GE5qa" value="where.oldCondition" />
-    <property role="TrG5h" value="ConditionsSequence" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
-    <node concept="1TJgyj" id="2fooeIVv2qT" role="1TKVEi">
-      <property role="IQ2ns" value="2582920951876036281" />
-      <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="conditions" />
-      <property role="20lbJX" value="fLJekj6/_1__n" />
-      <ref role="20lvS9" node="14g3IsRhKZN" resolve="OldCondition" />
-    </node>
-    <node concept="1TJgyi" id="2fooeIVxG2N" role="1TKVEl">
-      <property role="IQ2nx" value="2582920951876731059" />
-      <property role="TrG5h" value="conditionOperator" />
-      <ref role="AX2Wp" node="2fooeIVv2qq" resolve="ConditionOperator" />
-    </node>
-  </node>
   <node concept="25R3W" id="2fooeIVv2qq">
     <property role="3F6X1D" value="2582920951876036250" />
-    <property role="3GE5qa" value="where.oldCondition" />
+    <property role="3GE5qa" value="where.condition" />
     <property role="TrG5h" value="ConditionOperator" />
     <node concept="25R33" id="2fooeIVv2qr" role="25R1y">
       <property role="3tVfz5" value="2582920951876036251" />
@@ -457,19 +412,6 @@
     <node concept="25R33" id="2fooeIVv2qs" role="25R1y">
       <property role="3tVfz5" value="2582920951876036252" />
       <property role="TrG5h" value="OR" />
-    </node>
-  </node>
-  <node concept="1TIwiD" id="2fooeIVxG1G">
-    <property role="EcuMT" value="2582920951876730988" />
-    <property role="3GE5qa" value="where.oldCondition" />
-    <property role="TrG5h" value="ConditionSet" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
-    <node concept="1TJgyj" id="2fooeIVxG1H" role="1TKVEi">
-      <property role="IQ2ns" value="2582920951876730989" />
-      <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="conditions" />
-      <property role="20lbJX" value="fLJekj6/_1__n" />
-      <ref role="20lvS9" node="2fooeIVv2ql" resolve="ConditionsSequence" />
     </node>
   </node>
   <node concept="PlHQZ" id="5PYs8dV0yTO">
@@ -606,7 +548,7 @@
     <node concept="1TJgyj" id="HpRLxUE$GX" role="1TKVEi">
       <property role="IQ2ns" value="817930103574645565" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="aggregateFunction" />
+      <property role="20kJfa" value="aggregationFunction" />
       <ref role="20lvS9" node="5PYs8dV0yTO" resolve="AggregationFunction" />
     </node>
   </node>

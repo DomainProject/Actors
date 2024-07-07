@@ -88,10 +88,10 @@ import org.jetbrains.mps.openapi.language.SConcept;
     return editorCell;
   }
   private boolean nodeCondition_s4t3l3_a0a() {
-    return (SLinkOperations.getTarget(myNode, LINKS.aggregateFunction$8ryB) != null);
+    return (SLinkOperations.getTarget(myNode, LINKS.aggregationFunction$8ryB) != null);
   }
   private boolean nodeCondition_s4t3l3_a1a() {
-    return (SLinkOperations.getTarget(myNode, LINKS.aggregateFunction$8ryB) != null);
+    return (SLinkOperations.getTarget(myNode, LINKS.aggregationFunction$8ryB) != null);
   }
   private boolean nodeCondition_s4t3l3_a2a() {
     if ((SNodeOperations.getNodeAncestor(myNode, CONCEPTS.Select$Te, false, false) == null)) {
@@ -103,17 +103,17 @@ import org.jetbrains.mps.openapi.language.SConcept;
     return (SNodeOperations.getNodeAncestor(myNode, CONCEPTS.Select$Te, false, false) != null) && ListSequence.fromList(SLinkOperations.getChildren(SNodeOperations.getNodeAncestor(myNode, CONCEPTS.Select$Te, false, false), LINKS.tables$IXdn)).count() > 1;
   }
   private boolean nodeCondition_s4t3l3_a4a() {
-    return (SLinkOperations.getTarget(myNode, LINKS.aggregateFunction$8ryB) != null);
+    return (SLinkOperations.getTarget(myNode, LINKS.aggregationFunction$8ryB) != null);
   }
   private EditorCell createRefNode_0() {
-    SingleRoleCellProvider provider = new aggregateFunctionSingleRoleHandler_s4t3l3_a0(myNode, LINKS.aggregateFunction$8ryB, getEditorContext());
+    SingleRoleCellProvider provider = new aggregationFunctionSingleRoleHandler_s4t3l3_a0(myNode, LINKS.aggregationFunction$8ryB, getEditorContext());
     return provider.createCell();
   }
-  private static class aggregateFunctionSingleRoleHandler_s4t3l3_a0 extends SingleRoleCellProvider {
+  private static class aggregationFunctionSingleRoleHandler_s4t3l3_a0 extends SingleRoleCellProvider {
     @NotNull
     private SNode myNode;
 
-    public aggregateFunctionSingleRoleHandler_s4t3l3_a0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+    public aggregationFunctionSingleRoleHandler_s4t3l3_a0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
       super(containmentLink, context);
       myNode = ownerNode;
     }
@@ -126,8 +126,8 @@ import org.jetbrains.mps.openapi.language.SConcept;
 
     protected EditorCell createChildCell(SNode child) {
       EditorCell editorCell = getUpdateSession().updateChildNodeCell(child);
-      editorCell.setAction(CellActionType.DELETE, new CellAction_DeleteSmart(getNode(), LINKS.aggregateFunction$8ryB, child));
-      editorCell.setAction(CellActionType.BACKSPACE, new CellAction_DeleteSmart(getNode(), LINKS.aggregateFunction$8ryB, child));
+      editorCell.setAction(CellActionType.DELETE, new CellAction_DeleteSmart(getNode(), LINKS.aggregationFunction$8ryB, child));
+      editorCell.setAction(CellActionType.BACKSPACE, new CellAction_DeleteSmart(getNode(), LINKS.aggregationFunction$8ryB, child));
       installCellInfo(child, editorCell, false);
       return editorCell;
     }
@@ -139,16 +139,16 @@ import org.jetbrains.mps.openapi.language.SConcept;
         editorCell.setSubstituteInfo((isEmpty ? new SEmptyContainmentSubstituteInfo(editorCell) : new SChildSubstituteInfo(editorCell)));
       }
       if (editorCell.getSRole() == null) {
-        editorCell.setSRole(LINKS.aggregateFunction$8ryB);
+        editorCell.setSRole(LINKS.aggregationFunction$8ryB);
       }
     }
     @Override
     protected EditorCell createEmptyCell() {
       getCellFactory().pushCellContext();
-      getCellFactory().setNodeLocation(new SNodeLocation.FromParentAndLink(getNode(), LINKS.aggregateFunction$8ryB));
+      getCellFactory().setNodeLocation(new SNodeLocation.FromParentAndLink(getNode(), LINKS.aggregationFunction$8ryB));
       try {
         EditorCell editorCell = super.createEmptyCell();
-        editorCell.setCellId("empty_aggregateFunction");
+        editorCell.setCellId("empty_aggregationFunction");
         installCellInfo(null, editorCell, true);
         setCellContext(editorCell);
         return editorCell;
@@ -157,7 +157,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
       }
     }
     protected String getNoTargetText() {
-      return "<no aggregateFunction>";
+      return "<no aggregationFunction>";
     }
   }
   private EditorCell createConstant_0() {
@@ -336,7 +336,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink aggregateFunction$8ryB = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L, 0xb59df187aaa4b3dL, "aggregateFunction");
+    /*package*/ static final SContainmentLink aggregationFunction$8ryB = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L, 0xb59df187aaa4b3dL, "aggregationFunction");
     /*package*/ static final SContainmentLink tables$IXdn = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x207f13a8b54616bfL, "tables");
     /*package*/ static final SReferenceLink column$Wyeu = MetaAdapterFactory.getReferenceLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee7375157f4L, 0x11100ee7375157f5L, "column");
   }

@@ -36,7 +36,7 @@
       <concept id="6736945802599629714" name="QueryLanguage.structure.Count" flags="ng" index="Avfch" />
       <concept id="6736945802599629716" name="QueryLanguage.structure.Average" flags="ng" index="Avfcn" />
       <concept id="1047910270175909650" name="QueryLanguage.structure.SelectColumn" flags="ngI" index="2WQRJ4">
-        <child id="817930103574645565" name="aggregateFunction" index="1LWTg_" />
+        <child id="817930103574645565" name="aggregationFunction" index="1LWTg_" />
       </concept>
       <concept id="1047910270175909651" name="QueryLanguage.structure.AllColumns" flags="ng" index="2WQRJ5" />
       <concept id="7033755722359825273" name="QueryLanguage.structure.Select" flags="ng" index="15J0zD">
@@ -46,7 +46,6 @@
         <child id="7824142728409239666" name="joinCondition" index="ini0D" />
         <child id="2341611946572650175" name="tables" index="2legkn" />
         <child id="1229499084499654445" name="where" index="AlhBa" />
-        <child id="6736945802599629718" name="aggregateFunction" index="Avfcl" />
         <child id="1047910270176170764" name="cols" index="2WRRZq" />
         <child id="817930103574093953" name="aliasTable" index="1LY3Yp" />
       </concept>
@@ -74,6 +73,7 @@
     </language>
   </registry>
   <node concept="Al3kE" id="5Q93FfFUJYg">
+    <property role="TrG5h" value="PersonUniversityScript" />
     <node concept="Al3n9" id="5Q93FfFUJYh" role="21riY_">
       <property role="TrG5h" value="Person" />
       <node concept="Al3nk" id="5Q93FfFUJYj" role="1_7Ipx">
@@ -121,12 +121,12 @@
       </node>
       <node concept="2WQRJ5" id="6eYilKnl7Wp" role="2WRRZq" />
       <node concept="15J0zF" id="6eYilKnl7Wr" role="AlhBa">
-        <node concept="1osJ5O" id="6eYilKnl7Wt" role="AmyPj">
-          <property role="1osJ58" value="14g3IsRhL0d/GREATER_EQUAL" />
-          <node concept="1HhJcF" id="6eYilKnl7Wu" role="1osJ5a">
-            <property role="1HhJcI" value="18" />
+        <node concept="1osJ5O" id="3lH3Hb9pixM" role="AmyPj">
+          <property role="1osJ58" value="14g3IsRhL0j/LOWER_EQUAL" />
+          <node concept="1HhJcF" id="3lH3Hb9pixN" role="1osJ5a">
+            <property role="1HhJcI" value="30" />
           </node>
-          <node concept="Agl$j" id="6eYilKnl7Wv" role="1osJ57">
+          <node concept="Agl$j" id="3lH3Hb9pixO" role="1osJ57">
             <ref role="Agl$i" node="5Q93FfFUJYl" resolve="age" />
           </node>
         </node>
@@ -160,36 +160,36 @@
         </node>
       </node>
     </node>
-    <node concept="15J0zD" id="6eYilKnl7XW" role="21riY_">
-      <node concept="2leIlQ" id="6eYilKnl7XY" role="2legkn">
+    <node concept="15J0zD" id="2TdJYs2VY0S" role="21riY_">
+      <node concept="2leIlQ" id="2TdJYs2VY0U" role="2legkn">
         <ref role="2leIlR" node="5Q93FfFUJYh" resolve="Person" />
       </node>
-      <node concept="Agl$j" id="6eYilKnl7Ys" role="2WRRZq">
-        <ref role="Agl$i" node="5Q93FfFUJYj" resolve="name" />
-      </node>
-      <node concept="Avfch" id="6eYilKnl7Yu" role="Avfcl" />
-      <node concept="15J0zF" id="6eYilKnl7Yw" role="AlhBa">
-        <node concept="1osJ5R" id="6eYilKnl7Yy" role="AmyPj">
+      <node concept="15J0zF" id="2TdJYs2VY1O" role="AlhBa">
+        <node concept="1osJ5R" id="2TdJYs2VY1Q" role="AmyPj">
           <property role="1osJ5c" value="2fooeIVv2qr/AND" />
-          <node concept="1osJ5O" id="6eYilKnl7YL" role="1osJ4x">
+          <node concept="1osJ5O" id="2TdJYs2VY25" role="1osJ4x">
             <property role="1osJ58" value="14g3IsRhL0j/LOWER_EQUAL" />
-            <node concept="1HhJcF" id="6eYilKnl7YN" role="1osJ5a">
+            <node concept="1HhJcF" id="2TdJYs2VY27" role="1osJ5a">
               <property role="1HhJcI" value="80.0" />
             </node>
-            <node concept="Agl$j" id="6eYilKnl7YP" role="1osJ57">
+            <node concept="Agl$j" id="2TdJYs2VY29" role="1osJ57">
               <ref role="Agl$i" node="5VF6QK6CGCd" resolve="weight" />
             </node>
           </node>
-          <node concept="1osJ5O" id="6eYilKnl7YC" role="1osJ4P">
+          <node concept="1osJ5O" id="2TdJYs2VY1W" role="1osJ4P">
             <property role="1osJ58" value="14g3IsRhL0d/GREATER_EQUAL" />
-            <node concept="1HhJcF" id="6eYilKnl7YE" role="1osJ5a">
+            <node concept="1HhJcF" id="2TdJYs2VY1Y" role="1osJ5a">
               <property role="1HhJcI" value="1.8" />
             </node>
-            <node concept="Agl$j" id="6eYilKnl7YG" role="1osJ57">
+            <node concept="Agl$j" id="2TdJYs2VY20" role="1osJ57">
               <ref role="Agl$i" node="5VF6QK6CGC9" resolve="height" />
             </node>
           </node>
         </node>
+      </node>
+      <node concept="Agl$j" id="2TdJYs2VY2e" role="2WRRZq">
+        <ref role="Agl$i" node="5Q93FfFUJYj" resolve="name" />
+        <node concept="Avfch" id="2TdJYs2VY2g" role="1LWTg_" />
       </node>
     </node>
     <node concept="15J0zD" id="6MkW5HYFxer" role="21riY_">
@@ -212,20 +212,87 @@
               <ref role="Agl$i" node="6eYilKnl7TR" resolve="country" />
             </node>
           </node>
-          <node concept="1osJ5O" id="6MkW5HYFxfk" role="1osJ4P">
-            <property role="1osJ58" value="14g3IsRhL0j/LOWER_EQUAL" />
-            <node concept="1HhJcF" id="6MkW5HYFxfm" role="1osJ5a">
-              <property role="1HhJcI" value="30" />
+          <node concept="1osJ5R" id="3lH3Hb9pg33" role="1osJ4P">
+            <property role="1osJ5c" value="2fooeIVv2qs/OR" />
+            <node concept="1osJ5O" id="3lH3Hb9pg3j" role="1osJ4x">
+              <property role="1osJ58" value="14g3IsRhL0j/LOWER_EQUAL" />
+              <node concept="1HhJcF" id="3lH3Hb9pg3l" role="1osJ5a">
+                <property role="1HhJcI" value="100.0" />
+              </node>
+              <node concept="Agl$j" id="3lH3Hb9pg3n" role="1osJ57">
+                <ref role="Agl$i" node="5VF6QK6CGCd" resolve="weight" />
+              </node>
             </node>
-            <node concept="Agl$j" id="6MkW5HYFxfo" role="1osJ57">
-              <ref role="Agl$i" node="5Q93FfFUJYl" resolve="age" />
+            <node concept="1osJ5O" id="3lH3Hb9pg3a" role="1osJ4P">
+              <property role="1osJ58" value="14g3IsRhL0j/LOWER_EQUAL" />
+              <node concept="1HhJcF" id="3lH3Hb9pg3c" role="1osJ5a">
+                <property role="1HhJcI" value="30" />
+              </node>
+              <node concept="Agl$j" id="3lH3Hb9pg3e" role="1osJ57">
+                <ref role="Agl$i" node="5Q93FfFUJYl" resolve="age" />
+              </node>
             </node>
           </node>
         </node>
       </node>
     </node>
+    <node concept="15J0zD" id="2TdJYs306YE" role="21riY_">
+      <node concept="2leIlQ" id="2TdJYs306YF" role="2legkn">
+        <ref role="2leIlR" node="5Q93FfFUJYh" resolve="Person" />
+      </node>
+      <node concept="2leIlQ" id="2TdJYs306YG" role="2legkn">
+        <ref role="2leIlR" node="5VF6QK6C0wF" resolve="University" />
+      </node>
+      <node concept="15J0zF" id="2TdJYs306YI" role="AlhBa">
+        <node concept="1osJ5R" id="2TdJYs306YJ" role="AmyPj">
+          <property role="1osJ5c" value="2fooeIVv2qr/AND" />
+          <node concept="1osJ5O" id="2TdJYs306YK" role="1osJ4x">
+            <property role="1osJ58" value="14g3IsRhL0p/NOT_EQUAL" />
+            <node concept="1HhJcF" id="2TdJYs306YL" role="1osJ5a">
+              <property role="1HhJcI" value="&quot;Italy&quot;" />
+            </node>
+            <node concept="Agl$j" id="2TdJYs306YM" role="1osJ57">
+              <ref role="Agl$i" node="6eYilKnl7TR" resolve="country" />
+            </node>
+          </node>
+          <node concept="1osJ5R" id="2TdJYs306YN" role="1osJ4P">
+            <property role="1osJ5c" value="2fooeIVv2qs/OR" />
+            <node concept="1osJ5O" id="2TdJYs306YO" role="1osJ4x">
+              <property role="1osJ58" value="14g3IsRhL0j/LOWER_EQUAL" />
+              <node concept="1HhJcF" id="2TdJYs306YP" role="1osJ5a">
+                <property role="1HhJcI" value="100.0" />
+              </node>
+              <node concept="Agl$j" id="2TdJYs306YQ" role="1osJ57">
+                <ref role="Agl$i" node="5VF6QK6CGCd" resolve="weight" />
+              </node>
+            </node>
+            <node concept="1osJ5O" id="2TdJYs306YR" role="1osJ4P">
+              <property role="1osJ58" value="14g3IsRhL0j/LOWER_EQUAL" />
+              <node concept="1HhJcF" id="2TdJYs306YS" role="1osJ5a">
+                <property role="1HhJcI" value="30" />
+              </node>
+              <node concept="Agl$j" id="2TdJYs306YT" role="1osJ57">
+                <ref role="Agl$i" node="5Q93FfFUJYl" resolve="age" />
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+      <node concept="Agl$j" id="2TdJYs30700" role="2WRRZq">
+        <ref role="Agl$i" node="5Q93FfFUJYl" resolve="age" />
+      </node>
+      <node concept="ini0t" id="2TdJYs30702" role="ini0D">
+        <node concept="Agl$j" id="2TdJYs30703" role="ini0i">
+          <ref role="Agl$i" node="5Q93FfFUJYj" resolve="name" />
+        </node>
+        <node concept="Agl$j" id="2TdJYs30704" role="ini0g">
+          <ref role="Agl$i" node="5VF6QK6C0wL" resolve="name" />
+        </node>
+      </node>
+    </node>
   </node>
   <node concept="Al3kE" id="HpRLxUoZRY">
+    <property role="TrG5h" value="AgentScript" />
     <node concept="Al3n9" id="HpRLxUoZRZ" role="21riY_">
       <property role="TrG5h" value="agent" />
       <node concept="Al3nk" id="HpRLxUurU0" role="1_7Ipx">
