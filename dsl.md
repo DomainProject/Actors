@@ -133,23 +133,22 @@ graph LR
 Date tutte le query:
 1. $\forall$ diversa condizione in tutte le query:
 	* `create_actor(Select)`
-2. $\forall$ diversa condizione in tutte le query che effettuano join:
-	* `create_actor(Join)` 
-3. $\forall$ query q:
+2. $\forall$ query q:
+   	* Se `query.tables.size > 1` -> `create_actor(Join)`;
 	* Se `query.cols != AllColumns` -> `create_actor(Proj)`;
 	* Se `query.groupBy != NULL` -> `create_actor(GroupBy)`;
 	* Se `query.orderBy != NULL` -> `create_actor(OrderBy)`;
 	* Se `query.aggOp != NULL` -> `create_actor(AggOp)`.
 
-Nel caso di attori di Select e Join, ogni attore viene associato alla condizione per la quale è stato creato, mentre negli altri casi ogni attore viene associato alla query di select corrispondente, quindi sono definite le seguenti etichette:
+Ogni attore di Select viene associato alla condizione per la quale è stato creato, mentre negli altri casi ogni attore viene associato alla query (di selezione) corrispondente. Quindi, sono definite le seguenti etichette:
 * `SelectionActor: Condition -> Actor`
-* `JoinActor: Condition -> Actor`
+* `JoinActor: Select -> Actor`
 * `ProjectionActor: Select -> Actor`
 * `GroupByActor: Select -> Actor`
 * `OrderByActor: Select -> Actor`
 * `AggregateFunctionActor: Select -> Actor`
 
-Di conseguenza, da ogni query si può risalire agli attori relativi ad essa, in base alla condizione o alla query stessa.
+Di conseguenza, da ogni query si può risalire a tutti gli attori relativi ad essa, in base alla condizione o alla query stessa.
 
 ### Creazione link
 $\forall$ query su tabella **non** alias **senza** join:
@@ -177,9 +176,12 @@ $\forall$ query su tabella **non** alias **senza** join:
 
 $\forall$ query su tabella **non** alias **con** join:
 1. DataSource:
-	* $\forall$ select collegato alla query:
-		* `create_link(DataSource, Select)`;
-		* `create_link(Select, Join)`.
+	* $\forall$ tabella T collegata alla query:
+ 		* Se la query prevede una condizione su T:
+			* `create_link(DataSource, Select)`;
+			* `create_link(Select, Join)`.
+   		* Altrimenti: `create_link(DataSource, Join)`.
+	* dove Select e Join sono gli attori di selezione e di join associati, rispettivamente, ad ogni condizione e alla query stessa.	 		 		 
 2. Join:
 	* Se `query.cols != AllColumns` -> `create_link(Join, Proj)`;
 	* Altrimenti, se `query.groupBy != NULL` -> `create_link(Join, GroupBy)`;
