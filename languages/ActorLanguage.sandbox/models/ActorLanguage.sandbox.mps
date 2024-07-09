@@ -77,34 +77,8 @@
       <concept id="1200397529627" name="jetbrains.mps.baseLanguage.structure.CharConstant" flags="nn" index="1Xhbcc" />
     </language>
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
-      <concept id="1133920641626" name="jetbrains.mps.lang.core.structure.BaseConcept" flags="ng" index="2VYdi">
-        <child id="5169995583184591170" name="smodelAttribute" index="lGtFl" />
-      </concept>
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ngI" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
-      </concept>
-    </language>
-    <language id="8ca79d43-eb45-4791-bdd4-0d6130ff895b" name="de.itemis.mps.editor.diagram.layout">
-      <concept id="6720495385597071406" name="de.itemis.mps.editor.diagram.layout.structure.Layout_Box" flags="ng" index="gqqVs">
-        <property id="6720495385597071504" name="bounds_height" index="gqqTy" />
-        <property id="6720495385597071502" name="bounds_y" index="gqqTW" />
-        <property id="6720495385597071503" name="bounds_width" index="gqqTX" />
-        <property id="6720495385597071501" name="bounds_x" index="gqqTZ" />
-        <property id="4583510071007917016" name="transform" index="TgtnS" />
-      </concept>
-      <concept id="2319506556913310852" name="de.itemis.mps.editor.diagram.layout.structure.Layout_Connection" flags="ng" index="2VclpC">
-        <child id="2319506556913311101" name="anchors" index="2Vcluh" />
-      </concept>
-      <concept id="2319506556913310727" name="de.itemis.mps.editor.diagram.layout.structure.Point" flags="ng" index="2VclrF">
-        <property id="2319506556913310861" name="x" index="2Vclpx" />
-        <property id="2319506556913310863" name="y" index="2Vclpz" />
-      </concept>
-      <concept id="8963411245960991886" name="de.itemis.mps.editor.diagram.layout.structure.LayoutMap" flags="ng" index="37mRI7">
-        <child id="8963411245960991904" name="entries" index="37mRID" />
-      </concept>
-      <concept id="8963411245960991903" name="de.itemis.mps.editor.diagram.layout.structure.LayoutMapEntry" flags="ng" index="37mRIm">
-        <property id="8963411245960998400" name="key" index="37mO49" />
-        <child id="8963411245960998404" name="value" index="37mO4d" />
       </concept>
     </language>
   </registry>
@@ -201,79 +175,23 @@
       <ref role="2iLy9k" node="37YNBnePADl" resolve="b2" />
       <node concept="2uUgHn" id="ft6S0x41tw" role="2LyG1a" />
     </node>
-    <node concept="3DMq4$" id="6GNNap0prR7" role="3DMxif">
-      <node concept="E7uK3" id="4MKvPwHTpgF" role="3DMq5I" />
-      <node concept="Fpmux" id="6GNNap1eHme" role="Fpmug">
-        <node concept="3DMq4_" id="6GNNap1eHmg" role="FpmuI">
+    <node concept="3DMq4$" id="yznZkh7$SU" role="3DMxif">
+      <node concept="Fpmux" id="yznZkh7$SW" role="Fpmug">
+        <node concept="3DMq4_" id="yznZkh7$SY" role="FpmuI">
           <ref role="3DMq4F" node="ft6S0x41tm" resolve="act" />
         </node>
       </node>
-      <node concept="Fpmux" id="6GNNap1eHmi" role="Fpmug">
-        <node concept="3DMq4_" id="6GNNap1eHmm" role="FpmuI">
+      <node concept="Fpmux" id="yznZkh7$T0" role="Fpmug">
+        <node concept="3DMq4_" id="yznZkh7$T4" role="FpmuI">
           <ref role="3DMq4F" node="ft6S0x41tg" resolve="test" />
         </node>
       </node>
-      <node concept="37mRI7" id="6GNNap1eHmB" role="lGtFl">
-        <node concept="37mRIm" id="6GNNap1eHmC" role="37mRID">
-          <property role="37mO49" value="7724742800301544848" />
-          <node concept="gqqVs" id="6GNNap1eHmA" role="37mO4d">
-            <property role="gqqTZ" value="220.00029836425782" />
-            <property role="gqqTW" value="61.0" />
-            <property role="gqqTX" value="36.0" />
-            <property role="gqqTy" value="33.0" />
-            <property role="TgtnS" value="1.0;0.0;0.0;1.0;0.0;0.0" />
-          </node>
-        </node>
-        <node concept="37mRIm" id="6GNNap1eHmE" role="37mRID">
-          <property role="37mO49" value="7724742800301544854" />
-          <node concept="gqqVs" id="6GNNap1eHmD" role="37mO4d">
-            <property role="gqqTZ" value="86.00029836425782" />
-            <property role="gqqTW" value="107.0" />
-            <property role="gqqTX" value="44.0" />
-            <property role="gqqTy" value="33.0" />
-            <property role="TgtnS" value="1.0;0.0;0.0;1.0;0.0;0.0" />
-          </node>
-        </node>
-        <node concept="37mRIm" id="6GNNap1eHmG" role="37mRID">
-          <property role="37mO49" value="7724742800301544856" />
-          <node concept="gqqVs" id="6GNNap1eHmF" role="37mO4d">
-            <property role="gqqTZ" value="20.0" />
-            <property role="gqqTW" value="16.5" />
-            <property role="gqqTX" value="10.0" />
-            <property role="gqqTy" value="10.0" />
-          </node>
-        </node>
-        <node concept="37mRIm" id="6GNNap1eHmI" role="37mRID">
-          <property role="37mO49" value="7724742800301544864" />
-          <node concept="gqqVs" id="6GNNap1eHmH" role="37mO4d">
-            <property role="gqqTZ" value="106.0" />
-            <property role="gqqTW" value="32.5" />
-            <property role="gqqTX" value="10.0" />
-            <property role="gqqTy" value="10.0" />
-          </node>
-        </node>
-        <node concept="37mRIm" id="6GNNap1eHn5" role="37mRID">
-          <property role="37mO49" value="7724742800301544862" />
-          <node concept="2VclpC" id="6GNNap1eHn4" role="37mO4d">
-            <node concept="2VclrF" id="6GNNap1eHn6" role="2Vcluh">
-              <property role="2Vclpx" value="148.00039672851562" />
-              <property role="2Vclpz" value="28.50005" />
-            </node>
-            <node concept="2VclrF" id="6GNNap1eHn7" role="2Vcluh">
-              <property role="2Vclpx" value="148.00039672851562" />
-              <property role="2Vclpz" value="63.0" />
-            </node>
-            <node concept="2VclrF" id="6GNNap1eHn8" role="2Vcluh">
-              <property role="2Vclpx" value="12.0" />
-              <property role="2Vclpz" value="63.0" />
-            </node>
-            <node concept="2VclrF" id="6GNNap1eHn9" role="2Vcluh">
-              <property role="2Vclpx" value="12.0" />
-              <property role="2Vclpz" value="28.50005" />
-            </node>
-          </node>
+      <node concept="Fpmux" id="yznZkh7$T6" role="Fpmug">
+        <node concept="3DMq4_" id="yznZkh7$Tc" role="FpmuI">
+          <ref role="3DMq4F" node="ft6S0x41tu" resolve="test1" />
         </node>
       </node>
+      <node concept="E7uK3" id="yznZkh7$Te" role="3DMq5I" />
     </node>
   </node>
 </model>

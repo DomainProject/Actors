@@ -68,7 +68,6 @@
         <child id="1068580123134" name="parameter" index="3clF46" />
         <child id="1068580123135" name="body" index="3clF47" />
       </concept>
-      <concept id="1068580123152" name="jetbrains.mps.baseLanguage.structure.EqualsExpression" flags="nn" index="3clFbC" />
       <concept id="1068580123155" name="jetbrains.mps.baseLanguage.structure.ExpressionStatement" flags="nn" index="3clFbF">
         <child id="1068580123156" name="expression" index="3clFbG" />
       </concept>
@@ -128,6 +127,7 @@
       <concept id="1883223317721008713" name="jetbrains.mps.lang.smodel.structure.IfInstanceOfVariable" flags="ng" index="JncvC" />
       <concept id="1883223317721107059" name="jetbrains.mps.lang.smodel.structure.IfInstanceOfVarReference" flags="nn" index="Jnkvi" />
       <concept id="1171407110247" name="jetbrains.mps.lang.smodel.structure.Node_GetAncestorOperation" flags="nn" index="2Xjw5R" />
+      <concept id="1227264722563" name="jetbrains.mps.lang.smodel.structure.EqualsStructurallyExpression" flags="nn" index="2YFouu" />
       <concept id="1180031783296" name="jetbrains.mps.lang.smodel.structure.Concept_IsSubConceptOfOperation" flags="nn" index="2Zo12i">
         <child id="1180031783297" name="conceptArgument" index="2Zo12j" />
       </concept>
@@ -549,10 +549,7 @@
           </node>
           <node concept="3clFbS" id="3lH3Hb9htly" role="Jncv$">
             <node concept="3cpWs6" id="3lH3Hb9ht$6" role="3cqZAp">
-              <node concept="3clFbC" id="3lH3Hb9huwR" role="3cqZAk">
-                <node concept="37vLTw" id="3lH3Hb9huEZ" role="3uHU7w">
-                  <ref role="3cqZAo" node="3lH3Hb9hr76" resolve="table" />
-                </node>
+              <node concept="2YFouu" id="yznZkheDsY" role="3cqZAk">
                 <node concept="2OqwBi" id="3lH3Hb9htRm" role="3uHU7B">
                   <node concept="2OqwBi" id="3lH3Hb9npex" role="2Oq$k0">
                     <node concept="2OqwBi" id="3lH3Hb9lt1f" role="2Oq$k0">
@@ -574,6 +571,9 @@
                       </node>
                     </node>
                   </node>
+                </node>
+                <node concept="37vLTw" id="3lH3Hb9huEZ" role="3uHU7w">
+                  <ref role="3cqZAo" node="3lH3Hb9hr76" resolve="table" />
                 </node>
               </node>
             </node>
@@ -647,7 +647,7 @@
     </node>
     <node concept="13i0hz" id="3lH3Hb9hrb6" role="13h7CS">
       <property role="TrG5h" value="getTableFromCondition" />
-      <node concept="3Tm6S6" id="3lH3Hb9hrcn" role="1B3o_S" />
+      <node concept="3Tm1VV" id="yznZkiKkpZ" role="1B3o_S" />
       <node concept="3Tqbb2" id="3lH3Hb9hrcE" role="3clF45">
         <ref role="ehGHo" to="p6im:14g3IsRh3GI" resolve="CreateTable" />
       </node>

@@ -17,6 +17,7 @@ import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import jetbrains.mps.smodel.SNodeMatcher;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
@@ -30,7 +31,7 @@ public final class Script__BehaviorDescriptor extends BaseBHDescriptor {
   public static final SMethod<List<SNode>> findAllSingleTableConditions_id4BxYaol$2qr = new SMethodBuilder<List<SNode>>(new SJavaCompoundTypeImpl((Class<List<SNode>>) ((Class) Object.class))).name("findAllSingleTableConditions").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(5323809626738665115L).languageId(0xb522c0cdd699ded3L, 0x26d1395b1ee643adL).build2(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
   /*package*/ static final SMethod<Void> findAllSingleTableConditionsRecursive_id4BxYaol$2vv = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("findAllSingleTableConditionsRecursive").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(5323809626738665439L).languageId(0xb522c0cdd699ded3L, 0x26d1395b1ee643adL).build2(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""), SMethodBuilder.createJavaParameter((Class<List<SNode>>) ((Class) Object.class), ""));
   /*package*/ static final SMethod<Boolean> isConditionOnSingleTable_id3lH3Hb9hoXq = new SMethodBuilder<Boolean>(new SJavaCompoundTypeImpl(Boolean.TYPE)).name("isConditionOnSingleTable").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(3849749554954342234L).languageId(0xb522c0cdd699ded3L, 0x26d1395b1ee643adL).build2(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""), SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
-  /*package*/ static final SMethod<SNode> getTableFromCondition_id3lH3Hb9hrb6 = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getTableFromCondition").modifiers(0, AccessPrivileges.PRIVATE).concept(CONCEPT).baseMethodId(3849749554954351302L).languageId(0xb522c0cdd699ded3L, 0x26d1395b1ee643adL).build2(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
+  public static final SMethod<SNode> getTableFromCondition_id3lH3Hb9hrb6 = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getTableFromCondition").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(3849749554954351302L).languageId(0xb522c0cdd699ded3L, 0x26d1395b1ee643adL).build2(SMethodBuilder.createJavaParameter((Class<SNode>) ((Class) Object.class), ""));
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(findAllSingleTableConditions_id4BxYaol$2qr, findAllSingleTableConditionsRecursive_id4BxYaol$2vv, isConditionOnSingleTable_id3lH3Hb9hoXq, getTableFromCondition_id3lH3Hb9hrb6);
 
@@ -53,7 +54,7 @@ public final class Script__BehaviorDescriptor extends BaseBHDescriptor {
     {
       final SNode multipleCondition = condition;
       if (SNodeOperations.isInstanceOf(multipleCondition, CONCEPTS.MultipleCondition$9A)) {
-        if (((boolean) Script__BehaviorDescriptor.isConditionOnSingleTable_id3lH3Hb9hoXq.invokeSpecial(__thisNode__, multipleCondition, Script__BehaviorDescriptor.getTableFromCondition_id3lH3Hb9hrb6.invokeSpecial(__thisNode__, multipleCondition)))) {
+        if (((boolean) Script__BehaviorDescriptor.isConditionOnSingleTable_id3lH3Hb9hoXq.invokeSpecial(__thisNode__, multipleCondition, Script__BehaviorDescriptor.getTableFromCondition_id3lH3Hb9hrb6.invoke(__thisNode__, multipleCondition)))) {
           ListSequence.fromList(conditions).addElement(multipleCondition);
         } else {
           Script__BehaviorDescriptor.findAllSingleTableConditionsRecursive_id4BxYaol$2vv.invokeSpecial(__thisNode__, SLinkOperations.getTarget(multipleCondition, LINKS.conditionDx$A_03), conditions);
@@ -66,7 +67,7 @@ public final class Script__BehaviorDescriptor extends BaseBHDescriptor {
     {
       final SNode c = condition;
       if (SNodeOperations.isInstanceOf(c, CONCEPTS.SimpleCondition$89)) {
-        return SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(SLinkOperations.getTarget(c, LINKS.column$Aee5), LINKS.column$Wyeu), CONCEPTS.CreateTable$ca, false, false) == table;
+        return new SNodeMatcher().match(SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(SLinkOperations.getTarget(c, LINKS.column$Aee5), LINKS.column$Wyeu), CONCEPTS.CreateTable$ca, false, false), table);
       }
     }
     {
@@ -88,7 +89,7 @@ public final class Script__BehaviorDescriptor extends BaseBHDescriptor {
     {
       final SNode c = condition;
       if (SNodeOperations.isInstanceOf(c, CONCEPTS.MultipleCondition$9A)) {
-        return Script__BehaviorDescriptor.getTableFromCondition_id3lH3Hb9hrb6.invokeSpecial(__thisNode__, SLinkOperations.getTarget(c, LINKS.conditionDx$A_03));
+        return Script__BehaviorDescriptor.getTableFromCondition_id3lH3Hb9hrb6.invoke(__thisNode__, SLinkOperations.getTarget(c, LINKS.conditionDx$A_03));
       }
     }
 

@@ -161,9 +161,6 @@
       <concept id="1068580123137" name="jetbrains.mps.baseLanguage.structure.BooleanConstant" flags="nn" index="3clFbT">
         <property id="1068580123138" name="value" index="3clFbU" />
       </concept>
-      <concept id="1068580320020" name="jetbrains.mps.baseLanguage.structure.IntegerConstant" flags="nn" index="3cmrfG">
-        <property id="1068580320021" name="value" index="3cmrfH" />
-      </concept>
       <concept id="1068581242878" name="jetbrains.mps.baseLanguage.structure.ReturnStatement" flags="nn" index="3cpWs6" />
       <concept id="1068581242864" name="jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" flags="nn" index="3cpWs8">
         <child id="1068581242865" name="localVariableDeclaration" index="3cpWs9" />
@@ -232,7 +229,9 @@
       </concept>
       <concept id="1179409122411" name="jetbrains.mps.lang.smodel.structure.Node_ConceptMethodCall" flags="nn" index="2qgKlT" />
       <concept id="7835263205327057228" name="jetbrains.mps.lang.smodel.structure.Node_GetChildrenAndChildAttributesOperation" flags="ng" index="Bykcj" />
-      <concept id="1139184414036" name="jetbrains.mps.lang.smodel.structure.LinkList_AddNewChildOperation" flags="nn" index="WFELt" />
+      <concept id="1139184414036" name="jetbrains.mps.lang.smodel.structure.LinkList_AddNewChildOperation" flags="nn" index="WFELt">
+        <reference id="1139877738879" name="concept" index="1A0vxQ" />
+      </concept>
       <concept id="1143512015885" name="jetbrains.mps.lang.smodel.structure.Node_GetNextSiblingOperation" flags="nn" index="YCak7" />
       <concept id="5168775467716640652" name="jetbrains.mps.lang.smodel.structure.OperationParm_LinkQualifier" flags="ng" index="1aIX9F">
         <child id="5168775467716640653" name="linkQualifier" index="1aIX9E" />
@@ -264,10 +263,6 @@
       </concept>
     </language>
     <language id="83888646-71ce-4f1c-9c53-c54016f6ad4f" name="jetbrains.mps.baseLanguage.collections">
-      <concept id="540871147943773365" name="jetbrains.mps.baseLanguage.collections.structure.SingleArgumentSequenceOperation" flags="nn" index="25WWJ4">
-        <child id="540871147943773366" name="argument" index="25WWJ7" />
-      </concept>
-      <concept id="1162934736510" name="jetbrains.mps.baseLanguage.collections.structure.GetElementOperation" flags="nn" index="34jXtK" />
       <concept id="1165530316231" name="jetbrains.mps.baseLanguage.collections.structure.IsEmptyOperation" flags="nn" index="1v1jN8" />
       <concept id="1165595910856" name="jetbrains.mps.baseLanguage.collections.structure.GetLastOperation" flags="nn" index="1yVyf7" />
       <concept id="1176501494711" name="jetbrains.mps.baseLanguage.collections.structure.IsNotEmptyOperation" flags="nn" index="3GX2aA" />
@@ -1475,25 +1470,15 @@
                   <ref role="ehGHo" to="o1mc:2oGQ1bfTn$S" resolve="ActorLink" />
                 </node>
                 <node concept="2OqwBi" id="4MKvPwHQY2N" role="33vP2m">
-                  <node concept="2OqwBi" id="4MKvPwHQUHg" role="2Oq$k0">
-                    <node concept="2OqwBi" id="6GNNap1c3iK" role="2Oq$k0">
-                      <node concept="2OqwBi" id="6GNNap1bSlh" role="2Oq$k0">
-                        <node concept="1Pxb5l" id="6GNNap1bSaT" role="2Oq$k0" />
-                        <node concept="3Tsc0h" id="6GNNap1bSIw" role="2OqNvi">
-                          <ref role="3TtcxE" to="o1mc:2oGQ1bfTn_W" resolve="links" />
-                        </node>
-                      </node>
-                      <node concept="34jXtK" id="4MKvPwHQUst" role="2OqNvi">
-                        <node concept="3cmrfG" id="4MKvPwHQUwR" role="25WWJ7">
-                          <property role="3cmrfH" value="0" />
-                        </node>
-                      </node>
-                    </node>
-                    <node concept="3Tsc0h" id="4MKvPwHQVuV" role="2OqNvi">
-                      <ref role="3TtcxE" to="o1mc:6GNNap1by2C" resolve="links" />
+                  <node concept="2OqwBi" id="6GNNap1bSlh" role="2Oq$k0">
+                    <node concept="1Pxb5l" id="6GNNap1bSaT" role="2Oq$k0" />
+                    <node concept="3Tsc0h" id="6GNNap1bSIw" role="2OqNvi">
+                      <ref role="3TtcxE" to="o1mc:2oGQ1bfTn_W" resolve="links" />
                     </node>
                   </node>
-                  <node concept="WFELt" id="4MKvPwHR350" role="2OqNvi" />
+                  <node concept="WFELt" id="4MKvPwHR350" role="2OqNvi">
+                    <ref role="1A0vxQ" to="o1mc:2oGQ1bfTn$S" resolve="ActorLink" />
+                  </node>
                 </node>
               </node>
             </node>

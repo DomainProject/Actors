@@ -2746,8 +2746,8 @@
       <node id="2750811047725496315" at="91,99,92,63" concept="7" />
       <node id="2750811047725496315" at="92,63,93,59" concept="7" />
       <node id="2750811047725496315" at="93,59,94,0" concept="9" />
-      <node id="7724742800300802404" at="95,21,96,221" concept="7" />
-      <node id="2750811047725541737" at="96,221,97,86" concept="2" />
+      <node id="7724742800300802404" at="95,21,96,154" concept="7" />
+      <node id="2750811047725541737" at="96,154,97,86" concept="2" />
       <node id="2750811047725546992" at="97,86,98,82" concept="2" />
       <node id="2750811047725496315" at="102,73,103,101" concept="7" />
       <node id="2750811047725496315" at="104,43,105,35" concept="8" />
@@ -2783,10 +2783,10 @@
       <node id="2750811047725496299" at="168,40,169,55" concept="8" />
       <node id="2750811047725496299" at="173,0,174,0" concept="10" trace="actors$PE1V" />
       <node id="2750811047725496299" at="174,0,175,0" concept="10" trace="links$3jtH" />
-      <node id="2750811047725496299" at="175,0,176,0" concept="10" trace="links$O5ec" />
-      <node id="2750811047725496299" at="176,0,177,0" concept="10" trace="actorFrom$3cFe" />
-      <node id="2750811047725496299" at="177,0,178,0" concept="10" trace="actorTo$3d9g" />
-      <node id="2750811047725496299" at="181,0,182,0" concept="10" trace="ActorBox$s8" />
+      <node id="2750811047725496299" at="175,0,176,0" concept="10" trace="actorFrom$3cFe" />
+      <node id="2750811047725496299" at="176,0,177,0" concept="10" trace="actorTo$3d9g" />
+      <node id="2750811047725496299" at="180,0,181,0" concept="10" trace="ActorBox$s8" />
+      <node id="2750811047725496299" at="181,0,182,0" concept="10" trace="ActorLink$sB" />
       <node id="2750811047725496299" at="44,0,46,0" concept="3" trace="myNode" />
       <node id="2750811047725496299" at="58,0,61,0" concept="6" trace="createCell#()Ljetbrains/mps/openapi/editor/cells/EditorCell;" />
       <node id="2750811047725496305" at="72,104,75,17" concept="4" />
@@ -2902,8 +2902,8 @@
         <var name="editorContext" id="2750811047725496299" />
         <var name="node" id="2750811047725496299" />
       </scope>
-      <unit id="2750811047725496299" at="180,0,183,0" name="ActorLanguage.editor.ActorsGraph_graph_EditorBuilder_a$CONCEPTS" />
-      <unit id="2750811047725496299" at="172,0,179,0" name="ActorLanguage.editor.ActorsGraph_graph_EditorBuilder_a$LINKS" />
+      <unit id="2750811047725496299" at="179,0,183,0" name="ActorLanguage.editor.ActorsGraph_graph_EditorBuilder_a$CONCEPTS" />
+      <unit id="2750811047725496299" at="172,0,178,0" name="ActorLanguage.editor.ActorsGraph_graph_EditorBuilder_a$LINKS" />
       <unit id="2750811047725496315" at="84,69,119,17" name="ActorLanguage.editor.ActorsGraph_graph_EditorBuilder_a$1$1" />
       <unit id="2750811047725496299" at="70,44,135,13" name="ActorLanguage.editor.ActorsGraph_graph_EditorBuilder_a$1" />
       <unit id="2750811047725496299" at="43,0,184,0" name="ActorLanguage.editor.ActorsGraph_graph_EditorBuilder_a" />
@@ -10605,7 +10605,7 @@
       <node id="7724742800300712106" at="70,28,71,25" concept="2" />
       <node id="7724742800300712106" at="75,28,76,20" concept="8" />
       <node id="7724742800300712106" at="78,40,79,30" concept="8" />
-      <node id="7724742800300712106" at="81,48,82,35" concept="8" />
+      <node id="7724742800300712106" at="81,48,82,29" concept="8" />
       <node id="7724742800300712106" at="85,57,86,83" concept="7" />
       <node id="7724742800300712106" at="86,83,87,65" concept="2" />
       <node id="7724742800300712106" at="87,65,88,25" concept="8" />
@@ -10626,7 +10626,7 @@
       <node id="7724742800300712106" at="121,69,122,146" concept="2" />
       <node id="7724742800300712106" at="126,34,127,91" concept="2" />
       <node id="7724742800300712106" at="134,0,135,0" concept="10" trace="links$O5ec" />
-      <node id="7724742800300712106" at="138,0,139,0" concept="10" trace="ActorLink$sB" />
+      <node id="7724742800300712106" at="138,0,139,0" concept="10" trace="Link$m" />
       <node id="7724742800300712106" at="29,0,31,0" concept="3" trace="myNode" />
       <node id="7724742800300712106" at="66,0,68,0" concept="3" trace="myNode" />
       <node id="7724742800300712106" at="43,0,46,0" concept="6" trace="createCell#()Ljetbrains/mps/openapi/editor/cells/EditorCell;" />
@@ -10654,7 +10654,7 @@
       <scope id="7724742800300712106" at="43,39,44,32" />
       <scope id="7724742800300712106" at="75,28,76,20" />
       <scope id="7724742800300712106" at="78,40,79,30" />
-      <scope id="7724742800300712106" at="81,48,82,35" />
+      <scope id="7724742800300712106" at="81,48,82,29" />
       <scope id="7724742800300712106" at="99,17,100,42" />
       <scope id="7724742800300712106" at="126,34,127,91" />
       <scope id="7724742800300712106" at="32,94,34,18" />

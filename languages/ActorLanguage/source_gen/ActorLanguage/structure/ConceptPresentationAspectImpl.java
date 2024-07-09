@@ -43,6 +43,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_GetActorsFromReceptionist;
   private ConceptPresentation props_Initializer;
   private ConceptPresentation props_InitializerAction;
+  private ConceptPresentation props_Link;
   private ConceptPresentation props_MessageQueue;
   private ConceptPresentation props_MessageRef;
   private ConceptPresentation props_Payload;
@@ -305,6 +306,12 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_InitializerAction = cpb.create();
         }
         return props_InitializerAction;
+      case LanguageConceptSwitch.Link:
+        if (props_Link == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_Link = cpb.create();
+        }
+        return props_Link;
       case LanguageConceptSwitch.MessageQueue:
         if (props_MessageQueue == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

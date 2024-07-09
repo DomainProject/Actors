@@ -43,20 +43,21 @@ public final class LanguageConceptSwitch {
   public static final int GetActorsFromReceptionist = 31;
   public static final int Initializer = 32;
   public static final int InitializerAction = 33;
-  public static final int MessageQueue = 34;
-  public static final int MessageRef = 35;
-  public static final int Payload = 36;
-  public static final int RandomActor = 37;
-  public static final int Receptionist = 38;
-  public static final int ReceptionistPolicy = 39;
-  public static final int ReturnActorReference = 40;
-  public static final int SelectBehavior = 41;
-  public static final int SelectEnvelope = 42;
-  public static final int SelectPayload = 43;
-  public static final int SendMessage = 44;
-  public static final int StatementConstraint = 45;
-  public static final int StringBody = 46;
-  public static final int SwitchPolicy = 47;
+  public static final int Link = 34;
+  public static final int MessageQueue = 35;
+  public static final int MessageRef = 36;
+  public static final int Payload = 37;
+  public static final int RandomActor = 38;
+  public static final int Receptionist = 39;
+  public static final int ReceptionistPolicy = 40;
+  public static final int ReturnActorReference = 41;
+  public static final int SelectBehavior = 42;
+  public static final int SelectEnvelope = 43;
+  public static final int SelectPayload = 44;
+  public static final int SendMessage = 45;
+  public static final int StatementConstraint = 46;
+  public static final int StringBody = 47;
+  public static final int SwitchPolicy = 48;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x10eda99958984cdeL, 0x9416196c5eca1268L);
@@ -94,6 +95,7 @@ public final class LanguageConceptSwitch {
     builder.put(0x13974e2681690352L, GetActorsFromReceptionist);
     builder.put(0xe2178aac28357fL, Initializer);
     builder.put(0xe2178aac288a99L, InitializerAction);
+    builder.put(0x8a35ff51116d39aL, Link);
     builder.put(0x6ac9b580f420bed7L, MessageQueue);
     builder.put(0x6ac9b580f420bedcL, MessageRef);
     builder.put(0x13974e2681521590L, Payload);
