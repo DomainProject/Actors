@@ -510,6 +510,92 @@
         </node>
       </node>
     </node>
+    <node concept="15J0zD" id="40agTEs_wCQ" role="21riY_">
+      <node concept="2leIlQ" id="40agTEs_wCS" role="2legkn">
+        <ref role="2leIlR" node="6MkW5HYMsYw" resolve="TraveledDistanceTable" />
+      </node>
+      <node concept="Agl$j" id="40agTEs_wE1" role="2WRRZq">
+        <ref role="Agl$i" node="6MkW5HYMsYy" resolve="id" />
+      </node>
+      <node concept="Agl$j" id="40agTEs_wE6" role="2WRRZq">
+        <ref role="Agl$i" node="6MkW5HYMsYx" resolve="ts" />
+      </node>
+      <node concept="15J0zF" id="40agTEs_wEa" role="AlhBa">
+        <node concept="1osJ5O" id="40agTEs_wEc" role="AmyPj">
+          <property role="1osJ58" value="14g3IsRhL0p/NOT_EQUAL" />
+          <node concept="1HhJcF" id="40agTEs_wEd" role="1osJ5a">
+            <property role="1HhJcI" value="0" />
+          </node>
+          <node concept="Agl$j" id="40agTEs_wEe" role="1osJ57">
+            <ref role="Agl$i" node="6MkW5HYMsYy" resolve="id" />
+          </node>
+        </node>
+      </node>
+      <node concept="21oAwd" id="40agTEs_wEi" role="21oAAU">
+        <node concept="Agl$j" id="40agTEs_wEj" role="21oAAq">
+          <ref role="Agl$i" node="6MkW5HYMsYz" resolve="traveledDistance" />
+        </node>
+      </node>
+      <node concept="21qpMi" id="40agTEs_wEm" role="21qpFE">
+        <node concept="Agl$j" id="40agTEs_wEn" role="21oAwc">
+          <ref role="Agl$i" node="6MkW5HYMsYz" resolve="traveledDistance" />
+        </node>
+      </node>
+    </node>
+    <node concept="15J0zD" id="40agTEs_wLA" role="21riY_">
+      <node concept="2leIlQ" id="40agTEs_wMX" role="2legkn">
+        <ref role="2leIlR" node="HpRLxUoZRZ" resolve="agent" />
+      </node>
+      <node concept="Agl$j" id="40agTEs_wMZ" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUurU6" resolve="traveledTime" />
+      </node>
+      <node concept="Agl$j" id="40agTEs_wN4" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUoZS_" resolve="traveledDistance" />
+      </node>
+      <node concept="15J0zF" id="40agTEs_wN8" role="AlhBa">
+        <node concept="1osJ5O" id="40agTEs_wNa" role="AmyPj">
+          <property role="1osJ58" value="14g3IsRhKZW/GREATER" />
+          <node concept="1HhJcF" id="40agTEs_wNb" role="1osJ5a">
+            <property role="1HhJcI" value="12" />
+          </node>
+          <node concept="Agl$j" id="40agTEs_wNc" role="1osJ57">
+            <ref role="Agl$i" node="HpRLxUoZS3" resolve="regionId" />
+          </node>
+        </node>
+      </node>
+      <node concept="21oAwd" id="40agTEs_wNg" role="21oAAU">
+        <node concept="Agl$j" id="40agTEs_wNh" role="21oAAq">
+          <ref role="Agl$i" node="HpRLxUoZS6" resolve="speed" />
+        </node>
+      </node>
+      <node concept="21qpMi" id="40agTEs_wNk" role="21qpFE">
+        <node concept="Agl$j" id="40agTEs_wNl" role="21oAwc">
+          <ref role="Agl$i" node="HpRLxUoZS_" resolve="traveledDistance" />
+        </node>
+      </node>
+    </node>
+    <node concept="15J0zD" id="40agTEsGEAv" role="21riY_">
+      <node concept="2leIlQ" id="40agTEsGEAx" role="2legkn">
+        <ref role="2leIlR" node="HpRLxUoZRZ" resolve="agent" />
+      </node>
+      <node concept="2leIlQ" id="40agTEsGEC2" role="2legkn">
+        <ref role="2leIlR" node="6MkW5HYMsYo" resolve="TraveledTimeTable" />
+      </node>
+      <node concept="Agl$j" id="40agTEsGEC5" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUurU0" resolve="id" />
+      </node>
+      <node concept="15J0zF" id="40agTEsGEC7" role="AlhBa">
+        <node concept="1osJ5O" id="40agTEsGEC9" role="AmyPj">
+          <property role="1osJ58" value="14g3IsRhL08/LOWER" />
+          <node concept="1HhJcF" id="40agTEsGECa" role="1osJ5a">
+            <property role="1HhJcI" value="10" />
+          </node>
+          <node concept="Agl$j" id="40agTEsGECb" role="1osJ57">
+            <ref role="Agl$i" node="HpRLxUurU0" resolve="id" />
+          </node>
+        </node>
+      </node>
+    </node>
   </node>
 </model>
 
