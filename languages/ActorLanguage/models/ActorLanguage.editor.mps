@@ -178,10 +178,15 @@
       </concept>
     </language>
     <language id="fa13cc63-c476-4d46-9c96-d53670abe7bc" name="de.itemis.mps.editor.diagram">
+      <concept id="8433227566817223068" name="de.itemis.mps.editor.diagram.structure.LayeredLayoutAlgorithm" flags="ng" index="39fpm">
+        <property id="7623784619795245948" name="direction" index="1NdBj4" />
+      </concept>
       <concept id="6554619383001456740" name="de.itemis.mps.editor.diagram.structure.BoxEndpointTarget" flags="ng" index="23hSZX">
         <child id="6554619383001456819" name="targetId" index="23hSWE" />
       </concept>
       <concept id="1110129820007229393" name="de.itemis.mps.editor.diagram.structure.CellModel_Diagram" flags="ng" index="27vDVx">
+        <child id="8433227566816393050" name="layoutAlgorithm" index="35U2g" />
+        <child id="5018298105379062639" name="autoLayoutOnInit" index="2Dxx3A" />
         <child id="8637411062076630380" name="connectionTypes" index="1xLlFP" />
         <child id="1981294357059564524" name="paletteSources" index="1RuSHk" />
       </concept>
@@ -1439,7 +1444,7 @@
           <node concept="3cpWs6" id="2oGQ1bg1A1y" role="3cqZAp" />
         </node>
       </node>
-      <node concept="3clFbT" id="2oGQ1bg1A1P" role="3Czvdj">
+      <node concept="3clFbT" id="6g_QwonFyPQ" role="3Czvdj">
         <property role="3clFbU" value="true" />
       </node>
     </node>
@@ -1513,6 +1518,18 @@
       </node>
       <node concept="1RuTs0" id="2oGQ1bfTGMq" role="1RuSHk">
         <ref role="1RuSHD" to="o1mc:6GNNap0lEGQ" resolve="actors" />
+      </node>
+      <node concept="39fpm" id="6g_QwonDBvJ" role="35U2g">
+        <property role="1NdBj4" value="6Bd7VwqYQAT/RIGHT" />
+      </node>
+      <node concept="pkWqt" id="6g_QwonHshj" role="2Dxx3A">
+        <node concept="3clFbS" id="6g_QwonHshk" role="2VODD2">
+          <node concept="3clFbF" id="6g_QwonHsKb" role="3cqZAp">
+            <node concept="3clFbT" id="6g_QwonHsKa" role="3clFbG">
+              <property role="3clFbU" value="true" />
+            </node>
+          </node>
+        </node>
       </node>
     </node>
     <node concept="2aJ2om" id="2oGQ1bfVtml" role="CpUAK">
