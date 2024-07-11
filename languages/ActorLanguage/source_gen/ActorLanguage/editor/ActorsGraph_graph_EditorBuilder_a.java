@@ -27,18 +27,15 @@ import de.itemis.mps.editor.diagram.runtime.model.GeneratedConnectionType;
 import de.itemis.mps.editor.diagram.runtime.model.IConnectionEndpoint;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import de.itemis.mps.editor.diagram.runtime.model.DiagramModel;
+import de.itemis.mps.editor.diagram.runtime.jgraph.ElkLayouter;
+import de.itemis.mps.editor.diagram.runtime.jgraph.LayeredLayouter;
+import org.eclipse.elk.core.options.Direction;
 import de.itemis.mps.editor.diagram.runtime.model.IPaletteEntryProvider;
 import de.itemis.mps.editor.diagram.runtime.model.CompositePaletteEntryProvider;
 import de.itemis.mps.editor.diagram.runtime.model.SubstituteInfoPaletteEntryProvider;
 import de.itemis.mps.editor.diagram.runtime.substitute.SubstituteInfoFactory;
 import de.itemis.mps.editor.diagram.runtime.jgraph.SubDiagramECell;
 import de.itemis.mps.editor.diagram.runtime.jgraph.RootDiagramECell;
-import de.itemis.mps.editor.diagram.runtime.jgraph.ElkLayouter;
-import de.itemis.mps.editor.diagram.runtime.jgraph.LayeredLayouter;
-import org.eclipse.elk.core.options.Direction;
-import jetbrains.mps.baseLanguage.closures.runtime._FunctionTypes;
-import jetbrains.mps.openapi.editor.style.Style;
-import jetbrains.mps.editor.runtime.style.StyleImpl;
 import de.itemis.mps.editor.diagram.runtime.jgraph.RootDCell;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
@@ -145,6 +142,8 @@ import org.jetbrains.mps.openapi.language.SConcept;
 
             DiagramModel model = DiagramModel.getModel(editorContext, node, "2750811047725496301", accessor);
 
+            ElkLayouter layouter = new LayeredLayouter(Direction.RIGHT);
+            model.setLayouter(layouter);
 
             IPaletteEntryProvider paletteEntryProvider = new CompositePaletteEntryProvider(new SubstituteInfoPaletteEntryProvider(new SubstituteInfoFactory(editorContext, node).forChildLink(node, SLinkOperations.findLinkDeclaration(LINKS.actors$PE1V))));
             model.setPaletteEntryProvider(paletteEntryProvider);
@@ -158,18 +157,6 @@ import org.jetbrains.mps.openapi.language.SConcept;
             editorCell.value.setCellId("Diagram_9dsbqe_a");
             editorCell.value.setBig(true);
             setCellContext(editorCell.value);
-
-            ElkLayouter layouter = new LayeredLayouter(Direction.RIGHT);
-            layouter.toggleConnectBoxesWithoutDummyPort(false);
-            ((_FunctionTypes._void_P0_E0) () -> {
-              // the closure is necessary so that we can declare the style variable again in the current scope
-              Style style = new StyleImpl();
-              editorCell.value.getStyle().putAll(style);
-            }).invoke();
-            layouter.setStyle(editorCell.value.getStyle());
-
-            model.setLayouter(layouter);
-
             if (editorCell.value.getContextGraph() != null) {
               Object defaultParent = editorCell.value.getContextGraph().getDefaultParent();
               if (defaultParent instanceof RootDCell) {
