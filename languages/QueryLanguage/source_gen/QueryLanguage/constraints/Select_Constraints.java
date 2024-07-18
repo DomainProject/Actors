@@ -25,9 +25,9 @@ public class Select_Constraints extends BaseConstraintsDescriptor {
     super(CONCEPTS.Select$Te);
   }
 
-  public static class TableAlias_Property extends BasePropertyConstraintsDescriptor {
-    public TableAlias_Property(ConstraintsDescriptor container) {
-      super(PROPS.tableAlias$yY2f, container, false, true, false);
+  public static class ViewName_Property extends BasePropertyConstraintsDescriptor {
+    public ViewName_Property(ConstraintsDescriptor container) {
+      super(PROPS.viewName$yY2f, container, false, true, false);
     }
     @Override
     public void setPropertyValue(SNode node, Object propertyValue) {
@@ -35,18 +35,18 @@ public class Select_Constraints extends BaseConstraintsDescriptor {
     }
     private static void staticSetPropertyValue(SNode node, String propertyValue) {
 
-      if (isNotEmptyString(SPropertyOperations.getString(node, PROPS.tableAlias$yY2f))) {
-        SPropertyOperations.assign(SLinkOperations.getTarget(node, LINKS.aliasTable$4dXf), PROPS.name$MnvL, propertyValue);
-        SPropertyOperations.assign(node, PROPS.tableAlias$yY2f, propertyValue);
+      if (isNotEmptyString(SPropertyOperations.getString(node, PROPS.viewName$yY2f))) {
+        SPropertyOperations.assign(SLinkOperations.getTarget(node, LINKS.viewTable$4dXf), PROPS.name$MnvL, propertyValue);
+        SPropertyOperations.assign(node, PROPS.viewName$yY2f, propertyValue);
 
-        for (SNode col : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(node, LINKS.aliasTable$4dXf), LINKS.columns$ubIo))) {
+        for (SNode col : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(node, LINKS.viewTable$4dXf), LINKS.columns$ubIo))) {
           SPropertyOperations.assign(col, PROPS.fullName$t1KL, propertyValue + "." + SPropertyOperations.getString(col, PROPS.fullName$t1KL).split("\\.")[1]);
         }
 
         return;
       }
 
-      SPropertyOperations.assign(node, PROPS.tableAlias$yY2f, propertyValue);
+      SPropertyOperations.assign(node, PROPS.viewName$yY2f, propertyValue);
 
       SNode newTable = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b2eL, "QueryLanguage.structure.CreateTable"));
       SPropertyOperations.assign(newTable, PROPS.name$MnvL, propertyValue);
@@ -72,7 +72,7 @@ public class Select_Constraints extends BaseConstraintsDescriptor {
         }
       }
 
-      SLinkOperations.setTarget(node, LINKS.aliasTable$4dXf, newTable);
+      SLinkOperations.setTarget(node, LINKS.viewTable$4dXf, newTable);
 
     }
     private static boolean isNotEmptyString(String str) {
@@ -82,7 +82,7 @@ public class Select_Constraints extends BaseConstraintsDescriptor {
   @Override
   protected Map<SProperty, PropertyConstraintsDescriptor> getSpecifiedProperties() {
     Map<SProperty, PropertyConstraintsDescriptor> properties = new HashMap<SProperty, PropertyConstraintsDescriptor>();
-    properties.put(PROPS.tableAlias$yY2f, new TableAlias_Property(this));
+    properties.put(PROPS.viewName$yY2f, new ViewName_Property(this));
     return properties;
   }
 
@@ -93,13 +93,13 @@ public class Select_Constraints extends BaseConstraintsDescriptor {
   }
 
   private static final class PROPS {
-    /*package*/ static final SProperty tableAlias$yY2f = MetaAdapterFactory.getProperty(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x7642dbf63a87dc6eL, "tableAlias");
+    /*package*/ static final SProperty viewName$yY2f = MetaAdapterFactory.getProperty(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x7642dbf63a87dc6eL, "viewName");
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
     /*package*/ static final SProperty fullName$t1KL = MetaAdapterFactory.getProperty(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b33L, 0x207f13a8b5691efbL, "fullName");
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink aliasTable$4dXf = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0xb59df187aa1e081L, "aliasTable");
+    /*package*/ static final SContainmentLink viewTable$4dXf = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0xb59df187aa1e081L, "viewTable");
     /*package*/ static final SContainmentLink columns$ubIo = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b2eL, 0x75900635108ee054L, "columns");
     /*package*/ static final SReferenceLink column$Wyeu = MetaAdapterFactory.getReferenceLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee7375157f4L, 0x11100ee7375157f5L, "column");
     /*package*/ static final SContainmentLink tables$IXdn = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x207f13a8b54616bfL, "tables");

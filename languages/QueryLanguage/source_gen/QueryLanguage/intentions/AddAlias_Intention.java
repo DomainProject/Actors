@@ -50,7 +50,7 @@ public final class AddAlias_Intention extends AbstractIntentionDescriptor implem
 
     @Override
     public String getDescription(final SNode node, final EditorContext editorContext) {
-      return "Add Alias";
+      return "Create View";
     }
 
     @Override
@@ -60,14 +60,20 @@ public final class AddAlias_Intention extends AbstractIntentionDescriptor implem
         alias += SPropertyOperations.getString(SLinkOperations.getTarget(table, LINKS.tableRef$boeY), PROPS.name$MnvL) + "_";
       }
       alias += "alias";
-      SPropertyOperations.assign(node, PROPS.tableAlias$yY2f, alias);
+      SPropertyOperations.assign(node, PROPS.viewName$yY2f, alias);
     }
 
     @Override
     public boolean isApplicable(final SNode node, final EditorContext editorContext) {
+      if (!(isApplicableToNode(node, editorContext))) {
+        return false;
+      }
       return true;
     }
 
+    private boolean isApplicableToNode(final SNode node, final EditorContext editorContext) {
+      return (SLinkOperations.getTarget(node, LINKS.groupBy$vhgB) == null) && (SLinkOperations.getTarget(node, LINKS.orderBy$K96v) == null);
+    }
 
 
     @Override
@@ -80,10 +86,12 @@ public final class AddAlias_Intention extends AbstractIntentionDescriptor implem
   private static final class LINKS {
     /*package*/ static final SReferenceLink tableRef$boeY = MetaAdapterFactory.getReferenceLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL, 0x207f13a8b545f6dfL, "tableRef");
     /*package*/ static final SContainmentLink tables$IXdn = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x207f13a8b54616bfL, "tables");
+    /*package*/ static final SContainmentLink orderBy$K96v = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x2b087ec3aa61e429L, "orderBy");
+    /*package*/ static final SContainmentLink groupBy$vhgB = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x2b087ec3aa6a1779L, "groupBy");
   }
 
   private static final class PROPS {
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
-    /*package*/ static final SProperty tableAlias$yY2f = MetaAdapterFactory.getProperty(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x7642dbf63a87dc6eL, "tableAlias");
+    /*package*/ static final SProperty viewName$yY2f = MetaAdapterFactory.getProperty(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x7642dbf63a87dc6eL, "viewName");
   }
 }

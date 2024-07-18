@@ -69,7 +69,7 @@
       </node>
       <node concept="1GjwBS" id="HpRLxUpQ6k" role="3JXyrO">
         <ref role="sa$J1" to="fudv:1mFJTG7e$j" />
-        <ref role="1Gj$d9" to="p6im:7p2QZoUxXLI" resolve="tableAlias" />
+        <ref role="1Gj$d9" to="p6im:7p2QZoUxXLI" resolve="viewName" />
       </node>
     </node>
   </node>

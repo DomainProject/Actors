@@ -50,7 +50,6 @@
         <reference id="1068581517664" name="variableDeclaration" index="3cqZAo" />
       </concept>
       <concept id="1068498886292" name="jetbrains.mps.baseLanguage.structure.ParameterDeclaration" flags="ir" index="37vLTG" />
-      <concept id="1225271408483" name="jetbrains.mps.baseLanguage.structure.IsNotEmptyOperation" flags="nn" index="17RvpY" />
       <concept id="4972933694980447171" name="jetbrains.mps.baseLanguage.structure.BaseVariableDeclaration" flags="ng" index="19Szcq">
         <child id="5680397130376446158" name="type" index="1tU5fm" />
       </concept>
@@ -152,9 +151,10 @@
         <reference id="2644386474300074837" name="conceptDeclaration" index="35c_gD" />
       </concept>
       <concept id="6677504323281689838" name="jetbrains.mps.lang.smodel.structure.SConceptType" flags="in" index="3bZ5Sz" />
+      <concept id="1172008320231" name="jetbrains.mps.lang.smodel.structure.Node_IsNotNullOperation" flags="nn" index="3x8VRR" />
       <concept id="1138055754698" name="jetbrains.mps.lang.smodel.structure.SNodeType" flags="in" index="3Tqbb2" />
-      <concept id="1138056022639" name="jetbrains.mps.lang.smodel.structure.SPropertyAccess" flags="nn" index="3TrcHB">
-        <reference id="1138056395725" name="property" index="3TsBF5" />
+      <concept id="1138056143562" name="jetbrains.mps.lang.smodel.structure.SLinkAccess" flags="nn" index="3TrEf2">
+        <reference id="1138056516764" name="link" index="3Tt5mk" />
       </concept>
       <concept id="1138056282393" name="jetbrains.mps.lang.smodel.structure.SLinkListAccess" flags="nn" index="3Tsc0h">
         <reference id="1138056546658" name="link" index="3TtcxE" />
@@ -764,20 +764,20 @@
               </node>
             </node>
             <node concept="2OqwBi" id="38" role="3uHU7B">
-              <uo k="s:originTrace" v="n:7824142728406706015" />
+              <uo k="s:originTrace" v="n:6059320240600849004" />
               <node concept="2OqwBi" id="3f" role="2Oq$k0">
                 <uo k="s:originTrace" v="n:7824142728406692819" />
                 <node concept="37vLTw" id="3h" role="2Oq$k0">
                   <ref role="3cqZAo" node="2W" resolve="select" />
                   <uo k="s:originTrace" v="n:7824142728406691979" />
                 </node>
-                <node concept="3TrcHB" id="3i" role="2OqNvi">
-                  <ref role="3TsBF5" to="p6im:7p2QZoUxXLI" resolve="tableAlias" />
-                  <uo k="s:originTrace" v="n:7824142728406700725" />
+                <node concept="3TrEf2" id="3i" role="2OqNvi">
+                  <ref role="3Tt5mk" to="p6im:HpRLxUCu21" resolve="viewTable" />
+                  <uo k="s:originTrace" v="n:6059320240600848112" />
                 </node>
               </node>
-              <node concept="17RvpY" id="3g" role="2OqNvi">
-                <uo k="s:originTrace" v="n:7824142728406713459" />
+              <node concept="3x8VRR" id="3g" role="2OqNvi">
+                <uo k="s:originTrace" v="n:6059320240600852264" />
               </node>
             </node>
           </node>
@@ -820,7 +820,7 @@
                           <uo k="s:originTrace" v="n:7824142728406769756" />
                         </node>
                         <node concept="Xl_RD" id="3z" role="37wK5m">
-                          <property role="Xl_RC" value="Alias is not supported for joined tables" />
+                          <property role="Xl_RC" value="View is not supported for joined tables" />
                           <uo k="s:originTrace" v="n:7824142728406769673" />
                         </node>
                         <node concept="Xl_RD" id="3$" role="37wK5m">

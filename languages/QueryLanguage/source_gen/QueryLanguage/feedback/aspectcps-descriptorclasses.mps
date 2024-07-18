@@ -260,7 +260,7 @@
                 <uo k="s:originTrace" v="n:817930103570260372" />
                 <node concept="1BaE9c" id="K" role="37wK5m">
                   <property role="1ouuDV" value="PROPS" />
-                  <property role="1BaxDp" value="tableAlias$yY2f" />
+                  <property role="1BaxDp" value="viewName$yY2f" />
                   <uo k="s:originTrace" v="n:817930103570260372" />
                   <node concept="2YIFZM" id="L" role="1Bazha">
                     <ref role="37wK5l" to="2k9e:~MetaAdapterFactory.getProperty(long,long,long,long,java.lang.String)" resolve="getProperty" />
@@ -283,7 +283,7 @@
                       <uo k="s:originTrace" v="n:817930103570260372" />
                     </node>
                     <node concept="Xl_RD" id="Q" role="37wK5m">
-                      <property role="Xl_RC" value="tableAlias" />
+                      <property role="Xl_RC" value="viewName" />
                       <uo k="s:originTrace" v="n:817930103570260372" />
                     </node>
                   </node>

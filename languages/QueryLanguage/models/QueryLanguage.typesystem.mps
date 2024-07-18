@@ -19,7 +19,6 @@
       <concept id="1070475926800" name="jetbrains.mps.baseLanguage.structure.StringLiteral" flags="nn" index="Xl_RD">
         <property id="1070475926801" name="value" index="Xl_RC" />
       </concept>
-      <concept id="1225271408483" name="jetbrains.mps.baseLanguage.structure.IsNotEmptyOperation" flags="nn" index="17RvpY" />
       <concept id="1068580123159" name="jetbrains.mps.baseLanguage.structure.IfStatement" flags="nn" index="3clFbJ">
         <child id="1068580123160" name="condition" index="3clFbw" />
         <child id="1068580123161" name="ifTrue" index="3clFbx" />
@@ -60,8 +59,9 @@
       </concept>
     </language>
     <language id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel">
-      <concept id="1138056022639" name="jetbrains.mps.lang.smodel.structure.SPropertyAccess" flags="nn" index="3TrcHB">
-        <reference id="1138056395725" name="property" index="3TsBF5" />
+      <concept id="1172008320231" name="jetbrains.mps.lang.smodel.structure.Node_IsNotNullOperation" flags="nn" index="3x8VRR" />
+      <concept id="1138056143562" name="jetbrains.mps.lang.smodel.structure.SLinkAccess" flags="nn" index="3TrEf2">
+        <reference id="1138056516764" name="link" index="3Tt5mk" />
       </concept>
       <concept id="1138056282393" name="jetbrains.mps.lang.smodel.structure.SLinkListAccess" flags="nn" index="3Tsc0h">
         <reference id="1138056546658" name="link" index="3TtcxE" />
@@ -193,22 +193,22 @@
               <node concept="34oBXx" id="6MkW5HYCZ8c" role="2OqNvi" />
             </node>
           </node>
-          <node concept="2OqwBi" id="6MkW5HYCMtv" role="3uHU7B">
+          <node concept="2OqwBi" id="5gn1UuTmhDG" role="3uHU7B">
             <node concept="2OqwBi" id="6MkW5HYCJfj" role="2Oq$k0">
               <node concept="1YBJjd" id="6MkW5HYCJ2b" role="2Oq$k0">
                 <ref role="1YBMHb" node="6MkW5HYCIQ5" resolve="select" />
               </node>
-              <node concept="3TrcHB" id="6MkW5HYCLaP" role="2OqNvi">
-                <ref role="3TsBF5" to="p6im:7p2QZoUxXLI" resolve="tableAlias" />
+              <node concept="3TrEf2" id="5gn1UuTmhrK" role="2OqNvi">
+                <ref role="3Tt5mk" to="p6im:HpRLxUCu21" resolve="viewTable" />
               </node>
             </node>
-            <node concept="17RvpY" id="6MkW5HYCOhN" role="2OqNvi" />
+            <node concept="3x8VRR" id="5gn1UuTmisC" role="2OqNvi" />
           </node>
         </node>
         <node concept="3clFbS" id="6MkW5HYCIQk" role="3clFbx">
           <node concept="2MkqsV" id="6MkW5HYD1ZX" role="3cqZAp">
             <node concept="Xl_RD" id="6MkW5HYD209" role="2MkJ7o">
-              <property role="Xl_RC" value="Alias is not supported for joined tables" />
+              <property role="Xl_RC" value="View is not supported for joined tables" />
             </node>
             <node concept="1YBJjd" id="6MkW5HYD21s" role="1urrMF">
               <ref role="1YBMHb" node="6MkW5HYCIQ5" resolve="select" />

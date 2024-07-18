@@ -1246,7 +1246,7 @@
       <uo k="s:originTrace" v="n:817930103570060498" />
     </node>
     <node concept="312cEu" id="4j" role="jymVt">
-      <property role="TrG5h" value="TableAlias_Property" />
+      <property role="TrG5h" value="ViewName_Property" />
       <uo k="s:originTrace" v="n:817930103570060498" />
       <node concept="3clFbW" id="4v" role="jymVt">
         <uo k="s:originTrace" v="n:817930103570060498" />
@@ -1263,7 +1263,7 @@
             <uo k="s:originTrace" v="n:817930103570060498" />
             <node concept="1BaE9c" id="4D" role="37wK5m">
               <property role="1ouuDV" value="PROPS" />
-              <property role="1BaxDp" value="tableAlias$yY2f" />
+              <property role="1BaxDp" value="viewName$yY2f" />
               <uo k="s:originTrace" v="n:817930103570060498" />
               <node concept="2YIFZM" id="4I" role="1Bazha">
                 <ref role="37wK5l" to="2k9e:~MetaAdapterFactory.getProperty(long,long,long,long,java.lang.String)" resolve="getProperty" />
@@ -1286,7 +1286,7 @@
                   <uo k="s:originTrace" v="n:817930103570060498" />
                 </node>
                 <node concept="Xl_RD" id="4N" role="37wK5m">
-                  <property role="Xl_RC" value="tableAlias" />
+                  <property role="Xl_RC" value="viewName" />
                   <uo k="s:originTrace" v="n:817930103570060498" />
                 </node>
               </node>
@@ -1399,7 +1399,7 @@
                         <uo k="s:originTrace" v="n:817930103574113424" />
                       </node>
                       <node concept="3TrEf2" id="5x" role="2OqNvi">
-                        <ref role="3Tt5mk" to="p6im:HpRLxUCu21" resolve="aliasTable" />
+                        <ref role="3Tt5mk" to="p6im:HpRLxUCu21" resolve="viewTable" />
                         <uo k="s:originTrace" v="n:817930103574118075" />
                       </node>
                     </node>
@@ -1425,7 +1425,7 @@
                       <uo k="s:originTrace" v="n:817930103574129402" />
                     </node>
                     <node concept="3TrcHB" id="5A" role="2OqNvi">
-                      <ref role="3TsBF5" to="p6im:7p2QZoUxXLI" resolve="tableAlias" />
+                      <ref role="3TsBF5" to="p6im:7p2QZoUxXLI" resolve="viewName" />
                       <uo k="s:originTrace" v="n:817930103574134260" />
                     </node>
                   </node>
@@ -1449,7 +1449,7 @@
                       <uo k="s:originTrace" v="n:7824142728408670335" />
                     </node>
                     <node concept="3TrEf2" id="5H" role="2OqNvi">
-                      <ref role="3Tt5mk" to="p6im:HpRLxUCu21" resolve="aliasTable" />
+                      <ref role="3Tt5mk" to="p6im:HpRLxUCu21" resolve="viewTable" />
                       <uo k="s:originTrace" v="n:7824142728408673623" />
                     </node>
                   </node>
@@ -1538,7 +1538,7 @@
                   <uo k="s:originTrace" v="n:817930103573561958" />
                 </node>
                 <node concept="3TrcHB" id="62" role="2OqNvi">
-                  <ref role="3TsBF5" to="p6im:7p2QZoUxXLI" resolve="tableAlias" />
+                  <ref role="3TsBF5" to="p6im:7p2QZoUxXLI" resolve="viewName" />
                   <uo k="s:originTrace" v="n:817930103573564382" />
                 </node>
               </node>
@@ -1565,7 +1565,7 @@
                   <uo k="s:originTrace" v="n:817930103570943089" />
                 </node>
                 <node concept="3TrcHB" id="67" role="2OqNvi">
-                  <ref role="3TsBF5" to="p6im:7p2QZoUxXLI" resolve="tableAlias" />
+                  <ref role="3TsBF5" to="p6im:7p2QZoUxXLI" resolve="viewName" />
                   <uo k="s:originTrace" v="n:817930103570947478" />
                 </node>
               </node>
@@ -1970,7 +1970,7 @@
                   <uo k="s:originTrace" v="n:817930103574105385" />
                 </node>
                 <node concept="3TrEf2" id="7P" role="2OqNvi">
-                  <ref role="3Tt5mk" to="p6im:HpRLxUCu21" resolve="aliasTable" />
+                  <ref role="3Tt5mk" to="p6im:HpRLxUCu21" resolve="viewTable" />
                   <uo k="s:originTrace" v="n:817930103574110247" />
                 </node>
               </node>
@@ -2079,7 +2079,7 @@
               <uo k="s:originTrace" v="n:817930103570060498" />
               <node concept="1BaE9c" id="8c" role="37wK5m">
                 <property role="1ouuDV" value="PROPS" />
-                <property role="1BaxDp" value="tableAlias$yY2f" />
+                <property role="1BaxDp" value="viewName$yY2f" />
                 <uo k="s:originTrace" v="n:817930103570060498" />
                 <node concept="2YIFZM" id="8e" role="1Bazha">
                   <ref role="37wK5l" to="2k9e:~MetaAdapterFactory.getProperty(long,long,long,long,java.lang.String)" resolve="getProperty" />
@@ -2102,7 +2102,7 @@
                     <uo k="s:originTrace" v="n:817930103570060498" />
                   </node>
                   <node concept="Xl_RD" id="8j" role="37wK5m">
-                    <property role="Xl_RC" value="tableAlias" />
+                    <property role="Xl_RC" value="viewName" />
                     <uo k="s:originTrace" v="n:817930103570060498" />
                   </node>
                 </node>
@@ -2110,7 +2110,7 @@
               <node concept="2ShNRf" id="8d" role="37wK5m">
                 <uo k="s:originTrace" v="n:817930103570060498" />
                 <node concept="1pGfFk" id="8k" role="2ShVmc">
-                  <ref role="37wK5l" node="4v" resolve="Select_Constraints.TableAlias_Property" />
+                  <ref role="37wK5l" node="4v" resolve="Select_Constraints.ViewName_Property" />
                   <uo k="s:originTrace" v="n:817930103570060498" />
                   <node concept="Xjq3P" id="8l" role="37wK5m">
                     <uo k="s:originTrace" v="n:817930103570060498" />

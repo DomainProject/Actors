@@ -103,7 +103,7 @@
     <node concept="1TJgyj" id="HpRLxUCu21" role="1TKVEi">
       <property role="IQ2ns" value="817930103574093953" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="aliasTable" />
+      <property role="20kJfa" value="viewTable" />
       <ref role="20lvS9" node="14g3IsRh3GI" resolve="CreateTable" />
     </node>
     <node concept="1TJgyj" id="6MkW5HYMt1M" role="1TKVEi">
@@ -120,7 +120,7 @@
     </node>
     <node concept="1TJgyi" id="7p2QZoUxXLI" role="1TKVEl">
       <property role="IQ2nx" value="8521615295528819822" />
-      <property role="TrG5h" value="tableAlias" />
+      <property role="TrG5h" value="viewName" />
       <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
     </node>
   </node>

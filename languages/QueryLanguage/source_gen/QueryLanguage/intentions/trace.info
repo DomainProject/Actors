@@ -156,41 +156,52 @@
       <node id="8521615295528849613" at="37,35,38,17" concept="8" />
       <node id="8521615295528849613" at="42,37,43,105" concept="2" />
       <node id="8521615295528849613" at="44,5,45,30" concept="8" />
-      <node id="8521615295528850683" at="52,87,53,25" concept="8" />
+      <node id="8521615295528850683" at="52,87,53,27" concept="8" />
       <node id="2341611946572743992" at="57,78,58,24" concept="7" />
       <node id="2341611946572750042" at="59,103,60,125" concept="2" />
       <node id="2341611946576206445" at="61,7,62,23" concept="2" />
-      <node id="8521615295528851860" at="62,23,63,69" concept="2" />
-      <node id="8521615295528849613" at="67,86,68,18" concept="8" />
-      <node id="8521615295528849613" at="74,48,75,37" concept="8" />
-      <node id="8521615295528849613" at="81,0,82,0" concept="9" trace="tableRef$boeY" />
-      <node id="8521615295528849613" at="82,0,83,0" concept="9" trace="tables$IXdn" />
-      <node id="8521615295528849613" at="86,0,87,0" concept="9" trace="name$MnvL" />
-      <node id="8521615295528849613" at="87,0,88,0" concept="9" trace="tableAlias$yY2f" />
+      <node id="8521615295528851860" at="62,23,63,67" concept="2" />
+      <node id="8521615295528849613" at="68,55,69,21" concept="8" />
+      <node id="8521615295528849613" at="70,7,71,18" concept="8" />
+      <node id="6059320240599140067" at="74,93,75,140" concept="8" />
+      <node id="8521615295528849613" at="80,48,81,37" concept="8" />
+      <node id="8521615295528849613" at="87,0,88,0" concept="9" trace="tableRef$boeY" />
+      <node id="8521615295528849613" at="88,0,89,0" concept="9" trace="tables$IXdn" />
+      <node id="8521615295528849613" at="89,0,90,0" concept="9" trace="orderBy$K96v" />
+      <node id="8521615295528849613" at="90,0,91,0" concept="9" trace="groupBy$vhgB" />
+      <node id="8521615295528849613" at="94,0,95,0" concept="9" trace="name$MnvL" />
+      <node id="8521615295528849613" at="95,0,96,0" concept="9" trace="viewName$yY2f" />
       <node id="8521615295528849613" at="48,0,50,0" concept="1" trace="IntentionImplementation#()V" />
       <node id="8521615295528849613" at="27,0,30,0" concept="1" trace="AddAlias_Intention#()V" />
       <node id="8521615295528849613" at="41,99,44,5" concept="5" />
       <node id="2341611946572745887" at="58,24,61,7" concept="4" />
+      <node id="8521615295528849613" at="67,86,70,7" concept="5" />
+      <node id="8521615295528849613" at="74,0,77,0" concept="6" trace="isApplicableToNode#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Z" />
       <node id="8521615295528849613" at="31,0,35,0" concept="6" trace="getPresentation#()Ljava/lang/String;" />
       <node id="8521615295528849613" at="36,0,40,0" concept="6" trace="isSurroundWith#()Z" />
       <node id="8521615295528849613" at="51,0,55,0" concept="6" trace="getDescription#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Ljava/lang/String;" />
-      <node id="8521615295528849613" at="66,0,70,0" concept="6" trace="isApplicable#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Z" />
-      <node id="8521615295528849613" at="73,0,77,0" concept="6" trace="getDescriptor#()Ljetbrains/mps/openapi/intentions/IntentionDescriptor;" />
+      <node id="8521615295528849613" at="79,0,83,0" concept="6" trace="getDescriptor#()Ljetbrains/mps/openapi/intentions/IntentionDescriptor;" />
       <node id="8521615295528849613" at="41,0,47,0" concept="6" trace="instances#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Ljava/util/Collection;" />
+      <node id="8521615295528849613" at="66,0,73,0" concept="6" trace="isApplicable#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)Z" />
       <node id="8521615295528849613" at="56,0,65,0" concept="6" trace="execute#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/openapi/editor/EditorContext;)V" />
       <scope id="8521615295528849613" at="48,38,48,38" />
       <scope id="8521615295528849613" at="27,31,28,139" />
       <scope id="8521615295528849613" at="32,35,33,22" />
       <scope id="8521615295528849613" at="37,35,38,17" />
       <scope id="8521615295528849613" at="42,37,43,105" />
-      <scope id="8521615295528849615" at="52,87,53,25" />
+      <scope id="8521615295528849615" at="52,87,53,27" />
       <scope id="2341611946572745893" at="59,103,60,125" />
-      <scope id="8521615295528849613" at="67,86,68,18" />
-      <scope id="8521615295528849613" at="74,48,75,37" />
+      <scope id="8521615295528849613" at="68,55,69,21" />
+      <scope id="6059320240599139000" at="74,93,75,140" />
+      <scope id="8521615295528849613" at="80,48,81,37" />
       <scope id="8521615295528849613" at="48,0,50,0" />
       <scope id="8521615295528849613" at="27,0,30,0" />
       <scope id="2341611946572745887" at="58,24,61,7">
         <var name="table" id="2341611946572745889" />
+      </scope>
+      <scope id="8521615295528849613" at="74,0,77,0">
+        <var name="editorContext" id="8521615295528849613" />
+        <var name="node" id="8521615295528849613" />
       </scope>
       <scope id="8521615295528849613" at="31,0,35,0" />
       <scope id="8521615295528849613" at="36,0,40,0" />
@@ -199,26 +210,27 @@
         <var name="editorContext" id="8521615295528849613" />
         <var name="node" id="8521615295528849613" />
       </scope>
-      <scope id="8521615295528849613" at="66,0,70,0">
-        <var name="editorContext" id="8521615295528849613" />
-        <var name="node" id="8521615295528849613" />
-      </scope>
-      <scope id="8521615295528849613" at="73,0,77,0" />
+      <scope id="8521615295528849613" at="67,86,71,18" />
+      <scope id="8521615295528849613" at="79,0,83,0" />
       <scope id="8521615295528849613" at="41,0,47,0">
         <var name="context" id="8521615295528849613" />
         <var name="node" id="8521615295528849613" />
       </scope>
-      <scope id="8521615295528849617" at="57,78,63,69">
+      <scope id="8521615295528849617" at="57,78,63,67">
         <var name="alias" id="2341611946572743995" />
+      </scope>
+      <scope id="8521615295528849613" at="66,0,73,0">
+        <var name="editorContext" id="8521615295528849613" />
+        <var name="node" id="8521615295528849613" />
       </scope>
       <scope id="8521615295528849613" at="56,0,65,0">
         <var name="editorContext" id="8521615295528849613" />
         <var name="node" id="8521615295528849613" />
       </scope>
-      <unit id="8521615295528849613" at="80,0,84,0" name="QueryLanguage.intentions.AddAlias_Intention$LINKS" />
-      <unit id="8521615295528849613" at="85,0,89,0" name="QueryLanguage.intentions.AddAlias_Intention$PROPS" />
-      <unit id="8521615295528849613" at="47,0,79,0" name="QueryLanguage.intentions.AddAlias_Intention$IntentionImplementation" />
-      <unit id="8521615295528849613" at="24,0,90,0" name="QueryLanguage.intentions.AddAlias_Intention" />
+      <unit id="8521615295528849613" at="93,0,97,0" name="QueryLanguage.intentions.AddAlias_Intention$PROPS" />
+      <unit id="8521615295528849613" at="86,0,92,0" name="QueryLanguage.intentions.AddAlias_Intention$LINKS" />
+      <unit id="8521615295528849613" at="47,0,85,0" name="QueryLanguage.intentions.AddAlias_Intention$IntentionImplementation" />
+      <unit id="8521615295528849613" at="24,0,98,0" name="QueryLanguage.intentions.AddAlias_Intention" />
     </file>
     <file name="IntentionsDescriptor.java">
       <node id="8521615295528849613" at="37,47,38,51" concept="2" />

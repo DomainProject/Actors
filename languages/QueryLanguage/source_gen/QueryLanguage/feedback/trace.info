@@ -17,7 +17,7 @@
       <node id="817930103570260362" at="31,0,32,0" concept="3" trace="PROVIDERS" />
       <node id="817930103570260362" at="33,36,34,19" concept="4" />
       <node id="817930103570260362" at="39,58,40,30" concept="2" />
-      <node id="817930103570260362" at="44,0,45,0" concept="3" trace="tableAlias$yY2f" />
+      <node id="817930103570260362" at="44,0,45,0" concept="3" trace="viewName$yY2f" />
       <node id="817930103570260362" at="33,0,36,0" concept="0" trace="Select_FeedbackFeedback#()V" />
       <node id="817930103570260375" at="24,0,29,0" concept="1" trace="yieldMessage#(Ljetbrains/mps/core/aspects/feedback/messages/FailingPropertyConstraintContext;)Ljetbrains/mps/core/aspects/feedback/messages/MessageProvider/Msg;" />
       <node id="817930103570260362" at="37,0,42,0" concept="1" trace="getDeclaredProviders#()Ljava/util/stream/Stream;" />

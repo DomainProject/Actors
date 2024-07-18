@@ -9348,7 +9348,7 @@
                   <node concept="liA8E" id="MM" role="2OqNvi">
                     <ref role="37wK5l" to="bzg8:~ConceptDescriptorBuilder2.property(java.lang.String,long)" resolve="property" />
                     <node concept="Xl_RD" id="MN" role="37wK5m">
-                      <property role="Xl_RC" value="tableAlias" />
+                      <property role="Xl_RC" value="viewName" />
                     </node>
                     <node concept="1adDum" id="MO" role="37wK5m">
                       <property role="1adDun" value="0x7642dbf63a87dc6eL" />
@@ -9781,7 +9781,7 @@
                         <node concept="liA8E" id="Pl" role="2OqNvi">
                           <ref role="37wK5l" to="bzg8:~ConceptDescriptorBuilder2.aggregate(java.lang.String,long)" resolve="aggregate" />
                           <node concept="Xl_RD" id="Pm" role="37wK5m">
-                            <property role="Xl_RC" value="aliasTable" />
+                            <property role="Xl_RC" value="viewTable" />
                           </node>
                           <node concept="1adDum" id="Pn" role="37wK5m">
                             <property role="1adDun" value="0xb59df187aa1e081L" />

@@ -311,14 +311,14 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x33d23ee961a0cbf3L);
     b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/7033755722359825273");
     b.version(3);
-    b.property("tableAlias", 0x7642dbf63a87dc6eL).type(PrimitiveTypeId.STRING).origin("8521615295528819822").done();
+    b.property("viewName", 0x7642dbf63a87dc6eL).type(PrimitiveTypeId.STRING).origin("8521615295528819822").done();
     b.aggregate("where", 0x11100ee73745172dL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e37bL).optional(true).ordered(true).multiple(false).origin("1229499084499654445").done();
     b.aggregate("groupBy", 0x2b087ec3aa6a1779L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x2b087ec3aa6a16ceL).optional(true).ordered(true).multiple(false).origin("3100867722287388537").done();
     b.aggregate("orderBy", 0x2b087ec3aa61e429L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x2b087ec3aa61e251L).optional(true).ordered(true).multiple(false).origin("3100867722286851113").done();
     b.aggregate("aggregateFunction", 0x5d7e70837b028396L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b022e74L).optional(true).ordered(true).multiple(false).origin("6736945802599629718").done();
     b.aggregate("tables", 0x207f13a8b54616bfL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL).optional(false).ordered(true).multiple(true).origin("2341611946572650175").done();
     b.aggregate("cols", 0xe8aecd6b255930cL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0xe8aecd6b2519712L).optional(true).ordered(true).multiple(true).origin("1047910270176170764").done();
-    b.aggregate("aliasTable", 0xb59df187aa1e081L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b2eL).optional(true).ordered(true).multiple(false).origin("817930103574093953").done();
+    b.aggregate("viewTable", 0xb59df187aa1e081L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b2eL).optional(true).ordered(true).multiple(false).origin("817930103574093953").done();
     b.aggregate("joinCondition", 0x6c94f05b7ec9d072L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x6c94f05b7ec9d046L).optional(true).ordered(true).multiple(false).origin("7824142728409239666").done();
     b.alias("SELECT");
     return b.create();
