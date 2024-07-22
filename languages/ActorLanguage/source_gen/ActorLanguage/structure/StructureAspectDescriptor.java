@@ -359,7 +359,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.version(3);
     b.aggregate("behaviors", 0x5d890eb3ebfeaec2L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L).optional(true).ordered(true).multiple(true).origin("6739934483257929410").done();
     b.aggregate("receptionist", 0x5d890eb3ebff2495L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ebfeaec5L).optional(false).ordered(true).multiple(false).origin("6739934483257959573").done();
-    b.aggregate("actors", 0x35a5eccbf2f23377L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e268157ad87L).optional(true).ordered(true).multiple(true).origin("3865756215865914231").done();
+    b.aggregate("actorCreation", 0x35a5eccbf2f23377L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e268157ad87L).optional(true).ordered(true).multiple(true).origin("3865756215865914231").done();
     b.aggregate("topology", 0x262cd812cfe6cc9dL).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57936L).optional(true).ordered(true).multiple(false).origin("2750811047725550749").done();
     b.aggregate("initializers", 0xe2178aac28bdcbL).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xe2178aac28357fL).optional(true).ordered(true).multiple(true).origin("63639229097885131").done();
     b.aggregate("externalFunctions", 0x61da6c5c302ab136L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302aacc3L).optional(true).ordered(true).multiple(true).origin("7051067309802828086").done();
@@ -454,7 +454,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.property("receivedMessageName", 0x5ef413f8f5ef4191L).type(PrimitiveTypeId.STRING).origin("6842115693881541009").done();
     b.aggregate("actions", 0x35a5eccbf2f8e453L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x31fece75cecc5dcaL).optional(true).ordered(true).multiple(false).origin("3865756215866352723").done();
     b.aggregate("become", 0x5366e9c2d9745d61L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5366e9c2d97392cfL).optional(true).ordered(true).multiple(false).origin("6009747775853714785").done();
-    b.aggregate("receivedMessage", 0x5ef413f8f5ff2c54L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L).optional(false).ordered(true).multiple(false).origin("6842115693882584148").done();
+    b.aggregate("receivedMessage", 0x5ef413f8f5ff2c54L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L).optional(true).ordered(true).multiple(false).origin("6842115693882584148").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForCreateEnvelope() {

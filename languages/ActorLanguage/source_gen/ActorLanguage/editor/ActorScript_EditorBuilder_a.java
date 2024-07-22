@@ -650,9 +650,9 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
     return editorCell;
   }
   private EditorCell createRefNodeList_3() {
-    AbstractCellListHandler handler = new actorsListHandler_pclfx2_cb0(myNode, getEditorContext());
+    AbstractCellListHandler handler = new actorCreationListHandler_pclfx2_cb0(myNode, getEditorContext());
     EditorCell_Collection editorCell = handler.createCells(new CellLayout_Indent(), false);
-    editorCell.setCellId("refNodeList_actors");
+    editorCell.setCellId("refNodeList_actorCreation");
     Style style = new StyleImpl();
     style.set(StyleAttributes.INDENT_LAYOUT_ON_NEW_LINE, true);
     style.set(StyleAttributes.INDENT_LAYOUT_INDENT, true);
@@ -661,11 +661,11 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
     editorCell.setSRole(handler.getElementSRole());
     return editorCell;
   }
-  private static class actorsListHandler_pclfx2_cb0 extends RefNodeListHandler {
+  private static class actorCreationListHandler_pclfx2_cb0 extends RefNodeListHandler {
     @NotNull
     private SNode myNode;
 
-    public actorsListHandler_pclfx2_cb0(SNode ownerNode, EditorContext context) {
+    public actorCreationListHandler_pclfx2_cb0(SNode ownerNode, EditorContext context) {
       super(context, false);
       myNode = ownerNode;
     }
@@ -675,7 +675,7 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
       return myNode;
     }
     public SContainmentLink getSLink() {
-      return LINKS.actors$EA0a;
+      return LINKS.actorCreation$EA0a;
     }
     public SAbstractConcept getChildSConcept() {
       return CONCEPTS.ActorCreation$3s;
@@ -688,7 +688,7 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
     }
     public EditorCell createEmptyCell() {
       getCellFactory().pushCellContext();
-      getCellFactory().setNodeLocation(new SNodeLocation.FromParentAndLink(actorsListHandler_pclfx2_cb0.this.getNode(), LINKS.actors$EA0a));
+      getCellFactory().setNodeLocation(new SNodeLocation.FromParentAndLink(actorCreationListHandler_pclfx2_cb0.this.getNode(), LINKS.actorCreation$EA0a));
       try {
         EditorCell emptyCell = null;
         emptyCell = super.createEmptyCell();
@@ -864,7 +864,7 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
     /*package*/ static final SContainmentLink initializers$1tQJ = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0xe2178aac28bdcbL, "initializers");
     /*package*/ static final SContainmentLink behaviors$VQhG = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x5d890eb3ebfeaec2L, "behaviors");
     /*package*/ static final SContainmentLink receptionist$GJcH = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x5d890eb3ebff2495L, "receptionist");
-    /*package*/ static final SContainmentLink actors$EA0a = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x35a5eccbf2f23377L, "actors");
+    /*package*/ static final SContainmentLink actorCreation$EA0a = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x35a5eccbf2f23377L, "actorCreation");
     /*package*/ static final SContainmentLink topology$GORc = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x262cd812cfe6cc9dL, "topology");
   }
 }

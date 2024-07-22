@@ -43,7 +43,6 @@
       <concept id="7724742800286591751" name="ActorLanguage.structure.ActorBoxesList" flags="ng" index="Fpmux">
         <child id="7724742800286591752" name="actorBoxes" index="FpmuI" />
       </concept>
-      <concept id="63639229097850239" name="ActorLanguage.structure.Initializer" flags="ng" index="2GMybP" />
       <concept id="6739934483257929413" name="ActorLanguage.structure.Receptionist" flags="ng" index="2QtU1Q">
         <property id="1411682935489275238" name="address" index="2iLIH0" />
         <child id="6739934483257929414" name="behavior" index="2QtU1P" />
@@ -55,7 +54,6 @@
       <concept id="3865756215865914212" name="ActorLanguage.structure.CreateActor" flags="ng" index="37lXYJ">
         <property id="4813801747212515788" name="fetchPolicy" index="1V3Vrz" />
         <reference id="1411682935489260658" name="behavior" index="2iLy9k" />
-        <reference id="6842115693886643046" name="initializer" index="2CMgyu" />
         <child id="6739934483258265337" name="messageQueue" index="2LyG1a" />
       </concept>
       <concept id="3865756215865914225" name="ActorLanguage.structure.CreateMessage" flags="ng" index="37lXYU">
@@ -63,7 +61,6 @@
         <child id="3269545992594456658" name="envelope" index="34eGaj" />
       </concept>
       <concept id="3865756215865914230" name="ActorLanguage.structure.ActorScript" flags="ng" index="37lXYX">
-        <child id="63639229097885131" name="initializers" index="2GMED1" />
         <child id="6739934483257959573" name="receptionist" index="2QtyCA" />
         <child id="6739934483257929410" name="behaviors" index="2QtU1L" />
         <child id="3865756215865914231" name="actors" index="37lXYW" />
@@ -1109,6 +1106,36 @@
             <property role="TrG5h" value="ds_rec_message.payload" />
           </node>
         </node>
+        <node concept="3ZcDeZ" id="3aQNPNd8Ni5" role="37ngyo">
+          <node concept="2iZ$PO" id="3aQNPNd8Ns_" role="3ZcDeU">
+            <node concept="2iUZJK" id="3aQNPNd8NsA" role="2iUZJS">
+              <property role="2iUZJL" value="2oGQ1bfXVEv/TOPOLOGY" />
+            </node>
+            <node concept="2_DyK2" id="3aQNPNd8NsB" role="BvGUO">
+              <property role="TrG5h" value="refs" />
+            </node>
+          </node>
+          <node concept="2_LUnm" id="3aQNPNd8NX6" role="3ZcDeU">
+            <ref role="2_LUnp" node="3aQNPNd8NsB" resolve="refs" />
+            <node concept="Bk5ry" id="3aQNPNd8NX8" role="2_WIQ$">
+              <property role="TrG5h" value="ref" />
+            </node>
+            <node concept="37lXYU" id="3aQNPNd8Oib" role="1e4STI">
+              <property role="TrG5h" value="m" />
+              <node concept="1lgcPH" id="3aQNPNd96HA" role="GupN0">
+                <property role="TrG5h" value="p" />
+              </node>
+              <node concept="1lgcPy" id="3aQNPNd96S9" role="34eGaj">
+                <property role="TrG5h" value="e" />
+                <property role="2uCmrR" value="5.0" />
+                <ref role="1lgcPI" node="3aQNPNd8NX8" resolve="ref" />
+              </node>
+            </node>
+            <node concept="37lS4T" id="3aQNPNd97GT" role="1e4STI">
+              <ref role="37lS4Y" node="3aQNPNd8Oib" resolve="m" />
+            </node>
+          </node>
+        </node>
       </node>
       <node concept="1hWc2v" id="6eYilKnl9dD" role="1hWdPE">
         <property role="TrG5h" value="selection" />
@@ -1140,9 +1167,6 @@
       <node concept="1hWc2v" id="5FUxs3fkXh8" role="1hWdPE">
         <property role="TrG5h" value="orderBy" />
       </node>
-      <node concept="2GMybP" id="UaVdqMc0Ox" role="2GMED1">
-        <property role="TrG5h" value="dataSourceInitializer" />
-      </node>
       <node concept="2QtU1Q" id="52aDx$uhvmf" role="2QtyCA">
         <property role="2iLIH0" value="0" />
         <property role="TrG5h" value="receptionist" />
@@ -1151,9 +1175,8 @@
       </node>
       <node concept="37lXYJ" id="UaVdqMbZlr" role="37lXYW">
         <property role="TrG5h" value="dataSource" />
-        <property role="1V3Vrz" value="66sUT0$7o_R/FIFO" />
+        <property role="1V3Vrz" value="3aQNPNd64Wc/NOOP" />
         <ref role="2iLy9k" node="37YNBneQ1eh" resolve="DataSource" />
-        <ref role="2CMgyu" node="UaVdqMc0Ox" resolve="dataSourceInitializer" />
         <node concept="2uUgHn" id="UaVdqMbZls" role="2LyG1a" />
       </node>
       <node concept="37lXYJ" id="6MkW5HZ87SE" role="37lXYW">

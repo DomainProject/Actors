@@ -8,6 +8,7 @@
   <imports>
     <import index="o8zo" ref="r:314576fc-3aee-4386-a0a5-a38348ac317d(jetbrains.mps.scope)" />
     <import index="o1mc" ref="r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)" implicit="true" />
+    <import index="fh8z" ref="r:ba8769f3-331d-4a7d-b538-0ce586b24578(ActorLanguage.behavior)" implicit="true" />
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
     <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" implicit="true" />
   </imports>
@@ -17,6 +18,7 @@
         <child id="1068498886297" name="rValue" index="37vLTx" />
         <child id="1068498886295" name="lValue" index="37vLTJ" />
       </concept>
+      <concept id="4836112446988635817" name="jetbrains.mps.baseLanguage.structure.UndefinedType" flags="in" index="2jxLKc" />
       <concept id="1197027756228" name="jetbrains.mps.baseLanguage.structure.DotExpression" flags="nn" index="2OqwBi">
         <child id="1197027771414" name="operand" index="2Oq$k0" />
         <child id="1197027833540" name="operation" index="2OqNvi" />
@@ -53,6 +55,12 @@
         <child id="1068581242865" name="localVariableDeclaration" index="3cpWs9" />
       </concept>
       <concept id="1068581242863" name="jetbrains.mps.baseLanguage.structure.LocalVariableDeclaration" flags="nr" index="3cpWsn" />
+      <concept id="1204053956946" name="jetbrains.mps.baseLanguage.structure.IMethodCall" flags="ngI" index="1ndlxa">
+        <reference id="1068499141037" name="baseMethodDeclaration" index="37wK5l" />
+      </concept>
+      <concept id="5497648299878491908" name="jetbrains.mps.baseLanguage.structure.BaseVariableReference" flags="nn" index="1M0zk4">
+        <reference id="5497648299878491909" name="baseVariableDeclaration" index="1M0zk5" />
+      </concept>
       <concept id="6329021646629104954" name="jetbrains.mps.baseLanguage.structure.SingleLineComment" flags="nn" index="3SKdUt">
         <child id="8356039341262087992" name="line" index="1aUNEU" />
       </concept>
@@ -67,11 +75,21 @@
       </concept>
       <concept id="1158701162220" name="jetbrains.mps.lang.actions.structure.NodeSetupFunction" flags="in" index="37Y9Zx" />
       <concept id="5584396657084912703" name="jetbrains.mps.lang.actions.structure.NodeSetupFunction_NewNode" flags="nn" index="1r4Lsj" />
+      <concept id="5584396657084920670" name="jetbrains.mps.lang.actions.structure.NodeSetupFunction_EnclosingNode" flags="nn" index="1r4N1M" />
     </language>
     <language id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel">
       <concept id="1140725362528" name="jetbrains.mps.lang.smodel.structure.Link_SetTargetOperation" flags="nn" index="2oxUTD">
         <child id="1140725362529" name="linkTarget" index="2oxUTC" />
       </concept>
+      <concept id="1179409122411" name="jetbrains.mps.lang.smodel.structure.Node_ConceptMethodCall" flags="nn" index="2qgKlT" />
+      <concept id="1883223317721008708" name="jetbrains.mps.lang.smodel.structure.IfInstanceOfStatement" flags="nn" index="Jncv_">
+        <reference id="1883223317721008712" name="nodeConcept" index="JncvD" />
+        <child id="1883223317721008709" name="body" index="Jncv$" />
+        <child id="1883223317721008711" name="variable" index="JncvA" />
+        <child id="1883223317721008710" name="nodeExpression" index="JncvB" />
+      </concept>
+      <concept id="1883223317721008713" name="jetbrains.mps.lang.smodel.structure.IfInstanceOfVariable" flags="ng" index="JncvC" />
+      <concept id="1883223317721107059" name="jetbrains.mps.lang.smodel.structure.IfInstanceOfVarReference" flags="nn" index="Jnkvi" />
       <concept id="1180636770613" name="jetbrains.mps.lang.smodel.structure.SNodeCreator" flags="nn" index="3zrR0B">
         <child id="1180636770616" name="createdType" index="3zrR0E" />
       </concept>
@@ -137,6 +155,34 @@
                   <ref role="3cqZAo" node="6F9Ho3Obuf$" resolve="mQueue" />
                 </node>
               </node>
+            </node>
+          </node>
+          <node concept="Jncv_" id="3JP6tISbXep" role="3cqZAp">
+            <ref role="JncvD" to="o1mc:3m_VcJMWzdQ" resolve="ActorScript" />
+            <node concept="1r4N1M" id="3JP6tISbXfP" role="JncvB" />
+            <node concept="3clFbS" id="3JP6tISbXet" role="Jncv$">
+              <node concept="3clFbF" id="3JP6tISbXhJ" role="3cqZAp">
+                <node concept="37vLTI" id="3JP6tISc0d2" role="3clFbG">
+                  <node concept="2OqwBi" id="3JP6tISc1cT" role="37vLTx">
+                    <node concept="Jnkvi" id="3JP6tISc11A" role="2Oq$k0">
+                      <ref role="1M0zk5" node="3JP6tISbXev" resolve="script" />
+                    </node>
+                    <node concept="2qgKlT" id="3JP6tISc1p1" role="2OqNvi">
+                      <ref role="37wK5l" to="fh8z:3JP6tIS4aZI" resolve="getFreeAddress" />
+                    </node>
+                  </node>
+                  <node concept="2OqwBi" id="3JP6tISbXyP" role="37vLTJ">
+                    <node concept="1r4Lsj" id="3JP6tISbXhI" role="2Oq$k0" />
+                    <node concept="3TrcHB" id="3JP6tISbXUL" role="2OqNvi">
+                      <ref role="3TsBF5" to="o1mc:1enjyq1kiKO" resolve="address" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+            <node concept="JncvC" id="3JP6tISbXev" role="JncvA">
+              <property role="TrG5h" value="script" />
+              <node concept="2jxLKc" id="3JP6tISbXew" role="1tU5fm" />
             </node>
           </node>
         </node>
@@ -235,10 +281,6 @@
         </node>
       </node>
     </node>
-  </node>
-  <node concept="37WguZ" id="5VO4ZzPTp0w">
-    <property role="3GE5qa" value="behavior" />
-    <property role="TrG5h" value="BehaviorFactory" />
   </node>
 </model>
 

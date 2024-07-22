@@ -14,8 +14,8 @@ import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 
-public final class CreateActor__BehaviorDescriptor extends BaseBHDescriptor {
-  private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
+public final class ActorCreation__BehaviorDescriptor extends BaseBHDescriptor {
+  private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getInterfaceConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e268157ad87L, "ActorLanguage.structure.ActorCreation");
 
 
   private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList();
@@ -24,7 +24,7 @@ public final class CreateActor__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
 
-  /*package*/ CreateActor__BehaviorDescriptor() {
+  /*package*/ ActorCreation__BehaviorDescriptor() {
   }
 
   @Override

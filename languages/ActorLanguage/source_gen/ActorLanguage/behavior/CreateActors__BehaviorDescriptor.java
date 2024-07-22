@@ -24,6 +24,7 @@ import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SConcept;
 
 public final class CreateActors__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, "ActorLanguage.structure.CreateActors");
@@ -53,6 +54,7 @@ public final class CreateActors__BehaviorDescriptor extends BaseBHDescriptor {
       SLinkOperations.setTarget(newActor, LINKS.behavior$QgnL, SLinkOperations.getTarget(__thisNode__, LINKS.behavior$ew$H));
       SLinkOperations.setTarget(newActor, LINKS.messageQueue$L0ws, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6ac9b580f420bed7L, "ActorLanguage.structure.MessageQueue")));
       SPropertyOperations.assignEnum(newActor, PROPS.fetchPolicy$taMB, SPropertyOperations.getEnum(__thisNode__, PROPS.fetchPolicy$VsGQ));
+      SPropertyOperations.assign(newActor, PROPS.address$DqJ_, (int) ActorScript__BehaviorDescriptor.getFreeAddress_id3JP6tIS4aZI.invoke(SNodeOperations.getNodeAncestor(__thisNode__, CONCEPTS.ActorScript$nz, false, false)));
       ListSequence.fromList(SLinkOperations.getChildren(__thisNode__, LINKS.actors$HQEA)).addElement(newActor);
     }
   }
@@ -117,5 +119,10 @@ public final class CreateActors__BehaviorDescriptor extends BaseBHDescriptor {
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
     /*package*/ static final SProperty fetchPolicy$taMB = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x42ce0f2f39c1b9ccL, "fetchPolicy");
     /*package*/ static final SProperty fetchPolicy$VsGQ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x42ce0f2f39c1ba5dL, "fetchPolicy");
+    /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
   }
 }

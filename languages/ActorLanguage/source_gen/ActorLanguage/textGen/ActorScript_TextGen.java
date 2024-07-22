@@ -108,7 +108,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     ctx.getBuffer().area().increaseIndent();
 
     int num_threads = 0;
-    for (SNode actorCreation : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a))) {
+    for (SNode actorCreation : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actorCreation$EA0a))) {
       {
         final SNode act = actorCreation;
         if (SNodeOperations.isInstanceOf(act, CONCEPTS.CreateActor$Uv)) {
@@ -177,7 +177,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
 
     int i = 0;
 
-    for (SNode actor : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actors$EA0a))) {
+    for (SNode actor : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actorCreation$EA0a))) {
       {
         final SNode a = actor;
         if (SNodeOperations.isInstanceOf(a, CONCEPTS.CreateActor$Uv)) {
@@ -255,7 +255,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     /*package*/ static final SReferenceLink behavior$QgnL = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681516c72L, "behavior");
     /*package*/ static final SContainmentLink become$KDXz = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5366e9c2d9745d61L, "become");
     /*package*/ static final SReferenceLink newBehavior$ISpz = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5366e9c2d97392cfL, 0x5366e9c2d973e7e8L, "newBehavior");
-    /*package*/ static final SContainmentLink actors$EA0a = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x35a5eccbf2f23377L, "actors");
+    /*package*/ static final SContainmentLink actorCreation$EA0a = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x35a5eccbf2f23377L, "actorCreation");
     /*package*/ static final SContainmentLink topology$GORc = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x262cd812cfe6cc9dL, "topology");
     /*package*/ static final SContainmentLink links$3jtH = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57936L, 0x262cd812cfe5797cL, "links");
     /*package*/ static final SContainmentLink actors$HQEA = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x2e933327a36608L, "actors");
