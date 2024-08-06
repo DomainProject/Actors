@@ -16,36 +16,30 @@ void remove_quotes(char* str) {
             str[j++] = str[i];
         }
     }
-    str[j] = '\0';  // Null-terminate the modified string
+    str[j] = '\0'; 
 }
 
 char *trim_whitespace(char *str) {
     char *end;
 
-    // Trim spazi iniziali
     while (isspace((unsigned char)*str)) str++;
 
-    if (*str == 0)  // Se tutti gli spazi, restituisci una stringa vuota
+    if (*str == 0) 
         return str;
 
-    // Trim spazi finali
     end = str + strlen(str) - 1;
     while (end > str && isspace((unsigned char)*end)) end--;
 
-    // Terminare la stringa con un carattere nullo
     *(end + 1) = 0;
 
     return str;
 }
 
 int is_integer(const char *str) {
-    // Se la stringa è vuota, non è un numero
     if (*str == '\0') return 0;
 
-    // Permettere un segno all'inizio
     if (*str == '-' || *str == '+') str++;
 
-    // Controllare che ogni carattere sia una cifra
     while (*str) {
         if (!isdigit(*str)) return 0;
         str++;
@@ -53,20 +47,16 @@ int is_integer(const char *str) {
     return 1;
 }
 
-// Funzione per verificare se una stringa è un float
 int is_float(const char *str) {
     int has_decimal_point = 0;
 
-    // Se la stringa è vuota, non è un numero
     if (*str == '\0') return 0;
 
-    // Permettere un segno all'inizio
     if (*str == '-' || *str == '+') str++;
 
-    // Controllare che ogni carattere sia una cifra o un punto decimale
     while (*str) {
         if (*str == '.') {
-            if (has_decimal_point) return 0; // Più di un punto decimale
+            if (has_decimal_point) return 0;
             has_decimal_point = 1;
         } else if (!isdigit(*str)) {
             return 0;
@@ -74,7 +64,6 @@ int is_float(const char *str) {
         str++;
     }
 
-    // Un float deve avere almeno un numero e un punto decimale
     return has_decimal_point;
 }
 
