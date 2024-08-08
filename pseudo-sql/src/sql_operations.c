@@ -13,8 +13,10 @@ int compare_elements(const RowElement *elem1, const RowElement *elem2) {
             return (elem1->value.float_value > elem2->value.float_value) - (elem1->value.float_value < elem2->value.float_value);
         case TYPE_STRING:
             return strcmp(elem1->value.string_value, elem2->value.string_value);
+        case TYPE_DOUBLE:
+            return (elem1->value.double_value > elem2->value.double_value) - (elem1->value.double_value < elem2->value.double_value);
         default:
-            fprintf(stderr, "Unsupported type\n");
+            fprintf(stderr, "Unsupported type %d\n", elem1->type);
             exit(EXIT_FAILURE);
     }
 }
@@ -97,7 +99,7 @@ RowsList *ProjectionMultRows(RowsList input_rows, AttributeList list) {
                 found = 1;
         }
         if (!found) {
-            fprintf(stderr, "Column %s not found\n", list.attributes[i].name);
+            fprintf(stderr, "[PROJECTION] Column %s not found\n", list.attributes[i].name);
             return NULL;
         }
     } 
@@ -207,7 +209,7 @@ RowsList *OrderBy(RowsList input_rows, const char *col_name) {
     }
 
     if (!attribute_exists) {
-        fprintf(stderr, "Attribute %s not found in OrderBy\n", col_name);
+        fprintf(stderr, "[ORDER BY] Column %s not found\n", col_name);
         return NULL;
     }
 
@@ -251,7 +253,7 @@ GroupsList *GroupBy(RowsList *rows_list, const char *col_name) {
     }
 
     if (col_index == -1) {
-        fprintf(stderr, "Attribute not found\n");
+        fprintf(stderr, "[GROUP BY] Column %s not found\n", col_name);
         return NULL;
     }
 
@@ -360,7 +362,7 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
             free(sum);
             free(cnt);
 
-            fprintf(stderr, "Attribute %s not found\n", input.col_name);
+            fprintf(stderr, "[AGGREGATE FUNCTION] Column %s not found\n", input.col_name);
             return NULL;
         }
         
@@ -452,7 +454,7 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
                 free(sum);
                 free(cnt);
 
-                fprintf(stderr, "Attribute %s not found\n", input.col_name);
+                fprintf(stderr, "[AGGREGATE FUNCTION] Column %s not found\n", input.col_name);
                 return NULL;
             }
 

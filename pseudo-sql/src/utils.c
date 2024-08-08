@@ -156,6 +156,9 @@ void PrintRow(const Row *row) {
             case TYPE_STRING:
                 printf("Value: %s, Type: TYPE_STRING\n", row->elements[i].value.string_value);
                 break;
+            case TYPE_DOUBLE:
+                printf("Value: %f, Type: TYPE_DOUBLE\n", row->elements[i].value.double_value);
+                break;
             default:
                 break;
         }
