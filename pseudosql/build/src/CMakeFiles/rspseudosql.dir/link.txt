@@ -1,0 +1,2 @@
+/usr/bin/ar qc librspseudosql.a CMakeFiles/rspseudosql.dir/utils.c.o CMakeFiles/rspseudosql.dir/condition_parser.c.o CMakeFiles/rspseudosql.dir/sql_operations.c.o CMakeFiles/rspseudosql.dir/rootsim_operations.c.o
+/usr/bin/ranlib librspseudosql.a
