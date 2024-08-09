@@ -184,6 +184,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.interface_();
     b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/6839590609873398295");
     b.version(3);
+    b.property("textualCondition", 0x680472640f9c3430L).type(PrimitiveTypeId.STRING).origin("7495241453935539248").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForCount() {

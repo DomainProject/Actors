@@ -242,7 +242,7 @@
     <node concept="25R33" id="14g3IsRhKZU" role="25R1y">
       <property role="3tVfz5" value="1229499084499783674" />
       <property role="TrG5h" value="EQUALS" />
-      <property role="1L1pqM" value="=" />
+      <property role="1L1pqM" value="==" />
     </node>
     <node concept="25R33" id="14g3IsRhKZW" role="25R1y">
       <property role="3tVfz5" value="1229499084499783676" />
@@ -484,6 +484,11 @@
     <property role="EcuMT" value="6839590609873398295" />
     <property role="3GE5qa" value="where.condition" />
     <property role="TrG5h" value="Condition" />
+    <node concept="1TJgyi" id="6w4sAgfB3gK" role="1TKVEl">
+      <property role="IQ2nx" value="7495241453935539248" />
+      <property role="TrG5h" value="textualCondition" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
+    </node>
   </node>
   <node concept="1TIwiD" id="5VF6QK6AuCo">
     <property role="EcuMT" value="6839590609873398296" />

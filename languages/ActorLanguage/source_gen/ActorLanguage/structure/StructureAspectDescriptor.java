@@ -79,6 +79,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     deps.extendedLanguage(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, "jetbrains.mps.lang.core");
     deps.extendedLanguage(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, "jetbrains.mps.baseLanguage");
     deps.aggregatedLanguage(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, "jetbrains.mps.baseLanguage");
+    deps.aggregatedLanguage(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, "jetbrains.mps.lang.core");
   }
 
   @Override
@@ -323,6 +324,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.version(3);
     b.associate("actorFrom", 0x262cd812cfe57974L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57937L).optional(true).origin("2750811047725463924").done();
     b.associate("actorTo", 0x262cd812cfe57976L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57937L).optional(true).origin("2750811047725463926").done();
+    b.aggregate("data", 0x779e899a2deb7c19L).target(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x10802efe25aL).optional(true).ordered(true).multiple(false).origin("8619478032122084377").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForActorLinksList() {

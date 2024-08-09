@@ -15,7 +15,7 @@ public class EnumerationDescriptor_Operator extends EnumerationDescriptorBase {
     super(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737470ff9L, "Operator", "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783673");
   }
 
-  private final EnumerationDescriptor.MemberDescriptor myMember_EQUALS_0 = new EnumerationDescriptor.MemberDescriptor("EQUALS", "=", 0x11100ee737470ffaL, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783674");
+  private final EnumerationDescriptor.MemberDescriptor myMember_EQUALS_0 = new EnumerationDescriptor.MemberDescriptor("EQUALS", "==", 0x11100ee737470ffaL, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783674");
   private final EnumerationDescriptor.MemberDescriptor myMember_GREATER_0 = new EnumerationDescriptor.MemberDescriptor("GREATER", ">", 0x11100ee737470ffcL, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783676");
   private final EnumerationDescriptor.MemberDescriptor myMember_LOWER_0 = new EnumerationDescriptor.MemberDescriptor("LOWER", "<", 0x11100ee737471008L, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783688");
   private final EnumerationDescriptor.MemberDescriptor myMember_GREATER_EQUAL_0 = new EnumerationDescriptor.MemberDescriptor("GREATER_EQUAL", ">=", 0x11100ee73747100dL, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783693");

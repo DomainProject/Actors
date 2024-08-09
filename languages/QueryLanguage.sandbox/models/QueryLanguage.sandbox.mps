@@ -40,14 +40,14 @@
       </concept>
       <concept id="1047910270175909651" name="QueryLanguage.structure.AllColumns" flags="ng" index="2WQRJ5" />
       <concept id="7033755722359825273" name="QueryLanguage.structure.Select" flags="ng" index="15J0zD">
-        <property id="8521615295528819822" name="tableAlias" index="1cLguo" />
+        <property id="8521615295528819822" name="viewName" index="1cLguo" />
         <child id="3100867722287388537" name="groupBy" index="21oAAU" />
         <child id="3100867722286851113" name="orderBy" index="21qpFE" />
         <child id="7824142728409239666" name="joinCondition" index="ini0D" />
         <child id="2341611946572650175" name="tables" index="2legkn" />
         <child id="1229499084499654445" name="where" index="AlhBa" />
         <child id="1047910270176170764" name="cols" index="2WRRZq" />
-        <child id="817930103574093953" name="aliasTable" index="1LY3Yp" />
+        <child id="817930103574093953" name="viewTable" index="1LY3Yp" />
       </concept>
       <concept id="7033755722359825275" name="QueryLanguage.structure.Where" flags="ng" index="15J0zF">
         <child id="1229499084499985332" name="condition" index="AmyPj" />
@@ -147,7 +147,7 @@
         <node concept="1osJ5O" id="6eYilKnl7Xm" role="AmyPj">
           <property role="1osJ58" value="14g3IsRhKZU/EQUALS" />
           <node concept="1HhJcF" id="6eYilKnl7Xn" role="1osJ5a">
-            <property role="1HhJcI" value="&quot;Italy&quot;" />
+            <property role="1HhJcI" value="Italy" />
           </node>
           <node concept="Agl$j" id="6eYilKnl7Xo" role="1osJ57">
             <ref role="Agl$i" node="6eYilKnl7TR" resolve="country" />
@@ -233,6 +233,14 @@
               </node>
             </node>
           </node>
+        </node>
+      </node>
+      <node concept="ini0t" id="7uuypCIgwSI" role="ini0D">
+        <node concept="Agl$j" id="7uuypCIgwSJ" role="ini0i">
+          <ref role="Agl$i" node="5Q93FfFUJYl" resolve="age" />
+        </node>
+        <node concept="Agl$j" id="7uuypCIgwSK" role="ini0g">
+          <ref role="Agl$i" node="6eYilKnl7TR" resolve="country" />
         </node>
       </node>
     </node>

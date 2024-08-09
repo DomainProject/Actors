@@ -14,6 +14,7 @@ import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
   private final BHDescriptor myStatement__BehaviorDescriptor = new Statement__BehaviorDescriptor();
   private final BHDescriptor myScript__BehaviorDescriptor = new Script__BehaviorDescriptor();
+  private final BHDescriptor myMultipleCondition__BehaviorDescriptor = new MultipleCondition__BehaviorDescriptor();
   private final BHDescriptor mySelect__BehaviorDescriptor = new Select__BehaviorDescriptor();
 
   public BehaviorAspectDescriptor() {
@@ -24,14 +25,16 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
     SAbstractConcept cncpt = concept;
     switch (conceptIndex.index(cncpt)) {
       case 0:
-        return myScript__BehaviorDescriptor;
+        return myMultipleCondition__BehaviorDescriptor;
       case 1:
-        return mySelect__BehaviorDescriptor;
+        return myScript__BehaviorDescriptor;
       case 2:
+        return mySelect__BehaviorDescriptor;
+      case 3:
         return myStatement__BehaviorDescriptor;
       default:
     }
     return null;
   }
-  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443bcdL), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b30L)).seal();
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5eeb1b6c0699ea1bL), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443bcdL), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b30L)).seal();
 }

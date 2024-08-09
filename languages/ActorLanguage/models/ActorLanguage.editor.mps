@@ -178,6 +178,7 @@
       </concept>
     </language>
     <language id="fa13cc63-c476-4d46-9c96-d53670abe7bc" name="de.itemis.mps.editor.diagram">
+      <concept id="6554619383003875357" name="de.itemis.mps.editor.diagram.structure.InlineEditorComponent" flags="ig" index="238au4" />
       <concept id="8433227566817223068" name="de.itemis.mps.editor.diagram.structure.LayeredLayoutAlgorithm" flags="ng" index="39fpm">
         <property id="7623784619795245948" name="direction" index="1NdBj4" />
       </concept>
@@ -185,6 +186,7 @@
         <child id="6554619383001456819" name="targetId" index="23hSWE" />
       </concept>
       <concept id="1110129820007229393" name="de.itemis.mps.editor.diagram.structure.CellModel_Diagram" flags="ng" index="27vDVx">
+        <property id="4706276119306323403" name="runAutoLayoutOnInit" index="1ju4zT" />
         <child id="8433227566816393050" name="layoutAlgorithm" index="35U2g" />
         <child id="5018298105379062639" name="autoLayoutOnInit" index="2Dxx3A" />
         <child id="8637411062076630380" name="connectionTypes" index="1xLlFP" />
@@ -196,6 +198,7 @@
       <concept id="3462102746004176270" name="de.itemis.mps.editor.diagram.structure.DeleteHandler" flags="ig" index="2fs66k" />
       <concept id="9064581101900867235" name="de.itemis.mps.editor.diagram.structure.IEdgeEditor" flags="ngI" index="ljJFv">
         <child id="5725606875425248008" name="delete" index="1ide8m" />
+        <child id="2044706694575458564" name="labelCell" index="3kqczz" />
         <child id="6358960566596428706" name="curved" index="3Czvdj" />
         <child id="8587703283523592228" name="endpointFrom" index="1PN8q7" />
         <child id="8587703283523592242" name="endpointTo" index="1PN8qh" />
@@ -1447,6 +1450,11 @@
       <node concept="3clFbT" id="6g_QwonFyPQ" role="3Czvdj">
         <property role="3clFbU" value="true" />
       </node>
+      <node concept="238au4" id="7uuypCHR3gs" role="3kqczz">
+        <node concept="3F1sOY" id="7uuypCHURO3" role="2wV5jI">
+          <ref role="1NtTu8" to="o1mc:7uuypCHURKp" resolve="data" />
+        </node>
+      </node>
     </node>
     <node concept="2aJ2om" id="2oGQ1bfVtr0" role="CpUAK">
       <ref role="2$4xQ3" node="2oGQ1bfVsRT" resolve="topology" />
@@ -1456,6 +1464,7 @@
     <property role="3GE5qa" value="topology" />
     <ref role="1XX52x" to="o1mc:2oGQ1bfTn$Q" resolve="ActorsGraph" />
     <node concept="27vDVx" id="2oGQ1bfTvvH" role="2wV5jI">
+      <property role="1ju4zT" value="true" />
       <node concept="aDKH9" id="2oGQ1bfTvvL" role="aCds2">
         <ref role="aDKIf" to="o1mc:6GNNap0lEGQ" resolve="actors" />
       </node>
@@ -1519,9 +1528,6 @@
       <node concept="1RuTs0" id="2oGQ1bfTGMq" role="1RuSHk">
         <ref role="1RuSHD" to="o1mc:6GNNap0lEGQ" resolve="actors" />
       </node>
-      <node concept="39fpm" id="6g_QwonDBvJ" role="35U2g">
-        <property role="1NdBj4" value="6Bd7VwqYQAT/RIGHT" />
-      </node>
       <node concept="pkWqt" id="6g_QwonHshj" role="2Dxx3A">
         <node concept="3clFbS" id="6g_QwonHshk" role="2VODD2">
           <node concept="3clFbF" id="6g_QwonHsKb" role="3cqZAp">
@@ -1530,6 +1536,9 @@
             </node>
           </node>
         </node>
+      </node>
+      <node concept="39fpm" id="1OdtLo3nul4" role="35U2g">
+        <property role="1NdBj4" value="6Bd7VwqYQAT/RIGHT" />
       </node>
     </node>
     <node concept="2aJ2om" id="2oGQ1bfVtml" role="CpUAK">
