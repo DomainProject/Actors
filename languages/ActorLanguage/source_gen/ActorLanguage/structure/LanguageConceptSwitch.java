@@ -55,9 +55,11 @@ public final class LanguageConceptSwitch {
   public static final int SelectEnvelope = 43;
   public static final int SelectPayload = 44;
   public static final int SendMessage = 45;
-  public static final int StatementConstraint = 46;
-  public static final int StringBody = 47;
-  public static final int SwitchPolicy = 48;
+  public static final int SendMessageToActors = 46;
+  public static final int StatementConstraint = 47;
+  public static final int StringBody = 48;
+  public static final int SwitchPolicy = 49;
+  public static final int Type = 50;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x10eda99958984cdeL, 0x9416196c5eca1268L);
@@ -107,9 +109,11 @@ public final class LanguageConceptSwitch {
     builder.put(0x9de89b125bf6283L, SelectEnvelope);
     builder.put(0x4658738496c93a82L, SelectPayload);
     builder.put(0x35a5eccbf2f26df2L, SendMessage);
+    builder.put(0x338e7da8a4a78ca9L, SendMessageToActors);
     builder.put(0x61da6c5c2fca56f7L, StatementConstraint);
     builder.put(0x3db738e392e4ce51L, StringBody);
     builder.put(0x13974e2681a795e5L, SwitchPolicy);
+    builder.put(0x754f4cb23a214a8fL, Type);
     myIndex = builder.seal();
   }
 

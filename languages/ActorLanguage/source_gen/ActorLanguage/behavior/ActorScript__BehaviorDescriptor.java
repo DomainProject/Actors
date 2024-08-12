@@ -14,7 +14,6 @@ import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
@@ -22,7 +21,6 @@ import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SProperty;
-import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public final class ActorScript__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
@@ -35,23 +33,19 @@ public final class ActorScript__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   /*package*/ static int getFreeAddress_id3JP6tIS4aZI(@NotNull SNode __thisNode__) {
-    int count = 0;
-    for (SNode actorCreation : ListSequence.fromList(SLinkOperations.getChildren(__thisNode__, LINKS.actorCreation$EA0a))) {
-      {
-        final SNode c = actorCreation;
-        if (SNodeOperations.isInstanceOf(c, CONCEPTS.CreateActor$Uv)) {
-          count++;
+    int address = ListSequence.fromList(SNodeOperations.getNodeDescendants(__thisNode__, CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{})).count();
+    boolean isAddressFree;
+    do {
+      isAddressFree = true;
+      for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(__thisNode__, CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{}))) {
+        if (SPropertyOperations.getInteger(actor, PROPS.address$DqJ_) == address) {
+          isAddressFree = false;
+          address++;
+          break;
         }
       }
-      {
-        final SNode c = actorCreation;
-        if (SNodeOperations.isInstanceOf(c, CONCEPTS.CreateActors$rc)) {
-          count += SPropertyOperations.getInteger(c, PROPS.number$$XD7);
-        }
-      }
-    }
-
-    return count;
+    } while (!(isAddressFree));
+    return address;
   }
 
   /*package*/ ActorScript__BehaviorDescriptor() {
@@ -102,14 +96,9 @@ public final class ActorScript__BehaviorDescriptor extends BaseBHDescriptor {
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
-    /*package*/ static final SConcept CreateActors$rc = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, "ActorLanguage.structure.CreateActors");
   }
 
   private static final class PROPS {
-    /*package*/ static final SProperty number$$XD7 = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x5d890eb3ec029443L, "number");
-  }
-
-  private static final class LINKS {
-    /*package*/ static final SContainmentLink actorCreation$EA0a = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x35a5eccbf2f23377L, "actorCreation");
+    /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
   }
 }

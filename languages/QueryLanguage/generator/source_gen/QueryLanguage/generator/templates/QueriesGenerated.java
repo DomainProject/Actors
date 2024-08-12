@@ -1141,6 +1141,16 @@ public class QueriesGenerated extends QueryProviderBase {
       MultipleCondition__BehaviorDescriptor.setMultipleConditionString_id6w4sAgfAEwn.invoke(multipleCondition);
     }
   }
+  public static void mappingScript_CodeBlock_17(final MappingScriptContext _context) {
+    int count = 1;
+    for (SNode actor : ListSequence.fromList(SModelOperations.nodes(_context.getModel(), CONCEPTS.CreateActor$Uv))) {
+      if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$QgnL), PROPS.name$MnvL).equals("DataSource")) {
+        SPropertyOperations.assign(actor, PROPS.address$DqJ_, 0);
+      } else {
+        SPropertyOperations.assign(actor, PROPS.address$DqJ_, count++);
+      }
+    }
+  }
   public static SNode labelMapNode2_0(final TemplateQueryContext _context) {
     return SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q);
   }
@@ -1240,6 +1250,7 @@ public class QueriesGenerated extends QueryProviderBase {
   {
     int i = 0;
     mscbMethods.put("1455449051929537877", new SCB(i++));
+    mscbMethods.put("2233974986207239173", new SCB(i++));
   }
   @Override
   @NotNull
@@ -1257,6 +1268,9 @@ public class QueriesGenerated extends QueryProviderBase {
       switch (methodKey) {
         case 0:
           QueriesGenerated.mappingScript_CodeBlock_7(ctx);
+          return;
+        case 1:
+          QueriesGenerated.mappingScript_CodeBlock_17(ctx);
           return;
         default:
           throw new GenerationFailureException(String.format("There's no code block with method index %d ", methodKey));
@@ -1837,6 +1851,7 @@ public class QueriesGenerated extends QueryProviderBase {
     /*package*/ static final SContainmentLink operations$az69 = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443bcdL, 0x2b087ec3aa655166L, "operations");
     /*package*/ static final SContainmentLink receivedMessage$DtsG = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5ef413f8f5ff2c54L, "receivedMessage");
     /*package*/ static final SContainmentLink value$Ad30 = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5eeb1b6c0699ea18L, 0x5eeb1b6c0699ea26L, "value");
+    /*package*/ static final SReferenceLink behavior$QgnL = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681516c72L, "behavior");
   }
 
   private static final class CONCEPTS {
@@ -1847,6 +1862,7 @@ public class QueriesGenerated extends QueryProviderBase {
     /*package*/ static final SConcept MultipleCondition$9A = MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5eeb1b6c0699ea1bL, "QueryLanguage.structure.MultipleCondition");
     /*package*/ static final SConcept Select$Te = MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, "QueryLanguage.structure.Select");
     /*package*/ static final SConcept Script$Rg = MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443bcdL, "QueryLanguage.structure.Script");
+    /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
   }
 
   private static final class PROPS {
@@ -1856,5 +1872,6 @@ public class QueriesGenerated extends QueryProviderBase {
     /*package*/ static final SProperty value$jgCM = MetaAdapterFactory.getProperty(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc59b314L, 0xf8cc59b315L, "value");
     /*package*/ static final SProperty value$RF4w = MetaAdapterFactory.getProperty(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x625a3ba00f1cc88bL, 0x625a3ba00f1cc88eL, "value");
     /*package*/ static final SProperty operator$A7DD = MetaAdapterFactory.getProperty(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5eeb1b6c0699ea18L, 0x5eeb1b6c0699ea24L, "operator");
+    /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
   }
 }

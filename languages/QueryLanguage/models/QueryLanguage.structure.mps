@@ -14,6 +14,7 @@
         <property id="672037151186491528" name="presentation" index="1L1pqM" />
       </concept>
       <concept id="3348158742936976479" name="jetbrains.mps.lang.structure.structure.EnumerationDeclaration" flags="ng" index="25R3W">
+        <reference id="1075010451642646892" name="defaultMember" index="1H5jkz" />
         <child id="3348158742936976577" name="members" index="25R1y" />
       </concept>
       <concept id="1082978164218" name="jetbrains.mps.lang.structure.structure.DataTypeDeclaration" flags="ng" index="AxPO6">
@@ -111,6 +112,12 @@
       <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="joinCondition" />
       <ref role="20lvS9" node="6MkW5HYMt16" resolve="JoinCondition" />
+    </node>
+    <node concept="1TJgyj" id="32lqJACCeyQ" role="1TKVEi">
+      <property role="IQ2ns" value="3500821905858947254" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="window" />
+      <ref role="20lvS9" node="32lqJACCeyF" resolve="Window" />
     </node>
     <node concept="PrWs8" id="2G8vGeEpl5N" role="PzmwI">
       <ref role="PrY4T" node="2G8vGeEpl5$" resolve="DBOperation" />
@@ -584,6 +591,33 @@
       <property role="20kJfa" value="rightColumn" />
       <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" node="14g3IsRklvO" resolve="ColumnRef" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="32lqJACCeyF">
+    <property role="EcuMT" value="3500821905858947243" />
+    <property role="TrG5h" value="Window" />
+    <property role="3GE5qa" value="window" />
+    <property role="34LRSv" value="WINDOW" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="1TJgyi" id="32lqJACCeyL" role="1TKVEl">
+      <property role="IQ2nx" value="3500821905858947249" />
+      <property role="TrG5h" value="type" />
+      <ref role="AX2Wp" node="32lqJACCeyJ" resolve="WindowType" />
+    </node>
+    <node concept="1TJgyi" id="32lqJACCeyN" role="1TKVEl">
+      <property role="IQ2nx" value="3500821905858947251" />
+      <property role="TrG5h" value="size" />
+      <ref role="AX2Wp" to="tpck:fKAQMTA" resolve="integer" />
+    </node>
+  </node>
+  <node concept="25R3W" id="32lqJACCeyJ">
+    <property role="3F6X1D" value="3500821905858947247" />
+    <property role="3GE5qa" value="window" />
+    <property role="TrG5h" value="WindowType" />
+    <ref role="1H5jkz" node="32lqJACCeyK" resolve="TUMBLING" />
+    <node concept="25R33" id="32lqJACCeyK" role="25R1y">
+      <property role="3tVfz5" value="3500821905858947248" />
+      <property role="TrG5h" value="TUMBLING" />
     </node>
   </node>
 </model>

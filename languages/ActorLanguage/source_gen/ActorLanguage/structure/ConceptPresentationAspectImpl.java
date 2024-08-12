@@ -55,9 +55,11 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_SelectEnvelope;
   private ConceptPresentation props_SelectPayload;
   private ConceptPresentation props_SendMessage;
+  private ConceptPresentation props_SendMessageToActors;
   private ConceptPresentation props_StatementConstraint;
   private ConceptPresentation props_StringBody;
   private ConceptPresentation props_SwitchPolicy;
+  private ConceptPresentation props_Type;
 
   @Override
   @Nullable
@@ -389,6 +391,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_SendMessage = cpb.create();
         }
         return props_SendMessage;
+      case LanguageConceptSwitch.SendMessageToActors:
+        if (props_SendMessageToActors == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("send message to group of actors");
+          props_SendMessageToActors = cpb.create();
+        }
+        return props_SendMessageToActors;
       case LanguageConceptSwitch.StatementConstraint:
         if (props_StatementConstraint == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -409,6 +418,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_SwitchPolicy = cpb.create();
         }
         return props_SwitchPolicy;
+      case LanguageConceptSwitch.Type:
+        if (props_Type == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Type = cpb.create();
+        }
+        return props_Type;
     }
     return null;
   }

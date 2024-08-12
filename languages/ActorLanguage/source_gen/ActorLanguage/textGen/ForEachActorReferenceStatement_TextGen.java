@@ -7,10 +7,13 @@ import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
@@ -21,11 +24,15 @@ public class ForEachActorReferenceStatement_TextGen extends TextGenDescriptorBas
     tgs.createPositionInfo();
 
     tgs.indent();
-    tgs.append("for (int i = 0; i < ");
+    tgs.append("for (int i = 0; i < num_");
     tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.actorReferenceList$RLVE), PROPS.name$MnvL));
-    tgs.append("->size; i++) {");
+    tgs.append("; i++) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
+    for (SNode statement : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.statements$wOQE))) {
+      tgs.indent();
+      tgs.appendNode(statement);
+    }
     ctx.getBuffer().area().decreaseIndent();
     tgs.indent();
     tgs.append("}");
@@ -37,6 +44,7 @@ public class ForEachActorReferenceStatement_TextGen extends TextGenDescriptorBas
 
   private static final class LINKS {
     /*package*/ static final SReferenceLink actorReferenceList$RLVE = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5dbf567L, 0x401c50b1e5dbf568L, "actorReferenceList");
+    /*package*/ static final SContainmentLink statements$wOQE = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fc9e231L, 0x61da6c5c2fc9e232L, "statements");
   }
 
   private static final class PROPS {

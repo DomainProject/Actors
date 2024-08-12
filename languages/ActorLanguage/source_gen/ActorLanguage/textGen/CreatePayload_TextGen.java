@@ -5,86 +5,19 @@ package ActorLanguage.textGen;
 import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
-import org.jetbrains.mps.openapi.language.SProperty;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import org.jetbrains.mps.openapi.language.SContainmentLink;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class CreatePayload_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
-
-    String payload_name = SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL) + "_strings";
-
-    tgs.indent();
-    tgs.append("/* PAYLOAD CREATION */");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("char **");
-    tgs.append(payload_name);
-    tgs.append(" = malloc(sizeof(char *) * ");
-    tgs.append(String.valueOf(ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.strings$Xt$d)).count()));
-    tgs.append(");");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("if (!");
-    tgs.append(payload_name);
-    tgs.append(") {");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append("perror(\"malloc\");");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("exit(EXIT_FAILURE);");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("}");
-    tgs.newLine();
-    tgs.newLine();
-
-    for (SNode string : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.strings$Xt$d))) {
-      tgs.indent();
-      tgs.append(payload_name);
-      tgs.append("[");
-      tgs.append(String.valueOf(SNodeOperations.getIndexInParent(string)));
-      tgs.append("] = \"");
-      tgs.appendNode(string);
-      tgs.append("\";");
-      tgs.newLine();
-    }
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("payload *");
-    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
-    tgs.append(" = create_payload(");
-    tgs.append(payload_name);
-    tgs.append(", ");
-    tgs.append(String.valueOf(ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.strings$Xt$d)).count()));
-    tgs.append(");");
-    tgs.newLine();
-    tgs.newLine();
-
     if (tgs.needPositions()) {
       tgs.fillPositionInfo(TraceableConcept__BehaviorDescriptor.getTraceableProperty_id4pl5GY7LKmH.invoke(SNodeOperations.cast(ctx.getPrimaryInput(), CONCEPTS.TraceableConcept$L)));
     }
-  }
-
-  private static final class PROPS {
-    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
-  }
-
-  private static final class LINKS {
-    /*package*/ static final SContainmentLink strings$Xt$d = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, 0x3db738e392dd2178L, "strings");
   }
 
   private static final class CONCEPTS {

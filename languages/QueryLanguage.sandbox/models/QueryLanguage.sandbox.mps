@@ -20,6 +20,9 @@
       <concept id="2341611946572642014" name="QueryLanguage.structure.TableReference" flags="ng" index="2leIlQ">
         <reference id="2341611946572642015" name="tableRef" index="2leIlR" />
       </concept>
+      <concept id="3500821905858947243" name="QueryLanguage.structure.Window" flags="ng" index="2odo9i">
+        <property id="3500821905858947251" name="size" index="2odo9a" />
+      </concept>
       <concept id="1229499084500457460" name="QueryLanguage.structure.ColumnRef" flags="ng" index="Agl$j">
         <reference id="1229499084500457461" name="column" index="Agl$i" />
       </concept>
@@ -45,6 +48,7 @@
         <child id="3100867722286851113" name="orderBy" index="21qpFE" />
         <child id="7824142728409239666" name="joinCondition" index="ini0D" />
         <child id="2341611946572650175" name="tables" index="2legkn" />
+        <child id="3500821905858947254" name="window" index="2odo9f" />
         <child id="1229499084499654445" name="where" index="AlhBa" />
         <child id="1047910270176170764" name="cols" index="2WRRZq" />
         <child id="817930103574093953" name="viewTable" index="1LY3Yp" />
@@ -154,8 +158,8 @@
           </node>
         </node>
       </node>
-      <node concept="21oAwd" id="6eYilKnl7Xs" role="21oAAU">
-        <node concept="Agl$j" id="6eYilKnl7Xt" role="21oAAq">
+      <node concept="21oAwd" id="32lqJACJw5M" role="21oAAU">
+        <node concept="Agl$j" id="32lqJACJw5N" role="21oAAq">
           <ref role="Agl$i" node="5VF6QK6C0wQ" resolve="city" />
         </node>
       </node>
@@ -368,6 +372,9 @@
         <node concept="Agl$j" id="HpRLxUIQoi" role="21oAAq">
           <ref role="Agl$i" node="HpRLxUoZS3" resolve="regionId" />
         </node>
+      </node>
+      <node concept="2odo9i" id="32lqJACUHzZ" role="2odo9f">
+        <property role="2odo9a" value="15" />
       </node>
     </node>
     <node concept="15J0zD" id="HpRLxUIQp9" role="21riY_">

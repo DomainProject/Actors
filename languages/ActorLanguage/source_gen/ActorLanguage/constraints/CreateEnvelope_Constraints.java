@@ -99,7 +99,7 @@ public class CreateEnvelope_Constraints extends BaseConstraintsDescriptor {
           }
           @Override
           public Scope createScope(final ReferenceConstraintsContext _context) {
-            List<SNode> actors = ListSequence.fromList(new ArrayList<SNode>());
+            List<SNode> actors;
             if ((SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.Initializer$mM, false, false) != null)) {
               actors = SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.Initializer$mM, false, false), CONCEPTS.ActorReference$Cg, false, new SAbstractConcept[]{});
             } else {

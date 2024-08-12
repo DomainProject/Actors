@@ -36,6 +36,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_Update;
   private ConceptPresentation props_Value;
   private ConceptPresentation props_Where;
+  private ConceptPresentation props_Window;
 
   @Override
   @Nullable
@@ -226,6 +227,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Where = cpb.create();
         }
         return props_Where;
+      case LanguageConceptSwitch.Window:
+        if (props_Window == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("WINDOW");
+          props_Window = cpb.create();
+        }
+        return props_Window;
     }
     return null;
   }

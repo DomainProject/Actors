@@ -36,6 +36,7 @@ public final class LanguageConceptSwitch {
   public static final int Update = 24;
   public static final int Value = 25;
   public static final int Where = 26;
+  public static final int Window = 27;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L);
@@ -66,6 +67,7 @@ public final class LanguageConceptSwitch {
     builder.put(0x625a3ba00f23853fL, Update);
     builder.put(0x625a3ba00f1cc88bL, Value);
     builder.put(0x619ceb902420e37bL, Where);
+    builder.put(0x30956af9a8a0e8abL, Window);
     myIndex = builder.seal();
   }
 
