@@ -163,6 +163,9 @@
           <ref role="Agl$i" node="5VF6QK6C0wQ" resolve="city" />
         </node>
       </node>
+      <node concept="2odo9i" id="3F6HEtZw0Zx" role="2odo9f">
+        <property role="2odo9a" value="15" />
+      </node>
     </node>
     <node concept="15J0zD" id="2TdJYs2VY0S" role="21riY_">
       <node concept="2leIlQ" id="2TdJYs2VY0U" role="2legkn">
@@ -194,6 +197,9 @@
       <node concept="Agl$j" id="2TdJYs2VY2e" role="2WRRZq">
         <ref role="Agl$i" node="5Q93FfFUJYj" resolve="name" />
         <node concept="Avfch" id="2TdJYs2VY2g" role="1LWTg_" />
+      </node>
+      <node concept="2odo9i" id="3F6HEtZw0Zz" role="2odo9f">
+        <property role="2odo9a" value="15" />
       </node>
     </node>
     <node concept="15J0zD" id="6MkW5HYFxer" role="21riY_">
@@ -246,6 +252,9 @@
         <node concept="Agl$j" id="7uuypCIgwSK" role="ini0g">
           <ref role="Agl$i" node="6eYilKnl7TR" resolve="country" />
         </node>
+      </node>
+      <node concept="2odo9i" id="3F6HEtZw0Z_" role="2odo9f">
+        <property role="2odo9a" value="20" />
       </node>
     </node>
     <node concept="15J0zD" id="2TdJYs306YE" role="21riY_">
@@ -300,6 +309,9 @@
         <node concept="Agl$j" id="2TdJYs30704" role="ini0g">
           <ref role="Agl$i" node="5VF6QK6C0wL" resolve="name" />
         </node>
+      </node>
+      <node concept="2odo9i" id="3F6HEtZw0ZB" role="2odo9f">
+        <property role="2odo9a" value="20" />
       </node>
     </node>
   </node>
