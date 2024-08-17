@@ -36,30 +36,31 @@ public final class LanguageConceptSwitch {
   public static final int CreateEnvelope = 24;
   public static final int CreateMessage = 25;
   public static final int CreatePayload = 26;
-  public static final int Envelope = 27;
-  public static final int ExecuteExternalFunction = 28;
-  public static final int ExternalFunction = 29;
-  public static final int ForEachActorReferenceStatement = 30;
-  public static final int GetActorsFromReceptionist = 31;
-  public static final int Initializer = 32;
-  public static final int InitializerAction = 33;
-  public static final int Link = 34;
-  public static final int MessageQueue = 35;
-  public static final int MessageRef = 36;
-  public static final int Payload = 37;
-  public static final int RandomActor = 38;
-  public static final int Receptionist = 39;
-  public static final int ReceptionistPolicy = 40;
-  public static final int ReturnActorReference = 41;
-  public static final int SelectBehavior = 42;
-  public static final int SelectEnvelope = 43;
-  public static final int SelectPayload = 44;
-  public static final int SendMessage = 45;
-  public static final int SendMessageToActors = 46;
-  public static final int StatementConstraint = 47;
-  public static final int StringBody = 48;
-  public static final int SwitchPolicy = 49;
-  public static final int Type = 50;
+  public static final int CustomType = 27;
+  public static final int Envelope = 28;
+  public static final int ExecuteExternalFunction = 29;
+  public static final int ExternalFunction = 30;
+  public static final int ForEachActorReferenceStatement = 31;
+  public static final int GetActorsFromReceptionist = 32;
+  public static final int Initializer = 33;
+  public static final int InitializerAction = 34;
+  public static final int Link = 35;
+  public static final int MessageQueue = 36;
+  public static final int MessageRef = 37;
+  public static final int Payload = 38;
+  public static final int RandomActor = 39;
+  public static final int Receptionist = 40;
+  public static final int ReceptionistPolicy = 41;
+  public static final int ReturnActorReference = 42;
+  public static final int SelectBehavior = 43;
+  public static final int SelectEnvelope = 44;
+  public static final int SelectPayload = 45;
+  public static final int SendMessage = 46;
+  public static final int SendMessageToActors = 47;
+  public static final int StatementConstraint = 48;
+  public static final int StringBody = 49;
+  public static final int SwitchPolicy = 50;
+  public static final int Window = 51;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x10eda99958984cdeL, 0x9416196c5eca1268L);
@@ -90,6 +91,7 @@ public final class LanguageConceptSwitch {
     builder.put(0x2176abe574366687L, CreateEnvelope);
     builder.put(0x35a5eccbf2f23371L, CreateMessage);
     builder.put(0x2176abe574366688L, CreatePayload);
+    builder.put(0x754f4cb23a214a8fL, CustomType);
     builder.put(0x13974e268151b855L, Envelope);
     builder.put(0x61da6c5c302ab0f2L, ExecuteExternalFunction);
     builder.put(0x61da6c5c302aacc3L, ExternalFunction);
@@ -113,7 +115,7 @@ public final class LanguageConceptSwitch {
     builder.put(0x61da6c5c2fca56f7L, StatementConstraint);
     builder.put(0x3db738e392e4ce51L, StringBody);
     builder.put(0x13974e2681a795e5L, SwitchPolicy);
-    builder.put(0x754f4cb23a214a8fL, Type);
+    builder.put(0x712ee2200f5e06fcL, Window);
     myIndex = builder.seal();
   }
 

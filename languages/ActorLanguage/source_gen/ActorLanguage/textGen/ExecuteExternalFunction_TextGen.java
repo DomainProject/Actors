@@ -149,6 +149,19 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.newLine();
       tgs.newLine();
 
+    } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("window")) {
+      tgs.indent();
+      tgs.append("RowsList *");
+      tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
+      tgs.append("= ExecuteWindow((Message *)content, (WindowData *)data);");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("if (!");
+      tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
+      tgs.append(") return;");
+      tgs.newLine();
+      tgs.newLine();
+
     }
     if (tgs.needPositions()) {
       tgs.fillPositionInfo(TraceableConcept__BehaviorDescriptor.getTraceableProperty_id4pl5GY7LKmH.invoke(SNodeOperations.cast(ctx.getPrimaryInput(), CONCEPTS.TraceableConcept$L)));

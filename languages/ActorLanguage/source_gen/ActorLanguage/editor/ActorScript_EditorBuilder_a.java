@@ -201,7 +201,7 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
       return LINKS.types$lVcp;
     }
     public SAbstractConcept getChildSConcept() {
-      return CONCEPTS.Type$VF;
+      return CONCEPTS.CustomType$VF;
     }
 
     public EditorCell createNodeCell(SNode elementNode) {
@@ -989,7 +989,7 @@ import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept PropertyAttribute$Gb = MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da56L, "jetbrains.mps.lang.core.structure.PropertyAttribute");
-    /*package*/ static final SConcept Type$VF = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x754f4cb23a214a8fL, "ActorLanguage.structure.Type");
+    /*package*/ static final SConcept CustomType$VF = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x754f4cb23a214a8fL, "ActorLanguage.structure.CustomType");
     /*package*/ static final SConcept ExternalFunction$kh = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302aacc3L, "ActorLanguage.structure.ExternalFunction");
     /*package*/ static final SConcept Initializer$mM = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xe2178aac28357fL, "ActorLanguage.structure.Initializer");
     /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");

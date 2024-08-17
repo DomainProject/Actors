@@ -6739,7 +6739,7 @@
                       <node concept="3clFbS" id="6MZL0Gg0PSt" role="3izTki">
                         <node concept="lc7rE" id="6MZL0Gg0PSu" role="3cqZAp">
                           <node concept="la8eA" id="6MZL0Gg0PSv" role="lcghm">
-                            <property role="lacIc" value="Window(topology, me, now, content, s, 5.0);" />
+                            <property role="lacIc" value="window(me, now, content, s);" />
                             <property role="ldcpH" value="true" />
                           </node>
                           <node concept="l8MVK" id="6MZL0Gg0PSw" role="lcghm" />
@@ -6789,133 +6789,17 @@
                       <node concept="3clFbS" id="6MZL0Gg0Yxl" role="3izTki">
                         <node concept="lc7rE" id="6MZL0Gg0Yxm" role="3cqZAp">
                           <node concept="la8eA" id="6MZL0Gg0Yxn" role="lcghm">
-                            <property role="lacIc" value="window_data = (WindowData *)s;" />
+                            <property role="lacIc" value="TerminateWindow((WindowData *)s, me, now);" />
                             <property role="ldcpH" value="true" />
                           </node>
                           <node concept="l8MVK" id="6MZL0Gg0Yxo" role="lcghm" />
                         </node>
-                        <node concept="lc7rE" id="6MZL0Gg0YEH" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg0YEI" role="lcghm">
-                            <property role="lacIc" value="window_data-&gt;can_end = true;" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg0YEJ" role="lcghm" />
-                          <node concept="l8MVK" id="6MZL0Gg10XO" role="lcghm" />
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg0YLR" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg0YLS" role="lcghm">
-                            <property role="lacIc" value="// flush window" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg0YLT" role="lcghm" />
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg0YNe" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg0YNf" role="lcghm">
-                            <property role="lacIc" value="window_data-&gt;list-&gt;num_rows = window_data-&gt;received_tuples;" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg114c" role="lcghm" />
-                          <node concept="l8MVK" id="6MZL0Gg0YNg" role="lcghm" />
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg10_w" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg10_x" role="lcghm">
-                            <property role="lacIc" value="RowsList *copy_list = rs_malloc(sizeof(RowsList));" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg10_y" role="lcghm" />
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg10AY" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg10AZ" role="lcghm">
-                            <property role="lacIc" value="CHECK_RSMALLOC(copy_list);" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg10B0" role="lcghm" />
-                          <node concept="l8MVK" id="6MZL0Gg14Jp" role="lcghm" />
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg10Cv" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg10Cw" role="lcghm">
-                            <property role="lacIc" value="copy_list-&gt;num_rows = window_data-&gt;received_tuples;" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg10Cx" role="lcghm" />
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg10E3" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg10E4" role="lcghm">
-                            <property role="lacIc" value="copy_list-&gt;rows = rs_malloc(sizeof(Row) * window_data-&gt;window_size);" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg10E5" role="lcghm" />
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg10FE" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg10FF" role="lcghm">
-                            <property role="lacIc" value="CHECK_RSMALLOC(copy_list-&gt;rows);" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg10FG" role="lcghm" />
-                          <node concept="l8MVK" id="6MZL0Gg150J" role="lcghm" />
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg10Hk" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg10Hl" role="lcghm">
-                            <property role="lacIc" value="for (int i = 0; i &lt; window_data-&gt;list-&gt;num_rows; i++) {" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg10Hm" role="lcghm" />
-                        </node>
-                        <node concept="3izx1p" id="6MZL0Gg156T" role="3cqZAp">
-                          <node concept="3clFbS" id="6MZL0Gg156V" role="3izTki">
-                            <node concept="lc7rE" id="6MZL0Gg158V" role="3cqZAp">
-                              <node concept="la8eA" id="6MZL0Gg16TE" role="lcghm">
-                                <property role="lacIc" value="copy_list-&gt;rows[i] = window_data-&gt;list-&gt;rows[i];" />
-                                <property role="ldcpH" value="true" />
-                              </node>
-                              <node concept="l8MVK" id="6MZL0Gg16X2" role="lcghm" />
-                            </node>
-                          </node>
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg10J1" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg10J2" role="lcghm">
-                            <property role="lacIc" value="}" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg170v" role="lcghm" />
-                          <node concept="l8MVK" id="6MZL0Gg10J3" role="lcghm" />
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg10KL" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg10KM" role="lcghm">
-                            <property role="lacIc" value="CreateAndSendRowsMessage(topology, me, 5.0, copy_list, now);" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg10KN" role="lcghm" />
-                          <node concept="l8MVK" id="6MZL0Gg18V4" role="lcghm" />
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg10Lr" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg10Ls" role="lcghm">
-                            <property role="lacIc" value="rs_free(window_data-&gt;list-&gt;rows);" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg10Lt" role="lcghm" />
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg10M8" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg10M9" role="lcghm">
-                            <property role="lacIc" value="rs_free(window_data-&gt;list);" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg10Ma" role="lcghm" />
-                          <node concept="l8MVK" id="6MZL0Gg18Wj" role="lcghm" />
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg10MS" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg10MT" role="lcghm">
-                            <property role="lacIc" value="ForwardTerminationMessage(topology, me, now);" />
-                            <property role="ldcpH" value="true" />
-                          </node>
-                          <node concept="l8MVK" id="6MZL0Gg10MU" role="lcghm" />
-                        </node>
-                        <node concept="lc7rE" id="6MZL0Gg10NF" role="3cqZAp">
-                          <node concept="la8eA" id="6MZL0Gg10NG" role="lcghm">
+                        <node concept="lc7rE" id="74ISy0fnr$T" role="3cqZAp">
+                          <node concept="la8eA" id="74ISy0fnr$U" role="lcghm">
                             <property role="lacIc" value="break;" />
                             <property role="ldcpH" value="true" />
                           </node>
-                          <node concept="l8MVK" id="6MZL0Gg10NH" role="lcghm" />
+                          <node concept="l8MVK" id="74ISy0fnr$V" role="lcghm" />
                         </node>
                       </node>
                     </node>
@@ -7538,6 +7422,67 @@
               <node concept="3clFbH" id="32lqJAComF4" role="3cqZAp" />
             </node>
           </node>
+          <node concept="3eNFk2" id="74ISy0gFuOz" role="3eNLev">
+            <node concept="2OqwBi" id="74ISy0gFuO$" role="3eO9$A">
+              <node concept="2OqwBi" id="74ISy0gFuO_" role="2Oq$k0">
+                <node concept="2OqwBi" id="74ISy0gFuOA" role="2Oq$k0">
+                  <node concept="117lpO" id="74ISy0gFuOB" role="2Oq$k0" />
+                  <node concept="3TrEf2" id="74ISy0gFuOC" role="2OqNvi">
+                    <ref role="3Tt5mk" to="o1mc:67qr5KKaF3N" />
+                  </node>
+                </node>
+                <node concept="3TrcHB" id="74ISy0gFuOD" role="2OqNvi">
+                  <ref role="3TsBF5" to="tpck:h0TrG11" resolve="name" />
+                </node>
+              </node>
+              <node concept="liA8E" id="74ISy0gFuOE" role="2OqNvi">
+                <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
+                <node concept="Xl_RD" id="74ISy0gFuOF" role="37wK5m">
+                  <property role="Xl_RC" value="Average" />
+                </node>
+              </node>
+            </node>
+            <node concept="3clFbS" id="74ISy0gFuOG" role="3eOfB_">
+              <node concept="lc7rE" id="74ISy0gFuOH" role="3cqZAp">
+                <node concept="la8eA" id="74ISy0gFuOI" role="lcghm">
+                  <property role="lacIc" value="RowsList *" />
+                  <property role="ldcpH" value="true" />
+                </node>
+                <node concept="l9hG8" id="74ISy0gFuOJ" role="lcghm">
+                  <node concept="2OqwBi" id="74ISy0gFuOK" role="lb14g">
+                    <node concept="117lpO" id="74ISy0gFuOL" role="2Oq$k0" />
+                    <node concept="3TrcHB" id="74ISy0gFuOM" role="2OqNvi">
+                      <ref role="3TsBF5" to="o1mc:3eevqy$WRGB" resolve="resultName" />
+                    </node>
+                  </node>
+                </node>
+                <node concept="la8eA" id="74ISy0gFuON" role="lcghm">
+                  <property role="lacIc" value="= wAggregateFunction((Message *)content, data, AVG);" />
+                </node>
+                <node concept="l8MVK" id="74ISy0gFuOO" role="lcghm" />
+              </node>
+              <node concept="lc7rE" id="74ISy0gFuOP" role="3cqZAp">
+                <node concept="la8eA" id="74ISy0gFuOQ" role="lcghm">
+                  <property role="lacIc" value="if (!" />
+                  <property role="ldcpH" value="true" />
+                </node>
+                <node concept="l9hG8" id="74ISy0gFuOR" role="lcghm">
+                  <node concept="2OqwBi" id="74ISy0gFuOS" role="lb14g">
+                    <node concept="117lpO" id="74ISy0gFuOT" role="2Oq$k0" />
+                    <node concept="3TrcHB" id="74ISy0gFuOU" role="2OqNvi">
+                      <ref role="3TsBF5" to="o1mc:3eevqy$WRGB" resolve="resultName" />
+                    </node>
+                  </node>
+                </node>
+                <node concept="la8eA" id="74ISy0gFuOV" role="lcghm">
+                  <property role="lacIc" value=") return;" />
+                </node>
+                <node concept="l8MVK" id="74ISy0gFuOW" role="lcghm" />
+                <node concept="l8MVK" id="74ISy0gFuOX" role="lcghm" />
+              </node>
+              <node concept="3clFbH" id="74ISy0gFuOY" role="3cqZAp" />
+            </node>
+          </node>
           <node concept="3eNFk2" id="3eevqy$DSwC" role="3eNLev">
             <node concept="2OqwBi" id="3eevqy$DSwD" role="3eO9$A">
               <node concept="2OqwBi" id="3eevqy$DSwE" role="2Oq$k0">
@@ -7554,7 +7499,7 @@
               <node concept="liA8E" id="3eevqy$DSwJ" role="2OqNvi">
                 <ref role="37wK5l" to="wyt6:~String.equals(java.lang.Object)" resolve="equals" />
                 <node concept="Xl_RD" id="3eevqy$DSwK" role="37wK5m">
-                  <property role="Xl_RC" value="Average" />
+                  <property role="Xl_RC" value="window" />
                 </node>
               </node>
             </node>
@@ -7573,7 +7518,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="32lqJAConT3" role="lcghm">
-                  <property role="lacIc" value="= wAggregateFunction((Message *)content, data, AVG);" />
+                  <property role="lacIc" value="= ExecuteWindow((Message *)content, (WindowData *)data);" />
                 </node>
                 <node concept="l8MVK" id="32lqJAConT4" role="lcghm" />
               </node>
