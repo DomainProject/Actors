@@ -20,6 +20,9 @@
       <concept id="2341611946572642014" name="QueryLanguage.structure.TableReference" flags="ng" index="2leIlQ">
         <reference id="2341611946572642015" name="tableRef" index="2leIlR" />
       </concept>
+      <concept id="3500821905858947243" name="QueryLanguage.structure.Window" flags="ng" index="2odo9i">
+        <property id="3500821905858947251" name="size" index="2odo9a" />
+      </concept>
       <concept id="1229499084500457460" name="QueryLanguage.structure.ColumnRef" flags="ng" index="Agl$j">
         <reference id="1229499084500457461" name="column" index="Agl$i" />
       </concept>
@@ -40,14 +43,15 @@
       </concept>
       <concept id="1047910270175909651" name="QueryLanguage.structure.AllColumns" flags="ng" index="2WQRJ5" />
       <concept id="7033755722359825273" name="QueryLanguage.structure.Select" flags="ng" index="15J0zD">
-        <property id="8521615295528819822" name="tableAlias" index="1cLguo" />
+        <property id="8521615295528819822" name="viewName" index="1cLguo" />
         <child id="3100867722287388537" name="groupBy" index="21oAAU" />
         <child id="3100867722286851113" name="orderBy" index="21qpFE" />
         <child id="7824142728409239666" name="joinCondition" index="ini0D" />
         <child id="2341611946572650175" name="tables" index="2legkn" />
+        <child id="3500821905858947254" name="window" index="2odo9f" />
         <child id="1229499084499654445" name="where" index="AlhBa" />
         <child id="1047910270176170764" name="cols" index="2WRRZq" />
-        <child id="817930103574093953" name="aliasTable" index="1LY3Yp" />
+        <child id="817930103574093953" name="viewTable" index="1LY3Yp" />
       </concept>
       <concept id="7033755722359825275" name="QueryLanguage.structure.Where" flags="ng" index="15J0zF">
         <child id="1229499084499985332" name="condition" index="AmyPj" />
@@ -147,17 +151,20 @@
         <node concept="1osJ5O" id="6eYilKnl7Xm" role="AmyPj">
           <property role="1osJ58" value="14g3IsRhKZU/EQUALS" />
           <node concept="1HhJcF" id="6eYilKnl7Xn" role="1osJ5a">
-            <property role="1HhJcI" value="&quot;Italy&quot;" />
+            <property role="1HhJcI" value="Italy" />
           </node>
           <node concept="Agl$j" id="6eYilKnl7Xo" role="1osJ57">
             <ref role="Agl$i" node="6eYilKnl7TR" resolve="country" />
           </node>
         </node>
       </node>
-      <node concept="21oAwd" id="6eYilKnl7Xs" role="21oAAU">
-        <node concept="Agl$j" id="6eYilKnl7Xt" role="21oAAq">
+      <node concept="21oAwd" id="32lqJACJw5M" role="21oAAU">
+        <node concept="Agl$j" id="32lqJACJw5N" role="21oAAq">
           <ref role="Agl$i" node="5VF6QK6C0wQ" resolve="city" />
         </node>
+      </node>
+      <node concept="2odo9i" id="3F6HEtZw0Zx" role="2odo9f">
+        <property role="2odo9a" value="15" />
       </node>
     </node>
     <node concept="15J0zD" id="2TdJYs2VY0S" role="21riY_">
@@ -190,6 +197,9 @@
       <node concept="Agl$j" id="2TdJYs2VY2e" role="2WRRZq">
         <ref role="Agl$i" node="5Q93FfFUJYj" resolve="name" />
         <node concept="Avfch" id="2TdJYs2VY2g" role="1LWTg_" />
+      </node>
+      <node concept="2odo9i" id="3F6HEtZw0Zz" role="2odo9f">
+        <property role="2odo9a" value="15" />
       </node>
     </node>
     <node concept="15J0zD" id="6MkW5HYFxer" role="21riY_">
@@ -234,6 +244,17 @@
             </node>
           </node>
         </node>
+      </node>
+      <node concept="ini0t" id="7uuypCIgwSI" role="ini0D">
+        <node concept="Agl$j" id="7uuypCIgwSJ" role="ini0i">
+          <ref role="Agl$i" node="5Q93FfFUJYl" resolve="age" />
+        </node>
+        <node concept="Agl$j" id="7uuypCIgwSK" role="ini0g">
+          <ref role="Agl$i" node="6eYilKnl7TR" resolve="country" />
+        </node>
+      </node>
+      <node concept="2odo9i" id="3F6HEtZw0Z_" role="2odo9f">
+        <property role="2odo9a" value="20" />
       </node>
     </node>
     <node concept="15J0zD" id="2TdJYs306YE" role="21riY_">
@@ -288,6 +309,9 @@
         <node concept="Agl$j" id="2TdJYs30704" role="ini0g">
           <ref role="Agl$i" node="5VF6QK6C0wL" resolve="name" />
         </node>
+      </node>
+      <node concept="2odo9i" id="3F6HEtZw0ZB" role="2odo9f">
+        <property role="2odo9a" value="20" />
       </node>
     </node>
   </node>
@@ -360,6 +384,9 @@
         <node concept="Agl$j" id="HpRLxUIQoi" role="21oAAq">
           <ref role="Agl$i" node="HpRLxUoZS3" resolve="regionId" />
         </node>
+      </node>
+      <node concept="2odo9i" id="32lqJACUHzZ" role="2odo9f">
+        <property role="2odo9a" value="15" />
       </node>
     </node>
     <node concept="15J0zD" id="HpRLxUIQp9" role="21riY_">

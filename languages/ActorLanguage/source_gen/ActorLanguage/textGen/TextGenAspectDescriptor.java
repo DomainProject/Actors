@@ -25,6 +25,8 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
     switch (myIndex.index(concept)) {
       case LanguageConceptSwitch.ActorScript:
         return new ActorScript_TextGen();
+      case LanguageConceptSwitch.ActorsGraph:
+        return new ActorsGraph_TextGen();
       case LanguageConceptSwitch.CreateActor:
         return new CreateActor_TextGen();
       case LanguageConceptSwitch.CreateActors:
@@ -37,6 +39,10 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new CreateMessage_TextGen();
       case LanguageConceptSwitch.CreatePayload:
         return new CreatePayload_TextGen();
+      case LanguageConceptSwitch.ExecuteExternalFunction:
+        return new ExecuteExternalFunction_TextGen();
+      case LanguageConceptSwitch.ExternalFunction:
+        return new ExternalFunction_TextGen();
       case LanguageConceptSwitch.ForEachActorReferenceStatement:
         return new ForEachActorReferenceStatement_TextGen();
       case LanguageConceptSwitch.GetActorsFromReceptionist:
@@ -47,6 +53,8 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new SelectBehavior_TextGen();
       case LanguageConceptSwitch.SendMessage:
         return new SendMessage_TextGen();
+      case LanguageConceptSwitch.SendMessageToActors:
+        return new SendMessageToActors_TextGen();
       case LanguageConceptSwitch.StringBody:
         return new StringBody_TextGen();
     }

@@ -642,5 +642,9 @@
       </node>
     </node>
   </node>
+  <node concept="1M2fIO" id="6w4sAgfAlZ0">
+    <property role="3GE5qa" value="where.condition" />
+    <ref role="1M2myG" to="p6im:5VF6QK6AuCo" resolve="SimpleCondition" />
+  </node>
 </model>
 

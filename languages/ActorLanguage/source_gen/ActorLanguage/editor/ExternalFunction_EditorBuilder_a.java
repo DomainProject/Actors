@@ -89,7 +89,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
     }
   }
   private EditorCell createConstant_1() {
-    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "(message);");
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, ";");
     editorCell.setCellId("Constant_vd652s_c0");
     Style style = new StyleImpl();
     style.set(StyleAttributes.PUNCTUATION_LEFT, true);

@@ -527,6 +527,12 @@
           <property role="VOm3f" value="true" />
         </node>
       </node>
+      <node concept="3F1sOY" id="32lqJACCgcL" role="3EZMnx">
+        <ref role="1NtTu8" to="p6im:32lqJACCeyQ" resolve="window" />
+        <node concept="pVoyu" id="32lqJACCgmp" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+      </node>
       <node concept="3F0ifn" id="14g3IsRibwT" role="3EZMnx">
         <node concept="pVoyu" id="14g3IsRibx7" role="3F10Kt">
           <property role="VOm3f" value="true" />
@@ -1375,6 +1381,37 @@
         <ref role="1NtTu8" to="p6im:6MkW5HYMt1b" resolve="rightColumn" />
       </node>
       <node concept="l2Vlx" id="6MkW5HYMt1j" role="2iSdaV" />
+    </node>
+  </node>
+  <node concept="24kQdi" id="32lqJACCgAJ">
+    <property role="3GE5qa" value="window" />
+    <ref role="1XX52x" to="p6im:32lqJACCeyF" resolve="Window" />
+    <node concept="3EZMnI" id="32lqJACCgAL" role="2wV5jI">
+      <node concept="3F0ifn" id="32lqJACCgAV" role="3EZMnx">
+        <property role="3F0ifm" value="WINDOW" />
+        <node concept="VechU" id="32lqJACCgB1" role="3F10Kt">
+          <property role="Vb096" value="g1_qVrt/darkMagenta" />
+        </node>
+      </node>
+      <node concept="3F0ifn" id="32lqJACCgB3" role="3EZMnx">
+        <property role="3F0ifm" value="(" />
+      </node>
+      <node concept="3F0A7n" id="32lqJACCgBw" role="3EZMnx">
+        <ref role="1NtTu8" to="p6im:32lqJACCeyL" resolve="type" />
+      </node>
+      <node concept="3F0ifn" id="32lqJACCgBI" role="3EZMnx">
+        <property role="3F0ifm" value="," />
+      </node>
+      <node concept="3F0A7n" id="32lqJACCgC7" role="3EZMnx">
+        <ref role="1NtTu8" to="p6im:32lqJACCeyN" resolve="size" />
+      </node>
+      <node concept="3F0ifn" id="32lqJACCgCp" role="3EZMnx">
+        <property role="3F0ifm" value="seconds" />
+      </node>
+      <node concept="3F0ifn" id="32lqJACCgBd" role="3EZMnx">
+        <property role="3F0ifm" value=")" />
+      </node>
+      <node concept="l2Vlx" id="32lqJACCgAO" role="2iSdaV" />
     </node>
   </node>
 </model>

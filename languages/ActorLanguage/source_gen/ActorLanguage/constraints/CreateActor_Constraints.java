@@ -6,11 +6,12 @@ import jetbrains.mps.smodel.runtime.base.BaseConstraintsDescriptor;
 import jetbrains.mps.smodel.runtime.base.BasePropertyConstraintsDescriptor;
 import jetbrains.mps.smodel.runtime.ConstraintsDescriptor;
 import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.smodel.runtime.CheckingNodeContext;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import ActorLanguage.behavior.ActorScript__BehaviorDescriptor;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.smodel.runtime.CheckingNodeContext;
 import jetbrains.mps.smodel.SNodePointer;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.ArrayList;
 import java.util.Map;
@@ -27,7 +28,15 @@ public class CreateActor_Constraints extends BaseConstraintsDescriptor {
 
   public static class Name_Property extends BasePropertyConstraintsDescriptor {
     public Name_Property(ConstraintsDescriptor container) {
-      super(PROPS.name$MnvL, container, false, false, true);
+      super(PROPS.name$MnvL, container, false, true, true);
+    }
+    @Override
+    public void setPropertyValue(SNode node, Object propertyValue) {
+      staticSetPropertyValue(node, SPropertyOperations.castString(propertyValue));
+    }
+    private static void staticSetPropertyValue(SNode node, String propertyValue) {
+      SPropertyOperations.assign(node, PROPS.name$MnvL, propertyValue);
+      SPropertyOperations.assign(node, PROPS.address$DqJ_, (int) ActorScript__BehaviorDescriptor.getFreeAddress_id3JP6tIS4aZI.invoke(SNodeOperations.getNodeAncestor(node, CONCEPTS.ActorScript$nz, false, false)));
     }
     @Override
     public boolean validateValue(SNode node, Object propertyValue, CheckingNodeContext checkingNodeContext) {
@@ -61,9 +70,11 @@ public class CreateActor_Constraints extends BaseConstraintsDescriptor {
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
+    /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
   }
 
   private static final class PROPS {
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
   }
 }
