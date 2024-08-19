@@ -40,7 +40,7 @@ public abstract class GroupBySwitchCase {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("groupBy(me, now, content, s)");
+    tgs.append("groupBy(me, now, content, s);");
     tgs.newLine();
     tgs.indent();
     tgs.append("break;");

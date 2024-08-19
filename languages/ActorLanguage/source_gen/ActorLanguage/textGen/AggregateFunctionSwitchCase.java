@@ -42,9 +42,8 @@ public abstract class AggregateFunctionSwitchCase {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("wAggregateFunction(topology, me, now, content, (AggregateFunctionData *)s, 5.0, ");
     tgs.append(function);
-    tgs.append(");");
+    tgs.append("(me, now, content, s);");
     tgs.newLine();
     tgs.indent();
     tgs.append("break;");

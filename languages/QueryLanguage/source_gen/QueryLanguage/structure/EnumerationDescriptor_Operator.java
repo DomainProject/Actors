@@ -21,12 +21,9 @@ public class EnumerationDescriptor_Operator extends EnumerationDescriptorBase {
   private final EnumerationDescriptor.MemberDescriptor myMember_GREATER_EQUAL_0 = new EnumerationDescriptor.MemberDescriptor("GREATER_EQUAL", ">=", 0x11100ee73747100dL, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783693");
   private final EnumerationDescriptor.MemberDescriptor myMember_LOWER_EQUAL_0 = new EnumerationDescriptor.MemberDescriptor("LOWER_EQUAL", "<=", 0x11100ee737471013L, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783699");
   private final EnumerationDescriptor.MemberDescriptor myMember_NOT_EQUAL_0 = new EnumerationDescriptor.MemberDescriptor("NOT_EQUAL", "!=", 0x11100ee737471019L, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783705");
-  private final EnumerationDescriptor.MemberDescriptor myMember_BETWEEN_0 = new EnumerationDescriptor.MemberDescriptor("BETWEEN", "BETWEEN", 0x11100ee737471021L, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783713");
-  private final EnumerationDescriptor.MemberDescriptor myMember_LIKE_0 = new EnumerationDescriptor.MemberDescriptor("LIKE", "LIKE", 0x11100ee73747102aL, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783722");
-  private final EnumerationDescriptor.MemberDescriptor myMember_IN_0 = new EnumerationDescriptor.MemberDescriptor("IN", "IN", 0x11100ee737471034L, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783732");
 
-  private final EnumerationLiteralsIndex myIndex = EnumerationLiteralsIndex.build(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737470ff9L, 0x11100ee737470ffaL, 0x11100ee737470ffcL, 0x11100ee737471008L, 0x11100ee73747100dL, 0x11100ee737471013L, 0x11100ee737471019L, 0x11100ee737471021L, 0x11100ee73747102aL, 0x11100ee737471034L);
-  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList(myIndex, myMember_EQUALS_0, myMember_GREATER_0, myMember_LOWER_0, myMember_GREATER_EQUAL_0, myMember_LOWER_EQUAL_0, myMember_NOT_EQUAL_0, myMember_BETWEEN_0, myMember_LIKE_0, myMember_IN_0);
+  private final EnumerationLiteralsIndex myIndex = EnumerationLiteralsIndex.build(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737470ff9L, 0x11100ee737470ffaL, 0x11100ee737470ffcL, 0x11100ee737471008L, 0x11100ee73747100dL, 0x11100ee737471013L, 0x11100ee737471019L);
+  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList(myIndex, myMember_EQUALS_0, myMember_GREATER_0, myMember_LOWER_0, myMember_GREATER_EQUAL_0, myMember_LOWER_EQUAL_0, myMember_NOT_EQUAL_0);
 
   @Nullable
   @Override
@@ -59,12 +56,6 @@ public class EnumerationDescriptor_Operator extends EnumerationDescriptorBase {
         return myMember_LOWER_EQUAL_0;
       case "NOT_EQUAL":
         return myMember_NOT_EQUAL_0;
-      case "BETWEEN":
-        return myMember_BETWEEN_0;
-      case "LIKE":
-        return myMember_LIKE_0;
-      case "IN":
-        return myMember_IN_0;
     }
     return null;
   }

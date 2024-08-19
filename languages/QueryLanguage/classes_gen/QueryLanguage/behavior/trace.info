@@ -296,130 +296,138 @@
       <node id="7495241453935437827" at="35,0,36,0" concept="9" trace="BH_METHODS" />
       <node id="7495241453935524396" at="40,97,41,196" concept="2" />
       <node id="7495241453935438284" at="44,5,45,41" concept="6" />
-      <node id="7495241453935493515" at="46,82,47,132" concept="7" />
-      <node id="7495241453935491513" at="50,5,51,41" concept="6" />
-      <node id="7495241453935498767" at="52,84,53,134" concept="7" />
-      <node id="7495241453935499115" at="55,5,56,14" concept="7" />
-      <node id="7495241453935438721" at="58,115,59,82" concept="7" />
-      <node id="7495241453935471963" at="61,117,62,187" concept="6" />
-      <node id="7495241453935473805" at="62,187,63,187" concept="6" />
-      <node id="7495241453935475239" at="64,271,65,48" concept="7" />
-      <node id="7495241453938672728" at="66,5,67,46" concept="7" />
-      <node id="7495241453935437827" at="74,114,75,21" concept="2" />
-      <node id="7495241453935437827" at="79,114,80,49" concept="6" />
-      <node id="7495241453935437827" at="81,26,82,56" concept="12" />
-      <node id="7495241453935437827" at="85,13,86,55" concept="2" />
-      <node id="7495241453935437827" at="86,55,87,20" concept="7" />
-      <node id="7495241453935437827" at="88,13,89,92" concept="7" />
-      <node id="7495241453935437827" at="90,13,91,98" concept="7" />
-      <node id="7495241453935437827" at="92,13,93,100" concept="7" />
-      <node id="7495241453935437827" at="94,14,95,58" concept="12" />
-      <node id="7495241453935437827" at="100,128,101,49" concept="6" />
-      <node id="7495241453935437827" at="102,26,103,56" concept="12" />
-      <node id="7495241453935437827" at="106,14,107,58" concept="12" />
-      <node id="7495241453935437827" at="113,48,114,22" concept="7" />
-      <node id="7495241453935437827" at="119,40,120,19" concept="7" />
-      <node id="7495241453935437827" at="124,0,125,0" concept="9" trace="textualCondition$n5ly" />
-      <node id="7495241453935437827" at="125,0,126,0" concept="9" trace="operator$A6J2" />
-      <node id="7495241453935437827" at="129,0,130,0" concept="9" trace="SimpleCondition$89" />
-      <node id="7495241453935437827" at="130,0,131,0" concept="9" trace="MultipleCondition$9A" />
-      <node id="7495241453935437827" at="134,0,135,0" concept="9" trace="conditionSx$ALET" />
-      <node id="7495241453935437827" at="135,0,136,0" concept="9" trace="conditionDx$A_03" />
+      <node id="2849352084545055947" at="46,82,47,150" concept="6" />
+      <node id="2849352084545058283" at="47,150,48,92" concept="2" />
+      <node id="7495241453935493515" at="48,92,49,31" concept="7" />
+      <node id="7495241453935491513" at="52,5,53,41" concept="6" />
+      <node id="2849352084545076893" at="54,84,55,164" concept="6" />
+      <node id="2849352084545079332" at="55,164,56,92" concept="2" />
+      <node id="9181267657111137508" at="56,92,57,31" concept="7" />
+      <node id="7495241453935499115" at="59,5,60,14" concept="7" />
+      <node id="7495241453935438721" at="62,115,63,82" concept="7" />
+      <node id="7495241453935471963" at="65,117,66,187" concept="6" />
+      <node id="7495241453935473805" at="66,187,67,187" concept="6" />
+      <node id="7495241453935475239" at="68,271,69,48" concept="7" />
+      <node id="7495241453938672728" at="70,5,71,46" concept="7" />
+      <node id="7495241453935437827" at="78,114,79,21" concept="2" />
+      <node id="7495241453935437827" at="83,114,84,49" concept="6" />
+      <node id="7495241453935437827" at="85,26,86,56" concept="12" />
+      <node id="7495241453935437827" at="89,13,90,55" concept="2" />
+      <node id="7495241453935437827" at="90,55,91,20" concept="7" />
+      <node id="7495241453935437827" at="92,13,93,92" concept="7" />
+      <node id="7495241453935437827" at="94,13,95,98" concept="7" />
+      <node id="7495241453935437827" at="96,13,97,100" concept="7" />
+      <node id="7495241453935437827" at="98,14,99,58" concept="12" />
+      <node id="7495241453935437827" at="104,128,105,49" concept="6" />
+      <node id="7495241453935437827" at="106,26,107,56" concept="12" />
+      <node id="7495241453935437827" at="110,14,111,58" concept="12" />
+      <node id="7495241453935437827" at="117,48,118,22" concept="7" />
+      <node id="7495241453935437827" at="123,40,124,19" concept="7" />
+      <node id="7495241453935437827" at="128,0,129,0" concept="9" trace="textualCondition$n5ly" />
+      <node id="7495241453935437827" at="129,0,130,0" concept="9" trace="operator$A6J2" />
+      <node id="7495241453935437827" at="133,0,134,0" concept="9" trace="SimpleCondition$89" />
+      <node id="7495241453935437827" at="134,0,135,0" concept="9" trace="MultipleCondition$9A" />
+      <node id="7495241453935437827" at="138,0,139,0" concept="9" trace="conditionSx$ALET" />
+      <node id="7495241453935437827" at="139,0,140,0" concept="9" trace="conditionDx$A_03" />
       <node id="7495241453935437827" at="37,0,39,0" concept="10" trace="___init___#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
-      <node id="7495241453935437827" at="70,0,72,0" concept="1" trace="MultipleCondition__BehaviorDescriptor#()V" />
+      <node id="7495241453935437827" at="74,0,76,0" concept="1" trace="MultipleCondition__BehaviorDescriptor#()V" />
       <node id="7495241453935437827" at="40,0,43,0" concept="10" trace="setMultipleConditionString_id6w4sAgfAEwn#(Lorg/jetbrains/mps/openapi/model/SNode;)V" />
-      <node id="7495241453935438284" at="45,41,48,7" concept="4" />
-      <node id="7495241453935491513" at="51,41,54,7" concept="4" />
-      <node id="7495241453935437827" at="58,0,61,0" concept="10" trace="translateSimpleCondition_id6w4sAgfAEDl#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
-      <node id="7495241453938639755" at="63,187,66,5" concept="4" />
-      <node id="7495241453935437827" at="80,49,83,5" concept="4" />
-      <node id="7495241453935437827" at="101,49,104,5" concept="4" />
-      <node id="7495241453935437827" at="73,0,77,0" concept="5" trace="initNode#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/core/aspects/behaviour/api/SConstructor;[Ljava/lang/Object;)V" />
-      <node id="7495241453935437827" at="104,5,108,5" concept="11" />
-      <node id="7495241453935437827" at="111,0,116,0" concept="5" trace="getDeclaredMethods#()Ljava/util/List;" />
-      <node id="7495241453935437827" at="117,0,122,0" concept="5" trace="getConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
-      <node id="7495241453935438284" at="43,108,49,5" concept="0" />
-      <node id="7495241453935491513" at="49,5,55,5" concept="0" />
-      <node id="7495241453935437827" at="61,0,69,0" concept="10" trace="translateMultipleCondition_id6w4sAgfAMLR#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
-      <node id="7495241453935437827" at="99,0,110,0" concept="5" trace="invokeSpecial0#(Lorg/jetbrains/mps/openapi/language/SAbstractConcept;Ljetbrains/mps/core/aspects/behaviour/api/SMethod;[Ljava/lang/Object;)null" />
-      <node id="7495241453935437827" at="83,5,96,5" concept="11" />
-      <node id="7495241453935437827" at="43,0,58,0" concept="10" trace="translateCondition_id6w4sAgfAE$o#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
-      <node id="7495241453935437827" at="78,0,98,0" concept="5" trace="invokeSpecial0#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/core/aspects/behaviour/api/SMethod;[Ljava/lang/Object;)null" />
+      <node id="7495241453935437827" at="62,0,65,0" concept="10" trace="translateSimpleCondition_id6w4sAgfAEDl#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="7495241453938639755" at="67,187,70,5" concept="4" />
+      <node id="7495241453935437827" at="84,49,87,5" concept="4" />
+      <node id="7495241453935437827" at="105,49,108,5" concept="4" />
+      <node id="7495241453935437827" at="77,0,81,0" concept="5" trace="initNode#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/core/aspects/behaviour/api/SConstructor;[Ljava/lang/Object;)V" />
+      <node id="7495241453935437827" at="108,5,112,5" concept="11" />
+      <node id="7495241453935438284" at="45,41,50,7" concept="4" />
+      <node id="7495241453935491513" at="53,41,58,7" concept="4" />
+      <node id="7495241453935437827" at="115,0,120,0" concept="5" trace="getDeclaredMethods#()Ljava/util/List;" />
+      <node id="7495241453935437827" at="121,0,126,0" concept="5" trace="getConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="7495241453935438284" at="43,108,51,5" concept="0" />
+      <node id="7495241453935491513" at="51,5,59,5" concept="0" />
+      <node id="7495241453935437827" at="65,0,73,0" concept="10" trace="translateMultipleCondition_id6w4sAgfAMLR#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="7495241453935437827" at="103,0,114,0" concept="5" trace="invokeSpecial0#(Lorg/jetbrains/mps/openapi/language/SAbstractConcept;Ljetbrains/mps/core/aspects/behaviour/api/SMethod;[Ljava/lang/Object;)null" />
+      <node id="7495241453935437827" at="87,5,100,5" concept="11" />
+      <node id="7495241453935437827" at="43,0,62,0" concept="10" trace="translateCondition_id6w4sAgfAE$o#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="7495241453935437827" at="82,0,102,0" concept="5" trace="invokeSpecial0#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/core/aspects/behaviour/api/SMethod;[Ljava/lang/Object;)null" />
       <scope id="7495241453935437827" at="37,63,37,63" />
-      <scope id="7495241453935437827" at="70,55,70,55" />
+      <scope id="7495241453935437827" at="74,55,74,55" />
       <scope id="7495241453935437850" at="40,97,41,196" />
-      <scope id="7495241453935438286" at="46,82,47,132" />
-      <scope id="7495241453935491517" at="52,84,53,134" />
-      <scope id="7495241453935438424" at="58,115,59,82" />
-      <scope id="7495241453938639757" at="64,271,65,48" />
-      <scope id="7495241453935437827" at="74,114,75,21" />
-      <scope id="7495241453935437827" at="81,26,82,56" />
-      <scope id="7495241453935437827" at="88,13,89,92" />
-      <scope id="7495241453935437827" at="90,13,91,98" />
-      <scope id="7495241453935437827" at="92,13,93,100" />
-      <scope id="7495241453935437827" at="94,14,95,58" />
-      <scope id="7495241453935437827" at="102,26,103,56" />
-      <scope id="7495241453935437827" at="106,14,107,58" />
-      <scope id="7495241453935437827" at="113,48,114,22" />
-      <scope id="7495241453935437827" at="119,40,120,19" />
+      <scope id="7495241453935438424" at="62,115,63,82" />
+      <scope id="7495241453938639757" at="68,271,69,48" />
+      <scope id="7495241453935437827" at="78,114,79,21" />
+      <scope id="7495241453935437827" at="85,26,86,56" />
+      <scope id="7495241453935437827" at="92,13,93,92" />
+      <scope id="7495241453935437827" at="94,13,95,98" />
+      <scope id="7495241453935437827" at="96,13,97,100" />
+      <scope id="7495241453935437827" at="98,14,99,58" />
+      <scope id="7495241453935437827" at="106,26,107,56" />
+      <scope id="7495241453935437827" at="110,14,111,58" />
+      <scope id="7495241453935437827" at="117,48,118,22" />
+      <scope id="7495241453935437827" at="123,40,124,19" />
       <scope id="7495241453935437827" at="37,0,39,0">
         <var name="__thisNode__" id="7495241453935437827" />
       </scope>
-      <scope id="7495241453935437827" at="70,0,72,0" />
-      <scope id="7495241453935437827" at="85,13,87,20" />
+      <scope id="7495241453935437827" at="74,0,76,0" />
+      <scope id="7495241453935437827" at="89,13,91,20" />
       <scope id="7495241453935437827" at="40,0,43,0">
         <var name="__thisNode__" id="7495241453935437827" />
       </scope>
-      <scope id="7495241453935437827" at="58,0,61,0">
+      <scope id="7495241453935438286" at="46,82,49,31">
+        <var name="conditionString" id="2849352084545055950" />
+      </scope>
+      <scope id="7495241453935491517" at="54,84,57,31">
+        <var name="conditionString" id="2849352084545076896" />
+      </scope>
+      <scope id="7495241453935437827" at="62,0,65,0">
         <var name="__thisNode__" id="7495241453935437827" />
         <var name="sCondition" id="7495241453935438569" />
       </scope>
-      <scope id="7495241453935438284" at="44,5,48,7">
-        <var name="sCondition" id="7495241453935438284" />
-      </scope>
-      <scope id="7495241453935491513" at="50,5,54,7">
-        <var name="mCondition" id="7495241453935491513" />
-      </scope>
-      <scope id="7495241453935437827" at="73,0,77,0">
+      <scope id="7495241453935437827" at="77,0,81,0">
         <var name="constructor" id="7495241453935437827" />
         <var name="node" id="7495241453935437827" />
         <var name="parameters" id="7495241453935437827" />
       </scope>
-      <scope id="7495241453935437827" at="111,0,116,0" />
-      <scope id="7495241453935437827" at="117,0,122,0" />
-      <scope id="7495241453935471738" at="61,117,67,46">
+      <scope id="7495241453935437827" at="115,0,120,0" />
+      <scope id="7495241453935437827" at="121,0,126,0" />
+      <scope id="7495241453935438284" at="44,5,50,7">
+        <var name="sCondition" id="7495241453935438284" />
+      </scope>
+      <scope id="7495241453935491513" at="52,5,58,7">
+        <var name="mCondition" id="7495241453935491513" />
+      </scope>
+      <scope id="7495241453935471738" at="65,117,71,46">
         <var name="conditionDx" id="7495241453935473808" />
         <var name="conditionSx" id="7495241453935471966" />
       </scope>
-      <scope id="7495241453935437827" at="61,0,69,0">
+      <scope id="7495241453935437827" at="65,0,73,0">
         <var name="__thisNode__" id="7495241453935437827" />
         <var name="mCondition" id="7495241453935471903" />
       </scope>
-      <scope id="7495241453935437827" at="100,128,108,5">
+      <scope id="7495241453935437827" at="104,128,112,5">
         <var name="methodIndex" id="7495241453935437827" />
       </scope>
-      <scope id="7495241453935437827" at="99,0,110,0">
+      <scope id="7495241453935437827" at="103,0,114,0">
         <var name="concept" id="7495241453935437827" />
         <var name="method" id="7495241453935437827" />
         <var name="parameters" id="7495241453935437827" />
       </scope>
-      <scope id="7495241453935438107" at="43,108,56,14" />
-      <scope id="7495241453935437827" at="43,0,58,0">
+      <scope id="7495241453935438107" at="43,108,60,14" />
+      <scope id="7495241453935437827" at="83,114,100,5">
+        <var name="methodIndex" id="7495241453935437827" />
+      </scope>
+      <scope id="7495241453935437827" at="43,0,62,0">
         <var name="__thisNode__" id="7495241453935437827" />
         <var name="condition" id="7495241453935438207" />
       </scope>
-      <scope id="7495241453935437827" at="79,114,96,5">
-        <var name="methodIndex" id="7495241453935437827" />
-      </scope>
-      <scope id="7495241453935437827" at="78,0,98,0">
+      <scope id="7495241453935437827" at="82,0,102,0">
         <var name="method" id="7495241453935437827" />
         <var name="node" id="7495241453935437827" />
         <var name="parameters" id="7495241453935437827" />
       </scope>
-      <unit id="7495241453935437827" at="123,0,127,0" name="QueryLanguage.behavior.MultipleCondition__BehaviorDescriptor$PROPS" />
-      <unit id="7495241453935437827" at="128,0,132,0" name="QueryLanguage.behavior.MultipleCondition__BehaviorDescriptor$CONCEPTS" />
-      <unit id="7495241453935437827" at="133,0,137,0" name="QueryLanguage.behavior.MultipleCondition__BehaviorDescriptor$LINKS" />
-      <unit id="7495241453935437827" at="27,0,138,0" name="QueryLanguage.behavior.MultipleCondition__BehaviorDescriptor" />
+      <unit id="7495241453935437827" at="127,0,131,0" name="QueryLanguage.behavior.MultipleCondition__BehaviorDescriptor$PROPS" />
+      <unit id="7495241453935437827" at="132,0,136,0" name="QueryLanguage.behavior.MultipleCondition__BehaviorDescriptor$CONCEPTS" />
+      <unit id="7495241453935437827" at="137,0,141,0" name="QueryLanguage.behavior.MultipleCondition__BehaviorDescriptor$LINKS" />
+      <unit id="7495241453935437827" at="27,0,142,0" name="QueryLanguage.behavior.MultipleCondition__BehaviorDescriptor" />
     </file>
   </root>
   <root nodeRef="r:de42e374-0e47-4eb6-bd19-9c47ed9cd488(QueryLanguage.behavior)/8471277724064440128">

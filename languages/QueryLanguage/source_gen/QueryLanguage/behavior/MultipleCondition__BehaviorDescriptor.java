@@ -44,13 +44,17 @@ public final class MultipleCondition__BehaviorDescriptor extends BaseBHDescripto
     {
       final SNode sCondition = condition;
       if (SNodeOperations.isInstanceOf(sCondition, CONCEPTS.SimpleCondition$89)) {
-        return MultipleCondition__BehaviorDescriptor.translateSimpleCondition_id6w4sAgfAEDl.invokeSpecial(__thisNode__, sCondition);
+        String conditionString = MultipleCondition__BehaviorDescriptor.translateSimpleCondition_id6w4sAgfAEDl.invokeSpecial(__thisNode__, sCondition);
+        SPropertyOperations.assign(condition, PROPS.textualCondition$n5ly, conditionString);
+        return conditionString;
       }
     }
     {
       final SNode mCondition = condition;
       if (SNodeOperations.isInstanceOf(mCondition, CONCEPTS.MultipleCondition$9A)) {
-        return MultipleCondition__BehaviorDescriptor.translateMultipleCondition_id6w4sAgfAMLR.invokeSpecial(__thisNode__, mCondition);
+        String conditionString = "(" + MultipleCondition__BehaviorDescriptor.translateMultipleCondition_id6w4sAgfAMLR.invokeSpecial(__thisNode__, mCondition) + ")";
+        SPropertyOperations.assign(condition, PROPS.textualCondition$n5ly, conditionString);
+        return conditionString;
       }
     }
     return "";

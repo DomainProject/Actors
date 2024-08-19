@@ -56,16 +56,37 @@ public abstract class TopologyLinks {
     tgs.append(String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_)));
     tgs.append(", 1);");
     tgs.newLine();
-    if (SLinkOperations.getTarget(actorLink, LINKS.data$Kmlt) != null) {
+
+    if (SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorTo$3d9g), LINKS.actor$8xF), LINKS.behavior$QgnL), PROPS.name$MnvL).equals("window")) {
+      String sizeName = "window" + SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_) + "to" + SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_);
+      tgs.indent();
+      tgs.append("static int ");
+      tgs.append(sizeName);
+      tgs.append(" = ");
+      tgs.append(SPropertyOperations.getString(SNodeOperations.cast(SLinkOperations.getTarget(actorLink, LINKS.data$Kmlt), CONCEPTS.StringBody$hM), PROPS.body$$37E));
+      tgs.append(";");
+      tgs.newLine();
       tgs.indent();
       tgs.append("SetTopologyLinkData(topology, ");
       tgs.append(String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_)));
       tgs.append(", ");
       tgs.append(String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_)));
-      tgs.append(", (void *)\"");
-      tgs.append(SPropertyOperations.getString(SNodeOperations.cast(SLinkOperations.getTarget(actorLink, LINKS.data$Kmlt), CONCEPTS.StringBody$hM), PROPS.body$$37E));
-      tgs.append("\");");
+      tgs.append(", (void *)&");
+      tgs.append(sizeName);
+      tgs.append(");");
       tgs.newLine();
+    } else {
+      if (SLinkOperations.getTarget(actorLink, LINKS.data$Kmlt) != null) {
+        tgs.indent();
+        tgs.append("SetTopologyLinkData(topology, ");
+        tgs.append(String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_)));
+        tgs.append(", ");
+        tgs.append(String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_)));
+        tgs.append(", (void *)\"");
+        tgs.append(SPropertyOperations.getString(SNodeOperations.cast(SLinkOperations.getTarget(actorLink, LINKS.data$Kmlt), CONCEPTS.StringBody$hM), PROPS.body$$37E));
+        tgs.append("\");");
+        tgs.newLine();
+      }
     }
   }
 
@@ -81,10 +102,12 @@ public abstract class TopologyLinks {
     /*package*/ static final SReferenceLink actor$8xF = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57937L, 0x262cd812cfe57939L, "actor");
     /*package*/ static final SReferenceLink actorTo$3d9g = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57976L, "actorTo");
     /*package*/ static final SContainmentLink data$Kmlt = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x779e899a2deb7c19L, "data");
+    /*package*/ static final SReferenceLink behavior$QgnL = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681516c72L, "behavior");
   }
 
   private static final class PROPS {
     /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
     /*package*/ static final SProperty body$$37E = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x3db738e392e4ce51L, 0x3db738e392e4ce52L, "body");
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

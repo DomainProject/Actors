@@ -84,7 +84,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.newLine();
       tgs.newLine();
 
-    } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("Count")) {
+    } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("count")) {
       tgs.indent();
       tgs.append("RowsList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
@@ -97,7 +97,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.newLine();
       tgs.newLine();
 
-    } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("Sum")) {
+    } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("sum")) {
       tgs.indent();
       tgs.append("RowsList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
@@ -110,7 +110,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.newLine();
       tgs.newLine();
 
-    } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("Min")) {
+    } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("min")) {
       tgs.indent();
       tgs.append("RowsList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
@@ -123,7 +123,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.newLine();
       tgs.newLine();
 
-    } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("Max")) {
+    } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("max")) {
       tgs.indent();
       tgs.append("RowsList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
@@ -136,7 +136,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.newLine();
       tgs.newLine();
 
-    } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("Average")) {
+    } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("average")) {
       tgs.indent();
       tgs.append("RowsList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));

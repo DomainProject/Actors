@@ -75,8 +75,19 @@ public class ExecuteExternalFunction_Constraints extends BaseConstraintsDescript
         };
       }
     };
+    BaseReferenceConstraintsDescriptor d1 = new BaseReferenceConstraintsDescriptor(LINKS.resultType$kuHm, this, false, true) {
+      @Override
+      public boolean validate(final SNode referenceNode, final SNode oldReferentNode, final SNode newReferentNode) {
+        return true;
+      }
+      @Override
+      public void onReferenceSet(final SNode referenceNode, final SNode oldReferentNode, final SNode newReferentNode) {
+        SLinkOperations.setTarget(SLinkOperations.getTarget(referenceNode, LINKS.result$LWVz), LINKS.type$Zilj, newReferentNode);
+      }
+    };
     Map<SReferenceLink, ReferenceConstraintsDescriptor> references = new HashMap<SReferenceLink, ReferenceConstraintsDescriptor>();
     references.put(d0.getReference(), d0);
+    references.put(d1.getReference(), d1);
     return references;
   }
 
@@ -94,5 +105,7 @@ public class ExecuteExternalFunction_Constraints extends BaseConstraintsDescript
   private static final class LINKS {
     /*package*/ static final SContainmentLink result$LWVz = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302ab0f2L, 0x338e7da8a4f37b2bL, "result");
     /*package*/ static final SReferenceLink message$nfgc = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302ab0f2L, 0x61da6c5c3038cdbaL, "message");
+    /*package*/ static final SReferenceLink resultType$kuHm = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302ab0f2L, 0x754f4cb23a3092feL, "resultType");
+    /*package*/ static final SReferenceLink type$Zilj = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, 0x754f4cb23a21c3c1L, "type");
   }
 }

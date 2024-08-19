@@ -276,18 +276,6 @@
       <property role="TrG5h" value="NOT_EQUAL" />
       <property role="1L1pqM" value="!=" />
     </node>
-    <node concept="25R33" id="14g3IsRhL0x" role="25R1y">
-      <property role="3tVfz5" value="1229499084499783713" />
-      <property role="TrG5h" value="BETWEEN" />
-    </node>
-    <node concept="25R33" id="14g3IsRhL0E" role="25R1y">
-      <property role="3tVfz5" value="1229499084499783722" />
-      <property role="TrG5h" value="LIKE" />
-    </node>
-    <node concept="25R33" id="14g3IsRhL0O" role="25R1y">
-      <property role="3tVfz5" value="1229499084499783732" />
-      <property role="TrG5h" value="IN" />
-    </node>
   </node>
   <node concept="1TIwiD" id="14g3IsRklvO">
     <property role="EcuMT" value="1229499084500457460" />

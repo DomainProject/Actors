@@ -60,7 +60,7 @@ public abstract class WindowSwitchCase {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("TerminateWindow((WindowData *)s, me, now);");
+    tgs.append("TerminateWindow(topology, (WindowData *)s, me, now);");
     tgs.newLine();
     tgs.indent();
     tgs.append("break;");
