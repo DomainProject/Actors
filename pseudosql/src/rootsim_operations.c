@@ -8,6 +8,7 @@ RowsList* CopyAndFreeRowsList(RowsList *list) {
     }
 
     copy_list->num_rows = list->num_rows;
+	printf("%d\n", copy_list->num_rows);
 
     copy_list->rows = rs_malloc(sizeof(Row) * copy_list->num_rows);
     if (copy_list->rows == NULL) {
@@ -38,23 +39,52 @@ RowsList* CopyAndFreeRowsList(RowsList *list) {
         dest_row->table_name = strdup(src_row->table_name);
     }
 
+	printf("done\n");
+
     rs_free(list->rows);
     rs_free(list);
 
     return copy_list;
 }
 
-void SendMessageToAllNeighbors(struct topology *topology, Message *message, simtime_t now) {
-	lp_id_t num_neighbors = CountDirections(topology, message->envelope->sender);
-	lp_id_t neighbors[num_neighbors];
-	GetAllReceivers(topology, message->envelope->sender, neighbors);
-
-	for (unsigned int i = 0; i < num_neighbors; i++) {
-		ScheduleNewEvent(neighbors[i], now + 10, EVENT, message, sizeof(Message));
+void SendMessage(Message *message, simtime_t now, lp_id_t *receivers, int num_receivers) {
+	for (int i = 0; i < num_receivers; i++) {
+		ScheduleNewEvent(receivers[i], now + 10, EVENT, message, sizeof(Message));
 	}
 }
 
-void CreateAndSendRowsMessage(struct topology *topology, lp_id_t sender_id, float priority, RowsList *send_list, simtime_t now) {
+lp_id_t *GetAllNeighbors(struct topology *topology, lp_id_t me, int *num_neighbors) {
+	*num_neighbors = CountDirections(topology, me);
+	lp_id_t *neighbors = malloc(*num_neighbors * sizeof(lp_id_t)); 
+	GetAllReceivers(topology, me, neighbors);
+	return neighbors;
+}
+
+Message *CreateMessage(lp_id_t sender_id, float priority, void *list, MessageType type) {
+	Envelope *e;
+	Message *msg;
+
+	// create envelope
+	e = rs_malloc(sizeof(Envelope));
+	CHECK_RSMALLOC(e);
+	e->priority = priority;
+	e->sender = sender_id;
+
+	// create message
+	msg = rs_malloc(sizeof(Message));
+	CHECK_RSMALLOC(msg);
+	msg->envelope = e;
+	msg->type = type;
+	if (type == ROWS)
+		msg->content.rows_list = (RowsList *)list;
+	else 
+		msg->content.groups_list = (GroupsList *)list;
+
+	return msg;
+}
+
+void CreateAndSendRowsMessage(lp_id_t sender_id, float priority, RowsList *send_list, simtime_t now, lp_id_t *receivers, int num_receivers) {
+
 	Envelope *e;
 	Message *send_msg;
 
@@ -71,10 +101,11 @@ void CreateAndSendRowsMessage(struct topology *topology, lp_id_t sender_id, floa
 	send_msg->type = ROWS;
 	send_msg->content.rows_list = send_list;
 
-	SendMessageToAllNeighbors(topology, send_msg, now);
+	SendMessage(send_msg, now, receivers, num_receivers);
 }
 
-void CreateAndSendGroupsMessage(struct topology *topology, lp_id_t sender_id, float priority, GroupsList *send_list, simtime_t now) {
+void CreateAndSendGroupsMessage(lp_id_t sender_id, float priority, GroupsList *send_list, simtime_t now, lp_id_t *receivers, int num_receivers) {
+
 	Envelope *e;
 	Message *send_msg; 
 
@@ -89,7 +120,22 @@ void CreateAndSendGroupsMessage(struct topology *topology, lp_id_t sender_id, fl
 	send_msg->type = GROUPS;
 	send_msg->content.groups_list = send_list; 
 
-	SendMessageToAllNeighbors(topology, send_msg, now);
+	SendMessage(send_msg, now, receivers, num_receivers);
+}
+
+void CreateAndSendMessage(lp_id_t sender_id, float priority, MessageType type, void *list, simtime_t now, lp_id_t *receivers, int num_receivers) {
+	switch(type) {
+		case ROWS:
+			CreateAndSendRowsMessage(sender_id, priority, (RowsList *)list, now, receivers, num_receivers);
+			break;
+		case GROUPS:
+			CreateAndSendGroupsMessage(sender_id, priority, (GroupsList *)list, now, receivers, num_receivers);
+			break;
+		default:
+			fprintf(stderr, "Unknown message type\n");
+			abort();
+	}
+
 }
 
 long ComputeSleepTime(char *datetime) {
@@ -157,6 +203,8 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 	RowElement *elements;
 	Row *row;
 	RowsList *list;
+	lp_id_t *neighbors;
+	int num_neighbors;
 
 	// read line from the input file
 	if (!fgets(line, sizeof(line), *file)) {
@@ -190,7 +238,8 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 	list->num_rows = 1;
 	list->rows = row;
 
-	CreateAndSendRowsMessage(topology, me, 5.0, list, now);
+	neighbors = GetAllNeighbors(topology, me, &num_neighbors);
+	CreateAndSendRowsMessage(me, 5.0, list, now, neighbors, num_neighbors);
 
 	// get next tuple time, and schedule next DataIngestion process' execution
 	int count = 0;
@@ -239,61 +288,6 @@ void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 	#endif
 }
 
-/**
- * @brief Window process: it receives one tuple at a time from the DataInjection process, gathers as many tuples as the window size, 
- * 	and forwards the resulting list to its neighbors
- * @param me Process id
- * @param now Current simulation time
- * @param content Received message
- * @param data Process state
- * @param priority Priority of the messages to be sent
- */
-void Window(struct topology *topology, lp_id_t me, simtime_t now, const void *content, WindowData *data, float priority) {
-
-	// get row from message
-	Message *rcv_msg = (Message *)content;
-
-	if (rcv_msg->type != ROWS) {
-		fprintf(stderr, "Windowing can be applied only on lists of rows\n");
-		exit(EXIT_FAILURE);
-	}
-
-	RowsList *list = rcv_msg->content.rows_list;	// this should always be a single element list
-	if (list->num_rows != 1) {
-		fprintf(stderr, "Window operator received more than one tuple in a single message\n");
-		exit(EXIT_FAILURE);
-	}
-
-	// get tuple time
-	data->cur_time = list->rows[0].elements[1].value.long_value;
-
-	if (data->max_time == 0) {
-		// first tuple, set max_time
-		data->max_time = data->cur_time + data->window_size;
-	} 
-
-	// if this tuple's time exceeds the max_time, send all messages in the window and create the next window
-	if (data->cur_time > data->max_time) {
-
-		data->list->num_rows = data->received_tuples;
-
-		// Create a copy of the current list
-        RowsList *copy_list = CopyAndFreeRowsList(data->list);
-
-        CreateAndSendRowsMessage(topology, me, priority, copy_list, now);
-
-		data->list = rs_malloc(sizeof(RowsList));
-		CHECK_RSMALLOC(data->list);
-		data->list->rows = rs_malloc(sizeof(Row) * data->window_size);		// todo fix rows size
-		CHECK_RSMALLOC(data->list->rows);
-
-		data->received_tuples = 0;
-		data->max_time = data->cur_time + data->window_size;
-	}
-
-	data->list->rows[data->received_tuples++] = list->rows[0];
-}
-
 void TestWindow(const void *content) {
     Message *msg = (Message *)content;
 
@@ -331,41 +325,6 @@ void SelectionInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 	#ifdef DEBUG
 	printf("Selection initialized\n");
 	#endif
-}
-
-/**
- * @brief Selection process: given a list of rows, it applies its associated condition to each row and forwards the resulting list to its neighbors 
- * @param me Selection process id
- * @param now Current simulation time
- * @param content Received message
- * @param data Selection process state
- * @param priority Priority of the messages to be sent
- */
-void wSelection(struct topology *topology, lp_id_t me, simtime_t now, const void *content, SelectionData *data, float priority) {
-	Message *rcv_msg;
-	Condition *condition;
-	RowsList *rcv_list, *send_list;
-
-	condition = data->condition;
-	rcv_msg = (Message *)content;
-
-	if (rcv_msg->type != ROWS) {
-		fprintf(stderr, "Selection on grouped rows is not supported yet\n");
-		exit(EXIT_FAILURE);
-	}
-	rcv_list = rcv_msg->content.rows_list;
-
-	// select rows based on the condition
-	send_list = SelectionMultRows(*rcv_list, condition);
-
-	#ifdef DEBUG
-	printf("Selection output:\n");
-	for (int i = 0; i < send_list->num_rows; i++) {
-		PrintRow(&send_list->rows[i]);
-	}
-	#endif
-
-	CreateAndSendRowsMessage(topology, me, priority, send_list, now);
 }
 
 /**
@@ -425,38 +384,6 @@ void ProjectionInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 }
 
 /**
- * @brief Projection process: given a list of rows, it extracts the specified columns from each row and forwards the resulting list to its neighbors
- * @param me Projection process id
- * @param now Current simulation time
- * @param content Received message
- * @param data Projection process state
- * @param priority Priority of the messages to be sent
- */
-void wProjection(struct topology *topology, lp_id_t me, simtime_t now, const void *content, ProjectionData *data, float priority) {
-	Message *rcv_msg;
-	RowsList *rcv_list, *send_list;
-
-	AttributeList *list = data->list;
-
-	rcv_msg = (Message *)content;
-	if (rcv_msg->type != ROWS) {
-		fprintf(stderr, "Projection on grouped rows is not supported yet\n");
-	}
-	rcv_list = rcv_msg->content.rows_list;
-
-	send_list = ProjectionMultRows(*rcv_list, *list);
-
-	#ifdef DEBUG
-	printf("Projection output:\n");
-	for (int i = 0; i < send_list->num_rows; i++) {
-		PrintRow(&send_list->rows[i]);
-	}
-	#endif
-
-	CreateAndSendRowsMessage(topology, me, priority, send_list, now);
-}
-
-/**
  * @brief Initializer for the OrderBy processes
  * @param from Id of the source node, in the topology
  * @param me Projection process id
@@ -473,38 +400,6 @@ void OrderByInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 	#ifdef DEBUG
 	printf("OrderBy initialized\n");
 	#endif
-}
-
-/**
- * @brief Projection process: given a list of rows, it extracts the specified columns from each row and forwards the resulting list to its neighbors
- * @param me Projection process id
- * @param now Current simulation time
- * @param content Received message
- * @param data Projection process state
- * @param priority Priority of the messages to be sent
- */
-void wOrderBy(struct topology *topology, lp_id_t me, simtime_t now, const void *content, OrderByData *data, float priority) {
-	Message *rcv_msg;
-	RowsList *rcv_list, *send_list;
-
-	char *attribute = data->attribute;
-
-	rcv_msg = (Message *)content;
-	if (rcv_msg->type != ROWS) {
-		fprintf(stderr, "OrderBy can only be performed on a list of rows\n");
-	}
-	rcv_list = rcv_msg->content.rows_list;
-
-	send_list = OrderBy(*rcv_list, attribute);
-
-	#ifdef DEBUG
-	printf("OrderBy output:\n");
-	for (int i = 0; i < send_list->num_rows; i++) {
-		PrintRow(&send_list->rows[i]);
-	}
-	#endif
-
-	CreateAndSendRowsMessage(topology, me, priority, send_list, now);
 }
 
 /**
@@ -527,6 +422,184 @@ void GroupByInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 }
 
 /**
+ * @brief Initializer for the Aggregate function processes
+ * @param from Id of the source node, in the topology
+ * @param me Projection process id
+ */
+void AggregateFunctionInit(struct topology *topology, lp_id_t from, lp_id_t me) {
+	char *attribute = (char *)GetTopologyLinkData(topology, from, me);
+
+	AggregateFunctionData *data = rs_malloc(sizeof(AggregateFunctionData));
+	CHECK_RSMALLOC(data);
+	data->attribute = attribute;
+
+	SetState(data);
+
+	#ifdef DEBUG
+	printf("Aggregate function initialized\n");
+	#endif
+}
+
+/**
+ * @brief Initializer for the Join processes
+ * @param from Id of the source node, in the topology
+ * @param me Projection process id
+ * @param table_data Pointer to the state structure
+ */
+void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData *table_data) {
+	table_data->from_id = from;
+	table_data->attribute = (char *)GetTopologyLinkData(topology, from, me);
+	table_data->list = NULL;
+
+	#ifdef DEBUG
+	printf("Join initialized\n");
+	#endif
+}
+
+void AggregateFunctionRowsInput(Message *rcv_msg, char *attribute, AggregateFunctionType type) {
+	AggFunctionData input_data;
+	RowsList *rcv_rows_list;
+	AggFunctionResultValue *result_single_value;
+
+	rcv_rows_list = rcv_msg->content.rows_list;
+
+	input_data.col_name = attribute;
+	input_data.type = TYPE_ROWS;
+	input_data.input_data.rows = *rcv_rows_list;
+
+	result_single_value = (AggFunctionResultValue *)AggregateFunction(input_data, type);
+	
+	switch(result_single_value->type) {
+		case TYPE_INT:
+			printf("Result value is %d\n", result_single_value->value.int_value);
+			break;
+		case TYPE_FLOAT:
+			printf("Result value is %f\n", result_single_value->value.float_value);
+			break;
+		case TYPE_LONG:
+			printf("Result value is %ld\n", result_single_value->value.long_value);
+			break;
+		case TYPE_STRING:
+			printf("Result value is %s\n", result_single_value->value.string_value);
+			break;
+		default:
+			break;
+	}
+}
+
+
+RowsList *AggregateFunctionGroupedInput(Message *rcv_msg, char *attribute, AggregateFunctionType type) {
+	GroupsList *rcv_groups_list;
+	AggFunctionData input_data;
+	RowsList *result_rows_list;
+
+	rcv_groups_list = rcv_msg->content.groups_list;
+
+	input_data.col_name = attribute;
+	input_data.type = TYPE_GROUPS;
+	input_data.input_data.groups = *rcv_groups_list;
+
+	result_rows_list = (RowsList *)AggregateFunction(input_data, type);
+
+	return result_rows_list;	
+}
+
+/**
+ * @brief Selection process: given a list of rows, it applies its associated condition to each row and forwards the resulting list to its neighbors 
+ * @param me Selection process id
+ * @param now Current simulation time
+ * @param content Received message
+ * @param data Selection process state
+ * @param priority Priority of the messages to be sent
+ */
+RowsList *wSelection(Message *rcv_msg, void *data) {
+	Condition *condition;
+	RowsList *rcv_list, *send_list;
+	SelectionData *selection_data = (SelectionData *)data;
+
+	condition = selection_data->condition;
+
+	if (rcv_msg->type != ROWS) {
+		fprintf(stderr, "Selection on grouped rows is not supported yet\n");
+		exit(EXIT_FAILURE);
+	}
+	rcv_list = rcv_msg->content.rows_list;
+
+	// select rows based on the condition
+	send_list = SelectionMultRows(*rcv_list, condition);
+
+	#ifdef DEBUG
+	printf("Selection output:\n");
+	for (int i = 0; i < send_list->num_rows; i++) {
+		PrintRow(&send_list->rows[i]);
+	}
+	#endif
+
+	return send_list;
+}
+
+/**
+ * @brief Projection process: given a list of rows, it extracts the specified columns from each row and forwards the resulting list to its neighbors
+ * @param me Projection process id
+ * @param now Current simulation time
+ * @param content Received message
+ * @param data Projection process state
+ * @param priority Priority of the messages to be sent
+ */
+RowsList *wProjection(Message *rcv_msg, void *data) {
+	RowsList *rcv_list, *send_list;
+	ProjectionData *proj_data = (ProjectionData *)data;
+	AttributeList *list = proj_data->list;
+
+	if (rcv_msg->type != ROWS) {
+		fprintf(stderr, "Projection on grouped rows is not supported yet\n");
+	}
+	rcv_list = rcv_msg->content.rows_list;
+
+	send_list = ProjectionMultRows(*rcv_list, *list);
+
+	#ifdef DEBUG
+	printf("Projection output:\n");
+	for (int i = 0; i < send_list->num_rows; i++) {
+		PrintRow(&send_list->rows[i]);
+	}
+	#endif
+
+	return send_list;	
+}
+
+/**
+ * @brief Projection process: given a list of rows, it extracts the specified columns from each row and forwards the resulting list to its neighbors
+ * @param me Projection process id
+ * @param now Current simulation time
+ * @param content Received message
+ * @param data Projection process state
+ * @param priority Priority of the messages to be sent
+ */
+RowsList *wOrderBy(Message *rcv_msg, void *data) {
+	RowsList *rcv_list, *send_list;
+	OrderByData *orderBy_data = (OrderByData *)data;
+
+	char *attribute = orderBy_data->attribute;
+
+	if (rcv_msg->type != ROWS) {
+		fprintf(stderr, "OrderBy can only be performed on a list of rows\n");
+	}
+	rcv_list = rcv_msg->content.rows_list;
+
+	send_list = OrderBy(*rcv_list, attribute);
+
+	#ifdef DEBUG
+	printf("OrderBy output:\n");
+	for (int i = 0; i < send_list->num_rows; i++) {
+		PrintRow(&send_list->rows[i]);
+	}
+	#endif
+
+	return send_list;
+}
+
+/**
  * @brief GroupBy process: it receives a list of rows and groups them based on the value of an attribute, 
  * 	forwarding the resulting list of groups to its neighbors
  * @param me Process id
@@ -535,14 +608,13 @@ void GroupByInit(struct topology *topology, lp_id_t from, lp_id_t me) {
  * @param data Process state
  * @param priority Priority of the messages to be sent
  */
-void wGroupBy(struct topology *topology, lp_id_t me, simtime_t now, const void *content, GroupByData *data, float priority) {
-	Message *rcv_msg;
+GroupsList *wGroupBy(Message *rcv_msg, void *data) {
 	RowsList *rcv_list;
 	GroupsList *groups_list;
+	GroupByData *groupBy_data = (GroupByData *)data;
 
-	char *attribute = data->attribute;
+	char *attribute = groupBy_data->attribute;
 
-	rcv_msg = (Message *)content;
 	if (rcv_msg->type != ROWS) {
 		fprintf(stderr, "Unexpected input message type for GroupBy\n");
 		exit(EXIT_FAILURE);
@@ -565,26 +637,7 @@ void wGroupBy(struct topology *topology, lp_id_t me, simtime_t now, const void *
 	}
 	#endif
 
-	CreateAndSendGroupsMessage(topology, me, priority, groups_list, now);
-}
-
-/**
- * @brief Initializer for the Aggregate function processes
- * @param from Id of the source node, in the topology
- * @param me Projection process id
- */
-void AggregateFunctionInit(struct topology *topology, lp_id_t from, lp_id_t me) {
-	char *attribute = (char *)GetTopologyLinkData(topology, from, me);
-
-	AggregateFunctionData *data = rs_malloc(sizeof(AggregateFunctionData));
-	CHECK_RSMALLOC(data);
-	data->attribute = attribute;
-
-	SetState(data);
-
-	#ifdef DEBUG
-	printf("Aggregate function initialized\n");
-	#endif
+	return groups_list;
 }
 
 /**
@@ -596,82 +649,127 @@ void AggregateFunctionInit(struct topology *topology, lp_id_t from, lp_id_t me) 
  * @param priority Priority of the messages to be sent
  * @param type Aggregate function to be executed, it can be MIN, MAX, COUNT, SUM, AVG
  */
-void wAggregateFunction(struct topology *topology, lp_id_t me, simtime_t now, const void *content, AggregateFunctionData *data, float priority, AggregateFunctionType type) {
-	Message *rcv_msg;
-	RowsList *rcv_rows_list;
-	GroupsList *rcv_groups_list;
-	AggFunctionResultValue *result_single_value;
-	RowsList *result_rows_list;
-	AggFunctionData input_data;
+RowsList *wAggregateFunction(Message *rcv_msg, void *data, AggregateFunctionType type) {
+	RowsList *result_rows_list = NULL;
+	AggregateFunctionData *agg_function_data = (AggregateFunctionData *)data;
 
-	char *attribute = data->attribute;
-	rcv_msg = (Message *)content;
+	char *attribute = agg_function_data->attribute;
 
 	switch(rcv_msg->type) {
 		case ROWS:
-			rcv_rows_list = rcv_msg->content.rows_list;
-
-			input_data.col_name = attribute;
-			input_data.type = TYPE_ROWS;
-			input_data.input_data.rows = *rcv_rows_list;
-
-			result_single_value = (AggFunctionResultValue *)AggregateFunction(input_data, type);
-			
-			switch(result_single_value->type) {
-				case TYPE_INT:
-					printf("Result value is %d\n", result_single_value->value.int_value);
-					break;
-				case TYPE_FLOAT:
-					printf("Result value is %f\n", result_single_value->value.float_value);
-					break;
-				case TYPE_LONG:
-					printf("Result value is %ld\n", result_single_value->value.long_value);
-					break;
-				case TYPE_STRING:
-					printf("Result value is %s\n", result_single_value->value.string_value);
-					break;
-				default:
-					break;
-			}
-
+			AggregateFunctionRowsInput(rcv_msg, attribute, type);
 			break;
 
 		case GROUPS:
-			rcv_groups_list = rcv_msg->content.groups_list;
-
-			input_data.col_name = attribute;
-			input_data.type = TYPE_GROUPS;
-			input_data.input_data.groups = *rcv_groups_list;
-
-			result_rows_list = (RowsList *)AggregateFunction(input_data, type);
-
-			#ifdef DEBUG
-			printf("Aggregate function output:\n");
-			for (int i = 0; i < result_rows_list->num_rows; i++) {
-				PrintRow(&result_rows_list->rows[i]);
-			}
-			#endif
-
-			CreateAndSendRowsMessage(topology, me, priority, result_rows_list, now);
-
+			result_rows_list = AggregateFunctionGroupedInput(rcv_msg, attribute, type);
 			break;
 	}
+
+	return result_rows_list;
 }
 
 /**
- * @brief Initializer for the Join processes
- * @param from Id of the source node, in the topology
- * @param me Projection process id
- * @param table_data Pointer to the state structure
+ * @brief Window process: it receives one tuple at a time from the DataInjection process, gathers as many tuples as the window size, 
+ * 	and forwards the resulting list to its neighbors
+ * @param me Process id
+ * @param now Current simulation time
+ * @param content Received message
+ * @param data Process state
+ * @param priority Priority of the messages to be sent
  */
-void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData *table_data) {
-	table_data->from_id = from;
-	table_data->attribute = (char *)GetTopologyLinkData(topology, from, me);
-	table_data->list = NULL;
+RowsList *ExecuteWindow(Message *rcv_msg, WindowData *data) {
+	RowsList *copy_list = NULL;
 
-	#ifdef DEBUG
-	printf("Join initialized\n");
-	#endif
+	if (rcv_msg->type != ROWS) {
+		fprintf(stderr, "Windowing can be applied only on lists of rows\n");
+		exit(EXIT_FAILURE);
+	}
+
+	RowsList *list = rcv_msg->content.rows_list;	// this should always be a single element list
+	if (list->num_rows != 1) {
+		fprintf(stderr, "Window operator received more than one tuple in a single message\n");
+		exit(EXIT_FAILURE);
+	}
+
+	// get tuple time
+	data->cur_time = list->rows[0].elements[1].value.long_value;
+
+	if (data->max_time == 0) {
+		// first tuple, set max_time
+		data->max_time = data->cur_time + data->window_size;
+	} 
+
+	// if this tuple's time exceeds the max_time, send all messages in the window and create the next window
+	if (data->cur_time > data->max_time) {
+
+		data->list->num_rows = data->received_tuples;
+
+		// Create a copy of the current list
+        copy_list = CopyAndFreeRowsList(data->list);
+
+		data->list = rs_malloc(sizeof(RowsList));
+		CHECK_RSMALLOC(data->list);
+		data->list->rows = rs_malloc(sizeof(Row) * data->window_size);		// todo fix rows size
+		CHECK_RSMALLOC(data->list->rows);
+
+		data->received_tuples = 0;
+		data->max_time = data->cur_time + data->window_size;
+
+	}
+
+	data->list->rows[data->received_tuples++] = list->rows[0];
+
+	return copy_list;
+}
+
+void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t me, simtime_t now) {
+	lp_id_t *neighbors;
+	int num_neighbors;
+
+	window_data->can_end = true;
+	
+	// flush window
+	window_data->list->num_rows = window_data->received_tuples;
+
+	RowsList *copy_list = rs_malloc(sizeof(RowsList));
+	CHECK_RSMALLOC(copy_list);
+
+	copy_list->num_rows = window_data->received_tuples;
+	copy_list->rows = rs_malloc(sizeof(Row) * window_data->window_size);
+	CHECK_RSMALLOC(copy_list->rows);
+
+	for (int i = 0; i < window_data->list->num_rows; i++) {
+		copy_list->rows[i] = window_data->list->rows[i];
+	}
+
+	neighbors = GetAllNeighbors(topology, me, &num_neighbors);
+	CreateAndSendMessage(me, 5.0, ROWS, copy_list, now, neighbors, num_neighbors);
+
+	rs_free(window_data->list->rows);
+	rs_free(window_data->list);
+
+	ForwardTerminationMessage(topology, me, now);
+}
+
+void JoinInit(struct topology *topology, lp_id_t from1, lp_id_t from2, lp_id_t me) {
+	JoinData *join_data = rs_malloc(sizeof(JoinData));
+	JoinTableData *table1_data = rs_malloc(sizeof(JoinTableData));
+	JoinTableData *table2_data = rs_malloc(sizeof(JoinTableData));
+	CHECK_RSMALLOC(join_data);
+	CHECK_RSMALLOC(table1_data);
+	CHECK_RSMALLOC(table2_data);
+
+	join_data->can_end = false;
+	join_data->size = 2;
+	join_data->tables_data = rs_malloc(2 * sizeof(JoinTableData *));
+	CHECK_RSMALLOC(join_data->tables_data);
+	join_data->tables_data[0] = table1_data;
+	join_data->tables_data[1] = table2_data;
+
+	InitJoin(topology, from1, me, table1_data);
+	InitJoin(topology, from2, me, table2_data);
+
+	SetState(join_data);
 }
 
 /**
@@ -682,32 +780,37 @@ void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData
  * @param data Process state
  * @param priority Priority of the messages to be sent
  */
-void wJoin(struct topology *topology, lp_id_t me, simtime_t now, const void *content, JoinData *data, float priority) {
+RowsList *wJoin(Message *msg, void *data) {
 	unsigned int i;
 	bool can_execute = true;
-	Message *msg = (Message *)content;
 	RowsList *joined_list;
+	JoinData *join_data = (JoinData *)data;
 
-	printf("Join actor received message from %ld\n", msg->envelope->sender);
-
-	for (i = 0; i < data->size; i++) {
-		if (data->tables_data[i]->from_id == msg->envelope->sender) {
-			data->tables_data[i]->list = msg->content.rows_list;
+	for (i = 0; i < join_data->size; i++) {
+		if (join_data->tables_data[i]->from_id == msg->envelope->sender) {
+			join_data->tables_data[i]->list = msg->content.rows_list;
 		} else {
-			if (!data->tables_data[i]->list) {
+			if (!join_data->tables_data[i]->list) {
 				can_execute = false;
 			}
 		}
 	}
 
 	if (can_execute) {
-		joined_list = Join(*data->tables_data[0]->list, 
-				*data->tables_data[1]->list, 
-				data->tables_data[0]->attribute, 
-				data->tables_data[1]->attribute);
+		joined_list = Join(*join_data->tables_data[0]->list, 
+				*join_data->tables_data[1]->list, 
+				join_data->tables_data[0]->attribute, 
+				join_data->tables_data[1]->attribute);
+
+		// free tables lists
+		for (i = 0; i < join_data->size; i++) {
+			join_data->tables_data[i]->list = NULL;
+		}
 		
-		CreateAndSendRowsMessage(topology, me, priority, joined_list, now);
+		return joined_list;
 	} 
+
+	return NULL;
 }
 
 /**

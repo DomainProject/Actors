@@ -234,28 +234,33 @@ typedef struct {
     } content;
 } Message;
 
+/* utils */
+EXPORT void PrintRow(const Row *row);
+
+/* SQL operations */
+EXPORT RowsList *ProjectionMultRows(RowsList input_rows, AttributeList list);
+EXPORT RowsList *SelectionMultRows(RowsList input_rows, Condition *condition);
+EXPORT RowsList *OrderBy(RowsList input_rows, const char *col_name);
+EXPORT GroupsList *GroupBy(RowsList *rows_list, const char *col_name);
+EXPORT void *AggregateFunction(AggFunctionData input, AggregateFunctionType type);
+EXPORT RowsList *Join(RowsList list1, RowsList list2, char *col1_name, char *col2_name);
+
+/* ROOT-Sim management function */
 EXPORT RowsList* CopyAndFreeRowsList(RowsList *list);
 EXPORT void SendMessageToAllNeighbors(struct topology *topology, Message *message, simtime_t now);
-EXPORT void CreateAndSendRowsMessage(struct topology *topology, lp_id_t sender_id, float priority, RowsList *send_list, simtime_t now);
-EXPORT void CreateAndSendGroupsMessage(struct topology *topology, lp_id_t sender_id, float priority, GroupsList *send_list, simtime_t now);
+EXPORT Message *CreateMessage(lp_id_t sender_id, float priority, void *list, MessageType type);
+EXPORT void CreateAndSendMessage(lp_id_t sender_id, float priority, MessageType type, void *list, simtime_t now, lp_id_t *receivers, int num_receivers);
 EXPORT long ComputeSleepTime(char *datetime);
 EXPORT void DataIngestionInit(lp_id_t me, simtime_t now, FILE **file, char *filename, Schema *schema);
 EXPORT void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSourceData *data, FILE **file, Schema *schema);
 EXPORT void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me);
-EXPORT void Window(struct topology *topology, lp_id_t me, simtime_t now, const void *content, WindowData *data, float priority);
 EXPORT void TestWindow(const void *content);
 EXPORT void SelectionInit(struct topology *topology, lp_id_t from, lp_id_t me);
-EXPORT void wSelection(struct topology *topology, lp_id_t me, simtime_t now, const void *content, SelectionData *data, float priority);
 EXPORT void ProjectionInit(struct topology *topology, lp_id_t from, lp_id_t me);
-EXPORT void wProjection(struct topology *topology, lp_id_t me, simtime_t now, const void *content, ProjectionData *data, float priority);
 EXPORT void OrderByInit(struct topology *topology, lp_id_t from, lp_id_t me);
-EXPORT void wOrderBy(struct topology *topology, lp_id_t me, simtime_t now, const void *content, OrderByData *data, float priority);
 EXPORT void GroupByInit(struct topology *topology, lp_id_t from, lp_id_t me);
-EXPORT void wGroupBy(struct topology *topology, lp_id_t me, simtime_t now, const void *content, GroupByData *data, float priority);
 EXPORT void AggregateFunctionInit(struct topology *topology, lp_id_t from, lp_id_t me);
-EXPORT void wAggregateFunction(struct topology *topology, lp_id_t me, simtime_t now, const void *content, AggregateFunctionData *data, float priority, AggregateFunctionType type);
 EXPORT void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData *table_data);
-EXPORT void wJoin(struct topology *topology, lp_id_t me, simtime_t now, const void *content, JoinData *data, float priority);
 EXPORT void ProcessMessage(lp_id_t me, const void *content);
 EXPORT void ForwardTerminationMessage(struct topology *topology, lp_id_t me, simtime_t now);
 EXPORT void DataIngestionCleanUp(FILE *file, DataSourceData *data);
@@ -267,3 +272,16 @@ EXPORT void AggFunctionCleanUp(AggFunctionData *data);
 EXPORT void OrderByCleanUp(OrderByData *data);
 EXPORT void JoinCleanUp(JoinData *data);
 EXPORT void OutputCleanUp(OutputProcessData *data);
+EXPORT lp_id_t *GetAllNeighbors(struct topology *topology, lp_id_t me, int *num_neighbors);
+EXPORT void AggregateFunctionRowsInput(Message *rcv_msg, char *attribute, AggregateFunctionType type);
+EXPORT RowsList *AggregateFunctionGroupedInput(Message *rcv_msg, char *attribute, AggregateFunctionType type);
+EXPORT RowsList *wSelection(Message *rcv_msg, void *data);
+EXPORT RowsList *wProjection(Message *rcv_msg, void *data);
+EXPORT RowsList *wOrderBy(Message *rcv_msg, void *data);
+EXPORT GroupsList *wGroupBy(Message *rcv_msg, void *data);
+EXPORT RowsList *wAggregateFunction(Message *rcv_msg, void *data, AggregateFunctionType type);
+EXPORT RowsList *ExecuteWindow(Message *rcv_msg, WindowData *data);
+EXPORT RowsList *wJoin(Message *msg, void *data);
+EXPORT void ProcessMessage(lp_id_t me, const void *content);
+EXPORT void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t me, simtime_t now);
+EXPORT void JoinInit(struct topology *topology, lp_id_t from1, lp_id_t from2, lp_id_t me);
