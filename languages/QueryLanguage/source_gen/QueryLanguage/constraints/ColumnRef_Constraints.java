@@ -25,7 +25,7 @@ public class ColumnRef_Constraints extends BaseConstraintsDescriptor {
       @Nullable
       @Override
       public ReferenceScopeProvider getScopeProvider() {
-        return ReferenceScopeProvider.fromHierarchy(CONCEPTS.Column$oK, new SNodePointer("r:7edf4f40-f81a-49df-87e2-b00351b83558(QueryLanguage.constraints)", "8471277724064634581"));
+        return ReferenceScopeProvider.fromHierarchy(CONCEPTS.Column$oK, new SNodePointer("r:7edf4f40-f81a-49df-87e2-b00351b83558(QueryLanguage.constraints)", "6649776843795359366"));
       }
     };
     Map<SReferenceLink, ReferenceConstraintsDescriptor> references = new HashMap<SReferenceLink, ReferenceConstraintsDescriptor>();

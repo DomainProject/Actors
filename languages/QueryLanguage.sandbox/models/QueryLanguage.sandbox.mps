@@ -7,8 +7,9 @@
   <imports />
   <registry>
     <language id="26d1395b-1ee6-43ad-b522-c0cdd699ded3" name="QueryLanguage">
-      <concept id="3100867722287388366" name="QueryLanguage.structure.GroupBy" flags="ng" index="21oAwd">
-        <child id="3100867722287388505" name="columns" index="21oAAq" />
+      <concept id="7824142728409239622" name="QueryLanguage.structure.JoinCondition" flags="ng" index="ini0t">
+        <child id="7824142728409239627" name="rightColumn" index="ini0g" />
+        <child id="7824142728409239625" name="leftColumn" index="ini0i" />
       </concept>
       <concept id="2341611946572642014" name="QueryLanguage.structure.TableReference" flags="ng" index="2leIlQ">
         <reference id="2341611946572642015" name="tableRef" index="2leIlR" />
@@ -29,16 +30,14 @@
         <property id="2341611946574946043" name="fullName" index="2l5wPj" />
         <property id="1229499084499598135" name="type" index="Al3ng" />
       </concept>
-      <concept id="6736945802599629716" name="QueryLanguage.structure.Average" flags="ng" index="Avfcn" />
-      <concept id="1047910270175909650" name="QueryLanguage.structure.SelectColumn" flags="ngI" index="2WQRJ4">
-        <child id="817930103574645565" name="aggregationFunction" index="1LWTg_" />
-      </concept>
       <concept id="7033755722359825273" name="QueryLanguage.structure.Select" flags="ng" index="15J0zD">
-        <child id="3100867722287388537" name="groupBy" index="21oAAU" />
+        <property id="8521615295528819822" name="viewName" index="1cLguo" />
+        <child id="7824142728409239666" name="joinCondition" index="ini0D" />
         <child id="2341611946572650175" name="tables" index="2legkn" />
         <child id="3500821905858947254" name="window" index="2odo9f" />
         <child id="1229499084499654445" name="where" index="AlhBa" />
         <child id="1047910270176170764" name="cols" index="2WRRZq" />
+        <child id="817930103574093953" name="viewTable" index="1LY3Yp" />
       </concept>
       <concept id="7033755722359825275" name="QueryLanguage.structure.Where" flags="ng" index="15J0zF">
         <child id="1229499084499985332" name="condition" index="AmyPj" />
@@ -64,17 +63,17 @@
       <property role="TrG5h" value="agent" />
       <node concept="Al3nk" id="HpRLxUurU0" role="1_7Ipx">
         <property role="TrG5h" value="VendorID" />
-        <property role="2l5wPj" value="agent.VendorID" />
+        <property role="2l5wPj" value="agent_alias.VendorID" />
         <property role="Al3ng" value="14g3IsRh3GU/Integer" />
       </node>
       <node concept="Al3nk" id="7XEq$CD40o0" role="1_7Ipx">
         <property role="TrG5h" value="tpep_pickup_datetime" />
-        <property role="2l5wPj" value="agent.tpep_pickup_datetime" />
+        <property role="2l5wPj" value="agent_alias.tpep_pickup_datetime" />
         <property role="Al3ng" value="14g3IsRh3GZ/Date" />
       </node>
       <node concept="Al3nk" id="7XEq$CD40o3" role="1_7Ipx">
         <property role="TrG5h" value="tpep_dropoff_datetime" />
-        <property role="2l5wPj" value="agent.tpep_dropoff_datetime" />
+        <property role="2l5wPj" value="agent_alias.tpep_dropoff_datetime" />
         <property role="Al3ng" value="14g3IsRh3GZ/Date" />
       </node>
       <node concept="Al3nk" id="7XEq$CD40o7" role="1_7Ipx">
@@ -84,7 +83,7 @@
       </node>
       <node concept="Al3nk" id="7XEq$CD40oc" role="1_7Ipx">
         <property role="TrG5h" value="trip_distance" />
-        <property role="2l5wPj" value="agent.trip_distance" />
+        <property role="2l5wPj" value="agent_alias.trip_distance" />
         <property role="Al3ng" value="14g3IsRh3H3/Float" />
       </node>
       <node concept="Al3nk" id="7XEq$CD40ou" role="1_7Ipx">
@@ -104,7 +103,7 @@
       </node>
       <node concept="Al3nk" id="7XEq$CD40oQ" role="1_7Ipx">
         <property role="TrG5h" value="DOLocationID" />
-        <property role="2l5wPj" value="agent.DOLocationID" />
+        <property role="2l5wPj" value="agent_alias.DOLocationID" />
         <property role="Al3ng" value="14g3IsRh3GU/Integer" />
       </node>
       <node concept="Al3nk" id="7XEq$CD40p0" role="1_7Ipx">
@@ -149,77 +148,113 @@
       </node>
       <node concept="Al3nk" id="7XEq$CD40qO" role="1_7Ipx">
         <property role="TrG5h" value="congestion_surcharge" />
-        <property role="2l5wPj" value="agent.congestion_surcharge" />
+        <property role="2l5wPj" value="agent_alias.congestion_surcharge" />
         <property role="Al3ng" value="14g3IsRh3H3/Float" />
       </node>
       <node concept="Al3nk" id="7XEq$CD40r7" role="1_7Ipx">
         <property role="TrG5h" value="Airport_fee" />
-        <property role="2l5wPj" value="agent.Airport_fee" />
+        <property role="2l5wPj" value="agent_alias.Airport_fee" />
         <property role="Al3ng" value="14g3IsRh3H3/Float" />
       </node>
     </node>
-    <node concept="Al3n9" id="7XEq$CEmheX" role="21riY_">
-      <property role="TrG5h" value="person" />
-      <node concept="Al3nk" id="7XEq$CEmhg2" role="1_7Ipx">
-        <property role="TrG5h" value="id" />
-        <property role="2l5wPj" value="person.id" />
-        <property role="Al3ng" value="14g3IsRh3GU/Integer" />
-      </node>
-    </node>
-    <node concept="15J0zD" id="3QVj6nW3n93" role="21riY_">
-      <node concept="2leIlQ" id="3QVj6nW3n95" role="2legkn">
+    <node concept="15J0zD" id="1u7A9uKZjtI" role="21riY_">
+      <property role="1cLguo" value="AirportFeeSinglePassenger" />
+      <node concept="2leIlQ" id="1u7A9uKZjtK" role="2legkn">
         <ref role="2leIlR" node="HpRLxUoZRZ" resolve="agent" />
       </node>
-      <node concept="Agl$j" id="3QVj6nW3n9v" role="2WRRZq">
+      <node concept="Agl$j" id="1u7A9uKZjuj" role="2WRRZq">
+        <ref role="Agl$i" node="HpRLxUurU0" resolve="VendorID" />
+      </node>
+      <node concept="Agl$j" id="1u7A9uKZjuo" role="2WRRZq">
         <ref role="Agl$i" node="7XEq$CD40r7" resolve="Airport_fee" />
       </node>
-      <node concept="Agl$j" id="3QVj6nW3n9$" role="2WRRZq">
-        <ref role="Agl$i" node="7XEq$CD40oQ" resolve="DOLocationID" />
-      </node>
-      <node concept="15J0zF" id="3QVj6nW3n9C" role="AlhBa">
-        <node concept="1osJ5O" id="3QVj6nW3n9K" role="AmyPj">
-          <property role="1osJ58" value="14g3IsRhL0p/NOT_EQUAL" />
-          <node concept="1HhJcF" id="3QVj6nW3n9L" role="1osJ5a">
-            <property role="1HhJcI" value="0" />
+      <node concept="15J0zF" id="1u7A9uKZjus" role="AlhBa">
+        <node concept="1osJ5O" id="1u7A9uKZjuu" role="AmyPj">
+          <property role="1osJ58" value="14g3IsRhKZU/EQUALS" />
+          <node concept="1HhJcF" id="1u7A9uKZjuv" role="1osJ5a">
+            <property role="1HhJcI" value="1" />
           </node>
-          <node concept="Agl$j" id="3QVj6nW3n9M" role="1osJ57">
-            <ref role="Agl$i" node="7XEq$CD40r7" resolve="Airport_fee" />
+          <node concept="Agl$j" id="1u7A9uKZjuw" role="1osJ57">
+            <ref role="Agl$i" node="7XEq$CD40o7" resolve="passenger_count" />
           </node>
         </node>
       </node>
-      <node concept="2odo9i" id="3QVj6nW3n9Q" role="2odo9f">
-        <property role="2odo9a" value="15" />
+      <node concept="Al3n9" id="1u7A9uKZju$" role="1LY3Yp">
+        <property role="TrG5h" value="AirportFeeSinglePassenger" />
+        <node concept="Al3nk" id="1u7A9uKZju_" role="1_7Ipx">
+          <property role="TrG5h" value="VendorID" />
+          <property role="2l5wPj" value="AirportFeeSinglePassenger.VendorID" />
+          <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+        </node>
+        <node concept="Al3nk" id="1u7A9uKZjuA" role="1_7Ipx">
+          <property role="TrG5h" value="Airport_fee" />
+          <property role="2l5wPj" value="AirportFeeSinglePassenger.Airport_fee" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        </node>
       </node>
     </node>
-    <node concept="15J0zD" id="3QVj6nW3nap" role="21riY_">
-      <node concept="2leIlQ" id="3QVj6nW3nar" role="2legkn">
+    <node concept="15J0zD" id="1u7A9uKZjji" role="21riY_">
+      <property role="1cLguo" value="CongestionSurchargeAirportRides" />
+      <node concept="2leIlQ" id="1u7A9uKZjjk" role="2legkn">
         <ref role="2leIlR" node="HpRLxUoZRZ" resolve="agent" />
       </node>
-      <node concept="Agl$j" id="3QVj6nW3naY" role="2WRRZq">
-        <ref role="Agl$i" node="7XEq$CD40oQ" resolve="DOLocationID" />
+      <node concept="Agl$j" id="1u7A9uKZjjQ" role="2WRRZq">
+        <ref role="Agl$i" node="7XEq$CD40qO" resolve="congestion_surcharge" />
       </node>
-      <node concept="Agl$j" id="3QVj6nW3nbd" role="2WRRZq">
+      <node concept="Agl$j" id="1u7A9uKZjjV" role="2WRRZq">
         <ref role="Agl$i" node="HpRLxUurU0" resolve="VendorID" />
-        <node concept="Avfcn" id="3QVj6nW3nbh" role="1LWTg_" />
       </node>
-      <node concept="15J0zF" id="3QVj6nW3nb0" role="AlhBa">
-        <node concept="1osJ5O" id="3QVj6nW3nb2" role="AmyPj">
+      <node concept="15J0zF" id="1u7A9uKZjjZ" role="AlhBa">
+        <node concept="1osJ5O" id="1u7A9uKZjk1" role="AmyPj">
           <property role="1osJ58" value="14g3IsRhL0p/NOT_EQUAL" />
-          <node concept="1HhJcF" id="3QVj6nW3nb3" role="1osJ5a">
+          <node concept="1HhJcF" id="1u7A9uKZjk2" role="1osJ5a">
             <property role="1HhJcI" value="0" />
           </node>
-          <node concept="Agl$j" id="3QVj6nW3nb4" role="1osJ57">
+          <node concept="Agl$j" id="1u7A9uKZjk3" role="1osJ57">
             <ref role="Agl$i" node="7XEq$CD40r7" resolve="Airport_fee" />
           </node>
         </node>
       </node>
-      <node concept="2odo9i" id="3QVj6nW3nb8" role="2odo9f">
-        <property role="2odo9a" value="15" />
-      </node>
-      <node concept="21oAwd" id="3QVj6nW3nbj" role="21oAAU">
-        <node concept="Agl$j" id="3QVj6nW3nbk" role="21oAAq">
-          <ref role="Agl$i" node="7XEq$CD40oQ" resolve="DOLocationID" />
+      <node concept="Al3n9" id="1u7A9uKZjk7" role="1LY3Yp">
+        <property role="TrG5h" value="CongestionSurchargeAirportRides" />
+        <node concept="Al3nk" id="1u7A9uKZjk8" role="1_7Ipx">
+          <property role="TrG5h" value="congestion_surcharge" />
+          <property role="2l5wPj" value="CongestionSurchargeAirportRides.congestion_surcharge" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
         </node>
+        <node concept="Al3nk" id="1u7A9uKZjk9" role="1_7Ipx">
+          <property role="TrG5h" value="VendorID" />
+          <property role="2l5wPj" value="CongestionSurchargeAirportRides.VendorID" />
+          <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+        </node>
+      </node>
+    </node>
+    <node concept="15J0zD" id="1u7A9uKZjvm" role="21riY_">
+      <node concept="2leIlQ" id="1u7A9uKZjvo" role="2legkn">
+        <ref role="2leIlR" node="1u7A9uKZju$" resolve="AirportFeeSinglePassenger" />
+      </node>
+      <node concept="2leIlQ" id="1u7A9uKZjw6" role="2legkn">
+        <ref role="2leIlR" node="1u7A9uKZjk7" resolve="CongestionSurchargeAirportRides" />
+      </node>
+      <node concept="ini0t" id="1u7A9uKZjw9" role="ini0D">
+        <node concept="Agl$j" id="1u7A9uKZjwa" role="ini0i">
+          <ref role="Agl$i" node="1u7A9uKZju_" resolve="VendorID" />
+        </node>
+        <node concept="Agl$j" id="1u7A9uKZjwb" role="ini0g">
+          <ref role="Agl$i" node="1u7A9uKZjk9" resolve="VendorID" />
+        </node>
+      </node>
+      <node concept="Agl$j" id="1u7A9uKZjxe" role="2WRRZq">
+        <ref role="Agl$i" node="1u7A9uKZju_" resolve="VendorID" />
+      </node>
+      <node concept="Agl$j" id="1u7A9uKZjx1" role="2WRRZq">
+        <ref role="Agl$i" node="1u7A9uKZjuA" resolve="Airport_fee" />
+      </node>
+      <node concept="Agl$j" id="1u7A9uKZjx6" role="2WRRZq">
+        <ref role="Agl$i" node="1u7A9uKZjk8" resolve="congestion_surcharge" />
+      </node>
+      <node concept="2odo9i" id="1u7A9uLomNo" role="2odo9f">
+        <property role="2odo9a" value="10" />
       </node>
     </node>
   </node>

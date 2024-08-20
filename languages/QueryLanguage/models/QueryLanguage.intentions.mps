@@ -64,18 +64,15 @@
         <child id="1081773367579" name="rightExpression" index="3uHU7w" />
         <child id="1081773367580" name="leftExpression" index="3uHU7B" />
       </concept>
-      <concept id="1080120340718" name="jetbrains.mps.baseLanguage.structure.AndExpression" flags="nn" index="1Wc70l" />
     </language>
     <language id="d7a92d38-f7db-40d0-8431-763b0c3c9f20" name="jetbrains.mps.lang.intentions">
       <concept id="1192794744107" name="jetbrains.mps.lang.intentions.structure.IntentionDeclaration" flags="ig" index="2S6QgY" />
       <concept id="1192794782375" name="jetbrains.mps.lang.intentions.structure.DescriptionBlock" flags="in" index="2S6ZIM" />
-      <concept id="1192795771125" name="jetbrains.mps.lang.intentions.structure.IsApplicableBlock" flags="in" index="2SaL7w" />
       <concept id="1192795911897" name="jetbrains.mps.lang.intentions.structure.ExecuteBlock" flags="in" index="2Sbjvc" />
       <concept id="1192796902958" name="jetbrains.mps.lang.intentions.structure.ConceptFunctionParameter_node" flags="nn" index="2Sf5sV" />
       <concept id="2522969319638091381" name="jetbrains.mps.lang.intentions.structure.BaseIntentionDeclaration" flags="ig" index="2ZfUlf">
         <reference id="2522969319638198290" name="forConcept" index="2ZfgGC" />
         <child id="2522969319638198291" name="executeFunction" index="2ZfgGD" />
-        <child id="2522969319638093995" name="isApplicableFunction" index="2ZfVeh" />
         <child id="2522969319638093993" name="descriptionFunction" index="2ZfVej" />
       </concept>
       <concept id="1240316299033" name="jetbrains.mps.lang.intentions.structure.QueryBlock" flags="in" index="38BcoT">
@@ -98,7 +95,6 @@
         <child id="6039268229364358388" name="body" index="1pnPq1" />
         <child id="6039268229364358387" name="concept" index="1pnPq6" />
       </concept>
-      <concept id="1171999116870" name="jetbrains.mps.lang.smodel.structure.Node_IsNullOperation" flags="nn" index="3w_OXm" />
       <concept id="1180636770613" name="jetbrains.mps.lang.smodel.structure.SNodeCreator" flags="nn" index="3zrR0B">
         <child id="1180636770616" name="createdType" index="3zrR0E" />
       </concept>
@@ -231,32 +227,6 @@
             </node>
             <node concept="37vLTw" id="21Z4UyPiav9" role="37vLTx">
               <ref role="3cqZAo" node="21Z4UyPhSkV" resolve="alias" />
-            </node>
-          </node>
-        </node>
-      </node>
-    </node>
-    <node concept="2SaL7w" id="5gn1UuTfKaR" role="2ZfVeh">
-      <node concept="3clFbS" id="5gn1UuTfKaS" role="2VODD2">
-        <node concept="3clFbF" id="5gn1UuTfKrz" role="3cqZAp">
-          <node concept="1Wc70l" id="5gn1UuTfNuP" role="3clFbG">
-            <node concept="2OqwBi" id="5gn1UuTfPtu" role="3uHU7w">
-              <node concept="2OqwBi" id="5gn1UuTfNUN" role="2Oq$k0">
-                <node concept="2Sf5sV" id="5gn1UuTfNw9" role="2Oq$k0" />
-                <node concept="3TrEf2" id="5gn1UuTfOKX" role="2OqNvi">
-                  <ref role="3Tt5mk" to="p6im:2G8vGeEougD" resolve="orderBy" />
-                </node>
-              </node>
-              <node concept="3w_OXm" id="5gn1UuTfQ76" role="2OqNvi" />
-            </node>
-            <node concept="2OqwBi" id="5gn1UuTfLo7" role="3uHU7B">
-              <node concept="2OqwBi" id="5gn1UuTfKSm" role="2Oq$k0">
-                <node concept="2Sf5sV" id="5gn1UuTfKry" role="2Oq$k0" />
-                <node concept="3TrEf2" id="5gn1UuTfLaU" role="2OqNvi">
-                  <ref role="3Tt5mk" to="p6im:2G8vGeEqxtT" resolve="groupBy" />
-                </node>
-              </node>
-              <node concept="3w_OXm" id="5gn1UuTfLSZ" role="2OqNvi" />
             </node>
           </node>
         </node>

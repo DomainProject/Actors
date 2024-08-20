@@ -620,7 +620,7 @@
       <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="links" />
       <property role="20lbJX" value="fLJekj5/_0__n" />
-      <ref role="20lvS9" node="yznZkh5Heq" resolve="Link" />
+      <ref role="20lvS9" node="2oGQ1bfTn$S" resolve="ActorLink" />
     </node>
   </node>
   <node concept="1TIwiD" id="2oGQ1bfTn$R">
