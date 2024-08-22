@@ -16,8 +16,8 @@ import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.scope.ListScope;
 import jetbrains.mps.lang.core.behavior.ScopeProvider__BehaviorDescriptor;
@@ -40,11 +40,18 @@ public final class Select__BehaviorDescriptor extends BaseBHDescriptor {
 
   /*package*/ static Scope getScope_id52_Geb4QDV$(@NotNull SNode __thisNode__, SAbstractConcept kind, SNode child) {
     if (SConceptOperations.isSubConceptOf(SNodeOperations.asSConcept(kind), CONCEPTS.Column$oK)) {
-      final List<SNode> columns = ListSequence.fromList(new ArrayList<SNode>());
+      final List<SNode> columns = new ArrayList<SNode>();
       for (SNode table : ListSequence.fromList(SLinkOperations.getChildren(__thisNode__, LINKS.tables$IXdn))) {
         ListSequence.fromList(columns).addSequence(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(table, LINKS.tableRef$boeY), LINKS.columns$ubIo)));
       }
       return ListScope.forNamedElements(columns);
+    }
+    if (SConceptOperations.isSubConceptOf(SNodeOperations.asSConcept(kind), CONCEPTS.CreateTable$ca)) {
+      final List<SNode> tables = new ArrayList<SNode>();
+      for (SNode table : ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(__thisNode__, CONCEPTS.Script$Rg, false, false), CONCEPTS.CreateTable$ca, false, new SAbstractConcept[]{}))) {
+        ListSequence.fromList(tables).addElement(table);
+      }
+      return ListScope.forNamedElements(tables);
     }
     return ((Scope) ScopeProvider__BehaviorDescriptor.getScope_id52_Geb4QDV$.invokeSuper(__thisNode__, CONCEPTS.Select$Te, kind, child));
   }
@@ -103,6 +110,8 @@ public final class Select__BehaviorDescriptor extends BaseBHDescriptor {
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept Column$oK = MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b33L, "QueryLanguage.structure.Column");
+    /*package*/ static final SConcept Script$Rg = MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443bcdL, "QueryLanguage.structure.Script");
+    /*package*/ static final SConcept CreateTable$ca = MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b2eL, "QueryLanguage.structure.CreateTable");
     /*package*/ static final SConcept Select$Te = MetaAdapterFactory.getConcept(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, "QueryLanguage.structure.Select");
   }
 }

@@ -28,9 +28,11 @@ public class ConstraintsAspectDescriptor extends BaseConstraintsAspectDescriptor
         return new Select_Constraints();
       case 4:
         return new SimpleCondition_Constraints();
+      case 5:
+        return new TableReference_Constraints();
       default:
     }
     return new BaseConstraintsDescriptor(concept);
   }
-  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b33L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee7375157f4L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x2b087ec3aa61e251L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5eeb1b6c0699ea18L)).seal();
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b33L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee7375157f4L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x2b087ec3aa61e251L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5eeb1b6c0699ea18L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL)).seal();
 }

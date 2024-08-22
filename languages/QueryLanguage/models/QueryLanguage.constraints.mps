@@ -730,5 +730,15 @@
     <property role="3GE5qa" value="where.condition" />
     <ref role="1M2myG" to="p6im:5VF6QK6AuCo" resolve="SimpleCondition" />
   </node>
+  <node concept="1M2fIO" id="3Gp_4Vpb1Hz">
+    <property role="3GE5qa" value="statements" />
+    <ref role="1M2myG" to="p6im:21Z4UyPhvru" resolve="TableReference" />
+    <node concept="1N5Pfh" id="3Gp_4Vpb1H$" role="1Mr941">
+      <ref role="1N5Vy1" to="p6im:21Z4UyPhvrv" />
+      <node concept="1dDu$B" id="3Gp_4VpbskX" role="1N6uqs">
+        <ref role="1dDu$A" to="p6im:14g3IsRh3GI" resolve="CreateTable" />
+      </node>
+    </node>
+  </node>
 </model>
 
