@@ -65,15 +65,9 @@ public final class AddAlias_Intention extends AbstractIntentionDescriptor implem
 
     @Override
     public boolean isApplicable(final SNode node, final EditorContext editorContext) {
-      if (!(isApplicableToNode(node, editorContext))) {
-        return false;
-      }
       return true;
     }
 
-    private boolean isApplicableToNode(final SNode node, final EditorContext editorContext) {
-      return (SLinkOperations.getTarget(node, LINKS.groupBy$vhgB) == null) && (SLinkOperations.getTarget(node, LINKS.orderBy$K96v) == null);
-    }
 
 
     @Override
@@ -86,8 +80,6 @@ public final class AddAlias_Intention extends AbstractIntentionDescriptor implem
   private static final class LINKS {
     /*package*/ static final SReferenceLink tableRef$boeY = MetaAdapterFactory.getReferenceLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL, 0x207f13a8b545f6dfL, "tableRef");
     /*package*/ static final SContainmentLink tables$IXdn = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x207f13a8b54616bfL, "tables");
-    /*package*/ static final SContainmentLink orderBy$K96v = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x2b087ec3aa61e429L, "orderBy");
-    /*package*/ static final SContainmentLink groupBy$vhgB = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x2b087ec3aa6a1779L, "groupBy");
   }
 
   private static final class PROPS {

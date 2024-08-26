@@ -40,7 +40,7 @@ public abstract class ProjectionSwitchCase {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("proj(me, now, content, s)");
+    tgs.append("projection(me, now, content, s);");
     tgs.newLine();
     tgs.indent();
     tgs.append("break;");

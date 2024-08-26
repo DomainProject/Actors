@@ -9,6 +9,8 @@ import org.jetbrains.mps.openapi.language.SLanguage;
 import jetbrains.mps.smodel.runtime.ILanguageAspect;
 import jetbrains.mps.core.aspects.feedback.api.FeedbackAspect;
 import QueryLanguage.feedback.GeneratedFeedbackAspectFeedback;
+import jetbrains.mps.openapi.actions.descriptor.ActionAspectDescriptor;
+import QueryLanguage.actions.ActionAspectDescriptorImpl;
 import jetbrains.mps.smodel.runtime.BehaviorAspectDescriptor;
 import jetbrains.mps.smodel.runtime.ConstraintsAspectDescriptor;
 import jetbrains.mps.openapi.editor.descriptor.EditorAspectDescriptor;
@@ -52,6 +54,9 @@ public class Language extends LanguageRuntime {
   protected <T extends ILanguageAspect> T createAspect(Class<T> aspectClass) {
     if (aspectClass.isAssignableFrom(FeedbackAspect.class)) {
       return aspectClass.cast(FeedbackAspect.combine(new GeneratedFeedbackAspectFeedback()));
+    }
+    if (aspectClass == ActionAspectDescriptor.class) {
+      return aspectClass.cast(new ActionAspectDescriptorImpl());
     }
     if (aspectClass == BehaviorAspectDescriptor.class) {
       return aspectClass.cast(new QueryLanguage.behavior.BehaviorAspectDescriptor());

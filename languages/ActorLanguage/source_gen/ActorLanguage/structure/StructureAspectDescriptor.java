@@ -383,7 +383,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/2750811047725463862");
     b.version(3);
     b.aggregate("actors", 0x6b33cca64056ab36L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6b33cca64056ab07L).optional(true).ordered(true).multiple(true).origin("7724742800286591798").done();
-    b.aggregate("links", 0x262cd812cfe5797cL).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x8a35ff51116d39aL).optional(true).ordered(true).multiple(true).origin("2750811047725463932").done();
+    b.aggregate("links", 0x262cd812cfe5797cL).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L).optional(true).ordered(true).multiple(true).origin("2750811047725463932").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForBecome() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<product version="3" modelHash="-8fsjc3nqpt6ijr1zz3ejn9ndl6ognnj">
-  <files names="ColumnRef_Constraints.java:Column_Constraints.java:ConstraintsAspectDescriptor.java:OrderBy_Constraints.java:Select_Constraints.java:SimpleCondition_Constraints.java" />
+<product version="3" modelHash="-deqdfzc9xt57lup010k8o2gqk78rdlq">
+  <files names="ColumnRef_Constraints.java:Column_Constraints.java:ConstraintsAspectDescriptor.java:OrderBy_Constraints.java:Select_Constraints.java:SimpleCondition_Constraints.java:TableReference_Constraints.java" />
 </product>
 

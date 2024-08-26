@@ -276,18 +276,6 @@
       <property role="TrG5h" value="NOT_EQUAL" />
       <property role="1L1pqM" value="!=" />
     </node>
-    <node concept="25R33" id="14g3IsRhL0x" role="25R1y">
-      <property role="3tVfz5" value="1229499084499783713" />
-      <property role="TrG5h" value="BETWEEN" />
-    </node>
-    <node concept="25R33" id="14g3IsRhL0E" role="25R1y">
-      <property role="3tVfz5" value="1229499084499783722" />
-      <property role="TrG5h" value="LIKE" />
-    </node>
-    <node concept="25R33" id="14g3IsRhL0O" role="25R1y">
-      <property role="3tVfz5" value="1229499084499783732" />
-      <property role="TrG5h" value="IN" />
-    </node>
   </node>
   <node concept="1TIwiD" id="14g3IsRklvO">
     <property role="EcuMT" value="1229499084500457460" />
@@ -501,7 +489,7 @@
     <property role="EcuMT" value="6839590609873398296" />
     <property role="3GE5qa" value="where.condition" />
     <property role="TrG5h" value="SimpleCondition" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="5VF6QK6AuCA" role="1TKVEi">
       <property role="IQ2ns" value="6839590609873398310" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
@@ -529,7 +517,7 @@
     <property role="EcuMT" value="6839590609873398299" />
     <property role="3GE5qa" value="where.condition" />
     <property role="TrG5h" value="MultipleCondition" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="PrWs8" id="5VF6QK6AuCs" role="PzmwI">
       <ref role="PrY4T" node="5VF6QK6AuCn" resolve="Condition" />
     </node>
@@ -569,7 +557,7 @@
     <property role="3GE5qa" value="column" />
     <property role="TrG5h" value="AllColumns" />
     <property role="34LRSv" value="*" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="PrWs8" id="UaVdqMkpsp" role="PzmwI">
       <ref role="PrY4T" node="UaVdqMkpsi" resolve="SelectColumn" />
     </node>
@@ -577,7 +565,7 @@
   <node concept="1TIwiD" id="6MkW5HYMt16">
     <property role="EcuMT" value="7824142728409239622" />
     <property role="TrG5h" value="JoinCondition" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="6MkW5HYMt19" role="1TKVEi">
       <property role="IQ2ns" value="7824142728409239625" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
@@ -598,7 +586,7 @@
     <property role="TrG5h" value="Window" />
     <property role="3GE5qa" value="window" />
     <property role="34LRSv" value="WINDOW" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyi" id="32lqJACCeyL" role="1TKVEl">
       <property role="IQ2nx" value="3500821905858947249" />
       <property role="TrG5h" value="type" />

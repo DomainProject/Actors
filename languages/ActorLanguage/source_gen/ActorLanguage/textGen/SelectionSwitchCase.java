@@ -40,7 +40,7 @@ public abstract class SelectionSwitchCase {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("select(me, now, content, s)");
+    tgs.append("selection(me, now, content, s);");
     tgs.newLine();
     tgs.indent();
     tgs.append("break;");

@@ -5,13 +5,15 @@ package ActorLanguage.textGen;
 import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
+import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import org.jetbrains.mps.openapi.model.SNode;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 
 public class ActorsGraph_TextGen extends TextGenDescriptorBase {
@@ -21,12 +23,21 @@ public class ActorsGraph_TextGen extends TextGenDescriptorBase {
     tgs.append("void InitTopology() {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
+
+    int maxAddress = 0;
+    for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScript$nz, false, false), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{}))) {
+      if (SPropertyOperations.getInteger(actor, PROPS.address$DqJ_) > maxAddress) {
+        maxAddress = SPropertyOperations.getInteger(actor, PROPS.address$DqJ_);
+      }
+    }
+
     tgs.indent();
     tgs.append("topology = InitializeTopology(TOPOLOGY_GRAPH, ");
-    tgs.append(String.valueOf(ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).count()));
+    tgs.append(String.valueOf(maxAddress + 1));
     tgs.append(");");
     tgs.newLine();
     tgs.newLine();
+
     for (SNode link : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.links$3jtH))) {
       tgs.indent();
       TopologyLinks.createTopology(link, ctx);
@@ -37,8 +48,13 @@ public class ActorsGraph_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
   }
 
+  private static final class PROPS {
+    /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
+  }
+
   private static final class CONCEPTS {
-    /*package*/ static final SConcept ActorLink$sB = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, "ActorLanguage.structure.ActorLink");
+    /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
+    /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
   }
 
   private static final class LINKS {

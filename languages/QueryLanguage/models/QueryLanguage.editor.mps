@@ -1256,13 +1256,13 @@
     <ref role="1XX52x" to="p6im:5VF6QK6AuCo" resolve="SimpleCondition" />
     <node concept="3EZMnI" id="5VF6QK6AuCN" role="2wV5jI">
       <node concept="3F1sOY" id="5VF6QK6AuCO" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:5VF6QK6AuCF" />
+        <ref role="1NtTu8" to="p6im:5VF6QK6AuCF" resolve="column" />
       </node>
       <node concept="3F0A7n" id="5VF6QK6AuCP" role="3EZMnx">
         <ref role="1NtTu8" to="p6im:5VF6QK6AuC$" resolve="operator" />
       </node>
       <node concept="3F1sOY" id="5VF6QK6AuCQ" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:5VF6QK6AuCA" />
+        <ref role="1NtTu8" to="p6im:5VF6QK6AuCA" resolve="value" />
       </node>
       <node concept="l2Vlx" id="5VF6QK6AuCT" role="2iSdaV" />
     </node>
@@ -1275,7 +1275,7 @@
         <property role="3F0ifm" value="(" />
       </node>
       <node concept="3F1sOY" id="5VF6QK6AuDy" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:5VF6QK6AuDp" />
+        <ref role="1NtTu8" to="p6im:5VF6QK6AuDp" resolve="conditionSx" />
       </node>
       <node concept="3F0ifn" id="5VF6QK6C0y9" role="3EZMnx">
         <property role="3F0ifm" value=")" />
@@ -1290,7 +1290,7 @@
         <property role="3F0ifm" value="(" />
       </node>
       <node concept="3F1sOY" id="5VF6QK6AuDT" role="3EZMnx">
-        <ref role="1NtTu8" to="p6im:5VF6QK6AuDd" />
+        <ref role="1NtTu8" to="p6im:5VF6QK6AuDd" resolve="conditionDx" />
       </node>
       <node concept="3F0ifn" id="5VF6QK6C0yF" role="3EZMnx">
         <property role="3F0ifm" value=")" />

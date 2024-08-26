@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <root>
+    <file name="ActionAspectDescriptorImpl.java">
+      <unit at="12,0,30,0" name="QueryLanguage.actions.ActionAspectDescriptorImpl" />
+    </file>
+  </root>
+  <root nodeRef="r:b053dcf2-8574-41a3-bf8c-40491dc6b2df(QueryLanguage.actions)/6649776843783650043">
+    <file name="SelectColumnFactory.java">
+      <node id="6649776843783650044" at="11,0,13,0" concept="0" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="6649776843783650044" at="11,102,11,102" />
+      <scope id="6649776843783650044" at="11,0,13,0">
+        <var name="enclosingNode" id="6649776843783650044" />
+        <var name="index" id="6649776843783650044" />
+        <var name="model" id="6649776843783650044" />
+        <var name="newNode" id="6649776843783650044" />
+        <var name="sampleNode" id="6649776843783650044" />
+      </scope>
+      <unit id="6649776843783650044" at="10,0,14,0" name="QueryLanguage.actions.SelectColumnFactory$NodeFactory_6649776843783650044" />
+      <unit id="6649776843783650043" at="9,0,15,0" name="QueryLanguage.actions.SelectColumnFactory" />
+    </file>
+  </root>
+  <root nodeRef="r:b053dcf2-8574-41a3-bf8c-40491dc6b2df(QueryLanguage.actions)/6649776843796618829">
+    <file name="ColumnRefFactory.java">
+      <node id="6649776843796618830" at="11,0,13,0" concept="0" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="6649776843796618830" at="11,102,11,102" />
+      <scope id="6649776843796618830" at="11,0,13,0">
+        <var name="enclosingNode" id="6649776843796618830" />
+        <var name="index" id="6649776843796618830" />
+        <var name="model" id="6649776843796618830" />
+        <var name="newNode" id="6649776843796618830" />
+        <var name="sampleNode" id="6649776843796618830" />
+      </scope>
+      <unit id="6649776843796618830" at="10,0,14,0" name="QueryLanguage.actions.ColumnRefFactory$NodeFactory_6649776843796618830" />
+      <unit id="6649776843796618829" at="9,0,15,0" name="QueryLanguage.actions.ColumnRefFactory" />
+    </file>
+  </root>
+</debug-info>
+

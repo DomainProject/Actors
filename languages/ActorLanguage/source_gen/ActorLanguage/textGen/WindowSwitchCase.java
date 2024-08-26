@@ -6,7 +6,7 @@ import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 
 public abstract class WindowSwitchCase {
-  public static void AppendWindow(int address, final TextGenContext ctx) {
+  public static void AppendWindow(int from, int address, final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
@@ -27,7 +27,9 @@ public abstract class WindowSwitchCase {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("WindowInit(topology, 0, me);");
+    tgs.append("WindowInit(topology, ");
+    tgs.append(String.valueOf(from));
+    tgs.append(", me);");
     tgs.newLine();
     tgs.indent();
     tgs.append("break;");
@@ -60,7 +62,7 @@ public abstract class WindowSwitchCase {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("TerminateWindow((WindowData *)s, me, now);");
+    tgs.append("TerminateWindow(topology, (WindowData *)s, me, now);");
     tgs.newLine();
     tgs.indent();
     tgs.append("break;");

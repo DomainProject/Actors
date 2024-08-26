@@ -42,7 +42,7 @@ public abstract class JoinSwitchCase {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("join(me, now, content, s);");
+    tgs.append("joinColumns(me, now, content, s);");
     tgs.newLine();
     tgs.indent();
     tgs.append("break;");
