@@ -8,7 +8,6 @@ RowsList* CopyAndFreeRowsList(RowsList *list) {
     }
 
     copy_list->num_rows = list->num_rows;
-	printf("%d\n", copy_list->num_rows);
 
     copy_list->rows = rs_malloc(sizeof(Row) * copy_list->num_rows);
     if (copy_list->rows == NULL) {
@@ -39,8 +38,6 @@ RowsList* CopyAndFreeRowsList(RowsList *list) {
         dest_row->table_name = strdup(src_row->table_name);
     }
 
-	printf("done\n");
-
     rs_free(list->rows);
     rs_free(list);
 
@@ -49,7 +46,7 @@ RowsList* CopyAndFreeRowsList(RowsList *list) {
 
 void SendMessage(Message *message, simtime_t now, lp_id_t *receivers, int num_receivers) {
 	for (int i = 0; i < num_receivers; i++) {
-		ScheduleNewEvent(receivers[i], now + 10, EVENT, message, sizeof(Message));
+		ScheduleNewEvent(receivers[i], now + 1.0, EVENT, message, sizeof(Message));
 	}
 }
 
@@ -66,13 +63,13 @@ Message *CreateMessage(lp_id_t sender_id, float priority, void *list, MessageTyp
 
 	// create envelope
 	e = rs_malloc(sizeof(Envelope));
-	CHECK_RSMALLOC(e);
+	CHECK_RSMALLOC(e, "CreateMessage");
 	e->priority = priority;
 	e->sender = sender_id;
 
 	// create message
 	msg = rs_malloc(sizeof(Message));
-	CHECK_RSMALLOC(msg);
+	CHECK_RSMALLOC(msg, "CreateMessage");
 	msg->envelope = e;
 	msg->type = type;
 	if (type == ROWS)
@@ -84,19 +81,19 @@ Message *CreateMessage(lp_id_t sender_id, float priority, void *list, MessageTyp
 }
 
 void CreateAndSendRowsMessage(lp_id_t sender_id, float priority, RowsList *send_list, simtime_t now, lp_id_t *receivers, int num_receivers) {
-
+	
 	Envelope *e;
 	Message *send_msg;
 
 	// create envelope
 	e = rs_malloc(sizeof(Envelope));
-	CHECK_RSMALLOC(e);
+	CHECK_RSMALLOC(e, "CreateAndSendRowsMessage");
 	e->priority = priority;
 	e->sender = sender_id;
 
 	// create and send message
 	send_msg = rs_malloc(sizeof(Message));
-	CHECK_RSMALLOC(send_msg);
+	CHECK_RSMALLOC(send_msg, "CreateAndSendRowsMessage");
 	send_msg->envelope = e;
 	send_msg->type = ROWS;
 	send_msg->content.rows_list = send_list;
@@ -110,12 +107,12 @@ void CreateAndSendGroupsMessage(lp_id_t sender_id, float priority, GroupsList *s
 	Message *send_msg; 
 
 	e = rs_malloc(sizeof(Envelope));
-	CHECK_RSMALLOC(e);
+	CHECK_RSMALLOC(e, "CreateAndSendGroupsMessage");
 	e->priority = priority;
 	e->sender = sender_id;
 
 	send_msg = rs_malloc(sizeof(Message));
-	CHECK_RSMALLOC(send_msg);
+	CHECK_RSMALLOC(send_msg, "CreateAndSendGroupsMessage");
 	send_msg->envelope = e;
 	send_msg->type = GROUPS;
 	send_msg->content.groups_list = send_list; 
@@ -138,7 +135,7 @@ void CreateAndSendMessage(lp_id_t sender_id, float priority, MessageType type, v
 
 }
 
-long ComputeSleepTime(char *datetime) {
+simtime_t ComputeSleepTime(char *datetime) {
 
 	int hours, minutes, seconds;
 	char *time_str;
@@ -153,7 +150,7 @@ long ComputeSleepTime(char *datetime) {
 
     sscanf(time_str, "%2d:%2d:%2d", &hours, &minutes, &seconds);
 
-    return hours * 3600 + minutes * 60 + seconds;
+    return hours * 3600.0 + minutes * 60.0 + seconds;
 }
 
 /**
@@ -166,7 +163,7 @@ void DataIngestionInit(lp_id_t me, simtime_t now, FILE **file, char *filename, S
 	DataSourceData *data;
 
 	data = rs_malloc(sizeof(DataSourceData));
-	CHECK_RSMALLOC(data);
+	CHECK_RSMALLOC(data, "DataIngestionInit");
 	data->can_end = false;
 
 	SetState(data);
@@ -198,7 +195,7 @@ void DataIngestionInit(lp_id_t me, simtime_t now, FILE **file, char *filename, S
  */
 void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSourceData *data, FILE **file, Schema *schema) {
     char line[MAX_LINE_LENGTH];
-    long new_time = 0;
+    simtime_t new_time = 0.0;
     char *cols;
 	RowElement *elements;
 	Row *row;
@@ -207,14 +204,14 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 	int num_neighbors;
 
 	// read line from the input file
-	if (!fgets(line, sizeof(line), *file)) {
+	if (fgets(line, sizeof(line), *file) == NULL) {
 		// create and send termination message
 		lp_id_t num_neighbors = CountDirections(topology, me);
 		lp_id_t neighbors[num_neighbors];
 		GetAllReceivers(topology, me, neighbors);
 
 		for (unsigned int i = 0; i < num_neighbors; i++) {
-			ScheduleNewEvent(neighbors[i], now + 10, TERMINATE, NULL, 0);
+			ScheduleNewEvent(neighbors[i], now + 10.0, TERMINATE, NULL, 0);
 		}
 
 		data->can_end = true;
@@ -222,24 +219,33 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 		return;
 	}
 
+	line[strcspn(line, "\n")] = '\0';  // Rimuove il carattere newline, se presente
+    // ggiungi una terminazione \0 manualmente, nel caso fgets non la metta
+    line[sizeof(line) - 1] = '\0';
+
 	// create and populate Row struct from the input line
 	elements = rs_malloc(schema->num_cols * sizeof(RowElement));
-	CHECK_RSMALLOC(elements);
+	CHECK_RSMALLOC(elements, "DataIngestion");
 	row = rs_malloc(sizeof(Row));	
-	CHECK_RSMALLOC(row);
+	CHECK_RSMALLOC(row, "DataIngestion");
 	row->elements = elements;
 	row->num_elements = schema->num_cols;
 	row->table_name = "Taxis";
+
+	printf("%s\n", line);
+
 	PopulateRow(line, row, *schema);
 
 	// create single row list
 	list = rs_malloc(sizeof(RowsList));
-	CHECK_RSMALLOC(list);
+	CHECK_RSMALLOC(list, "DataIngestion");
 	list->num_rows = 1;
 	list->rows = row;
 
 	neighbors = GetAllNeighbors(topology, me, &num_neighbors);
 	CreateAndSendRowsMessage(me, 5.0, list, now, neighbors, num_neighbors);
+
+	PrintRow(row);
 
 	// get next tuple time, and schedule next DataIngestion process' execution
 	int count = 0;
@@ -254,7 +260,7 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 		count++;
 	}
 	
-	ScheduleNewEvent(me, now + new_time + 10, EVENT, NULL, 0);
+	ScheduleNewEvent(me, now + new_time, EVENT, NULL, 0);
 }
 
 /**
@@ -266,11 +272,11 @@ void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 	int *size = (int *)GetTopologyLinkData(topology, from, me);
 
 	WindowData *data = rs_malloc(sizeof(WindowData));
-	CHECK_RSMALLOC(data);
+	CHECK_RSMALLOC(data, "WindowInit");
 	Row *rows = rs_malloc(sizeof(Row) * *size);		// todo fix size
-	CHECK_RSMALLOC(rows);
+	CHECK_RSMALLOC(rows, "WindowInit");
 	RowsList *list = rs_malloc(sizeof(RowsList));
-	CHECK_RSMALLOC(list);
+	CHECK_RSMALLOC(list, "WindowInit");
 
 	list->num_rows = 0;
 	list->rows = rows;
@@ -311,7 +317,7 @@ void TestWindow(const void *content) {
 void SelectionInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 	// allocate struct for state
 	SelectionData *data = rs_malloc(sizeof(SelectionData));
-	CHECK_RSMALLOC(data);
+	CHECK_RSMALLOC(data, "SelectionInit");
 
 	// get textual condition and parse it to a Condition struct
 	char *condition = (char *)GetTopologyLinkData(topology, from, me);
@@ -338,7 +344,7 @@ void ProjectionInit(struct topology *topology, lp_id_t from, lp_id_t me) {
     int count = 0;
 
 	list = rs_malloc(sizeof(AttributeList));
-	CHECK_RSMALLOC(list);
+	CHECK_RSMALLOC(list, "ProjectionInit");
 
 	// get string representation of attributes ("attr1,attr2,...,attrN")
 	char *attributes = (char *)GetTopologyLinkData(topology, from, me);
@@ -358,7 +364,7 @@ void ProjectionInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 	// allocate AttributeList struct
 	list->num_attributes = count;
     list->attributes = rs_malloc(sizeof(Attribute) * count);
-	CHECK_RSMALLOC(list->attributes);
+	CHECK_RSMALLOC(list->attributes, "ProjectionInit");
 
 	// populate AttributeList struct with attributes
     token = strtok(attributes_cp, ",");
@@ -369,7 +375,7 @@ void ProjectionInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 
 	// create and set state
 	ProjectionData *projection_data = rs_malloc(sizeof(ProjectionData));
-	CHECK_RSMALLOC(projection_data);
+	CHECK_RSMALLOC(projection_data, "ProjectionInit");
 
 	projection_data->list = list;
 	projection_data->list_string = attributes;
@@ -392,7 +398,7 @@ void OrderByInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 	char *attribute = (char *)GetTopologyLinkData(topology, from, me);
 
 	OrderByData *data = rs_malloc(sizeof(OrderByData));
-	CHECK_RSMALLOC(data);
+	CHECK_RSMALLOC(data, "OrderByInit");
 	data->attribute = attribute;
 
 	SetState(data);
@@ -411,7 +417,7 @@ void GroupByInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 	char *attribute = (char *)GetTopologyLinkData(topology, from, me);
 
 	GroupByData *data = rs_malloc(sizeof(GroupByData));
-	CHECK_RSMALLOC(data);
+	CHECK_RSMALLOC(data, "GroupByInit");
 	data->attribute = attribute;
 
 	SetState(data);
@@ -430,8 +436,9 @@ void AggregateFunctionInit(struct topology *topology, lp_id_t from, lp_id_t me) 
 	char *attribute = (char *)GetTopologyLinkData(topology, from, me);
 
 	AggregateFunctionData *data = rs_malloc(sizeof(AggregateFunctionData));
-	CHECK_RSMALLOC(data);
+	CHECK_RSMALLOC(data, "AggregateFunctionInit");
 	data->attribute = attribute;
+	data->can_end = false;
 
 	SetState(data);
 
@@ -447,13 +454,39 @@ void AggregateFunctionInit(struct topology *topology, lp_id_t from, lp_id_t me) 
  * @param table_data Pointer to the state structure
  */
 void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData *table_data) {
-	table_data->from_id = from;
-	table_data->attribute = (char *)GetTopologyLinkData(topology, from, me);
-	table_data->list = NULL;
 
-	#ifdef DEBUG
-	printf("Join initialized\n");
-	#endif
+	char *attribute_name = (char *)GetTopologyLinkData(topology, from, me);
+
+	char *buffer = strdup(attribute_name);
+
+    // Usa strtok per dividere la stringa, verifica che i token siano validi
+    char *parsed_name = strtok(buffer, ".");
+    
+    // Verifica se il primo token è valido
+    if (parsed_name != NULL) {
+        table_data->table_name = parsed_name;
+    } else {
+        printf("Error: table_name is NULL\n");
+        return;
+    }
+
+    // Estrai il secondo token
+    parsed_name = strtok(NULL, ".");
+    
+    // Verifica se il secondo token è valido
+    if (parsed_name != NULL) {
+        table_data->attribute = parsed_name;
+    } else {
+        printf("Error: attribute is NULL\n");
+        return;
+    }
+
+    table_data->from_id = from;
+    table_data->list = NULL;
+
+    #ifdef DEBUG
+    printf("Join initialized: table_name = %s, attribute = %s\n", table_data->table_name, table_data->attribute);
+    #endif
 }
 
 void AggregateFunctionRowsInput(Message *rcv_msg, char *attribute, AggregateFunctionType type) {
@@ -528,7 +561,15 @@ RowsList *wSelection(Message *rcv_msg, void *data) {
 	// select rows based on the condition
 	send_list = SelectionMultRows(*rcv_list, condition);
 
+	if (send_list->num_rows == 0) {
+		printf("[SELECTION] No tuples were found that satisfy the specified selection condition.\n");
+		return NULL;
+	}
+
 	#ifdef DEBUG
+	if (!send_list) {
+		return NULL;
+	}
 	printf("Selection output:\n");
 	for (int i = 0; i < send_list->num_rows; i++) {
 		PrintRow(&send_list->rows[i]);
@@ -559,6 +600,9 @@ RowsList *wProjection(Message *rcv_msg, void *data) {
 	send_list = ProjectionMultRows(*rcv_list, *list);
 
 	#ifdef DEBUG
+	if (!send_list) {
+		return NULL;
+	}
 	printf("Projection output:\n");
 	for (int i = 0; i < send_list->num_rows; i++) {
 		PrintRow(&send_list->rows[i]);
@@ -590,6 +634,9 @@ RowsList *wOrderBy(Message *rcv_msg, void *data) {
 	send_list = OrderBy(*rcv_list, attribute);
 
 	#ifdef DEBUG
+	if (!send_list) {
+		return NULL;
+	}
 	printf("OrderBy output:\n");
 	for (int i = 0; i < send_list->num_rows; i++) {
 		PrintRow(&send_list->rows[i]);
@@ -627,6 +674,9 @@ GroupsList *wGroupBy(Message *rcv_msg, void *data) {
 	}
 
 	#ifdef DEBUG
+	if (!groups_list) {
+		return NULL;
+	}
 	printf("GroupBy output:\n");
 	for (int i = 0; i < groups_list->num_groups; i++) {
 		printf("Group %d\n", i);
@@ -699,18 +749,17 @@ RowsList *ExecuteWindow(Message *rcv_msg, WindowData *data) {
 		data->max_time = data->cur_time + data->window_size;
 	} 
 
-	// if this tuple's time exceeds the max_time, send all messages in the window and create the next window
+	// if this tuple's time exceeds the max_time, create the next window and return the current one
 	if (data->cur_time > data->max_time) {
-
 		data->list->num_rows = data->received_tuples;
 
 		// Create a copy of the current list
         copy_list = CopyAndFreeRowsList(data->list);
 
 		data->list = rs_malloc(sizeof(RowsList));
-		CHECK_RSMALLOC(data->list);
-		data->list->rows = rs_malloc(sizeof(Row) * data->window_size);		// todo fix rows size
-		CHECK_RSMALLOC(data->list->rows);
+		CHECK_RSMALLOC(data->list, "ExecuteWindow");
+		data->list->rows = rs_malloc(sizeof(Row) * 100);		// todo fix rows size
+		CHECK_RSMALLOC(data->list->rows, "ExecuteWindow");
 
 		data->received_tuples = 0;
 		data->max_time = data->cur_time + data->window_size;
@@ -732,17 +781,18 @@ void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t
 	window_data->list->num_rows = window_data->received_tuples;
 
 	RowsList *copy_list = rs_malloc(sizeof(RowsList));
-	CHECK_RSMALLOC(copy_list);
+	CHECK_RSMALLOC(copy_list, "TerminateWindow");
 
 	copy_list->num_rows = window_data->received_tuples;
 	copy_list->rows = rs_malloc(sizeof(Row) * window_data->window_size);
-	CHECK_RSMALLOC(copy_list->rows);
+	CHECK_RSMALLOC(copy_list->rows, "TerminateWindow");
 
 	for (int i = 0; i < window_data->list->num_rows; i++) {
 		copy_list->rows[i] = window_data->list->rows[i];
 	}
 
 	neighbors = GetAllNeighbors(topology, me, &num_neighbors);
+
 	CreateAndSendMessage(me, 5.0, ROWS, copy_list, now, neighbors, num_neighbors);
 
 	rs_free(window_data->list->rows);
@@ -755,14 +805,14 @@ void JoinInit(struct topology *topology, lp_id_t from1, lp_id_t from2, lp_id_t m
 	JoinData *join_data = rs_malloc(sizeof(JoinData));
 	JoinTableData *table1_data = rs_malloc(sizeof(JoinTableData));
 	JoinTableData *table2_data = rs_malloc(sizeof(JoinTableData));
-	CHECK_RSMALLOC(join_data);
-	CHECK_RSMALLOC(table1_data);
-	CHECK_RSMALLOC(table2_data);
+	CHECK_RSMALLOC(join_data, "JoinInit");
+	CHECK_RSMALLOC(table1_data, "JoinInit");
+	CHECK_RSMALLOC(table2_data, "JoinInit");
 
 	join_data->can_end = false;
 	join_data->size = 2;
 	join_data->tables_data = rs_malloc(2 * sizeof(JoinTableData *));
-	CHECK_RSMALLOC(join_data->tables_data);
+	CHECK_RSMALLOC(join_data->tables_data, "JoinInit");
 	join_data->tables_data[0] = table1_data;
 	join_data->tables_data[1] = table2_data;
 
@@ -788,6 +838,7 @@ RowsList *wJoin(Message *msg, void *data) {
 
 	for (i = 0; i < join_data->size; i++) {
 		if (join_data->tables_data[i]->from_id == msg->envelope->sender) {
+			msg->content.rows_list->rows->table_name = strdup(join_data->tables_data[i]->table_name);
 			join_data->tables_data[i]->list = msg->content.rows_list;
 		} else {
 			if (!join_data->tables_data[i]->list) {
@@ -806,11 +857,118 @@ RowsList *wJoin(Message *msg, void *data) {
 		for (i = 0; i < join_data->size; i++) {
 			join_data->tables_data[i]->list = NULL;
 		}
+
+		#ifdef DEBUG
+		for (int i = 0; i < joined_list->num_rows; i++) {
+			PrintRow(&joined_list->rows[i]);
+		}
+		#endif
 		
 		return joined_list;
 	} 
 
 	return NULL;
+}
+
+/**
+ * @brief Prints the header (column names) to the CSV file
+ * @param row Pointer to the row to extract column names from
+ * @param file File pointer to the open file
+ */
+void PrintHeaderCSV(Row *row, FILE *file) {
+    for (int i = 0; i < row->num_elements; i++) {
+        fprintf(file, "%s", row->elements[i].col_name);
+        if (i < row->num_elements - 1) {
+            fprintf(file, ",");
+        }
+    }
+    fprintf(file, "\n");
+}
+
+/**
+ * @brief Prints a row in CSV format
+ * @param row Pointer to the row to be printed
+ * @param file File pointer to the open file
+ */
+void PrintRowCSV(Row *row, FILE *file) {
+    for (int i = 0; i < row->num_elements; i++) {
+        RowElement *element = &row->elements[i];
+        
+        switch (element->type) {
+            case TYPE_INT:
+                fprintf(file, "%d", element->value.int_value);
+                break;
+            case TYPE_LONG:
+                fprintf(file, "%ld", element->value.long_value);
+                break;
+            case TYPE_FLOAT:
+                fprintf(file, "%f", element->value.float_value);
+                break;
+            case TYPE_DOUBLE:
+                fprintf(file, "%lf", element->value.double_value);
+                break;
+            case TYPE_STRING:
+                fprintf(file, "%s", element->value.string_value);
+                break;
+        }
+
+        if (i < row->num_elements - 1) {
+            fprintf(file, ",");
+        }
+    }
+    fprintf(file, "\n");
+}
+
+/**
+ * @brief Generic output process, that writes the received messages to a CSV file
+ *        If it's the first time writing, it also writes the header.
+ * @param me Process id
+ * @param now Current simulation time
+ * @param content Pointer to the received message
+ */
+void WriteToOutputFile(lp_id_t me, const void *content, OutputProcessData *data) {
+    Message *msg;
+    int i, j;
+    
+    msg = (Message *)content;
+
+    FILE *file = fopen(data->filename, "a+");
+    if (!file) {
+        perror("Error opening file");
+        exit(EXIT_FAILURE);
+    }
+
+    fseek(file, 0, SEEK_END);
+    long file_size = ftell(file);
+
+    if (file_size == 0) {
+        if (msg->type == ROWS && msg->content.rows_list->num_rows > 0) {
+            PrintHeaderCSV(&msg->content.rows_list->rows[0], file);
+        } else if (msg->type == GROUPS && msg->content.groups_list->num_groups > 0) {
+            if (msg->content.groups_list->groups[0].rows_list.num_rows > 0) {
+                PrintHeaderCSV(&msg->content.groups_list->groups[0].rows_list.rows[0], file);
+            }
+        }
+    }
+
+    switch (msg->type) {
+        case ROWS:
+            for (i = 0; i < msg->content.rows_list->num_rows; i++) {
+                PrintRowCSV(&msg->content.rows_list->rows[i], file);
+            }
+            break;
+        case GROUPS:
+            for (i = 0; i < msg->content.groups_list->num_groups; i++) {
+                fprintf(file, "Group %d\n", i);
+                for (j = 0; j < msg->content.groups_list->groups[i].rows_list.num_rows; j++) {
+                    PrintRowCSV(&msg->content.groups_list->groups[i].rows_list.rows[j], file);
+                }
+            }
+            break;
+    }
+
+	printf("[INFO] Output process %ld has written the query result in the file %s\n", me, data->filename);
+    fclose(file);
 }
 
 /**
@@ -850,7 +1008,7 @@ void ForwardTerminationMessage(struct topology *topology, lp_id_t me, simtime_t 
 	GetAllReceivers(topology, me, neighbors);
 
 	for (unsigned int i = 0; i < num_neighbors; i++) {
-		ScheduleNewEvent(neighbors[i], now + 10, TERMINATE, NULL, 0);
+		ScheduleNewEvent(neighbors[i], now + 10.0, TERMINATE, NULL, 0);
 	}
 }
 
@@ -880,7 +1038,7 @@ void GroupByCleanUp(__unused GroupByData *data) {
 	//rs_free(data);
 }
 
-void AggFunctionCleanUp(__unused AggFunctionData *data) {
+void AggFunctionCleanUp(__unused AggregateFunctionData *data) {
 	//rs_free(data);
 }
 

@@ -4,10 +4,10 @@
 #include <ROOT-Sim.h>
 #include <ROOT-Sim/topology.h>
 
-#define CHECK_RSMALLOC(ptr)    \
+#define CHECK_RSMALLOC(ptr, function)    \
     do {                       \
         if (!(ptr)) {          \
-            perror("rs_malloc"); \
+            fprintf(stderr, "Cannot allocate memory in function %s\n", function); \
             exit(EXIT_FAILURE); \
         }                      \
     } while (0)
@@ -203,6 +203,7 @@ typedef struct {
     lp_id_t from_id;
     char *attribute;
     RowsList *list;
+    char *table_name;
 } JoinTableData;
 
 typedef struct {
@@ -213,6 +214,7 @@ typedef struct {
 
 typedef struct {
     bool can_end;
+    char *filename;
 } OutputProcessData;
 
 typedef enum {
@@ -250,7 +252,7 @@ EXPORT RowsList* CopyAndFreeRowsList(RowsList *list);
 EXPORT void SendMessageToAllNeighbors(struct topology *topology, Message *message, simtime_t now);
 EXPORT Message *CreateMessage(lp_id_t sender_id, float priority, void *list, MessageType type);
 EXPORT void CreateAndSendMessage(lp_id_t sender_id, float priority, MessageType type, void *list, simtime_t now, lp_id_t *receivers, int num_receivers);
-EXPORT long ComputeSleepTime(char *datetime);
+EXPORT simtime_t ComputeSleepTime(char *datetime);
 EXPORT void DataIngestionInit(lp_id_t me, simtime_t now, FILE **file, char *filename, Schema *schema);
 EXPORT void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSourceData *data, FILE **file, Schema *schema);
 EXPORT void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me);
@@ -268,7 +270,7 @@ EXPORT void WindowCleanUp(WindowData *data);
 EXPORT void SelectionCleanUp(SelectionData *data);
 EXPORT void ProjectionCleanUp(ProjectionData *data);
 EXPORT void GroupByCleanUp(GroupByData *data);
-EXPORT void AggFunctionCleanUp(AggFunctionData *data);
+EXPORT void AggFunctionCleanUp(AggregateFunctionData *data);
 EXPORT void OrderByCleanUp(OrderByData *data);
 EXPORT void JoinCleanUp(JoinData *data);
 EXPORT void OutputCleanUp(OutputProcessData *data);
@@ -285,3 +287,4 @@ EXPORT RowsList *wJoin(Message *msg, void *data);
 EXPORT void ProcessMessage(lp_id_t me, const void *content);
 EXPORT void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t me, simtime_t now);
 EXPORT void JoinInit(struct topology *topology, lp_id_t from1, lp_id_t from2, lp_id_t me);
+EXPORT void WriteToOutputFile(lp_id_t me, const void *content, OutputProcessData *data);
