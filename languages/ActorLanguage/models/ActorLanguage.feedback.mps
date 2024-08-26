@@ -82,7 +82,7 @@
         </node>
       </node>
       <node concept="1GjwBS" id="6nnLc8PMh1Q" role="3JXyrO">
-        <ref role="sa$J1" to="fudv:1mFJTG7e$j" />
+        <ref role="sa$J1" to="fudv:1mFJTG7e$j" resolve="FailingPropertyConstraints" />
         <ref role="1Gj$d9" to="o1mc:1enjyq1kiKO" resolve="address" />
       </node>
     </node>

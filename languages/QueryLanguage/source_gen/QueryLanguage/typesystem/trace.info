@@ -127,43 +127,53 @@
     <file name="check_Select_NonTypesystemRule.java">
       <node id="7824142728406769661" at="25,7,26,66" concept="5" />
       <node id="7824142728406769661" at="26,66,27,243" concept="5" />
-      <node id="7824142728406691202" at="31,50,32,30" concept="6" />
-      <node id="7824142728406691202" at="34,68,35,102" concept="6" />
-      <node id="7824142728406691202" at="37,30,38,17" concept="6" />
-      <node id="7824142728406691202" at="42,0,43,0" concept="7" trace="tables$IXdn" />
-      <node id="7824142728406691202" at="43,0,44,0" concept="7" trace="viewTable$4dXf" />
-      <node id="7824142728406691202" at="47,0,48,0" concept="7" trace="Select$Te" />
+      <node id="8001552070340961835" at="31,7,32,66" concept="5" />
+      <node id="8001552070340961835" at="32,66,33,247" concept="5" />
+      <node id="7824142728406691202" at="37,50,38,30" concept="6" />
+      <node id="7824142728406691202" at="40,68,41,102" concept="6" />
+      <node id="7824142728406691202" at="43,30,44,17" concept="6" />
+      <node id="7824142728406691202" at="48,0,49,0" concept="7" trace="tables$IXdn" />
+      <node id="7824142728406691202" at="49,0,50,0" concept="7" trace="viewTable$4dXf" />
+      <node id="7824142728406691202" at="50,0,51,0" concept="7" trace="window$XLAN" />
+      <node id="7824142728406691202" at="54,0,55,0" concept="7" trace="Select$Te" />
       <node id="7824142728406691202" at="21,0,23,0" concept="1" trace="check_Select_NonTypesystemRule#()V" />
-      <node id="7824142728406691202" at="31,0,34,0" concept="4" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
-      <node id="7824142728406691202" at="34,0,37,0" concept="4" trace="isApplicableAndPattern#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;" />
-      <node id="7824142728406691202" at="37,0,40,0" concept="4" trace="overrides#()Z" />
+      <node id="7824142728406691202" at="37,0,40,0" concept="4" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="7824142728406691202" at="40,0,43,0" concept="4" trace="isApplicableAndPattern#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;" />
+      <node id="7824142728406691202" at="43,0,46,0" concept="4" trace="overrides#()Z" />
       <node id="7824142728406769661" at="24,169,28,7" concept="0" />
+      <node id="8001552070340961835" at="30,142,34,7" concept="0" />
       <node id="7824142728406691218" at="23,119,29,5" concept="3" />
-      <node id="7824142728406691202" at="23,0,31,0" concept="4" trace="applyRule#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/typesystem/inference/TypeCheckingContext;Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;)V" />
+      <node id="8001552070340938946" at="29,5,35,5" concept="3" />
+      <node id="7824142728406691202" at="23,0,37,0" concept="4" trace="applyRule#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/typesystem/inference/TypeCheckingContext;Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;)V" />
       <scope id="7824142728406691202" at="21,43,21,43" />
-      <scope id="7824142728406691202" at="31,50,32,30" />
-      <scope id="7824142728406691202" at="34,68,35,102" />
-      <scope id="7824142728406691202" at="37,30,38,17" />
+      <scope id="7824142728406691202" at="37,50,38,30" />
+      <scope id="7824142728406691202" at="40,68,41,102" />
+      <scope id="7824142728406691202" at="43,30,44,17" />
       <scope id="7824142728406691202" at="21,0,23,0" />
       <scope id="7824142728406769661" at="25,7,27,243">
         <var name="_reporter_2309309498" id="7824142728406769661" />
         <var name="errorTarget" id="7824142728406769661" />
       </scope>
-      <scope id="7824142728406691202" at="31,0,34,0" />
-      <scope id="7824142728406691202" at="34,0,37,0">
-        <var name="argument" id="7824142728406691202" />
+      <scope id="8001552070340961835" at="31,7,33,247">
+        <var name="_reporter_2309309498" id="8001552070340961835" />
+        <var name="errorTarget" id="8001552070340961835" />
       </scope>
       <scope id="7824142728406691202" at="37,0,40,0" />
+      <scope id="7824142728406691202" at="40,0,43,0">
+        <var name="argument" id="7824142728406691202" />
+      </scope>
+      <scope id="7824142728406691202" at="43,0,46,0" />
       <scope id="7824142728406691220" at="24,169,28,7" />
-      <scope id="7824142728406691203" at="23,119,29,5" />
-      <scope id="7824142728406691202" at="23,0,31,0">
+      <scope id="8001552070340938948" at="30,142,34,7" />
+      <scope id="7824142728406691203" at="23,119,35,5" />
+      <scope id="7824142728406691202" at="23,0,37,0">
         <var name="select" id="7824142728406691202" />
         <var name="status" id="7824142728406691202" />
         <var name="typeCheckingContext" id="7824142728406691202" />
       </scope>
-      <unit id="7824142728406691202" at="46,0,49,0" name="QueryLanguage.typesystem.check_Select_NonTypesystemRule$CONCEPTS" />
-      <unit id="7824142728406691202" at="41,0,45,0" name="QueryLanguage.typesystem.check_Select_NonTypesystemRule$LINKS" />
-      <unit id="7824142728406691202" at="20,0,50,0" name="QueryLanguage.typesystem.check_Select_NonTypesystemRule" />
+      <unit id="7824142728406691202" at="53,0,56,0" name="QueryLanguage.typesystem.check_Select_NonTypesystemRule$CONCEPTS" />
+      <unit id="7824142728406691202" at="47,0,52,0" name="QueryLanguage.typesystem.check_Select_NonTypesystemRule$LINKS" />
+      <unit id="7824142728406691202" at="20,0,57,0" name="QueryLanguage.typesystem.check_Select_NonTypesystemRule" />
     </file>
   </root>
 </debug-info>

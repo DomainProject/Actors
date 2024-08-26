@@ -15,8 +15,8 @@ import jetbrains.mps.internal.collections.runtime.Sequence;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
-import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class ActorScript_TextGen extends TextGenDescriptorBase {
   @Override
@@ -98,6 +98,9 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.indent();
     tgs.append("OutputProcessData *output_data;");
     tgs.newLine();
+    tgs.indent();
+    tgs.append("JoinData *join_data;");
+    tgs.newLine();
     tgs.newLine();
 
     tgs.indent();
@@ -175,7 +178,8 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
 
     for (final SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{}))) {
       if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$QgnL), PROPS.name$MnvL).equals("window")) {
-        WindowSwitchCase.AppendWindow(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
+        int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
+        WindowSwitchCase.AppendWindow(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
       } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$QgnL), PROPS.name$MnvL).equals("selection")) {
         int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
         SelectionSwitchCase.AppendSelection(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
@@ -446,19 +450,19 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
   private static final class LINKS {
     /*package*/ static final SContainmentLink topology$GORc = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x262cd812cfe6cc9dL, "topology");
     /*package*/ static final SContainmentLink behaviors$VQhG = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x5d890eb3ebfeaec2L, "behaviors");
-    /*package*/ static final SReferenceLink behavior$QgnL = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681516c72L, "behavior");
     /*package*/ static final SReferenceLink actorTo$3d9g = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57976L, "actorTo");
     /*package*/ static final SReferenceLink actor$8xF = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57937L, 0x262cd812cfe57939L, "actor");
     /*package*/ static final SReferenceLink actorFrom$3cFe = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57974L, "actorFrom");
-  }
-
-  private static final class PROPS {
-    /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
-    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SReferenceLink behavior$QgnL = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681516c72L, "behavior");
   }
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept ActorLink$sB = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, "ActorLanguage.structure.ActorLink");
     /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

@@ -1806,7 +1806,7 @@
       </node>
     </node>
     <node concept="1N5Pfh" id="7XEq$CDrJLb" role="1Mr941">
-      <ref role="1N5Vy1" to="o1mc:7lfjb8Uc9bY" />
+      <ref role="1N5Vy1" to="o1mc:7lfjb8Uc9bY" resolve="resultType" />
       <node concept="3k9gUc" id="7XEq$CDrKgO" role="3kmjI7">
         <node concept="3clFbS" id="7XEq$CDrKgP" role="2VODD2">
           <node concept="3clFbF" id="7XEq$CDrKjY" role="3cqZAp">
@@ -1875,7 +1875,7 @@
     <property role="3GE5qa" value="message" />
     <ref role="1M2myG" to="o1mc:3eevqy$DSMD" resolve="SendMessageToActors" />
     <node concept="1N5Pfh" id="3eevqy$K$R0" role="1Mr941">
-      <ref role="1N5Vy1" to="o1mc:3eevqy$DSMG" />
+      <ref role="1N5Vy1" to="o1mc:3eevqy$DSMG" resolve="referenceList" />
       <node concept="3dgokm" id="3eevqy$K$Tj" role="1N6uqs">
         <node concept="3clFbS" id="3eevqy$K$Tl" role="2VODD2">
           <node concept="3cpWs8" id="3eevqy$K$VZ" role="3cqZAp">

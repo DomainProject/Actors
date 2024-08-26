@@ -302,7 +302,7 @@
           <node concept="2OqwBi" id="I$NcBUire" role="2GsD0m">
             <node concept="13iPFW" id="I$NcBUi9H" role="2Oq$k0" />
             <node concept="3Tsc0h" id="I$NcBUiQ9" role="2OqNvi">
-              <ref role="3TtcxE" to="o1mc:I$NcBCQo8" />
+              <ref role="3TtcxE" to="o1mc:I$NcBCQo8" resolve="actors" />
             </node>
           </node>
           <node concept="3clFbS" id="I$NcBUfrx" role="2LFqv$">
@@ -374,7 +374,7 @@
                     <ref role="3cqZAo" node="I$NcBHaYj" resolve="newActor" />
                   </node>
                   <node concept="3TrEf2" id="I$NcBHnHO" role="2OqNvi">
-                    <ref role="3Tt5mk" to="o1mc:1enjyq1kmLM" />
+                    <ref role="3Tt5mk" to="o1mc:1enjyq1kmLM" resolve="behavior" />
                   </node>
                 </node>
               </node>
@@ -393,7 +393,7 @@
                     <ref role="3cqZAo" node="I$NcBHaYj" resolve="newActor" />
                   </node>
                   <node concept="3TrEf2" id="I$NcBNDLi" role="2OqNvi">
-                    <ref role="3Tt5mk" to="o1mc:5Q93FfG0WVT" />
+                    <ref role="3Tt5mk" to="o1mc:5Q93FfG0WVT" resolve="messageQueue" />
                   </node>
                 </node>
               </node>

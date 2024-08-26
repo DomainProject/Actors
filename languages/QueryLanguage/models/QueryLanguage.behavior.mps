@@ -495,7 +495,7 @@
         </node>
         <node concept="3clFbF" id="4BxYaol$7XR" role="3cqZAp">
           <node concept="BsUDl" id="4BxYaol$7XP" role="3clFbG">
-            <ref role="37wK5l" node="4BxYaol$2vv" resolve="findAllSimpleConditionsRecursive" />
+            <ref role="37wK5l" node="4BxYaol$2vv" resolve="findAllSingleTableConditionsRecursive" />
             <node concept="37vLTw" id="4BxYaol$823" role="37wK5m">
               <ref role="3cqZAo" node="4BxYaol$2t2" resolve="condition" />
             </node>

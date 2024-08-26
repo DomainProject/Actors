@@ -216,6 +216,42 @@
           </node>
         </node>
       </node>
+      <node concept="3clFbJ" id="6Wbejr4tCN2" role="3cqZAp">
+        <node concept="3clFbS" id="6Wbejr4tCN4" role="3clFbx">
+          <node concept="2MkqsV" id="6Wbejr4tIoF" role="3cqZAp">
+            <node concept="Xl_RD" id="6Wbejr4tIoG" role="2MkJ7o">
+              <property role="Xl_RC" value="Window in queries on views is not supported" />
+            </node>
+            <node concept="1YBJjd" id="6Wbejr4tIoH" role="1urrMF">
+              <ref role="1YBMHb" node="6MkW5HYCIQ5" resolve="select" />
+            </node>
+          </node>
+        </node>
+        <node concept="1Wc70l" id="6Wbejr4tGOz" role="3clFbw">
+          <node concept="2OqwBi" id="6Wbejr4tHLT" role="3uHU7w">
+            <node concept="2OqwBi" id="6Wbejr4tHgT" role="2Oq$k0">
+              <node concept="1YBJjd" id="6Wbejr4tH44" role="2Oq$k0">
+                <ref role="1YBMHb" node="6MkW5HYCIQ5" resolve="select" />
+              </node>
+              <node concept="3TrEf2" id="6Wbejr4tH_5" role="2OqNvi">
+                <ref role="3Tt5mk" to="p6im:32lqJACCeyQ" resolve="window" />
+              </node>
+            </node>
+            <node concept="3x8VRR" id="6Wbejr4tIis" role="2OqNvi" />
+          </node>
+          <node concept="2OqwBi" id="6Wbejr4tE3$" role="3uHU7B">
+            <node concept="2OqwBi" id="6Wbejr4tD0F" role="2Oq$k0">
+              <node concept="1YBJjd" id="6Wbejr4tCNz" role="2Oq$k0">
+                <ref role="1YBMHb" node="6MkW5HYCIQ5" resolve="select" />
+              </node>
+              <node concept="3TrEf2" id="6Wbejr4tDP6" role="2OqNvi">
+                <ref role="3Tt5mk" to="p6im:HpRLxUCu21" resolve="viewTable" />
+              </node>
+            </node>
+            <node concept="3x8VRR" id="6Wbejr4tEKn" role="2OqNvi" />
+          </node>
+        </node>
+      </node>
     </node>
     <node concept="1YaCAy" id="6MkW5HYCIQ5" role="1YuTPh">
       <property role="TrG5h" value="select" />

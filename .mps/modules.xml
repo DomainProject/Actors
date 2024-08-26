@@ -2,10 +2,10 @@
 <project version="4">
   <component name="MPSProject">
     <projectModules>
-      <modulePath path="$PROJECT_DIR$/languages/ActorLanguage.sandbox/ActorLanguage.sandbox.msd" folder="" />
       <modulePath path="$PROJECT_DIR$/languages/ActorLanguage/ActorLanguage.mpl" folder="" />
       <modulePath path="$PROJECT_DIR$/languages/QueryLanguage.sandbox/QueryLanguage.sandbox.msd" folder="" />
       <modulePath path="$PROJECT_DIR$/languages/QueryLanguage/QueryLanguage.mpl" folder="" />
+      <modulePath path="$PROJECT_DIR$/solutions/ActorLanguage.sandbox/ActorLanguage.sandbox.msd" folder="" />
     </projectModules>
   </component>
 </project>

@@ -180,7 +180,7 @@
     <property role="3GE5qa" value="column" />
     <ref role="1M2myG" to="p6im:14g3IsRklvO" resolve="ColumnRef" />
     <node concept="1N5Pfh" id="5L8KcUM2Aq4" role="1Mr941">
-      <ref role="1N5Vy1" to="p6im:14g3IsRklvP" />
+      <ref role="1N5Vy1" to="p6im:14g3IsRklvP" resolve="column" />
       <node concept="1dDu$B" id="5L8KcUM2Aq6" role="1N6uqs">
         <ref role="1dDu$A" to="p6im:14g3IsRh3GN" resolve="Column" />
       </node>
@@ -734,7 +734,7 @@
     <property role="3GE5qa" value="statements" />
     <ref role="1M2myG" to="p6im:21Z4UyPhvru" resolve="TableReference" />
     <node concept="1N5Pfh" id="3Gp_4Vpb1H$" role="1Mr941">
-      <ref role="1N5Vy1" to="p6im:21Z4UyPhvrv" />
+      <ref role="1N5Vy1" to="p6im:21Z4UyPhvrv" resolve="tableRef" />
       <node concept="1dDu$B" id="3Gp_4VpbskX" role="1N6uqs">
         <ref role="1dDu$A" to="p6im:14g3IsRh3GI" resolve="CreateTable" />
       </node>

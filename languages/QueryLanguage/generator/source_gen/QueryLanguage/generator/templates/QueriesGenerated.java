@@ -747,7 +747,8 @@ public class QueriesGenerated extends QueryProviderBase {
   }
   public static Object referenceMacro_GetReferent_6_0(final ReferenceMacroContext _context) {
     if ((SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).getElement(0), LINKS.tableRef$boeY), CONCEPTS.Select$Te, false, false) == null)) {
-      return _context.getOutputNodeByInputNodeAndMappingLabel((SNode) _context.getSessionObject(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly)), "SelectionActorBoxFromCondition");
+      String key = ((SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN) == null) ? SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) : SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) + String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN), PROPS.size$SW_U)));
+      return _context.getOutputNodeByInputNodeAndMappingLabel((SNode) _context.getSessionObject(key), "SelectionActorBoxFromCondition");
     }
     return _context.getOutputNodeByInputNodeAndMappingLabel(_context.getNode(), "SelectionActorBox");
   }
@@ -862,7 +863,8 @@ public class QueriesGenerated extends QueryProviderBase {
   }
   public static Object referenceMacro_GetReferent_8_0(final ReferenceMacroContext _context) {
     if ((SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).getElement(0), LINKS.tableRef$boeY), CONCEPTS.Select$Te, false, false) == null)) {
-      return _context.getOutputNodeByInputNodeAndMappingLabel((SNode) _context.getSessionObject(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly)), "SelectionActorBoxFromCondition");
+      String key = ((SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN) == null) ? SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) : SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) + String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN), PROPS.size$SW_U)));
+      return _context.getOutputNodeByInputNodeAndMappingLabel((SNode) _context.getSessionObject(key), "SelectionActorBoxFromCondition");
     }
     return _context.getOutputNodeByInputNodeAndMappingLabel(_context.getNode(), "SelectionActorBox");
   }
@@ -871,7 +873,8 @@ public class QueriesGenerated extends QueryProviderBase {
   }
   public static Object referenceMacro_GetReferent_8_2(final ReferenceMacroContext _context) {
     if ((SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).getElement(0), LINKS.tableRef$boeY), CONCEPTS.Select$Te, false, false) == null)) {
-      return _context.getOutputNodeByInputNodeAndMappingLabel((SNode) _context.getSessionObject(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly)), "SelectionActorBoxFromCondition");
+      String key = ((SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN) == null) ? SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) : SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) + String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN), PROPS.size$SW_U)));
+      return _context.getOutputNodeByInputNodeAndMappingLabel((SNode) _context.getSessionObject(key), "SelectionActorBoxFromCondition");
     }
     return _context.getOutputNodeByInputNodeAndMappingLabel(_context.getNode(), "SelectionActorBox");
   }
@@ -880,7 +883,8 @@ public class QueriesGenerated extends QueryProviderBase {
   }
   public static Object referenceMacro_GetReferent_8_4(final ReferenceMacroContext _context) {
     if ((SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).getElement(0), LINKS.tableRef$boeY), CONCEPTS.Select$Te, false, false) == null)) {
-      return _context.getOutputNodeByInputNodeAndMappingLabel((SNode) _context.getSessionObject(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly)), "SelectionActorBoxFromCondition");
+      String key = ((SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN) == null) ? SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) : SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) + String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN), PROPS.size$SW_U)));
+      return _context.getOutputNodeByInputNodeAndMappingLabel((SNode) _context.getSessionObject(key), "SelectionActorBoxFromCondition");
     }
     return _context.getOutputNodeByInputNodeAndMappingLabel(_context.getNode(), "SelectionActorBox");
   }
@@ -889,7 +893,8 @@ public class QueriesGenerated extends QueryProviderBase {
   }
   public static Object referenceMacro_GetReferent_8_6(final ReferenceMacroContext _context) {
     if ((SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).getElement(0), LINKS.tableRef$boeY), CONCEPTS.Select$Te, false, false) == null)) {
-      return _context.getOutputNodeByInputNodeAndMappingLabel((SNode) _context.getSessionObject(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly)), "SelectionActorBoxFromCondition");
+      String key = ((SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN) == null) ? SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) : SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) + String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN), PROPS.size$SW_U)));
+      return _context.getOutputNodeByInputNodeAndMappingLabel((SNode) _context.getSessionObject(key), "SelectionActorBoxFromCondition");
     }
     return _context.getOutputNodeByInputNodeAndMappingLabel(_context.getNode(), "SelectionActorBox");
   }
@@ -1107,7 +1112,8 @@ public class QueriesGenerated extends QueryProviderBase {
   }
   public static Object referenceMacro_GetReferent_18_0(final ReferenceMacroContext _context) {
     if ((SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).getElement(0), LINKS.tableRef$boeY), CONCEPTS.Select$Te, false, false) == null)) {
-      return _context.getOutputNodeByInputNodeAndMappingLabel((SNode) _context.getSessionObject(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly)), "SelectionActorBoxFromCondition");
+      String key = ((SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN) == null) ? SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) : SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) + String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN), PROPS.size$SW_U)));
+      return _context.getOutputNodeByInputNodeAndMappingLabel((SNode) _context.getSessionObject(key), "SelectionActorBoxFromCondition");
     }
     return _context.getOutputNodeByInputNodeAndMappingLabel(_context.getNode(), "SelectionActorBox");
   }
@@ -1359,9 +1365,10 @@ public class QueriesGenerated extends QueryProviderBase {
     return (SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN) != null) && (SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).getElement(0), LINKS.tableRef$boeY), CONCEPTS.Select$Te, false, false) != null);
   }
   public static boolean ifMacro_Condition_2_2(final IfMacroContext _context) {
-    if (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() == 1 && (SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0) != null) && (SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).getElement(0), LINKS.tableRef$boeY), CONCEPTS.Select$Te, false, false) == null) && !(MapSequence.fromMap(((Map<String, Boolean>) _context.getVariable("conditionsMap"))).get(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly)))) {
-      _context.putSessionObject(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly), SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q));
-      MapSequence.fromMap(((Map<String, Boolean>) _context.getVariable("conditionsMap"))).put(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly), true);
+    String key = SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) + String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(_context.getNode(), LINKS.window$XLAN), PROPS.size$SW_U));
+    if (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() == 1 && (SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0) != null) && (SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).getElement(0), LINKS.tableRef$boeY), CONCEPTS.Select$Te, false, false) == null) && !(MapSequence.fromMap(((Map<String, Boolean>) _context.getVariable("conditionsMap"))).get(key))) {
+      _context.putSessionObject(key, SLinkOperations.getTarget(SLinkOperations.getTarget(_context.getNode(), LINKS.where$e1s0), LINKS.condition$d94q));
+      MapSequence.fromMap(((Map<String, Boolean>) _context.getVariable("conditionsMap"))).put(key, true);
       return true;
     }
     return false;
@@ -1494,48 +1501,42 @@ public class QueriesGenerated extends QueryProviderBase {
     List<SNode> conditions = ListSequence.fromList(new ArrayList<SNode>());
     List<SNode> selects = ListSequence.fromList(new ArrayList<SNode>());
 
-    for (SNode selectQuery : ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.operations$az69)).where((it) -> SNodeOperations.isInstanceOf(it, CONCEPTS.Select$Te))) {
-      {
-        final SNode select = selectQuery;
-        if (SNodeOperations.isInstanceOf(select, CONCEPTS.Select$Te)) {
-
-          int count = 0;
-
-          if ((SLinkOperations.getTarget(select, LINKS.where$e1s0) != null)) {
-            if (ListSequence.fromList(SLinkOperations.getChildren(select, LINKS.tables$IXdn)).count() > 1) {
-              // joined tables
-              List<SNode> singleTableConditions = Script__BehaviorDescriptor.findAllSingleTableConditions_id4BxYaol$2qr.invoke(_context.getNode(), SLinkOperations.getTarget(SLinkOperations.getTarget(select, LINKS.where$e1s0), LINKS.condition$d94q));
-              for (final SNode condition : ListSequence.fromList(singleTableConditions)) {
-                if (!(ListSequence.fromList(conditions).any((it) -> new SNodeMatcher().match(it, condition))) || (SLinkOperations.getTarget(select, LINKS.viewTable$4dXf) != null)) {
-                  ListSequence.fromList(conditions).addElement(condition);
-                  ListSequence.fromList(selects).addElement(select);
-                  count++;
-                }
-              }
-            } else {
-              if (!(ListSequence.fromList(conditions).any((it) -> new SNodeMatcher().match(it, SLinkOperations.getTarget(SLinkOperations.getTarget(select, LINKS.where$e1s0), LINKS.condition$d94q)))) || (SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(select, LINKS.tables$IXdn)).getElement(0), LINKS.tableRef$boeY), CONCEPTS.Select$Te, false, false) != null)) {
-                ListSequence.fromList(conditions).addElement(SLinkOperations.getTarget(SLinkOperations.getTarget(select, LINKS.where$e1s0), LINKS.condition$d94q));
-                ListSequence.fromList(selects).addElement(select);
-                count++;
-              }
+    for (final SNode select : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(_context.getNode(), LINKS.operations$az69), CONCEPTS.Select$Te))) {
+      int count = 0;
+      if ((SLinkOperations.getTarget(select, LINKS.where$e1s0) != null)) {
+        if (ListSequence.fromList(SLinkOperations.getChildren(select, LINKS.tables$IXdn)).count() > 1) {
+          // joined tables
+          List<SNode> singleTableConditions = Script__BehaviorDescriptor.findAllSingleTableConditions_id4BxYaol$2qr.invoke(_context.getNode(), SLinkOperations.getTarget(SLinkOperations.getTarget(select, LINKS.where$e1s0), LINKS.condition$d94q));
+          for (final SNode condition : ListSequence.fromList(singleTableConditions)) {
+            if (!(ListSequence.fromList(conditions).any((it) -> new SNodeMatcher().match(it, condition))) || (SLinkOperations.getTarget(select, LINKS.viewTable$4dXf) != null)) {
+              ListSequence.fromList(conditions).addElement(condition);
+              ListSequence.fromList(selects).addElement(select);
+              count++;
             }
-
           }
-
-          SNode integerConstant = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc59b314L, "jetbrains.mps.baseLanguage.structure.IntegerConstant"));
-          SPropertyOperations.assign(integerConstant, PROPS.value$jgCM, count);
-          _context.registerMappingLabel(select, "SelectionActorsNumber", integerConstant);
+        } else {
+          if ((!(ListSequence.fromList(conditions).any((it) -> new SNodeMatcher().match(it, SLinkOperations.getTarget(SLinkOperations.getTarget(select, LINKS.where$e1s0), LINKS.condition$d94q)))) || (ListSequence.fromList(selects).findFirst((it) -> new SNodeMatcher().match(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.where$e1s0), LINKS.condition$d94q), SLinkOperations.getTarget(SLinkOperations.getTarget(select, LINKS.where$e1s0), LINKS.condition$d94q)) && SPropertyOperations.getInteger(SLinkOperations.getTarget(it, LINKS.window$XLAN), PROPS.size$SW_U) != SPropertyOperations.getInteger(SLinkOperations.getTarget(select, LINKS.window$XLAN), PROPS.size$SW_U)) != null)) || (SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(select, LINKS.tables$IXdn)).getElement(0), LINKS.tableRef$boeY), CONCEPTS.Select$Te, false, false) != null)) {
+            ListSequence.fromList(conditions).addElement(SLinkOperations.getTarget(SLinkOperations.getTarget(select, LINKS.where$e1s0), LINKS.condition$d94q));
+            ListSequence.fromList(selects).addElement(select);
+            count++;
+          }
         }
-      }
-    }
 
-    for (SNode select : ListSequence.fromList(selects)) {
-      for (SNode condition : ListSequence.fromList(conditions)) {
-        if (new SNodeMatcher().match(SLinkOperations.getTarget(SLinkOperations.getTarget(select, LINKS.where$e1s0), LINKS.condition$d94q), condition)) {
-          _context.registerMappingLabel(SLinkOperations.getTarget(SLinkOperations.getTarget(select, LINKS.where$e1s0), LINKS.condition$d94q), "ConditionLabel", condition);
-        }
       }
+      /*
+        <type> <var>;
+        ExpressionStatement
+        ExpressionStatement
+
+      */
+
+
     }
+    /*
+      for
+
+    */
+
 
     return selects;
   }
@@ -1694,8 +1695,9 @@ public class QueriesGenerated extends QueryProviderBase {
           MapSequence.fromMap(conditionsMap).put(SPropertyOperations.getString(condition, PROPS.textualCondition$n5ly), false);
         }
       } else {
-        if (!(MapSequence.fromMap(conditionsMap).containsKey(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(select, LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly)))) {
-          MapSequence.fromMap(conditionsMap).put(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(select, LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly), false);
+        String key = SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(select, LINKS.where$e1s0), LINKS.condition$d94q), PROPS.textualCondition$n5ly) + String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(select, LINKS.window$XLAN), PROPS.size$SW_U));
+        if (!(MapSequence.fromMap(conditionsMap).containsKey(key))) {
+          MapSequence.fromMap(conditionsMap).put(key, false);
         }
       }
     }

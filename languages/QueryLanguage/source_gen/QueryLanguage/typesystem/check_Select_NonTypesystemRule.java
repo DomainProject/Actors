@@ -27,6 +27,12 @@ public class check_Select_NonTypesystemRule extends AbstractNonTypesystemRule_Ru
         IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(select, "View is not supported for joined tables", "r:c16b6385-a54f-425c-958c-759f07935c87(QueryLanguage.typesystem)", "7824142728406769661", null, errorTarget);
       }
     }
+    if ((SLinkOperations.getTarget(select, LINKS.viewTable$4dXf) != null) && (SLinkOperations.getTarget(select, LINKS.window$XLAN) != null)) {
+      {
+        final MessageTarget errorTarget = new NodeMessageTarget();
+        IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(select, "Window in queries on views is not supported", "r:c16b6385-a54f-425c-958c-759f07935c87(QueryLanguage.typesystem)", "8001552070340961835", null, errorTarget);
+      }
+    }
   }
   public SAbstractConcept getApplicableConcept() {
     return CONCEPTS.Select$Te;
@@ -41,6 +47,7 @@ public class check_Select_NonTypesystemRule extends AbstractNonTypesystemRule_Ru
   private static final class LINKS {
     /*package*/ static final SContainmentLink tables$IXdn = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x207f13a8b54616bfL, "tables");
     /*package*/ static final SContainmentLink viewTable$4dXf = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0xb59df187aa1e081L, "viewTable");
+    /*package*/ static final SContainmentLink window$XLAN = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x30956af9a8a0e8b6L, "window");
   }
 
   private static final class CONCEPTS {
