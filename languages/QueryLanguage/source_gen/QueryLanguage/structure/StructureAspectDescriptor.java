@@ -29,6 +29,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptGroupBy = createDescriptorForGroupBy();
   /*package*/ final ConceptDescriptor myConceptInsertInto = createDescriptorForInsertInto();
   /*package*/ final ConceptDescriptor myConceptJoinCondition = createDescriptorForJoinCondition();
+  /*package*/ final ConceptDescriptor myConceptLocation = createDescriptorForLocation();
   /*package*/ final ConceptDescriptor myConceptMax = createDescriptorForMax();
   /*package*/ final ConceptDescriptor myConceptMin = createDescriptorForMin();
   /*package*/ final ConceptDescriptor myConceptMultipleCondition = createDescriptorForMultipleCondition();
@@ -36,6 +37,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptScript = createDescriptorForScript();
   /*package*/ final ConceptDescriptor myConceptSelect = createDescriptorForSelect();
   /*package*/ final ConceptDescriptor myConceptSelectColumn = createDescriptorForSelectColumn();
+  /*package*/ final ConceptDescriptor myConceptServiceZone = createDescriptorForServiceZone();
   /*package*/ final ConceptDescriptor myConceptSimpleCondition = createDescriptorForSimpleCondition();
   /*package*/ final ConceptDescriptor myConceptStatement = createDescriptorForStatement();
   /*package*/ final ConceptDescriptor myConceptSum = createDescriptorForSum();
@@ -44,8 +46,10 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptValue = createDescriptorForValue();
   /*package*/ final ConceptDescriptor myConceptWhere = createDescriptorForWhere();
   /*package*/ final ConceptDescriptor myConceptWindow = createDescriptorForWindow();
+  /*package*/ final ConceptDescriptor myConceptZone = createDescriptorForZone();
   /*package*/ final EnumerationDescriptor myEnumerationConditionOperator = new EnumerationDescriptor_ConditionOperator();
   /*package*/ final EnumerationDescriptor myEnumerationOperator = new EnumerationDescriptor_Operator();
+  /*package*/ final EnumerationDescriptor myEnumerationTemporalUnit = new EnumerationDescriptor_TemporalUnit();
   /*package*/ final EnumerationDescriptor myEnumerationType = new EnumerationDescriptor_Type();
   /*package*/ final EnumerationDescriptor myEnumerationWindowType = new EnumerationDescriptor_WindowType();
   private final LanguageConceptSwitch myIndexSwitch;
@@ -62,7 +66,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<ConceptDescriptor> getDescriptors() {
-    return Arrays.asList(myConceptAggregationFunction, myConceptAllColumns, myConceptAverage, myConceptColumn, myConceptColumnRef, myConceptCondition, myConceptCount, myConceptCreateTable, myConceptDBOperation, myConceptDelete, myConceptGroupBy, myConceptInsertInto, myConceptJoinCondition, myConceptMax, myConceptMin, myConceptMultipleCondition, myConceptOrderBy, myConceptScript, myConceptSelect, myConceptSelectColumn, myConceptSimpleCondition, myConceptStatement, myConceptSum, myConceptTableReference, myConceptUpdate, myConceptValue, myConceptWhere, myConceptWindow);
+    return Arrays.asList(myConceptAggregationFunction, myConceptAllColumns, myConceptAverage, myConceptColumn, myConceptColumnRef, myConceptCondition, myConceptCount, myConceptCreateTable, myConceptDBOperation, myConceptDelete, myConceptGroupBy, myConceptInsertInto, myConceptJoinCondition, myConceptLocation, myConceptMax, myConceptMin, myConceptMultipleCondition, myConceptOrderBy, myConceptScript, myConceptSelect, myConceptSelectColumn, myConceptServiceZone, myConceptSimpleCondition, myConceptStatement, myConceptSum, myConceptTableReference, myConceptUpdate, myConceptValue, myConceptWhere, myConceptWindow, myConceptZone);
   }
 
   @Override
@@ -95,6 +99,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptInsertInto;
       case LanguageConceptSwitch.JoinCondition:
         return myConceptJoinCondition;
+      case LanguageConceptSwitch.Location:
+        return myConceptLocation;
       case LanguageConceptSwitch.Max:
         return myConceptMax;
       case LanguageConceptSwitch.Min:
@@ -109,6 +115,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptSelect;
       case LanguageConceptSwitch.SelectColumn:
         return myConceptSelectColumn;
+      case LanguageConceptSwitch.ServiceZone:
+        return myConceptServiceZone;
       case LanguageConceptSwitch.SimpleCondition:
         return myConceptSimpleCondition;
       case LanguageConceptSwitch.Statement:
@@ -125,6 +133,8 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptWhere;
       case LanguageConceptSwitch.Window:
         return myConceptWindow;
+      case LanguageConceptSwitch.Zone:
+        return myConceptZone;
       default:
         return null;
     }
@@ -132,7 +142,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<DataTypeDescriptor> getDataTypeDescriptors() {
-    return Arrays.asList(myEnumerationConditionOperator, myEnumerationOperator, myEnumerationType, myEnumerationWindowType);
+    return Arrays.asList(myEnumerationConditionOperator, myEnumerationOperator, myEnumerationTemporalUnit, myEnumerationType, myEnumerationWindowType);
   }
 
   /*package*/ int internalIndex(SAbstractConcept c) {
@@ -260,6 +270,17 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.aggregate("rightColumn", 0x6c94f05b7ec9d04bL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee7375157f4L).optional(false).ordered(true).multiple(false).origin("7824142728409239627").done();
     return b.create();
   }
+  private static ConceptDescriptor createDescriptorForLocation() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("QueryLanguage", "Location", 0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x50bdfa91c9ae1804L);
+    b.class_(false, false, false);
+    b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
+    b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/5818081797693380612");
+    b.version(3);
+    b.property("ID", 0x50bdfa91c9ae1807L).type(PrimitiveTypeId.INTEGER).origin("5818081797693380615").done();
+    b.associate("zone", 0x50bdfa91c9ae1813L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x50bdfa91c9ae180dL).optional(false).origin("5818081797693380627").done();
+    b.associate("serviceZone", 0x50bdfa91c9ae1815L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x50bdfa91c9ae1810L).optional(false).origin("5818081797693380629").done();
+    return b.create();
+  }
   private static ConceptDescriptor createDescriptorForMax() {
     ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("QueryLanguage", "Max", 0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028390L);
     b.class_(false, false, false);
@@ -305,6 +326,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499598285");
     b.version(3);
     b.aggregate("operations", 0x2b087ec3aa655166L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x2b087ec3aa655164L).optional(true).ordered(true).multiple(true).origin("3100867722287075686").done();
+    b.aggregate("locations", 0x50bdfa91c9ae1819L).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x50bdfa91c9ae1804L).optional(true).ordered(true).multiple(true).origin("5818081797693380633").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForSelect() {
@@ -335,6 +357,14 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1047910270175909650");
     b.version(3);
     b.aggregate("aggregationFunction", 0xb59df187aaa4b3dL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b022e74L).optional(true).ordered(true).multiple(false).origin("817930103574645565").done();
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForServiceZone() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("QueryLanguage", "ServiceZone", 0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x50bdfa91c9ae1810L);
+    b.class_(false, false, false);
+    b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
+    b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/5818081797693380624");
+    b.version(3);
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForSimpleCondition() {
@@ -413,7 +443,16 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.version(3);
     b.property("type", 0x30956af9a8a0e8b1L).type(MetaIdFactory.dataTypeId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x30956af9a8a0e8afL)).origin("3500821905858947249").done();
     b.property("size", 0x30956af9a8a0e8b3L).type(PrimitiveTypeId.INTEGER).origin("3500821905858947251").done();
+    b.property("temporalUnit", 0x8073cf9a51b7617L).type(MetaIdFactory.dataTypeId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x8073cf9a51b7603L)).origin("578498120054961687").done();
     b.alias("WINDOW");
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForZone() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("QueryLanguage", "Zone", 0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x50bdfa91c9ae180dL);
+    b.class_(false, false, false);
+    b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
+    b.origin("r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/5818081797693380621");
+    b.version(3);
     return b.create();
   }
 }

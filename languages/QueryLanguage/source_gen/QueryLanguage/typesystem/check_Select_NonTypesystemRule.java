@@ -12,9 +12,11 @@ import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.errors.messageTargets.MessageTarget;
 import jetbrains.mps.errors.messageTargets.NodeMessageTarget;
 import jetbrains.mps.errors.IErrorReporter;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.language.SConcept;
 
 public class check_Select_NonTypesystemRule extends AbstractNonTypesystemRule_Runtime implements NonTypesystemRule_Runtime {
@@ -27,10 +29,10 @@ public class check_Select_NonTypesystemRule extends AbstractNonTypesystemRule_Ru
         IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(select, "View is not supported for joined tables", "r:c16b6385-a54f-425c-958c-759f07935c87(QueryLanguage.typesystem)", "7824142728406769661", null, errorTarget);
       }
     }
-    if ((SLinkOperations.getTarget(select, LINKS.viewTable$4dXf) != null) && (SLinkOperations.getTarget(select, LINKS.window$XLAN) != null)) {
+    if ((ListSequence.fromList(SLinkOperations.getChildren(select, LINKS.tables$IXdn)).findFirst((it) -> (SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(it, LINKS.tableRef$boeY), CONCEPTS.Select$Te, false, false) != null)) != null) && (SLinkOperations.getTarget(select, LINKS.window$XLAN) != null)) {
       {
         final MessageTarget errorTarget = new NodeMessageTarget();
-        IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(select, "Window in queries on views is not supported", "r:c16b6385-a54f-425c-958c-759f07935c87(QueryLanguage.typesystem)", "8001552070340961835", null, errorTarget);
+        IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(select, "Windows in queries on alias tables are not supported", "r:c16b6385-a54f-425c-958c-759f07935c87(QueryLanguage.typesystem)", "2438143853628963450", null, errorTarget);
       }
     }
   }
@@ -48,6 +50,7 @@ public class check_Select_NonTypesystemRule extends AbstractNonTypesystemRule_Ru
     /*package*/ static final SContainmentLink tables$IXdn = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x207f13a8b54616bfL, "tables");
     /*package*/ static final SContainmentLink viewTable$4dXf = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0xb59df187aa1e081L, "viewTable");
     /*package*/ static final SContainmentLink window$XLAN = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0x30956af9a8a0e8b6L, "window");
+    /*package*/ static final SReferenceLink tableRef$boeY = MetaAdapterFactory.getReferenceLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x207f13a8b545f6deL, 0x207f13a8b545f6dfL, "tableRef");
   }
 
   private static final class CONCEPTS {

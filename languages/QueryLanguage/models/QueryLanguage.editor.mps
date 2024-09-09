@@ -1405,8 +1405,8 @@
       <node concept="3F0A7n" id="32lqJACCgC7" role="3EZMnx">
         <ref role="1NtTu8" to="p6im:32lqJACCeyN" resolve="size" />
       </node>
-      <node concept="3F0ifn" id="32lqJACCgCp" role="3EZMnx">
-        <property role="3F0ifm" value="seconds" />
+      <node concept="3F0A7n" id="w7ffA_6Ror" role="3EZMnx">
+        <ref role="1NtTu8" to="p6im:w7ffA_6Ron" resolve="temporalUnit" />
       </node>
       <node concept="3F0ifn" id="32lqJACCgBd" role="3EZMnx">
         <property role="3F0ifm" value=")" />

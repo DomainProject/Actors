@@ -22,21 +22,24 @@ public final class LanguageConceptSwitch {
   public static final int GroupBy = 10;
   public static final int InsertInto = 11;
   public static final int JoinCondition = 12;
-  public static final int Max = 13;
-  public static final int Min = 14;
-  public static final int MultipleCondition = 15;
-  public static final int OrderBy = 16;
-  public static final int Script = 17;
-  public static final int Select = 18;
-  public static final int SelectColumn = 19;
-  public static final int SimpleCondition = 20;
-  public static final int Statement = 21;
-  public static final int Sum = 22;
-  public static final int TableReference = 23;
-  public static final int Update = 24;
-  public static final int Value = 25;
-  public static final int Where = 26;
-  public static final int Window = 27;
+  public static final int Location = 13;
+  public static final int Max = 14;
+  public static final int Min = 15;
+  public static final int MultipleCondition = 16;
+  public static final int OrderBy = 17;
+  public static final int Script = 18;
+  public static final int Select = 19;
+  public static final int SelectColumn = 20;
+  public static final int ServiceZone = 21;
+  public static final int SimpleCondition = 22;
+  public static final int Statement = 23;
+  public static final int Sum = 24;
+  public static final int TableReference = 25;
+  public static final int Update = 26;
+  public static final int Value = 27;
+  public static final int Where = 28;
+  public static final int Window = 29;
+  public static final int Zone = 30;
 
   public LanguageConceptSwitch() {
     LanguageConceptIndexBuilder builder = new LanguageConceptIndexBuilder(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L);
@@ -53,6 +56,7 @@ public final class LanguageConceptSwitch {
     builder.put(0x2b087ec3aa6a16ceL, GroupBy);
     builder.put(0x625a3ba00f1c72c8L, InsertInto);
     builder.put(0x6c94f05b7ec9d046L, JoinCondition);
+    builder.put(0x50bdfa91c9ae1804L, Location);
     builder.put(0x5d7e70837b028390L, Max);
     builder.put(0x5d7e70837b02838dL, Min);
     builder.put(0x5eeb1b6c0699ea1bL, MultipleCondition);
@@ -60,6 +64,7 @@ public final class LanguageConceptSwitch {
     builder.put(0x11100ee737443bcdL, Script);
     builder.put(0x619ceb902420e379L, Select);
     builder.put(0xe8aecd6b2519712L, SelectColumn);
+    builder.put(0x50bdfa91c9ae1810L, ServiceZone);
     builder.put(0x5eeb1b6c0699ea18L, SimpleCondition);
     builder.put(0x11100ee737443b30L, Statement);
     builder.put(0x5d7e70837b028393L, Sum);
@@ -68,6 +73,7 @@ public final class LanguageConceptSwitch {
     builder.put(0x625a3ba00f1cc88bL, Value);
     builder.put(0x619ceb902420e37bL, Where);
     builder.put(0x30956af9a8a0e8abL, Window);
+    builder.put(0x50bdfa91c9ae180dL, Zone);
     myIndex = builder.seal();
   }
 

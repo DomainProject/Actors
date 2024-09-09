@@ -22,6 +22,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_GroupBy;
   private ConceptPresentation props_InsertInto;
   private ConceptPresentation props_JoinCondition;
+  private ConceptPresentation props_Location;
   private ConceptPresentation props_Max;
   private ConceptPresentation props_Min;
   private ConceptPresentation props_MultipleCondition;
@@ -29,6 +30,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_Script;
   private ConceptPresentation props_Select;
   private ConceptPresentation props_SelectColumn;
+  private ConceptPresentation props_ServiceZone;
   private ConceptPresentation props_SimpleCondition;
   private ConceptPresentation props_Statement;
   private ConceptPresentation props_Sum;
@@ -37,6 +39,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_Value;
   private ConceptPresentation props_Where;
   private ConceptPresentation props_Window;
+  private ConceptPresentation props_Zone;
 
   @Override
   @Nullable
@@ -131,6 +134,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_JoinCondition = cpb.create();
         }
         return props_JoinCondition;
+      case LanguageConceptSwitch.Location:
+        if (props_Location == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Location = cpb.create();
+        }
+        return props_Location;
       case LanguageConceptSwitch.Max:
         if (props_Max == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -179,6 +189,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_SelectColumn = cpb.create();
         }
         return props_SelectColumn;
+      case LanguageConceptSwitch.ServiceZone:
+        if (props_ServiceZone == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ServiceZone = cpb.create();
+        }
+        return props_ServiceZone;
       case LanguageConceptSwitch.SimpleCondition:
         if (props_SimpleCondition == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -234,6 +251,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Window = cpb.create();
         }
         return props_Window;
+      case LanguageConceptSwitch.Zone:
+        if (props_Zone == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Zone = cpb.create();
+        }
+        return props_Zone;
     }
     return null;
   }

@@ -18,6 +18,8 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
       switch (concept.getName()) {
         case "ColumnRef":
           return Collections.<NodeFactory>singletonList(new ColumnRefFactory.NodeFactory_6649776843796618830());
+        case "Script":
+          return Collections.<NodeFactory>singletonList(new ScriptFactory.NodeFactory_5818081797687955067());
         case "SelectColumn":
           return Collections.<NodeFactory>singletonList(new SelectColumnFactory.NodeFactory_6649776843783650044());
         default:
