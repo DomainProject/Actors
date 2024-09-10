@@ -13,96 +13,89 @@
 #define NUM_THREADS 0
 #endif
 
-#define INPUT_FILE "taxi-1.csv"
+#define INPUT_FILE "taxi_1000.csv"
 
 FILE *file;
 Schema schema;
 struct topology *topology;
 void InitTopology() {
-  topology = InitializeTopology(TOPOLOGY_GRAPH, 41);
+  topology = InitializeTopology(TOPOLOGY_GRAPH, 36);
 
+  AddTopologyLink(topology, 0, 7, 1);
+  static int window0to7 = 302;
+  SetTopologyLinkData(topology, 0, 7, (void *)&window0to7);
+  AddTopologyLink(topology, 0, 8, 1);
+  static int window0to8 = 302;
+  SetTopologyLinkData(topology, 0, 8, (void *)&window0to8);
   AddTopologyLink(topology, 0, 9, 1);
-  static int window0to9 = 60;
+  static int window0to9 = 302;
   SetTopologyLinkData(topology, 0, 9, (void *)&window0to9);
-  AddTopologyLink(topology, 9, 20, 1);
-  SetTopologyLinkData(topology, 9, 20, (void *)"DOLocationID,total_amount");
-  AddTopologyLink(topology, 0, 6, 1);
-  SetTopologyLinkData(topology, 0, 6, (void *)"DOLocationID == 236 && (tpep_pickup_datetime >= 2023-12-32 15:00:00 && tpep_pickup_datetime <= 2024-01-01 04:00:00)");
-  AddTopologyLink(topology, 25, 7, 1);
-  SetTopologyLinkData(topology, 25, 7, (void *)"tpep_pickup_datetime >= 2024-05-17 10:00:00 && tpep_pickup_datetime <= 2024-17-05 23:59:59");
-  AddTopologyLink(topology, 9, 10, 1);
-  SetTopologyLinkData(topology, 9, 10, (void *)"PULocationID,passenger_count");
-  AddTopologyLink(topology, 9, 13, 1);
-  SetTopologyLinkData(topology, 9, 13, (void *)"RatecodeID,VendorID");
-  AddTopologyLink(topology, 9, 1, 1);
-  SetTopologyLinkData(topology, 9, 1, (void *)"Airport_fee != 0.0");
+  AddTopologyLink(topology, 0, 10, 1);
+  static int window0to10 = 302;
+  SetTopologyLinkData(topology, 0, 10, (void *)&window0to10);
+  AddTopologyLink(topology, 1, 11, 1);
+  SetTopologyLinkData(topology, 1, 11, (void *)"payment_type,total_amount");
+  AddTopologyLink(topology, 2, 18, 1);
+  SetTopologyLinkData(topology, 2, 18, (void *)"*");
+  AddTopologyLink(topology, 3, 19, 1);
+  SetTopologyLinkData(topology, 3, 19, (void *)"PULocationID,congestion_surcharge");
+  AddTopologyLink(topology, 4, 27, 1);
+  SetTopologyLinkData(topology, 4, 27, (void *)"PULocationID,DOLocationID");
+  AddTopologyLink(topology, 7, 1, 1);
+  SetTopologyLinkData(topology, 7, 1, (void *)"Airport_fee != 0.0");
+  AddTopologyLink(topology, 8, 14, 1);
+  SetTopologyLinkData(topology, 8, 14, (void *)"PULocationID,passenger_count");
   AddTopologyLink(topology, 9, 2, 1);
-  SetTopologyLinkData(topology, 9, 2, (void *)"total_amount > 100.0");
-  AddTopologyLink(topology, 9, 3, 1);
-  SetTopologyLinkData(topology, 9, 3, (void *)"tpep_pickup_datetime >= 2023-12-25 00:00:00 && tpep_pickup_datetime <= 2023-12-25 23:59:59");
-  AddTopologyLink(topology, 9, 4, 1);
-  SetTopologyLinkData(topology, 9, 4, (void *)"PULocationID == 161 || DOLocationID == 161");
-  AddTopologyLink(topology, 9, 5, 1);
-  SetTopologyLinkData(topology, 9, 5, (void *)"PULocationID == 49 || DOLocationID == 49");
-  AddTopologyLink(topology, 9, 8, 1);
-  SetTopologyLinkData(topology, 9, 8, (void *)"(tpep_pickup_datetime >= 2023-07-21 00:00:00 && tpep_pickup_datetime <= 2023-07-26 23:59:59) || ((tpep_pickup_datetime >= 2023-03-31 00:00:00 && tpep_pickup_datetime <= 2023-04-01 23:59:59) || (tpep_pickup_datetime >= 2024-05-18 00:00:00 && tpep_pickup_datetime <= 2024-05-22 23:59:59))");
-  AddTopologyLink(topology, 1, 16, 1);
-  SetTopologyLinkData(topology, 1, 16, (void *)"payment_type,total_amount");
-  AddTopologyLink(topology, 2, 19, 1);
-  SetTopologyLinkData(topology, 2, 19, (void *)"total_amount,trip_distance");
-  AddTopologyLink(topology, 3, 24, 1);
-  SetTopologyLinkData(topology, 3, 24, (void *)"total_amount,passenger_count,trip_distance,PULocationID,DOLocationID,Airport_fee");
-  AddTopologyLink(topology, 4, 25, 1);
-  SetTopologyLinkData(topology, 4, 25, (void *)"Airport_fee,tpep_pickup_datetime,tpep_dropoff_datetime,total_amount,passenger_count,trip_distance,PULocationID,DOLocationID,tip_amount");
-  AddTopologyLink(topology, 5, 26, 1);
-  SetTopologyLinkData(topology, 5, 26, (void *)"total_amount,passenger_count,trip_distance,PULocationID,DOLocationID,Airport_fee");
-  AddTopologyLink(topology, 6, 27, 1);
-  SetTopologyLinkData(topology, 6, 27, (void *)"total_amount,passenger_count,trip_distance,PULocationID,DOLocationID,Airport_fee");
-  AddTopologyLink(topology, 7, 28, 1);
-  SetTopologyLinkData(topology, 7, 28, (void *)"tip_amount");
-  AddTopologyLink(topology, 8, 30, 1);
-  SetTopologyLinkData(topology, 8, 30, (void *)"DOLocationID,PULocationID,passenger_count");
-  AddTopologyLink(topology, 10, 11, 1);
-  SetTopologyLinkData(topology, 10, 11, (void *)"PULocationID");
-  AddTopologyLink(topology, 13, 14, 1);
-  SetTopologyLinkData(topology, 13, 14, (void *)"RatecodeID");
-  AddTopologyLink(topology, 16, 17, 1);
-  SetTopologyLinkData(topology, 16, 17, (void *)"payment_type");
-  AddTopologyLink(topology, 20, 21, 1);
-  SetTopologyLinkData(topology, 20, 21, (void *)"DOLocationID");
-  AddTopologyLink(topology, 28, 29, 1);
-  SetTopologyLinkData(topology, 28, 29, (void *)"tip_amount");
+  SetTopologyLinkData(topology, 9, 2, (void *)"tpep_pickup_datetime >= 2024-12-25 00:00:00 && tpep_pickup_datetime <= 2024-12-25 23:59:59");
+  AddTopologyLink(topology, 7, 3, 1);
+  SetTopologyLinkData(topology, 7, 3, (void *)"PULocationID == 161 || DOLocationID == 161");
+  AddTopologyLink(topology, 10, 23, 1);
+  SetTopologyLinkData(topology, 10, 23, (void *)"PULocationID,trip_distance");
+  AddTopologyLink(topology, 7, 4, 1);
+  SetTopologyLinkData(topology, 7, 4, (void *)"tip_amount > 10.0");
+  AddTopologyLink(topology, 7, 5, 1);
+  SetTopologyLinkData(topology, 7, 5, (void *)"passenger_count > 4");
+  AddTopologyLink(topology, 7, 6, 1);
+  SetTopologyLinkData(topology, 7, 6, (void *)"payment_type == 1 && total_amount > 100.0");
   AddTopologyLink(topology, 11, 12, 1);
-  SetTopologyLinkData(topology, 11, 12, (void *)"passenger_count");
+  SetTopologyLinkData(topology, 11, 12, (void *)"payment_type");
   AddTopologyLink(topology, 14, 15, 1);
-  SetTopologyLinkData(topology, 14, 15, (void *)"VendorID");
-  AddTopologyLink(topology, 17, 18, 1);
-  SetTopologyLinkData(topology, 17, 18, (void *)"total_amount");
-  AddTopologyLink(topology, 21, 23, 1);
-  SetTopologyLinkData(topology, 21, 23, (void *)"total_amount");
-  AddTopologyLink(topology, 23, 22, 1);
-  SetTopologyLinkData(topology, 23, 22, (void *)"total_amount");
+  SetTopologyLinkData(topology, 14, 15, (void *)"PULocationID");
+  AddTopologyLink(topology, 19, 20, 1);
+  SetTopologyLinkData(topology, 19, 20, (void *)"PULocationID");
+  AddTopologyLink(topology, 23, 24, 1);
+  SetTopologyLinkData(topology, 23, 24, (void *)"PULocationID");
+  AddTopologyLink(topology, 12, 13, 1);
+  SetTopologyLinkData(topology, 12, 13, (void *)"total_amount");
+  AddTopologyLink(topology, 15, 17, 1);
+  SetTopologyLinkData(topology, 15, 17, (void *)"passenger_count");
+  AddTopologyLink(topology, 20, 22, 1);
+  SetTopologyLinkData(topology, 20, 22, (void *)"congestion_surcharge");
+  AddTopologyLink(topology, 24, 26, 1);
+  SetTopologyLinkData(topology, 24, 26, (void *)"trip_distance");
+  AddTopologyLink(topology, 17, 16, 1);
+  SetTopologyLinkData(topology, 17, 16, (void *)"passenger_count");
+  AddTopologyLink(topology, 22, 21, 1);
+  SetTopologyLinkData(topology, 22, 21, (void *)"congestion_surcharge");
+  AddTopologyLink(topology, 26, 25, 1);
+  SetTopologyLinkData(topology, 26, 25, (void *)"trip_distance");
 
-  AddTopologyLink(topology, 22, 31, 1);
-  SetTopologyLinkData(topology, 22, 31, (void *)"Query1.csv");
-  AddTopologyLink(topology, 15, 32, 1);
-  SetTopologyLinkData(topology, 15, 32, (void *)"Query2.csv");
-  AddTopologyLink(topology, 12, 33, 1);
-  SetTopologyLinkData(topology, 12, 33, (void *)"Query3.csv");
-  AddTopologyLink(topology, 24, 34, 1);
-  SetTopologyLinkData(topology, 24, 34, (void *)"Query4.csv");
-  AddTopologyLink(topology, 29, 35, 1);
-  SetTopologyLinkData(topology, 29, 35, (void *)"Query5.csv");
-  AddTopologyLink(topology, 18, 36, 1);
-  SetTopologyLinkData(topology, 18, 36, (void *)"Query6.csv");
-  AddTopologyLink(topology, 30, 37, 1);
-  SetTopologyLinkData(topology, 30, 37, (void *)"Query7.csv");
-  AddTopologyLink(topology, 19, 38, 1);
-  SetTopologyLinkData(topology, 19, 38, (void *)"Query8.csv");
-  AddTopologyLink(topology, 26, 39, 1);
-  SetTopologyLinkData(topology, 26, 39, (void *)"Query9.csv");
-  AddTopologyLink(topology, 27, 40, 1);
-  SetTopologyLinkData(topology, 27, 40, (void *)"Query10.csv");
+  AddTopologyLink(topology, 18, 28, 1);
+  SetTopologyLinkData(topology, 18, 29, (void *)"Query1.csv");
+  AddTopologyLink(topology, 16, 29, 1);
+  SetTopologyLinkData(topology, 16, 29, (void *)"Query2.csv");
+  AddTopologyLink(topology, 25, 30, 1);
+  SetTopologyLinkData(topology, 25, 30, (void *)"Query3.csv");
+  AddTopologyLink(topology, 6, 31, 1);
+  SetTopologyLinkData(topology, 6, 31, (void *)"Query4.csv");
+  AddTopologyLink(topology, 5, 32, 1);
+  SetTopologyLinkData(topology, 5, 32, (void *)"Query5.csv");
+  AddTopologyLink(topology, 21, 33, 1);
+  SetTopologyLinkData(topology, 21, 33, (void *)"Query6.csv");
+  AddTopologyLink(topology, 13, 34, 1);
+  SetTopologyLinkData(topology, 13, 34, (void *)"Query7.csv");
+  AddTopologyLink(topology, 27, 35, 1);
+  SetTopologyLinkData(topology, 27, 35, (void *)"Query8.csv");
 }
 
 
@@ -225,7 +218,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
       /* SELECTION */
       switch(event_type) {
         case LP_INIT:
-          SelectionInit(topology, 9, me);
+          SelectionInit(topology, 7, me);
           break;
         case EVENT:
           selection(me, now, content, s);
@@ -271,7 +264,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
       /* SELECTION */
       switch(event_type) {
         case LP_INIT:
-          SelectionInit(topology, 9, me);
+          SelectionInit(topology, 7, me);
           break;
         case EVENT:
           selection(me, now, content, s);
@@ -294,7 +287,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
       /* SELECTION */
       switch(event_type) {
         case LP_INIT:
-          SelectionInit(topology, 9, me);
+          SelectionInit(topology, 7, me);
           break;
         case EVENT:
           selection(me, now, content, s);
@@ -317,7 +310,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
       /* SELECTION */
       switch(event_type) {
         case LP_INIT:
-          SelectionInit(topology, 9, me);
+          SelectionInit(topology, 7, me);
           break;
         case EVENT:
           selection(me, now, content, s);
@@ -340,7 +333,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
       /* SELECTION */
       switch(event_type) {
         case LP_INIT:
-          SelectionInit(topology, 0, me);
+          SelectionInit(topology, 7, me);
           break;
         case EVENT:
           selection(me, now, content, s);
@@ -360,21 +353,19 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
       }
       break;
     case 7:
-      /* SELECTION */
+      /* WINDOW */
       switch(event_type) {
         case LP_INIT:
-          SelectionInit(topology, 25, me);
+          WindowInit(topology, 0, me);
           break;
         case EVENT:
-          selection(me, now, content, s);
+          window(me, now, content, s);
           break;
         case LP_FINI:
-          SelectionCleanUp((SelectionData *)s);
+          WindowCleanUp((WindowData *)s);
           break;
         case TERMINATE:
-          selection_data = (SelectionData *)s;
-          selection_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
+          TerminateWindow(topology, (WindowData *)s, me, now);
           break;
         default:
           fprintf(stderr, "Unknown event type");
@@ -383,21 +374,19 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
       }
       break;
     case 8:
-      /* SELECTION */
+      /* WINDOW */
       switch(event_type) {
         case LP_INIT:
-          SelectionInit(topology, 9, me);
+          WindowInit(topology, 0, me);
           break;
         case EVENT:
-          selection(me, now, content, s);
+          window(me, now, content, s);
           break;
         case LP_FINI:
-          SelectionCleanUp((SelectionData *)s);
+          WindowCleanUp((WindowData *)s);
           break;
         case TERMINATE:
-          selection_data = (SelectionData *)s;
-          selection_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
+          TerminateWindow(topology, (WindowData *)s, me, now);
           break;
         default:
           fprintf(stderr, "Unknown event type");
@@ -427,21 +416,19 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
       }
       break;
     case 10:
-      /* PROJECTION */
+      /* WINDOW */
       switch(event_type) {
         case LP_INIT:
-          ProjectionInit(topology, 9, me);
+          WindowInit(topology, 0, me);
           break;
         case EVENT:
-          projection(me, now, content, s);
+          window(me, now, content, s);
           break;
         case LP_FINI:
-          ProjectionCleanUp((ProjectionData *)s);
+          WindowCleanUp((WindowData *)s);
           break;
         case TERMINATE:
-          projection_data = (ProjectionData *)s;
-          projection_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
+          TerminateWindow(topology, (WindowData *)s, me, now);
           break;
         default:
           fprintf(stderr, "Unknown event type");
@@ -450,121 +437,6 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
       }
       break;
     case 11:
-      /* GROUP BY */
-      switch(event_type) {
-        case LP_INIT:
-          GroupByInit(topology, 10, me);
-          break;
-        case EVENT:
-          groupBy(me, now, content, s);
-          break;
-        case LP_FINI:
-          GroupByCleanUp((GroupByData *)s);
-          break;
-        case TERMINATE:
-          groupBy_data = (GroupByData *)s;
-          groupBy_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 12:
-      /* AGGREGATE FUNCTION (Sum) */
-      switch(event_type) {
-        case LP_INIT:
-          AggregateFunctionInit(topology, 11, me);
-          break;
-        case EVENT:
-          Sum(me, now, content, s);
-          break;
-        case LP_FINI:
-          AggFunctionCleanUp((AggregateFunctionData *)s);
-          break;
-        case TERMINATE:
-          agg_function_data = (AggregateFunctionData *)s;
-          agg_function_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 13:
-      /* PROJECTION */
-      switch(event_type) {
-        case LP_INIT:
-          ProjectionInit(topology, 9, me);
-          break;
-        case EVENT:
-          projection(me, now, content, s);
-          break;
-        case LP_FINI:
-          ProjectionCleanUp((ProjectionData *)s);
-          break;
-        case TERMINATE:
-          projection_data = (ProjectionData *)s;
-          projection_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 14:
-      /* GROUP BY */
-      switch(event_type) {
-        case LP_INIT:
-          GroupByInit(topology, 13, me);
-          break;
-        case EVENT:
-          groupBy(me, now, content, s);
-          break;
-        case LP_FINI:
-          GroupByCleanUp((GroupByData *)s);
-          break;
-        case TERMINATE:
-          groupBy_data = (GroupByData *)s;
-          groupBy_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 15:
-      /* AGGREGATE FUNCTION (Count) */
-      switch(event_type) {
-        case LP_INIT:
-          AggregateFunctionInit(topology, 14, me);
-          break;
-        case EVENT:
-          Count(me, now, content, s);
-          break;
-        case LP_FINI:
-          AggFunctionCleanUp((AggregateFunctionData *)s);
-          break;
-        case TERMINATE:
-          agg_function_data = (AggregateFunctionData *)s;
-          agg_function_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 16:
       /* PROJECTION */
       switch(event_type) {
         case LP_INIT:
@@ -587,11 +459,11 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 17:
+    case 12:
       /* GROUP BY */
       switch(event_type) {
         case LP_INIT:
-          GroupByInit(topology, 16, me);
+          GroupByInit(topology, 11, me);
           break;
         case EVENT:
           groupBy(me, now, content, s);
@@ -610,11 +482,11 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 18:
+    case 13:
       /* AGGREGATE FUNCTION (Average) */
       switch(event_type) {
         case LP_INIT:
-          AggregateFunctionInit(topology, 17, me);
+          AggregateFunctionInit(topology, 12, me);
           break;
         case EVENT:
           Average(me, now, content, s);
@@ -633,260 +505,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 19:
-      /* PROJECTION */
-      switch(event_type) {
-        case LP_INIT:
-          ProjectionInit(topology, 2, me);
-          break;
-        case EVENT:
-          projection(me, now, content, s);
-          break;
-        case LP_FINI:
-          ProjectionCleanUp((ProjectionData *)s);
-          break;
-        case TERMINATE:
-          projection_data = (ProjectionData *)s;
-          projection_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 20:
-      /* PROJECTION */
-      switch(event_type) {
-        case LP_INIT:
-          ProjectionInit(topology, 9, me);
-          break;
-        case EVENT:
-          projection(me, now, content, s);
-          break;
-        case LP_FINI:
-          ProjectionCleanUp((ProjectionData *)s);
-          break;
-        case TERMINATE:
-          projection_data = (ProjectionData *)s;
-          projection_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 21:
-      /* GROUP BY */
-      switch(event_type) {
-        case LP_INIT:
-          GroupByInit(topology, 20, me);
-          break;
-        case EVENT:
-          groupBy(me, now, content, s);
-          break;
-        case LP_FINI:
-          GroupByCleanUp((GroupByData *)s);
-          break;
-        case TERMINATE:
-          groupBy_data = (GroupByData *)s;
-          groupBy_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 22:
-      /* ORDER BY */
-      switch(event_type) {
-        case LP_INIT:
-          OrderByInit(topology, 23, me);
-          break;
-        case EVENT:
-          orderBy(me, now, content, s);
-          break;
-        case LP_FINI:
-          OrderByCleanUp((OrderByData *)s);
-          break;
-        case TERMINATE:
-          orderBy_data = (OrderByData *)s;
-          orderBy_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 23:
-      /* AGGREGATE FUNCTION (Sum) */
-      switch(event_type) {
-        case LP_INIT:
-          AggregateFunctionInit(topology, 21, me);
-          break;
-        case EVENT:
-          Sum(me, now, content, s);
-          break;
-        case LP_FINI:
-          AggFunctionCleanUp((AggregateFunctionData *)s);
-          break;
-        case TERMINATE:
-          agg_function_data = (AggregateFunctionData *)s;
-          agg_function_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 24:
-      /* PROJECTION */
-      switch(event_type) {
-        case LP_INIT:
-          ProjectionInit(topology, 3, me);
-          break;
-        case EVENT:
-          projection(me, now, content, s);
-          break;
-        case LP_FINI:
-          ProjectionCleanUp((ProjectionData *)s);
-          break;
-        case TERMINATE:
-          projection_data = (ProjectionData *)s;
-          projection_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 25:
-      /* PROJECTION */
-      switch(event_type) {
-        case LP_INIT:
-          ProjectionInit(topology, 4, me);
-          break;
-        case EVENT:
-          projection(me, now, content, s);
-          break;
-        case LP_FINI:
-          ProjectionCleanUp((ProjectionData *)s);
-          break;
-        case TERMINATE:
-          projection_data = (ProjectionData *)s;
-          projection_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 26:
-      /* PROJECTION */
-      switch(event_type) {
-        case LP_INIT:
-          ProjectionInit(topology, 5, me);
-          break;
-        case EVENT:
-          projection(me, now, content, s);
-          break;
-        case LP_FINI:
-          ProjectionCleanUp((ProjectionData *)s);
-          break;
-        case TERMINATE:
-          projection_data = (ProjectionData *)s;
-          projection_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 27:
-      /* PROJECTION */
-      switch(event_type) {
-        case LP_INIT:
-          ProjectionInit(topology, 6, me);
-          break;
-        case EVENT:
-          projection(me, now, content, s);
-          break;
-        case LP_FINI:
-          ProjectionCleanUp((ProjectionData *)s);
-          break;
-        case TERMINATE:
-          projection_data = (ProjectionData *)s;
-          projection_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 28:
-      /* PROJECTION */
-      switch(event_type) {
-        case LP_INIT:
-          ProjectionInit(topology, 7, me);
-          break;
-        case EVENT:
-          projection(me, now, content, s);
-          break;
-        case LP_FINI:
-          ProjectionCleanUp((ProjectionData *)s);
-          break;
-        case TERMINATE:
-          projection_data = (ProjectionData *)s;
-          projection_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 29:
-      /* AGGREGATE FUNCTION (Average) */
-      switch(event_type) {
-        case LP_INIT:
-          AggregateFunctionInit(topology, 28, me);
-          break;
-        case EVENT:
-          Average(me, now, content, s);
-          break;
-        case LP_FINI:
-          AggFunctionCleanUp((AggregateFunctionData *)s);
-          break;
-        case TERMINATE:
-          agg_function_data = (AggregateFunctionData *)s;
-          agg_function_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
-    case 30:
+    case 14:
       /* PROJECTION */
       switch(event_type) {
         case LP_INIT:
@@ -909,13 +528,312 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 31:
+    case 15:
+      /* GROUP BY */
+      switch(event_type) {
+        case LP_INIT:
+          GroupByInit(topology, 14, me);
+          break;
+        case EVENT:
+          groupBy(me, now, content, s);
+          break;
+        case LP_FINI:
+          GroupByCleanUp((GroupByData *)s);
+          break;
+        case TERMINATE:
+          groupBy_data = (GroupByData *)s;
+          groupBy_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 16:
+      /* ORDER BY */
+      switch(event_type) {
+        case LP_INIT:
+          OrderByInit(topology, 17, me);
+          break;
+        case EVENT:
+          orderBy(me, now, content, s);
+          break;
+        case LP_FINI:
+          OrderByCleanUp((OrderByData *)s);
+          break;
+        case TERMINATE:
+          orderBy_data = (OrderByData *)s;
+          orderBy_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 17:
+      /* AGGREGATE FUNCTION (Sum) */
+      switch(event_type) {
+        case LP_INIT:
+          AggregateFunctionInit(topology, 15, me);
+          break;
+        case EVENT:
+          Sum(me, now, content, s);
+          break;
+        case LP_FINI:
+          AggFunctionCleanUp((AggregateFunctionData *)s);
+          break;
+        case TERMINATE:
+          agg_function_data = (AggregateFunctionData *)s;
+          agg_function_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 18:
+      /* AGGREGATE FUNCTION (Count) */
+      switch(event_type) {
+        case LP_INIT:
+          AggregateFunctionInit(topology, 2, me);
+          break;
+        case EVENT:
+          Count(me, now, content, s);
+          break;
+        case LP_FINI:
+          AggFunctionCleanUp((AggregateFunctionData *)s);
+          break;
+        case TERMINATE:
+          agg_function_data = (AggregateFunctionData *)s;
+          agg_function_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 19:
+      /* PROJECTION */
+      switch(event_type) {
+        case LP_INIT:
+          ProjectionInit(topology, 3, me);
+          break;
+        case EVENT:
+          projection(me, now, content, s);
+          break;
+        case LP_FINI:
+          ProjectionCleanUp((ProjectionData *)s);
+          break;
+        case TERMINATE:
+          projection_data = (ProjectionData *)s;
+          projection_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 20:
+      /* GROUP BY */
+      switch(event_type) {
+        case LP_INIT:
+          GroupByInit(topology, 19, me);
+          break;
+        case EVENT:
+          groupBy(me, now, content, s);
+          break;
+        case LP_FINI:
+          GroupByCleanUp((GroupByData *)s);
+          break;
+        case TERMINATE:
+          groupBy_data = (GroupByData *)s;
+          groupBy_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 21:
+      /* ORDER BY */
+      switch(event_type) {
+        case LP_INIT:
+          OrderByInit(topology, 22, me);
+          break;
+        case EVENT:
+          orderBy(me, now, content, s);
+          break;
+        case LP_FINI:
+          OrderByCleanUp((OrderByData *)s);
+          break;
+        case TERMINATE:
+          orderBy_data = (OrderByData *)s;
+          orderBy_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 22:
+      /* AGGREGATE FUNCTION (Average) */
+      switch(event_type) {
+        case LP_INIT:
+          AggregateFunctionInit(topology, 20, me);
+          break;
+        case EVENT:
+          Average(me, now, content, s);
+          break;
+        case LP_FINI:
+          AggFunctionCleanUp((AggregateFunctionData *)s);
+          break;
+        case TERMINATE:
+          agg_function_data = (AggregateFunctionData *)s;
+          agg_function_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 23:
+      /* PROJECTION */
+      switch(event_type) {
+        case LP_INIT:
+          ProjectionInit(topology, 10, me);
+          break;
+        case EVENT:
+          projection(me, now, content, s);
+          break;
+        case LP_FINI:
+          ProjectionCleanUp((ProjectionData *)s);
+          break;
+        case TERMINATE:
+          projection_data = (ProjectionData *)s;
+          projection_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 25:
+      /* ORDER BY */
+      switch(event_type) {
+        case LP_INIT:
+          OrderByInit(topology, 26, me);
+          break;
+        case EVENT:
+          orderBy(me, now, content, s);
+          break;
+        case LP_FINI:
+          OrderByCleanUp((OrderByData *)s);
+          break;
+        case TERMINATE:
+          orderBy_data = (OrderByData *)s;
+          orderBy_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 24:
+      /* GROUP BY */
+      switch(event_type) {
+        case LP_INIT:
+          GroupByInit(topology, 23, me);
+          break;
+        case EVENT:
+          groupBy(me, now, content, s);
+          break;
+        case LP_FINI:
+          GroupByCleanUp((GroupByData *)s);
+          break;
+        case TERMINATE:
+          groupBy_data = (GroupByData *)s;
+          groupBy_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 26:
+      /* AGGREGATE FUNCTION (Sum) */
+      switch(event_type) {
+        case LP_INIT:
+          AggregateFunctionInit(topology, 24, me);
+          break;
+        case EVENT:
+          Sum(me, now, content, s);
+          break;
+        case LP_FINI:
+          AggFunctionCleanUp((AggregateFunctionData *)s);
+          break;
+        case TERMINATE:
+          agg_function_data = (AggregateFunctionData *)s;
+          agg_function_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 27:
+      /* PROJECTION */
+      switch(event_type) {
+        case LP_INIT:
+          ProjectionInit(topology, 4, me);
+          break;
+        case EVENT:
+          projection(me, now, content, s);
+          break;
+        case LP_FINI:
+          ProjectionCleanUp((ProjectionData *)s);
+          break;
+        case TERMINATE:
+          projection_data = (ProjectionData *)s;
+          projection_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 28:
 		/* OUTPUT */
 		switch(event_type) {
         case LP_INIT:
 		      output_data = rs_malloc(sizeof(OutputProcessData));
 		      output_data->can_end = false;
-          output_data->filename = (char *)GetTopologyLinkData(topology, 22, 31);
+          output_data->filename = (char *)GetTopologyLinkData(topology, 18, 28);
 		      SetState(output_data);
           break;
         case EVENT:
@@ -934,13 +852,13 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 32:
+      case 29:
 		/* OUTPUT */
 		switch(event_type) {
         case LP_INIT:
 		      output_data = rs_malloc(sizeof(OutputProcessData));
 		      output_data->can_end = false;
-          output_data->filename = (char *)GetTopologyLinkData(topology, 15, 32);
+          output_data->filename = (char *)GetTopologyLinkData(topology, 16, 29);
 		      SetState(output_data);
           break;
         case EVENT:
@@ -959,13 +877,13 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 33:
+      case 30:
 		/* OUTPUT */
 		switch(event_type) {
         case LP_INIT:
 		      output_data = rs_malloc(sizeof(OutputProcessData));
 		      output_data->can_end = false;
-          output_data->filename = (char *)GetTopologyLinkData(topology, 12, 33);
+          output_data->filename = (char *)GetTopologyLinkData(topology, 25, 30);
 		      SetState(output_data);
           break;
         case EVENT:
@@ -984,13 +902,13 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 34:
+      case 31:
 		/* OUTPUT */
 		switch(event_type) {
         case LP_INIT:
 		      output_data = rs_malloc(sizeof(OutputProcessData));
 		      output_data->can_end = false;
-          output_data->filename = (char *)GetTopologyLinkData(topology, 24, 34);
+          output_data->filename = (char *)GetTopologyLinkData(topology, 6, 31);
 		      SetState(output_data);
           break;
         case EVENT:
@@ -1009,13 +927,13 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 35:
+      case 32:
 		/* OUTPUT */
 		switch(event_type) {
         case LP_INIT:
 		      output_data = rs_malloc(sizeof(OutputProcessData));
 		      output_data->can_end = false;
-          output_data->filename = (char *)GetTopologyLinkData(topology, 29, 35);
+          output_data->filename = (char *)GetTopologyLinkData(topology, 5, 32);
 		      SetState(output_data);
           break;
         case EVENT:
@@ -1034,13 +952,13 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 36:
+      case 33:
 		/* OUTPUT */
 		switch(event_type) {
         case LP_INIT:
 		      output_data = rs_malloc(sizeof(OutputProcessData));
 		      output_data->can_end = false;
-          output_data->filename = (char *)GetTopologyLinkData(topology, 18, 36);
+          output_data->filename = (char *)GetTopologyLinkData(topology, 21, 33);
 		      SetState(output_data);
           break;
         case EVENT:
@@ -1059,13 +977,13 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 37:
+      case 34:
 		/* OUTPUT */
 		switch(event_type) {
         case LP_INIT:
 		      output_data = rs_malloc(sizeof(OutputProcessData));
 		      output_data->can_end = false;
-          output_data->filename = (char *)GetTopologyLinkData(topology, 30, 37);
+          output_data->filename = (char *)GetTopologyLinkData(topology, 13, 34);
 		      SetState(output_data);
           break;
         case EVENT:
@@ -1084,63 +1002,13 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 38:
+      case 35:
 		/* OUTPUT */
 		switch(event_type) {
         case LP_INIT:
 		      output_data = rs_malloc(sizeof(OutputProcessData));
 		      output_data->can_end = false;
-          output_data->filename = (char *)GetTopologyLinkData(topology, 19, 38);
-		      SetState(output_data);
-          break;
-        case EVENT:
-          WriteToOutputFile(me, content, (OutputProcessData *)s);
-          break;
-        case LP_FINI:
-          OutputCleanUp((OutputProcessData *)s);
-          break;
-        case TERMINATE:
-          output_data = (OutputProcessData *)s;
-          output_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type\n");
-          abort();
-      }
-      break;
-    case 39:
-		/* OUTPUT */
-		switch(event_type) {
-        case LP_INIT:
-		      output_data = rs_malloc(sizeof(OutputProcessData));
-		      output_data->can_end = false;
-          output_data->filename = (char *)GetTopologyLinkData(topology, 26, 39);
-		      SetState(output_data);
-          break;
-        case EVENT:
-          WriteToOutputFile(me, content, (OutputProcessData *)s);
-          break;
-        case LP_FINI:
-          OutputCleanUp((OutputProcessData *)s);
-          break;
-        case TERMINATE:
-          output_data = (OutputProcessData *)s;
-          output_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type\n");
-          abort();
-      }
-      break;
-    case 40:
-		/* OUTPUT */
-		switch(event_type) {
-        case LP_INIT:
-		      output_data = rs_malloc(sizeof(OutputProcessData));
-		      output_data->can_end = false;
-          output_data->filename = (char *)GetTopologyLinkData(topology, 27, 40);
+          output_data->filename = (char *)GetTopologyLinkData(topology, 27, 35);
 		      SetState(output_data);
           break;
         case EVENT:
@@ -1195,38 +1063,38 @@ bool CanEnd(lp_id_t me, const void *snapshot) {
       selection_data = (SelectionData *)snapshot;
       return selection_data->can_end;
     case 7:
-      selection_data = (SelectionData *)snapshot;
-      return selection_data->can_end;
+      window_data = (WindowData *)snapshot;
+      return window_data->can_end;
     case 8:
-      selection_data = (SelectionData *)snapshot;
-      return selection_data->can_end;
+      window_data = (WindowData *)snapshot;
+      return window_data->can_end;
     case 9:
       window_data = (WindowData *)snapshot;
       return window_data->can_end;
     case 10:
-      projection_data = (ProjectionData *)snapshot;
-      return projection_data->can_end;
+      window_data = (WindowData *)snapshot;
+      return window_data->can_end;
     case 11:
-      groupBy_data = (GroupByData *)snapshot;
-      return groupBy_data->can_end;
+      projection_data = (ProjectionData *)snapshot;
+      return projection_data->can_end;
     case 12:
-      agg_function_data = (AggregateFunctionData *)snapshot;
-      return agg_function_data->can_end;
+      groupBy_data = (GroupByData *)snapshot;
+      return groupBy_data->can_end;
     case 13:
-      projection_data = (ProjectionData *)snapshot;
-      return projection_data->can_end;
-    case 14:
-      groupBy_data = (GroupByData *)snapshot;
-      return groupBy_data->can_end;
-    case 15:
       agg_function_data = (AggregateFunctionData *)snapshot;
       return agg_function_data->can_end;
-    case 16:
+    case 14:
       projection_data = (ProjectionData *)snapshot;
       return projection_data->can_end;
-    case 17:
+    case 15:
       groupBy_data = (GroupByData *)snapshot;
       return groupBy_data->can_end;
+    case 16:
+      orderBy_data = (OrderByData *)snapshot;
+      return orderBy_data->can_end;
+    case 17:
+      agg_function_data = (AggregateFunctionData *)snapshot;
+      return agg_function_data->can_end;
     case 18:
       agg_function_data = (AggregateFunctionData *)snapshot;
       return agg_function_data->can_end;
@@ -1234,41 +1102,32 @@ bool CanEnd(lp_id_t me, const void *snapshot) {
       projection_data = (ProjectionData *)snapshot;
       return projection_data->can_end;
     case 20:
-      projection_data = (ProjectionData *)snapshot;
-      return projection_data->can_end;
-    case 21:
       groupBy_data = (GroupByData *)snapshot;
       return groupBy_data->can_end;
-    case 22:
+    case 21:
       orderBy_data = (OrderByData *)snapshot;
       return orderBy_data->can_end;
-    case 23:
+    case 22:
       agg_function_data = (AggregateFunctionData *)snapshot;
       return agg_function_data->can_end;
-    case 24:
+    case 23:
       projection_data = (ProjectionData *)snapshot;
       return projection_data->can_end;
     case 25:
-      projection_data = (ProjectionData *)snapshot;
-      return projection_data->can_end;
+      orderBy_data = (OrderByData *)snapshot;
+      return orderBy_data->can_end;
+    case 24:
+      groupBy_data = (GroupByData *)snapshot;
+      return groupBy_data->can_end;
     case 26:
-      projection_data = (ProjectionData *)snapshot;
-      return projection_data->can_end;
+      agg_function_data = (AggregateFunctionData *)snapshot;
+      return agg_function_data->can_end;
     case 27:
       projection_data = (ProjectionData *)snapshot;
       return projection_data->can_end;
-    case 28:
-      projection_data = (ProjectionData *)snapshot;
-      return projection_data->can_end;
-    case 29:
-      agg_function_data = (AggregateFunctionData *)snapshot;
-      return agg_function_data->can_end;
-    case 30:
-      projection_data = (ProjectionData *)snapshot;
-      return projection_data->can_end;
-    case 31 ... 40:
-      output_data = (OutputProcessData *)snapshot;
-      return output_data->can_end;
+    case 28 ... 35:
+        output_data = (OutputProcessData *)snapshot;
+        return output_data->can_end;
     default:
       return true;
   }
