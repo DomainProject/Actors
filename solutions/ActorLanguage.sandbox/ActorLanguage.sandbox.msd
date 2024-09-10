@@ -19,6 +19,7 @@
   </languageVersions>
   <dependencyVersions>
     <module reference="0d474d99-41d7-4d08-91e3-6dad4e206b05(ActorLanguage.sandbox)" version="0" />
+    <module reference="f068a51b-51c7-4818-8183-e85adeefeffd(QueryLanguage.sandbox@transient0)" version="0" />
     <module reference="dc115e27-aa6f-4fb5-bbf0-aa49a0c3b8a4(QueryLanguage.sandbox@transient4)" version="0" />
   </dependencyVersions>
 </solution>

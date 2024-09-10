@@ -935,5 +935,128 @@
       </node>
     </node>
   </node>
+  <node concept="Al3kE" id="3TsnP2VS$Rb">
+    <property role="TrG5h" value="Script2" />
+    <node concept="Al3n9" id="3TsnP2VS$Rc" role="21riY_">
+      <property role="TrG5h" value="Taxis" />
+      <node concept="Al3nk" id="3TsnP2VS$Rd" role="1_7Ipx">
+        <property role="TrG5h" value="VendorID" />
+        <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+        <property role="2l5wPj" value="Taxis.VendorID" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Re" role="1_7Ipx">
+        <property role="TrG5h" value="tpep_pickup_datetime" />
+        <property role="Al3ng" value="14g3IsRh3GZ/Date" />
+        <property role="2l5wPj" value="Taxis.tpep_pickup_datetime" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Rf" role="1_7Ipx">
+        <property role="TrG5h" value="tpep_dropoff_datetime" />
+        <property role="Al3ng" value="14g3IsRh3GZ/Date" />
+        <property role="2l5wPj" value="Taxis.tpep_dropoff_datetime" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Rg" role="1_7Ipx">
+        <property role="TrG5h" value="passenger_count" />
+        <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+        <property role="2l5wPj" value="Taxis.passenger_count" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Rh" role="1_7Ipx">
+        <property role="TrG5h" value="trip_distance" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        <property role="2l5wPj" value="Taxis.trip_distance" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Ri" role="1_7Ipx">
+        <property role="TrG5h" value="RatecodeID" />
+        <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+        <property role="2l5wPj" value="Taxis.RatecodeID" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Rj" role="1_7Ipx">
+        <property role="TrG5h" value="PULocationID" />
+        <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+        <property role="2l5wPj" value="Taxis.PULocationID" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Rk" role="1_7Ipx">
+        <property role="TrG5h" value="DOLocationID" />
+        <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+        <property role="2l5wPj" value="Taxis.DOLocationID" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Rl" role="1_7Ipx">
+        <property role="TrG5h" value="payment_type" />
+        <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+        <property role="2l5wPj" value="Taxis.payment_type" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Rm" role="1_7Ipx">
+        <property role="TrG5h" value="fare_amount" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        <property role="2l5wPj" value="Taxis.fare_amount" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Rn" role="1_7Ipx">
+        <property role="TrG5h" value="extra" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        <property role="2l5wPj" value="Taxis.extra" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Ro" role="1_7Ipx">
+        <property role="TrG5h" value="mta_tax" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        <property role="2l5wPj" value="Taxis.mta_tax" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Rp" role="1_7Ipx">
+        <property role="TrG5h" value="tip_amount" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        <property role="2l5wPj" value="Taxis.tip_amount" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Rq" role="1_7Ipx">
+        <property role="TrG5h" value="tolls_amount" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        <property role="2l5wPj" value="Taxis.tolls_amount" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Rr" role="1_7Ipx">
+        <property role="TrG5h" value="improvement_surcharge" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        <property role="2l5wPj" value="Taxis.improvement_surcharge" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Rs" role="1_7Ipx">
+        <property role="TrG5h" value="total_amount" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        <property role="2l5wPj" value="Taxis.total_amount" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Rt" role="1_7Ipx">
+        <property role="TrG5h" value="congestion_surcharge" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        <property role="2l5wPj" value="Taxis.congestion_surcharge" />
+      </node>
+      <node concept="Al3nk" id="3TsnP2VS$Ru" role="1_7Ipx">
+        <property role="TrG5h" value="Airport_fee" />
+        <property role="Al3ng" value="14g3IsRh3H3/Float" />
+        <property role="2l5wPj" value="Taxis.Airport_fee" />
+      </node>
+    </node>
+    <node concept="15J0zD" id="3TsnP2VS$RO" role="21riY_">
+      <node concept="2leIlQ" id="3TsnP2VS$RQ" role="2legkn">
+        <ref role="2leIlR" node="3TsnP2VS$Rc" resolve="Taxis" />
+      </node>
+      <node concept="15J0zF" id="3TsnP2VS$Sh" role="AlhBa">
+        <node concept="1osJ5O" id="3TsnP2VS$Sj" role="AmyPj">
+          <property role="1osJ58" value="14g3IsRhL0p/NOT_EQUAL" />
+          <node concept="1HhJcF" id="3TsnP2VS$Sk" role="1osJ5a">
+            <property role="1HhJcI" value="0.0" />
+          </node>
+          <node concept="Agl$j" id="3TsnP2VS$Sl" role="1osJ57">
+            <ref role="Agl$i" node="3TsnP2VS$Ru" resolve="Airport_fee" />
+          </node>
+        </node>
+      </node>
+      <node concept="Agl$j" id="3TsnP2VS$Sp" role="2WRRZq">
+        <ref role="Agl$i" node="3TsnP2VS$Rj" resolve="PULocationID" />
+      </node>
+      <node concept="2WQRJ5" id="3TsnP2VS$Su" role="2WRRZq">
+        <node concept="Avfch" id="3TsnP2VS$Sy" role="1LWTg_" />
+      </node>
+      <node concept="21oAwd" id="3TsnP2VS$S$" role="21oAAU">
+        <node concept="Agl$j" id="3TsnP2VS$S_" role="21oAAq">
+          <ref role="Agl$i" node="3TsnP2VS$Rj" resolve="PULocationID" />
+        </node>
+      </node>
+    </node>
+  </node>
 </model>
 
