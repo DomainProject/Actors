@@ -72,4 +72,7 @@ src/CMakeFiles/rspseudosql.dir/rootsim_operations.c.o: \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h \
  /home/simoneb/thesis/Actors/pseudosql/src/condition_parser.h \
- /home/simoneb/thesis/Actors/pseudosql/src/utils.h
+ /home/simoneb/thesis/Actors/pseudosql/src/utils.h /usr/include/time.h \
+ /usr/include/x86_64-linux-gnu/bits/time.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h

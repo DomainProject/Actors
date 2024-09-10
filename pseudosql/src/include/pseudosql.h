@@ -252,7 +252,6 @@ EXPORT RowsList* CopyAndFreeRowsList(RowsList *list);
 EXPORT void SendMessageToAllNeighbors(struct topology *topology, Message *message, simtime_t now);
 EXPORT Message *CreateMessage(lp_id_t sender_id, float priority, void *list, MessageType type);
 EXPORT void CreateAndSendMessage(lp_id_t sender_id, float priority, MessageType type, void *list, simtime_t now, lp_id_t *receivers, int num_receivers);
-EXPORT simtime_t ComputeSleepTime(char *datetime);
 EXPORT void DataIngestionInit(lp_id_t me, simtime_t now, FILE **file, char *filename, Schema *schema);
 EXPORT void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSourceData *data, FILE **file, Schema *schema);
 EXPORT void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me);

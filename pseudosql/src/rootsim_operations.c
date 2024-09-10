@@ -135,23 +135,56 @@ void CreateAndSendMessage(lp_id_t sender_id, float priority, MessageType type, v
 
 }
 
-simtime_t ComputeSleepTime(char *datetime) {
+simtime_t ComputeSleepTime(const char *cur_datetime, const char *next_datetime) {
+    struct tm cur_tm = {0}, next_tm = {0};
+    time_t cur_time, next_time;
+    int parsed;
 
-	int hours, minutes, seconds;
-	char *time_str;
-    
-    if (strlen(datetime) < DATE_TIME_FORMAT_LENGTH) {
-        perror("Invalid date time format");
+    // Verifica che i datetime siano della lunghezza corretta
+    if (strlen(cur_datetime) < DATE_TIME_FORMAT_LENGTH || strlen(next_datetime) < DATE_TIME_FORMAT_LENGTH) {
+        fprintf(stderr, "Invalid date time format\n");
         exit(EXIT_FAILURE);
     }
 
-    // Time starts after 11 chars
-    time_str = datetime + 11;
+    // Analizza la stringa datetime usando sscanf
+    parsed = sscanf(cur_datetime, "%d-%d-%d %d:%d:%d",
+                    &cur_tm.tm_year, &cur_tm.tm_mon, &cur_tm.tm_mday,
+                    &cur_tm.tm_hour, &cur_tm.tm_min, &cur_tm.tm_sec);
+    if (parsed != 6) {
+        fprintf(stderr, "Failed to parse cur_datetime with sscanf. Parsed %d elements\n", parsed);
+        exit(EXIT_FAILURE);
+    }
 
-    sscanf(time_str, "%2d:%2d:%2d", &hours, &minutes, &seconds);
+    parsed = sscanf(next_datetime, "%d-%d-%d %d:%d:%d",
+                    &next_tm.tm_year, &next_tm.tm_mon, &next_tm.tm_mday,
+                    &next_tm.tm_hour, &next_tm.tm_min, &next_tm.tm_sec);
+    if (parsed != 6) {
+        fprintf(stderr, "Failed to parse next_datetime with sscanf. Parsed %d elements\n", parsed);
+        exit(EXIT_FAILURE);
+    }
 
-    return hours * 3600.0 + minutes * 60.0 + seconds;
+    // `tm_year` è l'anno dal 1900, `tm_mon` è il mese da 0 a 11
+    cur_tm.tm_year -= 1900;
+    cur_tm.tm_mon -= 1;
+    next_tm.tm_year -= 1900;
+    next_tm.tm_mon -= 1;
+
+    // Converti struct tm in time_t
+    cur_time = mktime(&cur_tm);
+    next_time = mktime(&next_tm);
+
+    // Controlla che mktime non abbia fallito
+    if (cur_time == -1 || next_time == -1) {
+        perror("mktime failed");
+        exit(EXIT_FAILURE);
+    }
+
+    // Calcola la differenza tra i due timestamp in secondi
+    simtime_t difference = difftime(next_time, cur_time);
+
+    return difference;
 }
+
 
 /**
  * @brief Initializer for the DataIngestion process
@@ -195,73 +228,98 @@ void DataIngestionInit(lp_id_t me, simtime_t now, FILE **file, char *filename, S
  */
 void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSourceData *data, FILE **file, Schema *schema) {
     char line[MAX_LINE_LENGTH];
+    char next_line[MAX_LINE_LENGTH]; // Per salvare la riga successiva
     simtime_t new_time = 0.0;
-    char *cols;
-	RowElement *elements;
-	Row *row;
-	RowsList *list;
-	lp_id_t *neighbors;
-	int num_neighbors;
+    char *cur_datetime, *next_datetime;
+    RowElement *elements;
+    Row *row;
+    RowsList *list;
+    lp_id_t *neighbors;
+    int num_neighbors;
 
-	// read line from the input file
-	if (fgets(line, sizeof(line), *file) == NULL) {
-		// create and send termination message
-		lp_id_t num_neighbors = CountDirections(topology, me);
-		lp_id_t neighbors[num_neighbors];
-		GetAllReceivers(topology, me, neighbors);
+    // read line from the input file
+    if (fgets(line, sizeof(line), *file) == NULL) {
+        // create and send termination message
+        lp_id_t num_neighbors = CountDirections(topology, me);
+        lp_id_t neighbors[num_neighbors];
+        GetAllReceivers(topology, me, neighbors);
 
-		for (unsigned int i = 0; i < num_neighbors; i++) {
-			ScheduleNewEvent(neighbors[i], now + 10.0, TERMINATE, NULL, 0);
-		}
+        for (unsigned int i = 0; i < num_neighbors; i++) {
+            ScheduleNewEvent(neighbors[i], now + 10.0, TERMINATE, NULL, 0);
+        }
 
-		data->can_end = true;
+        data->can_end = true;
+        return;
+    }
 
-		return;
-	}
-
-	line[strcspn(line, "\n")] = '\0';  // Rimuove il carattere newline, se presente
-    // ggiungi una terminazione \0 manualmente, nel caso fgets non la metta
+    line[strcspn(line, "\n")] = '\0'; 
     line[sizeof(line) - 1] = '\0';
 
-	// create and populate Row struct from the input line
-	elements = rs_malloc(schema->num_cols * sizeof(RowElement));
-	CHECK_RSMALLOC(elements, "DataIngestion");
-	row = rs_malloc(sizeof(Row));	
-	CHECK_RSMALLOC(row, "DataIngestion");
-	row->elements = elements;
-	row->num_elements = schema->num_cols;
-	row->table_name = "Taxis";
+    // create and populate Row struct from the input line
+    elements = rs_malloc(schema->num_cols * sizeof(RowElement));
+    CHECK_RSMALLOC(elements, "DataIngestion");
+    row = rs_malloc(sizeof(Row));    
+    CHECK_RSMALLOC(row, "DataIngestion");
+    row->elements = elements;
+    row->num_elements = schema->num_cols;
+    row->table_name = "Taxis";
 
-	printf("%s\n", line);
+    PopulateRow(line, row, *schema);
 
-	PopulateRow(line, row, *schema);
-
-	// create single row list
-	list = rs_malloc(sizeof(RowsList));
-	CHECK_RSMALLOC(list, "DataIngestion");
-	list->num_rows = 1;
-	list->rows = row;
-
-	neighbors = GetAllNeighbors(topology, me, &num_neighbors);
-	CreateAndSendRowsMessage(me, 5.0, list, now, neighbors, num_neighbors);
+    // create single row list
+    list = rs_malloc(sizeof(RowsList));
+    CHECK_RSMALLOC(list, "DataIngestion");
+    list->num_rows = 1;
+    list->rows = row;
 
 	PrintRow(row);
+    
+    neighbors = GetAllNeighbors(topology, me, &num_neighbors);
+    CreateAndSendRowsMessage(me, 5.0, list, now, neighbors, num_neighbors);
 
-	// get next tuple time, and schedule next DataIngestion process' execution
-	int count = 0;
-	cols = strtok(line, ",");
+	// Check if there is a next line to compute the sleep time
+    long current_position = ftell(*file);
 
-	while(cols != NULL) {
-		if (count == 1) {
-			new_time = ComputeSleepTime(cols);
-			break;
-		}
-		cols = strtok(NULL, ",");
-		count++;
-	}
-	
-	ScheduleNewEvent(me, now + new_time, EVENT, NULL, 0);
+    if (fgets(next_line, sizeof(next_line), *file) != NULL) {
+        next_line[strcspn(next_line, "\n")] = '\0';
+        next_line[sizeof(next_line) - 1] = '\0';
+
+        // get the time from the next line
+        int count = 0;
+        char *cur_saveptr, *next_saveptr;
+        cur_datetime = strtok_r(line, ",", &cur_saveptr);
+        next_datetime = strtok_r(next_line, ",", &next_saveptr);
+
+        while (cur_datetime != NULL && next_datetime != NULL) {
+            if (count == 1) {
+                new_time = ComputeSleepTime(cur_datetime, next_datetime);
+                break;
+            }
+            cur_datetime = strtok_r(NULL, ",", &cur_saveptr);
+            next_datetime = strtok_r(NULL, ",", &next_saveptr);
+            count++;
+        }
+    } else {
+        // create and send termination message
+        lp_id_t num_neighbors = CountDirections(topology, me);
+        lp_id_t neighbors[num_neighbors];
+        GetAllReceivers(topology, me, neighbors);
+
+        for (unsigned int i = 0; i < num_neighbors; i++) {
+            ScheduleNewEvent(neighbors[i], now + 10.0, TERMINATE, NULL, 0);
+        }
+
+        data->can_end = true;
+        return;
+    }
+
+    // Torna alla posizione precedente nel file
+    fseek(*file, current_position, SEEK_SET);
+
+    // schedule next DataIngestion process' execution with the computed sleep time
+    ScheduleNewEvent(me, now + new_time, EVENT, NULL, 0);
 }
+
 
 /**
  * @brief Initializer for the Window processes

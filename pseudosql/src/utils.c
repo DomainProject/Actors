@@ -109,6 +109,30 @@ time_t convert_to_unix_timestamp(const char *datetime_str) {
     return mktime(&time_struct);
 }
 
+char* remove_newline_and_copy(const char *str) {
+    int new_len = 0;
+    for (const char *p = str; *p != '\0'; p++) {
+        if (*p != '\n') {
+            new_len++;
+        }
+    }
+    
+    char *new_str = (char *)malloc(new_len + 1);  
+    if (new_str == NULL) {
+        return NULL;  
+    }
+
+    char *dest = new_str;
+    for (const char *p = str; *p != '\0'; p++) {
+        if (*p != '\n') {
+            *dest++ = *p;
+        }
+    }
+    *dest = '\0';
+
+    return new_str;
+}
+
 void InitializeSchema(Schema *schema, char *header) {
     int num_columns = 0;
     for (int i = 0; header[i] != '\0'; i++) {
@@ -127,6 +151,8 @@ void InitializeSchema(Schema *schema, char *header) {
     while (header_token != NULL) {
         char *cur_name = strdup(header_token);
         remove_quotes(cur_name);
+        cur_name = remove_newline_and_copy(cur_name);
+
         schema->cols_names[column_index] = cur_name;
 
         header_token = strtok(NULL, ",");

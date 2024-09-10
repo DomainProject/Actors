@@ -159,7 +159,11 @@ src/CMakeFiles/rspseudosql.dir/rootsim_operations.c.o: ../src/rootsim_operations
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/strings.h \
   ../src/condition_parser.h \
-  ../src/utils.h
+  ../src/utils.h \
+  /usr/include/time.h \
+  /usr/include/x86_64-linux-gnu/bits/time.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h
 
 src/CMakeFiles/rspseudosql.dir/sql_operations.c.o: ../src/sql_operations.c \
   /usr/include/stdc-predef.h \
@@ -327,15 +331,15 @@ src/CMakeFiles/rspseudosql.dir/utils.c.o: ../src/utils.c \
   /usr/local/include/ROOT-Sim/topology.h
 
 
-/usr/include/x86_64-linux-gnu/bits/time.h:
-
-/usr/include/time.h:
-
 ../src/utils.c:
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
 ../src/sql_operations.c:
+
+/usr/include/x86_64-linux-gnu/bits/time.h:
+
+/usr/include/time.h:
 
 ../src/rootsim_operations.h:
 
