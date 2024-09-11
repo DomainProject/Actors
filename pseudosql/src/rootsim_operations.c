@@ -228,7 +228,7 @@ void DataIngestionInit(lp_id_t me, simtime_t now, FILE **file, char *filename, S
  */
 void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSourceData *data, FILE **file, Schema *schema) {
     char line[MAX_LINE_LENGTH];
-    char next_line[MAX_LINE_LENGTH]; // Per salvare la riga successiva
+    char next_line[MAX_LINE_LENGTH];
     simtime_t new_time = 0.0;
     char *cur_datetime, *next_datetime;
     RowElement *elements;
@@ -271,8 +271,6 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
     CHECK_RSMALLOC(list, "DataIngestion");
     list->num_rows = 1;
     list->rows = row;
-
-	PrintRow(row);
     
     neighbors = GetAllNeighbors(topology, me, &num_neighbors);
     CreateAndSendRowsMessage(me, 5.0, list, now, neighbors, num_neighbors);
@@ -331,7 +329,7 @@ void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 
 	WindowData *data = rs_malloc(sizeof(WindowData));
 	CHECK_RSMALLOC(data, "WindowInit");
-	Row *rows = rs_malloc(sizeof(Row) * *size);		// todo fix size
+	Row *rows = rs_malloc(sizeof(Row) * *size * 2);		// todo fix size
 	CHECK_RSMALLOC(rows, "WindowInit");
 	RowsList *list = rs_malloc(sizeof(RowsList));
 	CHECK_RSMALLOC(list, "WindowInit");
@@ -354,7 +352,9 @@ void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 
 void TestWindow(const void *content) {
     Message *msg = (Message *)content;
+	int size = msg->content.rows_list->num_rows;
 
+/*
     printf("Number of rows: %d\n", msg->content.rows_list->num_rows);
     for (int i = 0; i < msg->content.rows_list->num_rows; i++) {
         if (msg->content.rows_list->rows == NULL) {
@@ -364,6 +364,7 @@ void TestWindow(const void *content) {
         printf("Row %d, Element 1 Value: %ld\n", i, msg->content.rows_list->rows[i].elements[1].value.long_value);
     }
     puts("");
+	*/
 }
 
 /**
@@ -816,7 +817,7 @@ RowsList *ExecuteWindow(Message *rcv_msg, WindowData *data) {
 
 		data->list = rs_malloc(sizeof(RowsList));
 		CHECK_RSMALLOC(data->list, "ExecuteWindow");
-		data->list->rows = rs_malloc(sizeof(Row) * 100);		// todo fix rows size
+		data->list->rows = rs_malloc(sizeof(Row) * data->window_size * 2);		// todo fix rows size
 		CHECK_RSMALLOC(data->list->rows, "ExecuteWindow");
 
 		data->received_tuples = 0;

@@ -19,21 +19,25 @@ FILE *file;
 Schema schema;
 struct topology *topology;
 void InitTopology() {
-  topology = InitializeTopology(TOPOLOGY_GRAPH, 6);
+  topology = InitializeTopology(TOPOLOGY_GRAPH, 9);
 
 
   AddTopologyLink(topology, 0, 1, 1);
-  static int window0to17 = 100;
+  static int window0to17 = 300;
   SetTopologyLinkData(topology, 0, 1, (void *)&window0to17);
   AddTopologyLink(topology, 0, 2, 1);
-  static int window0to2 = 100;
+  static int window0to2 = 300;
   SetTopologyLinkData(topology, 0, 2, (void *)&window0to2);
-  //AddTopologyLink(topology, 0, 3, 1);
-  //static int window0to3 = 300;
-  //SetTopologyLinkData(topology, 0, 3, (void *)&window0to3);
-  AddTopologyLink(topology, 1, 4, 1);
-  AddTopologyLink(topology, 2, 5, 1);
-  //AddTopologyLink(topology, 3, 4, 1);
+  AddTopologyLink(topology, 0, 3, 1);
+  static int window0to3 = 300;
+  SetTopologyLinkData(topology, 0, 3, (void *)&window0to3);
+  AddTopologyLink(topology, 0, 4, 1);
+  static int window0to4 = 300;
+  SetTopologyLinkData(topology, 0, 3, (void *)&window0to4);
+  AddTopologyLink(topology, 1, 5, 1);
+  AddTopologyLink(topology, 2, 6, 1);
+  AddTopologyLink(topology, 3, 7, 1);
+  AddTopologyLink(topology, 4, 8, 1);
 }
 
 
@@ -77,7 +81,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 1 ... 2:
+    case 1 ... 4:
       /* WINDOW */
       switch(event_type) {
         case LP_INIT:
@@ -98,7 +102,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 4 ... 5:
+    case 5 ... 8:
       switch(event_type) {
         case LP_INIT:
           break;
@@ -132,7 +136,7 @@ bool CanEnd(lp_id_t me, const void *snapshot) {
     case 0:
       source_data = (DataSourceData *)snapshot;
       return source_data->can_end;
-    case 1 ... 2:
+    case 1 ... 3:
       window_data = (WindowData *)snapshot;
       return window_data->can_end;
     default:
