@@ -22,16 +22,16 @@ void InitTopology() {
   topology = InitializeTopology(TOPOLOGY_GRAPH, 36);
 
   AddTopologyLink(topology, 0, 7, 1);
-  static int window0to7 = 120;
+  static int window0to7 = 30;
   SetTopologyLinkData(topology, 0, 7, (void *)&window0to7);
   AddTopologyLink(topology, 0, 8, 1);
-  static int window0to8 = 60;
+  static int window0to8 = 30;
   SetTopologyLinkData(topology, 0, 8, (void *)&window0to8);
   AddTopologyLink(topology, 0, 9, 1);
-  static int window0to9 = 60;
+  static int window0to9 = 30;
   SetTopologyLinkData(topology, 0, 9, (void *)&window0to9);
   AddTopologyLink(topology, 0, 10, 1);
-  static int window0to10 = 60;
+  static int window0to10 = 30;
   SetTopologyLinkData(topology, 0, 10, (void *)&window0to10);
   AddTopologyLink(topology, 1, 11, 1);
   SetTopologyLinkData(topology, 1, 11, (void *)"payment_type,total_amount");

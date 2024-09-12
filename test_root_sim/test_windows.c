@@ -19,25 +19,25 @@ FILE *file;
 Schema schema;
 struct topology *topology;
 void InitTopology() {
-  topology = InitializeTopology(TOPOLOGY_GRAPH, 9);
+  topology = InitializeTopology(TOPOLOGY_GRAPH, 11);
 
 
   AddTopologyLink(topology, 0, 1, 1);
   static int window0to17 = 300;
   SetTopologyLinkData(topology, 0, 1, (void *)&window0to17);
   AddTopologyLink(topology, 0, 2, 1);
-  static int window0to2 = 300;
+  static int window0to2 = 60;
   SetTopologyLinkData(topology, 0, 2, (void *)&window0to2);
   AddTopologyLink(topology, 0, 3, 1);
-  static int window0to3 = 300;
+  static int window0to3 = 90;
   SetTopologyLinkData(topology, 0, 3, (void *)&window0to3);
   AddTopologyLink(topology, 0, 4, 1);
-  static int window0to4 = 300;
-  SetTopologyLinkData(topology, 0, 3, (void *)&window0to4);
-  AddTopologyLink(topology, 1, 5, 1);
-  AddTopologyLink(topology, 2, 6, 1);
-  AddTopologyLink(topology, 3, 7, 1);
-  AddTopologyLink(topology, 4, 8, 1);
+  static int window0to4 = 120;
+  SetTopologyLinkData(topology, 0, 4, (void *)&window0to4);
+  AddTopologyLink(topology, 1, 6, 1);
+  AddTopologyLink(topology, 2, 7, 1);
+  AddTopologyLink(topology, 3, 8, 1);
+  AddTopologyLink(topology, 4, 9, 1);
 }
 
 
@@ -102,7 +102,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 5 ... 8:
+    case 6 ... 9:
       switch(event_type) {
         case LP_INIT:
           break;

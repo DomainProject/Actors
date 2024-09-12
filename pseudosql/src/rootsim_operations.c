@@ -1,7 +1,7 @@
 #include "rootsim_operations.h"
 
 RowsList* CopyAndFreeRowsList(RowsList *list) {
-    RowsList *copy_list = rs_malloc(sizeof(RowsList));
+    RowsList *copy_list = malloc(sizeof(RowsList));
     if (copy_list == NULL) {
         fprintf(stderr, "Failed to allocate memory for RowsList\n");
         exit(EXIT_FAILURE);
@@ -9,7 +9,7 @@ RowsList* CopyAndFreeRowsList(RowsList *list) {
 
     copy_list->num_rows = list->num_rows;
 
-    copy_list->rows = rs_malloc(sizeof(Row) * copy_list->num_rows);
+    copy_list->rows = malloc(sizeof(Row) * copy_list->num_rows);
     if (copy_list->rows == NULL) {
         fprintf(stderr, "Failed to allocate memory for Rows in RowsList\n");
         exit(EXIT_FAILURE);
@@ -21,7 +21,7 @@ RowsList* CopyAndFreeRowsList(RowsList *list) {
 
         dest_row->num_elements = src_row->num_elements;
 
-        dest_row->elements = rs_malloc(sizeof(RowElement) * dest_row->num_elements);
+        dest_row->elements = malloc(sizeof(RowElement) * dest_row->num_elements);
         if (dest_row->elements == NULL) {
             fprintf(stderr, "Failed to allocate memory for RowElements in Row\n");
             exit(EXIT_FAILURE);
@@ -62,13 +62,13 @@ Message *CreateMessage(lp_id_t sender_id, float priority, void *list, MessageTyp
 	Message *msg;
 
 	// create envelope
-	e = rs_malloc(sizeof(Envelope));
+	e = malloc(sizeof(Envelope));
 	CHECK_RSMALLOC(e, "CreateMessage");
 	e->priority = priority;
 	e->sender = sender_id;
 
 	// create message
-	msg = rs_malloc(sizeof(Message));
+	msg = malloc(sizeof(Message));
 	CHECK_RSMALLOC(msg, "CreateMessage");
 	msg->envelope = e;
 	msg->type = type;
@@ -86,13 +86,13 @@ void CreateAndSendRowsMessage(lp_id_t sender_id, float priority, RowsList *send_
 	Message *send_msg;
 
 	// create envelope
-	e = rs_malloc(sizeof(Envelope));
+	e = malloc(sizeof(Envelope));
 	CHECK_RSMALLOC(e, "CreateAndSendRowsMessage");
 	e->priority = priority;
 	e->sender = sender_id;
 
 	// create and send message
-	send_msg = rs_malloc(sizeof(Message));
+	send_msg = malloc(sizeof(Message));
 	CHECK_RSMALLOC(send_msg, "CreateAndSendRowsMessage");
 	send_msg->envelope = e;
 	send_msg->type = ROWS;
@@ -106,12 +106,12 @@ void CreateAndSendGroupsMessage(lp_id_t sender_id, float priority, GroupsList *s
 	Envelope *e;
 	Message *send_msg; 
 
-	e = rs_malloc(sizeof(Envelope));
+	e = malloc(sizeof(Envelope));
 	CHECK_RSMALLOC(e, "CreateAndSendGroupsMessage");
 	e->priority = priority;
 	e->sender = sender_id;
 
-	send_msg = rs_malloc(sizeof(Message));
+	send_msg = malloc(sizeof(Message));
 	CHECK_RSMALLOC(send_msg, "CreateAndSendGroupsMessage");
 	send_msg->envelope = e;
 	send_msg->type = GROUPS;
@@ -256,9 +256,9 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
     line[sizeof(line) - 1] = '\0';
 
     // create and populate Row struct from the input line
-    elements = rs_malloc(schema->num_cols * sizeof(RowElement));
+    elements = malloc(schema->num_cols * sizeof(RowElement));
     CHECK_RSMALLOC(elements, "DataIngestion");
-    row = rs_malloc(sizeof(Row));    
+    row = malloc(sizeof(Row));    
     CHECK_RSMALLOC(row, "DataIngestion");
     row->elements = elements;
     row->num_elements = schema->num_cols;
@@ -267,7 +267,7 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
     PopulateRow(line, row, *schema);
 
     // create single row list
-    list = rs_malloc(sizeof(RowsList));
+    list = malloc(sizeof(RowsList));
     CHECK_RSMALLOC(list, "DataIngestion");
     list->num_rows = 1;
     list->rows = row;
@@ -351,21 +351,55 @@ void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 }
 
 void TestWindow(const void *content) {
-    Message *msg = (Message *)content;
-	int size = msg->content.rows_list->num_rows;
 
-/*
-    printf("Number of rows: %d\n", msg->content.rows_list->num_rows);
-    for (int i = 0; i < msg->content.rows_list->num_rows; i++) {
-        if (msg->content.rows_list->rows == NULL) {
-            fprintf(stderr, "TestWindow encountered NULL row at index %d\n", i);
+    // Controllo su content
+    if (!content) {
+        printf("content is null\n");
+        return;
+    }
+
+    Message *msg = (Message *)content;
+
+    if (!msg->content.rows_list) {
+        fprintf(stderr, "TestWindow encountered NULL rows_list in message\n");
+        return;
+    }
+
+    int size = msg->content.rows_list->num_rows;
+    if (size <= 0) {
+        fprintf(stderr, "TestWindow encountered invalid or zero number of rows\n");
+        return;
+    }
+
+    printf("Number of rows: %d\n", size);
+
+    for (int i = 0; i < size; i++) {
+        if (!msg->content.rows_list->rows) {
+            fprintf(stderr, "TestWindow encountered NULL rows array\n");
             return;
         }
-        printf("Row %d, Element 1 Value: %ld\n", i, msg->content.rows_list->rows[i].elements[1].value.long_value);
+
+        if (!msg->content.rows_list->rows[i].elements) {
+            fprintf(stderr, "TestWindow encountered NULL elements array in row %d\n", i);
+            return;
+        }
+
+        if (msg->content.rows_list->rows[i].num_elements <= 1) {
+            fprintf(stderr, "TestWindow encountered insufficient elements in row %d\n", i);
+            return;
+        }
+
+        if (msg->content.rows_list->rows[i].elements[1].type != TYPE_LONG) {
+            fprintf(stderr, "TestWindow encountered unexpected element type in row %d, element 1\n", i);
+            return;
+        }
+
+        long val = msg->content.rows_list->rows[i].elements[1].value.long_value;
+        printf("Row %d, Element 1 Value: %ld\n", i, val);
     }
     puts("");
-	*/
 }
+
 
 /**
  * @brief Initializer for the selection process, which converts the textual 
@@ -810,6 +844,11 @@ RowsList *ExecuteWindow(Message *rcv_msg, WindowData *data) {
 
 	// if this tuple's time exceeds the max_time, create the next window and return the current one
 	if (data->cur_time > data->max_time) {
+
+		printf("[WINDOW] Window termination at time %ld\n", data->cur_time);
+
+		data->max_time = data->cur_time + data->window_size;
+
 		data->list->num_rows = data->received_tuples;
 
 		// Create a copy of the current list
@@ -817,12 +856,11 @@ RowsList *ExecuteWindow(Message *rcv_msg, WindowData *data) {
 
 		data->list = rs_malloc(sizeof(RowsList));
 		CHECK_RSMALLOC(data->list, "ExecuteWindow");
+		printf("%d\n", data->window_size);
 		data->list->rows = rs_malloc(sizeof(Row) * data->window_size * 2);		// todo fix rows size
 		CHECK_RSMALLOC(data->list->rows, "ExecuteWindow");
 
 		data->received_tuples = 0;
-		data->max_time = data->cur_time + data->window_size;
-
 	}
 
 	data->list->rows[data->received_tuples++] = list->rows[0];
@@ -839,11 +877,11 @@ void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t
 	// flush window
 	window_data->list->num_rows = window_data->received_tuples;
 
-	RowsList *copy_list = rs_malloc(sizeof(RowsList));
+	RowsList *copy_list = malloc(sizeof(RowsList));
 	CHECK_RSMALLOC(copy_list, "TerminateWindow");
 
 	copy_list->num_rows = window_data->received_tuples;
-	copy_list->rows = rs_malloc(sizeof(Row) * window_data->window_size);
+	copy_list->rows = malloc(sizeof(Row) * window_data->list->num_rows);
 	CHECK_RSMALLOC(copy_list->rows, "TerminateWindow");
 
 	for (int i = 0; i < window_data->list->num_rows; i++) {
