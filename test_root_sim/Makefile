@@ -14,4 +14,5 @@ all:
 	# clang -g test_select.c -o test_select $(FLAGS) $(PSEUDOSQL) $(ROOT_SIM) $(TOPOLOGY) -lm
 
 clean:
-	rm test_root_sim
+	rm -f test_root_sim test_root_sim2 test test_join test_windows test_count test_select
+	rm -f Query*.csv

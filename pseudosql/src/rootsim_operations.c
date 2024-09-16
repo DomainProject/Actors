@@ -1,5 +1,9 @@
 #include "rootsim_operations.h"
 
+#define GROWTH_FACTOR 2
+
+unsigned long initial_size = 500;
+
 RowsList* CopyAndFreeRowsList(RowsList *list) {
     RowsList *copy_list = malloc(sizeof(RowsList));
     if (copy_list == NULL) {
@@ -329,7 +333,7 @@ void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 
 	WindowData *data = rs_malloc(sizeof(WindowData));
 	CHECK_RSMALLOC(data, "WindowInit");
-	Row *rows = rs_malloc(sizeof(Row) * *size * 2);		// todo fix size
+	Row *rows = rs_malloc(sizeof(Row) * initial_size);
 	CHECK_RSMALLOC(rows, "WindowInit");
 	RowsList *list = rs_malloc(sizeof(RowsList));
 	CHECK_RSMALLOC(list, "WindowInit");
@@ -370,8 +374,6 @@ void TestWindow(const void *content) {
         fprintf(stderr, "TestWindow encountered invalid or zero number of rows\n");
         return;
     }
-
-    printf("Number of rows: %d\n", size);
 
     for (int i = 0; i < size; i++) {
         if (!msg->content.rows_list->rows) {
@@ -811,6 +813,18 @@ RowsList *wAggregateFunction(Message *rcv_msg, void *data, AggregateFunctionType
 	return result_rows_list;
 }
 
+void AddRow(WindowData *data) {
+    RowsList *list = data->list;
+
+    // Se l'array di righe è pieno, rialloca più spazio
+    if ((unsigned long)list->num_rows == initial_size) {
+        unsigned long new_size = initial_size * GROWTH_FACTOR;
+        list->rows = rs_realloc(list->rows, sizeof(Row) * new_size);
+        CHECK_RSMALLOC(list->rows, "AddRow");
+        initial_size = new_size;
+    }
+}
+
 /**
  * @brief Window process: it receives one tuple at a time from the DataInjection process, gathers as many tuples as the window size, 
  * 	and forwards the resulting list to its neighbors
@@ -844,9 +858,7 @@ RowsList *ExecuteWindow(Message *rcv_msg, WindowData *data) {
 
 	// if this tuple's time exceeds the max_time, create the next window and return the current one
 	if (data->cur_time > data->max_time) {
-
-		printf("[WINDOW] Window termination at time %ld\n", data->cur_time);
-
+	
 		data->max_time = data->cur_time + data->window_size;
 
 		data->list->num_rows = data->received_tuples;
@@ -856,11 +868,15 @@ RowsList *ExecuteWindow(Message *rcv_msg, WindowData *data) {
 
 		data->list = rs_malloc(sizeof(RowsList));
 		CHECK_RSMALLOC(data->list, "ExecuteWindow");
-		printf("%d\n", data->window_size);
 		data->list->rows = rs_malloc(sizeof(Row) * data->window_size * 2);		// todo fix rows size
 		CHECK_RSMALLOC(data->list->rows, "ExecuteWindow");
 
 		data->received_tuples = 0;
+	}
+
+	if (data->received_tuples + 1 > data->window_size) {
+		// the window is out of memory, allocate new space
+		AddRow(data);
 	}
 
 	data->list->rows[data->received_tuples++] = list->rows[0];
@@ -1111,43 +1127,43 @@ void ForwardTerminationMessage(struct topology *topology, lp_id_t me, simtime_t 
 
 void DataIngestionCleanUp(FILE *file, __unused DataSourceData *data) {
 	fclose(file);
-	//rs_free(data);
+	rs_free(data);
 }
 
 void WindowCleanUp(__unused WindowData *data) {
-	//rs_free(data->list->rows);
-	//rs_free(data->list);
-	//rs_free(data);
+	rs_free(data->list->rows);
+	rs_free(data->list);
+	rs_free(data);
 }
 
 void SelectionCleanUp(__unused SelectionData *data) {
-	//rs_free(data->condition);
-	//rs_free(data);
+	rs_free(data->condition);
+	rs_free(data);
 }
 
 void ProjectionCleanUp(__unused ProjectionData *data) {
-	//rs_free(data->list->attributes);
-	//rs_free(data->list);
-	//rs_free(data);
+	rs_free(data->list->attributes);
+	rs_free(data->list);
+	rs_free(data);
 }
 
 void GroupByCleanUp(__unused GroupByData *data) {
-	//rs_free(data);
+	rs_free(data);
 }
 
 void AggFunctionCleanUp(__unused AggregateFunctionData *data) {
-	//rs_free(data);
+	rs_free(data);
 }
 
 void OrderByCleanUp(__unused OrderByData *data) {
-	//rs_free(data);
+	rs_free(data);
 }
 
 void JoinCleanUp(__unused JoinData *data) {
-	//rs_free(*data->tables_data);
-	//rs_free(data);
+	rs_free(*data->tables_data);
+	rs_free(data);
 }
 
 void OutputCleanUp(__unused OutputProcessData *data) {
-	//rs_free(data);
+	rs_free(data);
 }
