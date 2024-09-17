@@ -48,20 +48,28 @@ int is_integer(const char *str) {
 }
 
 int is_float(const char *str) {
+    printf("%s\n", str);
     int has_decimal_point = 0;
+    int count = 0;
 
-    if (*str == '\0') return 0;
+    if (*str == '\0') {
+        return 0;
+    }
 
     if (*str == '-' || *str == '+') str++;
 
     while (*str) {
         if (*str == '.') {
-            if (has_decimal_point) return 0;
+            if (has_decimal_point) {
+                return 0; 
+                count++;
+            }
             has_decimal_point = 1;
-        } else if (!isdigit(*str)) {
+        } else if (!isdigit(*str) && count == 0) {
             return 0;
         }
         str++;
+        count++;
     }
 
     return has_decimal_point;
@@ -134,6 +142,12 @@ char* remove_newline_and_copy(char *str) {
     return new_str;
 }
 
+void PrintSchema(const Schema *schema) {
+    for (int i = 0; i < schema->num_cols; i++) {
+        printf("Column %d: %s\n", i + 1, schema->cols_names[i]);
+    }
+}
+
 void InitializeSchema(Schema *schema, char *header) {
     int num_columns = 0;
     for (int i = 0; header[i] != '\0'; i++) {
@@ -152,18 +166,11 @@ void InitializeSchema(Schema *schema, char *header) {
     while (header_token != NULL) {
         char *cur_name = strdup(header_token);
         remove_quotes(cur_name);
-        cur_name = remove_newline_and_copy(cur_name);
-
+        
         schema->cols_names[column_index] = cur_name;
 
         header_token = strtok(NULL, ",");
         column_index++;
-    }
-}
-
-void PrintSchema(const Schema *schema) {
-    for (int i = 0; i < schema->num_cols; i++) {
-        printf("Column %d: %s\n", i + 1, schema->cols_names[i]);
     }
 }
 
@@ -202,7 +209,7 @@ void PopulateRow(char *row_string, Row *row, Schema schema) {
         
         row->elements[column_index].col_name = strdup(schema.cols_names[column_index]);
         char *value_str = strdup(token);
-        remove_quotes(value_str);
+        //remove_quotes(value_str);
 
         if (is_integer(value_str)) {
             row->elements[column_index].type = TYPE_INT;
@@ -230,7 +237,7 @@ void PopulateRow(char *row_string, Row *row, Schema schema) {
 
 int get_index(Row row, char *col_name) {
     for (int i = 0; i < row.num_elements; i++) {
-        if (!strcmp(row.elements[i].col_name, col_name))
+        if (!strncmp(row.elements[i].col_name, col_name, strlen(col_name)))
             return i;
     }
 

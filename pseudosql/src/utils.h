@@ -15,3 +15,4 @@ extern double compute_sum(RowsList list, char *col_name);
 extern int are_equals(Row row1, Row row2, char *col1_name, char *col2_name);
 extern void InitializeSchema(Schema *schema, char *header);
 extern void PopulateRow(char *row_string, Row *row, Schema schema);
+extern char* remove_newline_and_copy(char *str);

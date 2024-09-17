@@ -51,7 +51,7 @@ Row *Projection(Row input_row, AttributeList list) {
 
     for (i = 0; i < input_row.num_elements; i++) {
         for (j = 0; j < list.num_attributes; j++) {
-            if (!strcmp(input_row.elements[i].col_name, list.attributes[j].name)) {
+            if (!strncmp(input_row.elements[i].col_name, list.attributes[j].name, strlen(list.attributes[j].name))) {
                 output_row->elements[index].col_name = input_row.elements[i].col_name;
                 
                 switch (input_row.elements[i].type) {
@@ -95,7 +95,7 @@ RowsList *ProjectionMultRows(RowsList input_rows, AttributeList list) {
     for (i = 0; i < list.num_attributes; i++) {
         int found = 0;
         for (j = 0; j < input_rows.rows[0].num_elements; j++) {
-            if (!strcmp(input_rows.rows[0].elements[j].col_name, list.attributes[i].name)) 
+            if (!strncmp(input_rows.rows[0].elements[j].col_name, list.attributes[i].name, strlen(list.attributes[i].name))) 
                 found = 1;
         }
         if (!found) {
@@ -179,14 +179,14 @@ int compare_rows(const void *a, const void *b, void *arg) {
     RowElement *elem2 = NULL;
 
     for (int i = 0; i < row1->num_elements; i++) {
-        if (strcmp(row1->elements[i].col_name, col_name) == 0) {
+        if (strncmp(row1->elements[i].col_name, col_name, strlen(col_name)) == 0) {
             elem1 = &row1->elements[i];
             break;
         }
     }
 
     for (int i = 0; i < row2->num_elements; i++) {
-        if (strcmp(row2->elements[i].col_name, col_name) == 0) {
+        if (strncmp(row2->elements[i].col_name, col_name, strlen(col_name)) == 0) {
             elem2 = &row2->elements[i];
             break;
         }
@@ -210,7 +210,7 @@ RowsList *OrderBy(RowsList input_rows, const char *col_name) {
     int attribute_exists = 0, i;
 
     for (i = 0; i < input_rows.rows[0].num_elements; i++) {
-        if (!strcmp(input_rows.rows[0].elements[i].col_name, col_name)) 
+        if (!strncmp(input_rows.rows[0].elements[i].col_name, col_name, strlen(col_name))) 
             attribute_exists = 1;
     }
 
@@ -312,7 +312,7 @@ GroupsList *GroupBy(RowsList *rows_list, const char *col_name) {
     
     int col_index = -1;
     for (int i = 0; i < rows_list->rows[0].num_elements; i++) {
-        if (strcmp(rows_list->rows[0].elements[i].col_name, col_name) == 0) {
+        if (strncmp(rows_list->rows[0].elements[i].col_name, col_name, strlen(col_name)) == 0) {
             col_index = i;
             break;
         }
@@ -413,7 +413,7 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
             input_list = input.input_data.rows;
 
             for (i = 0; i < input_list.rows[0].num_elements; i++) {
-                if (!strcmp(input_list.rows[0].elements[i].col_name, input.col_name)) {
+                if (!strncmp(input_list.rows[0].elements[i].col_name, input.col_name, strlen(input.col_name))) {
                     attribute_exists = 1;
                 }
             }
@@ -501,7 +501,7 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
         case TYPE_GROUPS:
 
             for (i = 0; i < input.input_data.groups.groups[0].rows_list.rows[0].num_elements; i++) {
-                if (!strcmp(input.input_data.groups.groups[0].rows_list.rows[0].elements[i].col_name, input.col_name)) {
+                if (!strncmp(input.input_data.groups.groups[0].rows_list.rows[0].elements[i].col_name, input.col_name, strlen(input.col_name))) {
                     attribute_exists = 1;
                 }
             }

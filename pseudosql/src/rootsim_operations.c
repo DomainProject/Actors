@@ -277,8 +277,10 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
         return;
     }
 
-    line[strcspn(line, "\n")] = '\0'; 
-    line[sizeof(line) - 1] = '\0';
+    char *newline_pos = strchr(line, '\n');
+    if (newline_pos != NULL) {
+        *newline_pos = '\0';
+    }
 
     // create and populate Row struct from the input line
     elements = malloc(schema->num_cols * sizeof(RowElement));
@@ -296,6 +298,8 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
     CHECK_RSMALLOC(list, "DataIngestion");
     list->num_rows = 1;
     list->rows = row;
+
+	PrintRow(row);
     
     neighbors = GetAllNeighbors(topology, me, &num_neighbors);
     CreateAndSendRowsMessage(me, 5.0, list, now, neighbors, num_neighbors);

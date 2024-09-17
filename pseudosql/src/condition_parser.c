@@ -167,7 +167,7 @@ Condition *ParseCondition(char **condition_string) {
 
 RowElement *get_element_from_row(Row *row, const char *col_name) {
     for (int i = 0; i < row->num_elements; ++i) {
-        if (strcmp(row->elements[i].col_name, col_name) == 0) {
+        if (strncmp(row->elements[i].col_name, col_name, strlen(col_name)) == 0) {
             return &row->elements[i];
         }
     }
