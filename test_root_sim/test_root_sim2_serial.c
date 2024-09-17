@@ -10,7 +10,7 @@
 #endif
 
 #ifndef NUM_THREADS
-#define NUM_THREADS 0
+#define NUM_THREADS 1
 #endif
 
 #define INPUT_FILE "taxi_1000.csv"
@@ -1162,7 +1162,7 @@ struct simulation_configuration conf = {
   .stats_file = "stats",
   .ckpt_interval = 0,
   .core_binding = true,
-  .serial = false,
+  .serial = true,
   .dispatcher = ProcessEvent,
   .committed = CanEnd,
 };

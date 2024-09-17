@@ -109,7 +109,7 @@ time_t convert_to_unix_timestamp(const char *datetime_str) {
     return mktime(&time_struct);
 }
 
-char* remove_newline_and_copy(const char *str) {
+char* remove_newline_and_copy(char *str) {
     int new_len = 0;
     for (const char *p = str; *p != '\0'; p++) {
         if (*p != '\n') {
@@ -130,6 +130,7 @@ char* remove_newline_and_copy(const char *str) {
     }
     *dest = '\0';
 
+    free(str);
     return new_str;
 }
 

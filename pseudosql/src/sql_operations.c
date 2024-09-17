@@ -45,14 +45,14 @@ Row *Projection(Row input_row, AttributeList list) {
 
     output_row->elements = row_elements;
     output_row->num_elements = list.num_attributes;
-    output_row->table_name = input_row.table_name;
+    output_row->table_name = strdup(input_row.table_name);
 
     index = 0;
 
     for (i = 0; i < input_row.num_elements; i++) {
         for (j = 0; j < list.num_attributes; j++) {
             if (!strcmp(input_row.elements[i].col_name, list.attributes[j].name)) {
-                output_row->elements[index].col_name = strdup(input_row.elements[i].col_name);
+                output_row->elements[index].col_name = input_row.elements[i].col_name;
                 
                 switch (input_row.elements[i].type) {
                     case TYPE_INT:
@@ -136,19 +136,25 @@ int Selection(Row input_row, Condition *condition) {
  *  @param input_rows list of rows
  *  @param condition pointer to a condition struct 
  */
-RowsList *SelectionMultRows(RowsList input_rows, Condition *condition) {
+RowsList *SelectionMultRows(RowsList *input_rows, Condition *condition) {
 
     int i, count = 0;
 
-    Row *rows = malloc(sizeof(Row) * input_rows.num_rows);
+    Row *rows = malloc(sizeof(Row) * input_rows->num_rows);
     if (!rows) {
         perror("malloc");
         exit(EXIT_FAILURE);
     }
 
-    for (i = 0; i < input_rows.num_rows; i++) {
-        if (Selection(input_rows.rows[i], condition)) {
-            rows[count] = input_rows.rows[i];
+    for (i = 0; i < input_rows->num_rows; i++) {
+        if (Selection(input_rows->rows[i], condition)) {
+            rows[count].num_elements = input_rows->rows[i].num_elements;
+            rows[count].table_name = input_rows->rows[i].table_name;
+
+            rows[count].elements = malloc(sizeof(RowElement) * input_rows->rows[i].num_elements);
+            for (int j = 0; j < input_rows->rows[i].num_elements; j++) {
+                rows[count].elements[j] = input_rows->rows[i].elements[j];
+            }
             count++;
         }
     }
@@ -220,7 +226,40 @@ RowsList *OrderBy(RowsList input_rows, const char *col_name) {
     }
 
     // keep the original input unchanged
-    memcpy(sorted_rows, input_rows.rows, sizeof(Row) * input_rows.num_rows);
+    for (i = 0; i < input_rows.num_rows; i++) {
+        sorted_rows[i].num_elements = input_rows.rows[i].num_elements;
+        sorted_rows[i].elements = malloc(sizeof(RowElement) * input_rows.rows[i].num_elements);
+        if (!sorted_rows[i].elements) {
+            perror("malloc");
+            exit(EXIT_FAILURE);
+        }
+
+        for (int j = 0; j < input_rows.rows[i].num_elements; j++) {
+            // Copia profonda di `col_name`
+            sorted_rows[i].elements[j].col_name = strdup(input_rows.rows[i].elements[j].col_name);
+            
+            // Copia profonda dei valori in base al tipo
+            sorted_rows[i].elements[j].type = input_rows.rows[i].elements[j].type;
+            switch (input_rows.rows[i].elements[j].type) {
+                case TYPE_INT:
+                    sorted_rows[i].elements[j].value.int_value = input_rows.rows[i].elements[j].value.int_value;
+                    break;
+                case TYPE_LONG:
+                    sorted_rows[i].elements[j].value.long_value = input_rows.rows[i].elements[j].value.long_value;
+                    break;
+                case TYPE_FLOAT:
+                    sorted_rows[i].elements[j].value.float_value = input_rows.rows[i].elements[j].value.float_value;
+                    break;
+                case TYPE_STRING:
+                    // Copia profonda del valore stringa
+                    sorted_rows[i].elements[j].value.string_value = strdup(input_rows.rows[i].elements[j].value.string_value);
+                    break;
+                case TYPE_DOUBLE:
+                    sorted_rows[i].elements[j].value.double_value = input_rows.rows[i].elements[j].value.double_value;
+                    break;
+            }
+        }
+    }
 
     qsort_r(sorted_rows, input_rows.num_rows, sizeof(Row), compare_rows, (void *)col_name);
 
@@ -233,7 +272,34 @@ RowsList *OrderBy(RowsList input_rows, const char *col_name) {
     ret_list->num_rows = input_rows.num_rows;
     ret_list->rows = sorted_rows;
 
+    for (i = 0; i < input_rows.num_rows; i++) {
+        free(input_rows.rows[i].elements);
+    }
+    free(input_rows.rows);
+
     return ret_list;
+}
+
+Row deep_copy_row(Row *original_row) {
+    Row new_row;
+    new_row.num_elements = original_row->num_elements;
+    new_row.elements = malloc(new_row.num_elements * sizeof(RowElement));
+    
+    if (!new_row.elements) {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
+    
+    for (int i = 0; i < new_row.num_elements; i++) {
+        new_row.elements[i].col_name = strdup(original_row->elements[i].col_name);
+        if (original_row->elements[i].type == TYPE_STRING) {
+            new_row.elements[i].value.string_value = strdup(original_row->elements[i].value.string_value);
+        } else {
+            new_row.elements[i].value = original_row->elements[i].value;
+        }
+    }
+
+    return new_row;
 }
 
 
@@ -329,42 +395,34 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
     Row *rows;
     int row_index = 0;
     RowsList input_list;
-    double *avg = malloc(sizeof(double));
-    double *sum = malloc(sizeof(double));
-    int *cnt = malloc(sizeof(int));
+    double avg, sum, cnt;
     int index = 0;
     int attribute_exists = 0;
 
-    AggFunctionResultValue *ret_value = malloc(sizeof(AggFunctionResultValue));
-    if (!ret_value) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-
-    if (!avg || !sum || !cnt) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
+    AggFunctionResultValue *ret_value;
 
     switch (input.type) {
         case TYPE_ROWS:
-        input_list = input.input_data.rows;
 
-        for (i = 0; i < input_list.rows[0].num_elements; i++) {
-            if (!strcmp(input_list.rows[0].elements[i].col_name, input.col_name)) {
-                attribute_exists = 1;
+            ret_value = malloc(sizeof(AggFunctionResultValue));
+            if (!ret_value) {
+                perror("malloc");
+                exit(EXIT_FAILURE);
             }
-        }
 
-        if (!attribute_exists) {
-            free(ret_value);
-            free(avg);
-            free(sum);
-            free(cnt);
+            input_list = input.input_data.rows;
 
-            fprintf(stderr, "[AGGREGATE FUNCTION] Column %s not found\n", input.col_name);
-            return NULL;
-        }
+            for (i = 0; i < input_list.rows[0].num_elements; i++) {
+                if (!strcmp(input_list.rows[0].elements[i].col_name, input.col_name)) {
+                    attribute_exists = 1;
+                }
+            }
+
+            if (!attribute_exists) {
+                free(ret_value);
+                fprintf(stderr, "[AGGREGATE FUNCTION] Column %s not found\n", input.col_name);
+                return NULL;
+            }
         
             switch(type) {
 
@@ -414,25 +472,25 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
                     return (void *)ret_value;
 
                 case AVG:
-                    *avg = compute_average(input_list, input.col_name);
-                    if (*avg < 0) 
+                    avg = compute_average(input_list, input.col_name);
+                    if (avg < 0) 
                         return NULL;
                     ret_value->type = TYPE_DOUBLE;
-                    ret_value->value.double_value = *avg;
+                    ret_value->value.double_value = avg;
                     return (void *)ret_value;
 
                 case SUM:
-                    *sum = compute_sum(input_list, input.col_name);
-                    if (*sum < 0)
+                    sum = compute_sum(input_list, input.col_name);
+                    if (sum < 0)
                         return NULL;
                     ret_value->type = TYPE_DOUBLE;
-                    ret_value->value.double_value = *sum;
+                    ret_value->value.double_value = sum;
                     return (void *)ret_value;
 
                 case COUNT:
-                    cnt = &input_list.num_rows;
+                    cnt = input_list.num_rows;
                     ret_value->type = TYPE_INT;
-                    ret_value->value.int_value = *cnt;
+                    ret_value->value.int_value = cnt;
                     return (void *)ret_value;
 
                 default:
@@ -449,25 +507,18 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
             }
 
             if (!attribute_exists) {
-                free(ret_value);
-                free(avg);
-                free(sum);
-                free(cnt);
-
                 fprintf(stderr, "[AGGREGATE FUNCTION] Column %s not found\n", input.col_name);
                 return NULL;
             }
 
-            rows = malloc(input.input_data.groups.num_groups * sizeof(Row));   
+            rows = malloc(input.input_data.groups.num_groups * sizeof(Row));
+            CHECK_RSMALLOC(rows, "AggregateFunction");   
 
             for (i = 0; i < input.input_data.groups.num_groups; i++) {
                 Group cur_group = input.input_data.groups.groups[i];
 
                 RowElement *elements = malloc(2 * sizeof(RowElement));
-                if (!elements) {
-                    perror("malloc");
-                    exit(EXIT_FAILURE);
-                }
+                CHECK_RSMALLOC(elements, "AggregateFunction");
 
                 RowElement group_row_element = cur_group.rows_list.rows[0].elements[input.input_data.groups.col_index]; 
                 RowElement result_row_element;
@@ -493,17 +544,17 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
                         break;
 
                     case AVG:
-                        *avg = compute_average(cur_group.rows_list, input.col_name);
+                        avg = compute_average(cur_group.rows_list, input.col_name);
                         
                         result_row_element.type = TYPE_DOUBLE;
-                        result_row_element.value.double_value = *avg;
+                        result_row_element.value.double_value = avg;
                         break;
                     
                     case SUM:
-                        *sum = compute_sum(cur_group.rows_list, input.col_name);
+                        sum = compute_sum(cur_group.rows_list, input.col_name);
 
                         result_row_element.type = TYPE_DOUBLE;
-                        result_row_element.value.double_value = *sum;
+                        result_row_element.value.double_value = sum;
                         break;
                     
                     case COUNT:
@@ -526,10 +577,7 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
             }
 
             RowsList *ret_list = malloc(sizeof(RowsList));
-            if (!ret_list) {
-                perror("malloc");
-                exit(EXIT_FAILURE);
-            }
+            CHECK_RSMALLOC(ret_list, "AggregateFunction");
 
             ret_list->num_rows = row_index;
             ret_list->rows = rows;

@@ -241,7 +241,7 @@ EXPORT void PrintRow(const Row *row);
 
 /* SQL operations */
 EXPORT RowsList *ProjectionMultRows(RowsList input_rows, AttributeList list);
-EXPORT RowsList *SelectionMultRows(RowsList input_rows, Condition *condition);
+EXPORT RowsList *SelectionMultRows(RowsList *input_rows, Condition *condition);
 EXPORT RowsList *OrderBy(RowsList input_rows, const char *col_name);
 EXPORT GroupsList *GroupBy(RowsList *rows_list, const char *col_name);
 EXPORT void *AggregateFunction(AggFunctionData input, AggregateFunctionType type);

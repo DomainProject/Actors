@@ -6,11 +6,8 @@
 #include "utils.h"
 
 SimpleCondition *create_s_condition(const char *col_name, Operator op, const char *value) {
-    SimpleCondition *cond = malloc(sizeof(SimpleCondition));
-    if (!cond) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
+    SimpleCondition *cond = rs_malloc(sizeof(SimpleCondition));
+    CHECK_RSMALLOC(cond, "create_s_condition");
     cond->column = strdup(col_name);
     cond->operator = op;
     cond->value = strdup(value);
@@ -18,7 +15,7 @@ SimpleCondition *create_s_condition(const char *col_name, Operator op, const cha
 }
 
 MultipleCondition *create_m_condition(Condition *left, Condition *right, LogicalOperator op) {
-    MultipleCondition *mcond = malloc(sizeof(MultipleCondition));
+    MultipleCondition *mcond = rs_malloc(sizeof(MultipleCondition));
     if (!mcond) {
         perror("malloc");
         exit(EXIT_FAILURE);
@@ -121,11 +118,8 @@ Condition *ParseCondition(char **condition_string) {
             strcpy(token, *condition_string);
         }
         
-        left_condition = malloc(sizeof(Condition));
-        if (!left_condition) {
-            perror("malloc");
-            exit(EXIT_FAILURE);
-        }
+        left_condition = rs_malloc(sizeof(Condition));
+        CHECK_RSMALLOC(left_condition, "ParseCondition");
         left_condition->type = SIMPLE_CONDITION;
         left_condition->condition.simple_condition = *parse_simple_condition(token);
         *condition_string += strlen(token);
@@ -163,11 +157,8 @@ Condition *ParseCondition(char **condition_string) {
         return NULL;
     }
 
-    Condition *multiple_condition = malloc(sizeof(Condition));
-    if (!multiple_condition) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
+    Condition *multiple_condition = rs_malloc(sizeof(Condition));
+    CHECK_RSMALLOC(multiple_condition, "ParseCondition");
     multiple_condition->type = MULTIPLE_CONDITION;
     multiple_condition->condition.multiple_condition = *create_m_condition(left_condition, right_condition, logical_operator);
 

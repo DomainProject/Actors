@@ -85,7 +85,7 @@ Message *CreateMessage(lp_id_t sender_id, float priority, void *list, MessageTyp
 }
 
 void CreateAndSendRowsMessage(lp_id_t sender_id, float priority, RowsList *send_list, simtime_t now, lp_id_t *receivers, int num_receivers) {
-	
+	/*
 	Envelope *e;
 	Message *send_msg;
 
@@ -101,12 +101,22 @@ void CreateAndSendRowsMessage(lp_id_t sender_id, float priority, RowsList *send_
 	send_msg->envelope = e;
 	send_msg->type = ROWS;
 	send_msg->content.rows_list = send_list;
+*/
 
-	SendMessage(send_msg, now, receivers, num_receivers);
+	Envelope e;
+	e.priority = priority;
+	e.sender = sender_id;
+
+	Message send_msg;
+	send_msg.envelope = &e;
+	send_msg.type = ROWS;
+	send_msg.content.rows_list = send_list;
+
+	SendMessage(&send_msg, now, receivers, num_receivers);
 }
 
 void CreateAndSendGroupsMessage(lp_id_t sender_id, float priority, GroupsList *send_list, simtime_t now, lp_id_t *receivers, int num_receivers) {
-
+/*
 	Envelope *e;
 	Message *send_msg; 
 
@@ -122,6 +132,17 @@ void CreateAndSendGroupsMessage(lp_id_t sender_id, float priority, GroupsList *s
 	send_msg->content.groups_list = send_list; 
 
 	SendMessage(send_msg, now, receivers, num_receivers);
+*/
+	Envelope e;
+	e.priority = priority;
+	e.sender = sender_id;
+
+	Message send_msg;
+	send_msg.envelope = &e;
+	send_msg.type = GROUPS;
+	send_msg.content.groups_list = send_list;
+
+	SendMessage(&send_msg, now, receivers, num_receivers);
 }
 
 void CreateAndSendMessage(lp_id_t sender_id, float priority, MessageType type, void *list, simtime_t now, lp_id_t *receivers, int num_receivers) {
@@ -477,7 +498,7 @@ void ProjectionInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 
 	SetState((void *)projection_data);
 
-	//rs_free(attributes_cp);
+	free(attributes_cp);
 
 	#ifdef DEBUG
 	printf("Projection initialized\n");
@@ -654,7 +675,7 @@ RowsList *wSelection(Message *rcv_msg, void *data) {
 	rcv_list = rcv_msg->content.rows_list;
 
 	// select rows based on the condition
-	send_list = SelectionMultRows(*rcv_list, condition);
+	send_list = SelectionMultRows(rcv_list, condition);
 
 	if (send_list->num_rows == 0) {
 		printf("[SELECTION] No tuples were found that satisfy the specified selection condition.\n");
@@ -738,6 +759,7 @@ RowsList *wOrderBy(Message *rcv_msg, void *data) {
 	}
 	#endif
 
+	free(rcv_list);
 	return send_list;
 }
 
@@ -910,6 +932,7 @@ void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t
 
 	rs_free(window_data->list->rows);
 	rs_free(window_data->list);
+	free(neighbors);
 
 	ForwardTerminationMessage(topology, me, now);
 }
@@ -1069,6 +1092,11 @@ void WriteToOutputFile(lp_id_t me, const void *content, OutputProcessData *data)
             for (i = 0; i < msg->content.rows_list->num_rows; i++) {
                 PrintRowCSV(&msg->content.rows_list->rows[i], file);
             }
+			for (int i = 0; i < msg->content.rows_list->num_rows; i++) {
+				free(msg->content.rows_list->rows[i].elements);
+			}
+			free(msg->content.rows_list->rows);
+			free(msg->content.rows_list);
             break;
         case GROUPS:
             for (i = 0; i < msg->content.groups_list->num_groups; i++) {
@@ -1076,6 +1104,8 @@ void WriteToOutputFile(lp_id_t me, const void *content, OutputProcessData *data)
                 for (j = 0; j < msg->content.groups_list->groups[i].rows_list.num_rows; j++) {
                     PrintRowCSV(&msg->content.groups_list->groups[i].rows_list.rows[j], file);
                 }
+				free(msg->content.groups_list->groups);
+				free(msg->content.groups_list);
             }
             break;
     }
@@ -1131,17 +1161,38 @@ void DataIngestionCleanUp(FILE *file, __unused DataSourceData *data) {
 }
 
 void WindowCleanUp(__unused WindowData *data) {
-	rs_free(data->list->rows);
-	rs_free(data->list);
-	rs_free(data);
+	//rs_free(data->list->rows);
+	//rs_free(data->list);
+	//rs_free(data);
+}
+
+void ConditionCleanup(Condition *condition) {
+	if (!condition) return;
+
+	switch(condition->type) {
+		case SIMPLE_CONDITION:
+			free(condition->condition.simple_condition.column);
+			free(condition->condition.simple_condition.value);
+			break;
+		case MULTIPLE_CONDITION:
+			ConditionCleanup(condition->condition.multiple_condition.left);
+			ConditionCleanup(condition->condition.multiple_condition.right);
+			break;
+	}
+	rs_free(condition);
 }
 
 void SelectionCleanUp(__unused SelectionData *data) {
-	rs_free(data->condition);
+	if (!data) return;
+
+	ConditionCleanup(data->condition);
 	rs_free(data);
 }
 
 void ProjectionCleanUp(__unused ProjectionData *data) {
+	for (int i = 0; i < data->list->num_attributes; i++) {
+        free(data->list->attributes[i].name);
+    }
 	rs_free(data->list->attributes);
 	rs_free(data->list);
 	rs_free(data);
