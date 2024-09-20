@@ -2,7 +2,7 @@
 
 #define GROWTH_FACTOR 2
 
-unsigned long initial_size = 500;
+unsigned long initial_size = 50;
 
 RowsList* CopyAndFreeRowsList(RowsList *list) {
     RowsList *copy_list = malloc(sizeof(RowsList));
@@ -85,24 +85,6 @@ Message *CreateMessage(lp_id_t sender_id, float priority, void *list, MessageTyp
 }
 
 void CreateAndSendRowsMessage(lp_id_t sender_id, float priority, RowsList *send_list, simtime_t now, lp_id_t *receivers, int num_receivers) {
-	/*
-	Envelope *e;
-	Message *send_msg;
-
-	// create envelope
-	e = malloc(sizeof(Envelope));
-	CHECK_RSMALLOC(e, "CreateAndSendRowsMessage");
-	e->priority = priority;
-	e->sender = sender_id;
-
-	// create and send message
-	send_msg = malloc(sizeof(Message));
-	CHECK_RSMALLOC(send_msg, "CreateAndSendRowsMessage");
-	send_msg->envelope = e;
-	send_msg->type = ROWS;
-	send_msg->content.rows_list = send_list;
-*/
-
 	Envelope e;
 	e.priority = priority;
 	e.sender = sender_id;
@@ -113,6 +95,12 @@ void CreateAndSendRowsMessage(lp_id_t sender_id, float priority, RowsList *send_
 	send_msg.content.rows_list = send_list;
 
 	SendMessage(&send_msg, now, receivers, num_receivers);
+
+	for (int i = 0; i < send_list->num_rows; i++) {
+		free(send_list->rows[i].elements);
+	}
+	free(send_list->rows);
+	free(send_list);
 }
 
 void CreateAndSendGroupsMessage(lp_id_t sender_id, float priority, GroupsList *send_list, simtime_t now, lp_id_t *receivers, int num_receivers) {
@@ -143,6 +131,15 @@ void CreateAndSendGroupsMessage(lp_id_t sender_id, float priority, GroupsList *s
 	send_msg.content.groups_list = send_list;
 
 	SendMessage(&send_msg, now, receivers, num_receivers);
+
+	for (int i = 0; i < send_list->num_groups; i++) {
+		for (int j = 0; j < send_list->groups[i].rows_list.num_rows; j++) {
+			free(send_list->groups[i].rows_list.rows[j].elements);
+		}
+		free(send_list->groups[i].rows_list.rows);
+	}
+	free(send_list->groups);
+	free(send_list);
 }
 
 void CreateAndSendMessage(lp_id_t sender_id, float priority, MessageType type, void *list, simtime_t now, lp_id_t *receivers, int num_receivers) {
@@ -158,6 +155,44 @@ void CreateAndSendMessage(lp_id_t sender_id, float priority, MessageType type, v
 			abort();
 	}
 
+}
+
+void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedList *list, simtime_t now, lp_id_t *receivers, int num_receivers) {
+	Envelope e;
+	NewMessage *msg;
+	int i = 0;
+
+	e.priority = priority;
+	e.sender = sender_id;
+
+	msg = malloc(sizeof(NewMessage) + list->size * sizeof(MessageEntry));
+	CHECK_RSMALLOC(msg, "CreateAndSendMessageFromList");
+	msg->e = e;
+	msg->size = list->size;
+	msg->type = ROWS;
+
+	struct RowsLinkedListElement *tmp = list->head; 
+
+	while(tmp != NULL) {
+		if (i >= list->size) {
+            fprintf(stderr, "CreateAndSendMessageFromList: Exceeded the limits of the entries array\n");
+            free(msg);
+            exit(EXIT_FAILURE);
+        }
+
+		if (tmp->row != NULL) {
+			msg->entries[i].row = *tmp->row;
+			i++;
+		}
+		tmp = tmp->next;
+	}
+
+	for (int i = 0; i < num_receivers; i++) {
+		ScheduleNewEvent(receivers[i], now + 1.0, EVENT, msg, sizeof(NewMessage) + sizeof(MessageEntry) * msg->size);
+	}
+
+	FreeList(list);
+	free(msg);
 }
 
 simtime_t ComputeSleepTime(const char *cur_datetime, const char *next_datetime) {
@@ -256,14 +291,15 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
     char next_line[MAX_LINE_LENGTH];
     simtime_t new_time = 0.0;
     char *cur_datetime, *next_datetime;
-    RowElement *elements;
-    Row *row;
-    RowsList *list;
+    RowNew row;
     lp_id_t *neighbors;
     int num_neighbors;
 
     // read line from the input file
     if (fgets(line, sizeof(line), *file) == NULL) {
+
+		printf("File read\n");
+
         // create and send termination message
         lp_id_t num_neighbors = CountDirections(topology, me);
         lp_id_t neighbors[num_neighbors];
@@ -283,26 +319,31 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
     }
 
     // create and populate Row struct from the input line
-    elements = malloc(schema->num_cols * sizeof(RowElement));
-    CHECK_RSMALLOC(elements, "DataIngestion");
-    row = malloc(sizeof(Row));    
-    CHECK_RSMALLOC(row, "DataIngestion");
-    row->elements = elements;
-    row->num_elements = schema->num_cols;
-    row->table_name = "Taxis";
+    row.num_elements = schema->num_cols;
+    strcpy(row.table_name, "Taxis");
 
-    PopulateRow(line, row, *schema);
+    PopulateRow(line, &row, *schema);
 
     // create single row list
-    list = malloc(sizeof(RowsList));
-    CHECK_RSMALLOC(list, "DataIngestion");
-    list->num_rows = 1;
-    list->rows = row;
-
-	PrintRow(row);
-    
     neighbors = GetAllNeighbors(topology, me, &num_neighbors);
-    CreateAndSendRowsMessage(me, 5.0, list, now, neighbors, num_neighbors);
+
+	Envelope e;
+	e.sender = me;
+	e.priority = 5.0;
+
+	NewMessage *msg = malloc(sizeof(NewMessage) + sizeof(MessageEntry));
+	CHECK_RSMALLOC(msg, "DataIngestion");
+
+	msg->e = e;
+	msg->size = 1;
+	msg->type = ROWS;
+	msg->entries[0].row = row;
+
+	for (int i = 0; i < num_neighbors; i++) {
+		ScheduleNewEvent(neighbors[i], now, EVENT, msg, sizeof(NewMessage) + sizeof(MessageEntry) * msg->size);
+	}
+
+	free(msg);
 
 	// Check if there is a next line to compute the sleep time
     long current_position = ftell(*file);
@@ -344,7 +385,7 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
     fseek(*file, current_position, SEEK_SET);
 
     // schedule next DataIngestion process' execution with the computed sleep time
-    ScheduleNewEvent(me, now + new_time, EVENT, NULL, 0);
+    ScheduleNewEvent(me, now + 1.0 + new_time, EVENT, NULL, 0);
 }
 
 
@@ -358,16 +399,14 @@ void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 
 	WindowData *data = rs_malloc(sizeof(WindowData));
 	CHECK_RSMALLOC(data, "WindowInit");
-	Row *rows = rs_malloc(sizeof(Row) * initial_size);
-	CHECK_RSMALLOC(rows, "WindowInit");
-	RowsList *list = rs_malloc(sizeof(RowsList));
-	CHECK_RSMALLOC(list, "WindowInit");
 
-	list->num_rows = 0;
-	list->rows = rows;
+	struct RowsLinkedListElement *head = (struct RowsLinkedListElement *)rs_malloc(sizeof(struct RowsLinkedListElement));
+	CHECK_RSMALLOC(head, "WindowInit");
+	head->row = NULL;
+	head->next = NULL;
 
 	data->window_size = *size;
-	data->list = list;
+	data->list = head;
 	data->received_tuples = 0;
 	data->cur_time = 0L;
 	data->max_time = 0L;
@@ -665,9 +704,9 @@ RowsList *AggregateFunctionGroupedInput(Message *rcv_msg, char *attribute, Aggre
  * @param data Selection process state
  * @param priority Priority of the messages to be sent
  */
-RowsList *wSelection(Message *rcv_msg, void *data) {
+RowsLinkedList *wSelection(NewMessage *rcv_msg, void *data) {
 	Condition *condition;
-	RowsList *rcv_list, *send_list;
+	RowsLinkedList *ret_list;
 	SelectionData *selection_data = (SelectionData *)data;
 
 	condition = selection_data->condition;
@@ -676,27 +715,14 @@ RowsList *wSelection(Message *rcv_msg, void *data) {
 		fprintf(stderr, "Selection on grouped rows is not supported yet\n");
 		exit(EXIT_FAILURE);
 	}
-	rcv_list = rcv_msg->content.rows_list;
 
-	// select rows based on the condition
-	send_list = SelectionMultRows(rcv_list, condition);
-
-	if (send_list->num_rows == 0) {
+	ret_list = SelectionMultRows(rcv_msg->size, rcv_msg->entries, condition);
+	if (ret_list->size == 0) {
 		printf("[SELECTION] No tuples were found that satisfy the specified selection condition.\n");
 		return NULL;
 	}
 
-	#ifdef DEBUG
-	if (!send_list) {
-		return NULL;
-	}
-	printf("Selection output:\n");
-	for (int i = 0; i < send_list->num_rows; i++) {
-		PrintRow(&send_list->rows[i]);
-	}
-	#endif
-
-	return send_list;
+	return ret_list;
 }
 
 /**
@@ -707,17 +733,16 @@ RowsList *wSelection(Message *rcv_msg, void *data) {
  * @param data Projection process state
  * @param priority Priority of the messages to be sent
  */
-RowsList *wProjection(Message *rcv_msg, void *data) {
-	RowsList *rcv_list, *send_list;
+RowsLinkedList *wProjection(NewMessage *rcv_msg, void *data) {
+	RowsLinkedList *ret_list;
 	ProjectionData *proj_data = (ProjectionData *)data;
 	AttributeList *list = proj_data->list;
 
 	if (rcv_msg->type != ROWS) {
 		fprintf(stderr, "Projection on grouped rows is not supported yet\n");
 	}
-	rcv_list = rcv_msg->content.rows_list;
 
-	send_list = ProjectionMultRows(*rcv_list, *list);
+	ret_list = ProjectionMultRows(rcv_msg->size, rcv_msg->entries, *list);
 
 	#ifdef DEBUG
 	if (!send_list) {
@@ -729,7 +754,7 @@ RowsList *wProjection(Message *rcv_msg, void *data) {
 	}
 	#endif
 
-	return send_list;	
+	return ret_list;	
 }
 
 /**
@@ -740,8 +765,8 @@ RowsList *wProjection(Message *rcv_msg, void *data) {
  * @param data Projection process state
  * @param priority Priority of the messages to be sent
  */
-RowsList *wOrderBy(Message *rcv_msg, void *data) {
-	RowsList *rcv_list, *send_list;
+RowsLinkedList *wOrderBy(NewMessage *rcv_msg, void *data) {
+	RowsLinkedList *ret_list;
 	OrderByData *orderBy_data = (OrderByData *)data;
 
 	char *attribute = orderBy_data->attribute;
@@ -749,22 +774,10 @@ RowsList *wOrderBy(Message *rcv_msg, void *data) {
 	if (rcv_msg->type != ROWS) {
 		fprintf(stderr, "OrderBy can only be performed on a list of rows\n");
 	}
-	rcv_list = rcv_msg->content.rows_list;
 
-	send_list = OrderBy(*rcv_list, attribute);
+	ret_list = OrderBy(rcv_msg->size, rcv_msg->entries, attribute);
 
-	#ifdef DEBUG
-	if (!send_list) {
-		return NULL;
-	}
-	printf("OrderBy output:\n");
-	for (int i = 0; i < send_list->num_rows; i++) {
-		PrintRow(&send_list->rows[i]);
-	}
-	#endif
-
-	free(rcv_list);
-	return send_list;
+	return ret_list;
 }
 
 /**
@@ -776,9 +789,8 @@ RowsList *wOrderBy(Message *rcv_msg, void *data) {
  * @param data Process state
  * @param priority Priority of the messages to be sent
  */
-GroupsList *wGroupBy(Message *rcv_msg, void *data) {
-	RowsList *rcv_list;
-	GroupsList *groups_list;
+GroupsLinkedList *wGroupBy(NewMessage *rcv_msg, void *data) {
+	GroupsLinkedList *groups_list;
 	GroupByData *groupBy_data = (GroupByData *)data;
 
 	char *attribute = groupBy_data->attribute;
@@ -787,26 +799,11 @@ GroupsList *wGroupBy(Message *rcv_msg, void *data) {
 		fprintf(stderr, "Unexpected input message type for GroupBy\n");
 		exit(EXIT_FAILURE);
 	}
-	rcv_list = rcv_msg->content.rows_list;
 
-	groups_list = GroupBy(rcv_list, attribute);
+	groups_list = GroupBy(rcv_msg->size, rcv_msg->entries, attribute);
 	if (groups_list == NULL) {
 		exit(EXIT_FAILURE);
 	}
-
-	#ifdef DEBUG
-	if (!groups_list) {
-		return NULL;
-	}
-	printf("GroupBy output:\n");
-	for (int i = 0; i < groups_list->num_groups; i++) {
-		printf("Group %d\n", i);
-		for (int j = 0; j < groups_list->groups[i].rows_list.num_rows; j++) {
-			PrintRow(&groups_list->groups[i].rows_list.rows[j]);
-		}
-		puts("");
-	}
-	#endif
 
 	return groups_list;
 }
@@ -839,18 +836,6 @@ RowsList *wAggregateFunction(Message *rcv_msg, void *data, AggregateFunctionType
 	return result_rows_list;
 }
 
-void AddRow(WindowData *data) {
-    RowsList *list = data->list;
-
-    // Se l'array di righe è pieno, rialloca più spazio
-    if ((unsigned long)list->num_rows == initial_size) {
-        unsigned long new_size = initial_size * GROWTH_FACTOR;
-        list->rows = rs_realloc(list->rows, sizeof(Row) * new_size);
-        CHECK_RSMALLOC(list->rows, "AddRow");
-        initial_size = new_size;
-    }
-}
-
 /**
  * @brief Window process: it receives one tuple at a time from the DataInjection process, gathers as many tuples as the window size, 
  * 	and forwards the resulting list to its neighbors
@@ -860,22 +845,22 @@ void AddRow(WindowData *data) {
  * @param data Process state
  * @param priority Priority of the messages to be sent
  */
-RowsList *ExecuteWindow(Message *rcv_msg, WindowData *data) {
-	RowsList *copy_list = NULL;
+RowsLinkedList *ExecuteWindow(NewMessage *rcv_msg, WindowData *data) {
+
+	RowsLinkedList *ret_list = NULL;
 
 	if (rcv_msg->type != ROWS) {
 		fprintf(stderr, "Windowing can be applied only on lists of rows\n");
 		exit(EXIT_FAILURE);
 	}
 
-	RowsList *list = rcv_msg->content.rows_list;	// this should always be a single element list
-	if (list->num_rows != 1) {
+	if (rcv_msg->size != 1) {
 		fprintf(stderr, "Window operator received more than one tuple in a single message\n");
 		exit(EXIT_FAILURE);
 	}
 
 	// get tuple time
-	data->cur_time = list->rows[0].elements[1].value.long_value;
+	data->cur_time = rcv_msg->entries[0].row.elements[1].value.long_value;
 
 	if (data->max_time == 0) {
 		// first tuple, set max_time
@@ -885,29 +870,26 @@ RowsList *ExecuteWindow(Message *rcv_msg, WindowData *data) {
 	// if this tuple's time exceeds the max_time, create the next window and return the current one
 	if (data->cur_time > data->max_time) {
 	
-		data->max_time = data->cur_time + data->window_size;
+		data->max_time = data->max_time + data->window_size;
 
-		data->list->num_rows = data->received_tuples;
+		ret_list = (RowsLinkedList *)rs_malloc(sizeof(RowsLinkedList));
+		CHECK_RSMALLOC(ret_list, "ExecuteWindow");
+		ret_list->head = data->list;
+		ret_list->size = data->received_tuples;
 
-		// Create a copy of the current list
-        copy_list = CopyAndFreeRowsList(data->list);
-
-		data->list = rs_malloc(sizeof(RowsList));
+		// initialize new list
+		data->list = (struct RowsLinkedListElement *)rs_malloc(sizeof(struct RowsLinkedListElement));
 		CHECK_RSMALLOC(data->list, "ExecuteWindow");
-		data->list->rows = rs_malloc(sizeof(Row) * data->window_size * 2);		// todo fix rows size
-		CHECK_RSMALLOC(data->list->rows, "ExecuteWindow");
+		data->list->next = NULL;
+		data->list->row = NULL;
 
 		data->received_tuples = 0;
 	}
 
-	if (data->received_tuples + 1 > data->window_size) {
-		// the window is out of memory, allocate new space
-		AddRow(data);
-	}
+	AppendRow(data->list, &rcv_msg->entries[0].row);
+	data->received_tuples++;
 
-	data->list->rows[data->received_tuples++] = list->rows[0];
-
-	return copy_list;
+	return ret_list;	
 }
 
 void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t me, simtime_t now) {
@@ -917,26 +899,14 @@ void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t
 	window_data->can_end = true;
 	
 	// flush window
-	window_data->list->num_rows = window_data->received_tuples;
+	RowsLinkedList *list = rs_malloc(sizeof(RowsLinkedList));
+	CHECK_RSMALLOC(list, "TerminateWindow");
+	list->size = window_data->received_tuples;
 
-	RowsList *copy_list = malloc(sizeof(RowsList));
-	CHECK_RSMALLOC(copy_list, "TerminateWindow");
-
-	copy_list->num_rows = window_data->received_tuples;
-	copy_list->rows = malloc(sizeof(Row) * window_data->list->num_rows);
-	CHECK_RSMALLOC(copy_list->rows, "TerminateWindow");
-
-	for (int i = 0; i < window_data->list->num_rows; i++) {
-		copy_list->rows[i] = window_data->list->rows[i];
-	}
+	list->head = window_data->list;
 
 	neighbors = GetAllNeighbors(topology, me, &num_neighbors);
-
-	CreateAndSendMessage(me, 5.0, ROWS, copy_list, now, neighbors, num_neighbors);
-
-	rs_free(window_data->list->rows);
-	rs_free(window_data->list);
-	free(neighbors);
+	CreateAndSendMessageFromList(me, 5.0, list, now, neighbors, num_neighbors);
 
 	ForwardTerminationMessage(topology, me, now);
 }
@@ -1096,11 +1066,6 @@ void WriteToOutputFile(lp_id_t me, const void *content, OutputProcessData *data)
             for (i = 0; i < msg->content.rows_list->num_rows; i++) {
                 PrintRowCSV(&msg->content.rows_list->rows[i], file);
             }
-			for (int i = 0; i < msg->content.rows_list->num_rows; i++) {
-				free(msg->content.rows_list->rows[i].elements);
-			}
-			free(msg->content.rows_list->rows);
-			free(msg->content.rows_list);
             break;
         case GROUPS:
             for (i = 0; i < msg->content.groups_list->num_groups; i++) {
@@ -1108,8 +1073,6 @@ void WriteToOutputFile(lp_id_t me, const void *content, OutputProcessData *data)
                 for (j = 0; j < msg->content.groups_list->groups[i].rows_list.num_rows; j++) {
                     PrintRowCSV(&msg->content.groups_list->groups[i].rows_list.rows[j], file);
                 }
-				free(msg->content.groups_list->groups);
-				free(msg->content.groups_list);
             }
             break;
     }

@@ -3,7 +3,7 @@
 #include "sql_operations.h"
 #include "include/pseudosql.h"
 
-int compare_elements(const RowElement *elem1, const RowElement *elem2) {
+int compare_elements(const RowElementNew *elem1, const RowElementNew *elem2) {
     switch (elem1->type) {
         case TYPE_INT:
             return (elem1->value.int_value > elem2->value.int_value) - (elem1->value.int_value < elem2->value.int_value);
@@ -26,33 +26,25 @@ int compare_elements(const RowElement *elem1, const RowElement *elem2) {
  * @param input_row single row of a table
  * @param list list of attributes
  */
-Row *Projection(Row input_row, AttributeList list) {
+RowNew *Projection(RowNew input_row, AttributeList list) {
     int i, j, index;
-    RowElement *row_elements;
-    Row *output_row;
+    RowNew *output_row;
 
-    row_elements = malloc(sizeof(RowElement) * list.num_attributes);
-    if (!row_elements) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-
-    output_row = malloc(sizeof(Row));
+    output_row = malloc(sizeof(RowNew));
     if (!output_row) {
         perror("malloc");
         exit(EXIT_FAILURE);
     }
 
-    output_row->elements = row_elements;
     output_row->num_elements = list.num_attributes;
-    output_row->table_name = strdup(input_row.table_name);
+    strcpy(output_row->table_name, strdup(input_row.table_name));
 
     index = 0;
 
     for (i = 0; i < input_row.num_elements; i++) {
         for (j = 0; j < list.num_attributes; j++) {
             if (!strncmp(input_row.elements[i].col_name, list.attributes[j].name, strlen(list.attributes[j].name))) {
-                output_row->elements[index].col_name = input_row.elements[i].col_name;
+                strcpy(output_row->elements[index].col_name, input_row.elements[i].col_name);
                 
                 switch (input_row.elements[i].type) {
                     case TYPE_INT:
@@ -65,7 +57,7 @@ Row *Projection(Row input_row, AttributeList list) {
                         output_row->elements[index].value.float_value = input_row.elements[i].value.float_value;
                         break;
                     case TYPE_STRING:
-                        output_row->elements[index].value.string_value = strdup(input_row.elements[i].value.string_value);
+                        strcpy(output_row->elements[index].value.string_value, input_row.elements[i].value.string_value);
                         break;
                     case TYPE_DOUBLE:
                         output_row->elements[index].value.double_value = input_row.elements[i].value.double_value;
@@ -88,14 +80,13 @@ Row *Projection(Row input_row, AttributeList list) {
  *  @param input_rows list of rows
  *  @param list list of attributes
  */
-RowsList *ProjectionMultRows(RowsList input_rows, AttributeList list) {
-
+RowsLinkedList *ProjectionMultRows(int size, MessageEntry *input_rows, AttributeList list) {
     int i, j;
 
     for (i = 0; i < list.num_attributes; i++) {
         int found = 0;
-        for (j = 0; j < input_rows.rows[0].num_elements; j++) {
-            if (!strncmp(input_rows.rows[0].elements[j].col_name, list.attributes[i].name, strlen(list.attributes[i].name))) 
+        for (j = 0; j < input_rows[0].row.num_elements; j++) {
+            if (!strncmp(input_rows[0].row.elements[j].col_name, list.attributes[i].name, strlen(list.attributes[i].name))) 
                 found = 1;
         }
         if (!found) {
@@ -104,29 +95,24 @@ RowsList *ProjectionMultRows(RowsList input_rows, AttributeList list) {
         }
     } 
 
-    Row *rows = malloc(sizeof(Row) * input_rows.num_rows);
-    if (!rows) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
+    struct RowsLinkedListElement *head = rs_malloc(sizeof(struct RowsLinkedListElement));
+    CHECK_RSMALLOC(head, "ProjectionMultRows");
+    head->row = NULL;
+    head->next = NULL;
+
+    for (int i = 0; i < size; i++) {
+        AppendRow(head, Projection(input_rows[i].row, list));
     }
 
-    for (int i = 0; i < input_rows.num_rows; i++) {
-        rows[i] = *Projection(input_rows.rows[i], list);
-    }
-
-    RowsList *ret_list = malloc(sizeof(RowsList));
-    if (!ret_list) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-
-    ret_list->num_rows = input_rows.num_rows;
-    ret_list->rows = rows;
+    RowsLinkedList *ret_list = rs_malloc(sizeof(RowsLinkedList));
+    CHECK_RSMALLOC(ret_list, "ProjectionMultRows");
+    ret_list->head = head;
+    ret_list->size = size;
 
     return ret_list;
 }
 
-int Selection(Row input_row, Condition *condition) {
+int Selection(RowNew input_row, Condition *condition) {
     return EvaluateCondition(condition, &input_row);
 }
 
@@ -136,58 +122,48 @@ int Selection(Row input_row, Condition *condition) {
  *  @param input_rows list of rows
  *  @param condition pointer to a condition struct 
  */
-RowsList *SelectionMultRows(RowsList *input_rows, Condition *condition) {
-
+RowsLinkedList *SelectionMultRows(int size, MessageEntry *input_rows, Condition *condition) {
     int i, count = 0;
 
-    Row *rows = malloc(sizeof(Row) * input_rows->num_rows);
-    if (!rows) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
+    struct RowsLinkedListElement *head = rs_malloc(sizeof(struct RowsLinkedListElement));
+    CHECK_RSMALLOC(head, "SelectionMultRows");
+    head->next = NULL;
+    head->row = NULL;
 
-    for (i = 0; i < input_rows->num_rows; i++) {
-        if (Selection(input_rows->rows[i], condition)) {
-            rows[count].num_elements = input_rows->rows[i].num_elements;
-            rows[count].table_name = input_rows->rows[i].table_name;
-
-            rows[count].elements = malloc(sizeof(RowElement) * input_rows->rows[i].num_elements);
-            for (int j = 0; j < input_rows->rows[i].num_elements; j++) {
-                rows[count].elements[j] = input_rows->rows[i].elements[j];
-            }
+    for (i = 0; i < size; i++) {
+        if (Selection(input_rows[i].row, condition)) {
+            AppendRow(head, &input_rows[i].row);
             count++;
         }
     }
 
-    RowsList *ret_list = malloc(sizeof(RowsList));
-    if (!ret_list) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
+    RowsLinkedList *list = rs_malloc(sizeof(RowsLinkedList));
+    CHECK_RSMALLOC(list, "SelectionMultRows");
+    list->head = head;
+    list->size = count;
 
-    ret_list->num_rows = count;
-    ret_list->rows = rows;
-
-    return ret_list;
+    return list;
 }
 
 int compare_rows(const void *a, const void *b, void *arg) {
-    const Row *row1 = a;
-    const Row *row2 = b;
-    const char *col_name = (const char *)arg;
-    RowElement *elem1 = NULL;
-    RowElement *elem2 = NULL;
+    const MessageEntry *entry1 = (const MessageEntry *)a;
+    const MessageEntry *entry2 = (const MessageEntry *)b;
+    RowNew row1 = entry1->row;
+    RowNew row2 = entry2->row;
+    char *col_name = (char *)arg;
+    RowElementNew *elem1 = NULL;
+    RowElementNew *elem2 = NULL;
 
-    for (int i = 0; i < row1->num_elements; i++) {
-        if (strncmp(row1->elements[i].col_name, col_name, strlen(col_name)) == 0) {
-            elem1 = &row1->elements[i];
+    for (int i = 0; i < row1.num_elements; i++) {
+        if (strncmp(row1.elements[i].col_name, col_name, strlen(col_name)) == 0) {
+            elem1 = &row1.elements[i];
             break;
         }
     }
 
-    for (int i = 0; i < row2->num_elements; i++) {
-        if (strncmp(row2->elements[i].col_name, col_name, strlen(col_name)) == 0) {
-            elem2 = &row2->elements[i];
+    for (int i = 0; i < row2.num_elements; i++) {
+        if (strncmp(row2.elements[i].col_name, col_name, strlen(col_name)) == 0) {
+            elem2 = &row2.elements[i];
             break;
         }
     }
@@ -206,11 +182,11 @@ int compare_rows(const void *a, const void *b, void *arg) {
  *  @param input_rows list of rows
  *  @param col_name name of the aOrderttribute
  */
-RowsList *OrderBy(RowsList input_rows, const char *col_name) {
+RowsLinkedList *OrderBy(int size, MessageEntry *input_rows, const char *col_name) {
     int attribute_exists = 0, i;
 
-    for (i = 0; i < input_rows.rows[0].num_elements; i++) {
-        if (!strncmp(input_rows.rows[0].elements[i].col_name, col_name, strlen(col_name))) 
+    for (i = 0; i < input_rows[0].row.num_elements; i++) {
+        if (!strncmp(input_rows[0].row.elements[i].col_name, col_name, strlen(col_name))) 
             attribute_exists = 1;
     }
 
@@ -219,63 +195,21 @@ RowsList *OrderBy(RowsList input_rows, const char *col_name) {
         return NULL;
     }
 
-    Row *sorted_rows = malloc(sizeof(Row) * input_rows.num_rows);
-    if (!sorted_rows) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
+    struct RowsLinkedListElement *head = rs_malloc(sizeof(struct RowsLinkedListElement));
+    CHECK_RSMALLOC(head, "OrderBy");
+    head->row = NULL;
+    head->next = NULL;
+
+    qsort_r(input_rows, size, sizeof(MessageEntry), compare_rows, (void *)col_name);
+
+    for (int i = 0; i < size; i++) {
+        AppendRow(head, &input_rows[i].row);
     }
 
-    // keep the original input unchanged
-    for (i = 0; i < input_rows.num_rows; i++) {
-        sorted_rows[i].num_elements = input_rows.rows[i].num_elements;
-        sorted_rows[i].elements = malloc(sizeof(RowElement) * input_rows.rows[i].num_elements);
-        if (!sorted_rows[i].elements) {
-            perror("malloc");
-            exit(EXIT_FAILURE);
-        }
-
-        for (int j = 0; j < input_rows.rows[i].num_elements; j++) {
-            // Copia profonda di `col_name`
-            sorted_rows[i].elements[j].col_name = strdup(input_rows.rows[i].elements[j].col_name);
-            
-            // Copia profonda dei valori in base al tipo
-            sorted_rows[i].elements[j].type = input_rows.rows[i].elements[j].type;
-            switch (input_rows.rows[i].elements[j].type) {
-                case TYPE_INT:
-                    sorted_rows[i].elements[j].value.int_value = input_rows.rows[i].elements[j].value.int_value;
-                    break;
-                case TYPE_LONG:
-                    sorted_rows[i].elements[j].value.long_value = input_rows.rows[i].elements[j].value.long_value;
-                    break;
-                case TYPE_FLOAT:
-                    sorted_rows[i].elements[j].value.float_value = input_rows.rows[i].elements[j].value.float_value;
-                    break;
-                case TYPE_STRING:
-                    // Copia profonda del valore stringa
-                    sorted_rows[i].elements[j].value.string_value = strdup(input_rows.rows[i].elements[j].value.string_value);
-                    break;
-                case TYPE_DOUBLE:
-                    sorted_rows[i].elements[j].value.double_value = input_rows.rows[i].elements[j].value.double_value;
-                    break;
-            }
-        }
-    }
-
-    qsort_r(sorted_rows, input_rows.num_rows, sizeof(Row), compare_rows, (void *)col_name);
-
-    RowsList *ret_list = malloc(sizeof(RowsList));
-    if (!ret_list) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-
-    ret_list->num_rows = input_rows.num_rows;
-    ret_list->rows = sorted_rows;
-
-    for (i = 0; i < input_rows.num_rows; i++) {
-        free(input_rows.rows[i].elements);
-    }
-    free(input_rows.rows);
+    RowsLinkedList *ret_list = rs_malloc(sizeof(RowsLinkedList));
+    CHECK_RSMALLOC(ret_list, "OrderBy");
+    ret_list->head = head;
+    ret_list->size = size;
 
     return ret_list;
 }
@@ -308,11 +242,16 @@ Row deep_copy_row(Row *original_row) {
  *  @param input_rows list of rows
  *  @param col_name name of the attribute
  */
-GroupsList *GroupBy(RowsList *rows_list, const char *col_name) {
-    
-    int col_index = -1;
-    for (int i = 0; i < rows_list->rows[0].num_elements; i++) {
-        if (strncmp(rows_list->rows[0].elements[i].col_name, col_name, strlen(col_name)) == 0) {
+GroupsLinkedList *GroupBy(int size, MessageEntry *input_rows, const char *col_name) {
+    RowsLinkedList *rows_list;
+    RowElementNew last_element;
+    int rows_count = 1, groups_count = 1, col_index = -1;
+    struct GroupsLinkedListElement *groups_head;
+    struct RowsLinkedListElement *rows_head;
+    GroupsLinkedList *groups_list;
+
+    for (int i = 0; i < input_rows[0].row.num_elements; i++) {
+        if (strncmp(input_rows[0].row.elements[i].col_name, col_name, strlen(col_name)) == 0) {
             col_index = i;
             break;
         }
@@ -324,62 +263,62 @@ GroupsList *GroupBy(RowsList *rows_list, const char *col_name) {
     }
 
     // Order rows by the value of the specified attribute
-    qsort_r(rows_list->rows, rows_list->num_rows, sizeof(Row), compare_rows, (void *)col_name);
+    qsort_r(input_rows, size, sizeof(MessageEntry), compare_rows, (void *)col_name);
 
-    // Allocate memory for the groups
-    Group *groups = malloc(rows_list->num_rows * sizeof(Group));
-    if (!groups) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
+    groups_head = rs_malloc(sizeof(struct GroupsLinkedListElement));
+    CHECK_RSMALLOC(groups_head, "GroupBy");
+    groups_head->rows_list = NULL;
+    groups_head->next = NULL;
 
-    int num_groups = 0;
-    int current_group_index = 0;
+    rows_head = rs_malloc(sizeof(struct RowsLinkedListElement));
+    CHECK_RSMALLOC(rows_head, "GroupBy");
+    rows_head->row = NULL;
+    rows_head->next = NULL;
 
-    // Allocate first group
-    groups[current_group_index].rows_list.rows = malloc(rows_list->num_rows * sizeof(Row));
-    if (!groups[current_group_index].rows_list.rows) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-    groups[current_group_index].rows_list.num_rows = 0;
+    // first row goes in the first group
+    AppendRow(rows_head, &input_rows[0].row);
+    last_element = input_rows[0].row.elements[col_index];
 
-    for (int i = 0; i < rows_list->num_rows; i++) {
-        if (i == 0) {
-            groups[current_group_index].rows_list.rows[groups[current_group_index].rows_list.num_rows++] = rows_list->rows[i];
-        } else {
-            if (compare_elements(&rows_list->rows[i].elements[col_index], &rows_list->rows[i - 1].elements[col_index]) == 0) {
-                groups[current_group_index].rows_list.rows[groups[current_group_index].rows_list.num_rows++] = rows_list->rows[i];
-            } else {
-                current_group_index++;
-                groups[current_group_index].rows_list.rows = malloc(rows_list->num_rows * sizeof(Row));
-                if (!groups[current_group_index].rows_list.rows) {
-                    perror("malloc");
-                    exit(EXIT_FAILURE);
-                }
-                groups[current_group_index].rows_list.num_rows = 0;
-                groups[current_group_index].rows_list.rows[groups[current_group_index].rows_list.num_rows++] = rows_list->rows[i];
-            }
+    for (int i = 1; i < size; i++) {
+        if (compare_elements(&input_rows[i].row.elements[col_index], &last_element) == 0) {
+            AppendRow(rows_head, &input_rows[i].row);
+            rows_count++;
+            last_element = input_rows[i].row.elements[col_index];
+        } else {            
+            // save group and create new one
+            rows_list = rs_malloc(sizeof(RowsLinkedList));
+            CHECK_RSMALLOC(rows_list, "GroupBy");
+            rows_list->head = rows_head;
+            rows_list->size = rows_count;
+
+            AppendGroup(groups_head, rows_list);
+            groups_count++;
+
+            // reset variables
+            rows_count = 0;
+            rows_head = rs_malloc(sizeof(struct RowsLinkedListElement));
+            CHECK_RSMALLOC(rows_head, "GroupBy");
+            rows_head->row = NULL;
+            rows_head->next = NULL;
+
+            AppendRow(rows_head, &input_rows[i].row);
+            rows_count++;
+            last_element = input_rows[i].row.elements[col_index];
         }
     }
 
-    num_groups = current_group_index + 1;
+    // save last group
+    rows_list = rs_malloc(sizeof(RowsLinkedList));
+    CHECK_RSMALLOC(rows_list, "GroupBy");
+    rows_list->head = rows_head;
+    rows_list->size = rows_count;
 
-    groups = realloc(groups, num_groups * sizeof(Group));
-    if (!groups) {
-        perror("realloc");
-        exit(EXIT_FAILURE);
-    }
+    AppendGroup(groups_head, rows_list);
 
-    GroupsList *groups_list = malloc(sizeof(GroupsList));
-    if (!groups_list) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-
-    groups_list->col_index = col_index;
-    groups_list->num_groups = num_groups;
-    groups_list->groups = groups;
+    groups_list = rs_malloc(sizeof(GroupsLinkedList));
+    CHECK_RSMALLOC(groups_list, "GroupBy");
+    groups_list->size = groups_count;
+    groups_list->head = groups_head;
 
     return groups_list;
 }
@@ -591,6 +530,9 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
 }
 
 Row join_single_rows(Row row1, Row row2) {
+    Row row;
+    return row;
+    /*
     int i, j;
 
     RowElement *elements = malloc((row1.num_elements + row2.num_elements) * sizeof(RowElement));
@@ -658,6 +600,7 @@ Row join_single_rows(Row row1, Row row2) {
 
     row->elements = elements;
     return *row;
+    */
 }
 
 /**

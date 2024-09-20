@@ -48,7 +48,6 @@ int is_integer(const char *str) {
 }
 
 int is_float(const char *str) {
-    printf("%s\n", str);
     int has_decimal_point = 0;
     int count = 0;
 
@@ -174,7 +173,7 @@ void InitializeSchema(Schema *schema, char *header) {
     }
 }
 
-void PrintRow(const Row *row) {
+void PrintRow(const RowNew *row) {
     for (int i = 0; i < row->num_elements; i++) {
         printf("Name: %s, Table: %s, ", row->elements[i].col_name, row->table_name);
         switch (row->elements[i].type) {
@@ -200,16 +199,14 @@ void PrintRow(const Row *row) {
     puts("");
 }
 
-void PopulateRow(char *row_string, Row *row, Schema schema) {  
+void PopulateRow(char *row_string, RowNew *row, Schema schema) {  
     char *copy = strdup(row_string);
     char *token = strtok(copy, ",");  
 
     int column_index = 0;
     while (token != NULL && column_index < schema.num_cols) {
-        
-        row->elements[column_index].col_name = strdup(schema.cols_names[column_index]);
+        strcpy(row->elements[column_index].col_name, schema.cols_names[column_index]);
         char *value_str = strdup(token);
-        //remove_quotes(value_str);
 
         if (is_integer(value_str)) {
             row->elements[column_index].type = TYPE_INT;
@@ -224,7 +221,7 @@ void PopulateRow(char *row_string, Row *row, Schema schema) {
                 row->elements[column_index].value.long_value = convert_to_unix_timestamp(value_str);
             } else {
                 row->elements[column_index].type = TYPE_STRING;
-                row->elements[column_index].value.string_value = value_str;
+                strcpy(row->elements[column_index].value.string_value, value_str);
             }
         }
 
@@ -342,4 +339,71 @@ int are_equals(Row row1, Row row2, char *col1_name, char *col2_name) {
             fprintf(stderr, "Unexpected type\n");
             exit(EXIT_FAILURE);
     }
+}
+
+void AppendRow(struct RowsLinkedListElement* head, RowNew *row) {
+    if (head == NULL) {
+        fprintf(stderr, "invalid list head\n");
+        return;
+    }
+  
+    // Allocate memory for node
+    struct RowsLinkedListElement* new_node = (struct RowsLinkedListElement*)rs_malloc(sizeof(struct RowsLinkedListElement));
+    CHECK_RSMALLOC(new_node, "AppendRow");
+
+    new_node->row = rs_malloc(sizeof(RowNew));
+    CHECK_RSMALLOC(new_node->row, "AppendRow");
+    new_node->next = NULL;
+
+    // Copy contents of data to newly allocated memory.
+    memcpy(new_node->row, row, sizeof(RowNew));
+
+    // append row
+    struct RowsLinkedListElement* last = head;
+    while (last->next != NULL) {
+        last = last->next;
+    }
+    last->next = new_node;
+}
+
+void AppendGroup(struct GroupsLinkedListElement* head, RowsLinkedList *rows) {
+    if (head == NULL) {
+        fprintf(stderr, "invalid list head\n");
+        return;
+    }
+  
+    // Allocate memory for node
+    struct GroupsLinkedListElement* new_node = (struct GroupsLinkedListElement*)rs_malloc(sizeof(struct GroupsLinkedListElement));
+    CHECK_RSMALLOC(new_node, "AppendGroup");
+
+    new_node->rows_list = rows;
+    new_node->next = NULL;
+
+    struct GroupsLinkedListElement* last = head;
+    while (last->next != NULL) {
+        last = last->next;
+    }
+    last->next = new_node;
+}
+
+void FreeList(RowsLinkedList* list) {
+    if (list == NULL) {
+        fprintf(stderr, "Invalid list pointer\n");
+        return;
+    }
+
+    struct RowsLinkedListElement *tmp = list->head;
+
+    while(tmp != NULL) {
+        struct RowsLinkedListElement *next = tmp->next;
+        
+        if (tmp->row != NULL) {
+            rs_free(tmp->row);
+        }
+        rs_free(tmp);
+        
+        tmp = next;
+    }
+
+    rs_free(list);
 }

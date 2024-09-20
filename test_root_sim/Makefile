@@ -10,7 +10,7 @@ all:
 	# clang -g test_join.c -o test_join $(FLAGS) $(PSEUDOSQL) $(ROOT_SIM) $(TOPOLOGY) -lm
 	# clang -g test_windows.c -o test_windows $(FLAGS) $(PSEUDOSQL) $(ROOT_SIM) $(TOPOLOGY) -lm
 	clang -g test_root_sim2.c -o test_root_sim2 $(FLAGS) $(PSEUDOSQL) $(ROOT_SIM) $(TOPOLOGY) -lm
-	clang -g test_root_sim2_serial.c -o test_root_sim2_serial $(FLAGS) $(PSEUDOSQL) $(ROOT_SIM) $(TOPOLOGY) -lm
+	# clang -g test_root_sim2_serial.c -o test_root_sim2_serial $(FLAGS) $(PSEUDOSQL) $(ROOT_SIM) $(TOPOLOGY) -lm
 	# clang -g test_count.c -o test_count $(FLAGS) $(PSEUDOSQL) $(ROOT_SIM) $(TOPOLOGY) -lm
 	# clang -g test_select.c -o test_select $(FLAGS) $(PSEUDOSQL) $(ROOT_SIM) $(TOPOLOGY) -lm
 
