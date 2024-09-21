@@ -20,22 +20,6 @@ void remove_quotes(char* str) {
     str[j] = '\0'; 
 }
 
-char *trim_whitespace(char *str) {
-    char *end;
-
-    while (isspace((unsigned char)*str)) str++;
-
-    if (*str == 0) 
-        return str;
-
-    end = str + strlen(str) - 1;
-    while (end > str && isspace((unsigned char)*end)) end--;
-
-    *(end + 1) = 0;
-
-    return str;
-}
-
 int is_integer(const char *str) {
     if (*str == '\0') return 0;
 
@@ -115,31 +99,6 @@ time_t convert_to_unix_timestamp(const char *datetime_str) {
     time_struct.tm_mon -= 1;     
 
     return mktime(&time_struct);
-}
-
-char* remove_newline_and_copy(char *str) {
-    int new_len = 0;
-    for (const char *p = str; *p != '\0'; p++) {
-        if (*p != '\n') {
-            new_len++;
-        }
-    }
-    
-    char *new_str = (char *)malloc(new_len + 1);  
-    if (new_str == NULL) {
-        return NULL;  
-    }
-
-    char *dest = new_str;
-    for (const char *p = str; *p != '\0'; p++) {
-        if (*p != '\n') {
-            *dest++ = *p;
-        }
-    }
-    *dest = '\0';
-
-    free(str);
-    return new_str;
 }
 
 void PrintSchema(const Schema *schema) {

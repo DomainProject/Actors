@@ -15,7 +15,6 @@ extern double compute_sum(int size, RowNew *list, char *col_name);
 extern int are_equals(Row row1, Row row2, char *col1_name, char *col2_name);
 extern void InitializeSchema(Schema *schema, char *header);
 extern void PopulateRow(char *row_string, RowNew *row, Schema schema);
-extern char* remove_newline_and_copy(char *str);
 extern void AppendRow(struct RowsLinkedListElement* head, RowNew *row);
 extern void AppendGroup(struct GroupsLinkedListElement* head, RowsLinkedList *rows);
 extern RowNew *GetRowsArrayFromRowsLinkedList(RowsLinkedList *list);

@@ -1,160 +1,10 @@
 #include "rootsim_operations.h"
 
-#define GROWTH_FACTOR 2
-
-unsigned long initial_size = 50;
-
-RowsList* CopyAndFreeRowsList(RowsList *list) {
-    RowsList *copy_list = malloc(sizeof(RowsList));
-    if (copy_list == NULL) {
-        fprintf(stderr, "Failed to allocate memory for RowsList\n");
-        exit(EXIT_FAILURE);
-    }
-
-    copy_list->num_rows = list->num_rows;
-
-    copy_list->rows = malloc(sizeof(Row) * copy_list->num_rows);
-    if (copy_list->rows == NULL) {
-        fprintf(stderr, "Failed to allocate memory for Rows in RowsList\n");
-        exit(EXIT_FAILURE);
-    }
-
-    for (int i = 0; i < copy_list->num_rows; i++) {
-        Row *src_row = &list->rows[i];
-        Row *dest_row = &copy_list->rows[i];
-
-        dest_row->num_elements = src_row->num_elements;
-
-        dest_row->elements = malloc(sizeof(RowElement) * dest_row->num_elements);
-        if (dest_row->elements == NULL) {
-            fprintf(stderr, "Failed to allocate memory for RowElements in Row\n");
-            exit(EXIT_FAILURE);
-        }
-
-        for (int j = 0; j < dest_row->num_elements; j++) {
-            dest_row->elements[j] = src_row->elements[j];
-
-            if (src_row->elements[j].type == TYPE_STRING) {
-                dest_row->elements[j].value.string_value = strdup(src_row->elements[j].value.string_value);
-            }
-        }
-
-        dest_row->table_name = strdup(src_row->table_name);
-    }
-
-    rs_free(list->rows);
-    rs_free(list);
-
-    return copy_list;
-}
-
-void SendMessage(Message *message, simtime_t now, lp_id_t *receivers, int num_receivers) {
-	for (int i = 0; i < num_receivers; i++) {
-		ScheduleNewEvent(receivers[i], now + 1.0, EVENT, message, sizeof(Message));
-	}
-}
-
 lp_id_t *GetAllNeighbors(struct topology *topology, lp_id_t me, int *num_neighbors) {
 	*num_neighbors = CountDirections(topology, me);
 	lp_id_t *neighbors = malloc(*num_neighbors * sizeof(lp_id_t)); 
 	GetAllReceivers(topology, me, neighbors);
 	return neighbors;
-}
-
-Message *CreateMessage(lp_id_t sender_id, float priority, void *list, MessageType type) {
-	Envelope *e;
-	Message *msg;
-
-	// create envelope
-	e = malloc(sizeof(Envelope));
-	CHECK_RSMALLOC(e, "CreateMessage");
-	e->priority = priority;
-	e->sender = sender_id;
-
-	// create message
-	msg = malloc(sizeof(Message));
-	CHECK_RSMALLOC(msg, "CreateMessage");
-	msg->envelope = e;
-	msg->type = type;
-	if (type == ROWS)
-		msg->content.rows_list = (RowsList *)list;
-	else 
-		msg->content.groups_list = (GroupsList *)list;
-
-	return msg;
-}
-
-void CreateAndSendRowsMessage(lp_id_t sender_id, float priority, RowsList *send_list, simtime_t now, lp_id_t *receivers, int num_receivers) {
-	Envelope e;
-	e.priority = priority;
-	e.sender = sender_id;
-
-	Message send_msg;
-	send_msg.envelope = &e;
-	send_msg.type = ROWS;
-	send_msg.content.rows_list = send_list;
-
-	SendMessage(&send_msg, now, receivers, num_receivers);
-
-	for (int i = 0; i < send_list->num_rows; i++) {
-		free(send_list->rows[i].elements);
-	}
-	free(send_list->rows);
-	free(send_list);
-}
-
-void CreateAndSendGroupsMessage(lp_id_t sender_id, float priority, GroupsList *send_list, simtime_t now, lp_id_t *receivers, int num_receivers) {
-/*
-	Envelope *e;
-	Message *send_msg; 
-
-	e = malloc(sizeof(Envelope));
-	CHECK_RSMALLOC(e, "CreateAndSendGroupsMessage");
-	e->priority = priority;
-	e->sender = sender_id;
-
-	send_msg = malloc(sizeof(Message));
-	CHECK_RSMALLOC(send_msg, "CreateAndSendGroupsMessage");
-	send_msg->envelope = e;
-	send_msg->type = GROUPS;
-	send_msg->content.groups_list = send_list; 
-
-	SendMessage(send_msg, now, receivers, num_receivers);
-*/
-	Envelope e;
-	e.priority = priority;
-	e.sender = sender_id;
-
-	Message send_msg;
-	send_msg.envelope = &e;
-	send_msg.type = GROUPS;
-	send_msg.content.groups_list = send_list;
-
-	SendMessage(&send_msg, now, receivers, num_receivers);
-
-	for (int i = 0; i < send_list->num_groups; i++) {
-		for (int j = 0; j < send_list->groups[i].rows_list.num_rows; j++) {
-			free(send_list->groups[i].rows_list.rows[j].elements);
-		}
-		free(send_list->groups[i].rows_list.rows);
-	}
-	free(send_list->groups);
-	free(send_list);
-}
-
-void CreateAndSendMessage(lp_id_t sender_id, float priority, MessageType type, void *list, simtime_t now, lp_id_t *receivers, int num_receivers) {
-	switch(type) {
-		case ROWS:
-			CreateAndSendRowsMessage(sender_id, priority, (RowsList *)list, now, receivers, num_receivers);
-			break;
-		case GROUPS:
-			CreateAndSendGroupsMessage(sender_id, priority, (GroupsList *)list, now, receivers, num_receivers);
-			break;
-		default:
-			fprintf(stderr, "Unknown message type\n");
-			abort();
-	}
-
 }
 
 GroupsLinkedList *DeserializeGroupsMessage(GroupsMessage *msg) {
@@ -526,55 +376,6 @@ void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me) {
 	printf("Window initialized\n");
 	#endif
 }
-
-void TestWindow(const void *content) {
-
-    // Controllo su content
-    if (!content) {
-        printf("content is null\n");
-        return;
-    }
-
-    Message *msg = (Message *)content;
-
-    if (!msg->content.rows_list) {
-        fprintf(stderr, "TestWindow encountered NULL rows_list in message\n");
-        return;
-    }
-
-    int size = msg->content.rows_list->num_rows;
-    if (size <= 0) {
-        fprintf(stderr, "TestWindow encountered invalid or zero number of rows\n");
-        return;
-    }
-
-    for (int i = 0; i < size; i++) {
-        if (!msg->content.rows_list->rows) {
-            fprintf(stderr, "TestWindow encountered NULL rows array\n");
-            return;
-        }
-
-        if (!msg->content.rows_list->rows[i].elements) {
-            fprintf(stderr, "TestWindow encountered NULL elements array in row %d\n", i);
-            return;
-        }
-
-        if (msg->content.rows_list->rows[i].num_elements <= 1) {
-            fprintf(stderr, "TestWindow encountered insufficient elements in row %d\n", i);
-            return;
-        }
-
-        if (msg->content.rows_list->rows[i].elements[1].type != TYPE_LONG) {
-            fprintf(stderr, "TestWindow encountered unexpected element type in row %d, element 1\n", i);
-            return;
-        }
-
-        long val = msg->content.rows_list->rows[i].elements[1].value.long_value;
-        printf("Row %d, Element 1 Value: %ld\n", i, val);
-    }
-    puts("");
-}
-
 
 /**
  * @brief Initializer for the selection process, which converts the textual 
@@ -1142,15 +943,13 @@ void ForwardTerminationMessage(struct topology *topology, lp_id_t me, simtime_t 
 	free(neighbors);
 }
 
-void DataIngestionCleanUp(FILE *file, __unused DataSourceData *data) {
+void DataIngestionCleanUp(FILE *file, DataSourceData *data) {
 	fclose(file);
 	rs_free(data);
 }
 
-void WindowCleanUp(__unused WindowData *data) {
-	//rs_free(data->list->rows);
-	//rs_free(data->list);
-	//rs_free(data);
+void WindowCleanUp(WindowData *data) {
+	rs_free(data);
 }
 
 void ConditionCleanup(Condition *condition) {
@@ -1169,14 +968,14 @@ void ConditionCleanup(Condition *condition) {
 	rs_free(condition);
 }
 
-void SelectionCleanUp(__unused SelectionData *data) {
+void SelectionCleanUp(SelectionData *data) {
 	if (!data) return;
 
 	ConditionCleanup(data->condition);
 	rs_free(data);
 }
 
-void ProjectionCleanUp(__unused ProjectionData *data) {
+void ProjectionCleanUp(ProjectionData *data) {
 	for (int i = 0; i < data->list->num_attributes; i++) {
         free(data->list->attributes[i].name);
     }
@@ -1185,23 +984,23 @@ void ProjectionCleanUp(__unused ProjectionData *data) {
 	rs_free(data);
 }
 
-void GroupByCleanUp(__unused GroupByData *data) {
+void GroupByCleanUp(GroupByData *data) {
 	rs_free(data);
 }
 
-void AggFunctionCleanUp(__unused AggregateFunctionData *data) {
+void AggFunctionCleanUp(AggregateFunctionData *data) {
 	rs_free(data);
 }
 
-void OrderByCleanUp(__unused OrderByData *data) {
+void OrderByCleanUp(OrderByData *data) {
 	rs_free(data);
 }
 
-void JoinCleanUp(__unused JoinData *data) {
+void JoinCleanUp(JoinData *data) {
 	rs_free(*data->tables_data);
 	rs_free(data);
 }
 
-void OutputCleanUp(__unused OutputProcessData *data) {
+void OutputCleanUp(OutputProcessData *data) {
 	rs_free(data);
 }

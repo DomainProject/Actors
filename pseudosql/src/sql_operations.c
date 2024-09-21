@@ -212,28 +212,6 @@ RowsLinkedList *OrderBy(int size, RowNew *input_rows, const char *col_name) {
     return ret_list;
 }
 
-Row deep_copy_row(Row *original_row) {
-    Row new_row;
-    new_row.num_elements = original_row->num_elements;
-    new_row.elements = malloc(new_row.num_elements * sizeof(RowElement));
-    
-    if (!new_row.elements) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-    
-    for (int i = 0; i < new_row.num_elements; i++) {
-        new_row.elements[i].col_name = strdup(original_row->elements[i].col_name);
-        if (original_row->elements[i].type == TYPE_STRING) {
-            new_row.elements[i].value.string_value = strdup(original_row->elements[i].value.string_value);
-        } else {
-            new_row.elements[i].value = original_row->elements[i].value;
-        }
-    }
-
-    return new_row;
-}
-
 
 /** 
  *  @brief Group a list of rows, based on different values of an attribute
