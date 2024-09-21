@@ -13,7 +13,7 @@
 #define NUM_THREADS 0
 #endif
 
-#define INPUT_FILE "taxi_100.csv"
+#define INPUT_FILE "taxi_1000.csv"
 
 FILE *file;
 Schema schema;
@@ -22,23 +22,19 @@ void InitTopology() {
   topology = InitializeTopology(TOPOLOGY_GRAPH, 36);
 
   AddTopologyLink(topology, 0, 7, 1);
-  static int window0to7 = 60;
+  static int window0to7 = 1000;
   SetTopologyLinkData(topology, 0, 7, (void *)&window0to7);
-  //AddTopologyLink(topology, 0, 8, 1);
-  //static int window0to8 = 60;
-  //SetTopologyLinkData(topology, 0, 8, (void *)&window0to8);
-  //AddTopologyLink(topology, 0, 9, 1);
-  //static int window0to9 = 60;
-  //SetTopologyLinkData(topology, 0, 9, (void *)&window0to9);
-  //AddTopologyLink(topology, 0, 10, 1);
-  //static int window0to10 = 60;
-  //SetTopologyLinkData(topology, 0, 10, (void *)&window0to10);
-  AddTopologyLink(topology, 8, 11, 1);
-  SetTopologyLinkData(topology, 8, 11, (void *)"payment_type,total_amount");
-  AddTopologyLink(topology, 1, 12, 1);
-  SetTopologyLinkData(topology, 1, 12, (void *)"payment_type");
-  AddTopologyLink(topology, 11, 16, 1);
-  SetTopologyLinkData(topology, 11, 16, (void *)"total_amount");
+  AddTopologyLink(topology, 0, 8, 1);
+  static int window0to8 = 1000;
+  SetTopologyLinkData(topology, 0, 8, (void *)&window0to8);
+  AddTopologyLink(topology, 0, 9, 1);
+  static int window0to9 = 1000;
+  SetTopologyLinkData(topology, 0, 9, (void *)&window0to9);
+  AddTopologyLink(topology, 0, 10, 1);
+  static int window0to10 = 1000;
+  SetTopologyLinkData(topology, 0, 10, (void *)&window0to10);
+  AddTopologyLink(topology, 1, 11, 1);
+  SetTopologyLinkData(topology, 1, 11, (void *)"payment_type,total_amount");
   AddTopologyLink(topology, 2, 18, 1);
   SetTopologyLinkData(topology, 2, 18, (void *)"*");
   AddTopologyLink(topology, 3, 19, 1);
@@ -51,18 +47,18 @@ void InitTopology() {
   SetTopologyLinkData(topology, 8, 14, (void *)"PULocationID,passenger_count");
   AddTopologyLink(topology, 9, 2, 1);
   SetTopologyLinkData(topology, 9, 2, (void *)"tpep_pickup_datetime >= 2024-12-25 00:00:00 && tpep_pickup_datetime <= 2024-12-25 23:59:59");
-  //AddTopologyLink(topology, 7, 3, 1);
-  //SetTopologyLinkData(topology, 7, 3, (void *)"PULocationID == 161 || DOLocationID == 161");
+  AddTopologyLink(topology, 7, 3, 1);
+  SetTopologyLinkData(topology, 7, 3, (void *)"PULocationID == 161 || DOLocationID == 161");
   AddTopologyLink(topology, 10, 23, 1);
   SetTopologyLinkData(topology, 10, 23, (void *)"PULocationID,trip_distance");
-  //AddTopologyLink(topology, 7, 4, 1);
-  //SetTopologyLinkData(topology, 7, 4, (void *)"tip_amount > 10.0");
-  //AddTopologyLink(topology, 7, 5, 1);
-  //SetTopologyLinkData(topology, 7, 5, (void *)"passenger_count > 4");
-  //AddTopologyLink(topology, 7, 6, 1);
-  //SetTopologyLinkData(topology, 7, 6, (void *)"payment_type == 1 && total_amount > 100.0");
-  //AddTopologyLink(topology, 11, 12, 1);
-  //SetTopologyLinkData(topology, 11, 12, (void *)"payment_type");
+  AddTopologyLink(topology, 7, 4, 1);
+  SetTopologyLinkData(topology, 7, 4, (void *)"tip_amount > 10.0");
+  AddTopologyLink(topology, 7, 5, 1);
+  SetTopologyLinkData(topology, 7, 5, (void *)"passenger_count > 4");
+  AddTopologyLink(topology, 7, 6, 1);
+  SetTopologyLinkData(topology, 7, 6, (void *)"payment_type == 1 && total_amount > 100.0");
+  AddTopologyLink(topology, 11, 12, 1);
+  SetTopologyLinkData(topology, 11, 12, (void *)"payment_type");
   AddTopologyLink(topology, 14, 15, 1);
   SetTopologyLinkData(topology, 14, 15, (void *)"PULocationID");
   AddTopologyLink(topology, 19, 20, 1);
@@ -78,11 +74,11 @@ void InitTopology() {
   AddTopologyLink(topology, 24, 26, 1);
   SetTopologyLinkData(topology, 24, 26, (void *)"trip_distance");
   AddTopologyLink(topology, 17, 16, 1);
-  SetTopologyLinkData(topology, 17, 16, (void *)"passenger_count");
+  SetTopologyLinkData(topology, 17, 16, (void *)"SUM(passenger_count)");
   AddTopologyLink(topology, 22, 21, 1);
-  SetTopologyLinkData(topology, 22, 21, (void *)"congestion_surcharge");
+  SetTopologyLinkData(topology, 22, 21, (void *)"AVG(congestion_surcharge)");
   AddTopologyLink(topology, 26, 25, 1);
-  SetTopologyLinkData(topology, 26, 25, (void *)"trip_distance");
+  SetTopologyLinkData(topology, 26, 25, (void *)"SUM(trip_distance)");
 
   AddTopologyLink(topology, 18, 28, 1);
   SetTopologyLinkData(topology, 18, 29, (void *)"Query1.csv");
@@ -142,68 +138,62 @@ void joinColumns(lp_id_t me, simtime_t now, const void *content, void *data) {
   free(refs);
 }
 
-void Sum(lp_id_t me, simtime_t now, const void *content, void *data) {
-  RowsList *result= wAggregateFunction((Message *)content, data, SUM);
-  if (!result) return;
-
-  int num_refs;
-  lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
-  CreateAndSendMessage(me, 5.0, ROWS, result, now, refs, num_refs);
-
-  free(refs);
-}
-
 void Count(lp_id_t me, simtime_t now, const void *content, void *data) {
-  RowsList *result= wAggregateFunction((Message *)content, data, COUNT);
+  GroupsLinkedList *list = DeserializeGroupsMessage((GroupsMessage *)content);
+  RowsLinkedList *result= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, COUNT);
   if (!result) return;
 
   int num_refs;
   lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
-  CreateAndSendMessage(me, 5.0, ROWS, result, now, refs, num_refs);
+  CreateAndSendMessageFromList(me, 5.0, result, now, refs, num_refs);
 
   free(refs);
 }
 
 void Average(lp_id_t me, simtime_t now, const void *content, void *data) {
-  RowsList *result= wAggregateFunction((Message *)content, data, AVG);
-  if (!result)  return;
+  GroupsLinkedList *list = DeserializeGroupsMessage((GroupsMessage *)content);
+  RowsLinkedList *result= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, AVG);
+  if (!result) return;
 
   int num_refs;
   lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
-  CreateAndSendMessage(me, 5.0, ROWS, result, now, refs, num_refs);
+  CreateAndSendMessageFromList(me, 5.0, result, now, refs, num_refs);
+
+  free(refs);
+}
+
+void Sum(lp_id_t me, simtime_t now, const void *content, void *data) {
+  GroupsLinkedList *list = DeserializeGroupsMessage((GroupsMessage *)content);
+  RowsLinkedList *result= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, SUM);
+  if (!result) return;
+
+  int num_refs;
+  lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
+  CreateAndSendMessageFromList(me, 5.0, result, now, refs, num_refs);
 
   free(refs);
 }
 
 void groupBy(lp_id_t me, simtime_t now, const void *content, void *data) {
-  printf("\nNew window\n");
   GroupsLinkedList *result = wGroupBy((NewMessage *)content, data);
   if (!result)  return;
 
-  int count = 1;
-    struct GroupsLinkedListElement *current_group = result->head;
-
-    while(current_group != NULL) {
-        if (current_group->rows_list != NULL) {
-            printf("Group %d\n", count);
-            count++;
-
-            struct RowsLinkedListElement *current_row = current_group->rows_list->head;
-            while(current_row != NULL) {
-                if (current_row->row != NULL) {
-                    PrintRow(current_row->row);
-                }
-                current_row = current_row->next;
-            }
-        }
-        current_group = current_group->next;
-    }
+  int num_refs;
+  lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
+  CreateAndSendMessageFromGroupsList(me, 5.0, result, now, refs, num_refs);
   
+  free(refs);
 }
 
 void orderBy(lp_id_t me, simtime_t now, const void *content, void *data) {
   RowsLinkedList *result = wOrderBy((NewMessage *)content, data);
   if (!result)  return;
+  
+  int num_refs;
+  lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
+  CreateAndSendMessageFromList(me, 5.0, result, now, refs, num_refs);
+
+  free(refs);
 }
 
 void DataSource(lp_id_t me, simtime_t now, const void *content, void *data) {
@@ -231,10 +221,6 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           DataIngestion(topology, me, now, (DataSourceData *)s, &file, &schema);
           break;
         case LP_FINI:
-          for (int i = 0; i < schema.num_cols; i++) {
-            free(schema.cols_names[i]);
-          }
-          free(schema.cols_names);
           DataIngestionCleanUp(file, (DataSourceData *)s);
           break;
         default:
@@ -289,98 +275,98 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    //case 3:
-    //  /* SELECTION */
-    //  switch(event_type) {
-    //    case LP_INIT:
-    //      SelectionInit(topology, 7, me);
-    //      break;
-    //    case EVENT:
-    //      selection(me, now, content, s);
-    //      break;
-    //    case LP_FINI:
-    //      SelectionCleanUp((SelectionData *)s);
-    //      break;
-    //    case TERMINATE:
-    //      selection_data = (SelectionData *)s;
-    //      selection_data->can_end = true;
-    //      ForwardTerminationMessage(topology, me, now);
-    //      break;
-    //    default:
-    //      fprintf(stderr, "Unknown event type");
-    //      puts("");
-    //      abort();
-    //  }
-    //  break;
-    //case 4:
-    //  /* SELECTION */
-    //  switch(event_type) {
-    //    case LP_INIT:
-    //      SelectionInit(topology, 7, me);
-    //      break;
-    //    case EVENT:
-    //      selection(me, now, content, s);
-    //      break;
-    //    case LP_FINI:
-    //      SelectionCleanUp((SelectionData *)s);
-    //      break;
-    //    case TERMINATE:
-    //      selection_data = (SelectionData *)s;
-    //      selection_data->can_end = true;
-    //      ForwardTerminationMessage(topology, me, now);
-    //      break;
-    //    default:
-    //      fprintf(stderr, "Unknown event type");
-    //      puts("");
-    //      abort();
-    //  }
-    //  break;
-    //case 5:
-    //  /* SELECTION */
-    //  switch(event_type) {
-    //    case LP_INIT:
-    //      SelectionInit(topology, 7, me);
-    //      break;
-    //    case EVENT:
-    //      selection(me, now, content, s);
-    //      break;
-    //    case LP_FINI:
-    //      SelectionCleanUp((SelectionData *)s);
-    //      break;
-    //    case TERMINATE:
-    //      selection_data = (SelectionData *)s;
-    //      selection_data->can_end = true;
-    //      ForwardTerminationMessage(topology, me, now);
-    //      break;
-    //    default:
-    //      fprintf(stderr, "Unknown event type");
-    //      puts("");
-    //      abort();
-    //  }
-    //  break;
-    //case 6:
-    //  /* SELECTION */
-    //  switch(event_type) {
-    //    case LP_INIT:
-    //      SelectionInit(topology, 7, me);
-    //      break;
-    //    case EVENT:
-    //      selection(me, now, content, s);
-    //      break;
-    //    case LP_FINI:
-    //      SelectionCleanUp((SelectionData *)s);
-    //      break;
-    //    case TERMINATE:
-    //      selection_data = (SelectionData *)s;
-    //      selection_data->can_end = true;
-    //      ForwardTerminationMessage(topology, me, now);
-    //      break;
-    //    default:
-    //      fprintf(stderr, "Unknown event type");
-    //      puts("");
-    //      abort();
-    //  }
-    //  break;
+    case 3:
+      /* SELECTION */
+      switch(event_type) {
+        case LP_INIT:
+          SelectionInit(topology, 7, me);
+          break;
+        case EVENT:
+          selection(me, now, content, s);
+          break;
+        case LP_FINI:
+          SelectionCleanUp((SelectionData *)s);
+          break;
+        case TERMINATE:
+          selection_data = (SelectionData *)s;
+          selection_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 4:
+      /* SELECTION */
+      switch(event_type) {
+        case LP_INIT:
+          SelectionInit(topology, 7, me);
+          break;
+        case EVENT:
+          selection(me, now, content, s);
+          break;
+        case LP_FINI:
+          SelectionCleanUp((SelectionData *)s);
+          break;
+        case TERMINATE:
+          selection_data = (SelectionData *)s;
+          selection_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 5:
+      /* SELECTION */
+      switch(event_type) {
+        case LP_INIT:
+          SelectionInit(topology, 7, me);
+          break;
+        case EVENT:
+          selection(me, now, content, s);
+          break;
+        case LP_FINI:
+          SelectionCleanUp((SelectionData *)s);
+          break;
+        case TERMINATE:
+          selection_data = (SelectionData *)s;
+          selection_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 6:
+      /* SELECTION */
+      switch(event_type) {
+        case LP_INIT:
+          SelectionInit(topology, 7, me);
+          break;
+        case EVENT:
+          selection(me, now, content, s);
+          break;
+        case LP_FINI:
+          SelectionCleanUp((SelectionData *)s);
+          break;
+        case TERMINATE:
+          selection_data = (SelectionData *)s;
+          selection_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
     case 7:
       /* WINDOW */
       switch(event_type) {
@@ -402,8 +388,8 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    /*
     case 8:
+      /* WINDOW */
       switch(event_type) {
         case LP_INIT:
           WindowInit(topology, 0, me);
@@ -424,6 +410,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
       }
       break;
     case 9:
+      /* WINDOW */
       switch(event_type) {
         case LP_INIT:
           WindowInit(topology, 0, me);
@@ -444,6 +431,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
       }
       break;
     case 10:
+      /* WINDOW */
       switch(event_type) {
         case LP_INIT:
           WindowInit(topology, 0, me);
@@ -463,12 +451,11 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-      */
     case 11:
       /* PROJECTION */
       switch(event_type) {
         case LP_INIT:
-          ProjectionInit(topology, 8, me);
+          ProjectionInit(topology, 1, me);
           break;
         case EVENT:
           projection(me, now, content, s);
@@ -491,7 +478,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
       /* GROUP BY */
       switch(event_type) {
         case LP_INIT:
-          GroupByInit(topology, 1, me);
+          GroupByInit(topology, 11, me);
           break;
         case EVENT:
           groupBy(me, now, content, s);
@@ -583,8 +570,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
       /* ORDER BY */
       switch(event_type) {
         case LP_INIT:
-          //OrderByInit(topology, 17, me);
-          OrderByInit(topology, 11, me);
+          OrderByInit(topology, 17, me);
           break;
         case EVENT:
           orderBy(me, now, content, s);
@@ -764,29 +750,6 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           abort();
       }
       break;
-    case 25:
-      /* ORDER BY */
-      switch(event_type) {
-        case LP_INIT:
-          OrderByInit(topology, 26, me);
-          break;
-        case EVENT:
-          orderBy(me, now, content, s);
-          break;
-        case LP_FINI:
-          OrderByCleanUp((OrderByData *)s);
-          break;
-        case TERMINATE:
-          orderBy_data = (OrderByData *)s;
-          orderBy_data->can_end = true;
-          ForwardTerminationMessage(topology, me, now);
-          break;
-        default:
-          fprintf(stderr, "Unknown event type");
-          puts("");
-          abort();
-      }
-      break;
     case 24:
       /* GROUP BY */
       switch(event_type) {
@@ -802,6 +765,29 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
         case TERMINATE:
           groupBy_data = (GroupByData *)s;
           groupBy_data->can_end = true;
+          ForwardTerminationMessage(topology, me, now);
+          break;
+        default:
+          fprintf(stderr, "Unknown event type");
+          puts("");
+          abort();
+      }
+      break;
+    case 25:
+      /* ORDER BY */
+      switch(event_type) {
+        case LP_INIT:
+          OrderByInit(topology, 26, me);
+          break;
+        case EVENT:
+          orderBy(me, now, content, s);
+          break;
+        case LP_FINI:
+          OrderByCleanUp((OrderByData *)s);
+          break;
+        case TERMINATE:
+          orderBy_data = (OrderByData *)s;
+          orderBy_data->can_end = true;
           ForwardTerminationMessage(topology, me, now);
           break;
         default:

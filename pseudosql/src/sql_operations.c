@@ -80,13 +80,13 @@ RowNew *Projection(RowNew input_row, AttributeList list) {
  *  @param input_rows list of rows
  *  @param list list of attributes
  */
-RowsLinkedList *ProjectionMultRows(int size, MessageEntry *input_rows, AttributeList list) {
+RowsLinkedList *ProjectionMultRows(int size, RowNew *input_rows, AttributeList list) {
     int i, j;
 
     for (i = 0; i < list.num_attributes; i++) {
         int found = 0;
-        for (j = 0; j < input_rows[0].row.num_elements; j++) {
-            if (!strncmp(input_rows[0].row.elements[j].col_name, list.attributes[i].name, strlen(list.attributes[i].name))) 
+        for (j = 0; j < input_rows[0].num_elements; j++) {
+            if (!strncmp(input_rows[0].elements[j].col_name, list.attributes[i].name, strlen(list.attributes[i].name))) 
                 found = 1;
         }
         if (!found) {
@@ -101,7 +101,7 @@ RowsLinkedList *ProjectionMultRows(int size, MessageEntry *input_rows, Attribute
     head->next = NULL;
 
     for (int i = 0; i < size; i++) {
-        AppendRow(head, Projection(input_rows[i].row, list));
+        AppendRow(head, Projection(input_rows[i], list));
     }
 
     RowsLinkedList *ret_list = rs_malloc(sizeof(RowsLinkedList));
@@ -122,7 +122,7 @@ int Selection(RowNew input_row, Condition *condition) {
  *  @param input_rows list of rows
  *  @param condition pointer to a condition struct 
  */
-RowsLinkedList *SelectionMultRows(int size, MessageEntry *input_rows, Condition *condition) {
+RowsLinkedList *SelectionMultRows(int size, RowNew *input_rows, Condition *condition) {
     int i, count = 0;
 
     struct RowsLinkedListElement *head = rs_malloc(sizeof(struct RowsLinkedListElement));
@@ -131,8 +131,8 @@ RowsLinkedList *SelectionMultRows(int size, MessageEntry *input_rows, Condition 
     head->row = NULL;
 
     for (i = 0; i < size; i++) {
-        if (Selection(input_rows[i].row, condition)) {
-            AppendRow(head, &input_rows[i].row);
+        if (Selection(input_rows[i], condition)) {
+            AppendRow(head, &input_rows[i]);
             count++;
         }
     }
@@ -146,24 +146,22 @@ RowsLinkedList *SelectionMultRows(int size, MessageEntry *input_rows, Condition 
 }
 
 int compare_rows(const void *a, const void *b, void *arg) {
-    const MessageEntry *entry1 = (const MessageEntry *)a;
-    const MessageEntry *entry2 = (const MessageEntry *)b;
-    RowNew row1 = entry1->row;
-    RowNew row2 = entry2->row;
+    const RowNew *entry1 = (const RowNew *)a;
+    const RowNew *entry2 = (const RowNew *)b;
     char *col_name = (char *)arg;
-    RowElementNew *elem1 = NULL;
-    RowElementNew *elem2 = NULL;
+    const RowElementNew *elem1 = NULL;
+    const RowElementNew *elem2 = NULL;
 
-    for (int i = 0; i < row1.num_elements; i++) {
-        if (strncmp(row1.elements[i].col_name, col_name, strlen(col_name)) == 0) {
-            elem1 = &row1.elements[i];
+    for (int i = 0; i < entry1->num_elements; i++) {
+        if (strncmp(entry1->elements[i].col_name, col_name, strlen(col_name)) == 0) {
+            elem1 = &entry1->elements[i];
             break;
         }
     }
 
-    for (int i = 0; i < row2.num_elements; i++) {
-        if (strncmp(row2.elements[i].col_name, col_name, strlen(col_name)) == 0) {
-            elem2 = &row2.elements[i];
+    for (int i = 0; i < entry2->num_elements; i++) {
+        if (strncmp(entry2->elements[i].col_name, col_name, strlen(col_name)) == 0) {
+            elem2 = &entry2->elements[i];
             break;
         }
     }
@@ -182,11 +180,11 @@ int compare_rows(const void *a, const void *b, void *arg) {
  *  @param input_rows list of rows
  *  @param col_name name of the aOrderttribute
  */
-RowsLinkedList *OrderBy(int size, MessageEntry *input_rows, const char *col_name) {
+RowsLinkedList *OrderBy(int size, RowNew *input_rows, const char *col_name) {
     int attribute_exists = 0, i;
 
-    for (i = 0; i < input_rows[0].row.num_elements; i++) {
-        if (!strncmp(input_rows[0].row.elements[i].col_name, col_name, strlen(col_name))) 
+    for (i = 0; i < input_rows[0].num_elements; i++) {
+        if (!strncmp(input_rows[0].elements[i].col_name, col_name, strlen(col_name))) 
             attribute_exists = 1;
     }
 
@@ -200,10 +198,10 @@ RowsLinkedList *OrderBy(int size, MessageEntry *input_rows, const char *col_name
     head->row = NULL;
     head->next = NULL;
 
-    qsort_r(input_rows, size, sizeof(MessageEntry), compare_rows, (void *)col_name);
+    qsort_r(input_rows, size, sizeof(RowNew), compare_rows, (void *)col_name);
 
     for (int i = 0; i < size; i++) {
-        AppendRow(head, &input_rows[i].row);
+        AppendRow(head, &input_rows[i]);
     }
 
     RowsLinkedList *ret_list = rs_malloc(sizeof(RowsLinkedList));
@@ -242,7 +240,7 @@ Row deep_copy_row(Row *original_row) {
  *  @param input_rows list of rows
  *  @param col_name name of the attribute
  */
-GroupsLinkedList *GroupBy(int size, MessageEntry *input_rows, const char *col_name) {
+GroupsLinkedList *GroupBy(int size, RowNew *input_rows, const char *col_name) {
     RowsLinkedList *rows_list;
     RowElementNew last_element;
     int rows_count = 1, groups_count = 1, col_index = -1;
@@ -250,8 +248,8 @@ GroupsLinkedList *GroupBy(int size, MessageEntry *input_rows, const char *col_na
     struct RowsLinkedListElement *rows_head;
     GroupsLinkedList *groups_list;
 
-    for (int i = 0; i < input_rows[0].row.num_elements; i++) {
-        if (strncmp(input_rows[0].row.elements[i].col_name, col_name, strlen(col_name)) == 0) {
+    for (int i = 0; i < input_rows[0].num_elements; i++) {
+        if (strncmp(input_rows[0].elements[i].col_name, col_name, strlen(col_name)) == 0) {
             col_index = i;
             break;
         }
@@ -263,7 +261,7 @@ GroupsLinkedList *GroupBy(int size, MessageEntry *input_rows, const char *col_na
     }
 
     // Order rows by the value of the specified attribute
-    qsort_r(input_rows, size, sizeof(MessageEntry), compare_rows, (void *)col_name);
+    qsort_r(input_rows, size, sizeof(RowNew), compare_rows, (void *)col_name);
 
     groups_head = rs_malloc(sizeof(struct GroupsLinkedListElement));
     CHECK_RSMALLOC(groups_head, "GroupBy");
@@ -276,14 +274,14 @@ GroupsLinkedList *GroupBy(int size, MessageEntry *input_rows, const char *col_na
     rows_head->next = NULL;
 
     // first row goes in the first group
-    AppendRow(rows_head, &input_rows[0].row);
-    last_element = input_rows[0].row.elements[col_index];
+    AppendRow(rows_head, &input_rows[0]);
+    last_element = input_rows[0].elements[col_index];
 
     for (int i = 1; i < size; i++) {
-        if (compare_elements(&input_rows[i].row.elements[col_index], &last_element) == 0) {
-            AppendRow(rows_head, &input_rows[i].row);
+        if (compare_elements(&input_rows[i].elements[col_index], &last_element) == 0) {
+            AppendRow(rows_head, &input_rows[i]);
             rows_count++;
-            last_element = input_rows[i].row.elements[col_index];
+            last_element = input_rows[i].elements[col_index];
         } else {            
             // save group and create new one
             rows_list = rs_malloc(sizeof(RowsLinkedList));
@@ -301,9 +299,9 @@ GroupsLinkedList *GroupBy(int size, MessageEntry *input_rows, const char *col_na
             rows_head->row = NULL;
             rows_head->next = NULL;
 
-            AppendRow(rows_head, &input_rows[i].row);
+            AppendRow(rows_head, &input_rows[i]);
             rows_count++;
-            last_element = input_rows[i].row.elements[col_index];
+            last_element = input_rows[i].elements[col_index];
         }
     }
 
@@ -319,6 +317,7 @@ GroupsLinkedList *GroupBy(int size, MessageEntry *input_rows, const char *col_na
     CHECK_RSMALLOC(groups_list, "GroupBy");
     groups_list->size = groups_count;
     groups_list->head = groups_head;
+    groups_list->col_index = col_index;
 
     return groups_list;
 }
@@ -331,13 +330,12 @@ GroupsLinkedList *GroupBy(int size, MessageEntry *input_rows, const char *col_na
  */
 void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
     int i;
-    Row *rows;
-    int row_index = 0;
-    RowsList input_list;
+    RowNew *input_list;
     double avg, sum, cnt;
     int index = 0;
     int attribute_exists = 0;
 
+    RowsLinkedList *ret_list;
     AggFunctionResultValue *ret_value;
 
     switch (input.type) {
@@ -349,10 +347,10 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
                 exit(EXIT_FAILURE);
             }
 
-            input_list = input.input_data.rows;
+            input_list = input.input_data.rows_list;
 
-            for (i = 0; i < input_list.rows[0].num_elements; i++) {
-                if (!strncmp(input_list.rows[0].elements[i].col_name, input.col_name, strlen(input.col_name))) {
+            for (i = 0; i < input.size; i++) {
+                if (!strncmp(input_list[0].elements[i].col_name, input.col_name, strlen(input.col_name))) {
                     attribute_exists = 1;
                 }
             }
@@ -366,21 +364,21 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
             switch(type) {
 
                 case MIN:
-                    qsort_r(input_list.rows, input_list.num_rows, sizeof(Row), compare_rows, (void *)input.col_name);
-                    index = get_index(input_list.rows[0], input.col_name);
-                    ret_value->type = input_list.rows[0].elements[index].type;
+                    qsort_r(input_list, input.size, sizeof(RowNew), compare_rows, (void *)input.col_name);
+                    index = get_index(input_list[0], input.col_name);
+                    ret_value->type = input_list[0].elements[index].type;
                     switch(ret_value->type) {
                         case TYPE_INT:
-                            ret_value->value.int_value = input_list.rows[0].elements[index].value.int_value;
+                            ret_value->value.int_value = input_list[0].elements[index].value.int_value;
                             break;
                         case TYPE_LONG:
-                            ret_value->value.long_value = input_list.rows[0].elements[index].value.long_value;
+                            ret_value->value.long_value = input_list[0].elements[index].value.long_value;
                             break;
                         case TYPE_FLOAT:
-                            ret_value->value.float_value = input_list.rows[0].elements[index].value.float_value;
+                            ret_value->value.float_value = input_list[0].elements[index].value.float_value;
                             break;
                         case TYPE_STRING:
-                            ret_value->value.string_value = input_list.rows[0].elements[index].value.string_value;
+                            ret_value->value.string_value = input_list[0].elements[index].value.string_value;
                             break;
                         default:
                             fprintf(stderr, "Unknown type\n");
@@ -388,21 +386,21 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
                     }
                     return (void *)ret_value;
                 case MAX:
-                    qsort_r(input_list.rows, input_list.num_rows, sizeof(Row), compare_rows, (void *)input.col_name);
-                    index = get_index(input_list.rows[input_list.num_rows - 1], input.col_name);
-                    ret_value->type = input_list.rows[input_list.num_rows - 1].elements[index].type;
+                    qsort_r(input_list, input.size, sizeof(RowNew), compare_rows, (void *)input.col_name);
+                    index = get_index(input_list[input.size - 1], input.col_name);
+                    ret_value->type = input_list[input.size - 1].elements[index].type;
                     switch(ret_value->type) {
                         case TYPE_INT:
-                            ret_value->value.int_value = input_list.rows[input_list.num_rows - 1].elements[index].value.int_value;
+                            ret_value->value.int_value = input_list[input.size - 1].elements[index].value.int_value;
                             break;
                         case TYPE_LONG:
-                            ret_value->value.long_value = input_list.rows[input_list.num_rows - 1].elements[index].value.long_value;
+                            ret_value->value.long_value = input_list[input.size - 1].elements[index].value.long_value;
                             break;
                         case TYPE_FLOAT:
-                            ret_value->value.float_value = input_list.rows[input_list.num_rows - 1].elements[index].value.float_value;
+                            ret_value->value.float_value = input_list[input.size - 1].elements[index].value.float_value;
                             break;
                         case TYPE_STRING:
-                            ret_value->value.string_value = input_list.rows[input_list.num_rows - 1].elements[index].value.string_value;
+                            ret_value->value.string_value = input_list[input.size - 1].elements[index].value.string_value;
                             break;
                         default:
                             fprintf(stderr, "Unknown type\n");
@@ -411,7 +409,7 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
                     return (void *)ret_value;
 
                 case AVG:
-                    avg = compute_average(input_list, input.col_name);
+                    avg = compute_average(input.size, input_list, input.col_name);
                     if (avg < 0) 
                         return NULL;
                     ret_value->type = TYPE_DOUBLE;
@@ -419,7 +417,7 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
                     return (void *)ret_value;
 
                 case SUM:
-                    sum = compute_sum(input_list, input.col_name);
+                    sum = compute_sum(input.size, input_list, input.col_name);
                     if (sum < 0)
                         return NULL;
                     ret_value->type = TYPE_DOUBLE;
@@ -427,7 +425,7 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
                     return (void *)ret_value;
 
                 case COUNT:
-                    cnt = input_list.num_rows;
+                    cnt = input.size;
                     ret_value->type = TYPE_INT;
                     ret_value->value.int_value = cnt;
                     return (void *)ret_value;
@@ -437,68 +435,80 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
                     exit(EXIT_FAILURE);
             }
 
+            return NULL;
+
         case TYPE_GROUPS:
 
-            for (i = 0; i < input.input_data.groups.groups[0].rows_list.rows[0].num_elements; i++) {
-                if (!strncmp(input.input_data.groups.groups[0].rows_list.rows[0].elements[i].col_name, input.col_name, strlen(input.col_name))) {
+            for (i = 0; i < input.input_data.groups_list->head->rows_list->head->row->num_elements; i++) {
+                if (!strncmp(input.input_data.groups_list->head->rows_list->head->row->elements[i].col_name, input.col_name, strlen(input.col_name))) {
                     attribute_exists = 1;
+                    break;
                 }
             }
+
+            int col_index = get_index(*input.input_data.groups_list->head->rows_list->head->row, input.col_name);
 
             if (!attribute_exists) {
                 fprintf(stderr, "[AGGREGATE FUNCTION] Column %s not found\n", input.col_name);
                 return NULL;
             }
 
-            rows = malloc(input.input_data.groups.num_groups * sizeof(Row));
-            CHECK_RSMALLOC(rows, "AggregateFunction");   
+            ret_list = rs_malloc(sizeof(RowsLinkedList));
+            CHECK_RSMALLOC(ret_list, "AggregateFunction");
+            ret_list->head = NULL;
+            ret_list->size = input.input_data.groups_list->size;
 
-            for (i = 0; i < input.input_data.groups.num_groups; i++) {
-                Group cur_group = input.input_data.groups.groups[i];
+            struct RowsLinkedListElement *last_row_element = NULL;
+            struct GroupsLinkedListElement *group = input.input_data.groups_list->head;
 
-                RowElement *elements = malloc(2 * sizeof(RowElement));
-                CHECK_RSMALLOC(elements, "AggregateFunction");
+            while (group != NULL) {
 
-                RowElement group_row_element = cur_group.rows_list.rows[0].elements[input.input_data.groups.col_index]; 
-                RowElement result_row_element;
+                // allocate new row
+                RowNew *row = rs_malloc(sizeof(RowNew));
+                CHECK_RSMALLOC(row, "AggregateFunction");
 
-                int index = get_index(cur_group.rows_list.rows[0], input.col_name);
+                RowElementNew group_row_element = group->rows_list->head->row->elements[input.input_data.groups_list->col_index];
+                RowElementNew result_row_element;
 
-                // aggregate function element
-                result_row_element.col_name = input.col_name;
+                RowNew *rows_list = GetRowsArrayFromRowsLinkedList(group->rows_list);
 
                 switch(type) {
                     case MIN:
-                        qsort_r(cur_group.rows_list.rows, cur_group.rows_list.num_rows, sizeof(Row), compare_rows, (void *)input.col_name);
+                        qsort_r(rows_list, group->rows_list->size, sizeof(RowNew), compare_rows, (void *)input.col_name);
                         
-                        result_row_element.type = cur_group.rows_list.rows[0].elements[index].type;
-                        result_row_element.value = cur_group.rows_list.rows[0].elements[index].value;
+                        result_row_element.type = rows_list[0].elements[col_index].type;
+                        result_row_element.value = rows_list[0].elements[col_index].value;
+                        sprintf(result_row_element.col_name, "MIN(%s)", input.col_name);
                         break;
                     
                     case MAX:
-                        qsort_r(cur_group.rows_list.rows, cur_group.rows_list.num_rows, sizeof(Row), compare_rows, (void *)input.col_name);
+                        qsort_r(rows_list, group->rows_list->size, sizeof(RowNew), compare_rows, (void *)input.col_name);
                         
-                        result_row_element.type = cur_group.rows_list.rows[0].elements[index].type;
-                        result_row_element.value = cur_group.rows_list.rows[cur_group.rows_list.num_rows - 1].elements[index].value;      
+                        result_row_element.type = rows_list[group->rows_list->size - 1].elements[col_index].type;
+                        result_row_element.value = rows_list[group->rows_list->size - 1].elements[col_index].value;      
+                        sprintf(result_row_element.col_name, "MAX(%s)", input.col_name);
                         break;
 
                     case AVG:
-                        avg = compute_average(cur_group.rows_list, input.col_name);
+                        avg = compute_average(group->rows_list->size, rows_list, input.col_name);
                         
                         result_row_element.type = TYPE_DOUBLE;
                         result_row_element.value.double_value = avg;
+                        sprintf(result_row_element.col_name, "AVG(%s)", input.col_name);
                         break;
                     
                     case SUM:
-                        sum = compute_sum(cur_group.rows_list, input.col_name);
+                        sum = compute_sum(group->rows_list->size, rows_list, input.col_name);
 
                         result_row_element.type = TYPE_DOUBLE;
                         result_row_element.value.double_value = sum;
+                        sprintf(result_row_element.col_name, "SUM(%s)", input.col_name);
                         break;
                     
                     case COUNT:
                         result_row_element.type = TYPE_INT;
-                        result_row_element.value.int_value = cur_group.rows_list.num_rows;
+                        result_row_element.value.int_value = group->rows_list->size;
+                        sprintf(result_row_element.col_name, "COUNT(%s)", input.col_name);
                         break;
 
                     default:
@@ -506,22 +516,28 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
                         exit(EXIT_FAILURE);
                 }
 
-                elements[0] = group_row_element;
-                elements[1] = result_row_element;
+                row->elements[0] = group_row_element;
+                row->elements[1] = result_row_element;
+                row->num_elements = 2; 
+                strcpy(row->table_name, group->rows_list->head->row->table_name);
 
-                Row row = {.elements = elements, .num_elements = 2, .table_name = cur_group.rows_list.rows[0].table_name};
+                struct RowsLinkedListElement *row_element = rs_malloc(sizeof(struct RowsLinkedListElement));
+                CHECK_RSMALLOC(row_element, "AggregateFunction");
+                row_element->row = row;
+                row_element->next = NULL;
 
-                rows[row_index] = row;
-                row_index++;
+                if (last_row_element == NULL) {
+                    ret_list->head = row_element;
+                } else {
+                    last_row_element->next = row_element;
+                }
+                last_row_element = row_element;
+
+                munmap(ret_list, ret_list->size * sizeof(RowNew));
+                group = group->next;
             }
 
-            RowsList *ret_list = malloc(sizeof(RowsList));
-            CHECK_RSMALLOC(ret_list, "AggregateFunction");
-
-            ret_list->num_rows = row_index;
-            ret_list->rows = rows;
-
-            return ret_list;
+            return (void *)ret_list;
 
         default:
             fprintf(stderr, "Unexpected input data type\n");

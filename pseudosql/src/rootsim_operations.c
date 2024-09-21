@@ -157,41 +157,153 @@ void CreateAndSendMessage(lp_id_t sender_id, float priority, MessageType type, v
 
 }
 
+GroupsLinkedList *DeserializeGroupsMessage(GroupsMessage *msg) {
+	GroupsLinkedList *list = rs_malloc(sizeof(GroupsLinkedList));
+	CHECK_RSMALLOC(list, "DeserializeGroupsMessage");
+	list->head = NULL;
+	list->size = 0;
+
+	struct GroupsLinkedListElement *last_group_element = NULL;
+
+	unsigned char *buffer = msg->serialized_array;
+	unsigned char *buffer_end = buffer + msg->size;
+
+	memcpy(&list->col_index, buffer, sizeof(int));
+	buffer += sizeof(int);
+
+	while (buffer < buffer_end) {
+		struct GroupsLinkedListElement *cur_group = rs_malloc(sizeof(struct GroupsLinkedListElement));
+		CHECK_RSMALLOC(cur_group, "DeserializeGroupsMessage");
+		cur_group->next = NULL;
+		cur_group->rows_list = rs_malloc(sizeof(RowsLinkedList));
+		CHECK_RSMALLOC(cur_group->rows_list, "DeserializeGroupsMessage");
+		cur_group->rows_list->head = NULL;
+
+		memcpy(&cur_group->rows_list->size, buffer, sizeof(int));
+		buffer += sizeof(int);
+
+		struct RowsLinkedListElement *last_row_element = NULL;
+
+		unsigned char *buffer_end_rows_list = buffer + cur_group->rows_list->size * sizeof(RowNew); 
+		while (buffer < buffer_end_rows_list) {
+			struct RowsLinkedListElement *cur_row = rs_malloc(sizeof(struct RowsLinkedListElement));
+			CHECK_RSMALLOC(cur_row, "DeserializeGroupsMessage");
+			cur_row->next = NULL;
+
+			cur_row->row = rs_malloc(sizeof(RowNew));
+			CHECK_RSMALLOC(cur_row->row, "DeserializeGroupsMessage");
+			memcpy(cur_row->row, buffer, sizeof(RowNew));
+			buffer += sizeof(RowNew);
+
+			if (last_row_element == NULL) {
+                cur_group->rows_list->head = cur_row;
+            } else {
+                last_row_element->next = cur_row;
+            }
+            last_row_element = cur_row;
+		}
+
+        if (last_group_element == NULL) {
+            list->head = cur_group;
+        } else {
+            last_group_element->next = cur_group;
+        }
+        last_group_element = cur_group;
+        list->size++;
+	}
+
+	return list;
+}
+
+void CreateAndSendMessageFromGroupsList(lp_id_t sender_id, float priority, GroupsLinkedList *list, simtime_t now, lp_id_t *receivers, int num_receivers) {
+	int total_size = 0;
+
+	struct GroupsLinkedListElement *group_element = list->head;
+
+	total_size += sizeof(int);	// col_index
+	while (group_element != NULL) {
+		if (group_element->rows_list != NULL)
+			total_size += sizeof(int) + group_element->rows_list->size * sizeof(RowNew);
+		group_element = group_element->next;
+	}
+
+	Envelope e;
+	e.sender = sender_id;
+	e.priority = priority;
+
+	GroupsMessage *msg = malloc(sizeof(GroupsMessage) + total_size * sizeof(unsigned char));
+	CHECK_RSMALLOC(msg, "CreateAndSendMessageFromGroupsList");
+	msg->size = total_size;
+	msg->e = e;
+
+	unsigned char *buffer = msg->serialized_array;	
+
+	memcpy(buffer, &list->col_index, sizeof(int));
+	buffer += sizeof(int);
+
+	group_element = list->head;
+	while (group_element != NULL) {
+		if (group_element->rows_list != NULL) {
+			// copy rows list size
+			memcpy(buffer, &group_element->rows_list->size, sizeof(int));
+			buffer += sizeof(int);
+
+			struct RowsLinkedListElement *row_element = group_element->rows_list->head;
+			while (row_element != NULL) {
+				if (row_element->row != NULL) {
+					memcpy(buffer, row_element->row, sizeof(RowNew));
+					buffer += sizeof(RowNew);
+				}
+				row_element = row_element->next;
+			}
+		}
+		group_element = group_element->next;
+	}
+
+	for (int i = 0; i < num_receivers; i++) {
+		ScheduleNewEvent(receivers[i], now + 1, EVENT, msg, sizeof(GroupsMessage) + total_size * sizeof(unsigned char));
+	}
+
+	free(msg);
+	// todo, free groups list
+}
+
 void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedList *list, simtime_t now, lp_id_t *receivers, int num_receivers) {
 	Envelope e;
 	NewMessage *msg;
 	int i = 0;
+	RowsLinkedList *rows_list;
 
 	e.priority = priority;
 	e.sender = sender_id;
+	rows_list = (RowsLinkedList *)list;
 
-	msg = malloc(sizeof(NewMessage) + list->size * sizeof(MessageEntry));
+	msg = malloc(sizeof(NewMessage) + rows_list->size * sizeof(RowNew));
 	CHECK_RSMALLOC(msg, "CreateAndSendMessageFromList");
 	msg->e = e;
-	msg->size = list->size;
-	msg->type = ROWS;
+	msg->size = rows_list->size;
 
-	struct RowsLinkedListElement *tmp = list->head; 
+	struct RowsLinkedListElement *rows_tmp = rows_list->head; 
 
-	while(tmp != NULL) {
-		if (i >= list->size) {
-            fprintf(stderr, "CreateAndSendMessageFromList: Exceeded the limits of the entries array\n");
-            free(msg);
-            exit(EXIT_FAILURE);
-        }
+	while(rows_tmp != NULL) {
+		if (i >= rows_list->size) {
+			fprintf(stderr, "CreateAndSendMessageFromList: Exceeded the limits of the entries array\n");
+			free(msg);
+			exit(EXIT_FAILURE);
+		}
 
-		if (tmp->row != NULL) {
-			msg->entries[i].row = *tmp->row;
+		if (rows_tmp->row != NULL) {
+			msg->rows[i] = *rows_tmp->row;
 			i++;
 		}
-		tmp = tmp->next;
+		rows_tmp = rows_tmp->next;
 	}
 
 	for (int i = 0; i < num_receivers; i++) {
-		ScheduleNewEvent(receivers[i], now + 1.0, EVENT, msg, sizeof(NewMessage) + sizeof(MessageEntry) * msg->size);
+		ScheduleNewEvent(receivers[i], now + 1.0, EVENT, msg, sizeof(NewMessage) + sizeof(RowNew) * msg->size);
 	}
 
-	FreeList(list);
+	FreeList(rows_list);	
 	free(msg);
 }
 
@@ -331,16 +443,15 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 	e.sender = me;
 	e.priority = 5.0;
 
-	NewMessage *msg = malloc(sizeof(NewMessage) + sizeof(MessageEntry));
+	NewMessage *msg = malloc(sizeof(NewMessage) + sizeof(RowNew));
 	CHECK_RSMALLOC(msg, "DataIngestion");
 
 	msg->e = e;
 	msg->size = 1;
-	msg->type = ROWS;
-	msg->entries[0].row = row;
+	msg->rows[0] = row;
 
 	for (int i = 0; i < num_neighbors; i++) {
-		ScheduleNewEvent(neighbors[i], now, EVENT, msg, sizeof(NewMessage) + sizeof(MessageEntry) * msg->size);
+		ScheduleNewEvent(neighbors[i], now, EVENT, msg, sizeof(NewMessage) + sizeof(RowNew) * msg->size);
 	}
 
 	free(msg);
@@ -648,16 +759,14 @@ void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData
     #endif
 }
 
-void AggregateFunctionRowsInput(Message *rcv_msg, char *attribute, AggregateFunctionType type) {
+void AggregateFunctionRowsInput(NewMessage *msg, AggregateFunctionData *data, AggregateFunctionType type) {
 	AggFunctionData input_data;
-	RowsList *rcv_rows_list;
 	AggFunctionResultValue *result_single_value;
 
-	rcv_rows_list = rcv_msg->content.rows_list;
-
-	input_data.col_name = attribute;
+	input_data.col_name = data->attribute;
 	input_data.type = TYPE_ROWS;
-	input_data.input_data.rows = *rcv_rows_list;
+	input_data.input_data.rows_list = msg->rows;
+	input_data.size = msg->size;
 
 	result_single_value = (AggFunctionResultValue *)AggregateFunction(input_data, type);
 	
@@ -680,18 +789,15 @@ void AggregateFunctionRowsInput(Message *rcv_msg, char *attribute, AggregateFunc
 }
 
 
-RowsList *AggregateFunctionGroupedInput(Message *rcv_msg, char *attribute, AggregateFunctionType type) {
-	GroupsList *rcv_groups_list;
+RowsLinkedList *AggregateFunctionGroupedInput(GroupsLinkedList *groups, AggregateFunctionData *data, AggregateFunctionType type) {
 	AggFunctionData input_data;
-	RowsList *result_rows_list;
+	RowsLinkedList *result_rows_list;
 
-	rcv_groups_list = rcv_msg->content.groups_list;
-
-	input_data.col_name = attribute;
+	input_data.col_name = data->attribute;
 	input_data.type = TYPE_GROUPS;
-	input_data.input_data.groups = *rcv_groups_list;
+	input_data.input_data.groups_list = groups;
 
-	result_rows_list = (RowsList *)AggregateFunction(input_data, type);
+	result_rows_list = (RowsLinkedList *)AggregateFunction(input_data, type);
 
 	return result_rows_list;	
 }
@@ -711,12 +817,7 @@ RowsLinkedList *wSelection(NewMessage *rcv_msg, void *data) {
 
 	condition = selection_data->condition;
 
-	if (rcv_msg->type != ROWS) {
-		fprintf(stderr, "Selection on grouped rows is not supported yet\n");
-		exit(EXIT_FAILURE);
-	}
-
-	ret_list = SelectionMultRows(rcv_msg->size, rcv_msg->entries, condition);
+	ret_list = SelectionMultRows(rcv_msg->size, rcv_msg->rows, condition);
 	if (ret_list->size == 0) {
 		printf("[SELECTION] No tuples were found that satisfy the specified selection condition.\n");
 		return NULL;
@@ -738,11 +839,7 @@ RowsLinkedList *wProjection(NewMessage *rcv_msg, void *data) {
 	ProjectionData *proj_data = (ProjectionData *)data;
 	AttributeList *list = proj_data->list;
 
-	if (rcv_msg->type != ROWS) {
-		fprintf(stderr, "Projection on grouped rows is not supported yet\n");
-	}
-
-	ret_list = ProjectionMultRows(rcv_msg->size, rcv_msg->entries, *list);
+	ret_list = ProjectionMultRows(rcv_msg->size, rcv_msg->rows, *list);
 
 	#ifdef DEBUG
 	if (!send_list) {
@@ -771,11 +868,7 @@ RowsLinkedList *wOrderBy(NewMessage *rcv_msg, void *data) {
 
 	char *attribute = orderBy_data->attribute;
 
-	if (rcv_msg->type != ROWS) {
-		fprintf(stderr, "OrderBy can only be performed on a list of rows\n");
-	}
-
-	ret_list = OrderBy(rcv_msg->size, rcv_msg->entries, attribute);
+	ret_list = OrderBy(rcv_msg->size, rcv_msg->rows, attribute);
 
 	return ret_list;
 }
@@ -795,12 +888,7 @@ GroupsLinkedList *wGroupBy(NewMessage *rcv_msg, void *data) {
 
 	char *attribute = groupBy_data->attribute;
 
-	if (rcv_msg->type != ROWS) {
-		fprintf(stderr, "Unexpected input message type for GroupBy\n");
-		exit(EXIT_FAILURE);
-	}
-
-	groups_list = GroupBy(rcv_msg->size, rcv_msg->entries, attribute);
+	groups_list = GroupBy(rcv_msg->size, rcv_msg->rows, attribute);
 	if (groups_list == NULL) {
 		exit(EXIT_FAILURE);
 	}
@@ -817,24 +905,6 @@ GroupsLinkedList *wGroupBy(NewMessage *rcv_msg, void *data) {
  * @param priority Priority of the messages to be sent
  * @param type Aggregate function to be executed, it can be MIN, MAX, COUNT, SUM, AVG
  */
-RowsList *wAggregateFunction(Message *rcv_msg, void *data, AggregateFunctionType type) {
-	RowsList *result_rows_list = NULL;
-	AggregateFunctionData *agg_function_data = (AggregateFunctionData *)data;
-
-	char *attribute = agg_function_data->attribute;
-
-	switch(rcv_msg->type) {
-		case ROWS:
-			AggregateFunctionRowsInput(rcv_msg, attribute, type);
-			break;
-
-		case GROUPS:
-			result_rows_list = AggregateFunctionGroupedInput(rcv_msg, attribute, type);
-			break;
-	}
-
-	return result_rows_list;
-}
 
 /**
  * @brief Window process: it receives one tuple at a time from the DataInjection process, gathers as many tuples as the window size, 
@@ -849,18 +919,13 @@ RowsLinkedList *ExecuteWindow(NewMessage *rcv_msg, WindowData *data) {
 
 	RowsLinkedList *ret_list = NULL;
 
-	if (rcv_msg->type != ROWS) {
-		fprintf(stderr, "Windowing can be applied only on lists of rows\n");
-		exit(EXIT_FAILURE);
-	}
-
 	if (rcv_msg->size != 1) {
 		fprintf(stderr, "Window operator received more than one tuple in a single message\n");
 		exit(EXIT_FAILURE);
 	}
 
 	// get tuple time
-	data->cur_time = rcv_msg->entries[0].row.elements[1].value.long_value;
+	data->cur_time = rcv_msg->rows[0].elements[1].value.long_value;
 
 	if (data->max_time == 0) {
 		// first tuple, set max_time
@@ -886,7 +951,7 @@ RowsLinkedList *ExecuteWindow(NewMessage *rcv_msg, WindowData *data) {
 		data->received_tuples = 0;
 	}
 
-	AppendRow(data->list, &rcv_msg->entries[0].row);
+	AppendRow(data->list, &rcv_msg->rows[0]);
 	data->received_tuples++;
 
 	return ret_list;	
@@ -985,7 +1050,7 @@ RowsList *wJoin(Message *msg, void *data) {
  * @param row Pointer to the row to extract column names from
  * @param file File pointer to the open file
  */
-void PrintHeaderCSV(Row *row, FILE *file) {
+void PrintHeaderCSV(RowNew *row, FILE *file) {
     for (int i = 0; i < row->num_elements; i++) {
         fprintf(file, "%s", row->elements[i].col_name);
         if (i < row->num_elements - 1) {
@@ -1000,25 +1065,25 @@ void PrintHeaderCSV(Row *row, FILE *file) {
  * @param row Pointer to the row to be printed
  * @param file File pointer to the open file
  */
-void PrintRowCSV(Row *row, FILE *file) {
+void PrintRowCSV(RowNew *row, FILE *file) {
     for (int i = 0; i < row->num_elements; i++) {
-        RowElement *element = &row->elements[i];
+        RowElementNew element = row->elements[i];
         
-        switch (element->type) {
+        switch (element.type) {
             case TYPE_INT:
-                fprintf(file, "%d", element->value.int_value);
+                fprintf(file, "%d", element.value.int_value);
                 break;
             case TYPE_LONG:
-                fprintf(file, "%ld", element->value.long_value);
+                fprintf(file, "%ld", element.value.long_value);
                 break;
             case TYPE_FLOAT:
-                fprintf(file, "%f", element->value.float_value);
+                fprintf(file, "%f", element.value.float_value);
                 break;
             case TYPE_DOUBLE:
-                fprintf(file, "%lf", element->value.double_value);
+                fprintf(file, "%lf", element.value.double_value);
                 break;
             case TYPE_STRING:
-                fprintf(file, "%s", element->value.string_value);
+                fprintf(file, "%s", element.value.string_value);
                 break;
         }
 
@@ -1037,10 +1102,10 @@ void PrintRowCSV(Row *row, FILE *file) {
  * @param content Pointer to the received message
  */
 void WriteToOutputFile(lp_id_t me, const void *content, OutputProcessData *data) {
-    Message *msg;
-    int i, j;
+    NewMessage *msg;
+    int i;
     
-    msg = (Message *)content;
+    msg = (NewMessage *)content;
 
     FILE *file = fopen(data->filename, "a+");
     if (!file) {
@@ -1052,63 +1117,17 @@ void WriteToOutputFile(lp_id_t me, const void *content, OutputProcessData *data)
     long file_size = ftell(file);
 
     if (file_size == 0) {
-        if (msg->type == ROWS && msg->content.rows_list->num_rows > 0) {
-            PrintHeaderCSV(&msg->content.rows_list->rows[0], file);
-        } else if (msg->type == GROUPS && msg->content.groups_list->num_groups > 0) {
-            if (msg->content.groups_list->groups[0].rows_list.num_rows > 0) {
-                PrintHeaderCSV(&msg->content.groups_list->groups[0].rows_list.rows[0], file);
-            }
+        if (msg->size > 0) {
+            PrintHeaderCSV(&msg->rows[0], file);
         }
     }
 
-    switch (msg->type) {
-        case ROWS:
-            for (i = 0; i < msg->content.rows_list->num_rows; i++) {
-                PrintRowCSV(&msg->content.rows_list->rows[i], file);
-            }
-            break;
-        case GROUPS:
-            for (i = 0; i < msg->content.groups_list->num_groups; i++) {
-                fprintf(file, "Group %d\n", i);
-                for (j = 0; j < msg->content.groups_list->groups[i].rows_list.num_rows; j++) {
-                    PrintRowCSV(&msg->content.groups_list->groups[i].rows_list.rows[j], file);
-                }
-            }
-            break;
-    }
+    for (i = 0; i < msg->size; i++) {
+		PrintRowCSV(&msg->rows[i], file);
+	}
 
 	printf("[INFO] Output process %ld has written the query result in the file %s\n", me, data->filename);
     fclose(file);
-}
-
-/**
- * @brief Generic output process, that simply prints out the messages it receives
- * @param me Process id
- * @param now Current simulation time
- * @param content Pointer to the received message
- */
-void ProcessMessage(lp_id_t me, const void *content) {
-	Message *msg;
-	int i, j;
-	
-	msg = (Message *)content;
-
-	printf("[%ld] Printing result:\n", me);
-	switch(msg->type) {
-		case ROWS:
-			for (i = 0; i < msg->content.rows_list->num_rows; i++) {
-				PrintRow(&msg->content.rows_list->rows[i]);
-			}
-			break;
-		case GROUPS:
-			for (i = 0; i < msg->content.groups_list->num_groups; i++) {
-				printf("Group %d\n", i);
-				for (j = 0; j < msg->content.groups_list->groups[i].rows_list.num_rows; j++) {
-					PrintRow(&msg->content.groups_list->groups[i].rows_list.rows[j]);
-				}
-			}
-			break;
-	}
 }
 
 void ForwardTerminationMessage(struct topology *topology, lp_id_t me, simtime_t now) {

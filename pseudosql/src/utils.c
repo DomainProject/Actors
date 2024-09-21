@@ -4,6 +4,7 @@
 #include <string.h>
 #include <time.h>
 #include <stdint.h>
+#include <sys/mman.h>
 
 #include "utils.h"
 
@@ -232,7 +233,7 @@ void PopulateRow(char *row_string, RowNew *row, Schema schema) {
     free(copy);
 }
 
-int get_index(Row row, char *col_name) {
+int get_index(RowNew row, char *col_name) {
     for (int i = 0; i < row.num_elements; i++) {
         if (!strncmp(row.elements[i].col_name, col_name, strlen(col_name)))
             return i;
@@ -242,31 +243,31 @@ int get_index(Row row, char *col_name) {
     return -1;
 }
 
-double compute_average(RowsList list, char *col_name) {
+double compute_average(int size, RowNew *list, char *col_name) {
     int count = 0, index, i;
     double sum = 0.0;
 
-    index = get_index(list.rows[0], col_name);
+    index = get_index(list[0], col_name);
     
-    if (list.rows[0].elements[index].type == TYPE_STRING) {
+    if (list[0].elements[index].type == TYPE_STRING) {
         fprintf(stderr, "Average is not defined for strings\n");
         return -1.0;
     }
 
-    for (i = 0; i < list.num_rows; i++) {
+    for (i = 0; i < size; i++) {
         count++;
-        switch(list.rows[i].elements[index].type) {
+        switch(list[i].elements[index].type) {
             case TYPE_FLOAT:
-                sum += (double)list.rows[i].elements[index].value.float_value;
+                sum += (double)list[i].elements[index].value.float_value;
                 break;
             case TYPE_INT:
-                sum += (double)list.rows[i].elements[index].value.int_value;
+                sum += (double)list[i].elements[index].value.int_value;
                 break;
             case TYPE_LONG:
-                sum += (double)list.rows[i].elements[index].value.long_value;
+                sum += (double)list[i].elements[index].value.long_value;
                 break;
             case TYPE_DOUBLE:
-                sum += list.rows[i].elements[index].value.double_value;
+                sum += list[i].elements[index].value.double_value;
                 break;
             default:
                 break;
@@ -276,30 +277,30 @@ double compute_average(RowsList list, char *col_name) {
     return sum / count;
 }
 
-double compute_sum(RowsList list, char *col_name) {
+double compute_sum(int size, RowNew *list, char *col_name) {
     int index, i;
     double sum = 0.0;
 
-    index = get_index(list.rows[0], col_name);
+    index = get_index(list[0], col_name);
 
-    if (list.rows[0].elements[index].type == TYPE_STRING) {
+    if (list[0].elements[index].type == TYPE_STRING) {
         fprintf(stderr, "Sum is not defined for strings\n");
         return -1.0;
     }
 
-    for (i = 0; i < list.num_rows; i++) {
-        switch(list.rows[i].elements[index].type) {
+    for (i = 0; i < size; i++) {
+        switch(list[i].elements[index].type) {
             case TYPE_FLOAT:
-                sum += (double)list.rows[i].elements[index].value.float_value;
+                sum += (double)list[i].elements[index].value.float_value;
                 break;
             case TYPE_INT:
-                sum += (double)list.rows[i].elements[index].value.int_value;
+                sum += (double)list[i].elements[index].value.int_value;
                 break;
             case TYPE_LONG:
-                sum += (double)list.rows[i].elements[index].value.long_value;
+                sum += (double)list[i].elements[index].value.long_value;
                 break;
             case TYPE_DOUBLE:
-                sum += list.rows[i].elements[index].value.long_value;
+                sum += list[i].elements[index].value.long_value;
                 break;
             default:
                 break;
@@ -312,8 +313,8 @@ double compute_sum(RowsList list, char *col_name) {
 int are_equals(Row row1, Row row2, char *col1_name, char *col2_name) {
     int index1, index2;
 
-    index1 = get_index(row1, col1_name);
-    index2 = get_index(row2, col2_name);
+    //index1 = get_index(row1, col1_name);
+    //index2 = get_index(row2, col2_name);
 
     if (index1 == -1 || index2 == -1) {
         return -1;
@@ -406,4 +407,22 @@ void FreeList(RowsLinkedList* list) {
     }
 
     rs_free(list);
+}
+
+RowNew *GetRowsArrayFromRowsLinkedList(RowsLinkedList *list) {
+    RowNew *array = mmap(NULL, list->size * sizeof(RowNew), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
+    if (array == MAP_FAILED) {
+        perror("Error in mmap");
+        exit(EXIT_FAILURE);
+    }
+    CHECK_RSMALLOC(array, "GetRowsArrayFromRowsLinkedList");
+    int i = 0;
+
+    struct RowsLinkedListElement *e = list->head;
+    while (e != NULL) {
+        array[i++] = *e->row;
+        e = e->next;
+    }
+
+    return array;
 }

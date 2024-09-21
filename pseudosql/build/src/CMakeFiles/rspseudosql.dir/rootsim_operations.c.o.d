@@ -70,7 +70,11 @@ src/CMakeFiles/rspseudosql.dir/rootsim_operations.c.o: \
  /usr/include/string.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
+ /usr/include/strings.h /usr/include/x86_64-linux-gnu/sys/mman.h \
+ /usr/include/x86_64-linux-gnu/bits/mman.h \
+ /usr/include/x86_64-linux-gnu/bits/mman-map-flags-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/mman-linux.h \
+ /usr/include/x86_64-linux-gnu/bits/mman-shared.h \
  /home/simoneb/thesis/Actors/pseudosql/src/condition_parser.h \
  /home/simoneb/thesis/Actors/pseudosql/src/utils.h /usr/include/time.h \
  /usr/include/x86_64-linux-gnu/bits/time.h \
