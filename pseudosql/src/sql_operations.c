@@ -30,14 +30,14 @@ RowNew *Projection(RowNew input_row, AttributeList list) {
     int i, j, index;
     RowNew *output_row;
 
-    output_row = malloc(sizeof(RowNew));
+    output_row = rs_malloc(sizeof(RowNew));
     if (!output_row) {
         perror("malloc");
         exit(EXIT_FAILURE);
     }
 
     output_row->num_elements = list.num_attributes;
-    strcpy(output_row->table_name, strdup(input_row.table_name));
+    strcpy(output_row->table_name, input_row.table_name);
 
     index = 0;
 

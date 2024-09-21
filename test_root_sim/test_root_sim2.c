@@ -10,10 +10,10 @@
 #endif
 
 #ifndef NUM_THREADS
-#define NUM_THREADS 0
+#define NUM_THREADS 1
 #endif
 
-#define INPUT_FILE "taxi_1000.csv"
+#define INPUT_FILE "taxi.csv"
 
 FILE *file;
 Schema schema;
@@ -22,16 +22,16 @@ void InitTopology() {
   topology = InitializeTopology(TOPOLOGY_GRAPH, 36);
 
   AddTopologyLink(topology, 0, 7, 1);
-  static int window0to7 = 1000;
+  static int window0to7 = 3600;
   SetTopologyLinkData(topology, 0, 7, (void *)&window0to7);
   AddTopologyLink(topology, 0, 8, 1);
-  static int window0to8 = 1000;
+  static int window0to8 = 3600;
   SetTopologyLinkData(topology, 0, 8, (void *)&window0to8);
   AddTopologyLink(topology, 0, 9, 1);
-  static int window0to9 = 1000;
+  static int window0to9 = 3600;
   SetTopologyLinkData(topology, 0, 9, (void *)&window0to9);
   AddTopologyLink(topology, 0, 10, 1);
-  static int window0to10 = 1000;
+  static int window0to10 = 3600;
   SetTopologyLinkData(topology, 0, 10, (void *)&window0to10);
   AddTopologyLink(topology, 1, 11, 1);
   SetTopologyLinkData(topology, 1, 11, (void *)"payment_type,total_amount");
@@ -116,6 +116,8 @@ void projection(lp_id_t me, simtime_t now, const void *content, void *data) {
   int num_refs;
   lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
   CreateAndSendMessageFromList(me, 5.0, result, now, refs, num_refs);
+
+  free(refs);
 }
 
 void selection(lp_id_t me, simtime_t now, const void *content, void *data) {
@@ -125,6 +127,8 @@ void selection(lp_id_t me, simtime_t now, const void *content, void *data) {
   int num_refs;
   lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
   CreateAndSendMessageFromList(me, 5.0, result, now, refs, num_refs);
+
+  free(refs);
 }
 
 void joinColumns(lp_id_t me, simtime_t now, const void *content, void *data) {
@@ -1156,7 +1160,7 @@ struct simulation_configuration conf = {
   .log_level = LOG_INFO,
   .stats_file = "stats",
   .ckpt_interval = 0,
-  .core_binding = true,
+  .core_binding = false,
   .serial = false,
   .dispatcher = ProcessEvent,
   .committed = CanEnd,

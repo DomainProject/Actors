@@ -226,6 +226,7 @@ void PopulateRow(char *row_string, RowNew *row, Schema schema) {
             }
         }
 
+        free(value_str);
         token = strtok(NULL, ",");
         column_index++;
     }
@@ -369,7 +370,6 @@ void AppendRow(struct RowsLinkedListElement* head, RowNew *row) {
 
 void AppendGroup(struct GroupsLinkedListElement* head, RowsLinkedList *rows) {
     if (head == NULL) {
-        fprintf(stderr, "invalid list head\n");
         return;
     }
   
@@ -389,7 +389,6 @@ void AppendGroup(struct GroupsLinkedListElement* head, RowsLinkedList *rows) {
 
 void FreeList(RowsLinkedList* list) {
     if (list == NULL) {
-        fprintf(stderr, "Invalid list pointer\n");
         return;
     }
 
@@ -406,6 +405,26 @@ void FreeList(RowsLinkedList* list) {
         tmp = next;
     }
 
+    rs_free(list);
+}
+
+void FreeGroup(GroupsLinkedList *list) {
+    if (list == NULL) {
+        fprintf(stderr, "Invalid list pointer\n");
+        return;
+    }
+
+    struct GroupsLinkedListElement *tmp = list->head;
+
+    while (tmp != NULL) {
+        struct GroupsLinkedListElement *next = tmp->next;
+
+        FreeList(tmp->rows_list);
+        rs_free(tmp);
+
+        tmp = next;
+    }
+    
     rs_free(list);
 }
 

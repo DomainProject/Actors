@@ -265,7 +265,7 @@ void CreateAndSendMessageFromGroupsList(lp_id_t sender_id, float priority, Group
 	}
 
 	free(msg);
-	// todo, free groups list
+	FreeGroup(list);
 }
 
 void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedList *list, simtime_t now, lp_id_t *receivers, int num_receivers) {
@@ -409,9 +409,6 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 
     // read line from the input file
     if (fgets(line, sizeof(line), *file) == NULL) {
-
-		printf("File read\n");
-
         // create and send termination message
         lp_id_t num_neighbors = CountDirections(topology, me);
         lp_id_t neighbors[num_neighbors];
@@ -455,6 +452,7 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 	}
 
 	free(msg);
+	free(neighbors);
 
 	// Check if there is a next line to compute the sleep time
     long current_position = ftell(*file);
@@ -974,6 +972,8 @@ void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t
 	CreateAndSendMessageFromList(me, 5.0, list, now, neighbors, num_neighbors);
 
 	ForwardTerminationMessage(topology, me, now);
+
+	free(neighbors);
 }
 
 void JoinInit(struct topology *topology, lp_id_t from1, lp_id_t from2, lp_id_t me) {
@@ -1132,13 +1132,14 @@ void WriteToOutputFile(lp_id_t me, const void *content, OutputProcessData *data)
 
 void ForwardTerminationMessage(struct topology *topology, lp_id_t me, simtime_t now) {
 	// create and send termination message
-	lp_id_t num_neighbors = CountDirections(topology, me);
-	lp_id_t neighbors[num_neighbors];
-	GetAllReceivers(topology, me, neighbors);
+	int num_neighbors = CountDirections(topology, me);
+	lp_id_t *neighbors = GetAllNeighbors(topology, me, &num_neighbors);
 
-	for (unsigned int i = 0; i < num_neighbors; i++) {
+	for (int i = 0; i < num_neighbors; i++) {
 		ScheduleNewEvent(neighbors[i], now + 10.0, TERMINATE, NULL, 0);
 	}
+
+	free(neighbors);
 }
 
 void DataIngestionCleanUp(FILE *file, __unused DataSourceData *data) {

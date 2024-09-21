@@ -300,6 +300,7 @@ typedef struct {
 /* utils */
 EXPORT void PrintRow(const RowNew *row);
 EXPORT void FreeList(RowsLinkedList* list);
+EXPORT void FreeGroup(GroupsLinkedList *list);
 
 /* SQL operations */
 EXPORT RowsLinkedList *ProjectionMultRows(int size, RowNew *input_rows, AttributeList list);
