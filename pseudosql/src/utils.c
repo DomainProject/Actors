@@ -404,3 +404,219 @@ RowNew *GetRowsArrayFromRowsLinkedList(RowsLinkedList *list) {
 
     return array;
 }
+
+
+RowNew *FindMinFromLinkedList(RowsLinkedList *list, int col_index) {
+    if (list == NULL || list->head == NULL) {
+        fprintf(stderr, "FindMinFromLinkedList: invalid parameter (list is NULL)\n");
+        return NULL;
+    }
+
+    RowNew *min_row = NULL;
+
+    // Inizio dal primo elemento della lista
+    struct RowsLinkedListElement *current_element = list->head;
+
+    while (current_element != NULL) {
+
+        RowElementNew *cur_element = &current_element->row->elements[col_index];
+
+        if (min_row == NULL) {
+            min_row = current_element->row;
+        } else {
+            // Confronta il tipo dell'elemento attuale con il tipo dell'elemento minimo
+            switch (cur_element->type) {
+                case TYPE_INT:
+                    if (cur_element->value.int_value < min_row->elements[col_index].value.int_value) {
+                        min_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_LONG:
+                    if (cur_element->value.long_value < min_row->elements[col_index].value.long_value) {
+                        min_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_FLOAT:
+                    if (cur_element->value.float_value < min_row->elements[col_index].value.float_value) {
+                        min_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_DOUBLE:
+                    if (cur_element->value.double_value < min_row->elements[col_index].value.double_value) {
+                        min_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_STRING:
+                    if (strcmp(cur_element->value.string_value, min_row->elements[col_index].value.string_value) < 0) {
+                        min_row = current_element->row;
+                    }
+                    break;
+
+                default:
+                    fprintf(stderr, "FindMinFromLinkedList: Unexpected type\n");
+                    break;
+            }
+            
+        }
+        current_element = current_element->next;
+    }
+
+    return min_row;
+}
+
+RowNew *FindMaxFromLinkedList(RowsLinkedList *list, int col_index) {
+    if (list == NULL || list->head == NULL) {
+        fprintf(stderr, "FindMaxFromLinkedList: invalid parameter (list is NULL)\n");
+        return NULL;
+    }
+
+    RowNew *max_row = NULL;
+
+    // Inizio dal primo elemento della lista
+    struct RowsLinkedListElement *current_element = list->head;
+
+    while (current_element != NULL) {
+
+        RowElementNew *cur_element = &current_element->row->elements[col_index];
+
+        if (max_row == NULL) {
+            max_row = current_element->row;
+        } else {
+            // Confronta il tipo dell'elemento attuale con il tipo dell'elemento minimo
+            switch (cur_element->type) {
+                case TYPE_INT:
+                    if (cur_element->value.int_value > max_row->elements[col_index].value.int_value) {
+                        max_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_LONG:
+                    if (cur_element->value.long_value > max_row->elements[col_index].value.long_value) {
+                        max_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_FLOAT:
+                    if (cur_element->value.float_value > max_row->elements[col_index].value.float_value) {
+                        max_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_DOUBLE:
+                    if (cur_element->value.double_value > max_row->elements[col_index].value.double_value) {
+                        max_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_STRING:
+                    if (strcmp(cur_element->value.string_value, max_row->elements[col_index].value.string_value) > 0) {
+                        max_row = current_element->row;
+                    }
+                    break;
+
+                default:
+                    fprintf(stderr, "FindMinFromLinkedList: Unexpected type\n");
+                    break;
+            }
+            
+        }
+        current_element = current_element->next;
+    }
+
+    return max_row;
+}
+
+double ComputeAverageFromLinkedList(RowsLinkedList *list, int col_index) {
+    if (list == NULL || list->head == NULL) {
+        fprintf(stderr, "ComputeAverageFromLinkedList: invalid parameter (list is NULL)\n");
+        return;
+    }
+
+    struct RowsLinkedListElement *current_element = list->head;
+    double sum = 0.0;
+    int count = 0;
+
+    while (current_element != NULL) {
+        RowElementNew *cur_element = &current_element->row->elements[col_index];
+
+        switch (cur_element->type) {
+            case TYPE_INT:
+                sum += (double)cur_element->value.int_value;
+                break;
+
+            case TYPE_LONG:
+                sum += (double)cur_element->value.long_value;
+                break;
+
+            case TYPE_FLOAT:
+                sum += (double)cur_element->value.float_value;
+                break;
+
+            case TYPE_DOUBLE:
+                sum += cur_element->value.double_value;
+                break;
+
+            case TYPE_STRING:
+                fprintf(stderr, "ComputeAverageFromLinkedList: cannot compute average of strings\n");
+                exit(EXIT_FAILURE);
+
+            default:
+                fprintf(stderr, "ComputeAverageFromLinkedList: unexpected type\n");
+                exit(EXIT_FAILURE);
+        }
+
+        count++;
+        current_element = current_element->next;
+    }
+
+    return sum / count;
+}
+
+double ComputeSumFromLinkedList(RowsLinkedList *list, int col_index) {
+    if (list == NULL || list->head == NULL) {
+        fprintf(stderr, "ComputeSumFromLinkedList: invalid parameter (list is NULL)\n");
+        return;
+    }
+
+    struct RowsLinkedListElement *current_element = list->head;
+    double sum = 0.0;
+
+    while (current_element != NULL) {
+        RowElementNew *cur_element = &current_element->row->elements[col_index];
+
+        switch (cur_element->type) {
+            case TYPE_INT:
+                sum += (double)cur_element->value.int_value;
+                break;
+
+            case TYPE_LONG:
+                sum += (double)cur_element->value.long_value;
+                break;
+
+            case TYPE_FLOAT:
+                sum += (double)cur_element->value.float_value;
+                break;
+
+            case TYPE_DOUBLE:
+                sum += cur_element->value.double_value;
+                break;
+
+            case TYPE_STRING:
+                fprintf(stderr, "ComputeSumFromLinkedList: cannot compute average of strings\n");
+                exit(EXIT_FAILURE);
+
+            default:
+                fprintf(stderr, "ComputeSumFromLinkedList: unexpected type\n");
+                exit(EXIT_FAILURE);
+        }
+
+        current_element = current_element->next;
+    }
+
+    return sum;
+}
+

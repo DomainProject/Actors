@@ -6,11 +6,11 @@
 #include <unistd.h>
 
 #ifndef NUM_LPS
-#define NUM_LPS 256
+#define NUM_LPS 100
 #endif
 
 #ifndef NUM_THREADS
-#define NUM_THREADS 0
+#define NUM_THREADS 1
 #endif
 
 #define INPUT_FILE "taxi.csv"
@@ -19,16 +19,16 @@ FILE *file;
 Schema schema;
 struct topology *topology;
 void InitTopology() {
-  topology = InitializeTopology(TOPOLOGY_GRAPH, 28);
+  topology = InitializeTopology(TOPOLOGY_GRAPH, 25);
 
   AddTopologyLink(topology, 0, 6, 1);
-  static int window0to6 = 3600;
+  static int window0to6 = 36000;
   SetTopologyLinkData(topology, 0, 6, (void *)&window0to6);
   AddTopologyLink(topology, 0, 7, 1);
-  static int window0to7 = 3600;
+  static int window0to7 = 36000;
   SetTopologyLinkData(topology, 0, 7, (void *)&window0to7);
   AddTopologyLink(topology, 0, 8, 1);
-  static int window0to8 = 3600;
+  static int window0to8 = 36000;
   SetTopologyLinkData(topology, 0, 8, (void *)&window0to8);
   AddTopologyLink(topology, 1, 9, 1);
   SetTopologyLinkData(topology, 1, 9, (void *)"payment_type,total_amount");
@@ -83,6 +83,8 @@ void window(lp_id_t me, simtime_t now, const void *content, void *data) {
   int num_refs;
   lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
   CreateAndSendMessageFromList(me, 5.0, result, now, refs, num_refs);
+
+  free(refs);
 }
 
 void projection(lp_id_t me, simtime_t now, const void *content, void *data) {
@@ -858,7 +860,7 @@ struct simulation_configuration conf = {
   .stats_file = "stats",
   .ckpt_interval = 0,
   .core_binding = false,
-  .serial = false,
+  .serial = true,
   .dispatcher = ProcessEvent,
   .committed = CanEnd
 };

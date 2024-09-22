@@ -18,3 +18,7 @@ extern void PopulateRow(char *row_string, RowNew *row, Schema schema);
 extern void AppendRow(struct RowsLinkedListElement* head, RowNew *row);
 extern void AppendGroup(struct GroupsLinkedListElement* head, RowsLinkedList *rows);
 extern RowNew *GetRowsArrayFromRowsLinkedList(RowsLinkedList *list);
+extern double ComputeSumFromLinkedList(RowsLinkedList *list, int col_index);
+extern double ComputeAverageFromLinkedList(RowsLinkedList *list, int col_index);
+extern RowNew *FindMaxFromLinkedList(RowsLinkedList *list, int col_index);
+extern RowNew *FindMinFromLinkedList(RowsLinkedList *list, int col_index);

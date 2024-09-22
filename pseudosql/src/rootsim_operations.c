@@ -243,6 +243,47 @@ void DataIngestionInit(lp_id_t me, simtime_t now, FILE **file, char *filename, S
 	#endif
 }
 
+void CreateAndSendTerminationMessage(struct topology *topology, lp_id_t me, simtime_t now, DataSourceData *data) {
+	int num_neighbors;
+	lp_id_t *neighbors = GetAllNeighbors(topology, me, &num_neighbors);
+
+	for (int i = 0; i < num_neighbors; i++) {
+		ScheduleNewEvent(neighbors[i], now + 10.0, TERMINATE, NULL, 0);
+	}
+
+	data->can_end = true;
+	free(neighbors);
+}
+
+simtime_t GetNextTupleTime(char *line, char *next_line) {
+	simtime_t new_time;
+	char *cur_datetime, *next_datetime;
+
+	next_line[strcspn(next_line, "\n")] = '\0';
+	next_line[sizeof(next_line) - 1] = '\0';
+
+	char next_line_copy[MAX_LINE_LENGTH];
+	strcpy(next_line_copy, next_line);
+
+	// get the time from the next line
+	int count = 0;
+	char *cur_saveptr, *next_saveptr;
+	cur_datetime = strtok_r(line, ",", &cur_saveptr);
+	next_datetime = strtok_r(next_line_copy, ",", &next_saveptr);
+
+	while (cur_datetime != NULL && next_datetime != NULL) {
+		if (count == 1) {
+			new_time = ComputeSleepTime(cur_datetime, next_datetime);
+			break;
+		}
+		cur_datetime = strtok_r(NULL, ",", &cur_saveptr);
+		next_datetime = strtok_r(NULL, ",", &next_saveptr);
+		count++;
+	}
+
+	return new_time;
+}
+
 /**
  * @brief DataIngestion process, that reads tuples from the input files and forwards them to its neighbors, based on the tuple's actual time
  * @param me DataIngestion process id
@@ -251,100 +292,130 @@ void DataIngestionInit(lp_id_t me, simtime_t now, FILE **file, char *filename, S
 void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSourceData *data, FILE **file, Schema *schema) {
     char line[MAX_LINE_LENGTH];
     char next_line[MAX_LINE_LENGTH];
-    simtime_t new_time = 0.0;
-    char *cur_datetime, *next_datetime;
-    RowNew row;
     lp_id_t *neighbors;
     int num_neighbors;
+	simtime_t new_time;
+	int is_next_time_different = 0;
+	long current_position;
+	char *cur_datetime, *next_datetime;
+
 
     // read line from the input file
     if (fgets(line, sizeof(line), *file) == NULL) {
-        // create and send termination message
-        lp_id_t num_neighbors = CountDirections(topology, me);
-        lp_id_t neighbors[num_neighbors];
-        GetAllReceivers(topology, me, neighbors);
-
-        for (unsigned int i = 0; i < num_neighbors; i++) {
-            ScheduleNewEvent(neighbors[i], now + 10.0, TERMINATE, NULL, 0);
-        }
-
-        data->can_end = true;
+        CreateAndSendTerminationMessage(topology, me, now, data);
         return;
     }
 
+	// remove newline from the line
     char *newline_pos = strchr(line, '\n');
     if (newline_pos != NULL) {
         *newline_pos = '\0';
     }
 
-    // create and populate Row struct from the input line
-    row.num_elements = schema->num_cols;
-    strcpy(row.table_name, "Taxis");
+	int num_rows = 0;
+	struct RowsLinkedListElement *head = NULL;
 
-    PopulateRow(line, &row, *schema);
+	while (!is_next_time_different) {
+	
+		// create and populate Row struct from the input line
+		RowNew *cur_row = rs_malloc(sizeof(RowNew));
+		CHECK_RSMALLOC(cur_row, "DataIngestion");
+		cur_row->num_elements = schema->num_cols;
+		strcpy(cur_row->table_name, "Taxis");
+		PopulateRow(line, cur_row, *schema);
 
-    // create single row list
+		if (head == NULL) {
+			struct RowsLinkedListElement *cur_element = rs_malloc(sizeof(struct RowsLinkedListElement));
+			CHECK_RSMALLOC(cur_element, "DataIngestion");
+			cur_element->next = NULL;
+			cur_element->row = cur_row;
+			head = cur_element;
+		} else { 
+			AppendRow(head, cur_row);
+		}
+		num_rows++;
+
+		// Check if there is a next line to compute the sleep time
+		current_position = ftell(*file);
+
+		if (fgets(next_line, sizeof(next_line), *file) != NULL) {
+
+			// get next tuple time
+			next_line[strcspn(next_line, "\n")] = '\0';
+			next_line[sizeof(next_line) - 1] = '\0';
+
+			char next_line_copy[MAX_LINE_LENGTH];
+			strcpy(next_line_copy, next_line);
+
+			// get the time from the next line
+			int count = 0;
+			char *cur_saveptr, *next_saveptr;
+			cur_datetime = strtok_r(line, ",", &cur_saveptr);
+			next_datetime = strtok_r(next_line_copy, ",", &next_saveptr);
+
+			while (cur_datetime != NULL && next_datetime != NULL) {
+				if (count == 1) {
+					new_time = ComputeSleepTime(cur_datetime, next_datetime);
+					break;
+				}
+				cur_datetime = strtok_r(NULL, ",", &cur_saveptr);
+				next_datetime = strtok_r(NULL, ",", &next_saveptr);
+				count++;
+			}
+
+			if (!strcmp(cur_datetime, next_datetime)) {
+				strcpy(line, next_line);
+			} else {
+				is_next_time_different = 1;
+			}
+				
+		} else {
+			CreateAndSendTerminationMessage(topology, me, now, data);
+			return;
+		}
+	}
+
+	// create and send message
     neighbors = GetAllNeighbors(topology, me, &num_neighbors);
 
 	Envelope e;
 	e.sender = me;
 	e.priority = 5.0;
 
-	NewMessage *msg = malloc(sizeof(NewMessage) + sizeof(RowNew));
+	NewMessage *msg = malloc(sizeof(NewMessage) + num_rows * sizeof(RowNew));
 	CHECK_RSMALLOC(msg, "DataIngestion");
-
 	msg->e = e;
-	msg->size = 1;
-	msg->rows[0] = row;
+	msg->size = num_rows;
 
-	for (int i = 0; i < num_neighbors; i++) {
-		ScheduleNewEvent(neighbors[i], now, EVENT, msg, sizeof(NewMessage) + sizeof(RowNew) * msg->size);
+	int i = 0;
+	struct RowsLinkedListElement *cur_element = head;
+	while (cur_element != NULL) {
+		msg->rows[i++] = *cur_element->row;
+		cur_element = cur_element->next;
 	}
 
-	free(msg);
-	free(neighbors);
+	for (int i = 0; i < num_neighbors; i++) {
+		ScheduleNewEvent(neighbors[i], now, EVENT, msg, sizeof(NewMessage) + num_rows * sizeof(RowNew));
+	}
 
-	// Check if there is a next line to compute the sleep time
-    long current_position = ftell(*file);
-
-    if (fgets(next_line, sizeof(next_line), *file) != NULL) {
-        next_line[strcspn(next_line, "\n")] = '\0';
-        next_line[sizeof(next_line) - 1] = '\0';
-
-        // get the time from the next line
-        int count = 0;
-        char *cur_saveptr, *next_saveptr;
-        cur_datetime = strtok_r(line, ",", &cur_saveptr);
-        next_datetime = strtok_r(next_line, ",", &next_saveptr);
-
-        while (cur_datetime != NULL && next_datetime != NULL) {
-            if (count == 1) {
-                new_time = ComputeSleepTime(cur_datetime, next_datetime);
-                break;
-            }
-            cur_datetime = strtok_r(NULL, ",", &cur_saveptr);
-            next_datetime = strtok_r(NULL, ",", &next_saveptr);
-            count++;
-        }
-    } else {
-        // create and send termination message
-        lp_id_t num_neighbors = CountDirections(topology, me);
-        lp_id_t neighbors[num_neighbors];
-        GetAllReceivers(topology, me, neighbors);
-
-        for (unsigned int i = 0; i < num_neighbors; i++) {
-            ScheduleNewEvent(neighbors[i], now + 10.0, TERMINATE, NULL, 0);
-        }
-
-        data->can_end = true;
-        return;
-    }
-
-    // Torna alla posizione precedente nel file
+	// back to current_position (one line back)
     fseek(*file, current_position, SEEK_SET);
 
+	// cleanup
+	free(msg);
+	free(neighbors);
+	struct RowsLinkedListElement *tmp = head;
+    while(tmp != NULL) {
+        struct RowsLinkedListElement *next = tmp->next;
+        if (tmp->row != NULL) {
+            rs_free(tmp->row);
+        }
+        rs_free(tmp);
+        tmp = next;
+    }
+
     // schedule next DataIngestion process' execution with the computed sleep time
-    ScheduleNewEvent(me, now + 1.0 + new_time, EVENT, NULL, 0);
+    ScheduleNewEvent(me, now + new_time, EVENT, NULL, 0);
 }
 
 
@@ -718,12 +789,7 @@ RowsLinkedList *ExecuteWindow(NewMessage *rcv_msg, WindowData *data) {
 
 	RowsLinkedList *ret_list = NULL;
 
-	if (rcv_msg->size != 1) {
-		fprintf(stderr, "Window operator received more than one tuple in a single message\n");
-		exit(EXIT_FAILURE);
-	}
-
-	// get tuple time
+	// get tuple time 
 	data->cur_time = rcv_msg->rows[0].elements[1].value.long_value;
 
 	if (data->max_time == 0) {
@@ -750,8 +816,10 @@ RowsLinkedList *ExecuteWindow(NewMessage *rcv_msg, WindowData *data) {
 		data->received_tuples = 0;
 	}
 
-	AppendRow(data->list, &rcv_msg->rows[0]);
-	data->received_tuples++;
+	for (int i = 0; i < rcv_msg->size; i++) {
+		AppendRow(data->list, &rcv_msg->rows[i]);
+	}
+	data->received_tuples += rcv_msg->size;
 
 	return ret_list;	
 }

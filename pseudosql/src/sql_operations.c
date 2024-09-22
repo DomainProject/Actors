@@ -447,28 +447,27 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
 
                 RowElementNew group_row_element = group->rows_list->head->row->elements[input.input_data.groups_list->col_index];
                 RowElementNew result_row_element;
-
-                RowNew *rows_list = GetRowsArrayFromRowsLinkedList(group->rows_list);
+                RowNew *result;
 
                 switch(type) {
                     case MIN:
-                        qsort_r(rows_list, group->rows_list->size, sizeof(RowNew), compare_rows, (void *)input.col_name);
+                        result = FindMinFromLinkedList(group->rows_list, col_index);
                         
-                        result_row_element.type = rows_list[0].elements[col_index].type;
-                        result_row_element.value = rows_list[0].elements[col_index].value;
+                        result_row_element.type = result->elements[col_index].type;
+                        result_row_element.value = result->elements[col_index].value;
                         sprintf(result_row_element.col_name, "MIN(%s)", input.col_name);
                         break;
                     
                     case MAX:
-                        qsort_r(rows_list, group->rows_list->size, sizeof(RowNew), compare_rows, (void *)input.col_name);
+                        result = FindMaxFromLinkedList(group->rows_list, col_index);
                         
-                        result_row_element.type = rows_list[group->rows_list->size - 1].elements[col_index].type;
-                        result_row_element.value = rows_list[group->rows_list->size - 1].elements[col_index].value;      
+                        result_row_element.type = result->elements[col_index].type;
+                        result_row_element.value = result->elements[col_index].value;
                         sprintf(result_row_element.col_name, "MAX(%s)", input.col_name);
                         break;
 
                     case AVG:
-                        avg = compute_average(group->rows_list->size, rows_list, input.col_name);
+                        avg = ComputeAverageFromLinkedList(group->rows_list, col_index);
                         
                         result_row_element.type = TYPE_DOUBLE;
                         result_row_element.value.double_value = avg;
@@ -476,7 +475,7 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
                         break;
                     
                     case SUM:
-                        sum = compute_sum(group->rows_list->size, rows_list, input.col_name);
+                        sum = ComputeSumFromLinkedList(group->rows_list, col_index);
 
                         result_row_element.type = TYPE_DOUBLE;
                         result_row_element.value.double_value = sum;
@@ -511,7 +510,6 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
                 }
                 last_row_element = row_element;
 
-                munmap(ret_list, ret_list->size * sizeof(RowNew));
                 group = group->next;
             }
 
