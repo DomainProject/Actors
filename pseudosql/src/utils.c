@@ -133,7 +133,14 @@ void InitializeSchema(Schema *schema, char *header) {
     }
 }
 
-void PrintRow(const RowNew *row) {
+void FreeSchema(Schema *schema) {
+    for (int i = 0; i < schema->num_cols; i++) {
+        free(schema->cols_names[i]);
+    }
+    free(schema->cols_names);
+}
+
+void PrintRow(const Row *row) {
     for (int i = 0; i < row->num_elements; i++) {
         printf("Name: %s, Table: %s, ", row->elements[i].col_name, row->table_name);
         switch (row->elements[i].type) {
@@ -159,7 +166,7 @@ void PrintRow(const RowNew *row) {
     puts("");
 }
 
-void PopulateRow(char *row_string, RowNew *row, Schema schema) {  
+void PopulateRow(char *row_string, Row *row, Schema schema) {  
     char *copy = strdup(row_string);
     char *token = strtok(copy, ",");  
 
@@ -193,7 +200,7 @@ void PopulateRow(char *row_string, RowNew *row, Schema schema) {
     free(copy);
 }
 
-int get_index(RowNew row, char *col_name) {
+int get_index(Row row, char *col_name) {
     for (int i = 0; i < row.num_elements; i++) {
         if (!strncmp(row.elements[i].col_name, col_name, strlen(col_name)))
             return i;
@@ -203,7 +210,7 @@ int get_index(RowNew row, char *col_name) {
     return -1;
 }
 
-double compute_average(int size, RowNew *list, char *col_name) {
+double compute_average(int size, Row *list, char *col_name) {
     int count = 0, index, i;
     double sum = 0.0;
 
@@ -237,7 +244,7 @@ double compute_average(int size, RowNew *list, char *col_name) {
     return sum / count;
 }
 
-double compute_sum(int size, RowNew *list, char *col_name) {
+double compute_sum(int size, Row *list, char *col_name) {
     int index, i;
     double sum = 0.0;
 
@@ -270,6 +277,7 @@ double compute_sum(int size, RowNew *list, char *col_name) {
     return sum;
 }
 
+/*
 int are_equals(Row row1, Row row2, char *col1_name, char *col2_name) {
     int index1, index2;
 
@@ -301,8 +309,9 @@ int are_equals(Row row1, Row row2, char *col1_name, char *col2_name) {
             exit(EXIT_FAILURE);
     }
 }
+*/
 
-void AppendRow(struct RowsLinkedListElement* head, RowNew *row) {
+void AppendRow(struct RowsLinkedListElement* head, Row *row) {
     if (head == NULL) {
         fprintf(stderr, "invalid list head\n");
         return;
@@ -312,12 +321,12 @@ void AppendRow(struct RowsLinkedListElement* head, RowNew *row) {
     struct RowsLinkedListElement* new_node = (struct RowsLinkedListElement*)rs_malloc(sizeof(struct RowsLinkedListElement));
     CHECK_RSMALLOC(new_node, "AppendRow");
 
-    new_node->row = rs_malloc(sizeof(RowNew));
+    new_node->row = rs_malloc(sizeof(Row));
     CHECK_RSMALLOC(new_node->row, "AppendRow");
     new_node->next = NULL;
 
     // Copy contents of data to newly allocated memory.
-    memcpy(new_node->row, row, sizeof(RowNew));
+    memcpy(new_node->row, row, sizeof(Row));
 
     // append row
     struct RowsLinkedListElement* last = head;
@@ -387,8 +396,8 @@ void FreeGroup(GroupsLinkedList *list) {
     rs_free(list);
 }
 
-RowNew *GetRowsArrayFromRowsLinkedList(RowsLinkedList *list) {
-    RowNew *array = mmap(NULL, list->size * sizeof(RowNew), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
+Row *GetRowsArrayFromRowsLinkedList(RowsLinkedList *list) {
+    Row *array = mmap(NULL, list->size * sizeof(Row), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
     if (array == MAP_FAILED) {
         perror("Error in mmap");
         exit(EXIT_FAILURE);
@@ -406,20 +415,20 @@ RowNew *GetRowsArrayFromRowsLinkedList(RowsLinkedList *list) {
 }
 
 
-RowNew *FindMinFromLinkedList(RowsLinkedList *list, int col_index) {
+Row *FindMinFromLinkedList(RowsLinkedList *list, int col_index) {
     if (list == NULL || list->head == NULL) {
         fprintf(stderr, "FindMinFromLinkedList: invalid parameter (list is NULL)\n");
         return NULL;
     }
 
-    RowNew *min_row = NULL;
+    Row *min_row = NULL;
 
     // Inizio dal primo elemento della lista
     struct RowsLinkedListElement *current_element = list->head;
 
     while (current_element != NULL) {
 
-        RowElementNew *cur_element = &current_element->row->elements[col_index];
+        RowElement *cur_element = &current_element->row->elements[col_index];
 
         if (min_row == NULL) {
             min_row = current_element->row;
@@ -468,20 +477,20 @@ RowNew *FindMinFromLinkedList(RowsLinkedList *list, int col_index) {
     return min_row;
 }
 
-RowNew *FindMaxFromLinkedList(RowsLinkedList *list, int col_index) {
+Row *FindMaxFromLinkedList(RowsLinkedList *list, int col_index) {
     if (list == NULL || list->head == NULL) {
         fprintf(stderr, "FindMaxFromLinkedList: invalid parameter (list is NULL)\n");
         return NULL;
     }
 
-    RowNew *max_row = NULL;
+    Row *max_row = NULL;
 
     // Inizio dal primo elemento della lista
     struct RowsLinkedListElement *current_element = list->head;
 
     while (current_element != NULL) {
 
-        RowElementNew *cur_element = &current_element->row->elements[col_index];
+        RowElement *cur_element = &current_element->row->elements[col_index];
 
         if (max_row == NULL) {
             max_row = current_element->row;
@@ -533,7 +542,7 @@ RowNew *FindMaxFromLinkedList(RowsLinkedList *list, int col_index) {
 double ComputeAverageFromLinkedList(RowsLinkedList *list, int col_index) {
     if (list == NULL || list->head == NULL) {
         fprintf(stderr, "ComputeAverageFromLinkedList: invalid parameter (list is NULL)\n");
-        return;
+        return -1.0;
     }
 
     struct RowsLinkedListElement *current_element = list->head;
@@ -541,7 +550,7 @@ double ComputeAverageFromLinkedList(RowsLinkedList *list, int col_index) {
     int count = 0;
 
     while (current_element != NULL) {
-        RowElementNew *cur_element = &current_element->row->elements[col_index];
+        RowElement *cur_element = &current_element->row->elements[col_index];
 
         switch (cur_element->type) {
             case TYPE_INT:
@@ -579,14 +588,14 @@ double ComputeAverageFromLinkedList(RowsLinkedList *list, int col_index) {
 double ComputeSumFromLinkedList(RowsLinkedList *list, int col_index) {
     if (list == NULL || list->head == NULL) {
         fprintf(stderr, "ComputeSumFromLinkedList: invalid parameter (list is NULL)\n");
-        return;
+        return -1.0;
     }
 
     struct RowsLinkedListElement *current_element = list->head;
     double sum = 0.0;
 
     while (current_element != NULL) {
-        RowElementNew *cur_element = &current_element->row->elements[col_index];
+        RowElement *cur_element = &current_element->row->elements[col_index];
 
         switch (cur_element->type) {
             case TYPE_INT:

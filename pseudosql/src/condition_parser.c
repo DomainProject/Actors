@@ -165,7 +165,7 @@ Condition *ParseCondition(char **condition_string) {
     return multiple_condition;
 }
 
-RowElementNew *get_element_from_row(RowNew *row, const char *col_name) {
+RowElement *get_element_from_row(Row *row, const char *col_name) {
     for (int i = 0; i < row->num_elements; ++i) {
         if (strncmp(row->elements[i].col_name, col_name, strlen(col_name)) == 0) {
             return &row->elements[i];
@@ -244,8 +244,8 @@ int evaluate_simple_condition_string(char *col_value, Operator operator, char *v
     }
 }
 
-int evaluate_simple_condition(SimpleCondition *condition, RowNew *row) {
-    RowElementNew *row_element = get_element_from_row(row, condition->column);
+int evaluate_simple_condition(SimpleCondition *condition, Row *row) {
+    RowElement *row_element = get_element_from_row(row, condition->column);
     if (row_element == NULL) {
         return 0;
     }
@@ -264,7 +264,7 @@ int evaluate_simple_condition(SimpleCondition *condition, RowNew *row) {
     }
 }
 
-int EvaluateCondition(Condition *condition, RowNew *row) {
+int EvaluateCondition(Condition *condition, Row *row) {
     int ret;
     switch (condition->type) {
         case SIMPLE_CONDITION:

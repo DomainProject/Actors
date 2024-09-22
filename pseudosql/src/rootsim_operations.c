@@ -34,16 +34,16 @@ GroupsLinkedList *DeserializeGroupsMessage(GroupsMessage *msg) {
 
 		struct RowsLinkedListElement *last_row_element = NULL;
 
-		unsigned char *buffer_end_rows_list = buffer + cur_group->rows_list->size * sizeof(RowNew); 
+		unsigned char *buffer_end_rows_list = buffer + cur_group->rows_list->size * sizeof(Row); 
 		while (buffer < buffer_end_rows_list) {
 			struct RowsLinkedListElement *cur_row = rs_malloc(sizeof(struct RowsLinkedListElement));
 			CHECK_RSMALLOC(cur_row, "DeserializeGroupsMessage");
 			cur_row->next = NULL;
 
-			cur_row->row = rs_malloc(sizeof(RowNew));
+			cur_row->row = rs_malloc(sizeof(Row));
 			CHECK_RSMALLOC(cur_row->row, "DeserializeGroupsMessage");
-			memcpy(cur_row->row, buffer, sizeof(RowNew));
-			buffer += sizeof(RowNew);
+			memcpy(cur_row->row, buffer, sizeof(Row));
+			buffer += sizeof(Row);
 
 			if (last_row_element == NULL) {
                 cur_group->rows_list->head = cur_row;
@@ -73,7 +73,7 @@ void CreateAndSendMessageFromGroupsList(lp_id_t sender_id, float priority, Group
 	total_size += sizeof(int);	// col_index
 	while (group_element != NULL) {
 		if (group_element->rows_list != NULL)
-			total_size += sizeof(int) + group_element->rows_list->size * sizeof(RowNew);
+			total_size += sizeof(int) + group_element->rows_list->size * sizeof(Row);
 		group_element = group_element->next;
 	}
 
@@ -101,8 +101,8 @@ void CreateAndSendMessageFromGroupsList(lp_id_t sender_id, float priority, Group
 			struct RowsLinkedListElement *row_element = group_element->rows_list->head;
 			while (row_element != NULL) {
 				if (row_element->row != NULL) {
-					memcpy(buffer, row_element->row, sizeof(RowNew));
-					buffer += sizeof(RowNew);
+					memcpy(buffer, row_element->row, sizeof(Row));
+					buffer += sizeof(Row);
 				}
 				row_element = row_element->next;
 			}
@@ -120,7 +120,7 @@ void CreateAndSendMessageFromGroupsList(lp_id_t sender_id, float priority, Group
 
 void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedList *list, simtime_t now, lp_id_t *receivers, int num_receivers) {
 	Envelope e;
-	NewMessage *msg;
+	RowsMessage *msg;
 	int i = 0;
 	RowsLinkedList *rows_list;
 
@@ -128,7 +128,7 @@ void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedL
 	e.sender = sender_id;
 	rows_list = (RowsLinkedList *)list;
 
-	msg = malloc(sizeof(NewMessage) + rows_list->size * sizeof(RowNew));
+	msg = malloc(sizeof(RowsMessage) + rows_list->size * sizeof(Row));
 	CHECK_RSMALLOC(msg, "CreateAndSendMessageFromList");
 	msg->e = e;
 	msg->size = rows_list->size;
@@ -150,7 +150,7 @@ void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedL
 	}
 
 	for (int i = 0; i < num_receivers; i++) {
-		ScheduleNewEvent(receivers[i], now + 1.0, EVENT, msg, sizeof(NewMessage) + sizeof(RowNew) * msg->size);
+		ScheduleNewEvent(receivers[i], now + 1.0, EVENT, msg, sizeof(RowsMessage) + sizeof(Row) * msg->size);
 	}
 
 	FreeList(rows_list);	
@@ -318,7 +318,7 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 	while (!is_next_time_different) {
 	
 		// create and populate Row struct from the input line
-		RowNew *cur_row = rs_malloc(sizeof(RowNew));
+		Row *cur_row = rs_malloc(sizeof(Row));
 		CHECK_RSMALLOC(cur_row, "DataIngestion");
 		cur_row->num_elements = schema->num_cols;
 		strcpy(cur_row->table_name, "Taxis");
@@ -382,7 +382,7 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 	e.sender = me;
 	e.priority = 5.0;
 
-	NewMessage *msg = malloc(sizeof(NewMessage) + num_rows * sizeof(RowNew));
+	RowsMessage *msg = malloc(sizeof(RowsMessage) + num_rows * sizeof(Row));
 	CHECK_RSMALLOC(msg, "DataIngestion");
 	msg->e = e;
 	msg->size = num_rows;
@@ -395,7 +395,7 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 	}
 
 	for (int i = 0; i < num_neighbors; i++) {
-		ScheduleNewEvent(neighbors[i], now, EVENT, msg, sizeof(NewMessage) + num_rows * sizeof(RowNew));
+		ScheduleNewEvent(neighbors[i], now, EVENT, msg, sizeof(RowsMessage) + num_rows * sizeof(Row));
 	}
 
 	// back to current_position (one line back)
@@ -622,14 +622,14 @@ void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData
     }
 
     table_data->from_id = from;
-    table_data->list = NULL;
+    //table_data->list = NULL;
 
     #ifdef DEBUG
     printf("Join initialized: table_name = %s, attribute = %s\n", table_data->table_name, table_data->attribute);
     #endif
 }
 
-void AggregateFunctionRowsInput(NewMessage *msg, AggregateFunctionData *data, AggregateFunctionType type) {
+void AggregateFunctionRowsInput(RowsMessage *msg, AggregateFunctionData *data, AggregateFunctionType type) {
 	AggFunctionData input_data;
 	AggFunctionResultValue *result_single_value;
 
@@ -680,7 +680,7 @@ RowsLinkedList *AggregateFunctionGroupedInput(GroupsLinkedList *groups, Aggregat
  * @param data Selection process state
  * @param priority Priority of the messages to be sent
  */
-RowsLinkedList *wSelection(NewMessage *rcv_msg, void *data) {
+RowsLinkedList *wSelection(RowsMessage *rcv_msg, void *data) {
 	Condition *condition;
 	RowsLinkedList *ret_list;
 	SelectionData *selection_data = (SelectionData *)data;
@@ -704,7 +704,7 @@ RowsLinkedList *wSelection(NewMessage *rcv_msg, void *data) {
  * @param data Projection process state
  * @param priority Priority of the messages to be sent
  */
-RowsLinkedList *wProjection(NewMessage *rcv_msg, void *data) {
+RowsLinkedList *wProjection(RowsMessage *rcv_msg, void *data) {
 	RowsLinkedList *ret_list;
 	ProjectionData *proj_data = (ProjectionData *)data;
 	AttributeList *list = proj_data->list;
@@ -732,7 +732,7 @@ RowsLinkedList *wProjection(NewMessage *rcv_msg, void *data) {
  * @param data Projection process state
  * @param priority Priority of the messages to be sent
  */
-RowsLinkedList *wOrderBy(NewMessage *rcv_msg, void *data) {
+RowsLinkedList *wOrderBy(RowsMessage *rcv_msg, void *data) {
 	RowsLinkedList *ret_list;
 	OrderByData *orderBy_data = (OrderByData *)data;
 
@@ -752,7 +752,7 @@ RowsLinkedList *wOrderBy(NewMessage *rcv_msg, void *data) {
  * @param data Process state
  * @param priority Priority of the messages to be sent
  */
-GroupsLinkedList *wGroupBy(NewMessage *rcv_msg, void *data) {
+GroupsLinkedList *wGroupBy(RowsMessage *rcv_msg, void *data) {
 	GroupsLinkedList *groups_list;
 	GroupByData *groupBy_data = (GroupByData *)data;
 
@@ -785,7 +785,7 @@ GroupsLinkedList *wGroupBy(NewMessage *rcv_msg, void *data) {
  * @param data Process state
  * @param priority Priority of the messages to be sent
  */
-RowsLinkedList *ExecuteWindow(NewMessage *rcv_msg, WindowData *data) {
+RowsLinkedList *ExecuteWindow(RowsMessage *rcv_msg, WindowData *data) {
 
 	RowsLinkedList *ret_list = NULL;
 
@@ -874,6 +874,7 @@ void JoinInit(struct topology *topology, lp_id_t from1, lp_id_t from2, lp_id_t m
  * @param data Process state
  * @param priority Priority of the messages to be sent
  */
+/*
 RowsList *wJoin(Message *msg, void *data) {
 	unsigned int i;
 	bool can_execute = true;
@@ -913,13 +914,14 @@ RowsList *wJoin(Message *msg, void *data) {
 
 	return NULL;
 }
+*/
 
 /**
  * @brief Prints the header (column names) to the CSV file
  * @param row Pointer to the row to extract column names from
  * @param file File pointer to the open file
  */
-void PrintHeaderCSV(RowNew *row, FILE *file) {
+void PrintHeaderCSV(Row *row, FILE *file) {
     for (int i = 0; i < row->num_elements; i++) {
         fprintf(file, "%s", row->elements[i].col_name);
         if (i < row->num_elements - 1) {
@@ -934,9 +936,9 @@ void PrintHeaderCSV(RowNew *row, FILE *file) {
  * @param row Pointer to the row to be printed
  * @param file File pointer to the open file
  */
-void PrintRowCSV(RowNew *row, FILE *file) {
+void PrintRowCSV(Row *row, FILE *file) {
     for (int i = 0; i < row->num_elements; i++) {
-        RowElementNew element = row->elements[i];
+        RowElement element = row->elements[i];
         
         switch (element.type) {
             case TYPE_INT:
@@ -971,10 +973,10 @@ void PrintRowCSV(RowNew *row, FILE *file) {
  * @param content Pointer to the received message
  */
 void WriteToOutputFile(lp_id_t me, const void *content, OutputProcessData *data) {
-    NewMessage *msg;
+    RowsMessage *msg;
     int i;
     
-    msg = (NewMessage *)content;
+    msg = (RowsMessage *)content;
 
     FILE *file = fopen(data->filename, "a+");
     if (!file) {
@@ -1011,8 +1013,9 @@ void ForwardTerminationMessage(struct topology *topology, lp_id_t me, simtime_t 
 	free(neighbors);
 }
 
-void DataIngestionCleanUp(FILE *file, DataSourceData *data) {
+void DataIngestionCleanUp(FILE *file, DataSourceData *data, Schema *schema) {
 	fclose(file);
+	FreeSchema(schema);
 	rs_free(data);
 }
 

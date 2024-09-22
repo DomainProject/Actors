@@ -13,7 +13,7 @@
 #define NUM_THREADS 1
 #endif
 
-#define INPUT_FILE "taxi.csv"
+#define INPUT_FILE "taxi_1k.csv"
 
 FILE *file;
 Schema schema;
@@ -22,13 +22,13 @@ void InitTopology() {
   topology = InitializeTopology(TOPOLOGY_GRAPH, 25);
 
   AddTopologyLink(topology, 0, 6, 1);
-  static int window0to6 = 36000;
+  static int window0to6 = 60;
   SetTopologyLinkData(topology, 0, 6, (void *)&window0to6);
   AddTopologyLink(topology, 0, 7, 1);
-  static int window0to7 = 36000;
+  static int window0to7 = 60;
   SetTopologyLinkData(topology, 0, 7, (void *)&window0to7);
   AddTopologyLink(topology, 0, 8, 1);
-  static int window0to8 = 36000;
+  static int window0to8 = 60;
   SetTopologyLinkData(topology, 0, 8, (void *)&window0to8);
   AddTopologyLink(topology, 1, 9, 1);
   SetTopologyLinkData(topology, 1, 9, (void *)"payment_type,total_amount");
@@ -77,7 +77,7 @@ void InitTopology() {
 
 
 void window(lp_id_t me, simtime_t now, const void *content, void *data) {
-  RowsLinkedList *result = ExecuteWindow((NewMessage *)content, (WindowData *)data);
+  RowsLinkedList *result = ExecuteWindow((RowsMessage *)content, (WindowData *)data);
   if (!result) return;
 
   int num_refs;
@@ -88,7 +88,7 @@ void window(lp_id_t me, simtime_t now, const void *content, void *data) {
 }
 
 void projection(lp_id_t me, simtime_t now, const void *content, void *data) {
-  RowsLinkedList *result = wProjection((NewMessage *)content, data);
+  RowsLinkedList *result = wProjection((RowsMessage *)content, data);
   if (!result) return;
 
   int num_refs;
@@ -99,7 +99,7 @@ void projection(lp_id_t me, simtime_t now, const void *content, void *data) {
 }
 
 void selection(lp_id_t me, simtime_t now, const void *content, void *data) {
-  RowsLinkedList *result = wSelection((NewMessage *)content, data);
+  RowsLinkedList *result = wSelection((RowsMessage *)content, data);
   if (!result) return;
 
   int num_refs;
@@ -110,14 +110,14 @@ void selection(lp_id_t me, simtime_t now, const void *content, void *data) {
 }
 
 void joinColumns(lp_id_t me, simtime_t now, const void *content, void *data) {
-  RowsList *result= wJoin((Message *)content, data);
-  if (!result) return;
+  //RowsList *result= wJoin((Message *)content, data);
+  //if (!result) return;
 
-  int num_refs;
-  lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
+  //int num_refs;
+  //lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
   //CreateAndSendMessage(me, 5.0, ROWS, result, now, refs, num_refs);
 
-  free(refs);
+  //free(refs);
 }
 
 void Count(lp_id_t me, simtime_t now, const void *content, void *data) {
@@ -157,7 +157,7 @@ void Sum(lp_id_t me, simtime_t now, const void *content, void *data) {
 }
 
 void groupBy(lp_id_t me, simtime_t now, const void *content, void *data) {
-  GroupsLinkedList *result = wGroupBy((NewMessage *)content, data);
+  GroupsLinkedList *result = wGroupBy((RowsMessage *)content, data);
   if (!result)  return;
 
   int num_refs;
@@ -168,7 +168,7 @@ void groupBy(lp_id_t me, simtime_t now, const void *content, void *data) {
 }
 
 void orderBy(lp_id_t me, simtime_t now, const void *content, void *data) {
-  RowsLinkedList *result = wOrderBy((NewMessage *)content, data);
+  RowsLinkedList *result = wOrderBy((RowsMessage *)content, data);
   if (!result)  return;
   
   int num_refs;
@@ -203,7 +203,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
           DataIngestion(topology, me, now, (DataSourceData *)s, &file, &schema);
           break;
         case LP_FINI:
-          DataIngestionCleanUp(file, (DataSourceData *)s);
+          DataIngestionCleanUp(file, (DataSourceData *)s, &schema);
           break;
         default:
           fprintf(stderr, "Unknown event type");
@@ -868,6 +868,8 @@ struct simulation_configuration conf = {
 int main(void) {
   InitTopology();
   RootsimInit(&conf);
-  return RootsimRun();
+  int ret = RootsimRun();
+  ReleaseTopology(topology);
+  return ret;
 }
 

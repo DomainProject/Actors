@@ -3,7 +3,7 @@
 #include "sql_operations.h"
 #include "include/pseudosql.h"
 
-int compare_elements(const RowElementNew *elem1, const RowElementNew *elem2) {
+int compare_elements(const RowElement *elem1, const RowElement *elem2) {
     switch (elem1->type) {
         case TYPE_INT:
             return (elem1->value.int_value > elem2->value.int_value) - (elem1->value.int_value < elem2->value.int_value);
@@ -26,11 +26,11 @@ int compare_elements(const RowElementNew *elem1, const RowElementNew *elem2) {
  * @param input_row single row of a table
  * @param list list of attributes
  */
-RowNew *Projection(RowNew input_row, AttributeList list) {
+Row *Projection(Row input_row, AttributeList list) {
     int i, j, index;
-    RowNew *output_row;
+    Row *output_row;
 
-    output_row = rs_malloc(sizeof(RowNew));
+    output_row = rs_malloc(sizeof(Row));
     if (!output_row) {
         perror("malloc");
         exit(EXIT_FAILURE);
@@ -80,7 +80,7 @@ RowNew *Projection(RowNew input_row, AttributeList list) {
  *  @param input_rows list of rows
  *  @param list list of attributes
  */
-RowsLinkedList *ProjectionMultRows(int size, RowNew *input_rows, AttributeList list) {
+RowsLinkedList *ProjectionMultRows(int size, Row *input_rows, AttributeList list) {
     int i, j;
 
     for (i = 0; i < list.num_attributes; i++) {
@@ -112,7 +112,7 @@ RowsLinkedList *ProjectionMultRows(int size, RowNew *input_rows, AttributeList l
     return ret_list;
 }
 
-int Selection(RowNew input_row, Condition *condition) {
+int Selection(Row input_row, Condition *condition) {
     return EvaluateCondition(condition, &input_row);
 }
 
@@ -122,7 +122,7 @@ int Selection(RowNew input_row, Condition *condition) {
  *  @param input_rows list of rows
  *  @param condition pointer to a condition struct 
  */
-RowsLinkedList *SelectionMultRows(int size, RowNew *input_rows, Condition *condition) {
+RowsLinkedList *SelectionMultRows(int size, Row *input_rows, Condition *condition) {
     int i, count = 0;
 
     struct RowsLinkedListElement *head = rs_malloc(sizeof(struct RowsLinkedListElement));
@@ -146,11 +146,11 @@ RowsLinkedList *SelectionMultRows(int size, RowNew *input_rows, Condition *condi
 }
 
 int compare_rows(const void *a, const void *b, void *arg) {
-    const RowNew *entry1 = (const RowNew *)a;
-    const RowNew *entry2 = (const RowNew *)b;
+    const Row *entry1 = (const Row *)a;
+    const Row *entry2 = (const Row *)b;
     char *col_name = (char *)arg;
-    const RowElementNew *elem1 = NULL;
-    const RowElementNew *elem2 = NULL;
+    const RowElement *elem1 = NULL;
+    const RowElement *elem2 = NULL;
 
     for (int i = 0; i < entry1->num_elements; i++) {
         if (strncmp(entry1->elements[i].col_name, col_name, strlen(col_name)) == 0) {
@@ -180,7 +180,7 @@ int compare_rows(const void *a, const void *b, void *arg) {
  *  @param input_rows list of rows
  *  @param col_name name of the aOrderttribute
  */
-RowsLinkedList *OrderBy(int size, RowNew *input_rows, const char *col_name) {
+RowsLinkedList *OrderBy(int size, Row *input_rows, const char *col_name) {
     int attribute_exists = 0, i;
 
     for (i = 0; i < input_rows[0].num_elements; i++) {
@@ -198,7 +198,7 @@ RowsLinkedList *OrderBy(int size, RowNew *input_rows, const char *col_name) {
     head->row = NULL;
     head->next = NULL;
 
-    qsort_r(input_rows, size, sizeof(RowNew), compare_rows, (void *)col_name);
+    qsort_r(input_rows, size, sizeof(Row), compare_rows, (void *)col_name);
 
     for (int i = 0; i < size; i++) {
         AppendRow(head, &input_rows[i]);
@@ -218,9 +218,9 @@ RowsLinkedList *OrderBy(int size, RowNew *input_rows, const char *col_name) {
  *  @param input_rows list of rows
  *  @param col_name name of the attribute
  */
-GroupsLinkedList *GroupBy(int size, RowNew *input_rows, const char *col_name) {
+GroupsLinkedList *GroupBy(int size, Row *input_rows, const char *col_name) {
     RowsLinkedList *rows_list;
-    RowElementNew last_element;
+    RowElement last_element;
     int rows_count = 1, groups_count = 1, col_index = -1;
     struct GroupsLinkedListElement *groups_head;
     struct RowsLinkedListElement *rows_head;
@@ -239,7 +239,7 @@ GroupsLinkedList *GroupBy(int size, RowNew *input_rows, const char *col_name) {
     }
 
     // Order rows by the value of the specified attribute
-    qsort_r(input_rows, size, sizeof(RowNew), compare_rows, (void *)col_name);
+    qsort_r(input_rows, size, sizeof(Row), compare_rows, (void *)col_name);
 
     groups_head = rs_malloc(sizeof(struct GroupsLinkedListElement));
     CHECK_RSMALLOC(groups_head, "GroupBy");
@@ -308,7 +308,7 @@ GroupsLinkedList *GroupBy(int size, RowNew *input_rows, const char *col_name) {
  */
 void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
     int i;
-    RowNew *input_list;
+    Row *input_list;
     double avg, sum, cnt;
     int index = 0;
     int attribute_exists = 0;
@@ -342,7 +342,7 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
             switch(type) {
 
                 case MIN:
-                    qsort_r(input_list, input.size, sizeof(RowNew), compare_rows, (void *)input.col_name);
+                    qsort_r(input_list, input.size, sizeof(Row), compare_rows, (void *)input.col_name);
                     index = get_index(input_list[0], input.col_name);
                     ret_value->type = input_list[0].elements[index].type;
                     switch(ret_value->type) {
@@ -364,7 +364,7 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
                     }
                     return (void *)ret_value;
                 case MAX:
-                    qsort_r(input_list, input.size, sizeof(RowNew), compare_rows, (void *)input.col_name);
+                    qsort_r(input_list, input.size, sizeof(Row), compare_rows, (void *)input.col_name);
                     index = get_index(input_list[input.size - 1], input.col_name);
                     ret_value->type = input_list[input.size - 1].elements[index].type;
                     switch(ret_value->type) {
@@ -442,12 +442,12 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
             while (group != NULL) {
 
                 // allocate new row
-                RowNew *row = rs_malloc(sizeof(RowNew));
+                Row *row = rs_malloc(sizeof(Row));
                 CHECK_RSMALLOC(row, "AggregateFunction");
 
-                RowElementNew group_row_element = group->rows_list->head->row->elements[input.input_data.groups_list->col_index];
-                RowElementNew result_row_element;
-                RowNew *result;
+                RowElement group_row_element = group->rows_list->head->row->elements[input.input_data.groups_list->col_index];
+                RowElement result_row_element;
+                Row *result;
 
                 switch(type) {
                     case MIN:
@@ -521,10 +521,8 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
     } 
 }
 
+/*
 Row join_single_rows(Row row1, Row row2) {
-    Row row;
-    return row;
-    /*
     int i, j;
 
     RowElement *elements = malloc((row1.num_elements + row2.num_elements) * sizeof(RowElement));
@@ -592,8 +590,8 @@ Row join_single_rows(Row row1, Row row2) {
 
     row->elements = elements;
     return *row;
-    */
 }
+*/
 
 /**
  * @brief Join two tables
@@ -601,6 +599,7 @@ Row join_single_rows(Row row1, Row row2) {
  * @param list2 list of rows belonging to the second table
  * @param schema joined schema, that merges the two tables schemas
  */
+/*
 RowsList *Join(RowsList list1, RowsList list2, char *col1_name, char *col2_name) {
 
     int ret;
@@ -639,3 +638,4 @@ RowsList *Join(RowsList list1, RowsList list2, char *col1_name, char *col2_name)
 
     return list;
 }
+*/
