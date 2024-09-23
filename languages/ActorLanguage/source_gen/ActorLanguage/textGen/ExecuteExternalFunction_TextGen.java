@@ -21,9 +21,9 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
     tgs.createPositionInfo();
     if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("selection")) {
       tgs.indent();
-      tgs.append("RowsList *");
+      tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wSelection((Message *)content, data);");
+      tgs.append("= wSelection((RowsMessage *)content, data);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -34,9 +34,9 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
 
     } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("projection")) {
       tgs.indent();
-      tgs.append("RowsList *");
+      tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wProjection((Message *)content, data);");
+      tgs.append("= wProjection((RowsMessage *)content, data);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -47,9 +47,9 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
 
     } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("orderBy")) {
       tgs.indent();
-      tgs.append("RowsList *");
+      tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wOrderBy((Message *)content, data);");
+      tgs.append("= wOrderBy((RowsMessage *)content, data);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -60,9 +60,9 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
 
     } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("groupBy")) {
       tgs.indent();
-      tgs.append("GroupsList *");
+      tgs.append("GroupsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wGroupBy((Message *)content, data);");
+      tgs.append("= wGroupBy((RowsMessage *)content, data);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -73,7 +73,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
 
     } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("join")) {
       tgs.indent();
-      tgs.append("RowsList *");
+      tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
       tgs.append("= wJoin((Message *)content, data);");
       tgs.newLine();
@@ -86,9 +86,12 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
 
     } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("count")) {
       tgs.indent();
-      tgs.append("RowsList *");
+      tgs.append("GroupsLinkedList *list = DeserializeGroupsMessage((GroupsMessage *)content)");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wAggregateFunction((Message *)content, data, COUNT);");
+      tgs.append("= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, COUNT);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -99,9 +102,12 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
 
     } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("sum")) {
       tgs.indent();
-      tgs.append("RowsList *");
+      tgs.append("GroupsLinkedList *list = DeserializeGroupsMessage((GroupsMessage *)content)");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wAggregateFunction((Message *)content, data, SUM);");
+      tgs.append("= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, SUM);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -112,9 +118,12 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
 
     } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("min")) {
       tgs.indent();
-      tgs.append("RowsList *");
+      tgs.append("GroupsLinkedList *list = DeserializeGroupsMessage((GroupsMessage *)content)");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wAggregateFunction((Message *)content, data, MIN);");
+      tgs.append("= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MIN);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -125,9 +134,12 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
 
     } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("max")) {
       tgs.indent();
-      tgs.append("RowsList *");
+      tgs.append("GroupsLinkedList *list = DeserializeGroupsMessage((GroupsMessage *)content)");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wAggregateFunction((Message *)content, data, MAX);");
+      tgs.append("= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MAX);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -138,9 +150,12 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
 
     } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("average")) {
       tgs.indent();
-      tgs.append("RowsList *");
+      tgs.append("GroupsLinkedList *list = DeserializeGroupsMessage((GroupsMessage *)content)");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wAggregateFunction((Message *)content, data, AVG);");
+      tgs.append("= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, AVG);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -151,9 +166,9 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
 
     } else if (SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.function$3XqE), PROPS.name$MnvL).equals("window")) {
       tgs.indent();
-      tgs.append("RowsList *");
+      tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= ExecuteWindow((Message *)content, (WindowData *)data);");
+      tgs.append("= ExecuteWindow((RowsMessage *)content, (WindowData *)data);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");

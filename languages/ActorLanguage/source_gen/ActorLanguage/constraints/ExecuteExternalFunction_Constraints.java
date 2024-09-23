@@ -82,7 +82,8 @@ public class ExecuteExternalFunction_Constraints extends BaseConstraintsDescript
       }
       @Override
       public void onReferenceSet(final SNode referenceNode, final SNode oldReferentNode, final SNode newReferentNode) {
-        SLinkOperations.setTarget(SLinkOperations.getTarget(referenceNode, LINKS.result$LWVz), LINKS.type$Zilj, newReferentNode);
+        SLinkOperations.setTarget(referenceNode, LINKS.resultType$kuHm, newReferentNode);
+        SLinkOperations.setTarget(SLinkOperations.getTarget(referenceNode, LINKS.result$LWVz), LINKS.type$1_kc, newReferentNode);
       }
     };
     Map<SReferenceLink, ReferenceConstraintsDescriptor> references = new HashMap<SReferenceLink, ReferenceConstraintsDescriptor>();
@@ -106,6 +107,6 @@ public class ExecuteExternalFunction_Constraints extends BaseConstraintsDescript
     /*package*/ static final SContainmentLink result$LWVz = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302ab0f2L, 0x338e7da8a4f37b2bL, "result");
     /*package*/ static final SReferenceLink message$nfgc = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302ab0f2L, 0x61da6c5c3038cdbaL, "message");
     /*package*/ static final SReferenceLink resultType$kuHm = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302ab0f2L, 0x754f4cb23a3092feL, "resultType");
-    /*package*/ static final SReferenceLink type$Zilj = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, 0x754f4cb23a21c3c1L, "type");
+    /*package*/ static final SReferenceLink type$1_kc = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, 0x5fab333ad8631dc8L, "type");
   }
 }
