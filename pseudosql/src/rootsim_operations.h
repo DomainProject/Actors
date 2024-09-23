@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
 
 #define MAX_LINE_LENGTH 2048
 #define DATE_TIME_FORMAT_LENGTH 19

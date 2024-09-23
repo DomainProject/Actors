@@ -4,6 +4,7 @@
 #include <string.h>
 #include <time.h>
 #include <stdint.h>
+#include <sys/mman.h>
 
 #include "utils.h"
 
@@ -17,22 +18,6 @@ void remove_quotes(char* str) {
         }
     }
     str[j] = '\0'; 
-}
-
-char *trim_whitespace(char *str) {
-    char *end;
-
-    while (isspace((unsigned char)*str)) str++;
-
-    if (*str == 0) 
-        return str;
-
-    end = str + strlen(str) - 1;
-    while (end > str && isspace((unsigned char)*end)) end--;
-
-    *(end + 1) = 0;
-
-    return str;
 }
 
 int is_integer(const char *str) {
@@ -49,19 +34,26 @@ int is_integer(const char *str) {
 
 int is_float(const char *str) {
     int has_decimal_point = 0;
+    int count = 0;
 
-    if (*str == '\0') return 0;
+    if (*str == '\0') {
+        return 0;
+    }
 
     if (*str == '-' || *str == '+') str++;
 
     while (*str) {
         if (*str == '.') {
-            if (has_decimal_point) return 0;
+            if (has_decimal_point) {
+                return 0; 
+                count++;
+            }
             has_decimal_point = 1;
-        } else if (!isdigit(*str)) {
+        } else if (!isdigit(*str) && count == 0) {
             return 0;
         }
         str++;
+        count++;
     }
 
     return has_decimal_point;
@@ -109,6 +101,12 @@ time_t convert_to_unix_timestamp(const char *datetime_str) {
     return mktime(&time_struct);
 }
 
+void PrintSchema(const Schema *schema) {
+    for (int i = 0; i < schema->num_cols; i++) {
+        printf("Column %d: %s\n", i + 1, schema->cols_names[i]);
+    }
+}
+
 void InitializeSchema(Schema *schema, char *header) {
     int num_columns = 0;
     for (int i = 0; header[i] != '\0'; i++) {
@@ -127,6 +125,7 @@ void InitializeSchema(Schema *schema, char *header) {
     while (header_token != NULL) {
         char *cur_name = strdup(header_token);
         remove_quotes(cur_name);
+        
         schema->cols_names[column_index] = cur_name;
 
         header_token = strtok(NULL, ",");
@@ -134,10 +133,11 @@ void InitializeSchema(Schema *schema, char *header) {
     }
 }
 
-void PrintSchema(const Schema *schema) {
+void FreeSchema(Schema *schema) {
     for (int i = 0; i < schema->num_cols; i++) {
-        printf("Column %d: %s\n", i + 1, schema->cols_names[i]);
+        free(schema->cols_names[i]);
     }
+    free(schema->cols_names);
 }
 
 void PrintRow(const Row *row) {
@@ -172,10 +172,8 @@ void PopulateRow(char *row_string, Row *row, Schema schema) {
 
     int column_index = 0;
     while (token != NULL && column_index < schema.num_cols) {
-        
-        row->elements[column_index].col_name = strdup(schema.cols_names[column_index]);
+        strcpy(row->elements[column_index].col_name, schema.cols_names[column_index]);
         char *value_str = strdup(token);
-        remove_quotes(value_str);
 
         if (is_integer(value_str)) {
             row->elements[column_index].type = TYPE_INT;
@@ -190,10 +188,11 @@ void PopulateRow(char *row_string, Row *row, Schema schema) {
                 row->elements[column_index].value.long_value = convert_to_unix_timestamp(value_str);
             } else {
                 row->elements[column_index].type = TYPE_STRING;
-                row->elements[column_index].value.string_value = value_str;
+                strcpy(row->elements[column_index].value.string_value, value_str);
             }
         }
 
+        free(value_str);
         token = strtok(NULL, ",");
         column_index++;
     }
@@ -203,7 +202,7 @@ void PopulateRow(char *row_string, Row *row, Schema schema) {
 
 int get_index(Row row, char *col_name) {
     for (int i = 0; i < row.num_elements; i++) {
-        if (!strcmp(row.elements[i].col_name, col_name))
+        if (!strncmp(row.elements[i].col_name, col_name, strlen(col_name)))
             return i;
     }
 
@@ -211,31 +210,31 @@ int get_index(Row row, char *col_name) {
     return -1;
 }
 
-double compute_average(RowsList list, char *col_name) {
+double compute_average(int size, Row *list, char *col_name) {
     int count = 0, index, i;
     double sum = 0.0;
 
-    index = get_index(list.rows[0], col_name);
+    index = get_index(list[0], col_name);
     
-    if (list.rows[0].elements[index].type == TYPE_STRING) {
+    if (list[0].elements[index].type == TYPE_STRING) {
         fprintf(stderr, "Average is not defined for strings\n");
         return -1.0;
     }
 
-    for (i = 0; i < list.num_rows; i++) {
+    for (i = 0; i < size; i++) {
         count++;
-        switch(list.rows[i].elements[index].type) {
+        switch(list[i].elements[index].type) {
             case TYPE_FLOAT:
-                sum += (double)list.rows[i].elements[index].value.float_value;
+                sum += (double)list[i].elements[index].value.float_value;
                 break;
             case TYPE_INT:
-                sum += (double)list.rows[i].elements[index].value.int_value;
+                sum += (double)list[i].elements[index].value.int_value;
                 break;
             case TYPE_LONG:
-                sum += (double)list.rows[i].elements[index].value.long_value;
+                sum += (double)list[i].elements[index].value.long_value;
                 break;
             case TYPE_DOUBLE:
-                sum += list.rows[i].elements[index].value.double_value;
+                sum += list[i].elements[index].value.double_value;
                 break;
             default:
                 break;
@@ -245,30 +244,30 @@ double compute_average(RowsList list, char *col_name) {
     return sum / count;
 }
 
-double compute_sum(RowsList list, char *col_name) {
+double compute_sum(int size, Row *list, char *col_name) {
     int index, i;
     double sum = 0.0;
 
-    index = get_index(list.rows[0], col_name);
+    index = get_index(list[0], col_name);
 
-    if (list.rows[0].elements[index].type == TYPE_STRING) {
+    if (list[0].elements[index].type == TYPE_STRING) {
         fprintf(stderr, "Sum is not defined for strings\n");
         return -1.0;
     }
 
-    for (i = 0; i < list.num_rows; i++) {
-        switch(list.rows[i].elements[index].type) {
+    for (i = 0; i < size; i++) {
+        switch(list[i].elements[index].type) {
             case TYPE_FLOAT:
-                sum += (double)list.rows[i].elements[index].value.float_value;
+                sum += (double)list[i].elements[index].value.float_value;
                 break;
             case TYPE_INT:
-                sum += (double)list.rows[i].elements[index].value.int_value;
+                sum += (double)list[i].elements[index].value.int_value;
                 break;
             case TYPE_LONG:
-                sum += (double)list.rows[i].elements[index].value.long_value;
+                sum += (double)list[i].elements[index].value.long_value;
                 break;
             case TYPE_DOUBLE:
-                sum += list.rows[i].elements[index].value.long_value;
+                sum += list[i].elements[index].value.long_value;
                 break;
             default:
                 break;
@@ -278,11 +277,12 @@ double compute_sum(RowsList list, char *col_name) {
     return sum;
 }
 
+/*
 int are_equals(Row row1, Row row2, char *col1_name, char *col2_name) {
     int index1, index2;
 
-    index1 = get_index(row1, col1_name);
-    index2 = get_index(row2, col2_name);
+    //index1 = get_index(row1, col1_name);
+    //index2 = get_index(row2, col2_name);
 
     if (index1 == -1 || index2 == -1) {
         return -1;
@@ -309,3 +309,323 @@ int are_equals(Row row1, Row row2, char *col1_name, char *col2_name) {
             exit(EXIT_FAILURE);
     }
 }
+*/
+
+void AppendRow(struct RowsLinkedListElement* head, Row *row) {
+    if (head == NULL) {
+        fprintf(stderr, "invalid list head\n");
+        return;
+    }
+  
+    // Allocate memory for node
+    struct RowsLinkedListElement* new_node = (struct RowsLinkedListElement*)rs_malloc(sizeof(struct RowsLinkedListElement));
+    CHECK_RSMALLOC(new_node, "AppendRow");
+
+    new_node->row = rs_malloc(sizeof(Row));
+    CHECK_RSMALLOC(new_node->row, "AppendRow");
+    new_node->next = NULL;
+
+    // Copy contents of data to newly allocated memory.
+    memcpy(new_node->row, row, sizeof(Row));
+
+    // append row
+    struct RowsLinkedListElement* last = head;
+    while (last->next != NULL) {
+        last = last->next;
+    }
+    last->next = new_node;
+}
+
+void AppendGroup(struct GroupsLinkedListElement* head, RowsLinkedList *rows) {
+    if (head == NULL) {
+        return;
+    }
+  
+    // Allocate memory for node
+    struct GroupsLinkedListElement* new_node = (struct GroupsLinkedListElement*)rs_malloc(sizeof(struct GroupsLinkedListElement));
+    CHECK_RSMALLOC(new_node, "AppendGroup");
+
+    new_node->rows_list = rows;
+    new_node->next = NULL;
+
+    struct GroupsLinkedListElement* last = head;
+    while (last->next != NULL) {
+        last = last->next;
+    }
+    last->next = new_node;
+}
+
+void FreeList(RowsLinkedList* list) {
+    if (list == NULL) {
+        return;
+    }
+
+    struct RowsLinkedListElement *tmp = list->head;
+
+    while(tmp != NULL) {
+        struct RowsLinkedListElement *next = tmp->next;
+        
+        if (tmp->row != NULL) {
+            rs_free(tmp->row);
+        }
+        rs_free(tmp);
+        
+        tmp = next;
+    }
+
+    rs_free(list);
+}
+
+void FreeGroup(GroupsLinkedList *list) {
+    if (list == NULL) {
+        fprintf(stderr, "Invalid list pointer\n");
+        return;
+    }
+
+    struct GroupsLinkedListElement *tmp = list->head;
+
+    while (tmp != NULL) {
+        struct GroupsLinkedListElement *next = tmp->next;
+
+        FreeList(tmp->rows_list);
+        rs_free(tmp);
+
+        tmp = next;
+    }
+    
+    rs_free(list);
+}
+
+Row *GetRowsArrayFromRowsLinkedList(RowsLinkedList *list) {
+    Row *array = mmap(NULL, list->size * sizeof(Row), PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
+    if (array == MAP_FAILED) {
+        perror("Error in mmap");
+        exit(EXIT_FAILURE);
+    }
+    CHECK_RSMALLOC(array, "GetRowsArrayFromRowsLinkedList");
+    int i = 0;
+
+    struct RowsLinkedListElement *e = list->head;
+    while (e != NULL) {
+        array[i++] = *e->row;
+        e = e->next;
+    }
+
+    return array;
+}
+
+
+Row *FindMinFromLinkedList(RowsLinkedList *list, int col_index) {
+    if (list == NULL || list->head == NULL) {
+        fprintf(stderr, "FindMinFromLinkedList: invalid parameter (list is NULL)\n");
+        return NULL;
+    }
+
+    Row *min_row = NULL;
+
+    // Inizio dal primo elemento della lista
+    struct RowsLinkedListElement *current_element = list->head;
+
+    while (current_element != NULL) {
+
+        RowElement *cur_element = &current_element->row->elements[col_index];
+
+        if (min_row == NULL) {
+            min_row = current_element->row;
+        } else {
+            // Confronta il tipo dell'elemento attuale con il tipo dell'elemento minimo
+            switch (cur_element->type) {
+                case TYPE_INT:
+                    if (cur_element->value.int_value < min_row->elements[col_index].value.int_value) {
+                        min_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_LONG:
+                    if (cur_element->value.long_value < min_row->elements[col_index].value.long_value) {
+                        min_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_FLOAT:
+                    if (cur_element->value.float_value < min_row->elements[col_index].value.float_value) {
+                        min_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_DOUBLE:
+                    if (cur_element->value.double_value < min_row->elements[col_index].value.double_value) {
+                        min_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_STRING:
+                    if (strcmp(cur_element->value.string_value, min_row->elements[col_index].value.string_value) < 0) {
+                        min_row = current_element->row;
+                    }
+                    break;
+
+                default:
+                    fprintf(stderr, "FindMinFromLinkedList: Unexpected type\n");
+                    break;
+            }
+            
+        }
+        current_element = current_element->next;
+    }
+
+    return min_row;
+}
+
+Row *FindMaxFromLinkedList(RowsLinkedList *list, int col_index) {
+    if (list == NULL || list->head == NULL) {
+        fprintf(stderr, "FindMaxFromLinkedList: invalid parameter (list is NULL)\n");
+        return NULL;
+    }
+
+    Row *max_row = NULL;
+
+    // Inizio dal primo elemento della lista
+    struct RowsLinkedListElement *current_element = list->head;
+
+    while (current_element != NULL) {
+
+        RowElement *cur_element = &current_element->row->elements[col_index];
+
+        if (max_row == NULL) {
+            max_row = current_element->row;
+        } else {
+            // Confronta il tipo dell'elemento attuale con il tipo dell'elemento minimo
+            switch (cur_element->type) {
+                case TYPE_INT:
+                    if (cur_element->value.int_value > max_row->elements[col_index].value.int_value) {
+                        max_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_LONG:
+                    if (cur_element->value.long_value > max_row->elements[col_index].value.long_value) {
+                        max_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_FLOAT:
+                    if (cur_element->value.float_value > max_row->elements[col_index].value.float_value) {
+                        max_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_DOUBLE:
+                    if (cur_element->value.double_value > max_row->elements[col_index].value.double_value) {
+                        max_row = current_element->row;
+                    }
+                    break;
+
+                case TYPE_STRING:
+                    if (strcmp(cur_element->value.string_value, max_row->elements[col_index].value.string_value) > 0) {
+                        max_row = current_element->row;
+                    }
+                    break;
+
+                default:
+                    fprintf(stderr, "FindMinFromLinkedList: Unexpected type\n");
+                    break;
+            }
+            
+        }
+        current_element = current_element->next;
+    }
+
+    return max_row;
+}
+
+double ComputeAverageFromLinkedList(RowsLinkedList *list, int col_index) {
+    if (list == NULL || list->head == NULL) {
+        fprintf(stderr, "ComputeAverageFromLinkedList: invalid parameter (list is NULL)\n");
+        return -1.0;
+    }
+
+    struct RowsLinkedListElement *current_element = list->head;
+    double sum = 0.0;
+    int count = 0;
+
+    while (current_element != NULL) {
+        RowElement *cur_element = &current_element->row->elements[col_index];
+
+        switch (cur_element->type) {
+            case TYPE_INT:
+                sum += (double)cur_element->value.int_value;
+                break;
+
+            case TYPE_LONG:
+                sum += (double)cur_element->value.long_value;
+                break;
+
+            case TYPE_FLOAT:
+                sum += (double)cur_element->value.float_value;
+                break;
+
+            case TYPE_DOUBLE:
+                sum += cur_element->value.double_value;
+                break;
+
+            case TYPE_STRING:
+                fprintf(stderr, "ComputeAverageFromLinkedList: cannot compute average of strings\n");
+                exit(EXIT_FAILURE);
+
+            default:
+                fprintf(stderr, "ComputeAverageFromLinkedList: unexpected type\n");
+                exit(EXIT_FAILURE);
+        }
+
+        count++;
+        current_element = current_element->next;
+    }
+
+    return sum / count;
+}
+
+double ComputeSumFromLinkedList(RowsLinkedList *list, int col_index) {
+    if (list == NULL || list->head == NULL) {
+        fprintf(stderr, "ComputeSumFromLinkedList: invalid parameter (list is NULL)\n");
+        return -1.0;
+    }
+
+    struct RowsLinkedListElement *current_element = list->head;
+    double sum = 0.0;
+
+    while (current_element != NULL) {
+        RowElement *cur_element = &current_element->row->elements[col_index];
+
+        switch (cur_element->type) {
+            case TYPE_INT:
+                sum += (double)cur_element->value.int_value;
+                break;
+
+            case TYPE_LONG:
+                sum += (double)cur_element->value.long_value;
+                break;
+
+            case TYPE_FLOAT:
+                sum += (double)cur_element->value.float_value;
+                break;
+
+            case TYPE_DOUBLE:
+                sum += cur_element->value.double_value;
+                break;
+
+            case TYPE_STRING:
+                fprintf(stderr, "ComputeSumFromLinkedList: cannot compute average of strings\n");
+                exit(EXIT_FAILURE);
+
+            default:
+                fprintf(stderr, "ComputeSumFromLinkedList: unexpected type\n");
+                exit(EXIT_FAILURE);
+        }
+
+        current_element = current_element->next;
+    }
+
+    return sum;
+}
+

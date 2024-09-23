@@ -54,6 +54,11 @@ src/CMakeFiles/rspseudosql.dir/sql_operations.c.o: \
  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+ /usr/include/x86_64-linux-gnu/sys/mman.h \
+ /usr/include/x86_64-linux-gnu/bits/mman.h \
+ /usr/include/x86_64-linux-gnu/bits/mman-map-flags-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/mman-linux.h \
+ /usr/include/x86_64-linux-gnu/bits/mman-shared.h \
  /home/simoneb/thesis/Actors/pseudosql/src/condition_parser.h \
  /home/simoneb/thesis/Actors/pseudosql/src/include/pseudosql.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \

@@ -158,8 +158,17 @@ src/CMakeFiles/rspseudosql.dir/rootsim_operations.c.o: ../src/rootsim_operations
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/strings.h \
+  /usr/include/x86_64-linux-gnu/sys/mman.h \
+  /usr/include/x86_64-linux-gnu/bits/mman.h \
+  /usr/include/x86_64-linux-gnu/bits/mman-map-flags-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/mman-linux.h \
+  /usr/include/x86_64-linux-gnu/bits/mman-shared.h \
   ../src/condition_parser.h \
-  ../src/utils.h
+  ../src/utils.h \
+  /usr/include/time.h \
+  /usr/include/x86_64-linux-gnu/bits/time.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h
 
 src/CMakeFiles/rspseudosql.dir/sql_operations.c.o: ../src/sql_operations.c \
   /usr/include/stdc-predef.h \
@@ -221,6 +230,11 @@ src/CMakeFiles/rspseudosql.dir/sql_operations.c.o: ../src/sql_operations.c \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
   /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+  /usr/include/x86_64-linux-gnu/sys/mman.h \
+  /usr/include/x86_64-linux-gnu/bits/mman.h \
+  /usr/include/x86_64-linux-gnu/bits/mman-map-flags-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/mman-linux.h \
+  /usr/include/x86_64-linux-gnu/bits/mman-shared.h \
   ../src/condition_parser.h \
   ../src/include/pseudosql.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
@@ -310,6 +324,11 @@ src/CMakeFiles/rspseudosql.dir/utils.c.o: ../src/utils.c \
   /usr/include/stdint.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+  /usr/include/x86_64-linux-gnu/sys/mman.h \
+  /usr/include/x86_64-linux-gnu/bits/mman.h \
+  /usr/include/x86_64-linux-gnu/bits/mman-map-flags-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/mman-linux.h \
+  /usr/include/x86_64-linux-gnu/bits/mman-shared.h \
   ../src/utils.h \
   ../src/include/pseudosql.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
@@ -327,19 +346,25 @@ src/CMakeFiles/rspseudosql.dir/utils.c.o: ../src/utils.c \
   /usr/local/include/ROOT-Sim/topology.h
 
 
-/usr/include/x86_64-linux-gnu/bits/time.h:
-
-/usr/include/time.h:
-
 ../src/utils.c:
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
 ../src/sql_operations.c:
 
+/usr/include/x86_64-linux-gnu/bits/time.h:
+
+/usr/include/time.h:
+
+/usr/include/x86_64-linux-gnu/bits/mman-shared.h:
+
+/usr/include/x86_64-linux-gnu/bits/mman-linux.h:
+
 ../src/rootsim_operations.h:
 
 ../src/rootsim_operations.c:
+
+/usr/include/x86_64-linux-gnu/sys/mman.h:
 
 ../src/utils.h:
 
@@ -348,6 +373,8 @@ src/CMakeFiles/rspseudosql.dir/utils.c.o: ../src/utils.c \
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/include/x86_64-linux-gnu/bits/mman-map-flags-generic.h:
 
 /usr/include/stdint.h:
 
@@ -412,6 +439,8 @@ src/CMakeFiles/rspseudosql.dir/utils.c.o: ../src/utils.c \
 /usr/include/x86_64-linux-gnu/bits/timesize.h:
 
 /usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
+/usr/include/x86_64-linux-gnu/bits/mman.h:
 
 /usr/include/strings.h:
 
