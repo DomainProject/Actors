@@ -7,8 +7,8 @@
   </languages>
   <imports>
     <import index="o1mc" ref="r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)" implicit="true" />
-    <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" implicit="true" />
+    <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
     <import index="33ny" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.util(JDK/)" implicit="true" />
   </imports>
   <registry>
@@ -251,6 +251,66 @@
     </node>
     <node concept="11bSqf" id="6MZL0GfOpS8" role="11c4hB">
       <node concept="3clFbS" id="6MZL0GfOpS9" role="2VODD2">
+        <node concept="3clFbH" id="7dqKAO3Cyin" role="3cqZAp" />
+        <node concept="3cpWs8" id="7dqKAO3CJW1" role="3cqZAp">
+          <node concept="3cpWsn" id="7dqKAO3CJW4" role="3cpWs9">
+            <property role="TrG5h" value="maxAddress" />
+            <node concept="10Oyi0" id="7dqKAO3CJVZ" role="1tU5fm" />
+            <node concept="3cmrfG" id="7dqKAO3COUL" role="33vP2m">
+              <property role="3cmrfH" value="0" />
+            </node>
+          </node>
+        </node>
+        <node concept="2Gpval" id="7dqKAO3CCgG" role="3cqZAp">
+          <node concept="2GrKxI" id="7dqKAO3CCgH" role="2Gsz3X">
+            <property role="TrG5h" value="actor" />
+          </node>
+          <node concept="3clFbS" id="7dqKAO3CCgI" role="2LFqv$">
+            <node concept="3clFbJ" id="7dqKAO3CCgJ" role="3cqZAp">
+              <node concept="3eOSWO" id="7dqKAO3CCgK" role="3clFbw">
+                <node concept="37vLTw" id="7dqKAO3CCgL" role="3uHU7w">
+                  <ref role="3cqZAo" node="7dqKAO3CJW4" resolve="maxAddress" />
+                </node>
+                <node concept="2OqwBi" id="7dqKAO3CCgM" role="3uHU7B">
+                  <node concept="2GrUjf" id="7dqKAO3CCgN" role="2Oq$k0">
+                    <ref role="2Gs0qQ" node="7dqKAO3CCgH" resolve="actor" />
+                  </node>
+                  <node concept="3TrcHB" id="7dqKAO3CCgO" role="2OqNvi">
+                    <ref role="3TsBF5" to="o1mc:1enjyq1kiKO" resolve="address" />
+                  </node>
+                </node>
+              </node>
+              <node concept="3clFbS" id="7dqKAO3CCgP" role="3clFbx">
+                <node concept="3clFbF" id="7dqKAO3CCgQ" role="3cqZAp">
+                  <node concept="37vLTI" id="7dqKAO3CCgR" role="3clFbG">
+                    <node concept="2OqwBi" id="7dqKAO3CCgS" role="37vLTx">
+                      <node concept="2GrUjf" id="7dqKAO3CCgT" role="2Oq$k0">
+                        <ref role="2Gs0qQ" node="7dqKAO3CCgH" resolve="actor" />
+                      </node>
+                      <node concept="3TrcHB" id="7dqKAO3CCgU" role="2OqNvi">
+                        <ref role="3TsBF5" to="o1mc:1enjyq1kiKO" resolve="address" />
+                      </node>
+                    </node>
+                    <node concept="37vLTw" id="7dqKAO3CCgV" role="37vLTJ">
+                      <ref role="3cqZAo" node="7dqKAO3CJW4" resolve="maxAddress" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+          <node concept="2OqwBi" id="7dqKAO3CCgW" role="2GsD0m">
+            <node concept="117lpO" id="7dqKAO3CCgY" role="2Oq$k0" />
+            <node concept="2Rf3mk" id="7dqKAO3CCh2" role="2OqNvi">
+              <node concept="1xMEDy" id="7dqKAO3CCh3" role="1xVPHs">
+                <node concept="chp4Y" id="7dqKAO3CCh4" role="ri$Ld">
+                  <ref role="cht4Q" to="o1mc:3m_VcJMWzd$" resolve="CreateActor" />
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbH" id="7dqKAO3CyQm" role="3cqZAp" />
         <node concept="lc7rE" id="6MZL0GfOpTb" role="3cqZAp">
           <node concept="la8eA" id="6MZL0GfOpTB" role="lcghm">
             <property role="lacIc" value="#include &lt;ROOT-Sim.h&gt;" />
@@ -297,7 +357,21 @@
         </node>
         <node concept="lc7rE" id="6MZL0GfOqdW" role="3cqZAp">
           <node concept="la8eA" id="6MZL0GfOqeO" role="lcghm">
-            <property role="lacIc" value="#define NUM_LPS 256" />
+            <property role="lacIc" value="#define NUM_LPS " />
+          </node>
+          <node concept="l9hG8" id="7dqKAO3Crqp" role="lcghm">
+            <node concept="2YIFZM" id="7dqKAO3Crqq" role="lb14g">
+              <ref role="37wK5l" to="wyt6:~String.valueOf(int)" resolve="valueOf" />
+              <ref role="1Pybhc" to="wyt6:~String" resolve="String" />
+              <node concept="3cpWs3" id="7dqKAO3Crqr" role="37wK5m">
+                <node concept="3cmrfG" id="7dqKAO3Crqs" role="3uHU7w">
+                  <property role="3cmrfH" value="1" />
+                </node>
+                <node concept="37vLTw" id="7dqKAO3Crqt" role="3uHU7B">
+                  <ref role="3cqZAo" node="7dqKAO3CJW4" resolve="maxAddress" />
+                </node>
+              </node>
+            </node>
           </node>
           <node concept="l8MVK" id="6MZL0GfOqht" role="lcghm" />
         </node>
@@ -331,7 +405,7 @@
         <node concept="3clFbH" id="6MZL0GfOquc" role="3cqZAp" />
         <node concept="lc7rE" id="6MZL0GfOshX" role="3cqZAp">
           <node concept="la8eA" id="6MZL0GfOshY" role="lcghm">
-            <property role="lacIc" value="#define INPUT_FILE &quot;taxi-1.csv&quot;" />
+            <property role="lacIc" value="#define INPUT_FILE &quot;taxi.csv&quot;" />
           </node>
           <node concept="l8MVK" id="6MZL0GfOshZ" role="lcghm" />
           <node concept="l8MVK" id="6MZL0GfOsnk" role="lcghm" />
@@ -550,7 +624,7 @@
                           <node concept="3clFbS" id="6MZL0Gg0Ieg" role="3izTki">
                             <node concept="lc7rE" id="6MZL0Gg0I8V" role="3cqZAp">
                               <node concept="la8eA" id="6MZL0Gg0I9J" role="lcghm">
-                                <property role="lacIc" value="DataIngestionCleanUp(file, (DataSourceData *)s);" />
+                                <property role="lacIc" value="DataIngestionCleanUp(file, (DataSourceData *)s, &amp;schema);" />
                                 <property role="ldcpH" value="true" />
                               </node>
                               <node concept="l8MVK" id="6MZL0Gg0Ih2" role="lcghm" />
@@ -2873,10 +2947,24 @@
             </node>
             <node concept="lc7rE" id="7XEq$CDIw1s" role="3cqZAp">
               <node concept="la8eA" id="7XEq$CDIw1t" role="lcghm">
-                <property role="lacIc" value="return RootsimRun();" />
+                <property role="lacIc" value="int ret = RootsimRun();" />
                 <property role="ldcpH" value="true" />
               </node>
               <node concept="l8MVK" id="7XEq$CDIw1u" role="lcghm" />
+            </node>
+            <node concept="lc7rE" id="7dqKAO3sRrW" role="3cqZAp">
+              <node concept="la8eA" id="7dqKAO3sRrX" role="lcghm">
+                <property role="lacIc" value="ReleaseTopology(topology);" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l8MVK" id="7dqKAO3sRrY" role="lcghm" />
+            </node>
+            <node concept="lc7rE" id="7dqKAO3sRuK" role="3cqZAp">
+              <node concept="la8eA" id="7dqKAO3sRuL" role="lcghm">
+                <property role="lacIc" value="return ret;" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l8MVK" id="7dqKAO3sRuM" role="lcghm" />
             </node>
           </node>
         </node>
@@ -8111,7 +8199,7 @@
                 </node>
               </node>
               <node concept="la8eA" id="32lqJACokNa" role="lcghm">
-                <property role="lacIc" value="= wSelection((RowsMessage *)content, data);" />
+                <property role="lacIc" value=" = wSelection((RowsMessage *)content, data);" />
               </node>
               <node concept="l8MVK" id="3eevqy$DN_c" role="lcghm" />
             </node>
@@ -8171,7 +8259,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="32lqJAColXk" role="lcghm">
-                  <property role="lacIc" value="= wProjection((RowsMessage *)content, data);" />
+                  <property role="lacIc" value=" = wProjection((RowsMessage *)content, data);" />
                 </node>
                 <node concept="l8MVK" id="32lqJAColXl" role="lcghm" />
               </node>
@@ -8232,7 +8320,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="32lqJAComcK" role="lcghm">
-                  <property role="lacIc" value="= wOrderBy((RowsMessage *)content, data);" />
+                  <property role="lacIc" value=" = wOrderBy((RowsMessage *)content, data);" />
                 </node>
                 <node concept="l8MVK" id="32lqJAComcL" role="lcghm" />
               </node>
@@ -8293,7 +8381,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="32lqJAComfm" role="lcghm">
-                  <property role="lacIc" value="= wGroupBy((RowsMessage *)content, data);" />
+                  <property role="lacIc" value=" = wGroupBy((RowsMessage *)content, data);" />
                 </node>
                 <node concept="l8MVK" id="32lqJAComfn" role="lcghm" />
               </node>
@@ -8354,7 +8442,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="32lqJAComiT" role="lcghm">
-                  <property role="lacIc" value="= wJoin((Message *)content, data);" />
+                  <property role="lacIc" value=" = wJoin((RowsMessage *)content, data);" />
                 </node>
                 <node concept="l8MVK" id="32lqJAComiU" role="lcghm" />
               </node>
@@ -8422,7 +8510,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="32lqJAConAG" role="lcghm">
-                  <property role="lacIc" value="= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, COUNT);" />
+                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, COUNT);" />
                 </node>
                 <node concept="l8MVK" id="3eevqy$DO7i" role="lcghm" />
               </node>
@@ -8490,7 +8578,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="1dkLL_zF$Q1" role="lcghm">
-                  <property role="lacIc" value="= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, SUM);" />
+                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, SUM);" />
                 </node>
                 <node concept="l8MVK" id="1dkLL_zF$Q2" role="lcghm" />
               </node>
@@ -8558,7 +8646,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="1dkLL_zF$VE" role="lcghm">
-                  <property role="lacIc" value="= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MIN);" />
+                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MIN);" />
                 </node>
                 <node concept="l8MVK" id="1dkLL_zF$VF" role="lcghm" />
               </node>
@@ -8626,7 +8714,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="1dkLL_zF_0W" role="lcghm">
-                  <property role="lacIc" value="= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MAX);" />
+                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MAX);" />
                 </node>
                 <node concept="l8MVK" id="1dkLL_zF_0X" role="lcghm" />
               </node>
@@ -8694,7 +8782,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="1dkLL_zF_cg" role="lcghm">
-                  <property role="lacIc" value="= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, AVG);" />
+                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, AVG);" />
                 </node>
                 <node concept="l8MVK" id="1dkLL_zF_ch" role="lcghm" />
               </node>
@@ -8755,7 +8843,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="32lqJAConT3" role="lcghm">
-                  <property role="lacIc" value="= ExecuteWindow((RowsMessage *)content, (WindowData *)data);" />
+                  <property role="lacIc" value=" = ExecuteWindow((RowsMessage *)content, (WindowData *)data);" />
                 </node>
                 <node concept="l8MVK" id="32lqJAConT4" role="lcghm" />
               </node>

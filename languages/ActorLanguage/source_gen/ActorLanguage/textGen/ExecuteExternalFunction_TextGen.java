@@ -23,7 +23,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wSelection((RowsMessage *)content, data);");
+      tgs.append(" = wSelection((RowsMessage *)content, data);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -36,7 +36,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wProjection((RowsMessage *)content, data);");
+      tgs.append(" = wProjection((RowsMessage *)content, data);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -49,7 +49,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wOrderBy((RowsMessage *)content, data);");
+      tgs.append(" = wOrderBy((RowsMessage *)content, data);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -62,7 +62,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("GroupsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wGroupBy((RowsMessage *)content, data);");
+      tgs.append(" = wGroupBy((RowsMessage *)content, data);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -75,7 +75,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= wJoin((Message *)content, data);");
+      tgs.append(" = wJoin((RowsMessage *)content, data);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -91,7 +91,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, COUNT);");
+      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, COUNT);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -107,7 +107,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, SUM);");
+      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, SUM);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -123,7 +123,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MIN);");
+      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MIN);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -139,7 +139,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MAX);");
+      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MAX);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -155,7 +155,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, AVG);");
+      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, AVG);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -168,7 +168,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append("= ExecuteWindow((RowsMessage *)content, (WindowData *)data);");
+      tgs.append(" = ExecuteWindow((RowsMessage *)content, (WindowData *)data);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
