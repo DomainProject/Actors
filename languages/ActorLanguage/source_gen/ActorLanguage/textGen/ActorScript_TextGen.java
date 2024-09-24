@@ -5,23 +5,31 @@ package ActorLanguage.textGen;
 import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.internal.collections.runtime.Sequence;
-import org.jetbrains.mps.openapi.language.SContainmentLink;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import org.jetbrains.mps.openapi.language.SReferenceLink;
-import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 
 public class ActorScript_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
+
+    int maxAddress = 0;
+    for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{}))) {
+      if (SPropertyOperations.getInteger(actor, PROPS.address$DqJ_) > maxAddress) {
+        maxAddress = SPropertyOperations.getInteger(actor, PROPS.address$DqJ_);
+      }
+    }
+
     tgs.append("#include <ROOT-Sim.h>");
     tgs.newLine();
     tgs.append("#include <ROOT-Sim/topology.h>");
@@ -38,7 +46,8 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
 
     tgs.append("#ifndef NUM_LPS");
     tgs.newLine();
-    tgs.append("#define NUM_LPS 256");
+    tgs.append("#define NUM_LPS ");
+    tgs.append(String.valueOf(maxAddress + 1));
     tgs.newLine();
     tgs.append("#endif");
     tgs.newLine();
@@ -52,7 +61,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.newLine();
 
-    tgs.append("#define INPUT_FILE \"taxi-1.csv\"");
+    tgs.append("#define INPUT_FILE \"taxi.csv\"");
     tgs.newLine();
     tgs.newLine();
 
@@ -145,7 +154,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("DataIngestionCleanUp(file, (DataSourceData *)s);");
+    tgs.append("DataIngestionCleanUp(file, (DataSourceData *)s, &schema);");
     tgs.newLine();
     tgs.indent();
     tgs.append("break;");
@@ -438,13 +447,29 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.append("RootsimInit(&conf);");
     tgs.newLine();
     tgs.indent();
-    tgs.append("return RootsimRun();");
+    tgs.append("int ret = RootsimRun();");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("ReleaseTopology(topology);");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("return ret;");
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     tgs.append("}");
     tgs.newLine();
     tgs.newLine();
 
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
+    /*package*/ static final SConcept ActorLink$sB = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, "ActorLanguage.structure.ActorLink");
   }
 
   private static final class LINKS {
@@ -454,15 +479,5 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     /*package*/ static final SReferenceLink actor$8xF = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57937L, 0x262cd812cfe57939L, "actor");
     /*package*/ static final SReferenceLink actorFrom$3cFe = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57974L, "actorFrom");
     /*package*/ static final SReferenceLink behavior$QgnL = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681516c72L, "behavior");
-  }
-
-  private static final class CONCEPTS {
-    /*package*/ static final SConcept ActorLink$sB = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, "ActorLanguage.structure.ActorLink");
-    /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
-  }
-
-  private static final class PROPS {
-    /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
-    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

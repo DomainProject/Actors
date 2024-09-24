@@ -238,6 +238,11 @@
     <property role="34LRSv" value="create_payload" />
     <property role="R4oN_" value="create message payload" />
     <ref role="1TJDcQ" node="1enjyq1kxmg" resolve="Payload" />
+    <node concept="1TJgyj" id="5YFcNFooLR8" role="1TKVEi">
+      <property role="IQ2ns" value="6893659982452170184" />
+      <property role="20kJfa" value="type" />
+      <ref role="20lvS9" node="7lfjb8U8kEf" resolve="CustomType" />
+    </node>
     <node concept="PrWs8" id="25QEYlOdAsg" role="PzmwI">
       <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
@@ -247,11 +252,6 @@
       <property role="20kJfa" value="strings" />
       <property role="20lbJX" value="fLJekj5/_0__n" />
       <ref role="20lvS9" node="3QReeeiTcTh" resolve="StringBody" />
-    </node>
-    <node concept="1TJgyj" id="7lfjb8U8sf1" role="1TKVEi">
-      <property role="IQ2ns" value="8453059353960891329" />
-      <property role="20kJfa" value="type" />
-      <ref role="20lvS9" node="7lfjb8U8kEf" resolve="CustomType" />
     </node>
   </node>
   <node concept="1TIwiD" id="25QEYlOeItj">

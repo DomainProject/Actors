@@ -39,7 +39,7 @@ public class CreateMessage_TextGen extends TextGenDescriptorBase {
             tgs.append(", (void *)");
             tgs.append(SPropertyOperations.getString(p, PROPS.name$MnvL));
             tgs.append(", ");
-            tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(p, LINKS.type$Zilj), PROPS.name$MnvL));
+            tgs.appendNode(SLinkOperations.getTarget(p, LINKS.type$1_kc));
             tgs.append(");");
             tgs.newLine();
           }
@@ -54,7 +54,7 @@ public class CreateMessage_TextGen extends TextGenDescriptorBase {
             tgs.append(", (void *)");
             tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(p, LINKS.payload$ZT3H), PROPS.name$MnvL));
             tgs.append(", ");
-            tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(p, LINKS.payload$ZT3H), LINKS.type$Zilj), PROPS.name$MnvL));
+            tgs.appendNode(SLinkOperations.getTarget(SLinkOperations.getTarget(p, LINKS.payload$ZT3H), LINKS.type$1_kc));
             tgs.append(");");
             tgs.newLine();
           }
@@ -74,7 +74,7 @@ public class CreateMessage_TextGen extends TextGenDescriptorBase {
             tgs.append(", (void *)");
             tgs.append(SPropertyOperations.getString(p, PROPS.name$MnvL));
             tgs.append(", ");
-            tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(p, LINKS.type$Zilj), PROPS.name$MnvL));
+            tgs.appendNode(SLinkOperations.getTarget(p, LINKS.type$1_kc));
             tgs.append(");");
             tgs.newLine();
           }
@@ -89,7 +89,7 @@ public class CreateMessage_TextGen extends TextGenDescriptorBase {
             tgs.append(", (void *)");
             tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(p, LINKS.payload$ZT3H), PROPS.name$MnvL));
             tgs.append(", ");
-            tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(p, LINKS.payload$ZT3H), LINKS.type$Zilj), PROPS.name$MnvL));
+            tgs.appendNode(SLinkOperations.getTarget(SLinkOperations.getTarget(p, LINKS.payload$ZT3H), LINKS.type$1_kc));
             tgs.append(");");
             tgs.newLine();
           }
@@ -105,7 +105,7 @@ public class CreateMessage_TextGen extends TextGenDescriptorBase {
   private static final class LINKS {
     /*package*/ static final SContainmentLink payload$N_RC = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x9de89b125a71571L, "payload");
     /*package*/ static final SContainmentLink envelope$eoPh = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x2d5fc2c1e9650052L, "envelope");
-    /*package*/ static final SReferenceLink type$Zilj = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, 0x754f4cb23a21c3c1L, "type");
+    /*package*/ static final SReferenceLink type$1_kc = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, 0x5fab333ad8631dc8L, "type");
     /*package*/ static final SReferenceLink payload$ZT3H = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L, 0x4658738496c93a91L, "payload");
     /*package*/ static final SReferenceLink envelope$EmhE = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L, 0x9de89b125bf6284L, "envelope");
   }

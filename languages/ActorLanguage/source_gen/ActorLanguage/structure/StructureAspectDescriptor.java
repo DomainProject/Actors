@@ -505,7 +505,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/2411303652489062024");
     b.version(3);
-    b.associate("type", 0x754f4cb23a21c3c1L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x754f4cb23a214a8fL).optional(true).origin("8453059353960891329").done();
+    b.associate("type", 0x5fab333ad8631dc8L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x754f4cb23a214a8fL).optional(true).origin("6893659982452170184").done();
     b.aggregate("strings", 0x3db738e392dd2178L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x3db738e392e4ce51L).optional(true).ordered(true).multiple(true).origin("4447085707124351352").done();
     b.alias("create_payload");
     return b.create();

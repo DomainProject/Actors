@@ -13,12 +13,13 @@ import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.generator.template.PropertyMacroContext;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import java.util.List;
+import jetbrains.mps.internal.collections.runtime.Sequence;
+import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.generator.template.ReferenceMacroContext;
 import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import QueryLanguage.behavior.Script__BehaviorDescriptor;
-import jetbrains.mps.internal.collections.runtime.Sequence;
 import jetbrains.mps.smodel.SNodeMatcher;
 import jetbrains.mps.generator.template.IfMacroContext;
 import jetbrains.mps.internal.collections.runtime.MapSequence;
@@ -48,6 +49,9 @@ import jetbrains.mps.generator.impl.query.ReferenceTargetQuery;
 import jetbrains.mps.generator.impl.query.VariableValueQuery;
 import jetbrains.mps.generator.impl.query.LabelInputQuery;
 import jetbrains.mps.generator.template.LabelKeyQueryContext;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
+import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
+import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 import jetbrains.mps.lang.smodel.EnumerationLiteralsIndex;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
@@ -231,11 +235,20 @@ public class QueriesGenerated extends QueryProviderBase {
   public static Object propertyMacro_GetValue_5_3(final PropertyMacroContext _context) {
     String ret = "";
     List<SNode> cols = SLinkOperations.getChildren(SLinkOperations.getTarget(_context.getNode(), LINKS.orderBy$K96v), LINKS.columns$Hhkv);
-    for (SNode colRef : ListSequence.fromList(cols)) {
+    for (final SNode colRef : ListSequence.fromList(cols)) {
+      String colName = (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1 ? SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL) : SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL));
       if (SNodeOperations.getIndexInParent(colRef) == ListSequence.fromList(cols).count() - 1) {
-        ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL);
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList().get(0)).getConceptAlias() + "(" + colName + ")";
+        } else {
+          ret = ret + colName;
+        }
       } else {
-        ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL) + ", ";
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList().get(0)).getConceptAlias() + "(" + colName + "), ";
+        } else {
+          ret = ret + colName;
+        }
       }
     }
 
@@ -289,11 +302,20 @@ public class QueriesGenerated extends QueryProviderBase {
   public static Object propertyMacro_GetValue_7_2(final PropertyMacroContext _context) {
     String ret = "";
     List<SNode> cols = SLinkOperations.getChildren(SLinkOperations.getTarget(_context.getNode(), LINKS.orderBy$K96v), LINKS.columns$Hhkv);
-    for (SNode colRef : ListSequence.fromList(cols)) {
+    for (final SNode colRef : ListSequence.fromList(cols)) {
+      String colName = (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1 ? SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL) : SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL));
       if (SNodeOperations.getIndexInParent(colRef) == ListSequence.fromList(cols).count() - 1) {
-        ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL);
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList().get(0)).getConceptAlias() + "(" + colName + ")";
+        } else {
+          ret = ret + colName;
+        }
       } else {
-        ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL) + ", ";
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList().get(0)).getConceptAlias() + "(" + colName + "), ";
+        } else {
+          ret = ret + colName;
+        }
       }
     }
 
@@ -339,18 +361,20 @@ public class QueriesGenerated extends QueryProviderBase {
   public static Object propertyMacro_GetValue_8_1(final PropertyMacroContext _context) {
     String ret = "";
     List<SNode> cols = SLinkOperations.getChildren(SLinkOperations.getTarget(_context.getNode(), LINKS.orderBy$K96v), LINKS.columns$Hhkv);
-    for (SNode colRef : ListSequence.fromList(cols)) {
+
+    for (final SNode colRef : ListSequence.fromList(cols)) {
+      String colName = (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1 ? SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL) : SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL));
       if (SNodeOperations.getIndexInParent(colRef) == ListSequence.fromList(cols).count() - 1) {
-        if (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1) {
-          ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL);
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(ListSequence.fromList(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList()).getElement(0)).getConceptAlias() + "(" + colName + ")";
         } else {
-          ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL);
+          ret = ret + colName;
         }
       } else {
-        if (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1) {
-          ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL) + ", ";
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList().get(0)).getConceptAlias() + "(" + colName + "), ";
         } else {
-          ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL) + ", ";
+          ret = ret + colName;
         }
       }
     }
@@ -398,18 +422,19 @@ public class QueriesGenerated extends QueryProviderBase {
   public static Object propertyMacro_GetValue_9_1(final PropertyMacroContext _context) {
     String ret = "";
     List<SNode> cols = SLinkOperations.getChildren(SLinkOperations.getTarget(_context.getNode(), LINKS.orderBy$K96v), LINKS.columns$Hhkv);
-    for (SNode colRef : ListSequence.fromList(cols)) {
+    for (final SNode colRef : ListSequence.fromList(cols)) {
+      String colName = (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1 ? SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL) : SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL));
       if (SNodeOperations.getIndexInParent(colRef) == ListSequence.fromList(cols).count() - 1) {
-        if (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1) {
-          ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL);
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(ListSequence.fromList(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList()).getElement(0)).getConceptAlias() + "(" + colName + ")";
         } else {
-          ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL);
+          ret = ret + colName;
         }
       } else {
-        if (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1) {
-          ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL) + ", ";
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList().get(0)).getConceptAlias() + "(" + colName + "), ";
         } else {
-          ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL) + ", ";
+          ret = ret + colName;
         }
       }
     }
@@ -455,10 +480,67 @@ public class QueriesGenerated extends QueryProviderBase {
     String ret = "";
     List<SNode> cols = SLinkOperations.getChildren(SLinkOperations.getTarget(_context.getNode(), LINKS.orderBy$K96v), LINKS.columns$Hhkv);
     for (SNode colRef : ListSequence.fromList(cols)) {
+      String colName = (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1 ? SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL) : SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL));
       if (SNodeOperations.getIndexInParent(colRef) == ListSequence.fromList(cols).count() - 1) {
-        ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL);
+        SAbstractConcept cncpt = SNodeOperations.getConcept(SLinkOperations.getTarget(colRef, LINKS.aggregationFunction$8ryB));
+        switch (conceptIndex.index(cncpt)) {
+          case 0:
+            if (true) {
+              ret = ret + "AVG(" + colName + ")";
+            }
+            break;
+          case 1:
+            if (true) {
+              ret = ret + "COUNT(" + colName + ")";
+            }
+            break;
+          case 2:
+            if (true) {
+              ret = ret + "MAX(" + colName + ")";
+            }
+            break;
+          case 3:
+            if (true) {
+              ret = ret + "MIN(" + colName + ")";
+            }
+            break;
+          case 4:
+            if (true) {
+              ret = ret + "SUM(" + colName + ")";
+            }
+            break;
+          default:
+        }
       } else {
-        ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL) + ", ";
+        SAbstractConcept cncpt1 = SNodeOperations.getConcept(SLinkOperations.getTarget(colRef, LINKS.aggregationFunction$8ryB));
+        switch (conceptIndex1.index(cncpt1)) {
+          case 0:
+            if (true) {
+              ret = ret + "AVG(" + colName + "), ";
+            }
+            break;
+          case 1:
+            if (true) {
+              ret = ret + "COUNT(" + colName + "), ";
+            }
+            break;
+          case 2:
+            if (true) {
+              ret = ret + "MAX(" + colName + "), ";
+            }
+            break;
+          case 3:
+            if (true) {
+              ret = ret + "MIN(" + colName + "), ";
+            }
+            break;
+          case 4:
+            if (true) {
+              ret = ret + "SUM(" + colName + "), ";
+            }
+            break;
+          default:
+        }
       }
     }
 
@@ -567,11 +649,20 @@ public class QueriesGenerated extends QueryProviderBase {
   public static Object propertyMacro_GetValue_17_3(final PropertyMacroContext _context) {
     String ret = "";
     List<SNode> cols = SLinkOperations.getChildren(SLinkOperations.getTarget(_context.getNode(), LINKS.orderBy$K96v), LINKS.columns$Hhkv);
-    for (SNode colRef : ListSequence.fromList(cols)) {
+    for (final SNode colRef : ListSequence.fromList(cols)) {
+      String colName = (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1 ? SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL) : SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL));
       if (SNodeOperations.getIndexInParent(colRef) == ListSequence.fromList(cols).count() - 1) {
-        ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL);
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList().get(0)).getConceptAlias() + "(" + colName + ")";
+        } else {
+          ret = ret + colName;
+        }
       } else {
-        ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL) + ", ";
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList().get(0)).getConceptAlias() + "(" + colName + "), ";
+        } else {
+          ret = ret + colName;
+        }
       }
     }
 
@@ -642,7 +733,27 @@ public class QueriesGenerated extends QueryProviderBase {
     return _context.createUniqueName("window", _context.getNode());
   }
   public static Object propertyMacro_GetValue_27_2(final PropertyMacroContext _context) {
-    return SPropertyOperations.getString(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(_context.getNode(), LINKS.orderBy$K96v), LINKS.columns$Hhkv)).getElement(0), LINKS.column$Wyeu), PROPS.name$MnvL);
+    String ret = "";
+    List<SNode> cols = SLinkOperations.getChildren(SLinkOperations.getTarget(_context.getNode(), LINKS.orderBy$K96v), LINKS.columns$Hhkv);
+
+    for (final SNode colRef : ListSequence.fromList(cols)) {
+      String colName = (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1 ? SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL) : SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL));
+      if (SNodeOperations.getIndexInParent(colRef) == ListSequence.fromList(cols).count() - 1) {
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList().get(0)).getConceptAlias() + "(" + colName + ")";
+        } else {
+          ret = ret + colName;
+        }
+      } else {
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList().get(0)).getConceptAlias() + "(" + colName + "), ";
+        } else {
+          ret = ret + colName;
+        }
+      }
+    }
+
+    return ret;
   }
   public static Object propertyMacro_GetValue_27_3(final PropertyMacroContext _context) {
     SNode table = null;
@@ -675,18 +786,19 @@ public class QueriesGenerated extends QueryProviderBase {
   public static Object propertyMacro_GetValue_27_4(final PropertyMacroContext _context) {
     String ret = "";
     List<SNode> cols = SLinkOperations.getChildren(SLinkOperations.getTarget(_context.getNode(), LINKS.orderBy$K96v), LINKS.columns$Hhkv);
-    for (SNode colRef : ListSequence.fromList(cols)) {
+    for (final SNode colRef : ListSequence.fromList(cols)) {
+      String colName = (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1 ? SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL) : SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL));
       if (SNodeOperations.getIndexInParent(colRef) == ListSequence.fromList(cols).count() - 1) {
-        if (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1) {
-          ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL);
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList().get(0)).getConceptAlias() + "(" + colName + ")";
         } else {
-          ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL);
+          ret = ret + colName;
         }
       } else {
-        if (ListSequence.fromList(SLinkOperations.getChildren(_context.getNode(), LINKS.tables$IXdn)).count() > 1) {
-          ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.fullName$t1KL) + ", ";
+        if (Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).isNotEmpty()) {
+          ret = ret + SNodeOperations.getConcept(Sequence.fromIterable(SLinkOperations.collect(ListSequence.fromList(SNodeOperations.getNodeDescendants(_context.getNode(), CONCEPTS.ColumnRef$XM, false, new SAbstractConcept[]{})).where((it) -> Objects.equals(SLinkOperations.getTarget(it, LINKS.column$Wyeu), SLinkOperations.getTarget(colRef, LINKS.column$Wyeu))), LINKS.aggregationFunction$8ryB)).toList().get(0)).getConceptAlias() + "(" + colName + "), ";
         } else {
-          ret = ret + SPropertyOperations.getString(SLinkOperations.getTarget(colRef, LINKS.column$Wyeu), PROPS.name$MnvL) + ", ";
+          ret = ret + colName;
         }
       }
     }
@@ -2768,6 +2880,8 @@ public class QueriesGenerated extends QueryProviderBase {
       }
     }
   }
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028394L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028392L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028390L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b02838dL), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028393L)).seal();
+  private static final ConceptSwitchIndex conceptIndex1 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028394L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028392L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028390L), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b02838dL), MetaIdFactory.conceptId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5d7e70837b028393L)).seal();
   private static final EnumerationLiteralsIndex enumSwitchIndex = EnumerationLiteralsIndex.build(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x8073cf9a51b7603L, 0x8073cf9a51f0666L, 0x8073cf9a51e1edbL, 0x8073cf9a51b7608L, 0x8073cf9a51b7605L, 0x8073cf9a51b7611L, 0x8073cf9a51b760cL);
 
   private static final class LINKS {
