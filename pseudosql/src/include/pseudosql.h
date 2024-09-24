@@ -144,8 +144,8 @@ typedef struct {
 typedef struct {
     lp_id_t from_id;
     char *attribute;
-    // RowsList *list;
     char *table_name;
+    struct RowsLinkedListElement *list;
 } JoinTableData;
 
 typedef struct {
@@ -170,12 +170,12 @@ typedef struct {
 } Envelope;
 
 typedef struct {
-	char col_name[32];
+	char col_name[64];
 	union {
 		long long_value;
 		int int_value;
 		float float_value;
-		char string_value[16];
+		char string_value[8];
         double double_value;
 	} value;
 	Type type;
@@ -255,7 +255,7 @@ EXPORT RowsLinkedList *SelectionMultRows(int size, Row *input_rows, Condition *c
 EXPORT RowsLinkedList *OrderBy(int size, Row *input_rows, const char *col_name);
 EXPORT GroupsLinkedList *GroupBy(int size, Row *input_rows, const char *col_name);
 EXPORT void *AggregateFunction(AggFunctionData input, AggregateFunctionType type);
-//EXPORT RowsList *Join(RowsList list1, RowsList list2, char *col1_name, char *col2_name);
+EXPORT RowsLinkedList *Join(struct RowsLinkedListElement *head1, struct RowsLinkedListElement *head2, char *col1_name, char *col2_name);
 
 /* ROOT-Sim management function */
 EXPORT void DataIngestionInit(lp_id_t me, simtime_t now, FILE **file, char *filename, Schema *schema);
@@ -285,7 +285,7 @@ EXPORT RowsLinkedList *wProjection(RowsMessage *rcv_msg, void *data);
 EXPORT RowsLinkedList *wOrderBy(RowsMessage *rcv_msg, void *data);
 EXPORT GroupsLinkedList *wGroupBy(RowsMessage *rcv_msg, void *data);
 EXPORT RowsLinkedList *ExecuteWindow(RowsMessage *rcv_msg, WindowData *data);
-//EXPORT RowsList *wJoin(Message *msg, void *data);
+EXPORT RowsLinkedList *wJoin(RowsMessage *msg, void *data);
 EXPORT void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t me, simtime_t now);
 EXPORT void JoinInit(struct topology *topology, lp_id_t from1, lp_id_t from2, lp_id_t me);
 EXPORT void WriteToOutputFile(lp_id_t me, const void *content, OutputProcessData *data);

@@ -277,31 +277,31 @@ double compute_sum(int size, Row *list, char *col_name) {
     return sum;
 }
 
-/*
-int are_equals(Row row1, Row row2, char *col1_name, char *col2_name) {
+
+int are_equals(Row *row1, Row *row2, char *col1_name, char *col2_name) {
     int index1, index2;
 
-    //index1 = get_index(row1, col1_name);
-    //index2 = get_index(row2, col2_name);
+    index1 = get_index(*row1, col1_name);
+    index2 = get_index(*row2, col2_name);
 
     if (index1 == -1 || index2 == -1) {
         return -1;
     }
 
-    if (row1.elements[index1].type != row2.elements[index2].type) {
+    if (row1->elements[index1].type != row2->elements[index2].type) {
         fprintf(stderr, "Comparing columns with different types\n");
         return 0;
     }
 
-    switch(row1.elements[index1].type) {
+    switch(row1->elements[index1].type) {
         case TYPE_INT:
-            return row1.elements[index1].value.int_value == row2.elements[index2].value.int_value;
+            return row1->elements[index1].value.int_value == row2->elements[index2].value.int_value;
         case TYPE_LONG:
-            return row1.elements[index1].value.long_value == row2.elements[index2].value.long_value;
+            return row1->elements[index1].value.long_value == row2->elements[index2].value.long_value;
         case TYPE_FLOAT:
-            return row1.elements[index1].value.float_value == row2.elements[index2].value.float_value;
+            return row1->elements[index1].value.float_value == row2->elements[index2].value.float_value;
         case TYPE_STRING:
-            if (!strcmp(row1.elements[index1].value.string_value, row2.elements[index2].value.string_value))
+            if (!strcmp(row1->elements[index1].value.string_value, row2->elements[index2].value.string_value))
                 return 1;
             return 0;
         default:
@@ -309,7 +309,7 @@ int are_equals(Row row1, Row row2, char *col1_name, char *col2_name) {
             exit(EXIT_FAILURE);
     }
 }
-*/
+
 
 void AppendRow(struct RowsLinkedListElement* head, Row *row) {
     if (head == NULL) {

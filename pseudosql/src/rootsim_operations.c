@@ -111,7 +111,7 @@ void CreateAndSendMessageFromGroupsList(lp_id_t sender_id, float priority, Group
 	}
 
 	for (int i = 0; i < num_receivers; i++) {
-		ScheduleNewEvent(receivers[i], now + 1, EVENT, msg, sizeof(GroupsMessage) + total_size * sizeof(unsigned char));
+		ScheduleNewEvent(receivers[i], now + 0.1, EVENT, msg, sizeof(GroupsMessage) + total_size * sizeof(unsigned char));
 	}
 
 	free(msg);
@@ -150,7 +150,7 @@ void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedL
 	}
 
 	for (int i = 0; i < num_receivers; i++) {
-		ScheduleNewEvent(receivers[i], now + 1.0, EVENT, msg, sizeof(RowsMessage) + sizeof(Row) * msg->size);
+		ScheduleNewEvent(receivers[i], now + 0.1, EVENT, msg, sizeof(RowsMessage) + sizeof(Row) * msg->size);
 	}
 
 	FreeList(rows_list);	
@@ -306,11 +306,8 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
         return;
     }
 
-	// remove newline from the line
-    char *newline_pos = strchr(line, '\n');
-    if (newline_pos != NULL) {
-        *newline_pos = '\0';
-    }
+	// remove newline
+    line[strcspn(line, "\n")] = '\0';
 
 	int num_rows = 0;
 	struct RowsLinkedListElement *head = NULL;
@@ -599,10 +596,8 @@ void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData
 
 	char *buffer = strdup(attribute_name);
 
-    // Usa strtok per dividere la stringa, verifica che i token siano validi
     char *parsed_name = strtok(buffer, ".");
     
-    // Verifica se il primo token è valido
     if (parsed_name != NULL) {
         table_data->table_name = parsed_name;
     } else {
@@ -610,10 +605,8 @@ void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData
         return;
     }
 
-    // Estrai il secondo token
     parsed_name = strtok(NULL, ".");
     
-    // Verifica se il secondo token è valido
     if (parsed_name != NULL) {
         table_data->attribute = parsed_name;
     } else {
@@ -622,7 +615,7 @@ void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData
     }
 
     table_data->from_id = from;
-    //table_data->list = NULL;
+	table_data->list = NULL;
 
     #ifdef DEBUG
     printf("Join initialized: table_name = %s, attribute = %s\n", table_data->table_name, table_data->attribute);
@@ -689,7 +682,7 @@ RowsLinkedList *wSelection(RowsMessage *rcv_msg, void *data) {
 
 	ret_list = SelectionMultRows(rcv_msg->size, rcv_msg->rows, condition);
 	if (ret_list->size == 0) {
-		printf("[SELECTION] No tuples were found that satisfy the specified selection condition.\n");
+		//printf("[SELECTION] No tuples were found that satisfy the specified selection condition.\n");
 		return NULL;
 	}
 
@@ -710,16 +703,6 @@ RowsLinkedList *wProjection(RowsMessage *rcv_msg, void *data) {
 	AttributeList *list = proj_data->list;
 
 	ret_list = ProjectionMultRows(rcv_msg->size, rcv_msg->rows, *list);
-
-	#ifdef DEBUG
-	if (!send_list) {
-		return NULL;
-	}
-	printf("Projection output:\n");
-	for (int i = 0; i < send_list->num_rows; i++) {
-		PrintRow(&send_list->rows[i]);
-	}
-	#endif
 
 	return ret_list;	
 }
@@ -874,17 +857,32 @@ void JoinInit(struct topology *topology, lp_id_t from1, lp_id_t from2, lp_id_t m
  * @param data Process state
  * @param priority Priority of the messages to be sent
  */
-/*
-RowsList *wJoin(Message *msg, void *data) {
+
+RowsLinkedList *wJoin(RowsMessage *msg, void *data) {
 	unsigned int i;
 	bool can_execute = true;
-	RowsList *joined_list;
+	RowsLinkedList *joined_list;
 	JoinData *join_data = (JoinData *)data;
 
 	for (i = 0; i < join_data->size; i++) {
-		if (join_data->tables_data[i]->from_id == msg->envelope->sender) {
-			msg->content.rows_list->rows->table_name = strdup(join_data->tables_data[i]->table_name);
-			join_data->tables_data[i]->list = msg->content.rows_list;
+		if (join_data->tables_data[i]->from_id == msg->e.sender) {
+			// populate linked list from flexible array
+			for (int j = 0; j < msg->size; j++) {
+				strcpy(msg->rows[j].table_name, join_data->tables_data[i]->table_name);
+
+				if (join_data->tables_data[i]->list == NULL) {
+					struct RowsLinkedListElement *elem = rs_malloc(sizeof(struct RowsLinkedListElement));
+					CHECK_RSMALLOC(elem, "wJoin");
+					elem->next = NULL;
+					elem->row = rs_malloc(sizeof(Row));
+					CHECK_RSMALLOC(elem->row, "wJoin");
+					memcpy(elem->row, &msg->rows[j], sizeof(Row));
+
+					join_data->tables_data[i]->list = elem;
+				} else {
+					AppendRow(join_data->tables_data[i]->list, &msg->rows[j]);
+				}
+			} 
 		} else {
 			if (!join_data->tables_data[i]->list) {
 				can_execute = false;
@@ -893,28 +891,37 @@ RowsList *wJoin(Message *msg, void *data) {
 	}
 
 	if (can_execute) {
-		joined_list = Join(*join_data->tables_data[0]->list, 
-				*join_data->tables_data[1]->list, 
+
+		joined_list = Join(
+				join_data->tables_data[0]->list, 
+				join_data->tables_data[1]->list,
 				join_data->tables_data[0]->attribute, 
-				join_data->tables_data[1]->attribute);
+				join_data->tables_data[1]->attribute
+			);
 
 		// free tables lists
 		for (i = 0; i < join_data->size; i++) {
+			struct RowsLinkedListElement *tmp = join_data->tables_data[i]->list;
+			while(tmp != NULL) {
+				struct RowsLinkedListElement *next = tmp->next;
+				
+				if (tmp->row != NULL) {
+					rs_free(tmp->row);
+				}
+				rs_free(tmp);
+				
+				tmp = next;
+			}
+
 			join_data->tables_data[i]->list = NULL;
 		}
 
-		#ifdef DEBUG
-		for (int i = 0; i < joined_list->num_rows; i++) {
-			PrintRow(&joined_list->rows[i]);
-		}
-		#endif
-		
 		return joined_list;
 	} 
 
 	return NULL;
 }
-*/
+
 
 /**
  * @brief Prints the header (column names) to the CSV file
@@ -1007,7 +1014,7 @@ void ForwardTerminationMessage(struct topology *topology, lp_id_t me, simtime_t 
 	lp_id_t *neighbors = GetAllNeighbors(topology, me, &num_neighbors);
 
 	for (int i = 0; i < num_neighbors; i++) {
-		ScheduleNewEvent(neighbors[i], now + 10.0, TERMINATE, NULL, 0);
+		ScheduleNewEvent(neighbors[i], now + 1.0, TERMINATE, NULL, 0);
 	}
 
 	free(neighbors);

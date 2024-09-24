@@ -6,14 +6,14 @@
 #include <unistd.h>
 
 #ifndef NUM_LPS
-#define NUM_LPS 100
+#define NUM_LPS 25
 #endif
 
 #ifndef NUM_THREADS
-#define NUM_THREADS 1
+#define NUM_THREADS 0
 #endif
 
-#define INPUT_FILE "taxi_1k.csv"
+#define INPUT_FILE "taxi_1M.csv"
 
 FILE *file;
 Schema schema;
@@ -22,13 +22,13 @@ void InitTopology() {
   topology = InitializeTopology(TOPOLOGY_GRAPH, 25);
 
   AddTopologyLink(topology, 0, 6, 1);
-  static int window0to6 = 60;
+  static int window0to6 = 3600;
   SetTopologyLinkData(topology, 0, 6, (void *)&window0to6);
   AddTopologyLink(topology, 0, 7, 1);
-  static int window0to7 = 60;
+  static int window0to7 = 3600;
   SetTopologyLinkData(topology, 0, 7, (void *)&window0to7);
   AddTopologyLink(topology, 0, 8, 1);
-  static int window0to8 = 60;
+  static int window0to8 = 3600;
   SetTopologyLinkData(topology, 0, 8, (void *)&window0to8);
   AddTopologyLink(topology, 1, 9, 1);
   SetTopologyLinkData(topology, 1, 9, (void *)"payment_type,total_amount");
@@ -110,14 +110,14 @@ void selection(lp_id_t me, simtime_t now, const void *content, void *data) {
 }
 
 void joinColumns(lp_id_t me, simtime_t now, const void *content, void *data) {
-  //RowsList *result= wJoin((Message *)content, data);
-  //if (!result) return;
+  RowsLinkedList *result = wJoin((RowsMessage *)content, data);
+  if (!result) return;
 
-  //int num_refs;
-  //lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
-  //CreateAndSendMessage(me, 5.0, ROWS, result, now, refs, num_refs);
+  int num_refs;
+  lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
+  CreateAndSendMessageFromList(me, 5.0, result, now, refs, num_refs);
 
-  //free(refs);
+  free(refs);
 }
 
 void Count(lp_id_t me, simtime_t now, const void *content, void *data) {
@@ -859,8 +859,8 @@ struct simulation_configuration conf = {
   .log_level = LOG_INFO,
   .stats_file = "stats",
   .ckpt_interval = 0,
-  .core_binding = false,
-  .serial = true,
+  .core_binding = true,
+  .serial = false,
   .dispatcher = ProcessEvent,
   .committed = CanEnd
 };

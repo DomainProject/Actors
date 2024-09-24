@@ -82,6 +82,7 @@ Row *Projection(Row input_row, AttributeList list) {
  */
 RowsLinkedList *ProjectionMultRows(int size, Row *input_rows, AttributeList list) {
     int i, j;
+    Row *result;
 
     for (i = 0; i < list.num_attributes; i++) {
         int found = 0;
@@ -95,13 +96,27 @@ RowsLinkedList *ProjectionMultRows(int size, Row *input_rows, AttributeList list
         }
     } 
 
-    struct RowsLinkedListElement *head = rs_malloc(sizeof(struct RowsLinkedListElement));
-    CHECK_RSMALLOC(head, "ProjectionMultRows");
-    head->row = NULL;
-    head->next = NULL;
+    struct RowsLinkedListElement *head = NULL;
 
     for (int i = 0; i < size; i++) {
-        AppendRow(head, Projection(input_rows[i], list));
+        
+        result = Projection(input_rows[i], list);
+        struct RowsLinkedListElement *e = rs_malloc(sizeof(struct RowsLinkedListElement));
+            CHECK_RSMALLOC(e, "ProjectionMultRows");
+            e->next = NULL;
+            e->row = result;
+
+        if (head == NULL) {
+            head = e;
+        } else {
+            // append row
+            struct RowsLinkedListElement *cur = head;
+            while (cur->next != NULL) {
+                cur = cur->next;
+            }
+            cur->next = e;
+        }
+        
     }
 
     RowsLinkedList *ret_list = rs_malloc(sizeof(RowsLinkedList));
@@ -521,77 +536,50 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type) {
     } 
 }
 
-/*
-Row join_single_rows(Row row1, Row row2) {
+
+Row *join_single_rows(Row *row1, Row *row2) {
     int i, j;
 
-    RowElement *elements = malloc((row1.num_elements + row2.num_elements) * sizeof(RowElement));
-    if (!elements) {
-        perror("malloc");
+    Row *result_row = rs_malloc(sizeof(Row));
+    CHECK_RSMALLOC(result_row, "join_single_rows");
+
+    if (row1->num_elements + row2->num_elements > 19) {
+        fprintf(stderr, "Join is currently not supported when the total size of elements in each row exceeds 19\n");
         exit(EXIT_FAILURE);
     }
-
-    Row *row = malloc(sizeof(Row));
-    if (!row) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-
-    row->num_elements = row1.num_elements + row2.num_elements;
     
     // Create table name in the format "row1.table_name join row2.table_name"
-    size_t table_name_len = strlen(row1.table_name) + strlen(row2.table_name) + 6 + 2; 
-    row->table_name = malloc(table_name_len);
-    if (!row->table_name) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-    strcpy(row->table_name, row1.table_name);
-    strcat(row->table_name, " join ");
-    strcat(row->table_name, row2.table_name);
+    strcpy(result_row->table_name, "joined table");
 
-    for (i = 0; i < row1.num_elements; i++) {
-        elements[i] = row1.elements[i];
+    for (i = 0; i < row1->num_elements; i++) {
+        result_row->elements[i] = row1->elements[i];
 
-        size_t prefix_len = strlen(row1.table_name) + 1; // +1 for the '.'
-        size_t col_name_len = strlen(row1.elements[i].col_name);
-        elements[i].col_name = malloc(prefix_len + col_name_len + 1); // +1 for the '\0'
-        if (!elements[i].col_name) {
-            perror("malloc");
-            exit(EXIT_FAILURE);
-        }
-        strcpy(elements[i].col_name, row1.table_name);
-        strcat(elements[i].col_name, ".");
-        strcat(elements[i].col_name, row1.elements[i].col_name);
+        strcpy(result_row->elements[i].col_name, row1->table_name);
+        strcat(result_row->elements[i].col_name, ".");
+        strcat(result_row->elements[i].col_name, row1->elements[i].col_name);
 
-        if (elements[i].type == TYPE_STRING) {
-            elements[i].value.string_value = strdup(row1.elements[i].value.string_value);
+        if (result_row->elements[i].type == TYPE_STRING) {
+            strcpy(result_row->elements[i].value.string_value, row1->elements[i].value.string_value);
         }
     }
 
-    for (j = 0; j < row2.num_elements; j++) {
-        elements[i + j] = row2.elements[j];
+    for (j = 0; j < row2->num_elements; j++) {
+        result_row->elements[i + j] = row2->elements[j];
 
-        size_t prefix_len = strlen(row2.table_name) + 1; // +1 for the '.'
-        size_t col_name_len = strlen(row2.elements[j].col_name);
-        elements[i + j].col_name = malloc(prefix_len + col_name_len + 1); // +1 for the '\0'
-        if (!elements[i + j].col_name) {
-            perror("malloc");
-            exit(EXIT_FAILURE);
-        }
-        strcpy(elements[i + j].col_name, row2.table_name);
-        strcat(elements[i + j].col_name, ".");
-        strcat(elements[i + j].col_name, row2.elements[j].col_name);
+        strcpy(result_row->elements[i + j].col_name, row2->table_name);
+        strcat(result_row->elements[i + j].col_name, ".");
+        strcat(result_row->elements[i + j].col_name, row2->elements[j].col_name);
 
-        if (elements[i + j].type == TYPE_STRING) {
-            elements[i + j].value.string_value = strdup(row2.elements[j].value.string_value);
+        if (result_row->elements[i + j].type == TYPE_STRING) {
+            strcpy(result_row->elements[i + j].value.string_value, row2->elements[j].value.string_value);
         }
     }
 
-    row->elements = elements;
-    return *row;
+    result_row->num_elements = row1->num_elements + row2->num_elements;
+
+    return result_row;
 }
-*/
+
 
 /**
  * @brief Join two tables
@@ -599,43 +587,58 @@ Row join_single_rows(Row row1, Row row2) {
  * @param list2 list of rows belonging to the second table
  * @param schema joined schema, that merges the two tables schemas
  */
-/*
-RowsList *Join(RowsList list1, RowsList list2, char *col1_name, char *col2_name) {
+RowsLinkedList *Join(struct RowsLinkedListElement *head1, struct RowsLinkedListElement *head2, char *col1_name, char *col2_name) {
+    int ret, count = 0;
 
-    int ret;
+    RowsLinkedList *ret_list;
+    Row *result;
 
-    Row *rows = malloc(list1.num_rows * list2.num_rows * sizeof(Row));
-    if (!rows) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
+    struct RowsLinkedListElement *head = NULL;
 
-    int i, j, count = 0;
+    struct RowsLinkedListElement *list1_cur = head1;
+    struct RowsLinkedListElement *list2_cur = head2;
 
-    for (i = 0; i < list1.num_rows; i++) {
-        for (j = 0; j < list2.num_rows; j++) {
+    while (list1_cur != NULL) {
+        while (list2_cur != NULL) {
 
-            ret = are_equals(list1.rows[i], list2.rows[j], col1_name, col2_name);
+            ret = are_equals(list1_cur->row, list2_cur->row, col1_name, col2_name);
 
             if (ret == -1) {
                 return NULL;
             } else if (ret) {
-                rows[count++] = join_single_rows(list1.rows[i], list2.rows[j]);
+                result = join_single_rows(list1_cur->row, list2_cur->row); 
+
+                if (head == NULL) {
+                    head = rs_malloc(sizeof(struct RowsLinkedListElement));
+                    CHECK_RSMALLOC(head, "Join");
+                    head->next = NULL;
+                    head->row = result;
+                } else {
+                    // append row
+                    struct RowsLinkedListElement *new_elem = rs_malloc(sizeof(struct RowsLinkedListElement));
+                    CHECK_RSMALLOC(new_elem, "Join");
+                    new_elem->next = NULL;
+                    new_elem->row = result;
+
+                    struct RowsLinkedListElement* last = head;
+                    while (last->next != NULL) {
+                        last = last->next;
+                    }
+                    last->next = new_elem;
+                }
+
+                count++;
             }
+
+            list2_cur = list2_cur->next;
         }
+        list1_cur = list1_cur->next;
     }
+    
+    ret_list = rs_malloc(sizeof(RowsLinkedList));
+    CHECK_RSMALLOC(ret_list, "Join");
+    ret_list->head = head;
+    ret_list->size = count;
 
-    rows = realloc(rows, count * sizeof(Row));
-
-    RowsList *list = malloc(sizeof(RowsList));
-    if (!list) {
-        perror("malloc");
-        exit(EXIT_FAILURE);
-    }
-
-    list->num_rows = count;
-    list->rows = rows;
-
-    return list;
+    return ret_list;
 }
-*/

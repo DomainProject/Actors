@@ -9,5 +9,5 @@
 #include <stdbool.h>
 #include <time.h>
 
-#define MAX_LINE_LENGTH 2048
+#define MAX_LINE_LENGTH 512
 #define DATE_TIME_FORMAT_LENGTH 19
