@@ -57,7 +57,7 @@ typedef enum {
     LOPERATOR_AND,   // &&
     LOPERATOR_OR,    // ||
     LOPERATOR_INVALID
-} LogicalOperator;  
+} LogicalOperator;
 
 typedef enum {
     SIMPLE_CONDITION,
@@ -129,17 +129,17 @@ typedef struct {
 typedef struct {
     char *attribute;
     bool can_end;
-} OrderByData;  
+} OrderByData;
 
 typedef struct {
     char *attribute;
     bool can_end;
-} GroupByData;  
+} GroupByData;
 
 typedef struct {
     char *attribute;
     bool can_end;
-} AggregateFunctionData;  
+} AggregateFunctionData;
 
 typedef struct {
     lp_id_t from_id;
@@ -195,12 +195,12 @@ typedef struct {
 typedef struct {
     Envelope e;
     int size;
-    Row rows[]; 
+    Row rows[];
 } RowsMessage;
 
 typedef struct {
     Envelope e;
-    int size;
+    size_t size;
     unsigned char serialized_array[];
 } GroupsMessage;
 
@@ -242,7 +242,7 @@ typedef struct {
         Row *rows_list;
     } input_data;
     char *col_name;
-} AggFunctionData;  
+} AggFunctionData;
 
 /* utils */
 EXPORT void PrintRow(const Row *row);
@@ -277,7 +277,7 @@ EXPORT void AggFunctionCleanUp(AggregateFunctionData *data);
 EXPORT void OrderByCleanUp(OrderByData *data);
 EXPORT void JoinCleanUp(JoinData *data);
 EXPORT void OutputCleanUp(OutputProcessData *data);
-EXPORT lp_id_t *GetAllNeighbors(struct topology *topology, lp_id_t me, int *num_neighbors);
+EXPORT lp_id_t *GetAllNeighbors(struct topology *topology, lp_id_t me, unsigned long *num_neighbors);
 EXPORT void AggregateFunctionRowsInput(RowsMessage *msg, AggregateFunctionData *data, AggregateFunctionType type);
 EXPORT RowsLinkedList *AggregateFunctionGroupedInput(GroupsLinkedList *groups, AggregateFunctionData *data, AggregateFunctionType type);
 EXPORT RowsLinkedList *wSelection(RowsMessage *rcv_msg, void *data);
@@ -289,6 +289,6 @@ EXPORT RowsLinkedList *wJoin(RowsMessage *msg, void *data);
 EXPORT void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t me, simtime_t now);
 EXPORT void JoinInit(struct topology *topology, lp_id_t from1, lp_id_t from2, lp_id_t me);
 EXPORT void WriteToOutputFile(lp_id_t me, const void *content, OutputProcessData *data);
-EXPORT void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedList *list, simtime_t now, lp_id_t *receivers, int num_receivers);
-EXPORT void CreateAndSendMessageFromGroupsList(lp_id_t sender_id, float priority, GroupsLinkedList *list, simtime_t now, lp_id_t *receivers, int num_receivers);
+EXPORT void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedList *list, simtime_t now, lp_id_t *receivers, unsigned long num_receivers);
+EXPORT void CreateAndSendMessageFromGroupsList(lp_id_t sender_id, float priority, GroupsLinkedList *list, simtime_t now, lp_id_t *receivers, unsigned long num_receivers);
 EXPORT GroupsLinkedList *DeserializeGroupsMessage(GroupsMessage *msg);

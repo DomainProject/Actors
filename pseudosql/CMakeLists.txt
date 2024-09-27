@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project("psedosql" LANGUAGES C DESCRIPTION "PseudoSQL Library for ROOT-Sim")
+project("pseudosql" LANGUAGES C DESCRIPTION "PseudoSQL Library for ROOT-Sim")
 
 set(PROJECT_VERSION 1.1.0)
 
