@@ -9,15 +9,15 @@
 #include "utils.h"
 
 void remove_quotes(char* str) {
-    int len = strlen(str);
+    unsigned len = strlen(str);
     int j = 0;
 
-    for (int i = 0; i < len; i++) {
+    for (unsigned i = 0; i < len; i++) {
         if (str[i] != '"') {
             str[j++] = str[i];
         }
     }
-    str[j] = '\0'; 
+    str[j] = '\0';
 }
 
 int is_integer(const char *str) {
@@ -45,7 +45,7 @@ int is_float(const char *str) {
     while (*str) {
         if (*str == '.') {
             if (has_decimal_point) {
-                return 0; 
+                return 0;
                 count++;
             }
             has_decimal_point = 1;
@@ -95,8 +95,8 @@ time_t convert_to_unix_timestamp(const char *datetime_str) {
            &time_struct.tm_min,
            &time_struct.tm_sec);
 
-    time_struct.tm_year -= 1900; 
-    time_struct.tm_mon -= 1;     
+    time_struct.tm_year -= 1900;
+    time_struct.tm_mon -= 1;
 
     return mktime(&time_struct);
 }
@@ -125,7 +125,7 @@ void InitializeSchema(Schema *schema, char *header) {
     while (header_token != NULL) {
         char *cur_name = strdup(header_token);
         remove_quotes(cur_name);
-        
+
         schema->cols_names[column_index] = cur_name;
 
         header_token = strtok(NULL, ",");
@@ -166,9 +166,11 @@ void PrintRow(const Row *row) {
     puts("");
 }
 
-void PopulateRow(char *row_string, Row *row, Schema schema) {  
+static __thread char *populate_save_ptr = NULL;
+
+void PopulateRow(char *row_string, Row *row, Schema schema) {
     char *copy = strdup(row_string);
-    char *token = strtok(copy, ",");  
+    char *token = strtok_r(copy, ",", &populate_save_ptr);
 
     int column_index = 0;
     while (token != NULL && column_index < schema.num_cols) {
@@ -193,7 +195,7 @@ void PopulateRow(char *row_string, Row *row, Schema schema) {
         }
 
         free(value_str);
-        token = strtok(NULL, ",");
+        token = strtok_r(NULL, ",", &populate_save_ptr);
         column_index++;
     }
 
@@ -215,7 +217,7 @@ double compute_average(int size, Row *list, char *col_name) {
     double sum = 0.0;
 
     index = get_index(list[0], col_name);
-    
+
     if (list[0].elements[index].type == TYPE_STRING) {
         fprintf(stderr, "Average is not defined for strings\n");
         return -1.0;
@@ -267,7 +269,7 @@ double compute_sum(int size, Row *list, char *col_name) {
                 sum += (double)list[i].elements[index].value.long_value;
                 break;
             case TYPE_DOUBLE:
-                sum += list[i].elements[index].value.long_value;
+                sum += (double)list[i].elements[index].value.long_value;
                 break;
             default:
                 break;
@@ -316,14 +318,15 @@ void AppendRow(struct RowsLinkedListElement* head, Row *row) {
         fprintf(stderr, "invalid list head\n");
         return;
     }
-  
+
     // Allocate memory for node
-    struct RowsLinkedListElement* new_node = (struct RowsLinkedListElement*)rs_malloc(sizeof(struct RowsLinkedListElement));
+    struct RowsLinkedListElement* new_node = rs_malloc(sizeof(struct RowsLinkedListElement));
     CHECK_RSMALLOC(new_node, "AppendRow");
+    memset(new_node, 0, sizeof(*new_node));
+    new_node->next = NULL;
 
     new_node->row = rs_malloc(sizeof(Row));
     CHECK_RSMALLOC(new_node->row, "AppendRow");
-    new_node->next = NULL;
 
     // Copy contents of data to newly allocated memory.
     memcpy(new_node->row, row, sizeof(Row));
@@ -340,7 +343,7 @@ void AppendGroup(struct GroupsLinkedListElement* head, RowsLinkedList *rows) {
     if (head == NULL) {
         return;
     }
-  
+
     // Allocate memory for node
     struct GroupsLinkedListElement* new_node = (struct GroupsLinkedListElement*)rs_malloc(sizeof(struct GroupsLinkedListElement));
     CHECK_RSMALLOC(new_node, "AppendGroup");
@@ -364,12 +367,12 @@ void FreeList(RowsLinkedList* list) {
 
     while(tmp != NULL) {
         struct RowsLinkedListElement *next = tmp->next;
-        
+
         if (tmp->row != NULL) {
             rs_free(tmp->row);
         }
         rs_free(tmp);
-        
+
         tmp = next;
     }
 
@@ -392,7 +395,7 @@ void FreeGroup(GroupsLinkedList *list) {
 
         tmp = next;
     }
-    
+
     rs_free(list);
 }
 
@@ -469,7 +472,7 @@ Row *FindMinFromLinkedList(RowsLinkedList *list, int col_index) {
                     fprintf(stderr, "FindMinFromLinkedList: Unexpected type\n");
                     break;
             }
-            
+
         }
         current_element = current_element->next;
     }
@@ -531,7 +534,7 @@ Row *FindMaxFromLinkedList(RowsLinkedList *list, int col_index) {
                     fprintf(stderr, "FindMinFromLinkedList: Unexpected type\n");
                     break;
             }
-            
+
         }
         current_element = current_element->next;
     }
@@ -628,4 +631,3 @@ double ComputeSumFromLinkedList(RowsLinkedList *list, int col_index) {
 
     return sum;
 }
-
