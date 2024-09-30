@@ -259,7 +259,7 @@ EXPORT RowsLinkedList *Join(struct RowsLinkedListElement *head1, struct RowsLink
 
 /* ROOT-Sim management function */
 EXPORT void DataIngestionInit(lp_id_t me, simtime_t now, FILE **file, char *filename, Schema *schema);
-EXPORT void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSourceData *data, FILE **file, Schema *schema);
+EXPORT void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSourceData *data, FILE *file, Schema *schema);
 EXPORT void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me);
 EXPORT void SelectionInit(struct topology *topology, lp_id_t from, lp_id_t me);
 EXPORT void ProjectionInit(struct topology *topology, lp_id_t from, lp_id_t me);

@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <assert.h>
 
 #ifndef NUM_LPS
 #define NUM_LPS 25
@@ -13,11 +14,12 @@
 #define NUM_THREADS 0
 #endif
 
-#define INPUT_FILE "taxi_100k.csv"
+#define INPUT_FILE "taxi.csv"
 
-FILE *file;
-Schema schema;
-struct topology *topology;
+FILE *file = NULL;
+Schema schema = {0};
+struct topology *topology = NULL;
+
 void InitTopology(void)
 {
 	topology = InitializeTopology(TOPOLOGY_GRAPH, 25);
@@ -196,18 +198,18 @@ void orderBy(lp_id_t me, simtime_t now, const void *content, void *data)
 	free(refs);
 }
 
-void DataSource(lp_id_t me, simtime_t now, const void *content, void *data) {}
+void DataSource(__unused lp_id_t me, __unused simtime_t now, __unused const void *content, __unused void *data) {}
 
 void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *content, __unused unsigned size, void *s)
 {
-	WindowData *window_data;
-	SelectionData *selection_data;
-	ProjectionData *projection_data;
-	OrderByData *orderBy_data;
-	GroupByData *groupBy_data;
-	AggregateFunctionData *agg_function_data;
-	OutputProcessData *output_data;
-	JoinData *join_data;
+	WindowData *window_data = NULL;
+	SelectionData *selection_data = NULL;
+	ProjectionData *projection_data = NULL;
+	OrderByData *orderBy_data = NULL;
+	GroupByData *groupBy_data = NULL;
+	AggregateFunctionData *agg_function_data = NULL;
+	OutputProcessData *output_data = NULL;
+	JoinData *join_data = NULL;
 
 	switch(me) {
 		case 0:
@@ -217,7 +219,8 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
 					DataIngestionInit(me, now, &file, INPUT_FILE, &schema);
 					break;
 				case EVENT:
-					DataIngestion(topology, me, now, (DataSourceData *)s, &file, &schema);
+					assert(file != NULL);
+					DataIngestion(topology, me, now, (DataSourceData *)s, file, &schema);
 					break;
 				case LP_FINI:
 					DataIngestionCleanUp(file, (DataSourceData *)s, &schema);
@@ -782,15 +785,15 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
 
 bool CanEnd(lp_id_t me, const void *snapshot)
 {
-	DataSourceData *source_data;
-	WindowData *window_data;
-	SelectionData *selection_data;
-	ProjectionData *projection_data;
-	GroupByData *groupBy_data;
-	OrderByData *orderBy_data;
-	OutputProcessData *output_data;
-	JoinData *join_data;
-	AggregateFunctionData *agg_function_data;
+	DataSourceData *source_data = NULL;
+	WindowData *window_data = NULL;
+	SelectionData *selection_data = NULL;
+	ProjectionData *projection_data = NULL;
+	GroupByData *groupBy_data = NULL;
+	OrderByData *orderBy_data = NULL;
+	OutputProcessData *output_data = NULL;
+	JoinData *join_data = NULL;
+	AggregateFunctionData *agg_function_data = NULL;
 	switch(me) {
 		case 0:
 			source_data = (DataSourceData *)snapshot;
@@ -873,19 +876,25 @@ bool CanEnd(lp_id_t me, const void *snapshot)
 }
 
 struct simulation_configuration conf = {.lps = NUM_LPS,
-    .n_threads = NUM_THREADS,
+    .n_threads = 1,
     .termination_time = 0,
     .gvt_period = 1000,
     .log_level = LOG_INFO,
     .stats_file = "stats",
     .ckpt_interval = 0,
     .core_binding = true,
-    .serial = true,
+    .serial = false,
     .dispatcher = ProcessEvent,
-    .committed = CanEnd};
+    .committed = CanEnd
+};
 
-int main(void)
+int main(int argc, char **argv)
 {
+	if(argc != 2) {
+		printf("Usage: %s <n_thread>", argv[0]);
+		exit(1);
+	}
+	conf.n_threads = atoi(argv[1]);
 	InitTopology();
 	RootsimInit(&conf);
 	int ret = RootsimRun();

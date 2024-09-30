@@ -1,9 +1,13 @@
 #include "rootsim_operations.h"
 
+static __thread char line[MAX_LINE_LENGTH] = {0};
+static __thread char next_line[MAX_LINE_LENGTH] = {0};
+
 lp_id_t *GetAllNeighbors(struct topology *topology, lp_id_t me, unsigned long *num_neighbors)
 {
 	*num_neighbors = CountDirections(topology, me);
 	lp_id_t *neighbors = malloc(*num_neighbors * sizeof(lp_id_t));
+	memset(neighbors, 0xab, *num_neighbors * sizeof(lp_id_t));
 	GetAllReceivers(topology, me, neighbors);
 	return neighbors;
 }
@@ -126,9 +130,9 @@ void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedL
     lp_id_t *receivers, unsigned long num_receivers)
 {
 	Envelope e = {0};
-	RowsMessage *msg;
+	RowsMessage *msg = NULL;
 	int i = 0;
-	RowsLinkedList *rows_list;
+	RowsLinkedList *rows_list = NULL;
 
 	e.priority = priority;
 	e.sender = sender_id;
@@ -304,20 +308,18 @@ simtime_t GetNextTupleTime(char *line, char *next_line)
  * @param me DataIngestion process id
  * @param now Current simulation time
  */
-void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSourceData *data, FILE **file,
-    Schema *schema)
+void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSourceData *data, FILE *file, Schema *schema)
 {
-	char line[MAX_LINE_LENGTH];
-	char next_line[MAX_LINE_LENGTH];
 	lp_id_t *neighbors;
-	unsigned long num_neighbors;
-	simtime_t new_time;
-	int is_next_time_different = 0;
-	long current_position;
-	char *cur_datetime, *next_datetime;
+	unsigned long num_neighbors = 0;
+	simtime_t new_time = 0.;
+	bool is_next_time_different = false;
+	long current_position = -1;
+	char *cur_datetime = NULL, *next_datetime = NULL;
 
 	// read line from the input file
-	if(fgets(line, sizeof(line), *file) == NULL) {
+	line[0] = line[1] = '\0';
+	if(fgets(line, MAX_LINE_LENGTH, file) == NULL) {
 		CreateAndSendTerminationMessage(topology, me, now, data);
 		return;
 	}
@@ -332,6 +334,7 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 		// create and populate Row struct from the input line
 		Row *cur_row = rs_malloc(sizeof(Row));
 		CHECK_RSMALLOC(cur_row, "DataIngestion");
+		memset(cur_row, 0, sizeof(*cur_row));
 		cur_row->num_elements = schema->num_cols;
 		strcpy(cur_row->table_name, "Taxis");
 		PopulateRow(line, cur_row, *schema);
@@ -339,6 +342,7 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 		if(head == NULL) {
 			struct RowsLinkedListElement *cur_element = rs_malloc(sizeof(struct RowsLinkedListElement));
 			CHECK_RSMALLOC(cur_element, "DataIngestion");
+			memset(cur_element, 0, sizeof(*cur_element));
 			cur_element->next = NULL;
 			cur_element->row = cur_row;
 			head = cur_element;
@@ -348,19 +352,19 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 		num_rows++;
 
 		// Check if there is a next line to compute the sleep time
-		current_position = ftell(*file);
+		current_position = ftell(file);
 
-		if(fgets(next_line, sizeof(next_line), *file) != NULL) {
+		if(fgets(next_line, sizeof(next_line), file) != NULL) {
 			// get next tuple time
 			next_line[strcspn(next_line, "\n")] = '\0';
 			next_line[sizeof(next_line) - 1] = '\0';
 
-			char next_line_copy[MAX_LINE_LENGTH];
+			char next_line_copy[MAX_LINE_LENGTH] = {0};
 			strcpy(next_line_copy, next_line);
 
 			// get the time from the next line
 			int count = 0;
-			char *cur_saveptr, *next_saveptr;
+			char *cur_saveptr = NULL, *next_saveptr = NULL;
 			cur_datetime = strtok_r(line, ",", &cur_saveptr);
 			next_datetime = strtok_r(next_line_copy, ",", &next_saveptr);
 
@@ -377,7 +381,7 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 			if(!strcmp(cur_datetime, next_datetime)) {
 				strcpy(line, next_line);
 			} else {
-				is_next_time_different = 1;
+				is_next_time_different = true;
 			}
 
 		} else {
@@ -395,6 +399,7 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 
 	RowsMessage *msg = malloc(sizeof(RowsMessage) + num_rows * sizeof(Row));
 	CHECK_RSMALLOC(msg, "DataIngestion");
+	memset(msg, 0, sizeof(RowsMessage) + num_rows * sizeof(Row));
 	msg->e = e;
 	msg->size = num_rows;
 
@@ -410,7 +415,7 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 	}
 
 	// back to current_position (one line back)
-	fseek(*file, current_position, SEEK_SET);
+	fseek(file, current_position, SEEK_SET);
 
 	// cleanup
 	free(msg);
@@ -445,8 +450,6 @@ void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me)
 	struct RowsLinkedListElement *head = (struct RowsLinkedListElement *)rs_malloc(sizeof(struct RowsLinkedListElement));
 	CHECK_RSMALLOC(head, "WindowInit");
 	memset(head, 0, sizeof(*head));
-	head->row = NULL;
-	head->next = NULL;
 
 	data->window_size = *size;
 	data->list = head;
@@ -496,12 +499,13 @@ void SelectionInit(struct topology *topology, lp_id_t from, lp_id_t me)
  */
 void ProjectionInit(struct topology *topology, lp_id_t from, lp_id_t me)
 {
-	AttributeList *list;
-	char *token;
+	AttributeList *list = NULL;
+	char *token = NULL;
 	int count = 0;
 
 	list = rs_malloc(sizeof(AttributeList));
 	CHECK_RSMALLOC(list, "ProjectionInit");
+	memset(list, 0, sizeof(AttributeList));
 
 	// get string representation of attributes ("attr1,attr2,...,attrN")
 	char *attributes = (char *)GetTopologyLinkData(topology, from, me);
@@ -523,6 +527,7 @@ void ProjectionInit(struct topology *topology, lp_id_t from, lp_id_t me)
 	list->num_attributes = count;
 	list->attributes = rs_malloc(sizeof(Attribute) * count);
 	CHECK_RSMALLOC(list->attributes, "ProjectionInit");
+	memset(list->attributes, 0, sizeof(Attribute) * count);
 
 	// populate AttributeList struct with attributes
 	token = strtok(attributes_cp, ",");
@@ -534,6 +539,7 @@ void ProjectionInit(struct topology *topology, lp_id_t from, lp_id_t me)
 	// create and set state
 	ProjectionData *projection_data = rs_malloc(sizeof(ProjectionData));
 	CHECK_RSMALLOC(projection_data, "ProjectionInit");
+	memset(projection_data, 0, sizeof(ProjectionData));
 
 	projection_data->list = list;
 	projection_data->list_string = attributes;
