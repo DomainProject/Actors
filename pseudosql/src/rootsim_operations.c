@@ -476,6 +476,7 @@ void SelectionInit(struct topology *topology, lp_id_t from, lp_id_t me)
 	// allocate struct for state
 	SelectionData *data = rs_malloc(sizeof(SelectionData));
 	CHECK_RSMALLOC(data, "SelectionInit");
+	memset(data, 0, sizeof(*data));
 
 	// get textual condition and parse it to a Condition struct
 	char *condition = (char *)GetTopologyLinkData(topology, from, me);
@@ -564,6 +565,7 @@ void OrderByInit(struct topology *topology, lp_id_t from, lp_id_t me)
 
 	OrderByData *data = rs_malloc(sizeof(OrderByData));
 	CHECK_RSMALLOC(data, "OrderByInit");
+	memset(data, 0, sizeof(*data));
 	data->attribute = attribute;
 
 	SetState(data);
@@ -584,6 +586,7 @@ void GroupByInit(struct topology *topology, lp_id_t from, lp_id_t me)
 
 	GroupByData *data = rs_malloc(sizeof(GroupByData));
 	CHECK_RSMALLOC(data, "GroupByInit");
+	memset(data, 0, sizeof(*data));
 	data->attribute = attribute;
 
 	SetState(data);
