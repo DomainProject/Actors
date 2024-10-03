@@ -86,6 +86,7 @@ void CreateAndSendMessageFromGroupsList(lp_id_t sender_id, float priority, Group
 	}
 
 	Envelope e;
+	memset(&e, 0, sizeof(Envelope));
 	e.sender = sender_id;
 	e.priority = priority;
 
@@ -394,6 +395,7 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 	neighbors = GetAllNeighbors(topology, me, &num_neighbors);
 
 	Envelope e;
+	memset(&e, 0, sizeof(Envelope));
 	e.sender = me;
 	e.priority = 5.0f;
 
