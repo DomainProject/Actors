@@ -731,6 +731,7 @@ RowsLinkedList *wSelection(RowsMessage *rcv_msg, void *data)
 	if(ret_list->size == 0) {
 		// printf("[SELECTION] No tuples were found that satisfy the specified
 		// selection condition.\n");
+		FreeList(ret_list);
 		return NULL;
 	}
 
