@@ -550,10 +550,11 @@ void ProjectionInit(struct topology *topology, lp_id_t from, lp_id_t me)
 	memset(list->attributes, 0, sizeof(Attribute) * count);
 
 	// populate AttributeList struct with attributes
-	token = strtok(attributes_cp, ",");
+    char *saveptr = NULL;
+	token = strtok_r(attributes_cp, ",", &saveptr);
 	for(int i = 0; i < count; i++) {
 		list->attributes[i].name = strdup(token);
-		token = strtok(NULL, ",");
+		token = strtok_r(NULL, ",", &saveptr);
 	}
 
 	// create and set state
@@ -648,7 +649,8 @@ void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData
 
 	char *buffer = strdup(attribute_name);
 
-	char *parsed_name = strtok(buffer, ".");
+	char *saveptr = NULL;
+	char *parsed_name = strtok_r(buffer, ".", &saveptr);
 
 	if(parsed_name != NULL) {
 		table_data->table_name = parsed_name;
@@ -657,7 +659,7 @@ void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData
 		return;
 	}
 
-	parsed_name = strtok(NULL, ".");
+	parsed_name = strtok_r(NULL, ".", &saveptr);
 
 	if(parsed_name != NULL) {
 		table_data->attribute = parsed_name;

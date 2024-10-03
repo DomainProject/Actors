@@ -119,7 +119,8 @@ void InitializeSchema(Schema *schema, char *header) {
     schema->num_cols = num_columns;
     schema->cols_names = malloc(num_columns * sizeof(char *));
 
-    char *header_token = strtok(header, ",");
+    char *saveptr = NULL;
+    char *header_token = strtok_r(header, ",", &saveptr);
     int column_index = 0;
 
     while (header_token != NULL) {
@@ -128,7 +129,7 @@ void InitializeSchema(Schema *schema, char *header) {
 
         schema->cols_names[column_index] = cur_name;
 
-        header_token = strtok(NULL, ",");
+        header_token = strtok_r(NULL, ",", &saveptr);
         column_index++;
     }
 }
