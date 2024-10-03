@@ -331,13 +331,14 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 	int num_rows = 0;
 	struct RowsLinkedListElement *head = NULL;
 
+	// create and populate Row struct from the input line
+	Row *cur_row = malloc(sizeof(Row));
+	CHECK_RSMALLOC(cur_row, "DataIngestion");
+	memset(cur_row, 0, sizeof(*cur_row));
+	cur_row->num_elements = schema->num_cols;
+	strcpy(cur_row->table_name, "Taxis");
+
 	while(!is_next_time_different) {
-		// create and populate Row struct from the input line
-		Row *cur_row = rs_malloc(sizeof(Row));
-		CHECK_RSMALLOC(cur_row, "DataIngestion");
-		memset(cur_row, 0, sizeof(*cur_row));
-		cur_row->num_elements = schema->num_cols;
-		strcpy(cur_row->table_name, "Taxis");
 		PopulateRow(line, cur_row, *schema);
 
 		if(head == NULL) {
@@ -345,7 +346,11 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 			CHECK_RSMALLOC(cur_element, "DataIngestion");
 			memset(cur_element, 0, sizeof(*cur_element));
 			cur_element->next = NULL;
-			cur_element->row = cur_row;
+
+			cur_element->row = rs_malloc(sizeof(Row));
+			CHECK_RSMALLOC(cur_element->row, "DataIngestion");
+
+			memcpy(cur_element->row, cur_row, sizeof(Row));
 			head = cur_element;
 		} else {
 			AppendRow(head, cur_row);
@@ -387,9 +392,21 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 
 		} else {
 			CreateAndSendTerminationMessage(topology, me, now, data);
+            // Free the data
+            while(head != NULL) {
+                struct RowsLinkedListElement *next = head->next;
+                if(head->row != NULL) {
+                    rs_free(head->row);
+                }
+                rs_free(head);
+                head = next;
+            }
+			free(cur_row);
 			return;
 		}
 	}
+
+	free(cur_row);
 
 	// create and send message
 	neighbors = GetAllNeighbors(topology, me, &num_neighbors);
@@ -533,10 +550,11 @@ void ProjectionInit(struct topology *topology, lp_id_t from, lp_id_t me)
 	memset(list->attributes, 0, sizeof(Attribute) * count);
 
 	// populate AttributeList struct with attributes
-	token = strtok(attributes_cp, ",");
+    char *saveptr = NULL;
+	token = strtok_r(attributes_cp, ",", &saveptr);
 	for(int i = 0; i < count; i++) {
 		list->attributes[i].name = strdup(token);
-		token = strtok(NULL, ",");
+		token = strtok_r(NULL, ",", &saveptr);
 	}
 
 	// create and set state
@@ -631,7 +649,8 @@ void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData
 
 	char *buffer = strdup(attribute_name);
 
-	char *parsed_name = strtok(buffer, ".");
+	char *saveptr = NULL;
+	char *parsed_name = strtok_r(buffer, ".", &saveptr);
 
 	if(parsed_name != NULL) {
 		table_data->table_name = parsed_name;
@@ -640,7 +659,7 @@ void InitJoin(struct topology *topology, lp_id_t from, lp_id_t me, JoinTableData
 		return;
 	}
 
-	parsed_name = strtok(NULL, ".");
+	parsed_name = strtok_r(NULL, ".", &saveptr);
 
 	if(parsed_name != NULL) {
 		table_data->attribute = parsed_name;
@@ -723,6 +742,7 @@ RowsLinkedList *wSelection(RowsMessage *rcv_msg, void *data)
 	if(ret_list->size == 0) {
 		// printf("[SELECTION] No tuples were found that satisfy the specified
 		// selection condition.\n");
+		FreeList(ret_list);
 		return NULL;
 	}
 

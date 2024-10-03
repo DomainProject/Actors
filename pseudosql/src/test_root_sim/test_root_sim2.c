@@ -141,6 +141,7 @@ void Count(lp_id_t me, simtime_t now, const void *content, void *data)
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
 	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
 
+    FreeGroup(list);
 	free(refs);
 }
 
@@ -155,6 +156,7 @@ void Average(lp_id_t me, simtime_t now, const void *content, void *data)
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
 	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
 
+    FreeGroup(list);
 	free(refs);
 }
 
@@ -169,6 +171,7 @@ void Sum(lp_id_t me, simtime_t now, const void *content, void *data)
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
 	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
 
+    FreeGroup(list);
 	free(refs);
 }
 
