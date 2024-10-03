@@ -392,6 +392,15 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 
 		} else {
 			CreateAndSendTerminationMessage(topology, me, now, data);
+            // Free the data
+            while(head != NULL) {
+                struct RowsLinkedListElement *next = head->next;
+                if(head->row != NULL) {
+                    rs_free(head->row);
+                }
+                rs_free(head);
+                head = next;
+            }
 			free(cur_row);
 			return;
 		}
