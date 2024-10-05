@@ -21,10 +21,7 @@
 
 #define __unused __attribute__((unused))
 
-typedef struct {
-	int num_cols;
-	char **cols_names;
-} Schema;
+#define NUM_ELEMENTS_ROW 19
 
 typedef enum {
 	TYPE_INT,
@@ -33,6 +30,12 @@ typedef enum {
 	TYPE_STRING,
     TYPE_DOUBLE
 } Type;
+
+typedef struct {
+	int num_cols;
+	char cols_names[19][32];
+    Type types[19];
+} Schema;
 
 typedef struct {
 	char *name;
@@ -169,37 +172,30 @@ typedef struct {
     float priority;
 } Envelope;
 
-typedef struct {
-	char col_name[64];
-	union {
-		long long_value;
-		int int_value;
-		float float_value;
-		char string_value[8];
-        double double_value;
-	} value;
-	Type type;
-} RowElement;
+typedef union {
+	long long_value;
+    int int_value;
+    float float_value;
+    char string_value[8];
+    double double_value;
+} RowValue;
 
 typedef struct {
-	int num_elements;
-	RowElement elements[19];
+    int num_elements;
+	RowValue elements[19];
 	char table_name[32];
 } Row;
 
 typedef struct {
-    int num_rows;
-    Row *rows;
-} RowsList;
-
-typedef struct {
     Envelope e;
+    Schema schema;
     int size;
     Row rows[];
 } RowsMessage;
 
 typedef struct {
     Envelope e;
+    Schema schema;
     size_t size;
     unsigned char serialized_array[];
 } GroupsMessage;
@@ -210,6 +206,7 @@ struct RowsLinkedListElement {
 };
 
 typedef struct {
+    Schema schema;
     int size;
     struct RowsLinkedListElement *head;
 } RowsLinkedList;
@@ -244,17 +241,21 @@ typedef struct {
     char *col_name;
 } AggFunctionData;
 
+struct CompareRowsData {
+    char *col_name;
+    Schema schema;
+};
+
 /* utils */
-EXPORT void PrintRow(const Row *row);
 EXPORT void FreeList(RowsLinkedList* list);
 EXPORT void FreeGroup(GroupsLinkedList *list);
 
 /* SQL operations */
-EXPORT RowsLinkedList *ProjectionMultRows(int size, Row *input_rows, AttributeList list);
-EXPORT RowsLinkedList *SelectionMultRows(int size, Row *input_rows, Condition *condition);
-EXPORT RowsLinkedList *OrderBy(int size, Row *input_rows, const char *col_name);
-EXPORT GroupsLinkedList *GroupBy(int size, Row *input_rows, const char *col_name);
-EXPORT void *AggregateFunction(AggFunctionData input, AggregateFunctionType type);
+EXPORT RowsLinkedList *ProjectionMultRows(int size, Row *input_rows, AttributeList list, Schema schema);
+EXPORT RowsLinkedList *SelectionMultRows(int size, Row *input_rows, Condition *condition, Schema schema);
+EXPORT RowsLinkedList *OrderBy(int size, Row *input_rows, const char *col_name, Schema schema);
+EXPORT GroupsLinkedList *GroupBy(int size, Row *input_rows, const char *col_name, Schema schema);
+EXPORT void *AggregateFunction(AggFunctionData input, AggregateFunctionType type, Schema schema);
 EXPORT RowsLinkedList *Join(struct RowsLinkedListElement *head1, struct RowsLinkedListElement *head2, char *col1_name, char *col2_name);
 
 /* ROOT-Sim management function */
@@ -279,16 +280,15 @@ EXPORT void JoinCleanUp(JoinData *data);
 EXPORT void OutputCleanUp(OutputProcessData *data);
 EXPORT lp_id_t *GetAllNeighbors(struct topology *topology, lp_id_t me, unsigned long *num_neighbors);
 EXPORT void AggregateFunctionRowsInput(RowsMessage *msg, AggregateFunctionData *data, AggregateFunctionType type);
-EXPORT RowsLinkedList *AggregateFunctionGroupedInput(GroupsLinkedList *groups, AggregateFunctionData *data, AggregateFunctionType type);
+EXPORT RowsLinkedList *AggregateFunctionGroupedInput(GroupsLinkedList *groups, AggregateFunctionData *data, AggregateFunctionType type, Schema schema);
 EXPORT RowsLinkedList *wSelection(RowsMessage *rcv_msg, void *data);
 EXPORT RowsLinkedList *wProjection(RowsMessage *rcv_msg, void *data);
 EXPORT RowsLinkedList *wOrderBy(RowsMessage *rcv_msg, void *data);
 EXPORT GroupsLinkedList *wGroupBy(RowsMessage *rcv_msg, void *data);
 EXPORT RowsLinkedList *ExecuteWindow(RowsMessage *rcv_msg, WindowData *data);
 EXPORT RowsLinkedList *wJoin(RowsMessage *msg, void *data);
-EXPORT void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t me, simtime_t now);
+EXPORT void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t me, simtime_t now, Schema schema);
 EXPORT void JoinInit(struct topology *topology, lp_id_t from1, lp_id_t from2, lp_id_t me);
-EXPORT void WriteToOutputFile(lp_id_t me, const void *content, OutputProcessData *data);
 EXPORT void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedList *list, simtime_t now, lp_id_t *receivers, unsigned long num_receivers);
 EXPORT void CreateAndSendMessageFromGroupsList(lp_id_t sender_id, float priority, GroupsLinkedList *list, simtime_t now, lp_id_t *receivers, unsigned long num_receivers);
 EXPORT GroupsLinkedList *DeserializeGroupsMessage(GroupsMessage *msg);

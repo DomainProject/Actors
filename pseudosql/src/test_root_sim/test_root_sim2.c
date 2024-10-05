@@ -14,7 +14,7 @@
 #define NUM_THREADS 0
 #endif
 
-#define INPUT_FILE "taxi.csv"
+#define INPUT_FILE "taxi_100k.csv"
 
 FILE *file = NULL;
 Schema schema = {0};
@@ -70,11 +70,11 @@ void InitTopology(void)
 	AddTopologyLink(topology, 21, 23, 1);
 	SetTopologyLinkData(topology, 21, 23, (void *)"trip_distance");
 	AddTopologyLink(topology, 15, 14, 1);
-	SetTopologyLinkData(topology, 15, 14, (void *)"SUM(passenger_count)");
+	SetTopologyLinkData(topology, 15, 14, (void *)"passenger_count");
 	AddTopologyLink(topology, 19, 18, 1);
-	SetTopologyLinkData(topology, 19, 18, (void *)"AVG(congestion_surcharge)");
+	SetTopologyLinkData(topology, 19, 18, (void *)"congestion_surcharge");
 	AddTopologyLink(topology, 23, 22, 1);
-	SetTopologyLinkData(topology, 23, 22, (void *)"SUM(trip_distance)");
+	SetTopologyLinkData(topology, 23, 22, (void *)"trip_distance");
 }
 
 
@@ -133,7 +133,7 @@ void joinColumns(lp_id_t me, simtime_t now, const void *content, void *data)
 void Count(lp_id_t me, simtime_t now, const void *content, void *data)
 {
 	GroupsLinkedList *list = DeserializeGroupsMessage((GroupsMessage *)content);
-	RowsLinkedList *result = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, COUNT);
+	RowsLinkedList *result = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, COUNT, ((GroupsMessage *)content)->schema);
 	if(!result)
 		return;
 
@@ -141,13 +141,14 @@ void Count(lp_id_t me, simtime_t now, const void *content, void *data)
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
 	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
 
+    FreeGroup(list);
 	free(refs);
 }
 
 void Average(lp_id_t me, simtime_t now, const void *content, void *data)
 {
 	GroupsLinkedList *list = DeserializeGroupsMessage((GroupsMessage *)content);
-	RowsLinkedList *result = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, AVG);
+	RowsLinkedList *result = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, AVG, ((GroupsMessage *)content)->schema);
 	if(!result)
 		return;
 
@@ -155,13 +156,14 @@ void Average(lp_id_t me, simtime_t now, const void *content, void *data)
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
 	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
 
+    FreeGroup(list);
 	free(refs);
 }
 
 void Sum(lp_id_t me, simtime_t now, const void *content, void *data)
 {
 	GroupsLinkedList *list = DeserializeGroupsMessage((GroupsMessage *)content);
-	RowsLinkedList *result = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, SUM);
+	RowsLinkedList *result = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, SUM, ((GroupsMessage *)content)->schema);
 	if(!result)
 		return;
 
@@ -169,6 +171,7 @@ void Sum(lp_id_t me, simtime_t now, const void *content, void *data)
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
 	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
 
+    FreeGroup(list);
 	free(refs);
 }
 
@@ -359,7 +362,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
 					WindowCleanUp((WindowData *)s);
 					break;
 				case TERMINATE:
-					TerminateWindow(topology, (WindowData *)s, me, now);
+					TerminateWindow(topology, (WindowData *)s, me, now, schema);
 					break;
 				default:
 					fprintf(stderr, "Unknown event type");
@@ -380,7 +383,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
 					WindowCleanUp((WindowData *)s);
 					break;
 				case TERMINATE:
-					TerminateWindow(topology, (WindowData *)s, me, now);
+					TerminateWindow(topology, (WindowData *)s, me, now, schema);
 					break;
 				default:
 					fprintf(stderr, "Unknown event type");
@@ -401,7 +404,7 @@ void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *co
 					WindowCleanUp((WindowData *)s);
 					break;
 				case TERMINATE:
-					TerminateWindow(topology, (WindowData *)s, me, now);
+					TerminateWindow(topology, (WindowData *)s, me, now, schema);
 					break;
 				default:
 					fprintf(stderr, "Unknown event type");
@@ -883,7 +886,7 @@ struct simulation_configuration conf = {.lps = NUM_LPS,
     .stats_file = "stats",
     .ckpt_interval = 0,
     .core_binding = true,
-    .serial = false,
+    .serial = true,
     .dispatcher = ProcessEvent,
     .committed = CanEnd
 };

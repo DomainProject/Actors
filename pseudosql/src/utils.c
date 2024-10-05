@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include <sys/mman.h>
 
+
 #include "utils.h"
 
 void remove_quotes(char* str) {
@@ -107,7 +108,7 @@ void PrintSchema(const Schema *schema) {
     }
 }
 
-void InitializeSchema(Schema *schema, char *header) {
+void InitializeSchema(Schema *schema, char *header, char *second_line) {
     int num_columns = 0;
     for (int i = 0; header[i] != '\0'; i++) {
         if (header[i] == ',') {
@@ -117,18 +118,32 @@ void InitializeSchema(Schema *schema, char *header) {
     num_columns++;
 
     schema->num_cols = num_columns;
-    schema->cols_names = malloc(num_columns * sizeof(char *));
 
-    char *header_token = strtok(header, ",");
+    char *saveptr = NULL;
+    char *saveptr_line = NULL;
+    char *header_token = strtok_r(header, ",", &saveptr);
+    char *line_token = strtok_r(second_line, ",", &saveptr_line);
     int column_index = 0;
 
     while (header_token != NULL) {
-        char *cur_name = strdup(header_token);
-        remove_quotes(cur_name);
+        remove_quotes(header_token);
 
-        schema->cols_names[column_index] = cur_name;
+        strcpy(schema->cols_names[column_index], header_token);
 
-        header_token = strtok(NULL, ",");
+        if (is_integer(line_token)) {
+            schema->types[column_index] = TYPE_INT;
+        } else if (is_float(line_token)) {
+            schema->types[column_index] = TYPE_FLOAT;
+        } else {
+            if(is_valid_date_format(line_token)) {
+                schema->types[column_index] = TYPE_LONG;
+            } else {
+                schema->types[column_index] = TYPE_STRING;
+            }
+        }
+
+        line_token = strtok_r(NULL, ",", &saveptr_line);
+        header_token = strtok_r(NULL, ",", &saveptr);
         column_index++;
     }
 }
@@ -140,6 +155,7 @@ void FreeSchema(Schema *schema) {
     free(schema->cols_names);
 }
 
+/*
 void PrintRow(const Row *row) {
     for (int i = 0; i < row->num_elements; i++) {
         printf("Name: %s, Table: %s, ", row->elements[i].col_name, row->table_name);
@@ -165,6 +181,7 @@ void PrintRow(const Row *row) {
     }
     puts("");
 }
+*/
 
 static __thread char *populate_save_ptr = NULL;
 
@@ -172,25 +189,22 @@ void PopulateRow(char *row_string, Row *row, Schema schema) {
     char *copy = strdup(row_string);
     char *token = strtok_r(copy, ",", &populate_save_ptr);
 
+    row->num_elements = NUM_ELEMENTS_ROW;
+
     int column_index = 0;
     while (token != NULL && column_index < schema.num_cols) {
-        strcpy(row->elements[column_index].col_name, schema.cols_names[column_index]);
         char *value_str = strdup(token);
 
         if (is_integer(value_str)) {
-            row->elements[column_index].type = TYPE_INT;
-            row->elements[column_index].value.int_value = atoi(value_str);
+            row->elements[column_index].int_value = atoi(value_str);
         } else if (is_float(value_str)) {
-            row->elements[column_index].type = TYPE_FLOAT;
-            row->elements[column_index].value.float_value = atof(value_str);
+            row->elements[column_index].float_value = atof(value_str);
         } else {
             /* if value_str represents a date, save it as UNIX timestamp */
             if(is_valid_date_format(value_str)) {
-                row->elements[column_index].type = TYPE_LONG;
-                row->elements[column_index].value.long_value = convert_to_unix_timestamp(value_str);
+                row->elements[column_index].long_value = convert_to_unix_timestamp(value_str);
             } else {
-                row->elements[column_index].type = TYPE_STRING;
-                strcpy(row->elements[column_index].value.string_value, value_str);
+                strcpy(row->elements[column_index].string_value, value_str);
             }
         }
 
@@ -202,20 +216,20 @@ void PopulateRow(char *row_string, Row *row, Schema schema) {
     free(copy);
 }
 
-int get_index(Row row, char *col_name) {
+int get_index(Row row, char *col_name, Schema schema) {
     for (int i = 0; i < row.num_elements; i++) {
-        if (!strncmp(row.elements[i].col_name, col_name, strlen(col_name)))
+        if (!strncmp(schema.cols_names[i], col_name, strlen(col_name)))
             return i;
     }
 
     fprintf(stderr, "Column %s not found\n", col_name);
-    return -1;
+    exit(EXIT_FAILURE);
 }
 
 double compute_average(int size, Row *list, char *col_name) {
     int count = 0, index, i;
     double sum = 0.0;
-
+/*
     index = get_index(list[0], col_name);
 
     if (list[0].elements[index].type == TYPE_STRING) {
@@ -242,14 +256,15 @@ double compute_average(int size, Row *list, char *col_name) {
                 break;
         }
     }
-
-    return sum / count;
+*/
+    //return sum / count;
+    return sum;
 }
 
 double compute_sum(int size, Row *list, char *col_name) {
     int index, i;
     double sum = 0.0;
-
+/*
     index = get_index(list[0], col_name);
 
     if (list[0].elements[index].type == TYPE_STRING) {
@@ -275,7 +290,7 @@ double compute_sum(int size, Row *list, char *col_name) {
                 break;
         }
     }
-
+*/
     return sum;
 }
 
@@ -283,18 +298,14 @@ double compute_sum(int size, Row *list, char *col_name) {
 int are_equals(Row *row1, Row *row2, char *col1_name, char *col2_name) {
     int index1, index2;
 
-    index1 = get_index(*row1, col1_name);
-    index2 = get_index(*row2, col2_name);
+    //index1 = get_index(*row1, col1_name);
+    //index2 = get_index(*row2, col2_name);
 
     if (index1 == -1 || index2 == -1) {
         return -1;
     }
 
-    if (row1->elements[index1].type != row2->elements[index2].type) {
-        fprintf(stderr, "Comparing columns with different types\n");
-        return 0;
-    }
-
+/*
     switch(row1->elements[index1].type) {
         case TYPE_INT:
             return row1->elements[index1].value.int_value == row2->elements[index2].value.int_value;
@@ -310,6 +321,8 @@ int are_equals(Row *row1, Row *row2, char *col1_name, char *col2_name) {
             fprintf(stderr, "Unexpected type\n");
             exit(EXIT_FAILURE);
     }
+    */
+   return 0;
 }
 
 
@@ -431,39 +444,39 @@ Row *FindMinFromLinkedList(RowsLinkedList *list, int col_index) {
 
     while (current_element != NULL) {
 
-        RowElement *cur_element = &current_element->row->elements[col_index];
+        RowValue *cur_element = &current_element->row->elements[col_index];
 
         if (min_row == NULL) {
             min_row = current_element->row;
         } else {
             // Confronta il tipo dell'elemento attuale con il tipo dell'elemento minimo
-            switch (cur_element->type) {
+            switch (list->schema.types[col_index]) {
                 case TYPE_INT:
-                    if (cur_element->value.int_value < min_row->elements[col_index].value.int_value) {
+                    if (cur_element->int_value < min_row->elements[col_index].int_value) {
                         min_row = current_element->row;
                     }
                     break;
 
                 case TYPE_LONG:
-                    if (cur_element->value.long_value < min_row->elements[col_index].value.long_value) {
+                    if (cur_element->long_value < min_row->elements[col_index].long_value) {
                         min_row = current_element->row;
                     }
                     break;
 
                 case TYPE_FLOAT:
-                    if (cur_element->value.float_value < min_row->elements[col_index].value.float_value) {
+                    if (cur_element->float_value < min_row->elements[col_index].float_value) {
                         min_row = current_element->row;
                     }
                     break;
 
                 case TYPE_DOUBLE:
-                    if (cur_element->value.double_value < min_row->elements[col_index].value.double_value) {
+                    if (cur_element->double_value < min_row->elements[col_index].double_value) {
                         min_row = current_element->row;
                     }
                     break;
 
                 case TYPE_STRING:
-                    if (strcmp(cur_element->value.string_value, min_row->elements[col_index].value.string_value) < 0) {
+                    if (strcmp(cur_element->string_value, min_row->elements[col_index].string_value) < 0) {
                         min_row = current_element->row;
                     }
                     break;
@@ -493,39 +506,39 @@ Row *FindMaxFromLinkedList(RowsLinkedList *list, int col_index) {
 
     while (current_element != NULL) {
 
-        RowElement *cur_element = &current_element->row->elements[col_index];
+        RowValue *cur_element = &current_element->row->elements[col_index];
 
         if (max_row == NULL) {
             max_row = current_element->row;
         } else {
             // Confronta il tipo dell'elemento attuale con il tipo dell'elemento minimo
-            switch (cur_element->type) {
+            switch (list->schema.types[col_index]) {
                 case TYPE_INT:
-                    if (cur_element->value.int_value > max_row->elements[col_index].value.int_value) {
+                    if (cur_element->int_value > max_row->elements[col_index].int_value) {
                         max_row = current_element->row;
                     }
                     break;
 
                 case TYPE_LONG:
-                    if (cur_element->value.long_value > max_row->elements[col_index].value.long_value) {
+                    if (cur_element->long_value > max_row->elements[col_index].long_value) {
                         max_row = current_element->row;
                     }
                     break;
 
                 case TYPE_FLOAT:
-                    if (cur_element->value.float_value > max_row->elements[col_index].value.float_value) {
+                    if (cur_element->float_value > max_row->elements[col_index].float_value) {
                         max_row = current_element->row;
                     }
                     break;
 
                 case TYPE_DOUBLE:
-                    if (cur_element->value.double_value > max_row->elements[col_index].value.double_value) {
+                    if (cur_element->double_value > max_row->elements[col_index].double_value) {
                         max_row = current_element->row;
                     }
                     break;
 
                 case TYPE_STRING:
-                    if (strcmp(cur_element->value.string_value, max_row->elements[col_index].value.string_value) > 0) {
+                    if (strcmp(cur_element->string_value, max_row->elements[col_index].string_value) > 0) {
                         max_row = current_element->row;
                     }
                     break;
@@ -553,23 +566,23 @@ double ComputeAverageFromLinkedList(RowsLinkedList *list, int col_index) {
     int count = 0;
 
     while (current_element != NULL) {
-        RowElement *cur_element = &current_element->row->elements[col_index];
+        RowValue *cur_value = &current_element->row->elements[col_index];
 
-        switch (cur_element->type) {
+        switch (list->schema.types[col_index]) {
             case TYPE_INT:
-                sum += (double)cur_element->value.int_value;
+                sum += (double)cur_value->int_value;
                 break;
 
             case TYPE_LONG:
-                sum += (double)cur_element->value.long_value;
+                sum += (double)cur_value->long_value;
                 break;
 
             case TYPE_FLOAT:
-                sum += (double)cur_element->value.float_value;
+                sum += (double)cur_value->float_value;
                 break;
 
             case TYPE_DOUBLE:
-                sum += cur_element->value.double_value;
+                sum += cur_value->double_value;
                 break;
 
             case TYPE_STRING:
@@ -598,23 +611,23 @@ double ComputeSumFromLinkedList(RowsLinkedList *list, int col_index) {
     double sum = 0.0;
 
     while (current_element != NULL) {
-        RowElement *cur_element = &current_element->row->elements[col_index];
+        RowValue *cur_value = &current_element->row->elements[col_index];
 
-        switch (cur_element->type) {
+        switch (list->schema.types[col_index]) {
             case TYPE_INT:
-                sum += (double)cur_element->value.int_value;
+                sum += (double)cur_value->int_value;
                 break;
 
             case TYPE_LONG:
-                sum += (double)cur_element->value.long_value;
+                sum += (double)cur_value->long_value;
                 break;
 
             case TYPE_FLOAT:
-                sum += (double)cur_element->value.float_value;
+                sum += (double)cur_value->float_value;
                 break;
 
             case TYPE_DOUBLE:
-                sum += cur_element->value.double_value;
+                sum += cur_value->double_value;
                 break;
 
             case TYPE_STRING:
@@ -630,4 +643,16 @@ double ComputeSumFromLinkedList(RowsLinkedList *list, int col_index) {
     }
 
     return sum;
+}
+
+RowValue get_element_from_row(const Row *row, const char *col_name, Schema schema, Type *type) {
+    for (int i = 0; i < row->num_elements; ++i) {
+        if (strncmp(schema.cols_names[i], col_name, strlen(col_name)) == 0) {
+            *type = schema.types[i];
+            return row->elements[i];
+        }
+    }
+
+    fprintf(stderr, "get_element_from_row: column %s not found!\n", col_name);
+    exit(EXIT_FAILURE);
 }

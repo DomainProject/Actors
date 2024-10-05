@@ -165,15 +165,6 @@ Condition *ParseCondition(char **condition_string) {
     return multiple_condition;
 }
 
-RowElement *get_element_from_row(Row *row, const char *col_name) {
-    for (int i = 0; i < row->num_elements; ++i) {
-        if (strncmp(row->elements[i].col_name, col_name, strlen(col_name)) == 0) {
-            return &row->elements[i];
-        }
-    }
-    return NULL;
-}
-
 int evaluate_simple_condition_int(int col_value, Operator operator, int value) {
     switch (operator) {
         case OPERATOR_GR:
@@ -244,31 +235,30 @@ int evaluate_simple_condition_string(char *col_value, Operator operator, char *v
     }
 }
 
-int evaluate_simple_condition(SimpleCondition *condition, Row *row) {
-    RowElement *row_element = get_element_from_row(row, condition->column);
-    if (row_element == NULL) {
-        return 0;
-    }
-    switch (row_element->type) {
+int evaluate_simple_condition(SimpleCondition *condition, Row *row, Schema schema) {
+    Type type = {0};
+    RowValue row_value = get_element_from_row(row, condition->column, schema, &type);
+
+    switch (type) {
         case TYPE_INT:
-            return evaluate_simple_condition_int(row_element->value.int_value, condition->operator, atoi(condition->value));
+            return evaluate_simple_condition_int(row_value.int_value, condition->operator, atoi(condition->value));
         case TYPE_LONG:
             if (is_valid_date_format(condition->value)) {
-                return evaluate_simple_condition_long(row_element->value.long_value, condition->operator, convert_to_unix_timestamp(condition->value));
+                return evaluate_simple_condition_long(row_value.long_value, condition->operator, convert_to_unix_timestamp(condition->value));
             }
-            return evaluate_simple_condition_long(row_element->value.long_value, condition->operator, atol(condition->value));
+            return evaluate_simple_condition_long(row_value.long_value, condition->operator, atol(condition->value));
         case TYPE_FLOAT:
-            return evaluate_simple_condition_float(row_element->value.float_value, condition->operator, atof(condition->value));
+            return evaluate_simple_condition_float(row_value.float_value, condition->operator, atof(condition->value));
         default:
-            return evaluate_simple_condition_string(row_element->value.string_value, condition->operator, condition->value);
+            return evaluate_simple_condition_string(row_value.string_value, condition->operator, condition->value);
     }
 }
 
-int EvaluateCondition(Condition *condition, Row *row) {
+int EvaluateCondition(Condition *condition, Row *row, Schema schema) {
     int ret;
     switch (condition->type) {
         case SIMPLE_CONDITION:
-            ret = evaluate_simple_condition(&condition->condition.simple_condition, row);
+            ret = evaluate_simple_condition(&condition->condition.simple_condition, row, schema);
 
             #ifdef DEBUG
             printf("Evaluation of condition\n");
@@ -284,9 +274,9 @@ int EvaluateCondition(Condition *condition, Row *row) {
             switch (condition->condition.multiple_condition.logical_operator)
             {
             case LOPERATOR_AND:
-                return EvaluateCondition(condition->condition.multiple_condition.left, row) && EvaluateCondition(condition->condition.multiple_condition.right, row);
+                return EvaluateCondition(condition->condition.multiple_condition.left, row, schema) && EvaluateCondition(condition->condition.multiple_condition.right, row, schema);
             case LOPERATOR_OR:
-                return EvaluateCondition(condition->condition.multiple_condition.left, row) || EvaluateCondition(condition->condition.multiple_condition.right, row);
+                return EvaluateCondition(condition->condition.multiple_condition.left, row, schema) || EvaluateCondition(condition->condition.multiple_condition.right, row, schema);
             default:
                 fprintf(stderr, "Unknown logical operator\n");
                 return -1;
