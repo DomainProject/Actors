@@ -327,6 +327,7 @@ int are_equals(Row *row1, Row *row2, char *col1_name, char *col2_name) {
 
 
 void AppendRow(struct RowsLinkedListElement* head, Row *row) {
+
     if (head == NULL) {
         fprintf(stderr, "invalid list head\n");
         return;

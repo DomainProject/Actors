@@ -80,6 +80,7 @@ RowsLinkedList *ProjectionMultRows(int size, Row *input_rows, AttributeList list
     Row *result;
 
     Schema new_schema;
+    memset(&new_schema, 0, sizeof(Schema));
     new_schema.num_cols = list.num_attributes;
 
     int index = 0;
@@ -102,26 +103,23 @@ RowsLinkedList *ProjectionMultRows(int size, Row *input_rows, AttributeList list
     }
 
     struct RowsLinkedListElement *head = NULL;
+    struct RowsLinkedListElement *last_element = NULL;
 
     for (i = 0; i < size; i++) {
-
         result = Projection(input_rows[i], list, schema);
+        
         struct RowsLinkedListElement *e = rs_malloc(sizeof(struct RowsLinkedListElement));
-            CHECK_RSMALLOC(e, "ProjectionMultRows");
-            e->next = NULL;
-            e->row = result;
+        CHECK_RSMALLOC(e, "ProjectionMultRows");
+        e->next = NULL;
+        e->row = result;
 
-        if (head == NULL) {
+        if (!last_element) {
             head = e;
         } else {
-            // append row
-            struct RowsLinkedListElement *cur = head;
-            while (cur->next != NULL) {
-                cur = cur->next;
-            }
-            cur->next = e;
+            last_element->next = e;
         }
 
+        last_element = e;
     }
 
     RowsLinkedList *ret_list = rs_malloc(sizeof(RowsLinkedList));
@@ -132,6 +130,7 @@ RowsLinkedList *ProjectionMultRows(int size, Row *input_rows, AttributeList list
 
     return ret_list;
 }
+
 
 int Selection(Row input_row, Condition *condition, Schema schema) {
     return EvaluateCondition(condition, &input_row, schema);
@@ -146,18 +145,36 @@ int Selection(Row input_row, Condition *condition, Schema schema) {
 RowsLinkedList *SelectionMultRows(int size, Row *input_rows, Condition *condition, Schema schema) {
     int i, count = 0;
 
-    struct RowsLinkedListElement *head = rs_malloc(sizeof(struct RowsLinkedListElement));
-    CHECK_RSMALLOC(head, "SelectionMultRows");
-    head->next = NULL;
-    head->row = NULL;
+    struct RowsLinkedListElement *last_element = NULL;
+    struct RowsLinkedListElement *head = NULL;
 
     for (i = 0; i < size; i++) {
         if (Selection(input_rows[i], condition, schema)) {
-            AppendRow(head, &input_rows[i]);
+            struct RowsLinkedListElement* new_node = rs_malloc(sizeof(struct RowsLinkedListElement));
+            CHECK_RSMALLOC(new_node, "SelectionMultRows");
+            memset(new_node, 0, sizeof(*new_node));
+            
+            // Allocate memory for a new row and copy the data
+            new_node->row = rs_malloc(sizeof(Row));
+            CHECK_RSMALLOC(new_node->row, "SelectionMultRows");
+            memcpy(new_node->row, &input_rows[i], sizeof(Row));
+
+            // If this is the first node, set it as the head
+            if (!last_element) {
+                head = new_node;
+            } else {
+                last_element->next = new_node;
+            }
+
+            // Update the last_element to the current node
+            last_element = new_node;
+            new_node->next = NULL;
+
             count++;
         }
     }
 
+    // Allocate memory for the RowsLinkedList and set its properties
     RowsLinkedList *list = rs_malloc(sizeof(RowsLinkedList));
     CHECK_RSMALLOC(list, "SelectionMultRows");
     list->head = head;
@@ -166,6 +183,7 @@ RowsLinkedList *SelectionMultRows(int size, Row *input_rows, Condition *conditio
 
     return list;
 }
+
 
 int compare_rows(const void *a, const void *b, void *arg) {
     const Row *entry1 = (const Row *)a;
@@ -205,15 +223,27 @@ RowsLinkedList *OrderBy(int size, Row *input_rows, const char *col_name, Schema 
 
     struct CompareRowsData data = {.col_name = col_name, .schema = schema};
 
-    struct RowsLinkedListElement *head = rs_malloc(sizeof(struct RowsLinkedListElement));
-    CHECK_RSMALLOC(head, "OrderBy");
-    head->row = NULL;
-    head->next = NULL;
-
     qsort_r(input_rows, size, sizeof(Row), compare_rows, (void *)&data);
 
-    for (int i = 0; i < size; i++) {
-        AppendRow(head, &input_rows[i]);
+    struct RowsLinkedListElement *head = NULL;
+    struct RowsLinkedListElement *last_element = NULL;
+
+    for (i = 0; i < size; i++) {
+        struct RowsLinkedListElement* new_node = rs_malloc(sizeof(struct RowsLinkedListElement));
+        CHECK_RSMALLOC(new_node, "OrderBy");
+        memset(new_node, 0, sizeof(*new_node));
+        new_node->row = rs_malloc(sizeof(Row));
+        CHECK_RSMALLOC(new_node->row, "OrderBy");
+        memcpy(new_node->row, &input_rows[i], sizeof(Row));
+        new_node->next = NULL;
+
+        if (!last_element) {
+            head = new_node;
+        } else {
+            last_element->next = new_node; 
+        }
+
+        last_element = new_node;
     }
 
     RowsLinkedList *ret_list = rs_malloc(sizeof(RowsLinkedList));
@@ -226,6 +256,7 @@ RowsLinkedList *OrderBy(int size, Row *input_rows, const char *col_name, Schema 
 }
 
 
+
 /**
  *  @brief Group a list of rows, based on different values of an attribute
  *  @param input_rows list of rows
@@ -235,69 +266,106 @@ GroupsLinkedList *GroupBy(int size, Row *input_rows, const char *col_name, Schem
     RowsLinkedList *rows_list;
     RowValue last_value;
     int rows_count = 1, groups_count = 1, col_index = -1;
-    struct GroupsLinkedListElement *groups_head;
-    struct RowsLinkedListElement *rows_head;
+    struct GroupsLinkedListElement *groups_head = NULL, *last_group = NULL;
+    struct RowsLinkedListElement *rows_head = NULL, *last_row = NULL;
     GroupsLinkedList *groups_list;
 
+    // Trova l'indice della colonna
+    for (int i = 0; i < schema.num_cols; i++) {
+        if (strncmp(col_name, schema.cols_names[i], strlen(col_name)) == 0) {
+            col_index = i;
+            break;
+        }
+    }
+
+    if (col_index == -1) {
+        fprintf(stderr, "[GROUP BY] Column %s not found\n", col_name);
+        return NULL;
+    }
+
     Type type = 0;
-    RowValue value = get_element_from_row(&input_rows[0], col_name, schema, &type); 
+    RowValue value = get_element_from_row(&input_rows[0], col_name, schema, &type);
 
     struct CompareRowsData data = {.col_name = col_name, .schema = schema};
-
-    // Order rows by the value of the specified attribute
     qsort_r(input_rows, size, sizeof(Row), compare_rows, (void *)&data);
 
+    // Crea il primo gruppo e riga
     groups_head = rs_malloc(sizeof(struct GroupsLinkedListElement));
     CHECK_RSMALLOC(groups_head, "GroupBy");
     groups_head->rows_list = NULL;
     groups_head->next = NULL;
+    last_group = groups_head;
 
     rows_head = rs_malloc(sizeof(struct RowsLinkedListElement));
     CHECK_RSMALLOC(rows_head, "GroupBy");
-    rows_head->row = NULL;
+    rows_head->row = rs_malloc(sizeof(Row));
+    CHECK_RSMALLOC(rows_head->row, "GroupBy");
+    memcpy(rows_head->row, &input_rows[0], sizeof(Row));
     rows_head->next = NULL;
+    last_row = rows_head;
 
-    // first row goes in the first group
-    AppendRow(rows_head, &input_rows[0]);
     last_value = input_rows[0].elements[col_index];
 
     for (int i = 1; i < size; i++) {
         if (compare_elements(input_rows[i].elements[col_index], last_value, type) == 0) {
-            AppendRow(rows_head, &input_rows[i]);
+            // Aggiungi la riga all'ultimo elemento
+            struct RowsLinkedListElement *new_row = rs_malloc(sizeof(struct RowsLinkedListElement));
+            CHECK_RSMALLOC(new_row, "GroupBy");
+            new_row->row = rs_malloc(sizeof(Row));
+            CHECK_RSMALLOC(new_row->row, "GroupBy");
+            memcpy(new_row->row, &input_rows[i], sizeof(Row));
+            new_row->next = NULL;
+
+            last_row->next = new_row;
+            last_row = new_row;
             rows_count++;
-            last_value = input_rows[i].elements[col_index];
         } else {
-            // save group and create new one
+            // Crea una nuova lista di righe per il gruppo precedente
             rows_list = rs_malloc(sizeof(RowsLinkedList));
             CHECK_RSMALLOC(rows_list, "GroupBy");
             rows_list->head = rows_head;
             rows_list->size = rows_count;
+            rows_list->schema = schema;
 
-            AppendGroup(groups_head, rows_list);
+            // Aggiungi il gruppo alla lista di gruppi
+            struct GroupsLinkedListElement *new_group = rs_malloc(sizeof(struct GroupsLinkedListElement));
+            CHECK_RSMALLOC(new_group, "GroupBy");
+            new_group->rows_list = rows_list;
+            new_group->next = NULL;
+
+            last_group->next = new_group;
+            last_group = new_group;
             groups_count++;
 
-            // reset variables
-            rows_count = 0;
+            // Reset per il nuovo gruppo
+            rows_count = 1;
             rows_head = rs_malloc(sizeof(struct RowsLinkedListElement));
             CHECK_RSMALLOC(rows_head, "GroupBy");
-            rows_head->row = NULL;
+            rows_head->row = rs_malloc(sizeof(Row));
+            CHECK_RSMALLOC(rows_head->row, "GroupBy");
+            memcpy(rows_head->row, &input_rows[i], sizeof(Row));
             rows_head->next = NULL;
+            last_row = rows_head;
 
-            AppendRow(rows_head, &input_rows[i]);
-            rows_count++;
             last_value = input_rows[i].elements[col_index];
         }
     }
 
-    // save last group
+    // Aggiungi l'ultimo gruppo
     rows_list = rs_malloc(sizeof(RowsLinkedList));
     CHECK_RSMALLOC(rows_list, "GroupBy");
     rows_list->head = rows_head;
     rows_list->size = rows_count;
     rows_list->schema = schema;
 
-    AppendGroup(groups_head, rows_list);
+    struct GroupsLinkedListElement *final_group = rs_malloc(sizeof(struct GroupsLinkedListElement));
+    CHECK_RSMALLOC(final_group, "GroupBy");
+    final_group->rows_list = rows_list;
+    final_group->next = NULL;
 
+    last_group->next = final_group;
+
+    // Crea e restituisci la lista di gruppi
     groups_list = rs_malloc(sizeof(GroupsLinkedList));
     CHECK_RSMALLOC(groups_list, "GroupBy");
     groups_list->size = groups_count;
@@ -306,6 +374,7 @@ GroupsLinkedList *GroupBy(int size, Row *input_rows, const char *col_name, Schem
 
     return groups_list;
 }
+
 
 
 /**

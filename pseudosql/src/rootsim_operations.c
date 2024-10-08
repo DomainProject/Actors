@@ -33,6 +33,7 @@ GroupsLinkedList *DeserializeGroupsMessage(GroupsMessage *msg)
 		cur_group->next = NULL;
 		cur_group->rows_list = rs_malloc(sizeof(RowsLinkedList));
 		CHECK_RSMALLOC(cur_group->rows_list, "DeserializeGroupsMessage");
+		memset(cur_group->rows_list, 0, sizeof(RowsLinkedList));
 		cur_group->rows_list->head = NULL;
 
 		memcpy(&cur_group->rows_list->size, buffer, sizeof(int));
@@ -228,8 +229,8 @@ simtime_t ComputeSleepTime(const char *cur_datetime, const char *next_datetime)
 void DataIngestionInit(lp_id_t me, simtime_t now, FILE **file, char *filename, Schema *schema)
 {
     char header[MAX_LINE_LENGTH] = {0};
-    char second_line[MAX_LINE_LENGTH] = {0};  
-    long first_line_pos; 
+    char second_line[MAX_LINE_LENGTH] = {0};
+    long first_line_pos;
     DataSourceData *data;
 
     data = rs_malloc(sizeof(DataSourceData));
@@ -471,15 +472,12 @@ void WindowInit(struct topology *topology, lp_id_t from, lp_id_t me)
 	CHECK_RSMALLOC(data, "WindowInit");
 	memset(data, 0, sizeof(*data));
 
-	struct RowsLinkedListElement *head = (struct RowsLinkedListElement *)rs_malloc(sizeof(struct RowsLinkedListElement));
-	CHECK_RSMALLOC(head, "WindowInit");
-	memset(head, 0, sizeof(*head));
-
 	data->window_size = *size;
-	data->list = head;
+	data->list = NULL;
 	data->received_tuples = 0;
 	data->cur_time = 0L;
 	data->max_time = 0L;
+	data->last_element = NULL;
 
 	SetState(data);
 
@@ -867,16 +865,31 @@ RowsLinkedList *ExecuteWindow(RowsMessage *rcv_msg, WindowData *data)
 		ret_list->schema = rcv_msg->schema;
 
 		// initialize new list
-		data->list = (struct RowsLinkedListElement *)rs_malloc(sizeof(struct RowsLinkedListElement));
-		CHECK_RSMALLOC(data->list, "ExecuteWindow");
-		data->list->next = NULL;
-		data->list->row = NULL;
-
+		data->list = NULL;
 		data->received_tuples = 0;
 	}
 
 	for(int i = 0; i < rcv_msg->size; i++) {
-		AppendRow(data->list, &rcv_msg->rows[i]);
+
+		// Allocate memory for node
+		struct RowsLinkedListElement* new_node = rs_malloc(sizeof(struct RowsLinkedListElement));
+		CHECK_RSMALLOC(new_node, "ExecuteWindow");
+		memset(new_node, 0, sizeof(*new_node));
+		new_node->next = NULL;
+
+		new_node->row = rs_malloc(sizeof(Row));
+		CHECK_RSMALLOC(new_node->row, "ExecuteWindow");
+
+		// Copy contents of data to newly allocated memory.
+		memcpy(new_node->row, &rcv_msg->rows[i], sizeof(Row));
+
+		if (!data->list) {
+			data->list = new_node;
+		} else {
+			data->last_element->next = new_node;
+		}
+
+		data->last_element = new_node;
 	}
 	data->received_tuples += rcv_msg->size;
 

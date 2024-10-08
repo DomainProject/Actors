@@ -229,6 +229,7 @@ typedef struct {
     long cur_time;
     long max_time;
     bool can_end;
+    struct RowsLinkedListElement *last_element;
 } WindowData;
 
 typedef struct {
