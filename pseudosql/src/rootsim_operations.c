@@ -33,6 +33,7 @@ GroupsLinkedList *DeserializeGroupsMessage(GroupsMessage *msg)
 		cur_group->next = NULL;
 		cur_group->rows_list = rs_malloc(sizeof(RowsLinkedList));
 		CHECK_RSMALLOC(cur_group->rows_list, "DeserializeGroupsMessage");
+		memset(cur_group->rows_list, 0, sizeof(RowsLinkedList));
 		cur_group->rows_list->head = NULL;
 
 		memcpy(&cur_group->rows_list->size, buffer, sizeof(int));
@@ -228,8 +229,8 @@ simtime_t ComputeSleepTime(const char *cur_datetime, const char *next_datetime)
 void DataIngestionInit(lp_id_t me, simtime_t now, FILE **file, char *filename, Schema *schema)
 {
     char header[MAX_LINE_LENGTH] = {0};
-    char second_line[MAX_LINE_LENGTH] = {0};  
-    long first_line_pos; 
+    char second_line[MAX_LINE_LENGTH] = {0};
+    long first_line_pos;
     DataSourceData *data;
 
     data = rs_malloc(sizeof(DataSourceData));

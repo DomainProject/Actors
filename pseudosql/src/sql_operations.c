@@ -80,6 +80,7 @@ RowsLinkedList *ProjectionMultRows(int size, Row *input_rows, AttributeList list
     Row *result;
 
     Schema new_schema;
+    memset(&new_schema, 0, sizeof(Schema));
     new_schema.num_cols = list.num_attributes;
 
     int index = 0;
@@ -239,8 +240,21 @@ GroupsLinkedList *GroupBy(int size, Row *input_rows, const char *col_name, Schem
     struct RowsLinkedListElement *rows_head;
     GroupsLinkedList *groups_list;
 
+    for (int i = 0; i < schema.num_cols; i++) {
+        if (strncmp(col_name, schema.cols_names[i], strlen(col_name)) == 0) {
+            // Fixme: this also matches if col_name is a substring of schema.cols_names[i]
+            col_index = i;
+            break;
+        }
+    }
+
+    if (col_index == -1) {
+        fprintf(stderr, "[GROUP BY] Column %s not found\n", col_name);
+        return NULL;
+    }
+
     Type type = 0;
-    RowValue value = get_element_from_row(&input_rows[0], col_name, schema, &type); 
+    RowValue value = get_element_from_row(&input_rows[0], col_name, schema, &type);
 
     struct CompareRowsData data = {.col_name = col_name, .schema = schema};
 
@@ -272,6 +286,7 @@ GroupsLinkedList *GroupBy(int size, Row *input_rows, const char *col_name, Schem
             CHECK_RSMALLOC(rows_list, "GroupBy");
             rows_list->head = rows_head;
             rows_list->size = rows_count;
+            rows_list->schema = schema;
 
             AppendGroup(groups_head, rows_list);
             groups_count++;
