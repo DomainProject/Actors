@@ -65,11 +65,13 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.newLine();
 
-    tgs.append("FILE *file;");
+    tgs.append("FILE *file = NULL;");
     tgs.newLine();
-    tgs.append("Schema schema;");
+    tgs.append("Schema schema = {0};");
     tgs.newLine();
-    tgs.append("struct topology *topology;");
+    tgs.append("struct topology *topology = NULL;");
+    tgs.newLine();
+    tgs.append("static int window_size;");
     tgs.newLine();
 
     tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc));
@@ -400,10 +402,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append(".lps = NUM_LPS,");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append(".n_threads = NUM_THREADS,");
+    tgs.append(".n_threads = 1,");
     tgs.newLine();
     tgs.indent();
     tgs.append(".termination_time = 0,");
@@ -440,6 +439,26 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.append("int main(void) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append("if (argc != 3) {");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append("printf(\"Usage: %s <n_threads> <window_size>\", argv[0]);");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("exit(1);");
+    tgs.newLine();
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.indent();
+    tgs.append("}");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("conf.n_threads = atoi(argv[1]);");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("window_size = atoi(argv[2]);");
+    tgs.newLine();
     tgs.indent();
     tgs.append("InitTopology();");
     tgs.newLine();

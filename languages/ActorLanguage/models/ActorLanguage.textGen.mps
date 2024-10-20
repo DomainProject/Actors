@@ -413,19 +413,19 @@
         <node concept="3clFbH" id="6MZL0GfOsnL" role="3cqZAp" />
         <node concept="lc7rE" id="6MZL0GfOspI" role="3cqZAp">
           <node concept="la8eA" id="6MZL0GfOsqY" role="lcghm">
-            <property role="lacIc" value="FILE *file;" />
+            <property role="lacIc" value="FILE *file = NULL;" />
           </node>
           <node concept="l8MVK" id="6MZL0GfOssT" role="lcghm" />
         </node>
         <node concept="lc7rE" id="6MZL0GfOsux" role="3cqZAp">
           <node concept="la8eA" id="6MZL0GfOsvO" role="lcghm">
-            <property role="lacIc" value="Schema schema;" />
+            <property role="lacIc" value="Schema schema = {0};" />
           </node>
           <node concept="l8MVK" id="6MZL0GfOszh" role="lcghm" />
         </node>
         <node concept="lc7rE" id="6MZL0GfOs$V" role="3cqZAp">
           <node concept="la8eA" id="6MZL0GfOsAg" role="lcghm">
-            <property role="lacIc" value="struct topology *topology;" />
+            <property role="lacIc" value="struct topology *topology = NULL;" />
           </node>
           <node concept="l8MVK" id="6MZL0GfOsC_" role="lcghm" />
         </node>
@@ -2836,16 +2836,9 @@
         </node>
         <node concept="3izx1p" id="7XEq$CDI45d" role="3cqZAp">
           <node concept="3clFbS" id="7XEq$CDI45f" role="3izTki">
-            <node concept="lc7rE" id="7XEq$CDI5vl" role="3cqZAp">
-              <node concept="la8eA" id="7XEq$CDI5vL" role="lcghm">
-                <property role="lacIc" value=".lps = NUM_LPS," />
-                <property role="ldcpH" value="true" />
-              </node>
-              <node concept="l8MVK" id="7XEq$CDI5wY" role="lcghm" />
-            </node>
             <node concept="lc7rE" id="7XEq$CDI5xq" role="3cqZAp">
               <node concept="la8eA" id="7XEq$CDI5xr" role="lcghm">
-                <property role="lacIc" value=".n_threads = NUM_THREADS," />
+                <property role="lacIc" value=".n_threads = 1," />
                 <property role="ldcpH" value="true" />
               </node>
               <node concept="l8MVK" id="7XEq$CDI5xs" role="lcghm" />
@@ -2931,6 +2924,45 @@
         </node>
         <node concept="3izx1p" id="7XEq$CDIr70" role="3cqZAp">
           <node concept="3clFbS" id="7XEq$CDIr72" role="3izTki">
+            <node concept="lc7rE" id="6bQk4P8ioIy" role="3cqZAp">
+              <node concept="la8eA" id="6bQk4P8ioJf" role="lcghm">
+                <property role="lacIc" value="if (argc != 2) {" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l8MVK" id="6bQk4P8ioLd" role="lcghm" />
+            </node>
+            <node concept="3izx1p" id="6bQk4P8ioNS" role="3cqZAp">
+              <node concept="3clFbS" id="6bQk4P8ioNU" role="3izTki">
+                <node concept="lc7rE" id="6bQk4P8ioO_" role="3cqZAp">
+                  <node concept="la8eA" id="6bQk4P8ioP1" role="lcghm">
+                    <property role="lacIc" value="printf(&quot;Usage: %s &lt;n_threads&gt;&quot;, argv[0]);" />
+                    <property role="ldcpH" value="true" />
+                  </node>
+                  <node concept="l8MVK" id="6bQk4P8ioWl" role="lcghm" />
+                </node>
+                <node concept="lc7rE" id="6bQk4P8ioXb" role="3cqZAp">
+                  <node concept="la8eA" id="6bQk4P8ioXG" role="lcghm">
+                    <property role="lacIc" value="exit(1);" />
+                    <property role="ldcpH" value="true" />
+                  </node>
+                  <node concept="l8MVK" id="6bQk4P8ioZB" role="lcghm" />
+                </node>
+              </node>
+            </node>
+            <node concept="lc7rE" id="6bQk4P8ip1B" role="3cqZAp">
+              <node concept="la8eA" id="6bQk4P8ip2v" role="lcghm">
+                <property role="lacIc" value="}" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l8MVK" id="6bQk4P8ip3o" role="lcghm" />
+            </node>
+            <node concept="lc7rE" id="6bQk4P8ip64" role="3cqZAp">
+              <node concept="la8eA" id="6bQk4P8ip6Z" role="lcghm">
+                <property role="lacIc" value="conf.n_threads = atoi(argv[1]);" />
+                <property role="ldcpH" value="true" />
+              </node>
+              <node concept="l8MVK" id="6bQk4P8ipbP" role="lcghm" />
+            </node>
             <node concept="lc7rE" id="7XEq$CDIvYs" role="3cqZAp">
               <node concept="la8eA" id="7XEq$CDIvYS" role="lcghm">
                 <property role="lacIc" value="InitTopology();" />
@@ -5506,7 +5538,7 @@
       <node concept="3clFbS" id="3eevqy$TKOs" role="2VODD2">
         <node concept="lc7rE" id="3eevqy$TMPT" role="3cqZAp">
           <node concept="la8eA" id="3eevqy$TMQY" role="lcghm">
-            <property role="lacIc" value="int num_" />
+            <property role="lacIc" value="unsigned long num_" />
             <property role="ldcpH" value="true" />
           </node>
           <node concept="l9hG8" id="3eevqy$TMUG" role="lcghm">
@@ -8082,7 +8114,7 @@
                       <node concept="3clFbS" id="6MZL0Gg0Yxl" role="3izTki">
                         <node concept="lc7rE" id="6MZL0Gg0Yxm" role="3cqZAp">
                           <node concept="la8eA" id="6MZL0Gg0Yxn" role="lcghm">
-                            <property role="lacIc" value="TerminateWindow(topology, (WindowData *)s, me, now);" />
+                            <property role="lacIc" value="TerminateWindow(topology, (WindowData *)s, me, now, schema);" />
                             <property role="ldcpH" value="true" />
                           </node>
                           <node concept="l8MVK" id="6MZL0Gg0Yxo" role="lcghm" />
@@ -8510,7 +8542,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="32lqJAConAG" role="lcghm">
-                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, COUNT);" />
+                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, COUNT, ((GroupsMessage *)content)-&gt;schema);" />
                 </node>
                 <node concept="l8MVK" id="3eevqy$DO7i" role="lcghm" />
               </node>
@@ -8532,6 +8564,13 @@
                 </node>
                 <node concept="l8MVK" id="32lqJAComrz" role="lcghm" />
                 <node concept="l8MVK" id="32lqJAComr$" role="lcghm" />
+              </node>
+              <node concept="lc7rE" id="6bQk4P8mQjs" role="3cqZAp">
+                <node concept="la8eA" id="6bQk4P8mQkZ" role="lcghm">
+                  <property role="lacIc" value="FreeGroup(list);" />
+                  <property role="ldcpH" value="true" />
+                </node>
+                <node concept="l8MVK" id="6bQk4P8mQnh" role="lcghm" />
               </node>
               <node concept="3clFbH" id="32lqJAComvO" role="3cqZAp" />
             </node>
@@ -8578,7 +8617,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="1dkLL_zF$Q1" role="lcghm">
-                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, SUM);" />
+                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, SUM, ((GroupsMessage *)content)-&gt;schema);" />
                 </node>
                 <node concept="l8MVK" id="1dkLL_zF$Q2" role="lcghm" />
               </node>
@@ -8601,6 +8640,14 @@
                 <node concept="l8MVK" id="32lqJAComxt" role="lcghm" />
                 <node concept="l8MVK" id="32lqJAComxu" role="lcghm" />
               </node>
+              <node concept="lc7rE" id="6bQk4P8mQos" role="3cqZAp">
+                <node concept="la8eA" id="6bQk4P8mQot" role="lcghm">
+                  <property role="lacIc" value="FreeGroup(list);" />
+                  <property role="ldcpH" value="true" />
+                </node>
+                <node concept="l8MVK" id="6bQk4P8mQou" role="lcghm" />
+              </node>
+              <node concept="3clFbH" id="6bQk4P8mQo4" role="3cqZAp" />
               <node concept="3clFbH" id="32lqJAComzW" role="3cqZAp" />
             </node>
           </node>
@@ -8646,7 +8693,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="1dkLL_zF$VE" role="lcghm">
-                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MIN);" />
+                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MIN, ((GroupsMessage *)content)-&gt;schema);" />
                 </node>
                 <node concept="l8MVK" id="1dkLL_zF$VF" role="lcghm" />
               </node>
@@ -8669,6 +8716,14 @@
                 <node concept="l8MVK" id="32lqJACom_D" role="lcghm" />
                 <node concept="l8MVK" id="32lqJACom_E" role="lcghm" />
               </node>
+              <node concept="lc7rE" id="6bQk4P8mQwV" role="3cqZAp">
+                <node concept="la8eA" id="6bQk4P8mQwW" role="lcghm">
+                  <property role="lacIc" value="FreeGroup(list);" />
+                  <property role="ldcpH" value="true" />
+                </node>
+                <node concept="l8MVK" id="6bQk4P8mQwX" role="lcghm" />
+              </node>
+              <node concept="3clFbH" id="6bQk4P8mQsL" role="3cqZAp" />
               <node concept="3clFbH" id="32lqJAComBc" role="3cqZAp" />
             </node>
           </node>
@@ -8714,7 +8769,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="1dkLL_zF_0W" role="lcghm">
-                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MAX);" />
+                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MAX, ((GroupsMessage *)content)-&gt;schema);" />
                 </node>
                 <node concept="l8MVK" id="1dkLL_zF_0X" role="lcghm" />
               </node>
@@ -8737,6 +8792,14 @@
                 <node concept="l8MVK" id="32lqJAComDx" role="lcghm" />
                 <node concept="l8MVK" id="32lqJAComDy" role="lcghm" />
               </node>
+              <node concept="lc7rE" id="6bQk4P8mQyU" role="3cqZAp">
+                <node concept="la8eA" id="6bQk4P8mQyV" role="lcghm">
+                  <property role="lacIc" value="FreeGroup(list);" />
+                  <property role="ldcpH" value="true" />
+                </node>
+                <node concept="l8MVK" id="6bQk4P8mQyW" role="lcghm" />
+              </node>
+              <node concept="3clFbH" id="6bQk4P8mQyy" role="3cqZAp" />
               <node concept="3clFbH" id="32lqJAComF4" role="3cqZAp" />
             </node>
           </node>
@@ -8782,7 +8845,7 @@
                   </node>
                 </node>
                 <node concept="la8eA" id="1dkLL_zF_cg" role="lcghm">
-                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, AVG);" />
+                  <property role="lacIc" value=" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, AVG, ((GroupsMessage *)content)-&gt;schema);" />
                 </node>
                 <node concept="l8MVK" id="1dkLL_zF_ch" role="lcghm" />
               </node>
@@ -8805,6 +8868,14 @@
                 <node concept="l8MVK" id="74ISy0gFuOW" role="lcghm" />
                 <node concept="l8MVK" id="74ISy0gFuOX" role="lcghm" />
               </node>
+              <node concept="lc7rE" id="6bQk4P8mQ$T" role="3cqZAp">
+                <node concept="la8eA" id="6bQk4P8mQ$U" role="lcghm">
+                  <property role="lacIc" value="FreeGroup(list);" />
+                  <property role="ldcpH" value="true" />
+                </node>
+                <node concept="l8MVK" id="6bQk4P8mQ$V" role="lcghm" />
+              </node>
+              <node concept="3clFbH" id="6bQk4P8mQ$x" role="3cqZAp" />
               <node concept="3clFbH" id="74ISy0gFuOY" role="3cqZAp" />
             </node>
           </node>

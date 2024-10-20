@@ -637,6 +637,70 @@
       <ref role="1N5Vy1" to="o1mc:25QEYlOdAqb" resolve="receiver" />
       <node concept="3dgokm" id="I$NcBm8Xk" role="1N6uqs">
         <node concept="3clFbS" id="I$NcBm8Xl" role="2VODD2">
+          <node concept="3cpWs8" id="4HR0qZdAVWD" role="3cqZAp">
+            <node concept="3cpWsn" id="4HR0qZdAVWG" role="3cpWs9">
+              <property role="TrG5h" value="referenceToMyself" />
+              <node concept="3Tqbb2" id="4HR0qZdAVWB" role="1tU5fm">
+                <ref role="ehGHo" to="o1mc:I$NcBvGnh" resolve="ActorReference" />
+              </node>
+              <node concept="2ShNRf" id="4HR0qZdAWQR" role="33vP2m">
+                <node concept="3zrR0B" id="4HR0qZdAWQP" role="2ShVmc">
+                  <node concept="3Tqbb2" id="4HR0qZdAWQQ" role="3zrR0E">
+                    <ref role="ehGHo" to="o1mc:I$NcBvGnh" resolve="ActorReference" />
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+          <node concept="3clFbF" id="4HR0qZdEOI1" role="3cqZAp">
+            <node concept="37vLTI" id="4HR0qZdEQQc" role="3clFbG">
+              <node concept="2OqwBi" id="4HR0qZdEUDv" role="37vLTx">
+                <node concept="2OqwBi" id="4HR0qZdESqV" role="2Oq$k0">
+                  <node concept="3kakTB" id="4HR0qZdERJV" role="2Oq$k0" />
+                  <node concept="2Xjw5R" id="4HR0qZdETHP" role="2OqNvi">
+                    <node concept="1xMEDy" id="4HR0qZdETHR" role="1xVPHs">
+                      <node concept="chp4Y" id="4HR0qZdETQF" role="ri$Ld">
+                        <ref role="cht4Q" to="o1mc:3m_VcJMWzd$" resolve="CreateActor" />
+                      </node>
+                    </node>
+                  </node>
+                </node>
+                <node concept="3TrcHB" id="4HR0qZdEVgZ" role="2OqNvi">
+                  <ref role="3TsBF5" to="tpck:h0TrG11" resolve="name" />
+                </node>
+              </node>
+              <node concept="2OqwBi" id="4HR0qZdEPbz" role="37vLTJ">
+                <node concept="37vLTw" id="4HR0qZdEOHZ" role="2Oq$k0">
+                  <ref role="3cqZAo" node="4HR0qZdAVWG" resolve="referenceToMyself" />
+                </node>
+                <node concept="3TrcHB" id="4HR0qZdEPvu" role="2OqNvi">
+                  <ref role="3TsBF5" to="tpck:h0TrG11" resolve="name" />
+                </node>
+              </node>
+            </node>
+          </node>
+          <node concept="3clFbF" id="4HR0qZdAX3L" role="3cqZAp">
+            <node concept="37vLTI" id="4HR0qZdAYoC" role="3clFbG">
+              <node concept="2OqwBi" id="4HR0qZdAZQT" role="37vLTx">
+                <node concept="3kakTB" id="4HR0qZdAZiy" role="2Oq$k0" />
+                <node concept="2Xjw5R" id="4HR0qZdB0YE" role="2OqNvi">
+                  <node concept="1xMEDy" id="4HR0qZdB0YG" role="1xVPHs">
+                    <node concept="chp4Y" id="4HR0qZdB15r" role="ri$Ld">
+                      <ref role="cht4Q" to="o1mc:3m_VcJMWzd$" resolve="CreateActor" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+              <node concept="2OqwBi" id="4HR0qZdAXvc" role="37vLTJ">
+                <node concept="37vLTw" id="4HR0qZdAX3J" role="2Oq$k0">
+                  <ref role="3cqZAo" node="4HR0qZdAVWG" resolve="referenceToMyself" />
+                </node>
+                <node concept="3TrEf2" id="4HR0qZdAXLO" role="2OqNvi">
+                  <ref role="3Tt5mk" to="o1mc:I$NcBvGni" resolve="actor" />
+                </node>
+              </node>
+            </node>
+          </node>
           <node concept="3cpWs8" id="3y5SEGxXfF" role="3cqZAp">
             <node concept="3cpWsn" id="3y5SEGxXfI" role="3cpWs9">
               <property role="TrG5h" value="actors" />
@@ -716,6 +780,18 @@
                       </node>
                     </node>
                   </node>
+                </node>
+              </node>
+            </node>
+          </node>
+          <node concept="3clFbF" id="4HR0qZdB1xR" role="3cqZAp">
+            <node concept="2OqwBi" id="4HR0qZdB4_Q" role="3clFbG">
+              <node concept="37vLTw" id="4HR0qZdB1xP" role="2Oq$k0">
+                <ref role="3cqZAo" node="3y5SEGxXfI" resolve="actors" />
+              </node>
+              <node concept="TSZUe" id="4HR0qZdBaS$" role="2OqNvi">
+                <node concept="37vLTw" id="4HR0qZdBb0F" role="25WWJ7">
+                  <ref role="3cqZAo" node="4HR0qZdAVWG" resolve="referenceToMyself" />
                 </node>
               </node>
             </node>

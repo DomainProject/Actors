@@ -26,10 +26,12 @@ import jetbrains.mps.smodel.runtime.base.BaseScopeProvider;
 import org.jetbrains.mps.openapi.model.SNodeReference;
 import jetbrains.mps.scope.Scope;
 import jetbrains.mps.smodel.runtime.ReferenceConstraintsContext;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import java.util.List;
 import jetbrains.mps.scope.ListScope;
 import org.jetbrains.mps.openapi.language.SConcept;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class CreateEnvelope_Constraints extends BaseConstraintsDescriptor {
   public CreateEnvelope_Constraints() {
@@ -99,12 +101,16 @@ public class CreateEnvelope_Constraints extends BaseConstraintsDescriptor {
           }
           @Override
           public Scope createScope(final ReferenceConstraintsContext _context) {
+            SNode referenceToMyself = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e9333277ec5d1L, "ActorLanguage.structure.ActorReference"));
+            SPropertyOperations.assign(referenceToMyself, PROPS.name$MnvL, SPropertyOperations.getString(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateActor$Uv, false, false), PROPS.name$MnvL));
+            SLinkOperations.setTarget(referenceToMyself, LINKS.actor$BImE, SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateActor$Uv, false, false));
             List<SNode> actors;
             if ((SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.Initializer$mM, false, false) != null)) {
               actors = SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.Initializer$mM, false, false), CONCEPTS.ActorReference$Cg, false, new SAbstractConcept[]{});
             } else {
               actors = SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.AbstractBehavior$Dm, false, false), CONCEPTS.ActorReference$Cg, false, new SAbstractConcept[]{});
             }
+            ListSequence.fromList(actors).addElement(referenceToMyself);
             return ListScope.forNamedElements(actors);
 
           }
@@ -118,6 +124,7 @@ public class CreateEnvelope_Constraints extends BaseConstraintsDescriptor {
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept CreateEnvelope$OK = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, "ActorLanguage.structure.CreateEnvelope");
+    /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
     /*package*/ static final SConcept Initializer$mM = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xe2178aac28357fL, "ActorLanguage.structure.Initializer");
     /*package*/ static final SConcept ActorReference$Cg = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e9333277ec5d1L, "ActorLanguage.structure.ActorReference");
     /*package*/ static final SConcept AbstractBehavior$Dm = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb9024127367L, "ActorLanguage.structure.AbstractBehavior");
@@ -130,5 +137,6 @@ public class CreateEnvelope_Constraints extends BaseConstraintsDescriptor {
 
   private static final class LINKS {
     /*package*/ static final SReferenceLink receiver$OPjH = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, 0x2176abe57436668bL, "receiver");
+    /*package*/ static final SReferenceLink actor$BImE = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e9333277ec5d1L, 0x2e9333277ec5d2L, "actor");
   }
 }

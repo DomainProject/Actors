@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <solution name="ActorLanguage.sandbox" uuid="0d474d99-41d7-4d08-91e3-6dad4e206b05" moduleVersion="0">
   <models>
-    <modelRoot contentPath="${module}" type="default">
-      <sourceRoot path="${module}/models" />
+    <modelRoot type="default" contentPath="${module}">
+      <sourceRoot location="models" />
     </modelRoot>
   </models>
   <facets>
