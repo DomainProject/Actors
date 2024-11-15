@@ -1,0 +1,9 @@
+flask
+ipywidgets
+ipython
+tornado
+numpy
+pandas
+wget
+matplotlib
+pyspark
