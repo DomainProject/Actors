@@ -444,6 +444,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.property("type", 0x30956af9a8a0e8b1L).type(MetaIdFactory.dataTypeId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x30956af9a8a0e8afL)).origin("3500821905858947249").done();
     b.property("size", 0x30956af9a8a0e8b3L).type(PrimitiveTypeId.INTEGER).origin("3500821905858947251").done();
     b.property("temporalUnit", 0x8073cf9a51b7617L).type(MetaIdFactory.dataTypeId(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x8073cf9a51b7603L)).origin("578498120054961687").done();
+    b.associate("column", 0x70944e8a12f1c0aL).target(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b33L).optional(true).origin("507012198983212042").done();
     b.alias("WINDOW");
     return b.create();
   }

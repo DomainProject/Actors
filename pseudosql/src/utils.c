@@ -123,6 +123,7 @@ void InitializeSchema(Schema *schema, char *header, char *second_line) {
     char *saveptr_line = NULL;
     char *header_token = strtok_r(header, ",", &saveptr);
     char *line_token = strtok_r(second_line, ",", &saveptr_line);
+
     int column_index = 0;
 
     while (header_token != NULL) {

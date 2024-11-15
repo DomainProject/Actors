@@ -23,6 +23,7 @@
       <concept id="3500821905858947243" name="QueryLanguage.structure.Window" flags="ng" index="2odo9i">
         <property id="3500821905858947251" name="size" index="2odo9a" />
         <property id="578498120054961687" name="temporalUnit" index="2H74FI" />
+        <reference id="507012198983212042" name="column" index="2A9_zy" />
       </concept>
       <concept id="1229499084500457460" name="QueryLanguage.structure.ColumnRef" flags="ng" index="Agl$j">
         <reference id="1229499084500457461" name="column" index="Agl$i" />
@@ -189,8 +190,8 @@
         </node>
       </node>
       <node concept="2odo9i" id="7axJ0azng1y" role="2odo9f">
-        <property role="2odo9a" value="1" />
-        <property role="2H74FI" value="w7ffA_7xVr/HOURS" />
+        <property role="2odo9a" value="30" />
+        <property role="2H74FI" value="w7ffA_7KpA/MINUTES" />
       </node>
       <node concept="Al3n9" id="7axJ0azng1$" role="1LY3Yp">
         <property role="TrG5h" value="AiportRides" />
@@ -345,8 +346,8 @@
         </node>
       </node>
       <node concept="2odo9i" id="7axJ0azJuex" role="2odo9f">
-        <property role="2odo9a" value="1" />
-        <property role="2H74FI" value="w7ffA_6Ro8/DAYS" />
+        <property role="2odo9a" value="30" />
+        <property role="2H74FI" value="w7ffA_7KpA/MINUTES" />
       </node>
     </node>
     <node concept="15J0zD" id="7axJ0azJuyk" role="21riY_">
@@ -379,8 +380,8 @@
         </node>
       </node>
       <node concept="2odo9i" id="7axJ0azJu$s" role="2odo9f">
-        <property role="2odo9a" value="1" />
-        <property role="2H74FI" value="w7ffA_7xVr/HOURS" />
+        <property role="2odo9a" value="30" />
+        <property role="2H74FI" value="w7ffA_7KpA/MINUTES" />
       </node>
       <node concept="Al3n9" id="7axJ0azJu$u" role="1LY3Yp">
         <property role="TrG5h" value="MadisonSquareGardenRides" />
@@ -515,8 +516,8 @@
         </node>
       </node>
       <node concept="2odo9i" id="7axJ0azJuJ5" role="2odo9f">
-        <property role="2odo9a" value="1" />
-        <property role="2H74FI" value="w7ffA_6Roh/MONTHS" />
+        <property role="2odo9a" value="30" />
+        <property role="2H74FI" value="w7ffA_7KpA/MINUTES" />
       </node>
       <node concept="21qpMi" id="7axJ0azJuJ7" role="21qpFE">
         <node concept="Agl$j" id="7axJ0azJuJ8" role="21oAwc">
@@ -542,8 +543,8 @@
         </node>
       </node>
       <node concept="2odo9i" id="7axJ0azJuVL" role="2odo9f">
-        <property role="2odo9a" value="1" />
-        <property role="2H74FI" value="w7ffA_7xVr/HOURS" />
+        <property role="2odo9a" value="30" />
+        <property role="2H74FI" value="w7ffA_7KpA/MINUTES" />
       </node>
       <node concept="Al3n9" id="7axJ0azJuVN" role="1LY3Yp">
         <property role="TrG5h" value="HighTipsRides" />
@@ -668,8 +669,8 @@
         </node>
       </node>
       <node concept="2odo9i" id="7axJ0azJv8g" role="2odo9f">
-        <property role="2odo9a" value="1" />
-        <property role="2H74FI" value="w7ffA_7xVr/HOURS" />
+        <property role="2odo9a" value="30" />
+        <property role="2H74FI" value="w7ffA_7KpA/MINUTES" />
       </node>
       <node concept="Al3n9" id="7axJ0azJv8i" role="1LY3Yp">
         <property role="TrG5h" value="GroupRides" />
@@ -794,126 +795,280 @@
       </node>
       <node concept="2WQRJ5" id="7axJ0azJvqb" role="2WRRZq" />
       <node concept="2odo9i" id="7axJ0azJvqd" role="2odo9f">
-        <property role="2odo9a" value="1" />
-        <property role="2H74FI" value="w7ffA_7xVr/HOURS" />
+        <property role="2odo9a" value="30" />
+        <property role="2H74FI" value="w7ffA_7KpA/MINUTES" />
       </node>
     </node>
   </node>
   <node concept="Al3kE" id="3TsnP2VS$Rb">
-    <property role="TrG5h" value="Script2" />
-    <node concept="Al3n9" id="3TsnP2VS$Rc" role="21riY_">
+    <property role="TrG5h" value="Script" />
+    <node concept="Al3n9" id="s9heyxjs9j" role="21riY_">
       <property role="TrG5h" value="Taxis" />
-      <node concept="Al3nk" id="3TsnP2VS$Rd" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9k" role="1_7Ipx">
         <property role="TrG5h" value="VendorID" />
         <property role="Al3ng" value="14g3IsRh3GU/Integer" />
-        <property role="2l5wPj" value="Taxis.VendorID" />
+        <property role="2l5wPj" value="Taxis_alias.VendorID" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Re" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9l" role="1_7Ipx">
         <property role="TrG5h" value="tpep_pickup_datetime" />
-        <property role="Al3ng" value="14g3IsRh3GZ/Date" />
-        <property role="2l5wPj" value="Taxis.tpep_pickup_datetime" />
+        <property role="Al3ng" value="14g3IsRh3GV/String" />
+        <property role="2l5wPj" value="Taxis_alias.tpep_pickup_datetime" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Rf" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9m" role="1_7Ipx">
         <property role="TrG5h" value="tpep_dropoff_datetime" />
-        <property role="Al3ng" value="14g3IsRh3GZ/Date" />
-        <property role="2l5wPj" value="Taxis.tpep_dropoff_datetime" />
+        <property role="Al3ng" value="14g3IsRh3GV/String" />
+        <property role="2l5wPj" value="Taxis_alias.tpep_dropoff_datetime" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Rg" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9n" role="1_7Ipx">
         <property role="TrG5h" value="passenger_count" />
         <property role="Al3ng" value="14g3IsRh3GU/Integer" />
-        <property role="2l5wPj" value="Taxis.passenger_count" />
+        <property role="2l5wPj" value="Taxis_alias.passenger_count" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Rh" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9o" role="1_7Ipx">
         <property role="TrG5h" value="trip_distance" />
         <property role="Al3ng" value="14g3IsRh3H3/Float" />
-        <property role="2l5wPj" value="Taxis.trip_distance" />
+        <property role="2l5wPj" value="Taxis_alias.trip_distance" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Ri" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9p" role="1_7Ipx">
         <property role="TrG5h" value="RatecodeID" />
         <property role="Al3ng" value="14g3IsRh3GU/Integer" />
-        <property role="2l5wPj" value="Taxis.RatecodeID" />
+        <property role="2l5wPj" value="Taxis_alias.RatecodeID" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Rj" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9q" role="1_7Ipx">
         <property role="TrG5h" value="PULocationID" />
         <property role="Al3ng" value="14g3IsRh3GU/Integer" />
-        <property role="2l5wPj" value="Taxis.PULocationID" />
+        <property role="2l5wPj" value="Taxis_alias.PULocationID" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Rk" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9r" role="1_7Ipx">
         <property role="TrG5h" value="DOLocationID" />
         <property role="Al3ng" value="14g3IsRh3GU/Integer" />
-        <property role="2l5wPj" value="Taxis.DOLocationID" />
+        <property role="2l5wPj" value="Taxis_alias.DOLocationID" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Rl" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9s" role="1_7Ipx">
         <property role="TrG5h" value="payment_type" />
         <property role="Al3ng" value="14g3IsRh3GU/Integer" />
-        <property role="2l5wPj" value="Taxis.payment_type" />
+        <property role="2l5wPj" value="Taxis_alias.payment_type" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Rm" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9t" role="1_7Ipx">
         <property role="TrG5h" value="fare_amount" />
         <property role="Al3ng" value="14g3IsRh3H3/Float" />
-        <property role="2l5wPj" value="Taxis.fare_amount" />
+        <property role="2l5wPj" value="Taxis_alias.fare_amount" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Rn" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9u" role="1_7Ipx">
         <property role="TrG5h" value="extra" />
         <property role="Al3ng" value="14g3IsRh3H3/Float" />
-        <property role="2l5wPj" value="Taxis.extra" />
+        <property role="2l5wPj" value="Taxis_alias.extra" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Ro" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9v" role="1_7Ipx">
         <property role="TrG5h" value="mta_tax" />
         <property role="Al3ng" value="14g3IsRh3H3/Float" />
-        <property role="2l5wPj" value="Taxis.mta_tax" />
+        <property role="2l5wPj" value="Taxis_alias.mta_tax" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Rp" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9w" role="1_7Ipx">
         <property role="TrG5h" value="tip_amount" />
         <property role="Al3ng" value="14g3IsRh3H3/Float" />
-        <property role="2l5wPj" value="Taxis.tip_amount" />
+        <property role="2l5wPj" value="Taxis_alias.tip_amount" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Rq" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9x" role="1_7Ipx">
         <property role="TrG5h" value="tolls_amount" />
         <property role="Al3ng" value="14g3IsRh3H3/Float" />
-        <property role="2l5wPj" value="Taxis.tolls_amount" />
+        <property role="2l5wPj" value="Taxis_alias.tolls_amount" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Rr" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9y" role="1_7Ipx">
         <property role="TrG5h" value="improvement_surcharge" />
         <property role="Al3ng" value="14g3IsRh3H3/Float" />
-        <property role="2l5wPj" value="Taxis.improvement_surcharge" />
+        <property role="2l5wPj" value="Taxis_alias.improvement_surcharge" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Rs" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9z" role="1_7Ipx">
         <property role="TrG5h" value="total_amount" />
         <property role="Al3ng" value="14g3IsRh3H3/Float" />
-        <property role="2l5wPj" value="Taxis.total_amount" />
+        <property role="2l5wPj" value="Taxis_alias.total_amount" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Rt" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9$" role="1_7Ipx">
         <property role="TrG5h" value="congestion_surcharge" />
         <property role="Al3ng" value="14g3IsRh3H3/Float" />
-        <property role="2l5wPj" value="Taxis.congestion_surcharge" />
+        <property role="2l5wPj" value="Taxis_alias.congestion_surcharge" />
       </node>
-      <node concept="Al3nk" id="3TsnP2VS$Ru" role="1_7Ipx">
+      <node concept="Al3nk" id="s9heyxjs9_" role="1_7Ipx">
         <property role="TrG5h" value="Airport_fee" />
         <property role="Al3ng" value="14g3IsRh3H3/Float" />
-        <property role="2l5wPj" value="Taxis.Airport_fee" />
+        <property role="2l5wPj" value="Taxis_alias.Airport_fee" />
       </node>
     </node>
-    <node concept="15J0zD" id="1vc1$kzXsFA" role="21riY_">
-      <node concept="2leIlQ" id="1vc1$kzXsFC" role="2legkn">
-        <ref role="2leIlR" node="3TsnP2VS$Rc" resolve="Taxis" />
+    <node concept="15J0zD" id="s9heyxyOHZ" role="21riY_">
+      <property role="1cLguo" value="HighTipsRides" />
+      <node concept="2leIlQ" id="s9heyxyOI1" role="2legkn">
+        <ref role="2leIlR" node="s9heyxjs9j" resolve="Taxis" />
       </node>
-      <node concept="15J0zF" id="1vc1$kzXsFZ" role="AlhBa">
-        <node concept="1osJ5O" id="1vc1$kzXsG1" role="AmyPj">
-          <property role="1osJ58" value="14g3IsRhL0p/NOT_EQUAL" />
-          <node concept="1HhJcF" id="1vc1$kzXsG7" role="1osJ5a">
-            <property role="1HhJcI" value="0.0" />
+      <node concept="2WQRJ5" id="s9heyxyOIo" role="2WRRZq" />
+      <node concept="15J0zF" id="s9heyxyOIq" role="AlhBa">
+        <node concept="1osJ5O" id="s9heyxyOIs" role="AmyPj">
+          <property role="1osJ58" value="14g3IsRhL0d/GREATER_EQUAL" />
+          <node concept="1HhJcF" id="s9heyxyOIt" role="1osJ5a">
+            <property role="1HhJcI" value="10.0" />
           </node>
-          <node concept="Agl$j" id="1vc1$kzXsG3" role="1osJ57">
-            <ref role="Agl$i" node="3TsnP2VS$Ru" resolve="Airport_fee" />
+          <node concept="Agl$j" id="s9heyxyOIu" role="1osJ57">
+            <ref role="Agl$i" node="s9heyxjs9w" resolve="tip_amount" />
           </node>
         </node>
       </node>
-      <node concept="Agl$j" id="1vc1$kzXsGa" role="2WRRZq">
-        <ref role="Agl$i" node="3TsnP2VS$Ru" resolve="Airport_fee" />
-      </node>
-      <node concept="2odo9i" id="1vc1$kzXsGc" role="2odo9f">
+      <node concept="2odo9i" id="s9heyxyOIy" role="2odo9f">
         <property role="2odo9a" value="60" />
+        <ref role="2A9_zy" node="52XYD7aJnjx" resolve="tpep_pickup_datetime" />
+      </node>
+      <node concept="Al3n9" id="s9heyxyOI$" role="1LY3Yp">
+        <property role="TrG5h" value="HighTipsRides" />
+        <node concept="Al3nk" id="s9heyxyOI_" role="1_7Ipx">
+          <property role="TrG5h" value="VendorID" />
+          <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+          <property role="2l5wPj" value="HighTipsRides.VendorID" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIA" role="1_7Ipx">
+          <property role="TrG5h" value="tpep_pickup_datetime" />
+          <property role="Al3ng" value="14g3IsRh3GV/String" />
+          <property role="2l5wPj" value="HighTipsRides.tpep_pickup_datetime" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIB" role="1_7Ipx">
+          <property role="TrG5h" value="tpep_dropoff_datetime" />
+          <property role="Al3ng" value="14g3IsRh3GV/String" />
+          <property role="2l5wPj" value="HighTipsRides.tpep_dropoff_datetime" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIC" role="1_7Ipx">
+          <property role="TrG5h" value="passenger_count" />
+          <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+          <property role="2l5wPj" value="HighTipsRides.passenger_count" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOID" role="1_7Ipx">
+          <property role="TrG5h" value="trip_distance" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+          <property role="2l5wPj" value="HighTipsRides.trip_distance" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIE" role="1_7Ipx">
+          <property role="TrG5h" value="RatecodeID" />
+          <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+          <property role="2l5wPj" value="HighTipsRides.RatecodeID" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIF" role="1_7Ipx">
+          <property role="TrG5h" value="PULocationID" />
+          <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+          <property role="2l5wPj" value="HighTipsRides.PULocationID" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIG" role="1_7Ipx">
+          <property role="TrG5h" value="DOLocationID" />
+          <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+          <property role="2l5wPj" value="HighTipsRides.DOLocationID" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIH" role="1_7Ipx">
+          <property role="TrG5h" value="payment_type" />
+          <property role="Al3ng" value="14g3IsRh3GU/Integer" />
+          <property role="2l5wPj" value="HighTipsRides.payment_type" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOII" role="1_7Ipx">
+          <property role="TrG5h" value="fare_amount" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+          <property role="2l5wPj" value="HighTipsRides.fare_amount" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIJ" role="1_7Ipx">
+          <property role="TrG5h" value="extra" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+          <property role="2l5wPj" value="HighTipsRides.extra" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIK" role="1_7Ipx">
+          <property role="TrG5h" value="mta_tax" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+          <property role="2l5wPj" value="HighTipsRides.mta_tax" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIL" role="1_7Ipx">
+          <property role="TrG5h" value="tip_amount" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+          <property role="2l5wPj" value="HighTipsRides.tip_amount" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIM" role="1_7Ipx">
+          <property role="TrG5h" value="tolls_amount" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+          <property role="2l5wPj" value="HighTipsRides.tolls_amount" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIN" role="1_7Ipx">
+          <property role="TrG5h" value="improvement_surcharge" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+          <property role="2l5wPj" value="HighTipsRides.improvement_surcharge" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIO" role="1_7Ipx">
+          <property role="TrG5h" value="total_amount" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+          <property role="2l5wPj" value="HighTipsRides.total_amount" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIP" role="1_7Ipx">
+          <property role="TrG5h" value="congestion_surcharge" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+          <property role="2l5wPj" value="HighTipsRides.congestion_surcharge" />
+        </node>
+        <node concept="Al3nk" id="s9heyxyOIQ" role="1_7Ipx">
+          <property role="TrG5h" value="Airport_fee" />
+          <property role="Al3ng" value="14g3IsRh3H3/Float" />
+          <property role="2l5wPj" value="HighTipsRides.Airport_fee" />
+        </node>
+      </node>
+    </node>
+    <node concept="15J0zD" id="s9heyxyOJU" role="21riY_">
+      <node concept="2leIlQ" id="s9heyxyOJW" role="2legkn">
+        <ref role="2leIlR" node="s9heyxyOI$" resolve="HighTipsRides" />
+      </node>
+      <node concept="Agl$j" id="s9heyxyOKI" role="2WRRZq">
+        <ref role="Agl$i" node="s9heyxyOIF" resolve="PULocationID" />
+      </node>
+      <node concept="Agl$j" id="s9heyxyOKN" role="2WRRZq">
+        <ref role="Agl$i" node="s9heyxyOIG" resolve="DOLocationID" />
+      </node>
+    </node>
+    <node concept="15J0zD" id="s9heyxyOOn" role="21riY_">
+      <node concept="2leIlQ" id="s9heyxyOOp" role="2legkn">
+        <ref role="2leIlR" node="s9heyxjs9j" resolve="Taxis" />
+      </node>
+      <node concept="Agl$j" id="s9heyxyOPf" role="2WRRZq">
+        <ref role="Agl$i" node="s9heyxjs9q" resolve="PULocationID" />
+      </node>
+      <node concept="Agl$j" id="s9heyxyOPk" role="2WRRZq">
+        <ref role="Agl$i" node="s9heyxjs9z" resolve="total_amount" />
+        <node concept="Avfcg" id="s9heyxyOPs" role="1LWTg_" />
+      </node>
+      <node concept="15J0zF" id="s9heyxyOPu" role="AlhBa">
+        <node concept="1osJ5R" id="s9heyxyOPw" role="AmyPj">
+          <property role="1osJ5c" value="2fooeIVv2qs/OR" />
+          <node concept="1osJ5O" id="s9heyxyOPJ" role="1osJ4x">
+            <property role="1osJ58" value="14g3IsRhL0p/NOT_EQUAL" />
+            <node concept="1HhJcF" id="s9heyxyOPL" role="1osJ5a">
+              <property role="1HhJcI" value="0.0" />
+            </node>
+            <node concept="Agl$j" id="s9heyxyOPN" role="1osJ57">
+              <ref role="Agl$i" node="s9heyxjs9u" resolve="extra" />
+            </node>
+          </node>
+          <node concept="1osJ5O" id="s9heyxyOPA" role="1osJ4P">
+            <property role="1osJ58" value="14g3IsRhKZW/GREATER" />
+            <node concept="1HhJcF" id="s9heyxyOPC" role="1osJ5a">
+              <property role="1HhJcI" value="3" />
+            </node>
+            <node concept="Agl$j" id="s9heyxyOPE" role="1osJ57">
+              <ref role="Agl$i" node="s9heyxjs9n" resolve="passenger_count" />
+            </node>
+          </node>
+        </node>
+      </node>
+      <node concept="21oAwd" id="s9heyxyOPS" role="21oAAU">
+        <node concept="Agl$j" id="s9heyxyOPT" role="21oAAq">
+          <ref role="Agl$i" node="s9heyxjs9q" resolve="PULocationID" />
+        </node>
+      </node>
+      <node concept="21qpMi" id="s9heyxyOPW" role="21qpFE">
+        <node concept="Agl$j" id="s9heyxyOPX" role="21oAwc">
+          <ref role="Agl$i" node="s9heyxjs9z" resolve="total_amount" />
+        </node>
+      </node>
+      <node concept="2odo9i" id="s9heyxyOQ0" role="2odo9f">
+        <property role="2H74FI" value="w7ffA_7xVr/HOURS" />
+        <property role="2odo9a" value="3" />
+        <ref role="2A9_zy" node="52XYD7aJnjx" resolve="tpep_pickup_datetime" />
       </node>
     </node>
   </node>

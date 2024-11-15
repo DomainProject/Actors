@@ -341,7 +341,8 @@ void DataIngestion(struct topology *topology, lp_id_t me, simtime_t now, DataSou
 	Row *cur_row = malloc(sizeof(Row));
 	CHECK_RSMALLOC(cur_row, "DataIngestion");
 	memset(cur_row, 0, sizeof(*cur_row));
-	strcpy(cur_row->table_name, "Taxis");
+	cur_row->num_elements = schema->num_cols;
+  strcpy(cur_row->table_name, "Taxis");
 
 	while(!is_next_time_different) {
 		PopulateRow(line, cur_row, *schema);

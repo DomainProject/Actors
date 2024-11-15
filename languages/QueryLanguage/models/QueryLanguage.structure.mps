@@ -225,6 +225,10 @@
       <property role="3tVfz5" value="1229499084499598147" />
       <property role="TrG5h" value="Float" />
     </node>
+    <node concept="25R33" id="s9heyx3xhh" role="25R1y">
+      <property role="3tVfz5" value="507012198981047377" />
+      <property role="TrG5h" value="DateTime" />
+    </node>
   </node>
   <node concept="1TIwiD" id="14g3IsRh3Jd">
     <property role="EcuMT" value="1229499084499598285" />
@@ -608,6 +612,11 @@
       <property role="IQ2nx" value="578498120054961687" />
       <property role="TrG5h" value="temporalUnit" />
       <ref role="AX2Wp" node="w7ffA_6Ro3" resolve="TemporalUnit" />
+    </node>
+    <node concept="1TJgyj" id="s9heyxbLKa" role="1TKVEi">
+      <property role="IQ2ns" value="507012198983212042" />
+      <property role="20kJfa" value="column" />
+      <ref role="20lvS9" node="14g3IsRh3GN" resolve="Column" />
     </node>
   </node>
   <node concept="25R3W" id="32lqJACCeyJ">

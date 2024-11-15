@@ -2499,7 +2499,7 @@ public class QueriesGenerated extends QueryProviderBase {
     rtqMethods.put("7724742800288519810", new RTQ(9, "aggFunction"));
     rtqMethods.put("7724742800288521999", new RTQ(10, "aggFunction"));
     rtqMethods.put("7724742800300090481", new RTQ(11, "dataSource"));
-    rtqMethods.put("2171626095253857286", new RTQ(12, "aggOp"));
+    rtqMethods.put("2171626095253857286", new RTQ(12, null));
     rtqMethods.put("2942082050240056169", new RTQ(13, ""));
     rtqMethods.put("2942082050240059554", new RTQ(14, ""));
     rtqMethods.put("2942082050237369037", new RTQ(15, ""));

@@ -91,7 +91,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, COUNT);");
+      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, COUNT, ((GroupsMessage *)content)->schema);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -107,7 +107,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, SUM);");
+      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, SUM, ((GroupsMessage *)content)->schema);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -123,7 +123,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MIN);");
+      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MIN, ((GroupsMessage *)content)->schema);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -139,7 +139,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MAX);");
+      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, MAX, ((GroupsMessage *)content)->schema);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
@@ -155,7 +155,7 @@ public class ExecuteExternalFunction_TextGen extends TextGenDescriptorBase {
       tgs.indent();
       tgs.append("RowsLinkedList *");
       tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.resultName$LVZv));
-      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, AVG);");
+      tgs.append(" = AggregateFunctionGroupedInput(list, (AggregateFunctionData *)data, AVG, ((GroupsMessage *)content)->schema);");
       tgs.newLine();
       tgs.indent();
       tgs.append("if (!");
