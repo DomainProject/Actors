@@ -18,6 +18,7 @@ GroupsLinkedList *DeserializeGroupsMessage(GroupsMessage *msg)
 	CHECK_RSMALLOC(list, "DeserializeGroupsMessage");
 	list->head = NULL;
 	list->size = 0;
+	list->type = GROUPS;
 
 	struct GroupsLinkedListElement *last_group_element = NULL;
 
@@ -35,6 +36,7 @@ GroupsLinkedList *DeserializeGroupsMessage(GroupsMessage *msg)
 		CHECK_RSMALLOC(cur_group->rows_list, "DeserializeGroupsMessage");
 		memset(cur_group->rows_list, 0, sizeof(RowsLinkedList));
 		cur_group->rows_list->head = NULL;
+		cur_group->rows_list->type = ROWS;
 
 		memcpy(&cur_group->rows_list->size, buffer, sizeof(int));
 		buffer += sizeof(int);
@@ -130,7 +132,7 @@ void CreateAndSendMessageFromGroupsList(lp_id_t sender_id, float priority, Group
 	FreeGroup(list);
 }
 
-void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedList *list, simtime_t now,
+void CreateAndSendMessageFromRowsList(lp_id_t sender_id, float priority, RowsLinkedList *list, simtime_t now,
     lp_id_t *receivers, unsigned long num_receivers)
 {
 	Envelope e = {0};
@@ -176,6 +178,20 @@ void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedL
 
 	FreeList(rows_list);
 	free(msg);
+}
+
+void CreateAndSendMessage(lp_id_t sender_id, float priority, void *list, simtime_t now,
+	lp_id_t *receivers, unsigned long num_receivers)
+{
+	ListType *tag = (ListType *)list;
+	if (*tag == ROWS) {
+		CreateAndSendMessageFromRowsList(sender_id, priority, (RowsLinkedList *)list, now, receivers, num_receivers);
+	} else if (*tag == GROUPS) {
+		CreateAndSendMessageFromGroupsList(sender_id, priority, (GroupsLinkedList *)list, now, receivers, num_receivers);
+	} else {
+		fprintf(stderr, "CreateAndSendMessage: unknown list type\n");
+		exit(EXIT_FAILURE);
+	}
 }
 
 simtime_t ComputeSleepTime(const char *cur_datetime, const char *next_datetime)
@@ -864,6 +880,7 @@ RowsLinkedList *ExecuteWindow(RowsMessage *rcv_msg, WindowData *data)
 		ret_list->head = data->list;
 		ret_list->size = data->received_tuples;
 		ret_list->schema = rcv_msg->schema;
+		ret_list->type = ROWS;
 
 		// initialize new list
 		data->list = NULL;
@@ -908,6 +925,7 @@ void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t
 	list->head = window_data->list;
 	list->size = window_data->received_tuples;
 	list->schema = schema;
+	list->type = ROWS;
 
 	neighbors = GetAllNeighbors(topology, me, &num_neighbors);
 	CreateAndSendMessageFromList(me, 5.0f, list, now, neighbors, num_neighbors);

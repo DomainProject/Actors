@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/home/simoneb/experiments/Actors/pseudosql/src/test_root_sim/../include -I/usr/include/x86_64-linux-gnu/mpich
+C_INCLUDES = -I/home/simoneb/prova/Actors/pseudosql/src/test_root_sim/../include -I/usr/include/x86_64-linux-gnu/mpich
 
-C_FLAGS = -O3 -DNDEBUG -std=gnu11 -fvisibility=hidden -Wall -Wextra -pedantic
+C_FLAGS = -std=gnu11 -fvisibility=hidden -Wall -Wextra -pedantic
 

@@ -7,11 +7,11 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/simoneb/experiments/Actors/pseudosql/CMakeLists.txt"
+  "/home/simoneb/prova/Actors/pseudosql/CMakeLists.txt"
   "CMakeFiles/3.28.3/CMakeCCompiler.cmake"
   "CMakeFiles/3.28.3/CMakeSystem.cmake"
-  "/home/simoneb/experiments/Actors/pseudosql/src/CMakeLists.txt"
-  "/home/simoneb/experiments/Actors/pseudosql/src/test_root_sim/CMakeLists.txt"
+  "/home/simoneb/prova/Actors/pseudosql/src/CMakeLists.txt"
+  "/home/simoneb/prova/Actors/pseudosql/src/test_root_sim/CMakeLists.txt"
   "/usr/share/cmake-3.28/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake"
   "/usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake"

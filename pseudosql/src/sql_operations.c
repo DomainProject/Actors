@@ -127,6 +127,7 @@ RowsLinkedList *ProjectionMultRows(int size, Row *input_rows, AttributeList list
     ret_list->schema = new_schema;
     ret_list->head = head;
     ret_list->size = size;
+    ret_list->type = ROWS;
 
     return ret_list;
 }
@@ -180,6 +181,7 @@ RowsLinkedList *SelectionMultRows(int size, Row *input_rows, Condition *conditio
     list->head = head;
     list->size = count;
     list->schema = schema;
+    list->type = ROWS;
 
     return list;
 }
@@ -251,6 +253,7 @@ RowsLinkedList *OrderBy(int size, Row *input_rows, const char *col_name, Schema 
     ret_list->head = head;
     ret_list->size = size;
     ret_list->schema = schema;
+    ret_list->type = ROWS;
 
     return ret_list;
 }
@@ -308,7 +311,6 @@ GroupsLinkedList *GroupBy(int size, Row *input_rows, const char *col_name, Schem
 
     for (int i = 1; i < size; i++) {
         if (compare_elements(input_rows[i].elements[col_index], last_value, type) == 0) {
-            // Aggiungi la riga all'ultimo elemento
             struct RowsLinkedListElement *new_row = rs_malloc(sizeof(struct RowsLinkedListElement));
             CHECK_RSMALLOC(new_row, "GroupBy");
             new_row->row = rs_malloc(sizeof(Row));
@@ -320,14 +322,13 @@ GroupsLinkedList *GroupBy(int size, Row *input_rows, const char *col_name, Schem
             last_row = new_row;
             rows_count++;
         } else {
-            // Crea una nuova lista di righe per il gruppo precedente
             rows_list = rs_malloc(sizeof(RowsLinkedList));
             CHECK_RSMALLOC(rows_list, "GroupBy");
             rows_list->head = rows_head;
             rows_list->size = rows_count;
             rows_list->schema = schema;
+            rows_list->type = ROWS;
 
-            // Aggiungi il gruppo alla lista di gruppi
             struct GroupsLinkedListElement *new_group = rs_malloc(sizeof(struct GroupsLinkedListElement));
             CHECK_RSMALLOC(new_group, "GroupBy");
             new_group->rows_list = rows_list;
@@ -337,7 +338,6 @@ GroupsLinkedList *GroupBy(int size, Row *input_rows, const char *col_name, Schem
             last_group = new_group;
             groups_count++;
 
-            // Reset per il nuovo gruppo
             rows_count = 1;
             rows_head = rs_malloc(sizeof(struct RowsLinkedListElement));
             CHECK_RSMALLOC(rows_head, "GroupBy");
@@ -351,7 +351,6 @@ GroupsLinkedList *GroupBy(int size, Row *input_rows, const char *col_name, Schem
         }
     }
 
-    // Aggiungi l'ultimo gruppo
     rows_list = rs_malloc(sizeof(RowsLinkedList));
     CHECK_RSMALLOC(rows_list, "GroupBy");
     rows_list->head = rows_head;
@@ -365,12 +364,12 @@ GroupsLinkedList *GroupBy(int size, Row *input_rows, const char *col_name, Schem
 
     last_group->next = final_group;
 
-    // Crea e restituisci la lista di gruppi
     groups_list = rs_malloc(sizeof(GroupsLinkedList));
     CHECK_RSMALLOC(groups_list, "GroupBy");
     groups_list->size = groups_count;
     groups_list->head = groups_head;
     groups_list->col_index = col_index;
+    groups_list->type = GROUPS;
 
     return groups_list;
 }
@@ -491,6 +490,7 @@ void *AggregateFunction(AggFunctionData input, AggregateFunctionType type, Schem
             ret_list->head = NULL;
             ret_list->size = input.input_data.groups_list->size;
             ret_list->schema = schema;
+            ret_list->type = ROWS;
 
             struct RowsLinkedListElement *last_row_element = NULL;
             struct GroupsLinkedListElement *group = input.input_data.groups_list->head;

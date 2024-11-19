@@ -16,6 +16,21 @@
 
 #define INPUT_FILE "taxi.csv"
 
+typedef enum {
+    DATA_SOURCE,
+    WINDOW,
+    SELECTION,
+    PROJECTION,
+    GROUP_BY,
+    ORDER_BY,
+    JOIN,
+    AGG_MIN,
+    AGG_MAX,
+    AGG_AVG,
+    AGG_COUNT,
+    AGG_SUM
+} ActorType;
+
 FILE *file = NULL;
 Schema schema = {0};
 struct topology *topology = NULL;
@@ -80,7 +95,7 @@ void window(lp_id_t me, simtime_t now, const void *content, void *data)
 
 	unsigned long num_refs;
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
-	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
+	CreateAndSendMessage(me, 5.0f, (void *)result, now, refs, num_refs);
 
 	free(refs);
 }
@@ -93,7 +108,7 @@ void projection(lp_id_t me, simtime_t now, const void *content, void *data)
 
 	unsigned long num_refs;
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
-	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
+    CreateAndSendMessage(me, 5.0f, (void *)result, now, refs, num_refs);
 
 	free(refs);
 }
@@ -106,7 +121,7 @@ void selection(lp_id_t me, simtime_t now, const void *content, void *data)
 
 	unsigned long num_refs;
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
-	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
+    CreateAndSendMessage(me, 5.0f, (void *)result, now, refs, num_refs);
 
 	free(refs);
 }
@@ -119,7 +134,7 @@ void joinColumns(lp_id_t me, simtime_t now, const void *content, void *data)
 
 	unsigned long num_refs;
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
-	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
+	CreateAndSendMessage(me, 5.0f, (void *)result, now, refs, num_refs);
 
 	free(refs);
 }
@@ -133,7 +148,7 @@ void Count(lp_id_t me, simtime_t now, const void *content, void *data)
 
 	unsigned long num_refs;
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
-	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
+    CreateAndSendMessage(me, 5.0f, (void *)result, now, refs, num_refs);
 
     FreeGroup(list);
 	free(refs);
@@ -148,7 +163,7 @@ void Average(lp_id_t me, simtime_t now, const void *content, void *data)
 
 	unsigned long num_refs;
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
-	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
+    CreateAndSendMessage(me, 5.0f, (void *)result, now, refs, num_refs);
 
     FreeGroup(list);
 	free(refs);
@@ -163,7 +178,7 @@ void Sum(lp_id_t me, simtime_t now, const void *content, void *data)
 
 	unsigned long num_refs;
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
-	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
+    CreateAndSendMessage(me, 5.0f, (void *)result, now, refs, num_refs);
 
     FreeGroup(list);
 	free(refs);
@@ -177,7 +192,7 @@ void groupBy(lp_id_t me, simtime_t now, const void *content, void *data)
 
 	unsigned long num_refs;
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
-	CreateAndSendMessageFromGroupsList(me, 5.0f, result, now, refs, num_refs);
+    CreateAndSendMessage(me, 5.0f, (void *)result, now, refs, num_refs);
 
 	free(refs);
 }
@@ -190,7 +205,7 @@ void orderBy(lp_id_t me, simtime_t now, const void *content, void *data)
 
 	unsigned long num_refs;
 	lp_id_t *refs = GetAllNeighbors(topology, me, &num_refs);
-	CreateAndSendMessageFromList(me, 5.0f, result, now, refs, num_refs);
+    CreateAndSendMessage(me, 5.0f, (void *)result, now, refs, num_refs);
 
 	free(refs);
 }

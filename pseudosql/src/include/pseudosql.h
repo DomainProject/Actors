@@ -24,6 +24,11 @@
 #define NUM_ELEMENTS_ROW 19
 
 typedef enum {
+    ROWS,
+    GROUPS
+} ListType;
+
+typedef enum {
 	TYPE_INT,
 	TYPE_LONG,
 	TYPE_FLOAT,
@@ -162,11 +167,6 @@ typedef struct {
     char *filename;
 } OutputProcessData;
 
-typedef enum {
-    GROUPS,
-    ROWS
-} MessageType;
-
 typedef struct {
     lp_id_t sender;
     float priority;
@@ -206,6 +206,7 @@ struct RowsLinkedListElement {
 };
 
 typedef struct {
+    ListType type;
     Schema schema;
     int size;
     struct RowsLinkedListElement *head;
@@ -217,6 +218,7 @@ struct GroupsLinkedListElement {
 };
 
 typedef struct {
+    ListType type;
     int col_index;
     int size;
     struct GroupsLinkedListElement *head;
@@ -290,6 +292,5 @@ EXPORT RowsLinkedList *ExecuteWindow(RowsMessage *rcv_msg, WindowData *data);
 EXPORT RowsLinkedList *wJoin(RowsMessage *msg, void *data);
 EXPORT void TerminateWindow(struct topology *topology, WindowData *window_data, lp_id_t me, simtime_t now, Schema schema);
 EXPORT void JoinInit(struct topology *topology, lp_id_t from1, lp_id_t from2, lp_id_t me);
-EXPORT void CreateAndSendMessageFromList(lp_id_t sender_id, float priority, RowsLinkedList *list, simtime_t now, lp_id_t *receivers, unsigned long num_receivers);
-EXPORT void CreateAndSendMessageFromGroupsList(lp_id_t sender_id, float priority, GroupsLinkedList *list, simtime_t now, lp_id_t *receivers, unsigned long num_receivers);
+EXPORT void CreateAndSendMessage(lp_id_t sender_id, float priority, void *list, simtime_t now, lp_id_t *receivers, unsigned long num_receivers);
 EXPORT GroupsLinkedList *DeserializeGroupsMessage(GroupsMessage *msg);

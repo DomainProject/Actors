@@ -1,2 +1,0 @@
-/usr/local/include/pseudosql.h
-/usr/local/lib/librspseudosql.a
