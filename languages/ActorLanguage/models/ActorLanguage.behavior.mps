@@ -486,13 +486,6 @@
       </node>
     </node>
   </node>
-  <node concept="13h7C7" id="3JP6tIS4arx">
-    <property role="3GE5qa" value="actions" />
-    <ref role="13h7C2" to="o1mc:1enjyq1lUQ7" resolve="ActorCreation" />
-    <node concept="13hLZK" id="3JP6tIS4ary" role="13h7CW">
-      <node concept="3clFbS" id="3JP6tIS4arz" role="2VODD2" />
-    </node>
-  </node>
   <node concept="13h7C7" id="3JP6tIS4aZr">
     <ref role="13h7C2" to="o1mc:3m_VcJMWzdQ" resolve="ActorScript" />
     <node concept="13i0hz" id="3JP6tIS4aZI" role="13h7CS">

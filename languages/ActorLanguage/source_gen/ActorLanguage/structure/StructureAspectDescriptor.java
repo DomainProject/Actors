@@ -16,18 +16,9 @@ import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 import jetbrains.mps.smodel.adapter.ids.PrimitiveTypeId;
 
 public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
-  /*package*/ final ConceptDescriptor myConceptAbstractBehavior = createDescriptorForAbstractBehavior();
   /*package*/ final ConceptDescriptor myConceptActorAction = createDescriptorForActorAction();
   /*package*/ final ConceptDescriptor myConceptActorBox = createDescriptorForActorBox();
   /*package*/ final ConceptDescriptor myConceptActorBoxesList = createDescriptorForActorBoxesList();
-  /*package*/ final ConceptDescriptor myConceptActorCreation = createDescriptorForActorCreation();
-  /*package*/ final ConceptDescriptor myConceptActorLanguageForStatement = createDescriptorForActorLanguageForStatement();
-  /*package*/ final ConceptDescriptor myConceptActorLanguageIfStatement = createDescriptorForActorLanguageIfStatement();
-  /*package*/ final ConceptDescriptor myConceptActorLanguageStatement = createDescriptorForActorLanguageStatement();
-  /*package*/ final ConceptDescriptor myConceptActorLanguageStatementList = createDescriptorForActorLanguageStatementList();
-  /*package*/ final ConceptDescriptor myConceptActorLanguageSwitchCase = createDescriptorForActorLanguageSwitchCase();
-  /*package*/ final ConceptDescriptor myConceptActorLanguageSwitchStatement = createDescriptorForActorLanguageSwitchStatement();
-  /*package*/ final ConceptDescriptor myConceptActorLanguageWhileStatement = createDescriptorForActorLanguageWhileStatement();
   /*package*/ final ConceptDescriptor myConceptActorLink = createDescriptorForActorLink();
   /*package*/ final ConceptDescriptor myConceptActorLinksList = createDescriptorForActorLinksList();
   /*package*/ final ConceptDescriptor myConceptActorReference = createDescriptorForActorReference();
@@ -44,11 +35,15 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptCreateMessage = createDescriptorForCreateMessage();
   /*package*/ final ConceptDescriptor myConceptCreatePayload = createDescriptorForCreatePayload();
   /*package*/ final ConceptDescriptor myConceptCustomType = createDescriptorForCustomType();
+  /*package*/ final ConceptDescriptor myConceptEmptyLine = createDescriptorForEmptyLine();
   /*package*/ final ConceptDescriptor myConceptEnvelope = createDescriptorForEnvelope();
-  /*package*/ final ConceptDescriptor myConceptExecuteExternalFunction = createDescriptorForExecuteExternalFunction();
   /*package*/ final ConceptDescriptor myConceptExternalFunction = createDescriptorForExternalFunction();
+  /*package*/ final ConceptDescriptor myConceptExternalFunctionPrototype = createDescriptorForExternalFunctionPrototype();
   /*package*/ final ConceptDescriptor myConceptForEachActorReferenceStatement = createDescriptorForForEachActorReferenceStatement();
   /*package*/ final ConceptDescriptor myConceptGetActorsFromReceptionist = createDescriptorForGetActorsFromReceptionist();
+  /*package*/ final ConceptDescriptor myConceptIBehavior = createDescriptorForIBehavior();
+  /*package*/ final ConceptDescriptor myConceptICreateActor = createDescriptorForICreateActor();
+  /*package*/ final ConceptDescriptor myConceptIExternalFunction = createDescriptorForIExternalFunction();
   /*package*/ final ConceptDescriptor myConceptInitializer = createDescriptorForInitializer();
   /*package*/ final ConceptDescriptor myConceptInitializerAction = createDescriptorForInitializerAction();
   /*package*/ final ConceptDescriptor myConceptLink = createDescriptorForLink();
@@ -59,7 +54,6 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   /*package*/ final ConceptDescriptor myConceptReceptionist = createDescriptorForReceptionist();
   /*package*/ final ConceptDescriptor myConceptReceptionistPolicy = createDescriptorForReceptionistPolicy();
   /*package*/ final ConceptDescriptor myConceptReturnActorReference = createDescriptorForReturnActorReference();
-  /*package*/ final ConceptDescriptor myConceptSelectBehavior = createDescriptorForSelectBehavior();
   /*package*/ final ConceptDescriptor myConceptSelectEnvelope = createDescriptorForSelectEnvelope();
   /*package*/ final ConceptDescriptor myConceptSelectPayload = createDescriptorForSelectPayload();
   /*package*/ final ConceptDescriptor myConceptSendMessage = createDescriptorForSendMessage();
@@ -80,44 +74,30 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public void reportDependencies(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.Dependencies deps) {
+    deps.extendedLanguage(0xa9d696470840491eL, 0xbf392eb0805d2011L, "com.mbeddr.core.statements");
     deps.extendedLanguage(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, "jetbrains.mps.lang.core");
+    deps.extendedLanguage(0xefda956e491e4f00L, 0xba1436af2f213ecfL, "com.mbeddr.core.udt");
     deps.extendedLanguage(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, "jetbrains.mps.baseLanguage");
+    deps.aggregatedLanguage(0xa9d696470840491eL, 0xbf392eb0805d2011L, "com.mbeddr.core.statements");
+    deps.aggregatedLanguage(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, "com.mbeddr.core.modules");
     deps.aggregatedLanguage(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, "jetbrains.mps.baseLanguage");
   }
 
   @Override
   public Collection<ConceptDescriptor> getDescriptors() {
-    return Arrays.asList(myConceptAbstractBehavior, myConceptActorAction, myConceptActorBox, myConceptActorBoxesList, myConceptActorCreation, myConceptActorLanguageForStatement, myConceptActorLanguageIfStatement, myConceptActorLanguageStatement, myConceptActorLanguageStatementList, myConceptActorLanguageSwitchCase, myConceptActorLanguageSwitchStatement, myConceptActorLanguageWhileStatement, myConceptActorLink, myConceptActorLinksList, myConceptActorReference, myConceptActorReferenceList, myConceptActorScript, myConceptActorsGraph, myConceptBecome, myConceptChangeFetchPolicy, myConceptCreateActor, myConceptCreateActorReference, myConceptCreateActors, myConceptCreateBehavior, myConceptCreateEnvelope, myConceptCreateMessage, myConceptCreatePayload, myConceptCustomType, myConceptEnvelope, myConceptExecuteExternalFunction, myConceptExternalFunction, myConceptForEachActorReferenceStatement, myConceptGetActorsFromReceptionist, myConceptInitializer, myConceptInitializerAction, myConceptLink, myConceptMessageQueue, myConceptMessageRef, myConceptPayload, myConceptRandomActor, myConceptReceptionist, myConceptReceptionistPolicy, myConceptReturnActorReference, myConceptSelectBehavior, myConceptSelectEnvelope, myConceptSelectPayload, myConceptSendMessage, myConceptSendMessageToActors, myConceptStatementConstraint, myConceptStringBody, myConceptSwitchPolicy, myConceptWindow);
+    return Arrays.asList(myConceptActorAction, myConceptActorBox, myConceptActorBoxesList, myConceptActorLink, myConceptActorLinksList, myConceptActorReference, myConceptActorReferenceList, myConceptActorScript, myConceptActorsGraph, myConceptBecome, myConceptChangeFetchPolicy, myConceptCreateActor, myConceptCreateActorReference, myConceptCreateActors, myConceptCreateBehavior, myConceptCreateEnvelope, myConceptCreateMessage, myConceptCreatePayload, myConceptCustomType, myConceptEmptyLine, myConceptEnvelope, myConceptExternalFunction, myConceptExternalFunctionPrototype, myConceptForEachActorReferenceStatement, myConceptGetActorsFromReceptionist, myConceptIBehavior, myConceptICreateActor, myConceptIExternalFunction, myConceptInitializer, myConceptInitializerAction, myConceptLink, myConceptMessageQueue, myConceptMessageRef, myConceptPayload, myConceptRandomActor, myConceptReceptionist, myConceptReceptionistPolicy, myConceptReturnActorReference, myConceptSelectEnvelope, myConceptSelectPayload, myConceptSendMessage, myConceptSendMessageToActors, myConceptStatementConstraint, myConceptStringBody, myConceptSwitchPolicy, myConceptWindow);
   }
 
   @Override
   @Nullable
   public ConceptDescriptor getDescriptor(SConceptId id) {
     switch (myIndexSwitch.index(id)) {
-      case LanguageConceptSwitch.AbstractBehavior:
-        return myConceptAbstractBehavior;
       case LanguageConceptSwitch.ActorAction:
         return myConceptActorAction;
       case LanguageConceptSwitch.ActorBox:
         return myConceptActorBox;
       case LanguageConceptSwitch.ActorBoxesList:
         return myConceptActorBoxesList;
-      case LanguageConceptSwitch.ActorCreation:
-        return myConceptActorCreation;
-      case LanguageConceptSwitch.ActorLanguageForStatement:
-        return myConceptActorLanguageForStatement;
-      case LanguageConceptSwitch.ActorLanguageIfStatement:
-        return myConceptActorLanguageIfStatement;
-      case LanguageConceptSwitch.ActorLanguageStatement:
-        return myConceptActorLanguageStatement;
-      case LanguageConceptSwitch.ActorLanguageStatementList:
-        return myConceptActorLanguageStatementList;
-      case LanguageConceptSwitch.ActorLanguageSwitchCase:
-        return myConceptActorLanguageSwitchCase;
-      case LanguageConceptSwitch.ActorLanguageSwitchStatement:
-        return myConceptActorLanguageSwitchStatement;
-      case LanguageConceptSwitch.ActorLanguageWhileStatement:
-        return myConceptActorLanguageWhileStatement;
       case LanguageConceptSwitch.ActorLink:
         return myConceptActorLink;
       case LanguageConceptSwitch.ActorLinksList:
@@ -150,16 +130,24 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptCreatePayload;
       case LanguageConceptSwitch.CustomType:
         return myConceptCustomType;
+      case LanguageConceptSwitch.EmptyLine:
+        return myConceptEmptyLine;
       case LanguageConceptSwitch.Envelope:
         return myConceptEnvelope;
-      case LanguageConceptSwitch.ExecuteExternalFunction:
-        return myConceptExecuteExternalFunction;
       case LanguageConceptSwitch.ExternalFunction:
         return myConceptExternalFunction;
+      case LanguageConceptSwitch.ExternalFunctionPrototype:
+        return myConceptExternalFunctionPrototype;
       case LanguageConceptSwitch.ForEachActorReferenceStatement:
         return myConceptForEachActorReferenceStatement;
       case LanguageConceptSwitch.GetActorsFromReceptionist:
         return myConceptGetActorsFromReceptionist;
+      case LanguageConceptSwitch.IBehavior:
+        return myConceptIBehavior;
+      case LanguageConceptSwitch.ICreateActor:
+        return myConceptICreateActor;
+      case LanguageConceptSwitch.IExternalFunction:
+        return myConceptIExternalFunction;
       case LanguageConceptSwitch.Initializer:
         return myConceptInitializer;
       case LanguageConceptSwitch.InitializerAction:
@@ -180,8 +168,6 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
         return myConceptReceptionistPolicy;
       case LanguageConceptSwitch.ReturnActorReference:
         return myConceptReturnActorReference;
-      case LanguageConceptSwitch.SelectBehavior:
-        return myConceptSelectBehavior;
       case LanguageConceptSwitch.SelectEnvelope:
         return myConceptSelectEnvelope;
       case LanguageConceptSwitch.SelectPayload:
@@ -212,18 +198,11 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     return myIndexSwitch.index(c);
   }
 
-  private static ConceptDescriptor createDescriptorForAbstractBehavior() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "AbstractBehavior", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb9024127367L);
-    b.class_(false, true, false);
-    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7033755722358879079");
-    b.version(3);
-    return b.create();
-  }
   private static ConceptDescriptor createDescriptorForActorAction() {
     ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ActorAction", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681512684L);
     b.class_(false, true, false);
-    // extends: jetbrains.mps.baseLanguage.structure.Statement
-    b.super_(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b215L);
+    // extends: com.mbeddr.core.statements.structure.Statement
+    b.super_(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x3a16e3a9c7ad6d03L);
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/1411682935489242756");
     b.version(3);
     return b.create();
@@ -242,87 +221,6 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7724742800286591751");
     b.version(3);
     b.aggregate("actorBoxes", 0x6b33cca64056ab08L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57937L).optional(true).ordered(true).multiple(true).origin("7724742800286591752").done();
-    return b.create();
-  }
-  private static ConceptDescriptor createDescriptorForActorCreation() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ActorCreation", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e268157ad87L);
-    b.interface_();
-    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/1411682935489670535");
-    b.version(3);
-    return b.create();
-  }
-  private static ConceptDescriptor createDescriptorForActorLanguageForStatement() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ActorLanguageForStatement", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fabba73L);
-    b.class_(false, false, false);
-    // extends: jetbrains.mps.baseLanguage.structure.ForStatement
-    b.super_(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10a698082feL);
-    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fc9e231L);
-    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7051067309794507379");
-    b.version(3);
-    b.alias("for");
-    return b.create();
-  }
-  private static ConceptDescriptor createDescriptorForActorLanguageIfStatement() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ActorLanguageIfStatement", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fcb369cL);
-    b.class_(false, false, false);
-    // extends: jetbrains.mps.baseLanguage.structure.IfStatement
-    b.super_(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b217L);
-    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fc9e231L);
-    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7051067309796570780");
-    b.version(3);
-    b.alias("if");
-    return b.create();
-  }
-  private static ConceptDescriptor createDescriptorForActorLanguageStatement() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ActorLanguageStatement", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fc9e231L);
-    b.interface_();
-    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fca56f7L);
-    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7051067309796483633");
-    b.version(3);
-    b.aggregate("statements", 0x61da6c5c2fc9e232L).target(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b215L).optional(true).ordered(true).multiple(true).origin("7051067309796483634").done();
-    return b.create();
-  }
-  private static ConceptDescriptor createDescriptorForActorLanguageStatementList() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ActorLanguageStatementList", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x31fece75cecc5dcaL);
-    b.class_(false, false, false);
-    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fca56f7L);
-    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/3602543757318970826");
-    b.version(3);
-    b.aggregate("statements", 0x31fece75cecc5dcfL).target(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b215L).optional(true).ordered(true).multiple(true).origin("3602543757318970831").done();
-    return b.create();
-  }
-  private static ConceptDescriptor createDescriptorForActorLanguageSwitchCase() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ActorLanguageSwitchCase", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fca56f4L);
-    b.class_(false, false, false);
-    // extends: jetbrains.mps.baseLanguage.structure.SwitchCase
-    b.super_(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10ef02cdd1bL);
-    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fca56f7L);
-    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7051067309796513524");
-    b.version(3);
-    b.aggregate("statements", 0x61da6c5c2fcabe0aL).target(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b215L).optional(true).ordered(true).multiple(true).origin("7051067309796539914").done();
-    return b.create();
-  }
-  private static ConceptDescriptor createDescriptorForActorLanguageSwitchStatement() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ActorLanguageSwitchStatement", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fca56f1L);
-    b.class_(false, false, false);
-    // extends: jetbrains.mps.baseLanguage.structure.SwitchStatement
-    b.super_(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0x10ef02a8c6aL);
-    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fc9e231L);
-    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7051067309796513521");
-    b.version(3);
-    b.aggregate("customCase", 0x61da6c5c2fcb126bL).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fca56f4L).optional(true).ordered(true).multiple(true).origin("7051067309796561515").done();
-    b.alias("switch-case");
-    return b.create();
-  }
-  private static ConceptDescriptor createDescriptorForActorLanguageWhileStatement() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ActorLanguageWhileStatement", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fc9d2abL);
-    b.class_(false, false, false);
-    // extends: jetbrains.mps.baseLanguage.structure.WhileStatement
-    b.super_(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xfaa4bf0f2fL);
-    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fc9e231L);
-    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7051067309796479659");
-    b.version(3);
-    b.alias("while");
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForActorLink() {
@@ -368,12 +266,12 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/3865756215865914230");
     b.version(3);
-    b.aggregate("behaviors", 0x5d890eb3ebfeaec2L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L).optional(true).ordered(true).multiple(true).origin("6739934483257929410").done();
+    b.aggregate("behaviors", 0x5d890eb3ebfeaec2L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884edf2a23L).optional(true).ordered(true).multiple(true).origin("6739934483257929410").done();
     b.aggregate("receptionist", 0x5d890eb3ebff2495L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ebfeaec5L).optional(false).ordered(true).multiple(false).origin("6739934483257959573").done();
-    b.aggregate("actorCreation", 0x35a5eccbf2f23377L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e268157ad87L).optional(true).ordered(true).multiple(true).origin("3865756215865914231").done();
+    b.aggregate("actorCreation", 0x35a5eccbf2f23377L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL).optional(true).ordered(true).multiple(true).origin("3865756215865914231").done();
     b.aggregate("topology", 0x262cd812cfe6cc9dL).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57936L).optional(true).ordered(true).multiple(false).origin("2750811047725550749").done();
     b.aggregate("initializers", 0xe2178aac28bdcbL).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xe2178aac28357fL).optional(true).ordered(true).multiple(true).origin("63639229097885131").done();
-    b.aggregate("externalFunctions", 0x61da6c5c302ab136L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302aacc3L).optional(true).ordered(true).multiple(true).origin("7051067309802828086").done();
+    b.aggregate("externalFunctions", 0x61da6c5c302ab136L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a2d23L).optional(true).ordered(true).multiple(true).origin("7051067309802828086").done();
     b.aggregate("types", 0x754f4cb23a308c63L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x754f4cb23a214a8fL).optional(true).ordered(true).multiple(true).origin("8453059353961860195").done();
     return b.create();
   }
@@ -412,7 +310,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     // extends: ActorLanguage.structure.ActorAction
     b.super_(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681512684L);
     b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
-    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e268157ad87L);
+    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL);
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/3865756215865914212");
     b.version(3);
     b.property("address", 0x13974e2681512c34L).type(PrimitiveTypeId.INTEGER).origin("1411682935489244212").done();
@@ -442,7 +340,7 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.class_(false, false, false);
     // extends: ActorLanguage.structure.ActorAction
     b.super_(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681512684L);
-    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e268157ad87L);
+    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL);
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/6739934483258184740");
     b.version(3);
     b.property("number", 0x5d890eb3ec029443L).type(PrimitiveTypeId.INTEGER).origin("6739934483258184771").done();
@@ -457,14 +355,13 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   private static ConceptDescriptor createDescriptorForCreateBehavior() {
     ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "CreateBehavior", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L);
     b.class_(false, false, false);
-    // extends: ActorLanguage.structure.AbstractBehavior
-    b.super_(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb9024127367L);
     b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
     b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fca56f7L);
+    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884edf2a23L);
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/2411303652489357139");
     b.version(3);
     b.property("receivedMessageName", 0x5ef413f8f5ef4191L).type(PrimitiveTypeId.STRING).origin("6842115693881541009").done();
-    b.aggregate("actions", 0x35a5eccbf2f8e453L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x31fece75cecc5dcaL).optional(true).ordered(true).multiple(false).origin("3865756215866352723").done();
+    b.aggregate("statements", 0x35a5eccbf2f8e453L).target(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x3a16e3a9c7ad6d03L).optional(true).ordered(true).multiple(true).origin("3865756215866352723").done();
     b.aggregate("become", 0x5366e9c2d9745d61L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5366e9c2d97392cfL).optional(true).ordered(true).multiple(false).origin("6009747775853714785").done();
     b.aggregate("receivedMessage", 0x5ef413f8f5ff2c54L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L).optional(true).ordered(true).multiple(false).origin("6842115693882584148").done();
     return b.create();
@@ -513,8 +410,19 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
   private static ConceptDescriptor createDescriptorForCustomType() {
     ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "CustomType", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x754f4cb23a214a8fL);
     b.class_(false, false, false);
-    b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
+    // extends: com.mbeddr.core.udt.structure.TypeDef
+    b.super_(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x54e261614fd09a11L);
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/8453059353960860303");
+    b.version(3);
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForEmptyLine() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "EmptyLine", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ebc5f27L);
+    b.class_(false, false, false);
+    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a2d23L);
+    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884edf2a23L);
+    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL);
+    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/6946180687074189095");
     b.version(3);
     return b.create();
   }
@@ -528,39 +436,35 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.version(3);
     return b.create();
   }
-  private static ConceptDescriptor createDescriptorForExecuteExternalFunction() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ExecuteExternalFunction", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302ab0f2L);
-    b.class_(false, false, false);
-    // extends: ActorLanguage.structure.ActorAction
-    b.super_(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681512684L);
-    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7051067309802828018");
-    b.version(3);
-    b.property("resultName", 0x338e7da8a4f37b27L).type(PrimitiveTypeId.STRING).origin("3715044905902635815").done();
-    b.associate("function", 0x61da6c5c302ab0f3L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302aacc3L).optional(false).origin("7051067309802828019").done();
-    b.associate("message", 0x61da6c5c3038cdbaL).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L).optional(false).origin("7051067309803752890").done();
-    b.associate("resultType", 0x754f4cb23a3092feL).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x754f4cb23a214a8fL).optional(false).origin("8453059353961861886").done();
-    b.aggregate("result", 0x338e7da8a4f37b2bL).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L).optional(true).ordered(true).multiple(false).origin("3715044905902635819").done();
-    b.alias("execute");
-    return b.create();
-  }
   private static ConceptDescriptor createDescriptorForExternalFunction() {
     ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ExternalFunction", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302aacc3L);
     b.class_(false, false, false);
-    b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
+    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a2d23L);
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7051067309802826947");
     b.version(3);
+    b.aggregate("function", 0x6065ca884e7a5fd5L).target(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97e1L).optional(false).ordered(true).multiple(false).origin("6946180687069863893").done();
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForExternalFunctionPrototype() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ExternalFunctionPrototype", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a5fe9L);
+    b.class_(false, false, false);
+    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a2d23L);
+    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/6946180687069863913");
+    b.version(3);
+    b.property("header", 0x6065ca884e7a6002L).type(PrimitiveTypeId.STRING).origin("6946180687069863938").done();
+    b.aggregate("prototype", 0x6065ca884e7a5febL).target(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97e0L).optional(false).ordered(true).multiple(false).origin("6946180687069863915").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForForEachActorReferenceStatement() {
     ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ForEachActorReferenceStatement", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5dbf567L);
     b.class_(false, false, false);
-    // extends: jetbrains.mps.baseLanguage.structure.Statement
-    b.super_(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b215L);
-    b.parent(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fc9e231L);
+    // extends: com.mbeddr.core.statements.structure.Statement
+    b.super_(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x3a16e3a9c7ad6d03L);
     b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/4619656042771117415");
     b.version(3);
     b.associate("actorReferenceList", 0x401c50b1e5dbf568L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5ba7cb3L).optional(false).origin("4619656042771117416").done();
     b.aggregate("actorReference", 0x401c50b1e5eebd15L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e9333277ec5d1L).optional(false).ordered(true).multiple(false).origin("4619656042772348181").done();
+    b.aggregate("body", 0x6065ca884f42aac8L).target(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x3a16e3a9c7ad9955L).optional(false).ordered(true).multiple(false).origin("6946180687082990280").done();
     b.alias("for each actor reference");
     return b.create();
   }
@@ -574,6 +478,27 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.aggregate("policy", 0x13974e26817cb5deL).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e26817cb5d6L).optional(false).ordered(true).multiple(false).origin("1411682935492097502").done();
     b.aggregate("actorReferences", 0x2e933327505d87L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5ba7cb3L).optional(false).ordered(true).multiple(false).origin("13109696840883591").done();
     b.alias("get_actors");
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForIBehavior() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "IBehavior", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884edf2a23L);
+    b.interface_();
+    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/6946180687076469283");
+    b.version(3);
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForICreateActor() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "ICreateActor", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL);
+    b.interface_();
+    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/6946180687077938637");
+    b.version(3);
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForIExternalFunction() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "IExternalFunction", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a2d23L);
+    b.interface_();
+    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/6946180687069850915");
+    b.version(3);
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForInitializer() {
@@ -666,16 +591,6 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.version(3);
     b.associate("actorReference", 0x2e93332743e44fL).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e9333277ec5d1L).optional(false).origin("13109696840066127").done();
     b.alias("return_actor_reference");
-    return b.create();
-  }
-  private static ConceptDescriptor createDescriptorForSelectBehavior() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("ActorLanguage", "SelectBehavior", 0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb9024171024L);
-    b.class_(false, false, false);
-    // extends: ActorLanguage.structure.AbstractBehavior
-    b.super_(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb9024127367L);
-    b.origin("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/7033755722359181348");
-    b.version(3);
-    b.associate("behavior", 0x619ceb9024171025L).target(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L).optional(false).origin("7033755722359181349").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForSelectEnvelope() {

@@ -633,7 +633,7 @@
     <property role="EcuMT" value="5818081797693380612" />
     <property role="TrG5h" value="Location" />
     <property role="3GE5qa" value="location" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyi" id="52XYD79Fxw7" role="1TKVEl">
       <property role="IQ2nx" value="5818081797693380615" />
       <property role="TrG5h" value="ID" />
@@ -659,7 +659,7 @@
     <property role="EcuMT" value="5818081797693380621" />
     <property role="TrG5h" value="Zone" />
     <property role="3GE5qa" value="location" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="PrWs8" id="52XYD79Fxwe" role="PzmwI">
       <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
@@ -668,7 +668,7 @@
     <property role="EcuMT" value="5818081797693380624" />
     <property role="TrG5h" value="ServiceZone" />
     <property role="3GE5qa" value="location" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="PrWs8" id="52XYD79Fxwh" role="PzmwI">
       <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>

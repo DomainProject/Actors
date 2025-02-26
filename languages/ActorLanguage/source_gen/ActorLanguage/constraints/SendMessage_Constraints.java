@@ -47,7 +47,7 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
             if (SNodeOperations.isInstanceOf(SNodeOperations.getParent(_context.getReferenceNode()), CONCEPTS.Initializer$mM)) {
               messages = SNodeOperations.getNodeDescendants(SNodeOperations.getParent(_context.getReferenceNode()), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{});
             } else {
-              messages = ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.AbstractBehavior$Dm, false, false), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{})).where((it) -> it != SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateBehavior$iN, false, false), LINKS.receivedMessage$DtsG));
+              messages = ListSequence.fromList(SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateBehavior$iN, false, false), CONCEPTS.CreateMessage$aX, false, new SAbstractConcept[]{})).where((it) -> it != SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateBehavior$iN, false, false), LINKS.receivedMessage$DtsG));
             }
             return ListScope.forNamedElements(messages);
 
@@ -64,7 +64,6 @@ public class SendMessage_Constraints extends BaseConstraintsDescriptor {
     /*package*/ static final SConcept SendMessage$$2 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, "ActorLanguage.structure.SendMessage");
     /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");
     /*package*/ static final SConcept Initializer$mM = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xe2178aac28357fL, "ActorLanguage.structure.Initializer");
-    /*package*/ static final SConcept AbstractBehavior$Dm = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb9024127367L, "ActorLanguage.structure.AbstractBehavior");
     /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
   }
 

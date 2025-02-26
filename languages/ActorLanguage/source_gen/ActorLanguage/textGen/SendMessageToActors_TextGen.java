@@ -5,88 +5,20 @@ package ActorLanguage.textGen;
 import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
-import org.jetbrains.mps.openapi.model.SNode;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
-import org.jetbrains.mps.openapi.language.SContainmentLink;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
-import org.jetbrains.mps.openapi.language.SConcept;
-import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SProperty;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
 public class SendMessageToActors_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
-    {
-      final SNode p = SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$OqHH);
-      if (SNodeOperations.isInstanceOf(p, CONCEPTS.CreatePayload$Pf)) {
-        SNode extFunction = (SNode) SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(p, CONCEPTS.CreateBehavior$iN, false, false), CONCEPTS.ExecuteExternalFunction$6o, false, new SAbstractConcept[]{}).get(0);
-        if (SPropertyOperations.getString(SLinkOperations.getTarget(extFunction, LINKS.resultType$kuHm), PROPS.name$MnvL).equals("ROWS")) {
-          tgs.indent();
-          tgs.append("CreateAndSendMessageFromList(me, ");
-          tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.priority$Ypjc));
-          tgs.append(", ");
-          tgs.append(SPropertyOperations.getString(p, PROPS.name$MnvL));
-          tgs.append(", now, ");
-          tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
-          tgs.append(", num_");
-          tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
-          tgs.append(");");
-          tgs.newLine();
-        } else if (SPropertyOperations.getString(SLinkOperations.getTarget(extFunction, LINKS.resultType$kuHm), PROPS.name$MnvL).equals("GROUPS")) {
-          tgs.indent();
-          tgs.append("CreateAndSendMessageFromGroupsList(me, ");
-          tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.priority$Ypjc));
-          tgs.append(", ");
-          tgs.append(SPropertyOperations.getString(p, PROPS.name$MnvL));
-          tgs.append(", now, ");
-          tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
-          tgs.append(", num_");
-          tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
-          tgs.append(");");
-          tgs.newLine();
-        }
-      }
-    }
-    {
-      final SNode p = SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$OqHH);
-      if (SNodeOperations.isInstanceOf(p, CONCEPTS.SelectPayload$Hf)) {
-        SNode extFunction = (SNode) SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(SLinkOperations.getTarget(p, LINKS.payload$ZT3H), CONCEPTS.CreateBehavior$iN, false, false), CONCEPTS.ExecuteExternalFunction$6o, false, new SAbstractConcept[]{}).get(0);
-
-        if (SPropertyOperations.getString(SLinkOperations.getTarget(extFunction, LINKS.resultType$kuHm), PROPS.name$MnvL).equals("ROWS")) {
-          tgs.indent();
-          tgs.append("CreateAndSendMessageFromList(me, ");
-          tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.priority$Ypjc));
-          tgs.append(", ");
-          tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(p, LINKS.payload$ZT3H), PROPS.name$MnvL));
-          tgs.append(", now, ");
-          tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
-          tgs.append(", num_");
-          tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
-          tgs.append(");");
-          tgs.newLine();
-        } else if (SPropertyOperations.getString(SLinkOperations.getTarget(extFunction, LINKS.resultType$kuHm), PROPS.name$MnvL).equals("GROUPS")) {
-          tgs.indent();
-          tgs.append("CreateAndSendMessageFromGroupsList(me, ");
-          tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.priority$Ypjc));
-          tgs.append(", ");
-          tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(p, LINKS.payload$ZT3H), PROPS.name$MnvL));
-          tgs.append(", now, ");
-          tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
-          tgs.append(", num_");
-          tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
-          tgs.append(");");
-          tgs.newLine();
-        }
-
-      }
-    }
     tgs.newLine();
     tgs.indent();
     tgs.append("free(");
@@ -99,22 +31,14 @@ public class SendMessageToActors_TextGen extends TextGenDescriptorBase {
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink payload$OqHH = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, 0x338e7da8a4ced1dcL, "payload");
     /*package*/ static final SReferenceLink referenceList$9FRc = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, 0x338e7da8a4a78cacL, "referenceList");
-    /*package*/ static final SReferenceLink resultType$kuHm = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302ab0f2L, 0x754f4cb23a3092feL, "resultType");
-    /*package*/ static final SReferenceLink payload$ZT3H = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L, 0x4658738496c93a91L, "payload");
-  }
-
-  private static final class CONCEPTS {
-    /*package*/ static final SConcept CreatePayload$Pf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, "ActorLanguage.structure.CreatePayload");
-    /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
-    /*package*/ static final SConcept ExecuteExternalFunction$6o = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302ab0f2L, "ActorLanguage.structure.ExecuteExternalFunction");
-    /*package*/ static final SConcept SelectPayload$Hf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L, "ActorLanguage.structure.SelectPayload");
-    /*package*/ static final SInterfaceConcept TraceableConcept$L = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a3L, "jetbrains.mps.lang.traceable.structure.TraceableConcept");
   }
 
   private static final class PROPS {
-    /*package*/ static final SProperty priority$Ypjc = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, 0x338e7da8a4b5f036L, "priority");
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SInterfaceConcept TraceableConcept$L = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a3L, "jetbrains.mps.lang.traceable.structure.TraceableConcept");
   }
 }

@@ -44,7 +44,7 @@ public class StatementConstraint_Constraints extends BaseConstraintsDescriptor {
       return true;
     }
     if (SConceptOperations.isSubConceptOf(SNodeOperations.asSConcept(childConcept), CONCEPTS.Statement$P6)) {
-      return Objects.equals(childConcept, CONCEPTS.ForEachActorReferenceStatement$Jq) || Objects.equals(childConcept, CONCEPTS.ActorLanguageForStatement$E0) || Objects.equals(childConcept, CONCEPTS.ActorLanguageIfStatement$Q) || Objects.equals(childConcept, CONCEPTS.ActorLanguageWhileStatement$BN) || Objects.equals(childConcept, CONCEPTS.ActorLanguageSwitchStatement$fq) || Objects.equals(childConcept, CONCEPTS.Statement$P6);
+      return Objects.equals(childConcept, CONCEPTS.ForEachActorReferenceStatement$Jq) || Objects.equals(childConcept, CONCEPTS.Statement$P6);
     }
     return true;
   }
@@ -56,10 +56,6 @@ public class StatementConstraint_Constraints extends BaseConstraintsDescriptor {
     /*package*/ static final SConcept ActorAction$_s = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681512684L, "ActorLanguage.structure.ActorAction");
     /*package*/ static final SConcept SelectPayload$Hf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L, "ActorLanguage.structure.SelectPayload");
     /*package*/ static final SConcept ForEachActorReferenceStatement$Jq = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5dbf567L, "ActorLanguage.structure.ForEachActorReferenceStatement");
-    /*package*/ static final SConcept ActorLanguageForStatement$E0 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fabba73L, "ActorLanguage.structure.ActorLanguageForStatement");
-    /*package*/ static final SConcept ActorLanguageIfStatement$Q = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fcb369cL, "ActorLanguage.structure.ActorLanguageIfStatement");
-    /*package*/ static final SConcept ActorLanguageWhileStatement$BN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fc9d2abL, "ActorLanguage.structure.ActorLanguageWhileStatement");
-    /*package*/ static final SConcept ActorLanguageSwitchStatement$fq = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c2fca56f1L, "ActorLanguage.structure.ActorLanguageSwitchStatement");
     /*package*/ static final SConcept Statement$P6 = MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc56b215L, "jetbrains.mps.baseLanguage.structure.Statement");
   }
 }

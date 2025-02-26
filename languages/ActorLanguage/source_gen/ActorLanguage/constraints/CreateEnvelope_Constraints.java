@@ -108,7 +108,7 @@ public class CreateEnvelope_Constraints extends BaseConstraintsDescriptor {
             if ((SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.Initializer$mM, false, false) != null)) {
               actors = SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.Initializer$mM, false, false), CONCEPTS.ActorReference$Cg, false, new SAbstractConcept[]{});
             } else {
-              actors = SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.AbstractBehavior$Dm, false, false), CONCEPTS.ActorReference$Cg, false, new SAbstractConcept[]{});
+              actors = SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateBehavior$iN, false, false), CONCEPTS.ActorReference$Cg, false, new SAbstractConcept[]{});
             }
             ListSequence.fromList(actors).addElement(referenceToMyself);
             return ListScope.forNamedElements(actors);
@@ -127,7 +127,7 @@ public class CreateEnvelope_Constraints extends BaseConstraintsDescriptor {
     /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
     /*package*/ static final SConcept Initializer$mM = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xe2178aac28357fL, "ActorLanguage.structure.Initializer");
     /*package*/ static final SConcept ActorReference$Cg = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e9333277ec5d1L, "ActorLanguage.structure.ActorReference");
-    /*package*/ static final SConcept AbstractBehavior$Dm = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb9024127367L, "ActorLanguage.structure.AbstractBehavior");
+    /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
   }
 
   private static final class PROPS {

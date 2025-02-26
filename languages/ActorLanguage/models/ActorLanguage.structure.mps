@@ -9,6 +9,9 @@
     <import index="tpee" ref="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" />
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
+    <import index="c4fa" ref="r:9f0e84b6-2ec7-4f9e-83e0-feedc77b63a3(com.mbeddr.core.statements.structure)" implicit="true" />
+    <import index="x27k" ref="r:75ecab8a-8931-4140-afc6-4b46398710fc(com.mbeddr.core.modules.structure)" implicit="true" />
+    <import index="clbe" ref="r:61d840b4-12c1-49ea-b142-b2a1550a9b15(com.mbeddr.core.udt.structure)" implicit="true" />
   </imports>
   <registry>
     <language id="c72da2b9-7cce-4447-8389-f407dc1158b7" name="jetbrains.mps.lang.structure">
@@ -30,9 +33,7 @@
         <child id="1071489727083" name="linkDeclaration" index="1TKVEi" />
         <child id="1071489727084" name="propertyDeclaration" index="1TKVEl" />
       </concept>
-      <concept id="1169125989551" name="jetbrains.mps.lang.structure.structure.InterfaceConceptDeclaration" flags="ig" index="PlHQZ">
-        <child id="1169127546356" name="extends" index="PrDN$" />
-      </concept>
+      <concept id="1169125989551" name="jetbrains.mps.lang.structure.structure.InterfaceConceptDeclaration" flags="ig" index="PlHQZ" />
       <concept id="1169127622168" name="jetbrains.mps.lang.structure.structure.InterfaceConceptReference" flags="ig" index="PrWs8">
         <reference id="1169127628841" name="intfc" index="PrY4T" />
       </concept>
@@ -80,7 +81,7 @@
       <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
     <node concept="PrWs8" id="1enjyq1lUQ8" role="PzmwI">
-      <ref role="PrY4T" node="1enjyq1lUQ7" resolve="ActorCreation" />
+      <ref role="PrY4T" node="61_MCxeXpnd" resolve="ICreateActor" />
     </node>
     <node concept="1TJgyi" id="1enjyq1kiKO" role="1TKVEl">
       <property role="IQ2nx" value="1411682935489244212" />
@@ -141,7 +142,7 @@
       <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="behaviors" />
       <property role="20lbJX" value="fLJekj5/_0__n" />
-      <ref role="20lvS9" node="25QEYlOeItj" resolve="CreateBehavior" />
+      <ref role="20lvS9" node="61_MCxeRMCz" resolve="IBehavior" />
     </node>
     <node concept="1TJgyj" id="5Q93FfFZMil" role="1TKVEi">
       <property role="IQ2ns" value="6739934483257959573" />
@@ -155,7 +156,7 @@
       <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="actorCreation" />
       <property role="20lbJX" value="fLJekj5/_0__n" />
-      <ref role="20lvS9" node="1enjyq1lUQ7" resolve="ActorCreation" />
+      <ref role="20lvS9" node="61_MCxeXpnd" resolve="ICreateActor" />
     </node>
     <node concept="1TJgyj" id="2oGQ1bfTGMt" role="1TKVEi">
       <property role="IQ2ns" value="2750811047725550749" />
@@ -175,7 +176,7 @@
       <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="externalFunctions" />
       <property role="20lbJX" value="fLJekj5/_0__n" />
-      <ref role="20lvS9" node="67qr5KKaEN3" resolve="ExternalFunction" />
+      <ref role="20lvS9" node="61_MCxeuyOz" resolve="IExternalFunction" />
     </node>
     <node concept="1TJgyj" id="7lfjb8Uc8Lz" role="1TKVEi">
       <property role="IQ2ns" value="8453059353961860195" />
@@ -258,12 +259,13 @@
     <property role="EcuMT" value="2411303652489357139" />
     <property role="TrG5h" value="CreateBehavior" />
     <property role="3GE5qa" value="behavior" />
-    <ref role="1TJDcQ" node="66sUT0$4BdB" resolve="AbstractBehavior" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="3m_VcJMYehj" role="1TKVEi">
       <property role="IQ2ns" value="3865756215866352723" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="actions" />
-      <ref role="20lvS9" node="37YNBneN5Ra" resolve="ActorLanguageStatementList" />
+      <property role="20kJfa" value="statements" />
+      <property role="20lbJX" value="fLJekj5/_0__n" />
+      <ref role="20lvS9" to="c4fa:3CmSUB7FmO3" resolve="Statement" />
     </node>
     <node concept="1TJgyj" id="5dAUsbpt5Px" role="1TKVEi">
       <property role="IQ2ns" value="6009747775853714785" />
@@ -283,29 +285,13 @@
     <node concept="PrWs8" id="67qr5KJMFS4" role="PzmwI">
       <ref role="PrY4T" node="67qr5KJM_rR" resolve="StatementConstraint" />
     </node>
+    <node concept="PrWs8" id="61_MCxeRMC_" role="PzmwI">
+      <ref role="PrY4T" node="61_MCxeRMCz" resolve="IBehavior" />
+    </node>
     <node concept="1TJgyi" id="5VO4ZzPVO6h" role="1TKVEl">
       <property role="IQ2nx" value="6842115693881541009" />
       <property role="TrG5h" value="receivedMessageName" />
       <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
-    </node>
-  </node>
-  <node concept="1TIwiD" id="66sUT0$4BdB">
-    <property role="EcuMT" value="7033755722358879079" />
-    <property role="TrG5h" value="AbstractBehavior" />
-    <property role="R5$K7" value="true" />
-    <property role="3GE5qa" value="behavior" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
-  </node>
-  <node concept="1TIwiD" id="66sUT0$5L0$">
-    <property role="EcuMT" value="7033755722359181348" />
-    <property role="TrG5h" value="SelectBehavior" />
-    <property role="3GE5qa" value="behavior" />
-    <ref role="1TJDcQ" node="66sUT0$4BdB" resolve="AbstractBehavior" />
-    <node concept="1TJgyj" id="66sUT0$5L0_" role="1TKVEi">
-      <property role="IQ2ns" value="7033755722359181349" />
-      <property role="20kJfa" value="behavior" />
-      <property role="20lbJX" value="fLJekj4/_1" />
-      <ref role="20lvS9" node="25QEYlOeItj" resolve="CreateBehavior" />
     </node>
   </node>
   <node concept="25R3W" id="66sUT0$7o_Q">
@@ -446,7 +432,7 @@
       <ref role="20lvS9" node="3y5SEGa3lZ" resolve="Initializer" />
     </node>
     <node concept="PrWs8" id="1enjyq1lUQc" role="PzmwI">
-      <ref role="PrY4T" node="1enjyq1lUQ7" resolve="ActorCreation" />
+      <ref role="PrY4T" node="61_MCxeXpnd" resolve="ICreateActor" />
     </node>
     <node concept="1TJgyj" id="I$NcBCQo8" role="1TKVEi">
       <property role="IQ2ns" value="13109696846325256" />
@@ -461,7 +447,7 @@
     <property role="3GE5qa" value="actions" />
     <property role="TrG5h" value="ActorAction" />
     <property role="R5$K7" value="true" />
-    <ref role="1TJDcQ" to="tpee:fzclF8l" resolve="Statement" />
+    <ref role="1TJDcQ" to="c4fa:3CmSUB7FmO3" resolve="Statement" />
   </node>
   <node concept="1TIwiD" id="1enjyq1krxl">
     <property role="EcuMT" value="1411682935489280085" />
@@ -482,11 +468,6 @@
     <node concept="PrWs8" id="3y5SEGa8Ew" role="PzmwI">
       <ref role="PrY4T" node="3y5SEGa8Ep" resolve="InitializerAction" />
     </node>
-  </node>
-  <node concept="PlHQZ" id="1enjyq1lUQ7">
-    <property role="EcuMT" value="1411682935489670535" />
-    <property role="3GE5qa" value="actions" />
-    <property role="TrG5h" value="ActorCreation" />
   </node>
   <node concept="1TIwiD" id="1enjyq1qgdi">
     <property role="EcuMT" value="1411682935490806610" />
@@ -686,7 +667,7 @@
     <property role="TrG5h" value="ForEachActorReferenceStatement" />
     <property role="34LRSv" value="for each actor reference" />
     <property role="R4oN_" value="iterate on a list of actor references" />
-    <ref role="1TJDcQ" to="tpee:fzclF8l" resolve="Statement" />
+    <ref role="1TJDcQ" to="c4fa:3CmSUB7FmO3" resolve="Statement" />
     <node concept="1TJgyj" id="40skb7_QZlC" role="1TKVEi">
       <property role="IQ2ns" value="4619656042771117416" />
       <property role="20kJfa" value="actorReferenceList" />
@@ -700,8 +681,12 @@
       <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" node="I$NcBvGnh" resolve="ActorReference" />
     </node>
-    <node concept="PrWs8" id="67qr5KJMy9Q" role="PzmwI">
-      <ref role="PrY4T" node="67qr5KJMu8L" resolve="ActorLanguageStatement" />
+    <node concept="1TJgyj" id="61_MCxfgEF8" role="1TKVEi">
+      <property role="IQ2ns" value="6946180687082990280" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="body" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" to="c4fa:3CmSUB7Fp_l" resolve="StatementList" />
     </node>
   </node>
   <node concept="1TIwiD" id="5dAUsbpsTbf">
@@ -739,132 +724,25 @@
     <property role="3GE5qa" value="initializer" />
     <property role="TrG5h" value="InitializerAction" />
   </node>
-  <node concept="1TIwiD" id="67qr5KJEVDN">
-    <property role="EcuMT" value="7051067309794507379" />
-    <property role="3GE5qa" value="statement" />
-    <property role="TrG5h" value="ActorLanguageForStatement" />
-    <property role="34LRSv" value="for" />
-    <ref role="1TJDcQ" to="tpee:gDDw8bY" resolve="ForStatement" />
-    <node concept="PrWs8" id="67qr5KJMwm7" role="PzmwI">
-      <ref role="PrY4T" node="67qr5KJMu8L" resolve="ActorLanguageStatement" />
-    </node>
-  </node>
-  <node concept="1TIwiD" id="67qr5KJMtaF">
-    <property role="EcuMT" value="7051067309796479659" />
-    <property role="3GE5qa" value="statement" />
-    <property role="TrG5h" value="ActorLanguageWhileStatement" />
-    <property role="34LRSv" value="while" />
-    <ref role="1TJDcQ" to="tpee:fE$JKWJ" resolve="WhileStatement" />
-    <node concept="PrWs8" id="67qr5KJMxPa" role="PzmwI">
-      <ref role="PrY4T" node="67qr5KJMu8L" resolve="ActorLanguageStatement" />
-    </node>
-  </node>
-  <node concept="PlHQZ" id="67qr5KJMu8L">
-    <property role="EcuMT" value="7051067309796483633" />
-    <property role="3GE5qa" value="statement" />
-    <property role="TrG5h" value="ActorLanguageStatement" />
-    <node concept="1TJgyj" id="67qr5KJMu8M" role="1TKVEi">
-      <property role="IQ2ns" value="7051067309796483634" />
-      <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="statements" />
-      <property role="20lbJX" value="fLJekj5/_0__n" />
-      <ref role="20lvS9" to="tpee:fzclF8l" resolve="Statement" />
-    </node>
-    <node concept="PrWs8" id="67qr5KJMEvw" role="PrDN$">
-      <ref role="PrY4T" node="67qr5KJM_rR" resolve="StatementConstraint" />
-    </node>
-  </node>
-  <node concept="1TIwiD" id="67qr5KJM_rL">
-    <property role="EcuMT" value="7051067309796513521" />
-    <property role="3GE5qa" value="statement" />
-    <property role="TrG5h" value="ActorLanguageSwitchStatement" />
-    <property role="34LRSv" value="switch-case" />
-    <ref role="1TJDcQ" to="tpee:gVKaCLE" resolve="SwitchStatement" />
-    <node concept="PrWs8" id="67qr5KJM_rM" role="PzmwI">
-      <ref role="PrY4T" node="67qr5KJMu8L" resolve="ActorLanguageStatement" />
-    </node>
-    <node concept="1TJgyj" id="67qr5KJML9F" role="1TKVEi">
-      <property role="IQ2ns" value="7051067309796561515" />
-      <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="customCase" />
-      <property role="20lbJX" value="fLJekj5/_0__n" />
-      <ref role="20lvS9" node="67qr5KJM_rO" resolve="ActorLanguageSwitchCase" />
-    </node>
-  </node>
-  <node concept="1TIwiD" id="67qr5KJM_rO">
-    <property role="EcuMT" value="7051067309796513524" />
-    <property role="3GE5qa" value="statement" />
-    <property role="TrG5h" value="ActorLanguageSwitchCase" />
-    <ref role="1TJDcQ" to="tpee:gVKbdOr" resolve="SwitchCase" />
-    <node concept="PrWs8" id="67qr5KJMFS8" role="PzmwI">
-      <ref role="PrY4T" node="67qr5KJM_rR" resolve="StatementConstraint" />
-    </node>
-    <node concept="1TJgyj" id="67qr5KJMFSa" role="1TKVEi">
-      <property role="IQ2ns" value="7051067309796539914" />
-      <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="statements" />
-      <property role="20lbJX" value="fLJekj5/_0__n" />
-      <ref role="20lvS9" to="tpee:fzclF8l" resolve="Statement" />
-    </node>
-  </node>
   <node concept="PlHQZ" id="67qr5KJM_rR">
     <property role="EcuMT" value="7051067309796513527" />
     <property role="3GE5qa" value="statement" />
     <property role="TrG5h" value="StatementConstraint" />
-  </node>
-  <node concept="1TIwiD" id="67qr5KJMNqs">
-    <property role="EcuMT" value="7051067309796570780" />
-    <property role="3GE5qa" value="statement" />
-    <property role="TrG5h" value="ActorLanguageIfStatement" />
-    <property role="34LRSv" value="if" />
-    <ref role="1TJDcQ" to="tpee:fzclF8n" resolve="IfStatement" />
-    <node concept="PrWs8" id="67qr5KJMNqt" role="PzmwI">
-      <ref role="PrY4T" node="67qr5KJMu8L" resolve="ActorLanguageStatement" />
-    </node>
   </node>
   <node concept="1TIwiD" id="67qr5KKaEN3">
     <property role="EcuMT" value="7051067309802826947" />
     <property role="TrG5h" value="ExternalFunction" />
     <property role="3GE5qa" value="externalFunction" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
-    <node concept="PrWs8" id="67qr5KKaEN4" role="PzmwI">
-      <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
+    <node concept="PrWs8" id="61_MCxeu_Zk" role="PzmwI">
+      <ref role="PrY4T" node="61_MCxeuyOz" resolve="IExternalFunction" />
     </node>
-  </node>
-  <node concept="1TIwiD" id="67qr5KKaF3M">
-    <property role="EcuMT" value="7051067309802828018" />
-    <property role="TrG5h" value="ExecuteExternalFunction" />
-    <property role="3GE5qa" value="externalFunction" />
-    <property role="34LRSv" value="execute" />
-    <ref role="1TJDcQ" node="1enjyq1kiq4" resolve="ActorAction" />
-    <node concept="1TJgyi" id="3eevqy$WRGB" role="1TKVEl">
-      <property role="IQ2nx" value="3715044905902635815" />
-      <property role="TrG5h" value="resultName" />
-      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
-    </node>
-    <node concept="1TJgyj" id="67qr5KKaF3N" role="1TKVEi">
-      <property role="IQ2ns" value="7051067309802828019" />
+    <node concept="1TJgyj" id="61_MCxeu_Zl" role="1TKVEi">
+      <property role="IQ2ns" value="6946180687069863893" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="function" />
       <property role="20lbJX" value="fLJekj4/_1" />
-      <ref role="20lvS9" node="67qr5KKaEN3" resolve="ExternalFunction" />
-    </node>
-    <node concept="1TJgyj" id="67qr5KKecQU" role="1TKVEi">
-      <property role="IQ2ns" value="7051067309803752890" />
-      <property role="20kJfa" value="message" />
-      <property role="20lbJX" value="fLJekj4/_1" />
-      <ref role="20lvS9" node="3m_VcJMWzdL" resolve="CreateMessage" />
-    </node>
-    <node concept="1TJgyj" id="7lfjb8Uc9bY" role="1TKVEi">
-      <property role="IQ2ns" value="8453059353961861886" />
-      <property role="20kJfa" value="resultType" />
-      <property role="20lbJX" value="fLJekj4/_1" />
-      <ref role="20lvS9" node="7lfjb8U8kEf" resolve="CustomType" />
-    </node>
-    <node concept="1TJgyj" id="3eevqy$WRGF" role="1TKVEi">
-      <property role="IQ2ns" value="3715044905902635819" />
-      <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="result" />
-      <ref role="20lvS9" node="25QEYlOdAq8" resolve="CreatePayload" />
+      <ref role="20lvS9" to="x27k:5_l8w1EmTvx" resolve="Function" />
     </node>
   </node>
   <node concept="1TIwiD" id="5VO4ZzQ7TK4">
@@ -878,22 +756,6 @@
       <property role="IQ2nx" value="6842115693884709893" />
       <property role="TrG5h" value="newPolicy" />
       <ref role="AX2Wp" node="66sUT0$7o_Q" resolve="FetchPolicy" />
-    </node>
-  </node>
-  <node concept="1TIwiD" id="37YNBneN5Ra">
-    <property role="EcuMT" value="3602543757318970826" />
-    <property role="3GE5qa" value="statement" />
-    <property role="TrG5h" value="ActorLanguageStatementList" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
-    <node concept="1TJgyj" id="37YNBneN5Rf" role="1TKVEi">
-      <property role="IQ2ns" value="3602543757318970831" />
-      <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="statements" />
-      <property role="20lbJX" value="fLJekj5/_0__n" />
-      <ref role="20lvS9" to="tpee:fzclF8l" resolve="Statement" />
-    </node>
-    <node concept="PrWs8" id="37YNBneN5Rb" role="PzmwI">
-      <ref role="PrY4T" node="67qr5KJM_rR" resolve="StatementConstraint" />
     </node>
   </node>
   <node concept="1TIwiD" id="6GNNap0lEG7">
@@ -959,10 +821,7 @@
     <property role="EcuMT" value="8453059353960860303" />
     <property role="3GE5qa" value="payload" />
     <property role="TrG5h" value="CustomType" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
-    <node concept="PrWs8" id="7lfjb8U8kEg" role="PzmwI">
-      <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
-    </node>
+    <ref role="1TJDcQ" to="clbe:5jyom5fO9Ch" resolve="TypeDef" />
   </node>
   <node concept="1TIwiD" id="74ISy0fnwrW">
     <property role="EcuMT" value="8155704602539198204" />
@@ -991,6 +850,56 @@
       <property role="3tVfz5" value="8155704602539219991" />
       <property role="TrG5h" value="TUMBLING" />
     </node>
+  </node>
+  <node concept="PlHQZ" id="61_MCxeuyOz">
+    <property role="EcuMT" value="6946180687069850915" />
+    <property role="3GE5qa" value="externalFunction" />
+    <property role="TrG5h" value="IExternalFunction" />
+  </node>
+  <node concept="1TIwiD" id="61_MCxeu_ZD">
+    <property role="EcuMT" value="6946180687069863913" />
+    <property role="3GE5qa" value="externalFunction" />
+    <property role="TrG5h" value="ExternalFunctionPrototype" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <node concept="1TJgyj" id="61_MCxeu_ZF" role="1TKVEi">
+      <property role="IQ2ns" value="6946180687069863915" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="prototype" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" to="x27k:5_l8w1EmTvw" resolve="FunctionPrototype" />
+    </node>
+    <node concept="PrWs8" id="61_MCxeu_ZE" role="PzmwI">
+      <ref role="PrY4T" node="61_MCxeuyOz" resolve="IExternalFunction" />
+    </node>
+    <node concept="1TJgyi" id="61_MCxeuA02" role="1TKVEl">
+      <property role="IQ2nx" value="6946180687069863938" />
+      <property role="TrG5h" value="header" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="61_MCxeJ5WB">
+    <property role="EcuMT" value="6946180687074189095" />
+    <property role="TrG5h" value="EmptyLine" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="PrWs8" id="61_MCxeJ8VO" role="PzmwI">
+      <ref role="PrY4T" node="61_MCxeuyOz" resolve="IExternalFunction" />
+    </node>
+    <node concept="PrWs8" id="61_MCxeRMCB" role="PzmwI">
+      <ref role="PrY4T" node="61_MCxeRMCz" resolve="IBehavior" />
+    </node>
+    <node concept="PrWs8" id="61_MCxeXpnz" role="PzmwI">
+      <ref role="PrY4T" node="61_MCxeXpnd" resolve="ICreateActor" />
+    </node>
+  </node>
+  <node concept="PlHQZ" id="61_MCxeRMCz">
+    <property role="EcuMT" value="6946180687076469283" />
+    <property role="3GE5qa" value="behavior" />
+    <property role="TrG5h" value="IBehavior" />
+  </node>
+  <node concept="PlHQZ" id="61_MCxeXpnd">
+    <property role="EcuMT" value="6946180687077938637" />
+    <property role="3GE5qa" value="actor" />
+    <property role="TrG5h" value="ICreateActor" />
   </node>
 </model>
 

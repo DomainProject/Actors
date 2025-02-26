@@ -21,7 +21,7 @@ public class CreateBehavior_TextGen extends TextGenDescriptorBase {
     tgs.append("(lp_id_t me, simtime_t now, const void *content, void *data) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
-    for (SNode item : SLinkOperations.getChildren(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.actions$MLkf), LINKS.statements$uIuz)) {
+    for (SNode item : SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.statements$MLkf)) {
       tgs.appendNode(item);
     }
     ctx.getBuffer().area().decreaseIndent();
@@ -35,7 +35,6 @@ public class CreateBehavior_TextGen extends TextGenDescriptorBase {
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink actions$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "actions");
-    /*package*/ static final SContainmentLink statements$uIuz = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x31fece75cecc5dcaL, 0x31fece75cecc5dcfL, "statements");
+    /*package*/ static final SContainmentLink statements$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "statements");
   }
 }

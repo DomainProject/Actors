@@ -71,8 +71,6 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.append("struct topology *topology = NULL;");
     tgs.newLine();
-    tgs.append("static int window_size;");
-    tgs.newLine();
 
     tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc));
 
@@ -440,11 +438,11 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("if (argc != 3) {");
+    tgs.append("if (argc != 2) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("printf(\"Usage: %s <n_threads> <window_size>\", argv[0]);");
+    tgs.append("printf(\"Usage: %s <n_threads>\", argv[0]);");
     tgs.newLine();
     tgs.indent();
     tgs.append("exit(1);");
@@ -455,9 +453,6 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.indent();
     tgs.append("conf.n_threads = atoi(argv[1]);");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("window_size = atoi(argv[2]);");
     tgs.newLine();
     tgs.indent();
     tgs.append("InitTopology();");

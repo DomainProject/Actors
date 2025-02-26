@@ -13,10 +13,11 @@ import de.itemis.mps.editor.diagram.runtime.ContextVariables;
 import java.util.List;
 import de.itemis.mps.editor.diagram.runtime.model.Port;
 import java.util.ArrayList;
-import de.itemis.mps.editor.diagram.runtime.model.IBoxAccessor;
 import de.itemis.mps.editor.diagram.runtime.model.SNodeBoxAccessor;
 import de.itemis.mps.editor.diagram.runtime.model.IDiagramElementAccessor;
 import de.itemis.mps.editor.diagram.runtime.model.IAccessorFactory;
+import de.itemis.mps.editor.diagram.runtime.jgraph.ElkLayouter;
+import de.itemis.mps.editor.diagram.runtime.jgraph.DiagramCreationContext;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
 import jetbrains.mps.nodeEditor.cellLayout.CellLayout_Indent;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
@@ -78,7 +79,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
       contentCells.add(contentCell);
 
 
-      IBoxAccessor accessor = new SNodeBoxAccessor(node) {
+      SNodeBoxAccessor accessor = new SNodeBoxAccessor(node) {
         @NotNull
         public List<Port> getPorts() {
           return ports;
@@ -113,6 +114,8 @@ import org.jetbrains.mps.openapi.language.SConcept;
       setCellContext(editorCell.value);
 
       editorCell.value.addEditorCell(contentCell);
+      ElkLayouter layouter = (ElkLayouter) DiagramCreationContext.getRootGraph().getRootDiagramModel().getLayouter();
+      layouter.addNodesStyle(editorCell.value.getStyle(), accessor.getId());
     });
 
     return editorCell.value;

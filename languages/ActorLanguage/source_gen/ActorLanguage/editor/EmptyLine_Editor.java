@@ -7,8 +7,8 @@ import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
 
-public class ActorLanguageIfStatement_Editor extends DefaultNodeEditor {
+public class EmptyLine_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return new ActorLanguageIfStatement_EditorBuilder_a(editorContext, node).createCell();
+    return new EmptyLine_EditorBuilder_a(editorContext, node).createCell();
   }
 }
