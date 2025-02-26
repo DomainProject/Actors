@@ -13,8 +13,8 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1081236700938:jetbrains.mps.baseLanguage.structure.StaticMethodDeclaration" />
   <root>
     <file name="TextGenAspectDescriptor.java">
-      <unit at="76,0,79,0" name="ActorLanguage.textGen.TextGenAspectDescriptor$CONCEPTS" />
-      <unit at="16,0,80,0" name="ActorLanguage.textGen.TextGenAspectDescriptor" />
+      <unit at="78,0,81,0" name="ActorLanguage.textGen.TextGenAspectDescriptor$CONCEPTS" />
+      <unit at="16,0,82,0" name="ActorLanguage.textGen.TextGenAspectDescriptor" />
     </file>
   </root>
   <root nodeRef="r:5c12de31-eabc-4138-b711-95b52bc1fc4c(ActorLanguage.textGen)/3204091364823173251">
@@ -130,8 +130,8 @@
       <unit id="3204091364823999932" at="20,0,76,0" name="ActorLanguage.textGen.SendMessage_TextGen" />
     </file>
     <file name="TextGenAspectDescriptor.java">
-      <node id="3204091364823999932" at="48,45,49,41" concept="7" />
-      <scope id="3204091364823999932" at="48,45,49,41" />
+      <node id="3204091364823999932" at="50,45,51,41" concept="7" />
+      <scope id="3204091364823999932" at="50,45,51,41" />
     </file>
   </root>
   <root nodeRef="r:5c12de31-eabc-4138-b711-95b52bc1fc4c(ActorLanguage.textGen)/3204091364824420186">
@@ -886,25 +886,25 @@
     </file>
     <file name="TextGenAspectDescriptor.java">
       <node id="3865756215866094073" at="26,45,27,41" concept="7" />
-      <node id="3865756215866094073" at="61,62,62,53" concept="6" />
-      <node id="3865756215866094073" at="62,53,63,56" concept="6" />
-      <node id="3865756215866094073" at="63,56,64,84" concept="2" />
-      <node id="3865756215866094073" at="64,84,65,17" concept="1" />
-      <node id="3865756215866094073" at="69,61,70,26" concept="7" />
-      <node id="3865756215866095114" at="72,66,73,15" concept="7" />
-      <node id="3865756215866094073" at="69,0,72,0" concept="10" trace="getFileName_ActorScript#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
-      <node id="3865756215866094073" at="72,0,75,0" concept="10" trace="getFileExtension_ActorScript#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
-      <node id="3865756215866094073" at="60,58,66,7" concept="4" />
+      <node id="3865756215866094073" at="63,62,64,53" concept="6" />
+      <node id="3865756215866094073" at="64,53,65,56" concept="6" />
+      <node id="3865756215866094073" at="65,56,66,84" concept="2" />
+      <node id="3865756215866094073" at="66,84,67,17" concept="1" />
+      <node id="3865756215866094073" at="71,61,72,26" concept="7" />
+      <node id="3865756215866095114" at="74,66,75,15" concept="7" />
+      <node id="3865756215866094073" at="71,0,74,0" concept="10" trace="getFileName_ActorScript#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="3865756215866094073" at="74,0,77,0" concept="10" trace="getFileExtension_ActorScript#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljava/lang/String;" />
+      <node id="3865756215866094073" at="62,58,68,7" concept="4" />
       <scope id="3865756215866094073" at="26,45,27,41" />
-      <scope id="3865756215866094073" at="69,61,70,26" />
-      <scope id="3865756215866094073" at="72,66,73,15" />
-      <scope id="3865756215866094073" at="69,0,72,0">
+      <scope id="3865756215866094073" at="71,61,72,26" />
+      <scope id="3865756215866094073" at="74,66,75,15" />
+      <scope id="3865756215866094073" at="71,0,74,0">
         <var name="node" id="3865756215866094073" />
       </scope>
-      <scope id="3865756215866094073" at="72,0,75,0">
+      <scope id="3865756215866094073" at="74,0,77,0">
         <var name="node" id="3865756215866094073" />
       </scope>
-      <scope id="3865756215866094073" at="61,62,65,17">
+      <scope id="3865756215866094073" at="63,62,67,17">
         <var name="ext" id="3865756215866094073" />
         <var name="fname" id="3865756215866094073" />
       </scope>
@@ -991,8 +991,8 @@
       <unit id="4447085707126930950" at="12,0,23,0" name="ActorLanguage.textGen.StringBody_TextGen" />
     </file>
     <file name="TextGenAspectDescriptor.java">
-      <node id="4447085707126930950" at="52,44,53,40" concept="7" />
-      <scope id="4447085707126930950" at="52,44,53,40" />
+      <node id="4447085707126930950" at="54,44,55,40" concept="7" />
+      <scope id="4447085707126930950" at="54,44,55,40" />
     </file>
   </root>
   <root nodeRef="r:5c12de31-eabc-4138-b711-95b52bc1fc4c(ActorLanguage.textGen)/4619656042776081459">
@@ -1028,8 +1028,8 @@
       <unit id="4619656042776081459" at="18,0,50,0" name="ActorLanguage.textGen.ForEachActorReferenceStatement_TextGen" />
     </file>
     <file name="TextGenAspectDescriptor.java">
-      <node id="4619656042776081459" at="42,64,43,60" concept="7" />
-      <scope id="4619656042776081459" at="42,64,43,60" />
+      <node id="4619656042776081459" at="44,64,45,60" concept="7" />
+      <scope id="4619656042776081459" at="44,64,45,60" />
     </file>
   </root>
   <root nodeRef="r:5c12de31-eabc-4138-b711-95b52bc1fc4c(ActorLanguage.textGen)/4777863013390878865">
@@ -1930,8 +1930,8 @@
       <unit id="4777863013392011743" at="9,0,184,0" name="ActorLanguage.textGen.Receptionist_TextGen" />
     </file>
     <file name="TextGenAspectDescriptor.java">
-      <node id="4777863013392011743" at="46,46,47,42" concept="7" />
-      <scope id="4777863013392011743" at="46,46,47,42" />
+      <node id="4777863013392011743" at="48,46,49,42" concept="7" />
+      <scope id="4777863013392011743" at="48,46,49,42" />
     </file>
   </root>
   <root nodeRef="r:5c12de31-eabc-4138-b711-95b52bc1fc4c(ActorLanguage.textGen)/4777863013394265506">
@@ -1969,8 +1969,26 @@
       <unit id="4777863013394265506" at="17,0,51,0" name="ActorLanguage.textGen.GetActorsFromReceptionist_TextGen" />
     </file>
     <file name="TextGenAspectDescriptor.java">
-      <node id="4777863013394265506" at="44,59,45,55" concept="7" />
-      <scope id="4777863013394265506" at="44,59,45,55" />
+      <node id="4777863013394265506" at="46,59,47,55" concept="7" />
+      <scope id="4777863013394265506" at="46,59,47,55" />
+    </file>
+  </root>
+  <root nodeRef="r:5c12de31-eabc-4138-b711-95b52bc1fc4c(ActorLanguage.textGen)/6946180687088536158">
+    <file name="EmptyLine_TextGen.java">
+      <node id="6946180687088536158" at="11,54,12,55" concept="6" />
+      <node id="6946180687088536211" at="12,55,13,18" concept="2" />
+      <node id="6946180687088536158" at="10,0,15,0" concept="5" trace="generateText#(Ljetbrains/mps/text/rt/TextGenContext;)V" />
+      <scope id="6946180687088536158" at="11,54,13,18">
+        <var name="tgs" id="6946180687088536158" />
+      </scope>
+      <scope id="6946180687088536158" at="10,0,15,0">
+        <var name="ctx" id="6946180687088536158" />
+      </scope>
+      <unit id="6946180687088536158" at="9,0,16,0" name="ActorLanguage.textGen.EmptyLine_TextGen" />
+    </file>
+    <file name="TextGenAspectDescriptor.java">
+      <node id="6946180687088536158" at="42,43,43,39" concept="7" />
+      <scope id="6946180687088536158" at="42,43,43,39" />
     </file>
   </root>
   <root nodeRef="r:5c12de31-eabc-4138-b711-95b52bc1fc4c(ActorLanguage.textGen)/711157185105398139">
@@ -3016,8 +3034,8 @@
       <unit id="8453059353969591779" at="17,0,45,0" name="ActorLanguage.textGen.SendMessageToActors_TextGen" />
     </file>
     <file name="TextGenAspectDescriptor.java">
-      <node id="8453059353969591779" at="50,53,51,49" concept="7" />
-      <scope id="8453059353969591779" at="50,53,51,49" />
+      <node id="8453059353969591779" at="52,53,53,49" concept="7" />
+      <scope id="8453059353969591779" at="52,53,53,49" />
     </file>
   </root>
 </debug-info>
