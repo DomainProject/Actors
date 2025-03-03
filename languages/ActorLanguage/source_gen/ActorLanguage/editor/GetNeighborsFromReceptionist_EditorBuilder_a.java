@@ -22,13 +22,14 @@ import jetbrains.mps.openapi.editor.style.Style;
 import jetbrains.mps.editor.runtime.style.StyleImpl;
 import jetbrains.mps.editor.runtime.style.StyleAttributes;
 import jetbrains.mps.nodeEditor.MPSColors;
+import ActorLanguage.editor.ALStyle_StyleSheet.BraceStyleClass;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
-/*package*/ class GetActorsFromReceptionist_EditorBuilder_a extends AbstractEditorBuilder {
+/*package*/ class GetNeighborsFromReceptionist_EditorBuilder_a extends AbstractEditorBuilder {
   @NotNull
   private SNode myNode;
 
-  public GetActorsFromReceptionist_EditorBuilder_a(@NotNull EditorContext context, @NotNull SNode node) {
+  public GetNeighborsFromReceptionist_EditorBuilder_a(@NotNull EditorContext context, @NotNull SNode node) {
     super(context);
     myNode = node;
   }
@@ -45,7 +46,7 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
   private EditorCell createCollection_0() {
     EditorCell_Collection editorCell = new EditorCell_Collection(getEditorContext(), myNode, new CellLayout_Indent());
-    editorCell.setCellId("Collection_gm6qll_a");
+    editorCell.setCellId("Collection_mdo1i6_a");
     editorCell.setBig(true);
     setCellContext(editorCell);
     editorCell.addEditorCell(createRefNode_0());
@@ -54,17 +55,18 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
     editorCell.addEditorCell(createConstant_2());
     editorCell.addEditorCell(createRefNode_1());
     editorCell.addEditorCell(createConstant_3());
+    editorCell.addEditorCell(createConstant_4());
     return editorCell;
   }
   private EditorCell createRefNode_0() {
-    SingleRoleCellProvider provider = new actorReferencesSingleRoleHandler_gm6qll_a0(myNode, LINKS.actorReferences$8P4C, getEditorContext());
+    SingleRoleCellProvider provider = new actorReferencesSingleRoleHandler_mdo1i6_a0(myNode, LINKS.actorReferences$8P4C, getEditorContext());
     return provider.createCell();
   }
-  private static class actorReferencesSingleRoleHandler_gm6qll_a0 extends SingleRoleCellProvider {
+  private static class actorReferencesSingleRoleHandler_mdo1i6_a0 extends SingleRoleCellProvider {
     @NotNull
     private SNode myNode;
 
-    public actorReferencesSingleRoleHandler_gm6qll_a0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+    public actorReferencesSingleRoleHandler_mdo1i6_a0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
       super(containmentLink, context);
       myNode = ownerNode;
     }
@@ -113,13 +115,13 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
   }
   private EditorCell createConstant_0() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "=");
-    editorCell.setCellId("Constant_gm6qll_b0");
+    editorCell.setCellId("Constant_mdo1i6_b0");
     editorCell.setDefaultText("");
     return editorCell;
   }
   private EditorCell createConstant_1() {
-    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "get_actors");
-    editorCell.setCellId("Constant_gm6qll_c0");
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "GetNeighbors");
+    editorCell.setCellId("Constant_mdo1i6_c0");
     Style style = new StyleImpl();
     style.set(StyleAttributes.TEXT_COLOR, getStyleRegistry().getSimpleColor(MPSColors.blue));
     editorCell.getStyle().putAll(style);
@@ -128,19 +130,22 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
   }
   private EditorCell createConstant_2() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "(");
-    editorCell.setCellId("Constant_gm6qll_d0");
+    editorCell.setCellId("Constant_mdo1i6_d0");
+    Style style = new StyleImpl();
+    new BraceStyleClass(this).apply(style, editorCell);
+    editorCell.getStyle().putAll(style);
     editorCell.setDefaultText("");
     return editorCell;
   }
   private EditorCell createRefNode_1() {
-    SingleRoleCellProvider provider = new policySingleRoleHandler_gm6qll_e0(myNode, LINKS.policy$VmXt, getEditorContext());
+    SingleRoleCellProvider provider = new policySingleRoleHandler_mdo1i6_e0(myNode, LINKS.policy$VmXt, getEditorContext());
     return provider.createCell();
   }
-  private static class policySingleRoleHandler_gm6qll_e0 extends SingleRoleCellProvider {
+  private static class policySingleRoleHandler_mdo1i6_e0 extends SingleRoleCellProvider {
     @NotNull
     private SNode myNode;
 
-    public policySingleRoleHandler_gm6qll_e0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
+    public policySingleRoleHandler_mdo1i6_e0(SNode ownerNode, SContainmentLink containmentLink, EditorContext context) {
       super(containmentLink, context);
       myNode = ownerNode;
     }
@@ -188,8 +193,20 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
     }
   }
   private EditorCell createConstant_3() {
-    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, ");");
-    editorCell.setCellId("Constant_gm6qll_f0");
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, ")");
+    editorCell.setCellId("Constant_mdo1i6_f0");
+    Style style = new StyleImpl();
+    new BraceStyleClass(this).apply(style, editorCell);
+    editorCell.getStyle().putAll(style);
+    editorCell.setDefaultText("");
+    return editorCell;
+  }
+  private EditorCell createConstant_4() {
+    EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, ";");
+    editorCell.setCellId("Constant_mdo1i6_g0");
+    Style style = new StyleImpl();
+    style.set(StyleAttributes.PUNCTUATION_LEFT, true);
+    editorCell.getStyle().putAll(style);
     editorCell.setDefaultText("");
     return editorCell;
   }

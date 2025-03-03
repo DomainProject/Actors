@@ -31,7 +31,7 @@ public class ChangeFetchPolicy_Constraints extends BaseConstraintsDescriptor {
     }
     private static void staticSetPropertyValue(SNode node, SEnumerationLiteral propertyValue) {
       SPropertyOperations.assignEnum(node, PROPS.newPolicy$iNZa, propertyValue);
-      SPropertyOperations.assignEnum(SNodeOperations.getNodeAncestor(node, CONCEPTS.CreateActor$Uv, false, false), PROPS.fetchPolicy$taMB, propertyValue);
+      SPropertyOperations.assignEnum(SNodeOperations.getNodeAncestor(node, CONCEPTS.CreateActor$Uv, false, false), PROPS.fetchPolicy$2LTf, propertyValue);
     }
   }
   @Override
@@ -48,6 +48,6 @@ public class ChangeFetchPolicy_Constraints extends BaseConstraintsDescriptor {
 
   private static final class PROPS {
     /*package*/ static final SProperty newPolicy$iNZa = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5ef413f8f61f9c04L, 0x5ef413f8f61f9c05L, "newPolicy");
-    /*package*/ static final SProperty fetchPolicy$taMB = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x42ce0f2f39c1b9ccL, "fetchPolicy");
+    /*package*/ static final SProperty fetchPolicy$2LTf = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x47ae2b741b264b6fL, "fetchPolicy");
   }
 }

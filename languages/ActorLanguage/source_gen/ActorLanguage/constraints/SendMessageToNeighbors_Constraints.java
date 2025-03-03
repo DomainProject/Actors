@@ -28,9 +28,9 @@ import jetbrains.mps.scope.ListScope;
 import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
-public class SendMessageToActors_Constraints extends BaseConstraintsDescriptor {
-  public SendMessageToActors_Constraints() {
-    super(CONCEPTS.SendMessageToActors$yl);
+public class SendMessageToNeighbors_Constraints extends BaseConstraintsDescriptor {
+  public SendMessageToNeighbors_Constraints() {
+    super(CONCEPTS.SendMessageToNeighbors$yl);
   }
 
   public static class Priority_Property extends BasePropertyConstraintsDescriptor {
@@ -71,7 +71,7 @@ public class SendMessageToActors_Constraints extends BaseConstraintsDescriptor {
           }
           @Override
           public Scope createScope(final ReferenceConstraintsContext _context) {
-            final Iterable<SNode> list = SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.CreateBehavior$iN, false, false), CONCEPTS.ActorReferenceList$4g, false, new SAbstractConcept[]{});
+            final Iterable<SNode> list = SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.Function$K8, false, false), CONCEPTS.ActorReferenceList$4g, false, new SAbstractConcept[]{});
             return ListScope.forNamedElements(list);
           }
         };
@@ -83,8 +83,8 @@ public class SendMessageToActors_Constraints extends BaseConstraintsDescriptor {
   }
 
   private static final class CONCEPTS {
-    /*package*/ static final SConcept SendMessageToActors$yl = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, "ActorLanguage.structure.SendMessageToActors");
-    /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
+    /*package*/ static final SConcept SendMessageToNeighbors$yl = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, "ActorLanguage.structure.SendMessageToNeighbors");
+    /*package*/ static final SConcept Function$K8 = MetaAdapterFactory.getConcept(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97e1L, "com.mbeddr.core.modules.structure.Function");
     /*package*/ static final SConcept ActorReferenceList$4g = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5ba7cb3L, "ActorLanguage.structure.ActorReferenceList");
   }
 

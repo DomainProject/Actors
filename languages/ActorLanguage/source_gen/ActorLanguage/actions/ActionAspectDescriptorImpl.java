@@ -18,8 +18,12 @@ public class ActionAspectDescriptorImpl extends BaseActionAspectDescriptor imple
       switch (concept.getName()) {
         case "CreateActor":
           return Collections.<NodeFactory>singletonList(new ActorFactory.NodeFactory_7694881003795581833());
+        case "CreateBehavior":
+          return Collections.<NodeFactory>singletonList(new CreateBehaviorFactory.NodeFactory_5165113600332958188());
         case "Receptionist":
           return Collections.<NodeFactory>singletonList(new ReceptionistFactory.NodeFactory_6739934483259132151());
+        case "SendMessageToNeighbors":
+          return Collections.<NodeFactory>singletonList(new SendMessageToNeighborsFactory.NodeFactory_8622806035647258844());
         case "SwitchPolicy":
           return Collections.<NodeFactory>singletonList(new SwitchPolicyFactory.NodeFactory_1411682935496708278());
         default:

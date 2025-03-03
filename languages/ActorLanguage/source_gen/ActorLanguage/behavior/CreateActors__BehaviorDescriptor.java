@@ -39,7 +39,7 @@ public final class CreateActors__BehaviorDescriptor extends BaseBHDescriptor {
   /*package*/ static void createActors_idI$NcBTsrE(@NotNull SNode __thisNode__) {
 
     // safety check
-    if (SPropertyOperations.getInteger(__thisNode__, PROPS.number$$XD7) == 0 || SPropertyOperations.getString(__thisNode__, PROPS.baseName$$Y79) == null || (SLinkOperations.getTarget(__thisNode__, LINKS.behavior$ew$H) == null)) {
+    if (SPropertyOperations.getInteger(__thisNode__, PROPS.number$$XD7) == 0 || SPropertyOperations.getString(__thisNode__, PROPS.baseName$$Y79) == null || (SLinkOperations.getTarget(__thisNode__, LINKS.behavior$2M8g) == null)) {
       return;
     }
 
@@ -51,9 +51,9 @@ public final class CreateActors__BehaviorDescriptor extends BaseBHDescriptor {
     for (int i = 0; i < SPropertyOperations.getInteger(__thisNode__, PROPS.number$$XD7); i++) {
       SNode newActor = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor"));
       SPropertyOperations.assign(newActor, PROPS.name$MnvL, SPropertyOperations.getString(__thisNode__, PROPS.baseName$$Y79) + String.valueOf(i));
-      SLinkOperations.setTarget(newActor, LINKS.behavior$QgnL, SLinkOperations.getTarget(__thisNode__, LINKS.behavior$ew$H));
+      SLinkOperations.setTarget(newActor, LINKS.behavior$2M8g, SLinkOperations.getTarget(__thisNode__, LINKS.behavior$2M8g));
       SLinkOperations.setTarget(newActor, LINKS.messageQueue$L0ws, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6ac9b580f420bed7L, "ActorLanguage.structure.MessageQueue")));
-      SPropertyOperations.assignEnum(newActor, PROPS.fetchPolicy$taMB, SPropertyOperations.getEnum(__thisNode__, PROPS.fetchPolicy$VsGQ));
+      SPropertyOperations.assignEnum(newActor, PROPS.fetchPolicy$2LTf, SPropertyOperations.getEnum(__thisNode__, PROPS.fetchPolicy$2LTf));
       SPropertyOperations.assign(newActor, PROPS.address$DqJ_, (int) ActorScript__BehaviorDescriptor.getFreeAddress_id3JP6tIS4aZI.invoke(SNodeOperations.getNodeAncestor(__thisNode__, CONCEPTS.ActorScript$nz, false, false)));
       ListSequence.fromList(SLinkOperations.getChildren(__thisNode__, LINKS.actors$HQEA)).addElement(newActor);
     }
@@ -107,9 +107,8 @@ public final class CreateActors__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   private static final class LINKS {
-    /*package*/ static final SReferenceLink behavior$ew$H = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x13974e268151884fL, "behavior");
+    /*package*/ static final SReferenceLink behavior$2M8g = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x47ae2b741b264b70L, "behavior");
     /*package*/ static final SContainmentLink actors$HQEA = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x2e933327a36608L, "actors");
-    /*package*/ static final SReferenceLink behavior$QgnL = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681516c72L, "behavior");
     /*package*/ static final SContainmentLink messageQueue$L0ws = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x5d890eb3ec03cef9L, "messageQueue");
   }
 
@@ -117,8 +116,7 @@ public final class CreateActors__BehaviorDescriptor extends BaseBHDescriptor {
     /*package*/ static final SProperty number$$XD7 = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x5d890eb3ec029443L, "number");
     /*package*/ static final SProperty baseName$$Y79 = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x5d890eb3ec029445L, "baseName");
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
-    /*package*/ static final SProperty fetchPolicy$taMB = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x42ce0f2f39c1b9ccL, "fetchPolicy");
-    /*package*/ static final SProperty fetchPolicy$VsGQ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x42ce0f2f39c1ba5dL, "fetchPolicy");
+    /*package*/ static final SProperty fetchPolicy$2LTf = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x47ae2b741b264b6fL, "fetchPolicy");
     /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
   }
 

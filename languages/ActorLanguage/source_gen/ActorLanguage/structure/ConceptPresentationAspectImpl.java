@@ -32,11 +32,14 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_Envelope;
   private ConceptPresentation props_ExternalFunction;
   private ConceptPresentation props_ExternalFunctionPrototype;
+  private ConceptPresentation props_ExternalType;
   private ConceptPresentation props_ForEachActorReferenceStatement;
-  private ConceptPresentation props_GetActorsFromReceptionist;
+  private ConceptPresentation props_GetNeighborsFromReceptionist;
+  private ConceptPresentation props_IActor;
   private ConceptPresentation props_IBehavior;
   private ConceptPresentation props_ICreateActor;
   private ConceptPresentation props_IExternalFunction;
+  private ConceptPresentation props_IType;
   private ConceptPresentation props_Initializer;
   private ConceptPresentation props_InitializerAction;
   private ConceptPresentation props_Link;
@@ -50,7 +53,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_SelectEnvelope;
   private ConceptPresentation props_SelectPayload;
   private ConceptPresentation props_SendMessage;
-  private ConceptPresentation props_SendMessageToActors;
+  private ConceptPresentation props_SendMessageToNeighbors;
   private ConceptPresentation props_StatementConstraint;
   private ConceptPresentation props_StringBody;
   private ConceptPresentation props_SwitchPolicy;
@@ -217,7 +220,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
       case LanguageConceptSwitch.ExternalFunction:
         if (props_ExternalFunction == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.rawPresentation("ExternalFunction");
+          cpb.presentationByName();
           props_ExternalFunction = cpb.create();
         }
         return props_ExternalFunction;
@@ -228,6 +231,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ExternalFunctionPrototype = cpb.create();
         }
         return props_ExternalFunctionPrototype;
+      case LanguageConceptSwitch.ExternalType:
+        if (props_ExternalType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_ExternalType = cpb.create();
+        }
+        return props_ExternalType;
       case LanguageConceptSwitch.ForEachActorReferenceStatement:
         if (props_ForEachActorReferenceStatement == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -236,14 +246,20 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ForEachActorReferenceStatement = cpb.create();
         }
         return props_ForEachActorReferenceStatement;
-      case LanguageConceptSwitch.GetActorsFromReceptionist:
-        if (props_GetActorsFromReceptionist == null) {
+      case LanguageConceptSwitch.GetNeighborsFromReceptionist:
+        if (props_GetNeighborsFromReceptionist == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
           cpb.shortDesc("get list of references to linked actors from the receptionist");
-          cpb.rawPresentation("get_actors");
-          props_GetActorsFromReceptionist = cpb.create();
+          cpb.rawPresentation("GetNeighbors");
+          props_GetNeighborsFromReceptionist = cpb.create();
         }
-        return props_GetActorsFromReceptionist;
+        return props_GetNeighborsFromReceptionist;
+      case LanguageConceptSwitch.IActor:
+        if (props_IActor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IActor = cpb.create();
+        }
+        return props_IActor;
       case LanguageConceptSwitch.IBehavior:
         if (props_IBehavior == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -262,6 +278,12 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_IExternalFunction = cpb.create();
         }
         return props_IExternalFunction;
+      case LanguageConceptSwitch.IType:
+        if (props_IType == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IType = cpb.create();
+        }
+        return props_IType;
       case LanguageConceptSwitch.Initializer:
         if (props_Initializer == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -351,13 +373,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_SendMessage = cpb.create();
         }
         return props_SendMessage;
-      case LanguageConceptSwitch.SendMessageToActors:
-        if (props_SendMessageToActors == null) {
+      case LanguageConceptSwitch.SendMessageToNeighbors:
+        if (props_SendMessageToNeighbors == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.rawPresentation("send message to group of actors");
-          props_SendMessageToActors = cpb.create();
+          cpb.rawPresentation("SendMessageToNeighbors");
+          props_SendMessageToNeighbors = cpb.create();
         }
-        return props_SendMessageToActors;
+        return props_SendMessageToNeighbors;
       case LanguageConceptSwitch.StatementConstraint:
         if (props_StatementConstraint == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

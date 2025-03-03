@@ -43,14 +43,14 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new EmptyLine_TextGen();
       case LanguageConceptSwitch.ForEachActorReferenceStatement:
         return new ForEachActorReferenceStatement_TextGen();
-      case LanguageConceptSwitch.GetActorsFromReceptionist:
-        return new GetActorsFromReceptionist_TextGen();
+      case LanguageConceptSwitch.GetNeighborsFromReceptionist:
+        return new GetNeighborsFromReceptionist_TextGen();
       case LanguageConceptSwitch.Receptionist:
         return new Receptionist_TextGen();
       case LanguageConceptSwitch.SendMessage:
         return new SendMessage_TextGen();
-      case LanguageConceptSwitch.SendMessageToActors:
-        return new SendMessageToActors_TextGen();
+      case LanguageConceptSwitch.SendMessageToNeighbors:
+        return new SendMessageToNeighbors_TextGen();
       case LanguageConceptSwitch.StringBody:
         return new StringBody_TextGen();
     }

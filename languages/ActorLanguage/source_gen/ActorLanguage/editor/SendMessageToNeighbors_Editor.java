@@ -7,8 +7,8 @@ import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
 
-public class SendMessageToActors_Editor extends DefaultNodeEditor {
+public class SendMessageToNeighbors_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return new SendMessageToActors_EditorBuilder_a(editorContext, node).createCell();
+    return new SendMessageToNeighbors_EditorBuilder_a(editorContext, node).createCell();
   }
 }

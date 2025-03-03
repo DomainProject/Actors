@@ -14,18 +14,18 @@
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1076505808687:jetbrains.mps.baseLanguage.structure.WhileStatement" />
   <root>
     <file name="QueriesGenerated.java">
-      <unit at="2929,0,2939,0" name="QueryLanguage.generator.templates.QueriesGenerated$PROPS" />
+      <unit at="2928,0,2938,0" name="QueryLanguage.generator.templates.QueriesGenerated$PROPS" />
       <unit at="2867,0,2883,0" name="QueryLanguage.generator.templates.QueriesGenerated$LIQ" />
-      <unit at="2912,0,2928,0" name="QueryLanguage.generator.templates.QueriesGenerated$CONCEPTS" />
+      <unit at="2911,0,2927,0" name="QueryLanguage.generator.templates.QueriesGenerated$CONCEPTS" />
       <unit at="2840,0,2857,0" name="QueryLanguage.generator.templates.QueriesGenerated$VVQ" />
       <unit at="2006,0,2025,0" name="QueryLanguage.generator.templates.QueriesGenerated$SCB" />
-      <unit at="2887,0,2911,0" name="QueryLanguage.generator.templates.QueriesGenerated$LINKS" />
+      <unit at="2887,0,2910,0" name="QueryLanguage.generator.templates.QueriesGenerated$LINKS" />
       <unit at="2068,0,2147,0" name="QueryLanguage.generator.templates.QueriesGenerated$SNsQ" />
       <unit at="1905,0,1994,0" name="QueryLanguage.generator.templates.QueriesGenerated$RRC" />
       <unit at="2379,0,2488,0" name="QueryLanguage.generator.templates.QueriesGenerated$IfMC" />
       <unit at="2207,0,2321,0" name="QueryLanguage.generator.templates.QueriesGenerated$PVQ" />
       <unit at="2603,0,2829,0" name="QueryLanguage.generator.templates.QueriesGenerated$RTQ" />
-      <unit at="60,0,2940,0" name="QueryLanguage.generator.templates.QueriesGenerated" />
+      <unit at="60,0,2939,0" name="QueryLanguage.generator.templates.QueriesGenerated" />
     </file>
   </root>
   <root nodeRef="r:41c288b8-021d-4fc5-bda9-31f98ec63a55(QueryLanguage.generator.templates@generator)/1404468460816750182">
@@ -691,7 +691,7 @@
       <node id="2942082050240079464" at="2427,16,2428,61" concept="6" />
       <node id="2942082050240118698" at="2429,16,2430,61" concept="6" />
       <node id="2942082050240047343" at="2431,16,2432,61" concept="6" />
-      <node id="2942082050240056169" at="2502,61,2503,59" concept="2" />
+      <node id="2942082050240056169" at="2502,64,2503,59" concept="2" />
       <node id="2942082050240059554" at="2503,59,2504,59" concept="2" />
       <node id="2942082050240056169" at="2638,16,2639,70" concept="6" />
       <node id="2942082050240059554" at="2640,16,2641,70" concept="6" />
@@ -1137,7 +1137,7 @@
   <root nodeRef="r:41c288b8-021d-4fc5-bda9-31f98ec63a55(QueryLanguage.generator.templates@generator)/2233974986207239173">
     <file name="QueriesGenerated.java">
       <node id="2233974986207268264" at="1812,86,1813,18" concept="5" />
-      <node id="2233974986207282446" at="1815,135,1816,65" concept="2" />
+      <node id="2233974986207282446" at="1815,114,1816,65" concept="2" />
       <node id="2233974986207311212" at="1817,14,1818,71" concept="2" />
       <node id="2233974986207239173" at="1997,57,1998,57" concept="2" />
       <node id="2233974986207239173" at="2017,15,2018,59" concept="2" />
@@ -1146,7 +1146,7 @@
       <node id="2233974986207240581" at="1814,117,1819,7" concept="4" />
       <node id="2233974986207239192" at="1813,18,1820,5" concept="3" />
       <node id="2233974986207239174" at="1812,0,1822,0" concept="9" trace="mappingScript_CodeBlock_16#(Ljetbrains/mps/generator/template/MappingScriptContext;)V" />
-      <scope id="2233974986207240583" at="1815,135,1816,65" />
+      <scope id="2233974986207240583" at="1815,114,1816,65" />
       <scope id="2233974986207310973" at="1817,14,1818,71" />
       <scope id="2233974986207239173" at="2017,15,2019,17" />
       <scope id="2233974986207239195" at="1814,117,1819,7" />
@@ -3955,7 +3955,7 @@
       <node id="2171626095253807971" at="2415,16,2416,61" concept="6" />
       <node id="2171626095253830057" at="2417,16,2418,61" concept="6" />
       <node id="2171626095253857260" at="2419,16,2420,61" concept="6" />
-      <node id="2171626095253857286" at="2501,69,2502,61" concept="2" />
+      <node id="2171626095253857286" at="2501,69,2502,64" concept="2" />
       <node id="2171626095253857286" at="2636,16,2637,70" concept="6" />
       <node id="7824142728411256452" at="183,0,186,0" concept="9" trace="propertyMacro_GetValue_3_0#(Ljetbrains/mps/generator/template/PropertyMacroContext;)Ljava/lang/Object;" />
       <node id="622446679681395786" at="186,0,189,0" concept="9" trace="propertyMacro_GetValue_3_1#(Ljetbrains/mps/generator/template/PropertyMacroContext;)Ljava/lang/Object;" />

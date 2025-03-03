@@ -1812,7 +1812,7 @@ public class QueriesGenerated extends QueryProviderBase {
   public static void mappingScript_CodeBlock_16(final MappingScriptContext _context) {
     int count = 1;
     for (SNode actor : ListSequence.fromList(SModelOperations.nodes(_context.getModel(), CONCEPTS.CreateActor$Uv))) {
-      if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$QgnL), PROPS.name$MnvL).equals("DataSource")) {
+      if (SPropertyOperations.getString(SLinkOperations.getTarget(actor), PROPS.name$MnvL).equals("DataSource")) {
         SPropertyOperations.assign(actor, PROPS.address$DqJ_, 0);
       } else {
         SPropertyOperations.assign(actor, PROPS.address$DqJ_, count++);
@@ -2499,7 +2499,7 @@ public class QueriesGenerated extends QueryProviderBase {
     rtqMethods.put("7724742800288519810", new RTQ(9, "aggFunction"));
     rtqMethods.put("7724742800288521999", new RTQ(10, "aggFunction"));
     rtqMethods.put("7724742800300090481", new RTQ(11, "dataSource"));
-    rtqMethods.put("2171626095253857286", new RTQ(12, null));
+    rtqMethods.put("2171626095253857286", new RTQ(12, "aggOp"));
     rtqMethods.put("2942082050240056169", new RTQ(13, ""));
     rtqMethods.put("2942082050240059554", new RTQ(14, ""));
     rtqMethods.put("2942082050237369037", new RTQ(15, ""));
@@ -2906,7 +2906,6 @@ public class QueriesGenerated extends QueryProviderBase {
     /*package*/ static final SContainmentLink operations$az69 = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443bcdL, 0x2b087ec3aa655166L, "operations");
     /*package*/ static final SContainmentLink viewTable$4dXf = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x619ceb902420e379L, 0xb59df187aa1e081L, "viewTable");
     /*package*/ static final SContainmentLink value$Ad30 = MetaAdapterFactory.getContainmentLink(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x5eeb1b6c0699ea18L, 0x5eeb1b6c0699ea26L, "value");
-    /*package*/ static final SReferenceLink behavior$QgnL = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681516c72L, "behavior");
   }
 
   private static final class CONCEPTS {

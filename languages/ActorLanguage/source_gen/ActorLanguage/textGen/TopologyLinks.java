@@ -57,7 +57,7 @@ public abstract class TopologyLinks {
     tgs.append(", 1);");
     tgs.newLine();
 
-    if (SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorTo$3d9g), LINKS.actor$8xF), LINKS.behavior$QgnL), PROPS.name$MnvL).equals("window")) {
+    if (SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorTo$3d9g), LINKS.actor$8xF), LINKS.behavior$2M8g), PROPS.name$MnvL).equals("window")) {
       String sizeName = "window" + SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_) + "to" + SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_);
       tgs.indent();
       tgs.append("static int ");
@@ -102,7 +102,7 @@ public abstract class TopologyLinks {
     /*package*/ static final SReferenceLink actor$8xF = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57937L, 0x262cd812cfe57939L, "actor");
     /*package*/ static final SReferenceLink actorTo$3d9g = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57976L, "actorTo");
     /*package*/ static final SContainmentLink data$Kmlt = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x779e899a2deb7c19L, "data");
-    /*package*/ static final SReferenceLink behavior$QgnL = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681516c72L, "behavior");
+    /*package*/ static final SReferenceLink behavior$2M8g = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x47ae2b741b264b70L, "behavior");
   }
 
   private static final class PROPS {

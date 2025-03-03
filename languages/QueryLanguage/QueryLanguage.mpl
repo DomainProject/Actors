@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language namespace="QueryLanguage" uuid="26d1395b-1ee6-43ad-b522-c0cdd699ded3" languageVersion="0" moduleVersion="0">
   <models>
-    <modelRoot type="default" contentPath="${module}">
+    <modelRoot contentPath="${module}" type="default">
       <sourceRoot location="models" />
     </modelRoot>
   </models>
@@ -14,7 +14,7 @@
   <generators>
     <generator alias="main" namespace="QueryLanguage.generator" uuid="e55034fb-fcc8-4ced-8b08-e6470ead33ca">
       <models>
-        <modelRoot type="default" contentPath="${module}/generator">
+        <modelRoot contentPath="${module}/generator" type="default">
           <sourceRoot location="templates" />
         </modelRoot>
       </models>
@@ -26,6 +26,7 @@
       <external-templates />
       <dependencies>
         <dependency reexport="false">10eda999-5898-4cde-9416-196c5eca1268(ActorLanguage)</dependency>
+        <dependency reexport="false">d2a9c55c-6bdc-4cc2-97e1-4ba7552f5584(com.mbeddr.core)</dependency>
       </dependencies>
       <languageVersions>
         <language slang="l:10eda999-5898-4cde-9416-196c5eca1268:ActorLanguage" version="0" />
@@ -72,6 +73,7 @@
         <module reference="742f6602-5a2f-4313-aa6e-ae1cd4ffdc61(MPS.Platform)" version="0" />
         <module reference="26d1395b-1ee6-43ad-b522-c0cdd699ded3(QueryLanguage)" version="0" />
         <module reference="e55034fb-fcc8-4ced-8b08-e6470ead33ca(QueryLanguage.generator)" version="0" />
+        <module reference="d2a9c55c-6bdc-4cc2-97e1-4ba7552f5584(com.mbeddr.core)" version="0" />
         <module reference="d4280a54-f6df-4383-aa41-d1b2bffa7eb1(com.mbeddr.core.base)" version="3" />
         <module reference="61c69711-ed61-4850-81d9-7714ff227fb0(com.mbeddr.core.expressions)" version="0" />
         <module reference="984f0332-8a86-4f5c-9184-03eae96b5d16(com.mbeddr.core.expressions.runtime)" version="0" />
@@ -118,6 +120,7 @@
     <dependency reexport="false">34e84b8f-afa8-4364-abcd-a279fddddbe7(jetbrains.mps.editor.runtime)</dependency>
     <dependency reexport="false" scope="generate-into">b401a680-8325-4110-8fd3-84331ff25bef(jetbrains.mps.lang.generator)</dependency>
     <dependency reexport="false">cddf55b3-117e-46ec-837c-ff50eb7b89b0(jetbrains.mps.lang.feedback.problem.childAndProp)</dependency>
+    <dependency reexport="false">a9d69647-0840-491e-bf39-2eb0805d2011(com.mbeddr.core.statements)</dependency>
   </dependencies>
   <languageVersions>
     <language slang="l:10eda999-5898-4cde-9416-196c5eca1268:ActorLanguage" version="0" />
