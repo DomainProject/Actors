@@ -32,12 +32,11 @@ public class ExternalType_Constraints extends BaseConstraintsDescriptor {
     }
     private static void staticSetPropertyValue(SNode node, String propertyValue) {
       SPropertyOperations.assign(node, PROPS.name$MnvL, propertyValue);
-      if ((SLinkOperations.getTarget(node, LINKS.declaration$COQI) == null)) {
-        SNode decl = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x58bef62304fc0a2fL, "com.mbeddr.core.udt.structure.StructDeclaration"));
-        SPropertyOperations.assign(decl, PROPS.name$MnvL, propertyValue);
-        SLinkOperations.setTarget(node, LINKS.declaration$COQI, decl);
+      if ((SLinkOperations.getTarget(node, LINKS.structDeclaration$Nldq) == null)) {
+        SNode structDeclaration = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x58bef62304fc0a2fL, "com.mbeddr.core.udt.structure.StructDeclaration"));
+        SPropertyOperations.assign(structDeclaration, PROPS.name$MnvL, propertyValue);
       } else {
-        SPropertyOperations.assign(SLinkOperations.getTarget(node, LINKS.declaration$COQI), PROPS.name$MnvL, propertyValue);
+        SPropertyOperations.assign(SLinkOperations.getTarget(node, LINKS.structDeclaration$Nldq), PROPS.name$MnvL, propertyValue);
       }
     }
   }
@@ -57,6 +56,6 @@ public class ExternalType_Constraints extends BaseConstraintsDescriptor {
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink declaration$COQI = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L, 0x2e879cff63463a14L, "declaration");
+    /*package*/ static final SContainmentLink structDeclaration$Nldq = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L, 0xbc4afff42e69b25L, "structDeclaration");
   }
 }

@@ -41,10 +41,12 @@ public final class ActorScript__BehaviorDescriptor extends BaseBHDescriptor {
   /*package*/ static Iterable<SNode> allReferenceableContentsInChunk_id6clJcrKmVSn(@NotNull SNode __thisNode__) {
     List<SNode> base = Module__BehaviorDescriptor.flattenedContents_id5DwX9xlFNJe.invokeSpecial(__thisNode__);
     List<SNode> added = new ArrayList<SNode>();
-    ListSequence.fromList(added).addSequence(Sequence.fromIterable(SLinkOperations.collect(SNodeOperations.ofConcept(SLinkOperations.getChildren(__thisNode__, LINKS.types$lVcp), CONCEPTS.ExternalType$Bi), LINKS.declaration$COQI)));
+    ListSequence.fromList(added).addSequence(Sequence.fromIterable(SLinkOperations.collect(SNodeOperations.ofConcept(SLinkOperations.getChildren(__thisNode__, LINKS.types$lVcp), CONCEPTS.ExternalType$Bi), LINKS.structDeclaration$Nldq)));
     ListSequence.fromList(added).addSequence(Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(__thisNode__, LINKS.types$lVcp), CONCEPTS.CustomType$VF)));
+    ListSequence.fromList(added).addSequence(Sequence.fromIterable(SLinkOperations.collect(SNodeOperations.ofConcept(SLinkOperations.getChildren(__thisNode__, LINKS.types$lVcp), CONCEPTS.ExternalTypeDefinition$1k), LINKS.structDeclaration$OHmu)));
     ListSequence.fromList(added).addSequence(Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(__thisNode__, LINKS.externalFunctions$bWTb), CONCEPTS.ExternalFunction$kh)));
     ListSequence.fromList(added).addSequence(Sequence.fromIterable(SLinkOperations.collect(SNodeOperations.ofConcept(SLinkOperations.getChildren(__thisNode__, LINKS.externalFunctions$bWTb), CONCEPTS.ExternalFunctionPrototype$n3), LINKS.prototype$75Zb)));
+    ListSequence.fromList(added).addSequence(Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(__thisNode__, LINKS.configuration$6ery), CONCEPTS.GlobalVarDecl$3_)));
     ListSequence.fromList(base).addSequence(ListSequence.fromList(added));
     return base;
   }
@@ -114,16 +116,20 @@ public final class ActorScript__BehaviorDescriptor extends BaseBHDescriptor {
 
   private static final class LINKS {
     /*package*/ static final SContainmentLink types$lVcp = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x754f4cb23a308c63L, "types");
-    /*package*/ static final SContainmentLink declaration$COQI = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L, 0x2e879cff63463a14L, "declaration");
+    /*package*/ static final SContainmentLink structDeclaration$Nldq = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L, 0xbc4afff42e69b25L, "structDeclaration");
+    /*package*/ static final SContainmentLink structDeclaration$OHmu = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbc4afff4163c9e3L, 0xbc4afff4163cdccL, "structDeclaration");
     /*package*/ static final SContainmentLink externalFunctions$bWTb = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x61da6c5c302ab136L, "externalFunctions");
     /*package*/ static final SContainmentLink prototype$75Zb = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a5fe9L, 0x6065ca884e7a5febL, "prototype");
+    /*package*/ static final SContainmentLink configuration$6ery = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0xbc4afff405f7c51L, "configuration");
   }
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept ExternalType$Bi = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L, "ActorLanguage.structure.ExternalType");
     /*package*/ static final SConcept CustomType$VF = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x754f4cb23a214a8fL, "ActorLanguage.structure.CustomType");
+    /*package*/ static final SConcept ExternalTypeDefinition$1k = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbc4afff4163c9e3L, "ActorLanguage.structure.ExternalTypeDefinition");
     /*package*/ static final SConcept ExternalFunction$kh = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302aacc3L, "ActorLanguage.structure.ExternalFunction");
     /*package*/ static final SConcept ExternalFunctionPrototype$n3 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a5fe9L, "ActorLanguage.structure.ExternalFunctionPrototype");
+    /*package*/ static final SConcept GlobalVarDecl$3_ = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbc4afff405f7c4bL, "ActorLanguage.structure.GlobalVarDecl");
     /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
   }
 

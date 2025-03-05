@@ -53,9 +53,6 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
 
     for (SNode type : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.types$lVcp), CONCEPTS.ExternalType$Bi))) {
-      if (!(ListSequence.fromList(headers).contains(SPropertyOperations.getString(type, PROPS.header$COBH)))) {
-        ListSequence.fromList(headers).addElement(SPropertyOperations.getString(type, PROPS.header$COBH));
-      }
     }
     for (SNode function : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.externalFunctions$bWTb), CONCEPTS.ExternalFunctionPrototype$n3))) {
       if (!(ListSequence.fromList(headers).contains(SPropertyOperations.getString(function, PROPS.header$7lfc)))) {
@@ -513,7 +510,6 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
 
   private static final class PROPS {
     /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
-    /*package*/ static final SProperty header$COBH = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L, 0x2e879cff63463a13L, "header");
     /*package*/ static final SProperty header$7lfc = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a5fe9L, 0x6065ca884e7a6002L, "header");
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }

@@ -38,7 +38,9 @@ public class CreateBehavior_Constraints extends BaseConstraintsDescriptor {
     }
     private static void staticSetPropertyValue(SNode node, String propertyValue) {
       SPropertyOperations.assign(node, PROPS.name$MnvL, propertyValue);
-      SPropertyOperations.assign(SLinkOperations.getTarget(node, LINKS.function$MLkf), PROPS.name$MnvL, propertyValue);
+      SPropertyOperations.assign(SLinkOperations.getTarget(node, LINKS.function$MLkf), PROPS.name$MnvL, propertyValue + "Handler");
+      SPropertyOperations.assign(SLinkOperations.getTarget(node, LINKS.initHandler$1yDf), PROPS.name$MnvL, propertyValue + "Init");
+      SPropertyOperations.assign(SLinkOperations.getTarget(node, LINKS.cleanupHandler$1ySg), PROPS.name$MnvL, propertyValue + "Cleanup");
     }
     @Override
     public boolean validateValue(SNode node, Object propertyValue, CheckingNodeContext checkingNodeContext) {
@@ -119,6 +121,8 @@ public class CreateBehavior_Constraints extends BaseConstraintsDescriptor {
 
   private static final class LINKS {
     /*package*/ static final SContainmentLink function$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "function");
+    /*package*/ static final SContainmentLink initHandler$1yDf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31cL, "initHandler");
+    /*package*/ static final SContainmentLink cleanupHandler$1ySg = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31dL, "cleanupHandler");
     /*package*/ static final SContainmentLink payload$N_RC = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x9de89b125a71571L, "payload");
     /*package*/ static final SContainmentLink receivedMessage$DtsG = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5ef413f8f5ff2c54L, "receivedMessage");
     /*package*/ static final SContainmentLink messageArg$f47$ = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x47ae2b74198c8f13L, "messageArg");

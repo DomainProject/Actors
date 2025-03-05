@@ -27,18 +27,24 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_CreateEnvelope;
   private ConceptPresentation props_CreateMessage;
   private ConceptPresentation props_CreatePayload;
+  private ConceptPresentation props_CustomEvent;
+  private ConceptPresentation props_CustomEventHandler;
   private ConceptPresentation props_CustomType;
   private ConceptPresentation props_EmptyLine;
   private ConceptPresentation props_Envelope;
   private ConceptPresentation props_ExternalFunction;
   private ConceptPresentation props_ExternalFunctionPrototype;
   private ConceptPresentation props_ExternalType;
+  private ConceptPresentation props_ExternalTypeDefinition;
   private ConceptPresentation props_ForEachActorReferenceStatement;
   private ConceptPresentation props_GetNeighborsFromReceptionist;
+  private ConceptPresentation props_GetSourceActor;
+  private ConceptPresentation props_GlobalVarDecl;
   private ConceptPresentation props_IActor;
   private ConceptPresentation props_IBehavior;
   private ConceptPresentation props_ICreateActor;
   private ConceptPresentation props_IExternalFunction;
+  private ConceptPresentation props_IGlobalVarDecl;
   private ConceptPresentation props_IType;
   private ConceptPresentation props_Initializer;
   private ConceptPresentation props_InitializerAction;
@@ -197,6 +203,20 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_CreatePayload = cpb.create();
         }
         return props_CreatePayload;
+      case LanguageConceptSwitch.CustomEvent:
+        if (props_CustomEvent == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_CustomEvent = cpb.create();
+        }
+        return props_CustomEvent;
+      case LanguageConceptSwitch.CustomEventHandler:
+        if (props_CustomEventHandler == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1f52820f4a642252L, 0x1f52820f4a642253L, "event", "", "");
+          props_CustomEventHandler = cpb.create();
+        }
+        return props_CustomEventHandler;
       case LanguageConceptSwitch.CustomType:
         if (props_CustomType == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -238,6 +258,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ExternalType = cpb.create();
         }
         return props_ExternalType;
+      case LanguageConceptSwitch.ExternalTypeDefinition:
+        if (props_ExternalTypeDefinition == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("ExternalTypeDefinition");
+          props_ExternalTypeDefinition = cpb.create();
+        }
+        return props_ExternalTypeDefinition;
       case LanguageConceptSwitch.ForEachActorReferenceStatement:
         if (props_ForEachActorReferenceStatement == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -254,6 +281,21 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_GetNeighborsFromReceptionist = cpb.create();
         }
         return props_GetNeighborsFromReceptionist;
+      case LanguageConceptSwitch.GetSourceActor:
+        if (props_GetSourceActor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("get source actor in the topology");
+          cpb.rawPresentation("GetSourceActor");
+          props_GetSourceActor = cpb.create();
+        }
+        return props_GetSourceActor;
+      case LanguageConceptSwitch.GlobalVarDecl:
+        if (props_GlobalVarDecl == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_GlobalVarDecl = cpb.create();
+        }
+        return props_GlobalVarDecl;
       case LanguageConceptSwitch.IActor:
         if (props_IActor == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -278,6 +320,12 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_IExternalFunction = cpb.create();
         }
         return props_IExternalFunction;
+      case LanguageConceptSwitch.IGlobalVarDecl:
+        if (props_IGlobalVarDecl == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IGlobalVarDecl = cpb.create();
+        }
+        return props_IGlobalVarDecl;
       case LanguageConceptSwitch.IType:
         if (props_IType == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

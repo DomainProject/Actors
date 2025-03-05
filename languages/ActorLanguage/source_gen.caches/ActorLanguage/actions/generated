@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<product version="3" modelHash="camrm8s3qwgbmi5cdnjgzoni9j62nm6">
+<product version="3" modelHash="-6eq71tt4uclkjrrbsff2tgudw63cixu">
   <files names="ActionAspectDescriptorImpl.java:ActorFactory.java:CreateBehaviorFactory.java:ReceptionistFactory.java:SendMessageToNeighborsFactory.java:SwitchPolicyFactory.java" />
 </product>
 

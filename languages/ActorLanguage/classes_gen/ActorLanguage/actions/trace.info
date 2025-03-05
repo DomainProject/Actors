@@ -2,10 +2,12 @@
 <debug-info version="2">
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/6329021646629104954:jetbrains.mps.baseLanguage.structure.SingleLineComment" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
   <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root>
     <file name="ActionAspectDescriptorImpl.java">
@@ -14,10 +16,10 @@
   </root>
   <root nodeRef="r:4117b66e-6773-4ea8-8d65-4682755ba8ec(ActorLanguage.actions)/1411682935496708277">
     <file name="SwitchPolicyFactory.java">
-      <node id="1411682935497476013" at="15,102,16,54" concept="5" />
+      <node id="1411682935497476013" at="15,102,16,54" concept="6" />
       <node id="1411682935496708300" at="16,54,17,240" concept="1" />
-      <node id="1411682935496708277" at="22,0,23,0" concept="6" trace="expression$CjpY" />
-      <node id="1411682935496708278" at="15,0,19,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="1411682935496708277" at="22,0,23,0" concept="8" trace="expression$CjpY" />
+      <node id="1411682935496708278" at="15,0,19,0" concept="4" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
       <scope id="1411682935496708278" at="15,102,17,240" />
       <scope id="1411682935496708278" at="15,0,19,0">
         <var name="enclosingNode" id="1411682935496708278" />
@@ -33,43 +35,86 @@
   </root>
   <root nodeRef="r:4117b66e-6773-4ea8-8d65-4682755ba8ec(ActorLanguage.actions)/5165113600332958187">
     <file name="CreateBehaviorFactory.java">
-      <node id="5165113600332958208" at="20,102,21,236" concept="1" />
-      <node id="5165113600332976263" at="21,236,22,191" concept="4" />
-      <node id="5165113600332976739" at="22,191,23,64" concept="1" />
-      <node id="5165113600332985634" at="23,64,24,231" concept="1" />
-      <node id="5165113600332989727" at="24,231,25,327" concept="1" />
-      <node id="5165113600333003092" at="25,327,26,152" concept="1" />
-      <node id="5165113600332958187" at="31,0,32,0" concept="6" trace="function$MLkf" />
-      <node id="5165113600332958187" at="32,0,33,0" concept="6" trace="type$sXU3" />
-      <node id="5165113600332958187" at="33,0,34,0" concept="6" trace="baseType$zMGV" />
-      <node id="5165113600332958187" at="34,0,35,0" concept="6" trace="arguments$6da0" />
-      <node id="5165113600332958187" at="38,0,39,0" concept="6" trace="name$MnvL" />
-      <node id="5165113600332958187" at="42,0,43,0" concept="6" trace="PointerType$HX" />
-      <node id="5165113600332958188" at="20,0,28,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
-      <scope id="5165113600332958188" at="20,102,26,152">
-        <var name="arg" id="5165113600332976266" />
+      <node id="847996140691583195" at="21,102,22,0" concept="7" />
+      <node id="5165113600332958208" at="22,0,23,236" concept="1" />
+      <node id="847996140689590204" at="23,236,24,239" concept="1" />
+      <node id="847996140691245374" at="24,239,25,242" concept="1" />
+      <node id="847996140691338534" at="25,242,26,0" concept="7" />
+      <node id="2257009365457577282" at="27,171,28,208" concept="5" />
+      <node id="2257009365457577440" at="28,208,29,85" concept="1" />
+      <node id="2257009365457581544" at="29,85,30,132" concept="1" />
+      <node id="847996140691351197" at="31,7,32,0" concept="7" />
+      <node id="5165113600332976263" at="32,0,33,196" concept="5" />
+      <node id="5165113600332976739" at="33,196,34,69" concept="1" />
+      <node id="5165113600332985634" at="34,69,35,236" concept="1" />
+      <node id="5165113600332989727" at="35,236,36,332" concept="1" />
+      <node id="2257009365457567202" at="36,332,37,0" concept="7" />
+      <node id="847996140688006983" at="37,0,38,193" concept="5" />
+      <node id="847996140688010061" at="38,193,39,63" concept="1" />
+      <node id="847996140688022051" at="39,63,40,244" concept="1" />
+      <node id="847996140691256146" at="40,244,41,0" concept="7" />
+      <node id="847996140691257980" at="41,0,42,194" concept="5" />
+      <node id="847996140691265559" at="42,194,43,65" concept="1" />
+      <node id="847996140691287185" at="43,65,44,237" concept="1" />
+      <node id="847996140688032359" at="44,237,45,0" concept="7" />
+      <node id="5165113600333003092" at="45,0,46,183" concept="1" />
+      <node id="847996140691362738" at="46,183,47,180" concept="1" />
+      <node id="847996140691485816" at="47,180,48,181" concept="1" />
+      <node id="847996140691360934" at="48,181,49,0" concept="7" />
+      <node id="847996140688035282" at="49,0,50,186" concept="1" />
+      <node id="847996140691491996" at="50,186,51,183" concept="1" />
+      <node id="847996140691492007" at="51,183,52,184" concept="1" />
+      <node id="847996140691489510" at="52,184,53,0" concept="7" />
+      <node id="847996140691309590" at="53,0,54,189" concept="1" />
+      <node id="847996140691573054" at="54,189,55,186" concept="1" />
+      <node id="847996140691573065" at="55,186,56,187" concept="1" />
+      <node id="847996140691579318" at="56,187,57,0" concept="7" />
+      <node id="5165113600332958187" at="62,0,63,0" concept="8" trace="function$MLkf" />
+      <node id="5165113600332958187" at="63,0,64,0" concept="8" trace="initHandler$1yDf" />
+      <node id="5165113600332958187" at="64,0,65,0" concept="8" trace="cleanupHandler$1ySg" />
+      <node id="5165113600332958187" at="65,0,66,0" concept="8" trace="event$5Bra" />
+      <node id="5165113600332958187" at="66,0,67,0" concept="8" trace="customEventsHandlers$Ugrs" />
+      <node id="5165113600332958187" at="67,0,68,0" concept="8" trace="customEvents$eDRO" />
+      <node id="5165113600332958187" at="68,0,69,0" concept="8" trace="type$sXU3" />
+      <node id="5165113600332958187" at="69,0,70,0" concept="8" trace="baseType$zMGV" />
+      <node id="5165113600332958187" at="70,0,71,0" concept="8" trace="arguments$6da0" />
+      <node id="5165113600332958187" at="74,0,75,0" concept="8" trace="ActorScript$nz" />
+      <node id="5165113600332958187" at="75,0,76,0" concept="8" trace="PointerType$HX" />
+      <node id="5165113600332958187" at="79,0,80,0" concept="8" trace="name$MnvL" />
+      <node id="2257009365457568253" at="26,0,31,7" concept="2" />
+      <node id="5165113600332958188" at="21,0,59,0" concept="4" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="2257009365457568259" at="27,171,30,132">
+        <var name="customEventHandler" id="2257009365457577285" />
       </scope>
-      <scope id="5165113600332958188" at="20,0,28,0">
+      <scope id="2257009365457568253" at="26,0,31,7">
+        <var name="customEvent" id="2257009365457568255" />
+      </scope>
+      <scope id="5165113600332958188" at="21,102,57,0">
+        <var name="meArg" id="847996140688006986" />
+        <var name="nowArg" id="847996140691257983" />
+        <var name="stateArg" id="5165113600332976266" />
+      </scope>
+      <scope id="5165113600332958188" at="21,0,59,0">
         <var name="enclosingNode" id="5165113600332958188" />
         <var name="index" id="5165113600332958188" />
         <var name="model" id="5165113600332958188" />
         <var name="newNode" id="5165113600332958188" />
         <var name="sampleNode" id="5165113600332958188" />
       </scope>
-      <unit id="5165113600332958187" at="37,0,40,0" name="ActorLanguage.actions.CreateBehaviorFactory$PROPS" />
-      <unit id="5165113600332958187" at="41,0,44,0" name="ActorLanguage.actions.CreateBehaviorFactory$CONCEPTS" />
-      <unit id="5165113600332958187" at="30,0,36,0" name="ActorLanguage.actions.CreateBehaviorFactory$LINKS" />
-      <unit id="5165113600332958188" at="19,0,29,0" name="ActorLanguage.actions.CreateBehaviorFactory$NodeFactory_5165113600332958188" />
-      <unit id="5165113600332958187" at="18,0,45,0" name="ActorLanguage.actions.CreateBehaviorFactory" />
+      <unit id="5165113600332958187" at="78,0,81,0" name="ActorLanguage.actions.CreateBehaviorFactory$PROPS" />
+      <unit id="5165113600332958187" at="73,0,77,0" name="ActorLanguage.actions.CreateBehaviorFactory$CONCEPTS" />
+      <unit id="5165113600332958187" at="61,0,72,0" name="ActorLanguage.actions.CreateBehaviorFactory$LINKS" />
+      <unit id="5165113600332958188" at="20,0,60,0" name="ActorLanguage.actions.CreateBehaviorFactory$NodeFactory_5165113600332958188" />
+      <unit id="5165113600332958187" at="19,0,82,0" name="ActorLanguage.actions.CreateBehaviorFactory" />
     </file>
   </root>
   <root nodeRef="r:4117b66e-6773-4ea8-8d65-4682755ba8ec(ActorLanguage.actions)/6739934483259132150">
     <file name="ReceptionistFactory.java">
       <node id="6739934483259132173" at="14,102,15,65" concept="1" />
       <node id="6739934483259155048" at="15,65,16,75" concept="1" />
-      <node id="6739934483259132150" at="21,0,22,0" concept="6" trace="address$LyiD" />
-      <node id="6739934483259132150" at="22,0,23,0" concept="6" trace="name$MnvL" />
-      <node id="6739934483259132151" at="14,0,18,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="6739934483259132150" at="21,0,22,0" concept="8" trace="address$LyiD" />
+      <node id="6739934483259132150" at="22,0,23,0" concept="8" trace="name$MnvL" />
+      <node id="6739934483259132151" at="14,0,18,0" concept="4" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
       <scope id="6739934483259132151" at="14,102,16,75" />
       <scope id="6739934483259132151" at="14,0,18,0">
         <var name="enclosingNode" id="6739934483259132151" />
@@ -85,16 +130,16 @@
   </root>
   <root nodeRef="r:4117b66e-6773-4ea8-8d65-4682755ba8ec(ActorLanguage.actions)/7694881003795581832">
     <file name="ActorFactory.java">
-      <node id="7694881003796292577" at="20,102,21,188" concept="4" />
+      <node id="7694881003796292577" at="20,102,21,188" concept="5" />
       <node id="7694881003796134478" at="21,188,22,74" concept="1" />
-      <node id="4320387849010533273" at="23,7,24,43" concept="4" />
+      <node id="4320387849010533273" at="23,7,24,43" concept="5" />
       <node id="4320387849010533487" at="25,76,26,149" concept="1" />
-      <node id="7694881003795581832" at="33,0,34,0" concept="6" trace="messageQueue$L0ws" />
-      <node id="7694881003795581832" at="37,0,38,0" concept="6" trace="ActorScript$nz" />
-      <node id="7694881003795581832" at="41,0,42,0" concept="6" trace="address$DqJ_" />
-      <node id="4320387849010533273" at="24,43,27,9" concept="2" />
+      <node id="7694881003795581832" at="33,0,34,0" concept="8" trace="messageQueue$L0ws" />
+      <node id="7694881003795581832" at="37,0,38,0" concept="8" trace="ActorScript$nz" />
+      <node id="7694881003795581832" at="41,0,42,0" concept="8" trace="address$DqJ_" />
+      <node id="4320387849010533273" at="24,43,27,9" concept="3" />
       <node id="4320387849010533273" at="22,74,28,7" concept="0" />
-      <node id="7694881003795581833" at="20,0,30,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="7694881003795581833" at="20,0,30,0" concept="4" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
       <scope id="4320387849010533277" at="25,76,26,149" />
       <scope id="4320387849010533273" at="23,7,27,9">
         <var name="script" id="4320387849010533273" />
@@ -119,8 +164,8 @@
   <root nodeRef="r:4117b66e-6773-4ea8-8d65-4682755ba8ec(ActorLanguage.actions)/8622806035647258843">
     <file name="SendMessageToNeighborsFactory.java">
       <node id="8622806035647258864" at="14,102,15,84" concept="1" />
-      <node id="8622806035647258843" at="20,0,21,0" concept="6" trace="priority$Ypjc" />
-      <node id="8622806035647258844" at="14,0,17,0" concept="3" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <node id="8622806035647258843" at="20,0,21,0" concept="8" trace="priority$Ypjc" />
+      <node id="8622806035647258844" at="14,0,17,0" concept="4" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
       <scope id="8622806035647258844" at="14,102,15,84" />
       <scope id="8622806035647258844" at="14,0,17,0">
         <var name="enclosingNode" id="8622806035647258844" />
