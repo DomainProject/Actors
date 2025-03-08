@@ -379,18 +379,6 @@
       <node concept="3F0A7n" id="4be3MWTKrC0" role="3EZMnx">
         <ref role="1NtTu8" to="o1mc:4uIaRgr9$HJ" resolve="fetchPolicy" />
       </node>
-      <node concept="3F0ifn" id="4uIaRgr9$HN" role="3EZMnx">
-        <property role="3F0ifm" value="," />
-      </node>
-      <node concept="1iCGBv" id="4uIaRgr9$HQ" role="3EZMnx">
-        <ref role="1NtTu8" to="o1mc:4uIaRgr9$HL" resolve="stateType" />
-        <node concept="1sVBvm" id="4uIaRgr9$HS" role="1sWHZn">
-          <node concept="3F0A7n" id="4uIaRgr9$HY" role="2wV5jI">
-            <property role="1Intyy" value="true" />
-            <ref role="1NtTu8" to="tpck:h0TrG11" resolve="name" />
-          </node>
-        </node>
-      </node>
       <node concept="3F0ifn" id="3m_VcJMZPf2" role="3EZMnx">
         <property role="3F0ifm" value=")" />
         <ref role="1k5W1q" node="7uEn6txeTQ2" resolve="Brace" />
@@ -1301,7 +1289,7 @@
         <property role="3F0ifm" value="," />
       </node>
       <node concept="1iCGBv" id="5Q93FfG7jbh" role="3EZMnx">
-        <ref role="1NtTu8" to="o1mc:4uIaRgr9$HK" resolve="behavior" />
+        <ref role="1NtTu8" to="o1mc:3hefzVo8WA8" />
         <node concept="1sVBvm" id="5Q93FfG7jbj" role="1sWHZn">
           <node concept="3F0A7n" id="5Q93FfG7jbB" role="2wV5jI">
             <property role="1Intyy" value="true" />
@@ -2504,6 +2492,20 @@
         </node>
       </node>
       <node concept="l2Vlx" id="J4FZX2wITG" role="2iSdaV" />
+    </node>
+  </node>
+  <node concept="24kQdi" id="3hefzVnYPH2">
+    <property role="3GE5qa" value="actor" />
+    <ref role="1XX52x" to="o1mc:3hefzVnYPGZ" resolve="ListCreateActor" />
+    <node concept="3EZMnI" id="3hefzVnYPH7" role="2wV5jI">
+      <node concept="3F2HdR" id="3hefzVnYPHb" role="3EZMnx">
+        <ref role="1NtTu8" to="o1mc:3hefzVnYPH1" resolve="actors" />
+        <node concept="l2Vlx" id="3hefzVnYPHd" role="2czzBx" />
+        <node concept="pj6Ft" id="3hefzVnYPHe" role="3F10Kt">
+          <property role="VOm3f" value="true" />
+        </node>
+      </node>
+      <node concept="l2Vlx" id="3hefzVnYPHa" role="2iSdaV" />
     </node>
   </node>
 </model>

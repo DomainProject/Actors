@@ -45,10 +45,12 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_ICreateActor;
   private ConceptPresentation props_IExternalFunction;
   private ConceptPresentation props_IGlobalVarDecl;
+  private ConceptPresentation props_IState;
   private ConceptPresentation props_IType;
   private ConceptPresentation props_Initializer;
   private ConceptPresentation props_InitializerAction;
   private ConceptPresentation props_Link;
+  private ConceptPresentation props_ListCreateActor;
   private ConceptPresentation props_MessageQueue;
   private ConceptPresentation props_MessageRef;
   private ConceptPresentation props_Payload;
@@ -261,7 +263,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
       case LanguageConceptSwitch.ExternalTypeDefinition:
         if (props_ExternalTypeDefinition == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.rawPresentation("ExternalTypeDefinition");
+          cpb.presentationByName();
           props_ExternalTypeDefinition = cpb.create();
         }
         return props_ExternalTypeDefinition;
@@ -326,6 +328,12 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_IGlobalVarDecl = cpb.create();
         }
         return props_IGlobalVarDecl;
+      case LanguageConceptSwitch.IState:
+        if (props_IState == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          props_IState = cpb.create();
+        }
+        return props_IState;
       case LanguageConceptSwitch.IType:
         if (props_IType == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -351,6 +359,14 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Link = cpb.create();
         }
         return props_Link;
+      case LanguageConceptSwitch.ListCreateActor:
+        if (props_ListCreateActor == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("this is only used in the generator and should NOT be instantiated");
+          cpb.rawPresentation("ListCreateActor");
+          props_ListCreateActor = cpb.create();
+        }
+        return props_ListCreateActor;
       case LanguageConceptSwitch.MessageQueue:
         if (props_MessageQueue == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

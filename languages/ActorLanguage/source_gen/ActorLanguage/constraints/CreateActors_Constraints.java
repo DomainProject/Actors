@@ -94,7 +94,7 @@ public class CreateActors_Constraints extends BaseConstraintsDescriptor {
   }
   @Override
   protected Map<SReferenceLink, ReferenceConstraintsDescriptor> getSpecifiedReferences() {
-    BaseReferenceConstraintsDescriptor d0 = new BaseReferenceConstraintsDescriptor(LINKS.behavior$2M8g, this, false, true) {
+    BaseReferenceConstraintsDescriptor d0 = new BaseReferenceConstraintsDescriptor(LINKS.behavior$iAwJ, this, false, true) {
       @Override
       public boolean validate(final SNode referenceNode, final SNode oldReferentNode, final SNode newReferentNode) {
         return true;
@@ -120,6 +120,6 @@ public class CreateActors_Constraints extends BaseConstraintsDescriptor {
   }
 
   private static final class LINKS {
-    /*package*/ static final SReferenceLink behavior$2M8g = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x47ae2b741b264b70L, "behavior");
+    /*package*/ static final SReferenceLink behavior$iAwJ = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x344e3e3ed823c988L, "behavior");
   }
 }

@@ -39,7 +39,7 @@ public final class CreateActors__BehaviorDescriptor extends BaseBHDescriptor {
   /*package*/ static void createActors_idI$NcBTsrE(@NotNull SNode __thisNode__) {
 
     // safety check
-    if (SPropertyOperations.getInteger(__thisNode__, PROPS.number$$XD7) == 0 || SPropertyOperations.getString(__thisNode__, PROPS.baseName$$Y79) == null || (SLinkOperations.getTarget(__thisNode__, LINKS.behavior$2M8g) == null)) {
+    if (SPropertyOperations.getInteger(__thisNode__, PROPS.number$$XD7) == 0 || SPropertyOperations.getString(__thisNode__, PROPS.baseName$$Y79) == null || (SLinkOperations.getTarget(__thisNode__, LINKS.behavior$iAwJ) == null)) {
       return;
     }
 
@@ -51,7 +51,7 @@ public final class CreateActors__BehaviorDescriptor extends BaseBHDescriptor {
     for (int i = 0; i < SPropertyOperations.getInteger(__thisNode__, PROPS.number$$XD7); i++) {
       SNode newActor = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor"));
       SPropertyOperations.assign(newActor, PROPS.name$MnvL, SPropertyOperations.getString(__thisNode__, PROPS.baseName$$Y79) + String.valueOf(i));
-      SLinkOperations.setTarget(newActor, LINKS.behavior$2M8g, SLinkOperations.getTarget(__thisNode__, LINKS.behavior$2M8g));
+      SLinkOperations.setTarget(newActor, LINKS.behavior$Wafv, SLinkOperations.getTarget(__thisNode__, LINKS.behavior$iAwJ));
       SLinkOperations.setTarget(newActor, LINKS.messageQueue$L0ws, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6ac9b580f420bed7L, "ActorLanguage.structure.MessageQueue")));
       SPropertyOperations.assignEnum(newActor, PROPS.fetchPolicy$2LTf, SPropertyOperations.getEnum(__thisNode__, PROPS.fetchPolicy$2LTf));
       SPropertyOperations.assign(newActor, PROPS.address$DqJ_, (int) ActorScript__BehaviorDescriptor.getFreeAddress_id3JP6tIS4aZI.invoke(SNodeOperations.getNodeAncestor(__thisNode__, CONCEPTS.ActorScript$nz, false, false)));
@@ -107,8 +107,9 @@ public final class CreateActors__BehaviorDescriptor extends BaseBHDescriptor {
   }
 
   private static final class LINKS {
-    /*package*/ static final SReferenceLink behavior$2M8g = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x47ae2b741b264b70L, "behavior");
+    /*package*/ static final SReferenceLink behavior$iAwJ = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x344e3e3ed823c988L, "behavior");
     /*package*/ static final SContainmentLink actors$HQEA = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x2e933327a36608L, "actors");
+    /*package*/ static final SReferenceLink behavior$Wafv = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x47ae2b741b264b70L, "behavior");
     /*package*/ static final SContainmentLink messageQueue$L0ws = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x5d890eb3ec03cef9L, "messageQueue");
   }
 

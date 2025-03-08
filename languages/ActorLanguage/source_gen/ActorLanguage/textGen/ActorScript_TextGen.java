@@ -211,38 +211,38 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     // todo in the following code, for each actor's behavior, an hardcoded switch-case is appended (we don't have a way to define the init, cleanup and terminate handlers, for each family of actors)
 
     for (final SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{}))) {
-      if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("window")) {
+      if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("window")) {
         int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
         WindowSwitchCase.AppendWindow(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("selection")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("selection")) {
         int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
         SelectionSwitchCase.AppendSelection(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("projection")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("projection")) {
         int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
         ProjectionSwitchCase.AppendProjection(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("groupBy")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("groupBy")) {
         int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
         GroupBySwitchCase.AppendGroupBy(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("orderBy")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("orderBy")) {
         int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
         OrderBySwitchCase.AppendOrderBy(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("joinColumns")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("joinColumns")) {
         Iterable<SNode> links = ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).where((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_));
         int[] from = {SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(Sequence.fromIterable(links).toList()).getElement(0), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_), SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(Sequence.fromIterable(links).toList()).getElement(1), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_)};
         JoinSwitchCase.AppendJoin(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("Min")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Min")) {
         int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
         AggregateFunctionSwitchCase.AppendAggregateFunction(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), "Min", ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("Max")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Max")) {
         int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
         AggregateFunctionSwitchCase.AppendAggregateFunction(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), "Max", ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("Average")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Average")) {
         int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
         AggregateFunctionSwitchCase.AppendAggregateFunction(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), "Average", ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("Sum")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Sum")) {
         int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
         AggregateFunctionSwitchCase.AppendAggregateFunction(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), "Sum", ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("Count")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Count")) {
         int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
         AggregateFunctionSwitchCase.AppendAggregateFunction(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), "Count", ctx);
       }
@@ -304,7 +304,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{}))) {
-      if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("window")) {
+      if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("window")) {
         tgs.indent();
         tgs.append("case ");
         tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
@@ -318,7 +318,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
         tgs.append("return window_data->can_end;");
         tgs.newLine();
         ctx.getBuffer().area().decreaseIndent();
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("selection")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("selection")) {
         tgs.indent();
         tgs.append("case ");
         tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
@@ -332,7 +332,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
         tgs.append("return selection_data->can_end;");
         tgs.newLine();
         ctx.getBuffer().area().decreaseIndent();
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("projection")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("projection")) {
         tgs.indent();
         tgs.append("case ");
         tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
@@ -346,7 +346,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
         tgs.append("return projection_data->can_end;");
         tgs.newLine();
         ctx.getBuffer().area().decreaseIndent();
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("groupBy")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("groupBy")) {
         tgs.indent();
         tgs.append("case ");
         tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
@@ -360,7 +360,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
         tgs.append("return groupBy_data->can_end;");
         tgs.newLine();
         ctx.getBuffer().area().decreaseIndent();
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("orderBy")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("orderBy")) {
         tgs.indent();
         tgs.append("case ");
         tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
@@ -374,7 +374,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
         tgs.append("return orderBy_data->can_end;");
         tgs.newLine();
         ctx.getBuffer().area().decreaseIndent();
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("joinColumns")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("joinColumns")) {
         tgs.indent();
         tgs.append("case ");
         tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
@@ -388,7 +388,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
         tgs.append("return join_data->can_end;");
         tgs.newLine();
         ctx.getBuffer().area().decreaseIndent();
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("Min") || SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("Max") || SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("Average") || SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("Sum") || SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$2M8g), PROPS.name$MnvL).equals("Count")) {
+      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Min") || SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Max") || SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Average") || SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Sum") || SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Count")) {
         tgs.indent();
         tgs.append("case ");
         tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
@@ -530,6 +530,6 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     /*package*/ static final SReferenceLink actorTo$3d9g = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57976L, "actorTo");
     /*package*/ static final SReferenceLink actor$8xF = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57937L, 0x262cd812cfe57939L, "actor");
     /*package*/ static final SReferenceLink actorFrom$3cFe = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57974L, "actorFrom");
-    /*package*/ static final SReferenceLink behavior$2M8g = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x47ae2b741b264b70L, "behavior");
+    /*package*/ static final SReferenceLink behavior$Wafv = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x47ae2b741b264b70L, "behavior");
   }
 }

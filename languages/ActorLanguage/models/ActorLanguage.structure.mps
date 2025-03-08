@@ -80,6 +80,12 @@
       <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" node="6F9Ho3O8bVn" resolve="MessageQueue" />
     </node>
+    <node concept="1TJgyj" id="4uIaRgr9$HK" role="1TKVEi">
+      <property role="IQ2ns" value="5165113600312232816" />
+      <property role="20kJfa" value="behavior" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="25QEYlOeItj" resolve="CreateBehavior" />
+    </node>
     <node concept="PrWs8" id="5Q93FfG29w4" role="PzmwI">
       <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
     </node>
@@ -437,6 +443,12 @@
     <property role="34LRSv" value="create_actors" />
     <property role="R4oN_" value="create group of actors with the same behavior" />
     <ref role="1TJDcQ" node="1enjyq1kiq4" resolve="ActorAction" />
+    <node concept="1TJgyj" id="3hefzVo8WA8" role="1TKVEi">
+      <property role="IQ2ns" value="3769018377790802312" />
+      <property role="20kJfa" value="behavior" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="25QEYlOeItj" resolve="CreateBehavior" />
+    </node>
     <node concept="1TJgyi" id="5Q93FfG0Dh3" role="1TKVEl">
       <property role="IQ2nx" value="6739934483258184771" />
       <property role="TrG5h" value="number" />
@@ -920,12 +932,6 @@
       <property role="TrG5h" value="fetchPolicy" />
       <ref role="AX2Wp" node="66sUT0$7o_Q" resolve="FetchPolicy" />
     </node>
-    <node concept="1TJgyj" id="4uIaRgr9$HK" role="1TKVEi">
-      <property role="IQ2ns" value="5165113600312232816" />
-      <property role="20kJfa" value="behavior" />
-      <property role="20lbJX" value="fLJekj4/_1" />
-      <ref role="20lvS9" node="25QEYlOeItj" resolve="CreateBehavior" />
-    </node>
     <node concept="1TJgyj" id="5VO4ZzQfhHA" role="1TKVEi">
       <property role="IQ2ns" value="6842115693886643046" />
       <property role="20kJfa" value="initializer" />
@@ -934,8 +940,7 @@
     <node concept="1TJgyj" id="4uIaRgr9$HL" role="1TKVEi">
       <property role="IQ2ns" value="5165113600312232817" />
       <property role="20kJfa" value="stateType" />
-      <property role="20lbJX" value="fLJekj4/_1" />
-      <ref role="20lvS9" node="2U7BfXzcKw6" resolve="ExternalType" />
+      <ref role="20lvS9" node="3hefzVnDUmf" resolve="IState" />
     </node>
     <node concept="PrWs8" id="4uIaRgrfEl6" role="PrDN$">
       <ref role="PrY4T" node="4uIaRgrfEl5" resolve="IActor" />
@@ -956,11 +961,11 @@
     <node concept="PrWs8" id="2U7BfXzcKwb" role="PzmwI">
       <ref role="PrY4T" node="2U7BfXzcKw9" resolve="IType" />
     </node>
-    <node concept="PrWs8" id="2U7BfXzls64" role="PzmwI">
-      <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
-    </node>
     <node concept="PrWs8" id="J4FZX2TDG$" role="PzmwI">
       <ref role="PrY4T" to="x27k:5_l8w1EmTdf" resolve="IModuleContent" />
+    </node>
+    <node concept="PrWs8" id="3hefzVnDUmg" role="PzmwI">
+      <ref role="PrY4T" node="3hefzVnDUmf" resolve="IState" />
     </node>
     <node concept="1TJgyi" id="J4FZX2TAsr" role="1TKVEl">
       <property role="IQ2nx" value="847996140726413083" />
@@ -1046,6 +1051,9 @@
     <node concept="PrWs8" id="J4FZX1oWB$" role="PzmwI">
       <ref role="PrY4T" node="2U7BfXzcKw9" resolve="IType" />
     </node>
+    <node concept="PrWs8" id="3hefzVnDUmh" role="PzmwI">
+      <ref role="PrY4T" node="3hefzVnDUmf" resolve="IState" />
+    </node>
     <node concept="1TJgyj" id="J4FZX1oWRc" role="1TKVEi">
       <property role="IQ2ns" value="847996140701076940" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
@@ -1065,6 +1073,31 @@
     <node concept="25R33" id="J4FZX1NQ5I" role="25R1y">
       <property role="3tVfz5" value="847996140708127086" />
       <property role="TrG5h" value="ALL" />
+    </node>
+  </node>
+  <node concept="PlHQZ" id="3hefzVnDUmf">
+    <property role="EcuMT" value="3769018377782666639" />
+    <property role="3GE5qa" value="type" />
+    <property role="TrG5h" value="IState" />
+    <node concept="PrWs8" id="3hefzVnFHVd" role="PrDN$">
+      <ref role="PrY4T" to="tpck:h0TrEE$" resolve="INamedConcept" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="3hefzVnYPGZ">
+    <property role="EcuMT" value="3769018377788152639" />
+    <property role="3GE5qa" value="actor" />
+    <property role="TrG5h" value="ListCreateActor" />
+    <property role="R4oN_" value="this is only used in the generator and should NOT be instantiated" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <node concept="PrWs8" id="3hefzVnYPH0" role="PzmwI">
+      <ref role="PrY4T" node="61_MCxeXpnd" resolve="ICreateActor" />
+    </node>
+    <node concept="1TJgyj" id="3hefzVnYPH1" role="1TKVEi">
+      <property role="IQ2ns" value="3769018377788152641" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="actors" />
+      <property role="20lbJX" value="fLJekj5/_0__n" />
+      <ref role="20lvS9" node="3m_VcJMWzd$" resolve="CreateActor" />
     </node>
   </node>
 </model>
