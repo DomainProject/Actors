@@ -47,6 +47,8 @@ public class Language extends LanguageRuntime {
   @Override
   protected void fillExtendedLanguages(Collection<SLanguage> extendedLanguages) {
     extendedLanguages.add(MetaAdapterFactory.getLanguage(SLanguageId.deserialize("f3061a53-9226-4cc5-a443-f952ceaf5816"), "jetbrains.mps.baseLanguage"));
+    extendedLanguages.add(MetaAdapterFactory.getLanguage(SLanguageId.deserialize("a9d69647-0840-491e-bf39-2eb0805d2011"), "com.mbeddr.core.statements"));
+    extendedLanguages.add(MetaAdapterFactory.getLanguage(SLanguageId.deserialize("6d11763d-483d-4b2b-8efc-09336c1b0001"), "com.mbeddr.core.modules"));
     extendedLanguages.add(MetaAdapterFactory.getLanguage(SLanguageId.deserialize("efda956e-491e-4f00-ba14-36af2f213ecf"), "com.mbeddr.core.udt"));
   }
 

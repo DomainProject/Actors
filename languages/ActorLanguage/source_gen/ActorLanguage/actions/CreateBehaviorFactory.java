@@ -33,7 +33,7 @@ public class CreateBehaviorFactory {
       SNode stateArg = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x6d872ef9245a20d7L, "com.mbeddr.core.modules.structure.Argument"));
       SPropertyOperations.assign(stateArg, PROPS.name$MnvL, "state");
       SLinkOperations.setTarget(stateArg, LINKS.type$sXU3, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x3bf5377ae9044dedL, 0x97545a516023bfaaL, 0x3e0cae5e366d630L, "com.mbeddr.core.pointers.structure.PointerType")));
-      SLinkOperations.setTarget(SNodeOperations.cast(SLinkOperations.getTarget(stateArg, LINKS.type$sXU3), CONCEPTS.PointerType$HX), LINKS.baseType$zMGV, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x6d872ef9245a0d19L, "com.mbeddr.core.expressions.structure.VoidType")));
+      SLinkOperations.setTarget(SNodeOperations.cast(SLinkOperations.getTarget(stateArg, LINKS.type$sXU3), CONCEPTS.PointerType$HX), LINKS.baseType$zMGV, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0xf3061a5392264cc5L, 0xa443f952ceaf5816L, 0xf8cc6bf96dL, "jetbrains.mps.baseLanguage.structure.VoidType")));
 
       SNode meArg = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x6d872ef9245a20d7L, "com.mbeddr.core.modules.structure.Argument"));
       SPropertyOperations.assign(meArg, PROPS.name$MnvL, "me");
