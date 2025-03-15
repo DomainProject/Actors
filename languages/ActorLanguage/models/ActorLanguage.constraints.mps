@@ -2129,7 +2129,7 @@
       </node>
     </node>
     <node concept="1N5Pfh" id="I$NcBCQoh" role="1Mr941">
-      <ref role="1N5Vy1" to="o1mc:3hefzVo8WA8" />
+      <ref role="1N5Vy1" to="o1mc:3hefzVo8WA8" resolve="behavior" />
       <node concept="3k9gUc" id="I$NcBGIGB" role="3kmjI7">
         <node concept="3clFbS" id="I$NcBGIGC" role="2VODD2">
           <node concept="3clFbF" id="I$NcBV7P3" role="3cqZAp">
@@ -2823,7 +2823,7 @@
                       </node>
                     </node>
                     <node concept="3Tsc0h" id="1XiwwXb7Zny" role="2OqNvi">
-                      <ref role="3TtcxE" to="o1mc:5Q93FfFZEV2" />
+                      <ref role="3TtcxE" to="o1mc:5Q93FfFZEV2" resolve="behaviors" />
                     </node>
                   </node>
                   <node concept="v3k3i" id="1XiwwXb88sT" role="2OqNvi">
@@ -2856,7 +2856,7 @@
                           <ref role="3cqZAo" node="1XiwwXb88LL" resolve="handler" />
                         </node>
                         <node concept="3TrEf2" id="1XiwwXb89cB" role="2OqNvi">
-                          <ref role="3Tt5mk" to="o1mc:1XiwwXap29j" />
+                          <ref role="3Tt5mk" to="o1mc:1XiwwXap29j" resolve="event" />
                         </node>
                       </node>
                     </node>
@@ -2868,7 +2868,7 @@
                           <ref role="2Gs0qQ" node="1XiwwXb7WAV" resolve="behavior" />
                         </node>
                         <node concept="3Tsc0h" id="1XiwwXb8b8G" role="2OqNvi">
-                          <ref role="3TtcxE" to="o1mc:1XiwwXap29b" />
+                          <ref role="3TtcxE" to="o1mc:1XiwwXap29b" resolve="customEventsHandlers" />
                         </node>
                       </node>
                       <node concept="TSZUe" id="1XiwwXb8ji9" role="2OqNvi">
@@ -2896,7 +2896,7 @@
                         </node>
                       </node>
                       <node concept="3Tsc0h" id="1XiwwXbiid8" role="2OqNvi">
-                        <ref role="3TtcxE" to="o1mc:5Q93FfFZEV2" />
+                        <ref role="3TtcxE" to="o1mc:5Q93FfFZEV2" resolve="behaviors" />
                       </node>
                     </node>
                     <node concept="v3k3i" id="1XiwwXbiid9" role="2OqNvi">
@@ -2906,7 +2906,7 @@
                     </node>
                   </node>
                   <node concept="13MTOL" id="1XiwwXbiidb" role="2OqNvi">
-                    <ref role="13MTZf" to="o1mc:1XiwwXap29b" />
+                    <ref role="13MTZf" to="o1mc:1XiwwXap29b" resolve="customEventsHandlers" />
                   </node>
                 </node>
                 <node concept="3zZkjj" id="1XiwwXbiidc" role="2OqNvi">

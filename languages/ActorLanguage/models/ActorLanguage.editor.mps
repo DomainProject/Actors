@@ -1289,7 +1289,7 @@
         <property role="3F0ifm" value="," />
       </node>
       <node concept="1iCGBv" id="5Q93FfG7jbh" role="3EZMnx">
-        <ref role="1NtTu8" to="o1mc:3hefzVo8WA8" />
+        <ref role="1NtTu8" to="o1mc:3hefzVo8WA8" resolve="behavior" />
         <node concept="1sVBvm" id="5Q93FfG7jbj" role="1sWHZn">
           <node concept="3F0A7n" id="5Q93FfG7jbB" role="2wV5jI">
             <property role="1Intyy" value="true" />

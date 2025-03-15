@@ -1042,7 +1042,7 @@
     <property role="EcuMT" value="847996140701075939" />
     <property role="3GE5qa" value="type" />
     <property role="TrG5h" value="ExternalTypeDefinition" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyi" id="J4FZX1oWB_" role="1TKVEl">
       <property role="IQ2nx" value="847996140701075941" />
       <property role="TrG5h" value="header" />
@@ -1088,7 +1088,7 @@
     <property role="3GE5qa" value="actor" />
     <property role="TrG5h" value="ListCreateActor" />
     <property role="R4oN_" value="this is only used in the generator and should NOT be instantiated" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="PrWs8" id="3hefzVnYPH0" role="PzmwI">
       <ref role="PrY4T" node="61_MCxeXpnd" resolve="ICreateActor" />
     </node>
