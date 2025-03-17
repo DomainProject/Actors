@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <root>
+    <file name="ModelListenersDescriptor.java">
+      <unit at="130,0,133,0" name="ActorLanguage.listeners.ModelListenersDescriptor$PROPS" />
+      <unit at="106,0,117,0" name="ActorLanguage.listeners.ModelListenersDescriptor$CONCEPTS" />
+      <unit at="118,0,129,0" name="ActorLanguage.listeners.ModelListenersDescriptor$LINKS" />
+      <unit at="20,0,134,0" name="ActorLanguage.listeners.ModelListenersDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:df60b066-c14a-4db4-a774-d89028e60e8b(ActorLanguage.listeners)/4794726433264442221">
+    <file name="ModelListenersDescriptor.java">
+      <node id="4794726433264442274" at="29,71,30,80" concept="1" />
+      <node id="4794726433264480516" at="35,71,36,80" concept="1" />
+      <node id="4794726433264504667" at="41,71,42,80" concept="1" />
+      <node id="4794726433264442222" at="28,0,32,0" concept="3" trace="childAdded#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="4794726433264480479" at="34,0,38,0" concept="3" trace="childAdded#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="4794726433264504630" at="40,0,44,0" concept="3" trace="childAdded#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="4794726433264442222" at="26,0,32,7" concept="1" />
+      <node id="4794726433264480479" at="32,7,38,7" concept="1" />
+      <node id="4794726433264504630" at="38,7,44,7" concept="1" />
+      <scope id="4794726433264442222" at="29,71,30,80" />
+      <scope id="4794726433264480479" at="35,71,36,80" />
+      <scope id="4794726433264504630" at="41,71,42,80" />
+      <scope id="4794726433264442222" at="28,0,32,0">
+        <var name="child" id="4794726433264442222" />
+        <var name="instance" id="4794726433264442222" />
+      </scope>
+      <scope id="4794726433264480479" at="34,0,38,0">
+        <var name="child" id="4794726433264480479" />
+        <var name="instance" id="4794726433264480479" />
+      </scope>
+      <scope id="4794726433264504630" at="40,0,44,0">
+        <var name="child" id="4794726433264504630" />
+        <var name="instance" id="4794726433264504630" />
+      </scope>
+      <unit id="4794726433264442222" at="27,52,32,5" name="ActorLanguage.listeners.ModelListenersDescriptor$1" />
+      <unit id="4794726433264480479" at="33,52,38,5" name="ActorLanguage.listeners.ModelListenersDescriptor$2" />
+      <unit id="4794726433264504630" at="39,52,44,5" name="ActorLanguage.listeners.ModelListenersDescriptor$3" />
+    </file>
+  </root>
+  <root nodeRef="r:df60b066-c14a-4db4-a774-d89028e60e8b(ActorLanguage.listeners)/4794726433264527491">
+    <file name="ModelListenersDescriptor.java">
+      <node id="4794726433264527527" at="47,71,48,80" concept="1" />
+      <node id="4794726433264527492" at="46,0,50,0" concept="3" trace="childAdded#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="4794726433264527492" at="44,7,50,7" concept="1" />
+      <scope id="4794726433264527492" at="47,71,48,80" />
+      <scope id="4794726433264527492" at="46,0,50,0">
+        <var name="child" id="4794726433264527492" />
+        <var name="instance" id="4794726433264527492" />
+      </scope>
+      <unit id="4794726433264527492" at="45,52,50,5" name="ActorLanguage.listeners.ModelListenersDescriptor$4" />
+    </file>
+  </root>
+  <root nodeRef="r:df60b066-c14a-4db4-a774-d89028e60e8b(ActorLanguage.listeners)/4794726433270466046">
+    <file name="ModelListenersDescriptor.java">
+      <node id="4794726433270484420" at="54,9,55,39" concept="4" />
+      <node id="4794726433270485068" at="56,85,57,87" concept="1" />
+      <node id="4794726433270509004" at="60,9,61,40" concept="4" />
+      <node id="4794726433270509659" at="62,95,63,137" concept="1" />
+      <node id="4794726433286366829" at="71,9,72,44" concept="4" />
+      <node id="4794726433286366979" at="73,87,74,92" concept="1" />
+      <node id="4794726433295496698" at="82,9,83,43" concept="4" />
+      <node id="4794726433295496856" at="84,85,85,148" concept="1" />
+      <node id="4794726433295512858" at="88,9,89,53" concept="4" />
+      <node id="4794726433295513306" at="90,105,91,101" concept="1" />
+      <node id="4794726433295539089" at="94,9,95,41" concept="4" />
+      <node id="4794726433295539952" at="96,81,97,89" concept="1" />
+      <node id="4794726433270484420" at="55,39,58,11" concept="2" />
+      <node id="4794726433270509004" at="61,40,64,11" concept="2" />
+      <node id="4794726433286366829" at="72,44,75,11" concept="2" />
+      <node id="4794726433295496698" at="83,43,86,11" concept="2" />
+      <node id="4794726433295512858" at="89,53,92,11" concept="2" />
+      <node id="4794726433295539089" at="95,41,98,11" concept="2" />
+      <node id="4794726433270484420" at="53,71,59,9" concept="0" />
+      <node id="4794726433270509004" at="59,9,65,9" concept="0" />
+      <node id="4794726433286366829" at="70,71,76,9" concept="0" />
+      <node id="4794726433295496698" at="81,71,87,9" concept="0" />
+      <node id="4794726433295512858" at="87,9,93,9" concept="0" />
+      <node id="4794726433295539089" at="93,9,99,9" concept="0" />
+      <node id="4794726433286366793" at="69,0,78,0" concept="3" trace="childAdded#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="4794726433286366793" at="67,7,78,7" concept="1" />
+      <node id="4794726433270466047" at="52,0,67,0" concept="3" trace="childAdded#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="4794726433270466047" at="50,7,67,7" concept="1" />
+      <node id="4794726433295496662" at="80,0,101,0" concept="3" trace="childAdded#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;)V" />
+      <node id="4794726433295496662" at="78,7,101,7" concept="1" />
+      <scope id="4794726433270484424" at="56,85,57,87" />
+      <scope id="4794726433270509008" at="62,95,63,137" />
+      <scope id="4794726433286366831" at="73,87,74,92" />
+      <scope id="4794726433295496700" at="84,85,85,148" />
+      <scope id="4794726433295512862" at="90,105,91,101" />
+      <scope id="4794726433295539093" at="96,81,97,89" />
+      <scope id="4794726433270484420" at="54,9,58,11">
+        <var name="function" id="4794726433270484420" />
+      </scope>
+      <scope id="4794726433270509004" at="60,9,64,11">
+        <var name="prototype" id="4794726433270509004" />
+      </scope>
+      <scope id="4794726433286366829" at="71,9,75,11">
+        <var name="globalVarDecl" id="4794726433286366829" />
+      </scope>
+      <scope id="4794726433295496698" at="82,9,86,11">
+        <var name="externalType" id="4794726433295496698" />
+      </scope>
+      <scope id="4794726433295512858" at="88,9,92,11">
+        <var name="externalTypeDefinition" id="4794726433295512858" />
+      </scope>
+      <scope id="4794726433295539089" at="94,9,98,11">
+        <var name="customType" id="4794726433295539089" />
+      </scope>
+      <scope id="4794726433286366793" at="70,71,76,9" />
+      <scope id="4794726433286366793" at="69,0,78,0">
+        <var name="child" id="4794726433286366793" />
+        <var name="instance" id="4794726433286366793" />
+      </scope>
+      <scope id="4794726433270466047" at="53,71,65,9" />
+      <scope id="4794726433270466047" at="52,0,67,0">
+        <var name="child" id="4794726433270466047" />
+        <var name="instance" id="4794726433270466047" />
+      </scope>
+      <scope id="4794726433295496662" at="81,71,99,9" />
+      <scope id="4794726433295496662" at="80,0,101,0">
+        <var name="child" id="4794726433295496662" />
+        <var name="instance" id="4794726433295496662" />
+      </scope>
+      <unit id="4794726433286366793" at="68,52,78,5" name="ActorLanguage.listeners.ModelListenersDescriptor$6" />
+      <unit id="4794726433270466047" at="51,52,67,5" name="ActorLanguage.listeners.ModelListenersDescriptor$5" />
+      <unit id="4794726433295496662" at="79,52,101,5" name="ActorLanguage.listeners.ModelListenersDescriptor$7" />
+    </file>
+  </root>
+</debug-info>
+

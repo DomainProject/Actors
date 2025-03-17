@@ -1011,19 +1011,6 @@
       <ref role="20lvS9" to="x27k:5_l8w1EmTvx" resolve="Function" />
     </node>
   </node>
-  <node concept="1TIwiD" id="J4FZX0g81D">
-    <property role="EcuMT" value="847996140681986153" />
-    <property role="3GE5qa" value="actions" />
-    <property role="TrG5h" value="GetSourceActor" />
-    <property role="R4oN_" value="get source actor in the topology" />
-    <property role="34LRSv" value="GetSourceActor" />
-    <ref role="1TJDcQ" to="mj1l:7FQByU3CrCM" resolve="Expression" />
-    <node concept="1TJgyi" id="J4FZX1NQ5J" role="1TKVEl">
-      <property role="IQ2nx" value="847996140708127087" />
-      <property role="TrG5h" value="policy" />
-      <ref role="AX2Wp" node="J4FZX1NQ5G" resolve="GetSourceActorPolicy" />
-    </node>
-  </node>
   <node concept="1TIwiD" id="J4FZX0nRLb">
     <property role="EcuMT" value="847996140684016715" />
     <property role="TrG5h" value="GlobalVarDecl" />
@@ -1042,7 +1029,7 @@
     <property role="EcuMT" value="847996140701075939" />
     <property role="3GE5qa" value="type" />
     <property role="TrG5h" value="ExternalTypeDefinition" />
-    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <ref role="1TJDcQ" to="clbe:5yYXyc4Z0CJ" resolve="StructDeclaration" />
     <node concept="1TJgyi" id="J4FZX1oWB_" role="1TKVEl">
       <property role="IQ2nx" value="847996140701075941" />
       <property role="TrG5h" value="header" />
@@ -1053,13 +1040,6 @@
     </node>
     <node concept="PrWs8" id="3hefzVnDUmh" role="PzmwI">
       <ref role="PrY4T" node="3hefzVnDUmf" resolve="IState" />
-    </node>
-    <node concept="1TJgyj" id="J4FZX1oWRc" role="1TKVEi">
-      <property role="IQ2ns" value="847996140701076940" />
-      <property role="20lmBu" value="fLJjDmT/aggregation" />
-      <property role="20kJfa" value="structDeclaration" />
-      <property role="20lbJX" value="fLJekj4/_1" />
-      <ref role="20lvS9" to="clbe:5yYXyc4Z0CJ" resolve="StructDeclaration" />
     </node>
   </node>
   <node concept="25R3W" id="J4FZX1NQ5G">
@@ -1098,6 +1078,28 @@
       <property role="20kJfa" value="actors" />
       <property role="20lbJX" value="fLJekj5/_0__n" />
       <ref role="20lvS9" node="3m_VcJMWzd$" resolve="CreateActor" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="4aai$ArOvrd">
+    <property role="EcuMT" value="4794726433296611021" />
+    <property role="3GE5qa" value="type" />
+    <property role="TrG5h" value="OpaqueTypeDeclaration" />
+    <property role="R4oN_" value="use this for struct types defined with typedef" />
+    <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <node concept="1TJgyi" id="4aai$ArY_fP" role="1TKVEl">
+      <property role="IQ2nx" value="4794726433299256309" />
+      <property role="TrG5h" value="header" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
+    </node>
+    <node concept="PrWs8" id="4aai$ArOvre" role="PzmwI">
+      <ref role="PrY4T" node="2U7BfXzcKw9" resolve="IType" />
+    </node>
+    <node concept="1TJgyj" id="4aai$ArY_fO" role="1TKVEi">
+      <property role="IQ2ns" value="4794726433299256308" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="opaqueType" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" to="clbe:2ZsiEbEC2" resolve="OpaqueTypeDecl" />
     </node>
   </node>
 </model>

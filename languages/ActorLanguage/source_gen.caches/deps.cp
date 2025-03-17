@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dependenciesRoot>
+  <uses language="l:9d69e719-78c8-4286-90db-fb19c107d049:com.mbeddr.mpsutil.grammarcells" />
+  <uses language="l:309e0004-4976-4416-b947-ec02ae4ecef2:com.mbeddr.mpsutil.modellisteners" />
   <uses language="l:fa13cc63-c476-4d46-9c96-d53670abe7bc:de.itemis.mps.editor.diagram" />
+  <uses language="l:52733268-be24-4f5f-ab84-a73b7c0c03b0:de.slisson.mps.richtext.customcell" />
   <uses language="l:f3061a53-9226-4cc5-a443-f952ceaf5816:jetbrains.mps.baseLanguage" />
   <uses language="l:fd392034-7849-419d-9071-12563d152375:jetbrains.mps.baseLanguage.closures" />
   <uses language="l:83888646-71ce-4f1c-9c53-c54016f6ad4f:jetbrains.mps.baseLanguage.collections" />
@@ -29,6 +32,7 @@
   <uses language="l:517077fd-e44f-4338-a475-1d29781dfdb8:jetbrains.mps.lang.feedback.skeleton" />
   <uses language="l:ad93155d-79b2-4759-b10c-55123e763903:jetbrains.mps.lang.messages" />
   <uses language="l:446c26eb-2b7b-4bf0-9b35-f83fa582753e:jetbrains.mps.lang.modelapi" />
+  <uses language="l:d4615e3b-d671-4ba9-af01-2b78369b0ba7:jetbrains.mps.lang.pattern" />
   <uses language="l:86ef8290-12bb-4ca7-947f-093788f263a9:jetbrains.mps.lang.project" />
   <uses language="l:3a13115c-633c-4c5c-bbcc-75c4219e9555:jetbrains.mps.lang.quotation" />
   <uses language="l:b3551702-269c-4f05-ba61-58060cef4292:jetbrains.mps.lang.rulesAndMessages" />
@@ -38,6 +42,7 @@
   <uses language="l:c72da2b9-7cce-4447-8389-f407dc1158b7:jetbrains.mps.lang.structure" />
   <uses language="l:c7fb639f-be78-4307-89b0-b5959c3fa8c8:jetbrains.mps.lang.text" />
   <uses language="l:b83431fe-5c8f-40bc-8a36-65e25f4dd253:jetbrains.mps.lang.textGen" />
+  <uses language="l:7a5dda62-9140-4668-ab76-d5ed1746f2b2:jetbrains.mps.lang.typesystem" />
   <uses module="10eda999-5898-4cde-9416-196c5eca1268(ActorLanguage)" kind="dp" />
   <uses module="3f233e7f-b8a6-46d2-a57f-795d56775243(Annotations)" kind="dp" />
   <uses module="6354ebe7-c22a-4a0f-ac54-50b52ab9b065(JDK)" kind="rt+dp" />
@@ -58,7 +63,9 @@
   <uses module="efda956e-491e-4f00-ba14-36af2f213ecf(com.mbeddr.core.udt)" kind="dp" />
   <uses module="63e0e566-5131-447e-90e3-12ea330e1a00(com.mbeddr.mpsutil.blutil)" kind="dp" />
   <uses module="d3a0fd26-445a-466c-900e-10444ddfed52(com.mbeddr.mpsutil.filepicker)" kind="dp" />
+  <uses module="7ac49bcb-77fb-4f0f-9036-e31b86b854b2(com.mbeddr.mpsutil.grammarcells.runtime)" kind="rt+dp" />
   <uses module="d09a16fb-1d68-4a92-a5a4-20b4b2f86a62(com.mbeddr.mpsutil.jung)" kind="dp" />
+  <uses module="7197c640-b458-406b-8636-40c7936ef8c8(com.mbeddr.mpsutil.modellisteners.runtime)" kind="rt+dp" />
   <uses module="b4d28e19-7d2d-47e9-943e-3a41f97a0e52(com.mbeddr.mpsutil.plantuml.node)" kind="dp" />
   <uses module="c1c2a88a-323c-4605-a37d-9ab77a2ccbd2(com.mbeddr.mpsutil.suppresswarning)" kind="dp" />
   <uses module="848ef45d-e560-4e35-853c-f35a64cc135c(de.itemis.mps.editor.celllayout.runtime)" kind="dp" />
@@ -70,6 +77,7 @@
   <uses module="cce85e64-7b37-4ad5-b0e6-9d18324cdfb3(de.itemis.mps.selection.runtime)" kind="dp" />
   <uses module="0022e9df-2136-4ef8-81b2-08650aeb1dc7(de.itemis.mps.tooltips.runtime)" kind="dp" />
   <uses module="dc038ceb-b7ea-4fea-ac12-55f7400e97ba(de.slisson.mps.editor.multiline.runtime)" kind="dp" />
+  <uses module="7037b32c-9607-4f8e-81bd-1f028a4c117b(de.slisson.mps.reflection.runtime)" kind="rt" />
   <uses module="92d2ea16-5a42-4fdf-a676-c7604efe3504(de.slisson.mps.richtext)" kind="dp" />
   <uses module="f3061a53-9226-4cc5-a443-f952ceaf5816(jetbrains.mps.baseLanguage)" kind="dp" />
   <uses module="443f4c36-fcf5-4eb6-9500-8d06ed259e3e(jetbrains.mps.baseLanguage.classifiers)" kind="dp" />
@@ -89,6 +97,7 @@
   <uses module="d936855b-48da-4812-a8a0-2bfddd633ac4(jetbrains.mps.lang.behavior.runtime)" kind="rt+dp" />
   <uses module="8e98f4e2-decf-4e97-bf80-9109e8b759ee(jetbrains.mps.lang.constraints.rules.runtime)" kind="rt+dp" />
   <uses module="ceab5195-25ea-4f22-9b92-103b95ca8c0c(jetbrains.mps.lang.core)" kind="dp" />
+  <uses module="0647eca7-da98-422a-8a8b-6ebc0bd014ea(jetbrains.mps.lang.editor#1129914002149)" kind="dp" />
   <uses module="9e9ef4e2-decf-4e97-bf80-9109e8b759bb(jetbrains.mps.lang.feedback.api)" kind="rt+dp" />
   <uses module="9e98f4e2-decf-4e97-bf80-9109e8b759aa(jetbrains.mps.lang.feedback.context)" kind="dp" />
   <uses module="033598a4-76a9-47e1-ac89-a300c0fceab8(jetbrains.mps.lang.feedback.problem)" kind="dp" />

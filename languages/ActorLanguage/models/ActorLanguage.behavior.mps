@@ -605,22 +605,44 @@
               <ref role="3cqZAo" node="3k7QKnRKeRM" resolve="added" />
             </node>
             <node concept="X8dFx" id="J4FZX1tw$H" role="2OqNvi">
-              <node concept="2OqwBi" id="J4FZX2yiLt" role="25WWJ7">
-                <node concept="2OqwBi" id="J4FZX1tw$I" role="2Oq$k0">
-                  <node concept="2OqwBi" id="J4FZX1tw$J" role="2Oq$k0">
-                    <node concept="13iPFW" id="J4FZX1tw$K" role="2Oq$k0" />
-                    <node concept="3Tsc0h" id="J4FZX1tw$L" role="2OqNvi">
+              <node concept="2OqwBi" id="J4FZX1tw$I" role="25WWJ7">
+                <node concept="2OqwBi" id="J4FZX1tw$J" role="2Oq$k0">
+                  <node concept="13iPFW" id="J4FZX1tw$K" role="2Oq$k0" />
+                  <node concept="3Tsc0h" id="J4FZX1tw$L" role="2OqNvi">
+                    <ref role="3TtcxE" to="o1mc:7lfjb8Uc8Lz" resolve="types" />
+                  </node>
+                </node>
+                <node concept="v3k3i" id="J4FZX1tw$M" role="2OqNvi">
+                  <node concept="chp4Y" id="J4FZX1tw$N" role="v3oSu">
+                    <ref role="cht4Q" to="o1mc:J4FZX1oWBz" resolve="ExternalTypeDefinition" />
+                  </node>
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="3clFbF" id="4aai$ArYIhZ" role="3cqZAp">
+          <node concept="2OqwBi" id="4aai$ArYOvT" role="3clFbG">
+            <node concept="37vLTw" id="4aai$ArYIhX" role="2Oq$k0">
+              <ref role="3cqZAo" node="3k7QKnRKeRM" resolve="added" />
+            </node>
+            <node concept="X8dFx" id="4aai$ArYYiB" role="2OqNvi">
+              <node concept="2OqwBi" id="4aai$ArZeKT" role="25WWJ7">
+                <node concept="2OqwBi" id="4aai$ArZ74m" role="2Oq$k0">
+                  <node concept="2OqwBi" id="4aai$ArZ1xS" role="2Oq$k0">
+                    <node concept="13iPFW" id="4aai$ArYZi6" role="2Oq$k0" />
+                    <node concept="3Tsc0h" id="4aai$ArZ3E3" role="2OqNvi">
                       <ref role="3TtcxE" to="o1mc:7lfjb8Uc8Lz" resolve="types" />
                     </node>
                   </node>
-                  <node concept="v3k3i" id="J4FZX1tw$M" role="2OqNvi">
-                    <node concept="chp4Y" id="J4FZX1tw$N" role="v3oSu">
-                      <ref role="cht4Q" to="o1mc:J4FZX1oWBz" resolve="ExternalTypeDefinition" />
+                  <node concept="v3k3i" id="4aai$ArZaAx" role="2OqNvi">
+                    <node concept="chp4Y" id="4aai$ArZc73" role="v3oSu">
+                      <ref role="cht4Q" to="o1mc:4aai$ArOvrd" resolve="OpaqueTypeDeclaration" />
                     </node>
                   </node>
                 </node>
-                <node concept="13MTOL" id="J4FZX2ylXX" role="2OqNvi">
-                  <ref role="13MTZf" to="o1mc:J4FZX1oWRc" resolve="structDeclaration" />
+                <node concept="13MTOL" id="4aai$ArZg7K" role="2OqNvi">
+                  <ref role="13MTZf" to="o1mc:4aai$ArY_fO" resolve="opaqueType" />
                 </node>
               </node>
             </node>
@@ -1295,6 +1317,13 @@
       <node concept="3Tqbb2" id="7uEn6txGhFh" role="3clF45">
         <ref role="ehGHo" to="mj1l:7FQByU3CrCM" resolve="Expression" />
       </node>
+    </node>
+  </node>
+  <node concept="13h7C7" id="1IMoxTvpy$F">
+    <property role="3GE5qa" value="type" />
+    <ref role="13h7C2" to="o1mc:J4FZX1oWBz" resolve="ExternalTypeDefinition" />
+    <node concept="13hLZK" id="1IMoxTvpy$G" role="13h7CW">
+      <node concept="3clFbS" id="1IMoxTvpy$H" role="2VODD2" />
     </node>
   </node>
 </model>

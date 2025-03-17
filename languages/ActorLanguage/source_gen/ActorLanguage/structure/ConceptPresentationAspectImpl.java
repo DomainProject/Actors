@@ -38,7 +38,6 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_ExternalTypeDefinition;
   private ConceptPresentation props_ForEachActorReferenceStatement;
   private ConceptPresentation props_GetNeighborsFromReceptionist;
-  private ConceptPresentation props_GetSourceActor;
   private ConceptPresentation props_GlobalVarDecl;
   private ConceptPresentation props_IActor;
   private ConceptPresentation props_IBehavior;
@@ -53,6 +52,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_ListCreateActor;
   private ConceptPresentation props_MessageQueue;
   private ConceptPresentation props_MessageRef;
+  private ConceptPresentation props_OpaqueTypeDeclaration;
   private ConceptPresentation props_Payload;
   private ConceptPresentation props_RandomActor;
   private ConceptPresentation props_Receptionist;
@@ -283,14 +283,6 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_GetNeighborsFromReceptionist = cpb.create();
         }
         return props_GetNeighborsFromReceptionist;
-      case LanguageConceptSwitch.GetSourceActor:
-        if (props_GetSourceActor == null) {
-          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.shortDesc("get source actor in the topology");
-          cpb.rawPresentation("GetSourceActor");
-          props_GetSourceActor = cpb.create();
-        }
-        return props_GetSourceActor;
       case LanguageConceptSwitch.GlobalVarDecl:
         if (props_GlobalVarDecl == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -381,6 +373,14 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_MessageRef = cpb.create();
         }
         return props_MessageRef;
+      case LanguageConceptSwitch.OpaqueTypeDeclaration:
+        if (props_OpaqueTypeDeclaration == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("use this for struct types defined with typedef");
+          cpb.rawPresentation("OpaqueTypeDeclaration");
+          props_OpaqueTypeDeclaration = cpb.create();
+        }
+        return props_OpaqueTypeDeclaration;
       case LanguageConceptSwitch.Payload:
         if (props_Payload == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

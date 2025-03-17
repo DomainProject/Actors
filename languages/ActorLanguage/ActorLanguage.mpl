@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language namespace="ActorLanguage" uuid="10eda999-5898-4cde-9416-196c5eca1268" languageVersion="0" moduleVersion="0">
   <models>
-    <modelRoot type="default" contentPath="${module}">
+    <modelRoot contentPath="${module}" type="default">
       <sourceRoot location="models" />
     </modelRoot>
   </models>
@@ -23,8 +23,13 @@
     <dependency reexport="false">3bf5377a-e904-4ded-9754-5a516023bfaa(com.mbeddr.core.pointers)</dependency>
     <dependency reexport="false">6d11763d-483d-4b2b-8efc-09336c1b0001(com.mbeddr.core.modules)</dependency>
     <dependency reexport="false">efda956e-491e-4f00-ba14-36af2f213ecf(com.mbeddr.core.udt)</dependency>
+    <dependency reexport="false">63650c59-16c8-498a-99c8-005c7ee9515d(jetbrains.mps.lang.access)</dependency>
+    <dependency reexport="false">9d69e719-78c8-4286-90db-fb19c107d049(com.mbeddr.mpsutil.grammarcells)</dependency>
   </dependencies>
   <languageVersions>
+    <language slang="l:9d69e719-78c8-4286-90db-fb19c107d049:com.mbeddr.mpsutil.grammarcells" version="2" />
+    <language slang="l:b4f35ed8-45af-4efa-abe4-00ac26956e69:com.mbeddr.mpsutil.grammarcells.runtimelang" version="0" />
+    <language slang="l:309e0004-4976-4416-b947-ec02ae4ecef2:com.mbeddr.mpsutil.modellisteners" version="0" />
     <language slang="l:fa13cc63-c476-4d46-9c96-d53670abe7bc:de.itemis.mps.editor.diagram" version="1" />
     <language slang="l:f3061a53-9226-4cc5-a443-f952ceaf5816:jetbrains.mps.baseLanguage" version="12" />
     <language slang="l:443f4c36-fcf5-4eb6-9500-8d06ed259e3e:jetbrains.mps.baseLanguage.classifiers" version="0" />
@@ -85,6 +90,9 @@
     <module reference="efda956e-491e-4f00-ba14-36af2f213ecf(com.mbeddr.core.udt)" version="4" />
     <module reference="63e0e566-5131-447e-90e3-12ea330e1a00(com.mbeddr.mpsutil.blutil)" version="0" />
     <module reference="d3a0fd26-445a-466c-900e-10444ddfed52(com.mbeddr.mpsutil.filepicker)" version="0" />
+    <module reference="9d69e719-78c8-4286-90db-fb19c107d049(com.mbeddr.mpsutil.grammarcells)" version="0" />
+    <module reference="7ac49bcb-77fb-4f0f-9036-e31b86b854b2(com.mbeddr.mpsutil.grammarcells.runtime)" version="0" />
+    <module reference="b4f35ed8-45af-4efa-abe4-00ac26956e69(com.mbeddr.mpsutil.grammarcells.runtimelang)" version="0" />
     <module reference="d09a16fb-1d68-4a92-a5a4-20b4b2f86a62(com.mbeddr.mpsutil.jung)" version="0" />
     <module reference="b4d28e19-7d2d-47e9-943e-3a41f97a0e52(com.mbeddr.mpsutil.plantuml.node)" version="0" />
     <module reference="c1c2a88a-323c-4605-a37d-9ab77a2ccbd2(com.mbeddr.mpsutil.suppresswarning)" version="0" />
@@ -103,9 +111,11 @@
     <module reference="23865718-e2ed-41b5-a132-0da1d04e266d(jetbrains.mps.ide.httpsupport.manager)" version="0" />
     <module reference="ae6d8005-36be-4cb6-945b-8c8cfc033c51(jetbrains.mps.ide.httpsupport.runtime)" version="0" />
     <module reference="2d3c70e9-aab2-4870-8d8d-6036800e4103(jetbrains.mps.kernel)" version="0" />
+    <module reference="63650c59-16c8-498a-99c8-005c7ee9515d(jetbrains.mps.lang.access)" version="0" />
     <module reference="d936855b-48da-4812-a8a0-2bfddd633ac5(jetbrains.mps.lang.behavior.api)" version="0" />
     <module reference="ceab5195-25ea-4f22-9b92-103b95ca8c0c(jetbrains.mps.lang.core)" version="0" />
     <module reference="a9e4c532-c5f5-4bb7-99ef-42abb73bbb70(jetbrains.mps.lang.descriptor.aspects)" version="0" />
+    <module reference="18bc6592-03a6-4e29-a83a-7ff23bde13ba(jetbrains.mps.lang.editor)" version="0" />
     <module reference="033598a4-76a9-47e1-ac89-a300c0fceab8(jetbrains.mps.lang.feedback.problem)" version="0" />
     <module reference="cddf55b3-117e-46ec-837c-ff50eb7b89b0(jetbrains.mps.lang.feedback.problem.childAndProp)" version="1" />
     <module reference="7127d409-29f0-43e8-917f-f016ea288944(jetbrains.mps.lang.feedback.problem.structural)" version="1" />

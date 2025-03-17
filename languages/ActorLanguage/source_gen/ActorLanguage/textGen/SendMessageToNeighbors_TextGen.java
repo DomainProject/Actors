@@ -9,9 +9,10 @@ import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import org.jetbrains.mps.openapi.language.SReferenceLink;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
 public class SendMessageToNeighbors_TextGen extends TextGenDescriptorBase {
@@ -19,23 +20,35 @@ public class SendMessageToNeighbors_TextGen extends TextGenDescriptorBase {
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
+
+    tgs.append("CreateAndSendMessage(me, ");
+    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.priority$Ypjc));
+    tgs.append(", (void *)");
+    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$OqHH), LINKS.payload$ZT3H), PROPS.name$MnvL));
+    tgs.append(", now, ");
+    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
+    tgs.append(", num_");
+    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
+    tgs.append(");");
     tgs.newLine();
     tgs.indent();
     tgs.append("free(");
     tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
     tgs.append(");");
-    tgs.newLine();
     if (tgs.needPositions()) {
       tgs.fillPositionInfo(TraceableConcept__BehaviorDescriptor.getTraceableProperty_id4pl5GY7LKmH.invoke(SNodeOperations.cast(ctx.getPrimaryInput(), CONCEPTS.TraceableConcept$L)));
     }
   }
 
-  private static final class LINKS {
-    /*package*/ static final SReferenceLink referenceList$9FRc = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, 0x338e7da8a4a78cacL, "referenceList");
+  private static final class PROPS {
+    /*package*/ static final SProperty priority$Ypjc = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, 0x338e7da8a4b5f036L, "priority");
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 
-  private static final class PROPS {
-    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink payload$OqHH = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, 0x338e7da8a4ced1dcL, "payload");
+    /*package*/ static final SReferenceLink payload$ZT3H = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L, 0x4658738496c93a91L, "payload");
+    /*package*/ static final SReferenceLink referenceList$9FRc = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, 0x338e7da8a4a78cacL, "referenceList");
   }
 
   private static final class CONCEPTS {

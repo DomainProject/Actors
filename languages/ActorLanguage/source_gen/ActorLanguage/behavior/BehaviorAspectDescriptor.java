@@ -12,6 +12,7 @@ import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
 import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
+  private final BHDescriptor myExternalTypeDefinition__BehaviorDescriptor = new ExternalTypeDefinition__BehaviorDescriptor();
   private final BHDescriptor myCreatePayload__BehaviorDescriptor = new CreatePayload__BehaviorDescriptor();
   private final BHDescriptor myActorsGraph__BehaviorDescriptor = new ActorsGraph__BehaviorDescriptor();
   private final BHDescriptor myActorScript__BehaviorDescriptor = new ActorScript__BehaviorDescriptor();
@@ -32,9 +33,11 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
         return myCreateActors__BehaviorDescriptor;
       case 3:
         return myCreatePayload__BehaviorDescriptor;
+      case 4:
+        return myExternalTypeDefinition__BehaviorDescriptor;
       default:
     }
     return null;
   }
-  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57936L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L)).seal();
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57936L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbc4afff4163c9e3L)).seal();
 }

@@ -49,6 +49,7 @@
       </concept>
       <concept id="6946180687077938637" name="ActorLanguage.structure.ICreateActor" flags="ngI" index="I$5X5">
         <property id="5165113600312232815" name="fetchPolicy" index="1sy60r" />
+        <reference id="5165113600312232817" name="stateType" index="1sy605" />
       </concept>
       <concept id="6946180687074189095" name="ActorLanguage.structure.EmptyLine" flags="ng" index="IQpmJ" />
       <concept id="4447085707124854353" name="ActorLanguage.structure.StringBody" flags="ng" index="2JkZqM">
@@ -78,10 +79,6 @@
       </concept>
       <concept id="847996140701075939" name="ActorLanguage.structure.ExternalTypeDefinition" flags="ng" index="1aDQos">
         <property id="847996140701075941" name="header" index="1aDQoq" />
-        <child id="847996140701076940" name="structDeclaration" index="1aDQ8N" />
-      </concept>
-      <concept id="847996140681986153" name="ActorLanguage.structure.GetSourceActor" flags="ng" index="1bx2Ym">
-        <property id="847996140708127087" name="policy" index="1a2WUg" />
       </concept>
       <concept id="847996140684016715" name="ActorLanguage.structure.GlobalVarDecl" flags="ng" index="1bAXeO" />
       <concept id="3352821068295505926" name="ActorLanguage.structure.ExternalType" flags="ng" index="1dH9jT">
@@ -106,6 +103,10 @@
         <child id="2257009365445288733" name="cleanupHandler" index="1liy4i" />
         <child id="2257009365445288732" name="initHandler" index="1liy4j" />
         <child id="5165113600285380371" name="messageArg" index="1u8EhB" />
+      </concept>
+      <concept id="4794726433296611021" name="ActorLanguage.structure.OpaqueTypeDeclaration" flags="ng" index="3pmVM4">
+        <property id="4794726433299256309" name="header" index="3ps1AW" />
+        <child id="4794726433299256308" name="opaqueType" index="3ps1AX" />
       </concept>
       <concept id="3769018377788152639" name="ActorLanguage.structure.ListCreateActor" flags="ng" index="3zHmk1">
         <child id="3769018377788152641" name="actors" index="3zHmlZ" />
@@ -271,9 +272,6 @@
       </concept>
     </language>
     <language id="3bf5377a-e904-4ded-9754-5a516023bfaa" name="com.mbeddr.core.pointers">
-      <concept id="6282313788306893057" name="com.mbeddr.core.pointers.structure.ArrayAccessExpr" flags="ng" index="2wJmCr">
-        <child id="6282313788306893059" name="indexExpr" index="2wJmCp" />
-      </concept>
       <concept id="5308710777891643206" name="com.mbeddr.core.pointers.structure.NullExpression" flags="ng" index="Ea8Gl" />
       <concept id="6113173064526131575" name="com.mbeddr.core.pointers.structure.StringLiteral" flags="ng" index="PhEJO">
         <property id="6113173064526131578" name="value" index="PhEJT" />
@@ -395,6 +393,10 @@
       <concept id="6116558314501347863" name="com.mbeddr.core.udt.structure.TypeDefType" flags="ng" index="rcJHQ">
         <reference id="6116558314501347864" name="typeDef" index="rcJHT" />
       </concept>
+      <concept id="841971064023554" name="com.mbeddr.core.udt.structure.OpaqueTypeDecl" flags="ng" index="2Eb5v6" />
+      <concept id="841971064023564" name="com.mbeddr.core.udt.structure.OpaqueType" flags="ng" index="2Eb5v8">
+        <reference id="841971064023567" name="decl" index="2Eb5vb" />
+      </concept>
       <concept id="7099329415459817973" name="com.mbeddr.core.udt.structure.SUDeclaration" flags="ng" index="HsMI8">
         <child id="7099329415459888018" name="members" index="HszBJ" />
       </concept>
@@ -433,6 +435,9 @@
       </concept>
       <concept id="7713191144372389655" name="com.mbeddr.core.modules.structure.ITypeDef" flags="ngI" index="2I2SlH">
         <child id="6116558314501347862" name="original" index="rcJHR" />
+      </concept>
+      <concept id="6437088627575722831" name="com.mbeddr.core.modules.structure.IModuleContent" flags="ngI" index="N3F5f">
+        <property id="6708182213627106114" name="preventNameMangling" index="3mNxdG" />
       </concept>
       <concept id="6437088627575724000" name="com.mbeddr.core.modules.structure.FunctionPrototype" flags="ng" index="N3Fnw" />
       <concept id="6437088627575724001" name="com.mbeddr.core.modules.structure.Function" flags="ng" index="N3Fnx">
@@ -23377,76 +23382,330 @@
   </node>
   <node concept="37lXYX" id="31hsOFINvZc">
     <property role="TrG5h" value="map_Script" />
-    <node concept="1dH9jT" id="J4FZX34KVR" role="1fvW3h">
+    <node concept="1dH9jT" id="4aai$AsX1do" role="1fvW3h">
       <property role="TrG5h" value="RowsLinkedList" />
       <property role="198Gz$" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX34KVT" role="198zjq">
+      <node concept="1sgJKc" id="4aai$AsX1dq" role="198zjq">
+        <property role="3mNxdG" value="true" />
         <property role="TrG5h" value="RowsLinkedList" />
       </node>
     </node>
-    <node concept="1dH9jT" id="J4FZX34dVu" role="1fvW3h">
+    <node concept="1dH9jT" id="4aai$AsX1WT" role="1fvW3h">
       <property role="TrG5h" value="RowsMessage" />
       <property role="198Gz$" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX34dVw" role="198zjq">
+      <node concept="1sgJKc" id="4aai$AsX1WV" role="198zjq">
+        <property role="3mNxdG" value="true" />
         <property role="TrG5h" value="RowsMessage" />
       </node>
     </node>
-    <node concept="1dH9jT" id="J4FZX350Tx" role="1fvW3h">
+    <node concept="1dH9jT" id="4aai$AsX2k0" role="1fvW3h">
       <property role="TrG5h" value="GroupsLinkedList" />
       <property role="198Gz$" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX350Tz" role="198zjq">
+      <node concept="1sgJKc" id="4aai$AsX2k1" role="198zjq">
+        <property role="3mNxdG" value="true" />
         <property role="TrG5h" value="GroupsLinkedList" />
       </node>
     </node>
-    <node concept="1dH9jT" id="J4FZX35CMF" role="1fvW3h">
+    <node concept="1dH9jT" id="4aai$AsX2AN" role="1fvW3h">
       <property role="TrG5h" value="WindowData" />
       <property role="198Gz$" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX35CMH" role="198zjq">
+      <node concept="1sgJKc" id="4aai$AsX2AO" role="198zjq">
+        <property role="3mNxdG" value="true" />
         <property role="TrG5h" value="WindowData" />
       </node>
     </node>
-    <node concept="1dH9jT" id="J4FZX35Q93" role="1fvW3h">
-      <property role="TrG5h" value="AggregateFunctionData" />
-      <property role="198Gz$" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX35Q95" role="198zjq">
-        <property role="TrG5h" value="AggregateFunctionData" />
-      </node>
-    </node>
-    <node concept="1dH9jT" id="J4FZX36bq_" role="1fvW3h">
+    <node concept="1dH9jT" id="4aai$AsX2AP" role="1fvW3h">
       <property role="TrG5h" value="Schema" />
       <property role="198Gz$" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX36bqB" role="198zjq">
+      <node concept="1sgJKc" id="4aai$AsX2AQ" role="198zjq">
+        <property role="3mNxdG" value="true" />
         <property role="TrG5h" value="Schema" />
       </node>
     </node>
-    <node concept="1dH9jT" id="J4FZX36iC2" role="1fvW3h">
-      <property role="TrG5h" value="Topology" />
-      <property role="198Gz$" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX36iC4" role="198zjq">
-        <property role="TrG5h" value="Topology" />
-      </node>
-    </node>
-    <node concept="1dH9jT" id="J4FZX36Dex" role="1fvW3h">
+    <node concept="1dH9jT" id="4aai$AsX2Dp" role="1fvW3h">
       <property role="TrG5h" value="JoinTableData" />
       <property role="198Gz$" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX36Dez" role="198zjq">
+      <node concept="1sgJKc" id="4aai$AsX2Dq" role="198zjq">
+        <property role="3mNxdG" value="true" />
         <property role="TrG5h" value="JoinTableData" />
       </node>
     </node>
-    <node concept="1dH9jT" id="J4FZX3l9ap" role="1fvW3h">
+    <node concept="1dH9jT" id="4aai$AsX35x" role="1fvW3h">
       <property role="TrG5h" value="DataSourceData" />
       <property role="198Gz$" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX3l9ar" role="198zjq">
+      <node concept="1sgJKc" id="4aai$AsX35y" role="198zjq">
+        <property role="3mNxdG" value="true" />
         <property role="TrG5h" value="DataSourceData" />
       </node>
     </node>
-    <node concept="1dH9jT" id="J4FZX3lunL" role="1fvW3h">
-      <property role="TrG5h" value="FILE" />
-      <property role="198Gz$" value="file" />
-      <node concept="1sgJKc" id="J4FZX3lunN" role="198zjq">
+    <node concept="IQpmJ" id="4aai$AsuClM" role="1fvW3h" />
+    <node concept="3pmVM4" id="4aai$As3vkf" role="1fvW3h">
+      <property role="3ps1AW" value="ROOT-Sim/topology" />
+      <node concept="2Eb5v6" id="4aai$As3vkh" role="3ps1AX">
+        <property role="TrG5h" value="Topology" />
+      </node>
+    </node>
+    <node concept="3pmVM4" id="4aai$As3xu2" role="1fvW3h">
+      <property role="3ps1AW" value="stdio" />
+      <node concept="2Eb5v6" id="4aai$As3xu4" role="3ps1AX">
         <property role="TrG5h" value="FILE" />
       </node>
     </node>
+    <node concept="1bAXeO" id="4aai$AqS2lT" role="1bAXeI">
+      <property role="TrG5h" value="file" />
+      <property role="3mNxdG" value="true" />
+      <node concept="3wxxNl" id="4aai$AqS2G8" role="2C2TGm">
+        <node concept="2Eb5v8" id="4aai$As91Kz" role="2umbIo">
+          <ref role="2Eb5vb" node="4aai$As3xu4" resolve="FILE" />
+        </node>
+      </node>
+      <node concept="Ea8Gl" id="4aai$AqS2HC" role="1cecVj" />
+    </node>
+    <node concept="1bAXeO" id="4aai$AqS3si" role="1bAXeI">
+      <property role="TrG5h" value="topology" />
+      <property role="3mNxdG" value="true" />
+      <node concept="3wxxNl" id="4aai$AqS3Np" role="2C2TGm">
+        <node concept="2Eb5v8" id="4aai$As91Lr" role="2umbIo">
+          <ref role="2Eb5vb" node="4aai$As3vkh" resolve="Topology" />
+        </node>
+      </node>
+      <node concept="Ea8Gl" id="4aai$AqS3Po" role="1cecVj" />
+    </node>
+    <node concept="1bAXeO" id="4aai$AqS4QM" role="1bAXeI">
+      <property role="TrG5h" value="schema" />
+      <property role="3mNxdG" value="true" />
+      <node concept="1sgJKr" id="4aai$At2wru" role="2C2TGm">
+        <ref role="1sgJKq" node="4aai$AsX2AQ" resolve="Schema" />
+      </node>
+    </node>
+    <node concept="1bAXeO" id="4aai$AqS5SR" role="1bAXeI">
+      <property role="TrG5h" value="INPUT_FILE" />
+      <property role="3mNxdG" value="true" />
+      <node concept="3wxxNl" id="4aai$AqS6dM" role="2C2TGm">
+        <node concept="biTqx" id="4aai$AqS6bM" role="2umbIo" />
+      </node>
+      <node concept="PhEJO" id="4aai$AqS6e_" role="1cecVj">
+        <property role="PhEJT" value="taxis.csv" />
+      </node>
+    </node>
+    <node concept="IQpmJ" id="4aai$AqJ50Q" role="1bAXeI" />
+    <node concept="I7Tlx" id="4aai$AqkVh6" role="1hWdPE">
+      <property role="I7UEa" value="pseudosql" />
+      <node concept="N3Fnw" id="4aai$AqkVh8" role="I7Tlz">
+        <property role="TrG5h" value="ExecuteWindow" />
+        <property role="3mNxdG" value="true" />
+        <node concept="3wxxNl" id="4aai$AqkVDh" role="2C2TGm">
+          <node concept="1sgJKr" id="4aai$At2w7w" role="2umbIo">
+            <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$AqkVMB" role="1UOdpc">
+          <property role="TrG5h" value="msg" />
+          <node concept="3wxxNl" id="4aai$AqkVOi" role="2C2TGm">
+            <node concept="1sgJKr" id="4aai$At2w9N" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX1WV" resolve="RowsMessage" />
+            </node>
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$AqkW6q" role="1UOdpc">
+          <property role="TrG5h" value="data" />
+          <node concept="3wxxNl" id="4aai$AqkWa3" role="2C2TGm">
+            <node concept="1sgJKr" id="4aai$At2wcs" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX2AO" resolve="WindowData" />
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="I7Tlx" id="4aai$AqkWZU" role="1hWdPE">
+      <property role="I7UEa" value="pseudosql" />
+      <node concept="N3Fnw" id="4aai$AqkWZW" role="I7Tlz">
+        <property role="TrG5h" value="wProjection" />
+        <property role="3mNxdG" value="true" />
+        <node concept="3wxxNl" id="4aai$AqkXpC" role="2C2TGm">
+          <node concept="1sgJKr" id="4aai$At2wct" role="2umbIo">
+            <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$AqkX_S" role="1UOdpc">
+          <property role="TrG5h" value="msg" />
+          <node concept="3wxxNl" id="4aai$AqkXD0" role="2C2TGm">
+            <node concept="1sgJKr" id="4aai$At2wcu" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX1WV" resolve="RowsMessage" />
+            </node>
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$AqkXP7" role="1UOdpc">
+          <property role="TrG5h" value="data" />
+          <node concept="3wxxNl" id="4aai$AqkXP8" role="2C2TGm">
+            <node concept="19Rifw" id="4aai$AqkXP9" role="2umbIo" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="I7Tlx" id="4aai$AqkXUN" role="1hWdPE">
+      <property role="I7UEa" value="pseudosql" />
+      <node concept="N3Fnw" id="4aai$AqkXUO" role="I7Tlz">
+        <property role="TrG5h" value="wSelection" />
+        <property role="3mNxdG" value="true" />
+        <node concept="3wxxNl" id="4aai$AqkXUP" role="2C2TGm">
+          <node concept="1sgJKr" id="4aai$At2wdv" role="2umbIo">
+            <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$AqkXUR" role="1UOdpc">
+          <property role="TrG5h" value="msg" />
+          <node concept="3wxxNl" id="4aai$AqkXUS" role="2C2TGm">
+            <node concept="1sgJKr" id="4aai$At2wdK" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX1WV" resolve="RowsMessage" />
+            </node>
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$AqkXUU" role="1UOdpc">
+          <property role="TrG5h" value="data" />
+          <node concept="3wxxNl" id="4aai$AqkXUV" role="2C2TGm">
+            <node concept="19Rifw" id="4aai$AqkXUW" role="2umbIo" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="I7Tlx" id="4aai$AqkYiw" role="1hWdPE">
+      <property role="I7UEa" value="pseudosql" />
+      <node concept="N3Fnw" id="4aai$AqkYix" role="I7Tlz">
+        <property role="TrG5h" value="wJoin" />
+        <property role="3mNxdG" value="true" />
+        <node concept="3wxxNl" id="4aai$AqkYiy" role="2C2TGm">
+          <node concept="1sgJKr" id="4aai$At2we1" role="2umbIo">
+            <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$AqkYi$" role="1UOdpc">
+          <property role="TrG5h" value="msg" />
+          <node concept="3wxxNl" id="4aai$AqkYi_" role="2C2TGm">
+            <node concept="1sgJKr" id="4aai$At2wey" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX1WV" resolve="RowsMessage" />
+            </node>
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$AqkYiB" role="1UOdpc">
+          <property role="TrG5h" value="data" />
+          <node concept="3wxxNl" id="4aai$AqkYiC" role="2C2TGm">
+            <node concept="19Rifw" id="4aai$AqkYiD" role="2umbIo" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="I7Tlx" id="4aai$AqkYDX" role="1hWdPE">
+      <property role="I7UEa" value="pseudosql" />
+      <node concept="N3Fnw" id="4aai$AqkYDY" role="I7Tlz">
+        <property role="TrG5h" value="wGroupBy" />
+        <property role="3mNxdG" value="true" />
+        <node concept="3wxxNl" id="4aai$AqkYDZ" role="2C2TGm">
+          <node concept="1sgJKr" id="4aai$At2weP" role="2umbIo">
+            <ref role="1sgJKq" node="4aai$AsX2k1" resolve="GroupsLinkedList" />
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$AqkYE1" role="1UOdpc">
+          <property role="TrG5h" value="msg" />
+          <node concept="3wxxNl" id="4aai$AqkYE2" role="2C2TGm">
+            <node concept="1sgJKr" id="4aai$At2weQ" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX1WV" resolve="RowsMessage" />
+            </node>
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$AqkYE4" role="1UOdpc">
+          <property role="TrG5h" value="data" />
+          <node concept="3wxxNl" id="4aai$AqkYE5" role="2C2TGm">
+            <node concept="19Rifw" id="4aai$AqkYE6" role="2umbIo" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="I7Tlx" id="4aai$AqkYOJ" role="1hWdPE">
+      <property role="I7UEa" value="pseudosql" />
+      <node concept="N3Fnw" id="4aai$AqkYOK" role="I7Tlz">
+        <property role="TrG5h" value="wOrderBy" />
+        <property role="3mNxdG" value="true" />
+        <node concept="3wxxNl" id="4aai$AqkYOL" role="2C2TGm">
+          <node concept="1sgJKr" id="4aai$At2wfB" role="2umbIo">
+            <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$AqkYON" role="1UOdpc">
+          <property role="TrG5h" value="msg" />
+          <node concept="3wxxNl" id="4aai$AqkYOO" role="2C2TGm">
+            <node concept="1sgJKr" id="4aai$At2wfO" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX1WV" resolve="RowsMessage" />
+            </node>
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$AqkYOQ" role="1UOdpc">
+          <property role="TrG5h" value="data" />
+          <node concept="3wxxNl" id="4aai$AqkYOR" role="2C2TGm">
+            <node concept="19Rifw" id="4aai$AqkYOS" role="2umbIo" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="I7Tlx" id="4aai$Aql0bt" role="1hWdPE">
+      <property role="I7UEa" value="pseudosql" />
+      <node concept="N3Fnw" id="4aai$Aql0bv" role="I7Tlz">
+        <property role="TrG5h" value="AggregateFunctionGroupedInput" />
+        <property role="3mNxdG" value="true" />
+        <node concept="3wxxNl" id="4aai$Aql0zx" role="2C2TGm">
+          <node concept="1sgJKr" id="4aai$At2wg1" role="2umbIo">
+            <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$Aql0Nq" role="1UOdpc">
+          <property role="TrG5h" value="groups" />
+          <node concept="3wxxNl" id="4aai$Aql0QG" role="2C2TGm">
+            <node concept="1sgJKr" id="4aai$At2wgk" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX2k1" resolve="GroupsLinkedList" />
+            </node>
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$Aql0Z_" role="1UOdpc">
+          <property role="TrG5h" value="data" />
+          <node concept="3wxxNl" id="4aai$Aql11g" role="2C2TGm">
+            <node concept="1sgJKr" id="4aai$Aql0Z$" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
+            </node>
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$Aql1bq" role="1UOdpc">
+          <property role="TrG5h" value="type" />
+          <node concept="26Vqpq" id="4aai$Aql1bo" role="2C2TGm" />
+        </node>
+        <node concept="19RgSI" id="4aai$Aql1o_" role="1UOdpc">
+          <property role="TrG5h" value="schema" />
+          <node concept="1sgJKr" id="4aai$At2wh4" role="2C2TGm">
+            <ref role="1sgJKq" node="4aai$AsX2AQ" resolve="Schema" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="I7Tlx" id="4aai$Aql2c0" role="1hWdPE">
+      <property role="I7UEa" value="pseudosql" />
+      <node concept="N3Fnw" id="4aai$Aql2c2" role="I7Tlz">
+        <property role="TrG5h" value="DeserializeGroupsMessage" />
+        <property role="3mNxdG" value="true" />
+        <node concept="3wxxNl" id="4aai$Aql2_7" role="2C2TGm">
+          <node concept="1sgJKr" id="4aai$At2wh5" role="2umbIo">
+            <ref role="1sgJKq" node="4aai$AsX2k1" resolve="GroupsLinkedList" />
+          </node>
+        </node>
+        <node concept="19RgSI" id="4aai$Aql2I$" role="1UOdpc">
+          <property role="TrG5h" value="msg" />
+          <node concept="3wxxNl" id="4aai$Aql2JS" role="2C2TGm">
+            <node concept="1sgJKr" id="4aai$Aql2Iz" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$ApGyU$" resolve="GroupsMessage" />
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+    <node concept="IQpmJ" id="4aai$AqIM$D" role="1hWdPE" />
     <node concept="1lj4MQ" id="J4FZX132MY" role="2QtU1L">
       <property role="TrG5h" value="window" />
       <property role="2F6P9D" value="msg" />
@@ -23463,12 +23722,12 @@
           <node concept="3XIRlf" id="J4FZX13m9T" role="3XIRFZ">
             <property role="TrG5h" value="result" />
             <node concept="3wxxNl" id="J4FZX13m9U" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX37aRB" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2ws4" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX38M5N" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgpocLC" resolve="ExecuteWindow" />
+              <ref role="3O_q_h" node="4aai$AqkVh8" resolve="ExecuteWindow" />
               <node concept="1S8S4T" id="J4FZX38P0V" role="3O_q_j">
                 <node concept="2BPB98" id="J4FZX38P0W" role="1S8S4V">
                   <node concept="3ZUYvv" id="J4FZX38XQa" role="1_9fRO">
@@ -23476,8 +23735,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX38URJ" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX38RW0" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX34dVw" resolve="RowsMessage" />
+                  <node concept="1sgJKr" id="4aai$At2wsn" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$AsX1WV" resolve="RowsMessage" />
                   </node>
                 </node>
               </node>
@@ -23488,8 +23747,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX39cF1" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX399IM" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX35CMH" resolve="WindowData" />
+                  <node concept="1sgJKr" id="4aai$At2wsQ" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$AsX2AO" resolve="WindowData" />
                   </node>
                 </node>
               </node>
@@ -23543,10 +23802,7 @@
             <node concept="3O_q_g" id="J4FZX13KUp" role="1_9egR">
               <ref role="3O_q_h" node="J4FZX0lMwf" resolve="WindowInit" />
               <node concept="1S7827" id="J4FZX13NOZ" role="3O_q_j">
-                <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
-              </node>
-              <node concept="1bx2Ym" id="J4FZX13NPd" role="3O_q_j">
-                <property role="1a2WUg" value="J4FZX1NQ5H/FIRST" />
+                <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
               </node>
               <node concept="3ZUYvv" id="J4FZX13NPo" role="3O_q_j">
                 <ref role="3ZUYvu" node="J4FZX132ND" resolve="me" />
@@ -23583,8 +23839,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX13R3t" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX37dOz" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX35CMH" resolve="WindowData" />
+                  <node concept="1sgJKr" id="4aai$At2wt9" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$AsX2AO" resolve="WindowData" />
                   </node>
                 </node>
               </node>
@@ -23616,7 +23872,7 @@
               <node concept="3O_q_g" id="J4FZX13Ry$" role="1_9egR">
                 <ref role="3O_q_h" node="J4FZX0VuUX" resolve="TerminateWindow" />
                 <node concept="1S7827" id="J4FZX13UuW" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="1S8S4T" id="J4FZX13Uvc" role="3O_q_j">
                   <node concept="2BPB98" id="J4FZX13Uvd" role="1S8S4V">
@@ -23625,8 +23881,8 @@
                     </node>
                   </node>
                   <node concept="3wxxNl" id="J4FZX13UvB" role="1S8S4N">
-                    <node concept="1sgJKr" id="J4FZX37dO$" role="2umbIo">
-                      <ref role="1sgJKq" node="J4FZX35CMH" resolve="WindowData" />
+                    <node concept="1sgJKr" id="4aai$At2wtO" role="2umbIo">
+                      <ref role="1sgJKq" node="4aai$AsX2AO" resolve="WindowData" />
                     </node>
                   </node>
                 </node>
@@ -23637,7 +23893,7 @@
                   <ref role="3ZUYvu" node="J4FZX132Ni" resolve="now" />
                 </node>
                 <node concept="1S7827" id="J4FZX14oVo" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX145K5" resolve="schema" />
+                  <ref role="1S7826" node="4aai$AqS4QM" resolve="schema" />
                 </node>
               </node>
             </node>
@@ -23691,12 +23947,12 @@
           <node concept="3XIRlf" id="J4FZX1_TGx" role="3XIRFZ">
             <property role="TrG5h" value="result" />
             <node concept="3wxxNl" id="J4FZX1_WBo" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX37dO_" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wuv" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX1A15u" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgprkNK" resolve="wProjection" />
+              <ref role="3O_q_h" node="4aai$AqkWZW" resolve="wProjection" />
               <node concept="1S8S4T" id="J4FZX1A42I" role="3O_q_j">
                 <node concept="2BPB98" id="J4FZX1A42J" role="1S8S4V">
                   <node concept="2Ysn8y" id="J4FZX1AfKL" role="1_9fRO">
@@ -23706,8 +23962,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX1A9Sr" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX37dOA" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX34dVw" resolve="RowsMessage" />
+                  <node concept="1sgJKr" id="4aai$At2wwW" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$AsX1WV" resolve="RowsMessage" />
                   </node>
                 </node>
               </node>
@@ -23764,10 +24020,7 @@
             <node concept="3O_q_g" id="J4FZX1jocY" role="1_9egR">
               <ref role="3O_q_h" node="J4FZX15mER" resolve="ProjectionInit" />
               <node concept="1S7827" id="J4FZX1jr87" role="3O_q_j">
-                <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
-              </node>
-              <node concept="1bx2Ym" id="J4FZX1jx0a" role="3O_q_j">
-                <property role="1a2WUg" value="J4FZX1NQ5H/FIRST" />
+                <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
               </node>
               <node concept="3ZUYvv" id="J4FZX1jzVe" role="3O_q_j">
                 <ref role="3ZUYvu" node="J4FZX1j3ma" resolve="me" />
@@ -23804,8 +24057,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX1jPNR" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX37gJv" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX36WKo" resolve="ProjectionData" />
+                  <node concept="1sgJKr" id="4aai$ApGzRt" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxv8" resolve="ProjectionData" />
                   </node>
                 </node>
               </node>
@@ -23836,8 +24089,8 @@
             <node concept="3XIRlf" id="J4FZX1_6Xb" role="3XIRFZ">
               <property role="TrG5h" value="projection_data" />
               <node concept="3wxxNl" id="J4FZX1_9Vj" role="2C2TGm">
-                <node concept="1sgJKr" id="J4FZX37gJw" role="2umbIo">
-                  <ref role="1sgJKq" node="J4FZX36WKo" resolve="ProjectionData" />
+                <node concept="1sgJKr" id="4aai$ApGzU3" role="2umbIo">
+                  <ref role="1sgJKq" node="4aai$ApGxv8" resolve="ProjectionData" />
                 </node>
               </node>
               <node concept="1S8S4T" id="J4FZX1_dRj" role="3XIe9u">
@@ -23847,8 +24100,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX1_jI0" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX37gJx" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX36WKo" resolve="ProjectionData" />
+                  <node concept="1sgJKr" id="4aai$ApGzWN" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxv8" resolve="ProjectionData" />
                   </node>
                 </node>
               </node>
@@ -23858,7 +24111,7 @@
                 <node concept="3TlMhK" id="J4FZX1_yzZ" role="3TlMhJ" />
                 <node concept="2qmXGp" id="J4FZX37pvM" role="3TlMhI">
                   <node concept="1E4Tgc" id="J4FZX37sqV" role="1ESnxz">
-                    <ref role="1E4Tge" node="J4FZX36WKp" resolve="can_end" />
+                    <ref role="1E4Tge" node="4aai$ApGxv9" resolve="can_end" />
                   </node>
                   <node concept="3ZVu4v" id="J4FZX1_sGt" role="1_9fRO">
                     <ref role="3ZVs_2" node="J4FZX1_6Xb" resolve="projection_data" />
@@ -23870,7 +24123,7 @@
               <node concept="3O_q_g" id="J4FZX1_Fzr" role="1_9egR">
                 <ref role="3O_q_h" node="J4FZX17o1P" resolve="ForwardTerminationMessage" />
                 <node concept="1S7827" id="J4FZX1_IvH" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX1_IFk" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX1j3lM" resolve="me" />
@@ -23927,12 +24180,12 @@
           <node concept="3XIRlf" id="J4FZX1C328" role="3XIRFZ">
             <property role="TrG5h" value="result" />
             <node concept="3wxxNl" id="J4FZX1C5XZ" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX37gK6" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wxU" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX1Cah9" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgpsKSW" resolve="wSelection" />
+              <ref role="3O_q_h" node="4aai$AqkXUO" resolve="wSelection" />
               <node concept="1S8S4T" id="J4FZX1Cdc7" role="3O_q_j">
                 <node concept="2BPB98" id="J4FZX1Cdc8" role="1S8S4V">
                   <node concept="3ZUYvv" id="J4FZX1ClYD" role="1_9fRO">
@@ -23940,8 +24193,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX1Cj3$" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX37voC" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX34dVw" resolve="RowsMessage" />
+                  <node concept="1sgJKr" id="4aai$At2wz6" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$AsX1WV" resolve="RowsMessage" />
                   </node>
                 </node>
               </node>
@@ -23998,10 +24251,7 @@
             <node concept="3O_q_g" id="J4FZX1EfTX" role="1_9egR">
               <ref role="3O_q_h" node="J4FZX1DgkZ" resolve="SelectionInit" />
               <node concept="1S7827" id="J4FZX1EiPj" role="3O_q_j">
-                <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
-              </node>
-              <node concept="1bx2Ym" id="J4FZX1ElMG" role="3O_q_j">
-                <property role="1a2WUg" value="J4FZX1NQ5H/FIRST" />
+                <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
               </node>
               <node concept="3ZUYvv" id="J4FZX1ErC0" role="3O_q_j">
                 <ref role="3ZUYvu" node="J4FZX1BL63" resolve="me" />
@@ -24038,8 +24288,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX1EF2f" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX37yiZ" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX36UNM" resolve="SelectionData" />
+                  <node concept="1sgJKr" id="4aai$ApG$2R" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApCCTc" resolve="SelectionData" />
                   </node>
                 </node>
               </node>
@@ -24070,8 +24320,8 @@
             <node concept="3XIRlf" id="J4FZX1EOlH" role="3XIRFZ">
               <property role="TrG5h" value="selection_data" />
               <node concept="3wxxNl" id="J4FZX1EUbZ" role="2C2TGm">
-                <node concept="1sgJKr" id="J4FZX37_cR" role="2umbIo">
-                  <ref role="1sgJKq" node="J4FZX36UNM" resolve="SelectionData" />
+                <node concept="1sgJKr" id="4aai$ApG$4l" role="2umbIo">
+                  <ref role="1sgJKq" node="4aai$ApCCTc" resolve="SelectionData" />
                 </node>
               </node>
               <node concept="1S8S4T" id="J4FZX1F04C" role="3XIe9u">
@@ -24081,8 +24331,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX1F5Y9" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX37_cS" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX36UNM" resolve="SelectionData" />
+                  <node concept="1sgJKr" id="4aai$ApG$5t" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApCCTc" resolve="SelectionData" />
                   </node>
                 </node>
               </node>
@@ -24092,7 +24342,7 @@
                 <node concept="3TlMhK" id="J4FZX1FioQ" role="3TlMhJ" />
                 <node concept="2qmXGp" id="J4FZX37FnA" role="3TlMhI">
                   <node concept="1E4Tgc" id="J4FZX37HRi" role="1ESnxz">
-                    <ref role="1E4Tge" node="J4FZX36UNN" resolve="can_end" />
+                    <ref role="1E4Tge" node="4aai$ApGuW0" resolve="can_end" />
                   </node>
                   <node concept="3ZVu4v" id="J4FZX1Fff9" role="1_9fRO">
                     <ref role="3ZVs_2" node="J4FZX1EOlH" resolve="selection_data" />
@@ -24104,7 +24354,7 @@
               <node concept="3O_q_g" id="J4FZX1FlIL" role="1_9egR">
                 <ref role="3O_q_h" node="J4FZX17o1P" resolve="ForwardTerminationMessage" />
                 <node concept="1S7827" id="J4FZX1FoDn" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX1FrAl" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX1BL5F" resolve="me" />
@@ -24161,12 +24411,12 @@
           <node concept="3XIRlf" id="J4FZX1Mfjl" role="3XIRFZ">
             <property role="TrG5h" value="result" />
             <node concept="3wxxNl" id="J4FZX1MidS" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX37KLq" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wzL" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX1Mo6R" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgpt1uA" resolve="wJoin" />
+              <ref role="3O_q_h" node="4aai$AqkYix" resolve="wJoin" />
               <node concept="1S8S4T" id="J4FZX1Mr1f" role="3O_q_j">
                 <node concept="2BPB98" id="J4FZX1Mr1g" role="1S8S4V">
                   <node concept="2Ysn8y" id="J4FZX1MzZ_" role="1_9fRO">
@@ -24176,8 +24426,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX1MwRZ" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX37NHn" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX34dVw" resolve="RowsMessage" />
+                  <node concept="1sgJKr" id="4aai$At2w$s" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$AsX1WV" resolve="RowsMessage" />
                   </node>
                 </node>
               </node>
@@ -24230,44 +24480,18 @@
         <property role="TrG5h" value="joinInit" />
         <node concept="19Rifw" id="J4FZX1LVQF" role="2C2TGm" />
         <node concept="3XIRFW" id="J4FZX1LVQG" role="3XIRFX">
-          <node concept="3XIRlf" id="J4FZX1Nrz6" role="3XIRFZ">
-            <property role="TrG5h" value="sources" />
-            <node concept="3wxxNl" id="J4FZX1TIGa" role="2C2TGm">
-              <node concept="rcJHQ" id="J4FZX1Nrz4" role="2umbIo">
-                <ref role="rcJHT" node="J4FZX0mk2Y" resolve="lp_id_t" />
-              </node>
-            </node>
-            <node concept="1bx2Ym" id="J4FZX1TNVA" role="3XIe9u">
-              <property role="1a2WUg" value="J4FZX1NQ5I/ALL" />
-            </node>
-          </node>
           <node concept="1_9egQ" id="J4FZX1TZUf" role="3XIRFZ">
             <node concept="3O_q_g" id="J4FZX1TZUd" role="1_9egR">
               <ref role="3O_q_h" node="J4FZX1IxO2" resolve="JoinInit" />
               <node concept="1S7827" id="J4FZX1UbAB" role="3O_q_j">
-                <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
-              </node>
-              <node concept="2wJmCr" id="J4FZX1Uhv9" role="3O_q_j">
-                <node concept="3ZVu4v" id="J4FZX1Ue$o" role="1_9fRO">
-                  <ref role="3ZVs_2" node="J4FZX1Nrz6" resolve="sources" />
-                </node>
-                <node concept="3TlMh9" id="J4FZX1UntA" role="2wJmCp">
-                  <property role="2hmy$m" value="0" />
-                </node>
-              </node>
-              <node concept="2wJmCr" id="J4FZX1Uwg6" role="3O_q_j">
-                <node concept="3TlMh9" id="J4FZX1Uwgd" role="2wJmCp">
-                  <property role="2hmy$m" value="1" />
-                </node>
-                <node concept="3ZVu4v" id="J4FZX1Utlz" role="1_9fRO">
-                  <ref role="3ZVs_2" node="J4FZX1Nrz6" resolve="sources" />
-                </node>
+                <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
               </node>
               <node concept="3ZUYvv" id="J4FZX1UG0i" role="3O_q_j">
                 <ref role="3ZUYvu" node="J4FZX1LVRf" resolve="me" />
               </node>
             </node>
           </node>
+          <node concept="3XISUE" id="4aai$AuocGd" role="3XIRFZ" />
         </node>
         <node concept="19RgSI" id="J4FZX1LVRc" role="1UOdpc">
           <property role="TrG5h" value="state" />
@@ -24298,8 +24522,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX1V9Qw" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX37QCO" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX36Nop" resolve="JoinData" />
+                  <node concept="1sgJKr" id="4aai$ApG$a2" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxU1" resolve="JoinData" />
                   </node>
                 </node>
               </node>
@@ -24330,8 +24554,8 @@
             <node concept="3XIRlf" id="J4FZX1VjtH" role="3XIRFZ">
               <property role="TrG5h" value="join_data" />
               <node concept="3wxxNl" id="J4FZX1VmoR" role="2C2TGm">
-                <node concept="1sgJKr" id="J4FZX37QCP" role="2umbIo">
-                  <ref role="1sgJKq" node="J4FZX36Nop" resolve="JoinData" />
+                <node concept="1sgJKr" id="4aai$ApG$bm" role="2umbIo">
+                  <ref role="1sgJKq" node="4aai$ApGxU1" resolve="JoinData" />
                 </node>
               </node>
               <node concept="1S8S4T" id="J4FZX1Vsho" role="3XIe9u">
@@ -24341,30 +24565,30 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX1Vy90" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX37QCQ" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX36Nop" resolve="JoinData" />
+                  <node concept="1sgJKr" id="4aai$ApG$ec" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxU1" resolve="JoinData" />
                   </node>
                 </node>
               </node>
             </node>
             <node concept="1_9egQ" id="J4FZX1VOs2" role="3XIRFZ">
-              <node concept="3pqW6w" id="J4FZX1VUlv" role="1_9egR">
-                <node concept="3TlMhK" id="J4FZX1VUmM" role="3TlMhJ" />
+              <node concept="3pqW6w" id="4aai$ApG$xI" role="1_9egR">
                 <node concept="2qmXGp" id="J4FZX1VRpq" role="3TlMhI">
                   <node concept="3ZVu4v" id="J4FZX1VOs0" role="1_9fRO">
                     <ref role="3ZVs_2" node="J4FZX1VjtH" resolve="join_data" />
                   </node>
                   <node concept="1E4Tgc" id="J4FZX37Wv5" role="1ESnxz">
-                    <ref role="1E4Tge" node="J4FZX36R7A" resolve="can_end" />
+                    <ref role="1E4Tge" node="4aai$ApGxU2" resolve="can_end" />
                   </node>
                 </node>
+                <node concept="3TlMhK" id="J4FZX1VUmM" role="3TlMhJ" />
               </node>
             </node>
             <node concept="1_9egQ" id="J4FZX1W0t2" role="3XIRFZ">
               <node concept="3O_q_g" id="J4FZX1W0t0" role="1_9egR">
                 <ref role="3O_q_h" node="J4FZX17o1P" resolve="ForwardTerminationMessage" />
                 <node concept="1S7827" id="J4FZX1W9fM" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX1W9fS" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX1LVQR" resolve="me" />
@@ -24409,12 +24633,14 @@
       <property role="TrG5h" value="dataSource" />
       <property role="1sy60r" value="3aQNPNd64Wc/NOOP" />
       <ref role="1sy604" node="J4FZX3eUPN" resolve="dataSource" />
+      <ref role="1sy605" node="4aai$AsX35x" resolve="DataSourceData" />
       <node concept="2uUgHn" id="3hefzVogQir" role="2LyG1a" />
     </node>
     <node concept="37lXYJ" id="3hefzVoh73l" role="37lXYW">
       <property role="2iLA8i" value="4" />
       <property role="TrG5h" value="selection" />
       <ref role="1sy604" node="J4FZX1BL5o" resolve="selection" />
+      <ref role="1sy605" node="4aai$ApCCTc" resolve="SelectionData" />
       <node concept="2uUgHn" id="3hefzVoh73n" role="2LyG1a" />
       <node concept="17Uvod" id="3hefzVohbr$" role="lGtFl">
         <property role="2qtEX9" value="name" />
@@ -24858,6 +25084,7 @@
       <property role="2iLA8i" value="7" />
       <property role="TrG5h" value="window" />
       <ref role="1sy604" node="J4FZX132MY" resolve="window" />
+      <ref role="1sy605" node="4aai$AsX2AN" resolve="WindowData" />
       <node concept="2uUgHn" id="3hefzVohBId" role="2LyG1a" />
       <node concept="17Uvod" id="3hefzVohKHh" role="lGtFl">
         <property role="2qtEX9" value="name" />
@@ -25131,12 +25358,12 @@
           <node concept="3XIRlf" id="J4FZX39NaM" role="3XIRFZ">
             <property role="TrG5h" value="list" />
             <node concept="3wxxNl" id="J4FZX39Q6Y" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX39NaL" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX350Tz" resolve="GroupsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2w$H" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX2k1" resolve="GroupsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX39T3w" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgpwANR" resolve="DeserializeGroupsMessage" />
+              <ref role="3O_q_h" node="4aai$Aql2c2" resolve="DeserializeGroupsMessage" />
               <node concept="1S8S4T" id="J4FZX3a1OJ" role="3O_q_j">
                 <node concept="2BPB98" id="J4FZX3a1OK" role="1S8S4V">
                   <node concept="3ZUYvv" id="J4FZX3aaBU" role="1_9fRO">
@@ -25144,8 +25371,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3a7FV" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3bhq7" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX3b1jR" resolve="GroupsMessage" />
+                  <node concept="1sgJKr" id="4aai$ApG$CG" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGyU$" resolve="GroupsMessage" />
                   </node>
                 </node>
               </node>
@@ -25154,12 +25381,12 @@
           <node concept="3XIRlf" id="J4FZX3aegn" role="3XIRFZ">
             <property role="TrG5h" value="result" />
             <node concept="3wxxNl" id="J4FZX3ah9p" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX3aegm" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wBW" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX3ak5K" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgptnFu" resolve="AggregateFunctionGroupedInput" />
+              <ref role="3O_q_h" node="4aai$Aql0bv" resolve="AggregateFunctionGroupedInput" />
               <node concept="3ZVu4v" id="J4FZX3an0m" role="3O_q_j">
                 <ref role="3ZVs_2" node="J4FZX39NaM" resolve="list" />
               </node>
@@ -25170,8 +25397,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3a_Bf" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3bznV" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApG$CT" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -25180,7 +25407,7 @@
               </node>
               <node concept="2qmXGp" id="J4FZX3btrS" role="3O_q_j">
                 <node concept="1E4Tgc" id="J4FZX3bwu4" role="1ESnxz">
-                  <ref role="1E4Tge" node="J4FZX3b5oS" resolve="schema" />
+                  <ref role="1E4Tge" node="4aai$ApGzG1" resolve="schema" />
                 </node>
                 <node concept="1S8S4T" id="J4FZX3bkrU" role="1_9fRO">
                   <node concept="2BPB98" id="J4FZX3bkrV" role="1S8S4V">
@@ -25189,8 +25416,8 @@
                     </node>
                   </node>
                   <node concept="3wxxNl" id="J4FZX3bqsi" role="1S8S4N">
-                    <node concept="1sgJKr" id="J4FZX3bnsB" role="2umbIo">
-                      <ref role="1sgJKq" node="J4FZX3b1jR" resolve="GroupsMessage" />
+                    <node concept="1sgJKr" id="4aai$ApG$Eq" role="2umbIo">
+                      <ref role="1sgJKq" node="4aai$ApGyU$" resolve="GroupsMessage" />
                     </node>
                   </node>
                 </node>
@@ -25246,10 +25473,7 @@
               <node concept="3O_q_g" id="J4FZX3bWS9" role="2Yskys">
                 <ref role="3O_q_h" node="J4FZX1Xtdg" resolve="AggregateFunctionInit" />
                 <node concept="1S7827" id="J4FZX3bZLR" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
-                </node>
-                <node concept="1bx2Ym" id="J4FZX3bZM9" role="3O_q_j">
-                  <property role="1a2WUg" value="J4FZX1NQ5H/FIRST" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX3cbuW" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX386tg" resolve="me" />
@@ -25287,8 +25511,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3chyf" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3ch$S" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX35Q95" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApG$GM" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -25319,8 +25543,8 @@
             <node concept="3XIRlf" id="J4FZX3chMq" role="3XIRFZ">
               <property role="TrG5h" value="agg_function_data" />
               <node concept="3wxxNl" id="J4FZX3ckGM" role="2C2TGm">
-                <node concept="1sgJKr" id="J4FZX3cOZD" role="2umbIo">
-                  <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                <node concept="1sgJKr" id="4aai$ApG$Ie" role="2umbIo">
+                  <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                 </node>
               </node>
               <node concept="1S8S4T" id="J4FZX3cwpE" role="3XIe9u">
@@ -25330,8 +25554,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3cAg0" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3cRXq" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApG$Ix" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -25340,11 +25564,11 @@
               <node concept="3pqW6w" id="J4FZX3d0JC" role="1_9egR">
                 <node concept="3TlMhK" id="J4FZX3d3Ha" role="3TlMhJ" />
                 <node concept="2qmXGp" id="J4FZX3cUUZ" role="3TlMhI">
-                  <node concept="1E4Tgc" id="J4FZX3cXPu" role="1ESnxz">
-                    <ref role="1E4Tge" node="J4FZX2GOS$" resolve="can_end" />
-                  </node>
                   <node concept="3ZVu4v" id="J4FZX3cGej" role="1_9fRO">
                     <ref role="3ZVs_2" node="J4FZX3chMq" resolve="agg_function_data" />
+                  </node>
+                  <node concept="1E4Tgc" id="4aai$ApG$M8" role="1ESnxz">
+                    <ref role="1E4Tge" node="4aai$ApGxRo" resolve="can_end" />
                   </node>
                 </node>
               </node>
@@ -25353,7 +25577,7 @@
               <node concept="3O_q_g" id="J4FZX3d9J3" role="1_9egR">
                 <ref role="3O_q_h" node="J4FZX17o1P" resolve="ForwardTerminationMessage" />
                 <node concept="1S7827" id="J4FZX3dcD9" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX3dcDt" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX386sS" resolve="me" />
@@ -25472,7 +25696,6 @@
       </node>
     </node>
     <node concept="IQpmJ" id="J4FZX3dcHJ" role="2QtU1L" />
-    <node concept="IQpmJ" id="J4FZX3dcHK" role="2QtU1L" />
     <node concept="1lj4MQ" id="J4FZX3do69" role="2QtU1L">
       <property role="TrG5h" value="sum" />
       <property role="2F6P9D" value="msg" />
@@ -25489,12 +25712,12 @@
           <node concept="3XIRlf" id="J4FZX3do6g" role="3XIRFZ">
             <property role="TrG5h" value="list" />
             <node concept="3wxxNl" id="J4FZX3do6h" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX3do6i" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX350Tz" resolve="GroupsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wCd" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX2k1" resolve="GroupsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX3do6j" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgpwANR" resolve="DeserializeGroupsMessage" />
+              <ref role="3O_q_h" node="4aai$Aql2c2" resolve="DeserializeGroupsMessage" />
               <node concept="1S8S4T" id="J4FZX3do6k" role="3O_q_j">
                 <node concept="2BPB98" id="J4FZX3do6l" role="1S8S4V">
                   <node concept="3ZUYvv" id="J4FZX3do6m" role="1_9fRO">
@@ -25502,8 +25725,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3do6n" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3do6o" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX3b1jR" resolve="GroupsMessage" />
+                  <node concept="1sgJKr" id="4aai$ApG$Oe" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGyU$" resolve="GroupsMessage" />
                   </node>
                 </node>
               </node>
@@ -25512,12 +25735,12 @@
           <node concept="3XIRlf" id="J4FZX3do6p" role="3XIRFZ">
             <property role="TrG5h" value="result" />
             <node concept="3wxxNl" id="J4FZX3do6q" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX3do6r" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wCM" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX3do6s" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgptnFu" resolve="AggregateFunctionGroupedInput" />
+              <ref role="3O_q_h" node="4aai$Aql0bv" resolve="AggregateFunctionGroupedInput" />
               <node concept="3ZVu4v" id="J4FZX3do6t" role="3O_q_j">
                 <ref role="3ZVs_2" node="J4FZX3do6g" resolve="list" />
               </node>
@@ -25528,8 +25751,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3do6x" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3do6y" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApG$Or" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -25538,7 +25761,7 @@
               </node>
               <node concept="2qmXGp" id="J4FZX3do6$" role="3O_q_j">
                 <node concept="1E4Tgc" id="J4FZX3do6_" role="1ESnxz">
-                  <ref role="1E4Tge" node="J4FZX3b5oS" resolve="schema" />
+                  <ref role="1E4Tge" node="4aai$ApGzG1" resolve="schema" />
                 </node>
                 <node concept="1S8S4T" id="J4FZX3do6A" role="1_9fRO">
                   <node concept="2BPB98" id="J4FZX3do6B" role="1S8S4V">
@@ -25547,8 +25770,8 @@
                     </node>
                   </node>
                   <node concept="3wxxNl" id="J4FZX3do6D" role="1S8S4N">
-                    <node concept="1sgJKr" id="J4FZX3do6E" role="2umbIo">
-                      <ref role="1sgJKq" node="J4FZX3b1jR" resolve="GroupsMessage" />
+                    <node concept="1sgJKr" id="4aai$ApG$Rn" role="2umbIo">
+                      <ref role="1sgJKq" node="4aai$ApGyU$" resolve="GroupsMessage" />
                     </node>
                   </node>
                 </node>
@@ -25604,10 +25827,7 @@
               <node concept="3O_q_g" id="J4FZX3do72" role="2Yskys">
                 <ref role="3O_q_h" node="J4FZX1Xtdg" resolve="AggregateFunctionInit" />
                 <node concept="1S7827" id="J4FZX3do73" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
-                </node>
-                <node concept="1bx2Ym" id="J4FZX3do74" role="3O_q_j">
-                  <property role="1a2WUg" value="J4FZX1NQ5H/FIRST" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX3do75" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX3do79" resolve="me" />
@@ -25645,8 +25865,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3do7l" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3do7m" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX35Q95" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApG$Vn" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -25677,8 +25897,8 @@
             <node concept="3XIRlf" id="J4FZX3do7y" role="3XIRFZ">
               <property role="TrG5h" value="agg_function_data" />
               <node concept="3wxxNl" id="J4FZX3do7z" role="2C2TGm">
-                <node concept="1sgJKr" id="J4FZX3do7$" role="2umbIo">
-                  <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                <node concept="1sgJKr" id="4aai$ApG$XX" role="2umbIo">
+                  <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                 </node>
               </node>
               <node concept="1S8S4T" id="J4FZX3do7_" role="3XIe9u">
@@ -25688,8 +25908,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3do7C" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3do7D" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApG$Ye" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -25697,9 +25917,9 @@
             <node concept="1_9egQ" id="J4FZX3do7E" role="3XIRFZ">
               <node concept="3pqW6w" id="J4FZX3do7F" role="1_9egR">
                 <node concept="3TlMhK" id="J4FZX3do7G" role="3TlMhJ" />
-                <node concept="2qmXGp" id="J4FZX3do7H" role="3TlMhI">
-                  <node concept="1E4Tgc" id="J4FZX3do7I" role="1ESnxz">
-                    <ref role="1E4Tge" node="J4FZX2GOS$" resolve="can_end" />
+                <node concept="2qmXGp" id="4aai$ApG_aA" role="3TlMhI">
+                  <node concept="1E4Tgc" id="4aai$ApG_cC" role="1ESnxz">
+                    <ref role="1E4Tge" node="4aai$ApGxRo" resolve="can_end" />
                   </node>
                   <node concept="3ZVu4v" id="J4FZX3do7J" role="1_9fRO">
                     <ref role="3ZVs_2" node="J4FZX3do7y" resolve="agg_function_data" />
@@ -25711,7 +25931,7 @@
               <node concept="3O_q_g" id="J4FZX3do7L" role="1_9egR">
                 <ref role="3O_q_h" node="J4FZX17o1P" resolve="ForwardTerminationMessage" />
                 <node concept="1S7827" id="J4FZX3do7M" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX3do7N" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX3do7P" resolve="me" />
@@ -25846,12 +26066,12 @@
           <node concept="3XIRlf" id="J4FZX3dCni" role="3XIRFZ">
             <property role="TrG5h" value="list" />
             <node concept="3wxxNl" id="J4FZX3dCnj" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX3dCnk" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX350Tz" resolve="GroupsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wD5" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX2k1" resolve="GroupsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX3dCnl" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgpwANR" resolve="DeserializeGroupsMessage" />
+              <ref role="3O_q_h" node="4aai$Aql2c2" resolve="DeserializeGroupsMessage" />
               <node concept="1S8S4T" id="J4FZX3dCnm" role="3O_q_j">
                 <node concept="2BPB98" id="J4FZX3dCnn" role="1S8S4V">
                   <node concept="3ZUYvv" id="J4FZX3dCno" role="1_9fRO">
@@ -25859,8 +26079,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3dCnp" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3dCnq" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX3b1jR" resolve="GroupsMessage" />
+                  <node concept="1sgJKr" id="4aai$ApG_fL" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGyU$" resolve="GroupsMessage" />
                   </node>
                 </node>
               </node>
@@ -25869,12 +26089,12 @@
           <node concept="3XIRlf" id="J4FZX3dCnr" role="3XIRFZ">
             <property role="TrG5h" value="result" />
             <node concept="3wxxNl" id="J4FZX3dCns" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX3dCnt" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wDA" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX3dCnu" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgptnFu" resolve="AggregateFunctionGroupedInput" />
+              <ref role="3O_q_h" node="4aai$Aql0bv" resolve="AggregateFunctionGroupedInput" />
               <node concept="3ZVu4v" id="J4FZX3dCnv" role="3O_q_j">
                 <ref role="3ZVs_2" node="J4FZX3dCni" resolve="list" />
               </node>
@@ -25885,8 +26105,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3dCnz" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3dCn$" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApG_gA" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -25895,7 +26115,7 @@
               </node>
               <node concept="2qmXGp" id="J4FZX3dCnA" role="3O_q_j">
                 <node concept="1E4Tgc" id="J4FZX3dCnB" role="1ESnxz">
-                  <ref role="1E4Tge" node="J4FZX3b5oS" resolve="schema" />
+                  <ref role="1E4Tge" node="4aai$ApGzG1" resolve="schema" />
                 </node>
                 <node concept="1S8S4T" id="J4FZX3dCnC" role="1_9fRO">
                   <node concept="2BPB98" id="J4FZX3dCnD" role="1S8S4V">
@@ -25904,8 +26124,8 @@
                     </node>
                   </node>
                   <node concept="3wxxNl" id="J4FZX3dCnF" role="1S8S4N">
-                    <node concept="1sgJKr" id="J4FZX3dCnG" role="2umbIo">
-                      <ref role="1sgJKq" node="J4FZX3b1jR" resolve="GroupsMessage" />
+                    <node concept="1sgJKr" id="4aai$ApG_iv" role="2umbIo">
+                      <ref role="1sgJKq" node="4aai$ApGyU$" resolve="GroupsMessage" />
                     </node>
                   </node>
                 </node>
@@ -25961,10 +26181,7 @@
               <node concept="3O_q_g" id="J4FZX3dCo4" role="2Yskys">
                 <ref role="3O_q_h" node="J4FZX1Xtdg" resolve="AggregateFunctionInit" />
                 <node concept="1S7827" id="J4FZX3dCo5" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
-                </node>
-                <node concept="1bx2Ym" id="J4FZX3dCo6" role="3O_q_j">
-                  <property role="1a2WUg" value="J4FZX1NQ5H/FIRST" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX3dCo7" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX3dCob" resolve="me" />
@@ -26002,8 +26219,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3dCon" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3dCoo" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX35Q95" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApG_kR" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -26034,8 +26251,8 @@
             <node concept="3XIRlf" id="J4FZX3dCo$" role="3XIRFZ">
               <property role="TrG5h" value="agg_function_data" />
               <node concept="3wxxNl" id="J4FZX3dCo_" role="2C2TGm">
-                <node concept="1sgJKr" id="J4FZX3dCoA" role="2umbIo">
-                  <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                <node concept="1sgJKr" id="4aai$ApG_ml" role="2umbIo">
+                  <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                 </node>
               </node>
               <node concept="1S8S4T" id="J4FZX3dCoB" role="3XIe9u">
@@ -26045,8 +26262,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3dCoE" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3dCoF" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApG_nv" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -26054,9 +26271,9 @@
             <node concept="1_9egQ" id="J4FZX3dCoG" role="3XIRFZ">
               <node concept="3pqW6w" id="J4FZX3dCoH" role="1_9egR">
                 <node concept="3TlMhK" id="J4FZX3dCoI" role="3TlMhJ" />
-                <node concept="2qmXGp" id="J4FZX3dCoJ" role="3TlMhI">
-                  <node concept="1E4Tgc" id="J4FZX3dCoK" role="1ESnxz">
-                    <ref role="1E4Tge" node="J4FZX2GOS$" resolve="can_end" />
+                <node concept="2qmXGp" id="4aai$ApG_ua" role="3TlMhI">
+                  <node concept="1E4Tgc" id="4aai$ApG_vz" role="1ESnxz">
+                    <ref role="1E4Tge" node="4aai$ApGxRo" resolve="can_end" />
                   </node>
                   <node concept="3ZVu4v" id="J4FZX3dCoL" role="1_9fRO">
                     <ref role="3ZVs_2" node="J4FZX3dCo$" resolve="agg_function_data" />
@@ -26068,7 +26285,7 @@
               <node concept="3O_q_g" id="J4FZX3dCoN" role="1_9egR">
                 <ref role="3O_q_h" node="J4FZX17o1P" resolve="ForwardTerminationMessage" />
                 <node concept="1S7827" id="J4FZX3dCoO" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX3dCoP" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX3dCoR" resolve="me" />
@@ -26203,12 +26420,12 @@
           <node concept="3XIRlf" id="J4FZX3dO9b" role="3XIRFZ">
             <property role="TrG5h" value="list" />
             <node concept="3wxxNl" id="J4FZX3dO9c" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX3dO9d" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX350Tz" resolve="GroupsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wDX" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX2k1" resolve="GroupsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX3dO9e" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgpwANR" resolve="DeserializeGroupsMessage" />
+              <ref role="3O_q_h" node="4aai$Aql2c2" resolve="DeserializeGroupsMessage" />
               <node concept="1S8S4T" id="J4FZX3dO9f" role="3O_q_j">
                 <node concept="2BPB98" id="J4FZX3dO9g" role="1S8S4V">
                   <node concept="3ZUYvv" id="J4FZX3dO9h" role="1_9fRO">
@@ -26216,8 +26433,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3dO9i" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3dO9j" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX3b1jR" resolve="GroupsMessage" />
+                  <node concept="1sgJKr" id="4aai$ApG_x4" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGyU$" resolve="GroupsMessage" />
                   </node>
                 </node>
               </node>
@@ -26226,12 +26443,12 @@
           <node concept="3XIRlf" id="J4FZX3dO9k" role="3XIRFZ">
             <property role="TrG5h" value="result" />
             <node concept="3wxxNl" id="J4FZX3dO9l" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX3dO9m" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wGg" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX3dO9n" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgptnFu" resolve="AggregateFunctionGroupedInput" />
+              <ref role="3O_q_h" node="4aai$Aql0bv" resolve="AggregateFunctionGroupedInput" />
               <node concept="3ZVu4v" id="J4FZX3dO9o" role="3O_q_j">
                 <ref role="3ZVs_2" node="J4FZX3dO9b" resolve="list" />
               </node>
@@ -26242,8 +26459,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3dO9s" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3dO9t" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApG_xl" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -26252,7 +26469,7 @@
               </node>
               <node concept="2qmXGp" id="J4FZX3dO9v" role="3O_q_j">
                 <node concept="1E4Tgc" id="J4FZX3dO9w" role="1ESnxz">
-                  <ref role="1E4Tge" node="J4FZX3b5oS" resolve="schema" />
+                  <ref role="1E4Tge" node="4aai$ApGzG1" resolve="schema" />
                 </node>
                 <node concept="1S8S4T" id="J4FZX3dO9x" role="1_9fRO">
                   <node concept="2BPB98" id="J4FZX3dO9y" role="1S8S4V">
@@ -26261,8 +26478,8 @@
                     </node>
                   </node>
                   <node concept="3wxxNl" id="J4FZX3dO9$" role="1S8S4N">
-                    <node concept="1sgJKr" id="J4FZX3dO9_" role="2umbIo">
-                      <ref role="1sgJKq" node="J4FZX3b1jR" resolve="GroupsMessage" />
+                    <node concept="1sgJKr" id="4aai$ApG_z$" role="2umbIo">
+                      <ref role="1sgJKq" node="4aai$ApGyU$" resolve="GroupsMessage" />
                     </node>
                   </node>
                 </node>
@@ -26318,10 +26535,7 @@
               <node concept="3O_q_g" id="J4FZX3dO9X" role="2Yskys">
                 <ref role="3O_q_h" node="J4FZX1Xtdg" resolve="AggregateFunctionInit" />
                 <node concept="1S7827" id="J4FZX3dO9Y" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
-                </node>
-                <node concept="1bx2Ym" id="J4FZX3dO9Z" role="3O_q_j">
-                  <property role="1a2WUg" value="J4FZX1NQ5H/FIRST" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX3dOa0" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX3dOa4" resolve="me" />
@@ -26359,8 +26573,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3dOag" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3dOah" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX35Q95" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApG_AV" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -26391,8 +26605,8 @@
             <node concept="3XIRlf" id="J4FZX3dOat" role="3XIRFZ">
               <property role="TrG5h" value="agg_function_data" />
               <node concept="3wxxNl" id="J4FZX3dOau" role="2C2TGm">
-                <node concept="1sgJKr" id="J4FZX3dOav" role="2umbIo">
-                  <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                <node concept="1sgJKr" id="4aai$ApG_BM" role="2umbIo">
+                  <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                 </node>
               </node>
               <node concept="1S8S4T" id="J4FZX3dOaw" role="3XIe9u">
@@ -26402,8 +26616,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3dOaz" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3dOa$" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApG_Cs" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -26411,9 +26625,9 @@
             <node concept="1_9egQ" id="J4FZX3dOa_" role="3XIRFZ">
               <node concept="3pqW6w" id="J4FZX3dOaA" role="1_9egR">
                 <node concept="3TlMhK" id="J4FZX3dOaB" role="3TlMhJ" />
-                <node concept="2qmXGp" id="J4FZX3dOaC" role="3TlMhI">
-                  <node concept="1E4Tgc" id="J4FZX3dOaD" role="1ESnxz">
-                    <ref role="1E4Tge" node="J4FZX2GOS$" resolve="can_end" />
+                <node concept="2qmXGp" id="4aai$ApG_RJ" role="3TlMhI">
+                  <node concept="1E4Tgc" id="4aai$ApG_Vu" role="1ESnxz">
+                    <ref role="1E4Tge" node="4aai$ApGxRo" resolve="can_end" />
                   </node>
                   <node concept="3ZVu4v" id="J4FZX3dOaE" role="1_9fRO">
                     <ref role="3ZVs_2" node="J4FZX3dOat" resolve="agg_function_data" />
@@ -26425,7 +26639,7 @@
               <node concept="3O_q_g" id="J4FZX3dOaG" role="1_9egR">
                 <ref role="3O_q_h" node="J4FZX17o1P" resolve="ForwardTerminationMessage" />
                 <node concept="1S7827" id="J4FZX3dOaH" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX3dOaI" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX3dOaK" resolve="me" />
@@ -26560,12 +26774,12 @@
           <node concept="3XIRlf" id="J4FZX3e3O_" role="3XIRFZ">
             <property role="TrG5h" value="list" />
             <node concept="3wxxNl" id="J4FZX3e3OA" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX3e3OB" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX350Tz" resolve="GroupsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wHe" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX2k1" resolve="GroupsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX3e3OC" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgpwANR" resolve="DeserializeGroupsMessage" />
+              <ref role="3O_q_h" node="4aai$Aql2c2" resolve="DeserializeGroupsMessage" />
               <node concept="1S8S4T" id="J4FZX3e3OD" role="3O_q_j">
                 <node concept="2BPB98" id="J4FZX3e3OE" role="1S8S4V">
                   <node concept="3ZUYvv" id="J4FZX3e3OF" role="1_9fRO">
@@ -26573,8 +26787,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3e3OG" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3e3OH" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX3b1jR" resolve="GroupsMessage" />
+                  <node concept="1sgJKr" id="4aai$ApG_Ya" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGyU$" resolve="GroupsMessage" />
                   </node>
                 </node>
               </node>
@@ -26583,12 +26797,12 @@
           <node concept="3XIRlf" id="J4FZX3e3OI" role="3XIRFZ">
             <property role="TrG5h" value="result" />
             <node concept="3wxxNl" id="J4FZX3e3OJ" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX3e3OK" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wHv" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX3e3OL" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgptnFu" resolve="AggregateFunctionGroupedInput" />
+              <ref role="3O_q_h" node="4aai$Aql0bv" resolve="AggregateFunctionGroupedInput" />
               <node concept="3ZVu4v" id="J4FZX3e3OM" role="3O_q_j">
                 <ref role="3ZVs_2" node="J4FZX3e3O_" resolve="list" />
               </node>
@@ -26599,8 +26813,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3e3OQ" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3e3OR" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApGA0X" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -26609,7 +26823,7 @@
               </node>
               <node concept="2qmXGp" id="J4FZX3e3OT" role="3O_q_j">
                 <node concept="1E4Tgc" id="J4FZX3e3OU" role="1ESnxz">
-                  <ref role="1E4Tge" node="J4FZX3b5oS" resolve="schema" />
+                  <ref role="1E4Tge" node="4aai$ApGzG1" resolve="schema" />
                 </node>
                 <node concept="1S8S4T" id="J4FZX3e3OV" role="1_9fRO">
                   <node concept="2BPB98" id="J4FZX3e3OW" role="1S8S4V">
@@ -26618,8 +26832,8 @@
                     </node>
                   </node>
                   <node concept="3wxxNl" id="J4FZX3e3OY" role="1S8S4N">
-                    <node concept="1sgJKr" id="J4FZX3e3OZ" role="2umbIo">
-                      <ref role="1sgJKq" node="J4FZX3b1jR" resolve="GroupsMessage" />
+                    <node concept="1sgJKr" id="4aai$ApGA21" role="2umbIo">
+                      <ref role="1sgJKq" node="4aai$ApGyU$" resolve="GroupsMessage" />
                     </node>
                   </node>
                 </node>
@@ -26675,10 +26889,7 @@
               <node concept="3O_q_g" id="J4FZX3e3Pn" role="2Yskys">
                 <ref role="3O_q_h" node="J4FZX1Xtdg" resolve="AggregateFunctionInit" />
                 <node concept="1S7827" id="J4FZX3e3Po" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
-                </node>
-                <node concept="1bx2Ym" id="J4FZX3e3Pp" role="3O_q_j">
-                  <property role="1a2WUg" value="J4FZX1NQ5H/FIRST" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX3e3Pq" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX3e3Pu" resolve="me" />
@@ -26716,8 +26927,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3e3PE" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3e3PF" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX35Q95" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApGA5N" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -26748,8 +26959,8 @@
             <node concept="3XIRlf" id="J4FZX3e3PR" role="3XIRFZ">
               <property role="TrG5h" value="agg_function_data" />
               <node concept="3wxxNl" id="J4FZX3e3PS" role="2C2TGm">
-                <node concept="1sgJKr" id="J4FZX3e3PT" role="2umbIo">
-                  <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                <node concept="1sgJKr" id="4aai$ApGA7f" role="2umbIo">
+                  <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                 </node>
               </node>
               <node concept="1S8S4T" id="J4FZX3e3PU" role="3XIe9u">
@@ -26759,8 +26970,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3e3PX" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3e3PY" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
+                  <node concept="1sgJKr" id="4aai$ApGA7y" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
                   </node>
                 </node>
               </node>
@@ -26769,11 +26980,11 @@
               <node concept="3pqW6w" id="J4FZX3e3Q0" role="1_9egR">
                 <node concept="3TlMhK" id="J4FZX3e3Q1" role="3TlMhJ" />
                 <node concept="2qmXGp" id="J4FZX3e3Q2" role="3TlMhI">
-                  <node concept="1E4Tgc" id="J4FZX3e3Q3" role="1ESnxz">
-                    <ref role="1E4Tge" node="J4FZX2GOS$" resolve="can_end" />
-                  </node>
                   <node concept="3ZVu4v" id="J4FZX3e3Q4" role="1_9fRO">
                     <ref role="3ZVs_2" node="J4FZX3e3PR" resolve="agg_function_data" />
+                  </node>
+                  <node concept="1E4Tgc" id="4aai$ApGAdU" role="1ESnxz">
+                    <ref role="1E4Tge" node="4aai$ApGxRo" resolve="can_end" />
                   </node>
                 </node>
               </node>
@@ -26782,7 +26993,7 @@
               <node concept="3O_q_g" id="J4FZX3e3Q6" role="1_9egR">
                 <ref role="3O_q_h" node="J4FZX17o1P" resolve="ForwardTerminationMessage" />
                 <node concept="1S7827" id="J4FZX3e3Q7" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX3e3Q8" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX3e3Qa" resolve="me" />
@@ -26901,7 +27112,6 @@
       </node>
     </node>
     <node concept="IQpmJ" id="J4FZX3e1cD" role="2QtU1L" />
-    <node concept="IQpmJ" id="J4FZX3f5EW" role="2QtU1L" />
     <node concept="1lj4MQ" id="J4FZX3ffri" role="2QtU1L">
       <property role="TrG5h" value="groupBy" />
       <property role="2F6P9D" value="msg" />
@@ -26918,12 +27128,12 @@
           <node concept="3XIRlf" id="J4FZX3fQas" role="3XIRFZ">
             <property role="TrG5h" value="result" />
             <node concept="3wxxNl" id="J4FZX3fT6K" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX3fQar" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX350Tz" resolve="GroupsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wIB" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX2k1" resolve="GroupsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX3fV4l" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgpxI0z" resolve="wGroupBy" />
+              <ref role="3O_q_h" node="4aai$AqkYDY" resolve="wGroupBy" />
               <node concept="1S8S4T" id="J4FZX3fXYK" role="3O_q_j">
                 <node concept="2BPB98" id="J4FZX3fXYL" role="1S8S4V">
                   <node concept="3ZUYvv" id="J4FZX3g3Nb" role="1_9fRO">
@@ -26931,8 +27141,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3g0Td" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3g05I" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX34dVw" resolve="RowsMessage" />
+                  <node concept="1sgJKr" id="4aai$At2wJi" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$AsX1WV" resolve="RowsMessage" />
                   </node>
                 </node>
               </node>
@@ -26989,10 +27199,7 @@
             <node concept="3O_q_g" id="J4FZX3jkq5" role="1_9egR">
               <ref role="3O_q_h" node="J4FZX3hode" resolve="GroupByInit" />
               <node concept="1S7827" id="J4FZX3jnmv" role="3O_q_j">
-                <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
-              </node>
-              <node concept="1bx2Ym" id="J4FZX3jnmM" role="3O_q_j">
-                <property role="1a2WUg" value="J4FZX1NQ5H/FIRST" />
+                <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
               </node>
               <node concept="3ZUYvv" id="J4FZX3jnnk" role="3O_q_j">
                 <ref role="3ZUYvu" node="J4FZX3ffrX" resolve="me" />
@@ -27029,8 +27236,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3jqu9" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3jqtu" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX3i4a3" resolve="GroupByData" />
+                  <node concept="1sgJKr" id="4aai$ApGAh9" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGyeA" resolve="GroupByData" />
                   </node>
                 </node>
               </node>
@@ -27061,8 +27268,8 @@
             <node concept="3XIRlf" id="J4FZX3jqNz" role="3XIRFZ">
               <property role="TrG5h" value="group_by_data" />
               <node concept="3wxxNl" id="J4FZX3jtHi" role="2C2TGm">
-                <node concept="1sgJKr" id="J4FZX3jqNy" role="2umbIo">
-                  <ref role="1sgJKq" node="J4FZX3i4a3" resolve="GroupByData" />
+                <node concept="1sgJKr" id="4aai$ApGAkM" role="2umbIo">
+                  <ref role="1sgJKq" node="4aai$ApGyeA" resolve="GroupByData" />
                 </node>
               </node>
               <node concept="1S8S4T" id="J4FZX3jzAf" role="3XIe9u">
@@ -27072,8 +27279,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3jD2W" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3jAx$" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX3i4a3" resolve="GroupByData" />
+                  <node concept="1sgJKr" id="4aai$ApGAk9" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGyeA" resolve="GroupByData" />
                   </node>
                 </node>
               </node>
@@ -27083,7 +27290,7 @@
                 <node concept="3TlMhK" id="J4FZX3jNC$" role="3TlMhJ" />
                 <node concept="2qmXGp" id="J4FZX3jKFI" role="3TlMhI">
                   <node concept="1E4Tgc" id="J4FZX3jMOa" role="1ESnxz">
-                    <ref role="1E4Tge" node="J4FZX3i8pc" resolve="can_end" />
+                    <ref role="1E4Tge" node="4aai$ApGyeB" resolve="can_end" />
                   </node>
                   <node concept="3ZVu4v" id="J4FZX3jHL7" role="1_9fRO">
                     <ref role="3ZVs_2" node="J4FZX3jqNz" resolve="group_by_data" />
@@ -27095,7 +27302,7 @@
               <node concept="3O_q_g" id="J4FZX3jQNa" role="1_9egR">
                 <ref role="3O_q_h" node="J4FZX17o1P" resolve="ForwardTerminationMessage" />
                 <node concept="1S7827" id="J4FZX3jTH1" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX3jTQ9" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX3ffr_" resolve="me" />
@@ -27185,7 +27392,6 @@
       </node>
     </node>
     <node concept="IQpmJ" id="J4FZX3f5EX" role="2QtU1L" />
-    <node concept="IQpmJ" id="J4FZX3etZt" role="2QtU1L" />
     <node concept="1lj4MQ" id="J4FZX3f$Ii" role="2QtU1L">
       <property role="TrG5h" value="orderBy" />
       <property role="2F6P9D" value="msg" />
@@ -27202,12 +27408,12 @@
           <node concept="3XIRlf" id="J4FZX3gEVb" role="3XIRFZ">
             <property role="TrG5h" value="result" />
             <node concept="3wxxNl" id="J4FZX3gHPV" role="2C2TGm">
-              <node concept="1sgJKr" id="J4FZX3gEVa" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
+              <node concept="1sgJKr" id="4aai$At2wJD" role="2umbIo">
+                <ref role="1sgJKq" node="4aai$AsX1dq" resolve="RowsLinkedList" />
               </node>
             </node>
             <node concept="3O_q_g" id="J4FZX3gNDp" role="3XIe9u">
-              <ref role="3O_q_h" node="4uIaRgpy0j_" resolve="wOrderBy" />
+              <ref role="3O_q_h" node="4aai$AqkYOK" resolve="wOrderBy" />
               <node concept="1S8S4T" id="J4FZX3gQ$u" role="3O_q_j">
                 <node concept="2BPB98" id="J4FZX3gQ$v" role="1S8S4V">
                   <node concept="3ZUYvv" id="J4FZX3gZlf" role="1_9fRO">
@@ -27215,8 +27421,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3gWqN" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3gTvr" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX34dVw" resolve="RowsMessage" />
+                  <node concept="1sgJKr" id="4aai$At2wKe" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$AsX1WV" resolve="RowsMessage" />
                   </node>
                 </node>
               </node>
@@ -27273,10 +27479,7 @@
             <node concept="3O_q_g" id="J4FZX3jU2w" role="1_9egR">
               <ref role="3O_q_h" node="J4FZX3iIWg" resolve="OrderByInit" />
               <node concept="1S7827" id="J4FZX3jWYK" role="3O_q_j">
-                <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
-              </node>
-              <node concept="1bx2Ym" id="J4FZX3jWYY" role="3O_q_j">
-                <property role="1a2WUg" value="J4FZX1NQ5H/FIRST" />
+                <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
               </node>
               <node concept="3ZUYvv" id="J4FZX3jWZt" role="3O_q_j">
                 <ref role="3ZUYvu" node="J4FZX3f$IX" resolve="me" />
@@ -27313,8 +27516,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3k09p" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3k08I" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX3iuDl" resolve="OrderByData" />
+                  <node concept="1sgJKr" id="4aai$ApGAoo" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGyeI" resolve="OrderByData" />
                   </node>
                 </node>
               </node>
@@ -27345,8 +27548,8 @@
             <node concept="3XIRlf" id="J4FZX3k0uN" role="3XIRFZ">
               <property role="TrG5h" value="order_by_data" />
               <node concept="3wxxNl" id="J4FZX3k3pF" role="2C2TGm">
-                <node concept="1sgJKr" id="J4FZX3k0uM" role="2umbIo">
-                  <ref role="1sgJKq" node="J4FZX3iuDl" resolve="OrderByData" />
+                <node concept="1sgJKr" id="4aai$ApGAru" role="2umbIo">
+                  <ref role="1sgJKq" node="4aai$ApGyeI" resolve="OrderByData" />
                 </node>
               </node>
               <node concept="1S8S4T" id="J4FZX3k9hd" role="3XIe9u">
@@ -27356,8 +27559,8 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3kf7j" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3kccL" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX3iuDl" resolve="OrderByData" />
+                  <node concept="1sgJKr" id="4aai$ApGArv" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$ApGyeI" resolve="OrderByData" />
                   </node>
                 </node>
               </node>
@@ -27366,11 +27569,11 @@
               <node concept="3pqW6w" id="J4FZX3kr4S" role="1_9egR">
                 <node concept="3TlMhK" id="J4FZX3ku02" role="3TlMhJ" />
                 <node concept="2qmXGp" id="J4FZX3koa0" role="3TlMhI">
-                  <node concept="1E4Tgc" id="J4FZX3kr4B" role="1ESnxz">
-                    <ref role="1E4Tge" node="J4FZX3iuDm" resolve="can_end" />
-                  </node>
                   <node concept="3ZVu4v" id="J4FZX3klfd" role="1_9fRO">
                     <ref role="3ZVs_2" node="J4FZX3k0uN" resolve="order_by_data" />
+                  </node>
+                  <node concept="1E4Tgc" id="4aai$ApGAxf" role="1ESnxz">
+                    <ref role="1E4Tge" node="4aai$ApGyeJ" resolve="can_end" />
                   </node>
                 </node>
               </node>
@@ -27379,7 +27582,7 @@
               <node concept="3O_q_g" id="J4FZX3kz9_" role="1_9egR">
                 <ref role="3O_q_h" node="J4FZX17o1P" resolve="ForwardTerminationMessage" />
                 <node concept="1S7827" id="J4FZX3kA3d" role="3O_q_j">
-                  <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
+                  <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
                 </node>
                 <node concept="3ZUYvv" id="J4FZX3kA3t" role="3O_q_j">
                   <ref role="3ZUYvu" node="J4FZX3f$I_" resolve="me" />
@@ -27468,7 +27671,6 @@
         </node>
       </node>
     </node>
-    <node concept="IQpmJ" id="J4FZX3eGNZ" role="2QtU1L" />
     <node concept="IQpmJ" id="J4FZX3eCOW" role="2QtU1L" />
     <node concept="1lj4MQ" id="J4FZX3eUPN" role="2QtU1L">
       <property role="TrG5h" value="dataSource" />
@@ -27487,7 +27689,7 @@
             <node concept="3O_q_g" id="J4FZX3nbR4" role="1_9egR">
               <ref role="3O_q_h" node="J4FZX3kEMH" resolve="DataIngestion" />
               <node concept="1S7827" id="J4FZX3neNA" role="3O_q_j">
-                <ref role="1S7826" node="J4FZX0xgSr" resolve="topology" />
+                <ref role="1S7826" node="4aai$AqS3si" resolve="topology" />
               </node>
               <node concept="3ZUYvv" id="J4FZX3neNH" role="3O_q_j">
                 <ref role="3ZUYvu" node="J4FZX3eUQn" resolve="me" />
@@ -27502,17 +27704,17 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3neOE" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3neOu" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX3l9ar" resolve="DataSourceData" />
+                  <node concept="1sgJKr" id="4aai$At2wKx" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$AsX35y" resolve="DataSourceData" />
                   </node>
                 </node>
               </node>
               <node concept="1S7827" id="J4FZX3nePR" role="3O_q_j">
-                <ref role="1S7826" node="J4FZX3mi2q" resolve="file" />
+                <ref role="1S7826" node="4aai$AqS2lT" resolve="file" />
               </node>
               <node concept="YInwV" id="J4FZX3neQC" role="3O_q_j">
                 <node concept="1S7827" id="J4FZX3nf4o" role="1_9fRO">
-                  <ref role="1S7826" node="J4FZX145K5" resolve="schema" />
+                  <ref role="1S7826" node="4aai$AqS4QM" resolve="schema" />
                 </node>
               </node>
             </node>
@@ -27548,15 +27750,15 @@
               </node>
               <node concept="YInwV" id="J4FZX3opgI" role="3O_q_j">
                 <node concept="1S7827" id="J4FZX3oph0" role="1_9fRO">
-                  <ref role="1S7826" node="J4FZX3mi2q" resolve="file" />
+                  <ref role="1S7826" node="4aai$AqS2lT" resolve="file" />
                 </node>
               </node>
               <node concept="1S7827" id="J4FZX3oph_" role="3O_q_j">
-                <ref role="1S7826" node="J4FZX3o8xa" resolve="INPUT_FILE" />
+                <ref role="1S7826" node="4aai$AqS5SR" resolve="INPUT_FILE" />
               </node>
               <node concept="YInwV" id="J4FZX3opir" role="3O_q_j">
                 <node concept="1S7827" id="J4FZX3op_z" role="1_9fRO">
-                  <ref role="1S7826" node="J4FZX145K5" resolve="schema" />
+                  <ref role="1S7826" node="4aai$AqS4QM" resolve="schema" />
                 </node>
               </node>
             </node>
@@ -27585,7 +27787,7 @@
             <node concept="3O_q_g" id="J4FZX3ng6N" role="1_9egR">
               <ref role="3O_q_h" node="J4FZX3mH6i" resolve="DataIngestionCleanup" />
               <node concept="1S7827" id="J4FZX3nj2p" role="3O_q_j">
-                <ref role="1S7826" node="J4FZX3mi2q" resolve="file" />
+                <ref role="1S7826" node="4aai$AqS2lT" resolve="file" />
               </node>
               <node concept="1S8S4T" id="J4FZX3nj2C" role="3O_q_j">
                 <node concept="2BPB98" id="J4FZX3nj2D" role="1S8S4V">
@@ -27594,14 +27796,14 @@
                   </node>
                 </node>
                 <node concept="3wxxNl" id="J4FZX3nj33" role="1S8S4N">
-                  <node concept="1sgJKr" id="J4FZX3nj2R" role="2umbIo">
-                    <ref role="1sgJKq" node="J4FZX3l9ar" resolve="DataSourceData" />
+                  <node concept="1sgJKr" id="4aai$At2wN7" role="2umbIo">
+                    <ref role="1sgJKq" node="4aai$AsX35y" resolve="DataSourceData" />
                   </node>
                 </node>
               </node>
               <node concept="YInwV" id="J4FZX3njjv" role="3O_q_j">
                 <node concept="1S7827" id="J4FZX3njyQ" role="1_9fRO">
-                  <ref role="1S7826" node="J4FZX145K5" resolve="schema" />
+                  <ref role="1S7826" node="4aai$AqS4QM" resolve="schema" />
                 </node>
               </node>
             </node>
@@ -30732,225 +30934,17 @@
         </node>
       </node>
     </node>
-    <node concept="I7Tlx" id="4uIaRgpocLB" role="1hWdPE">
-      <property role="I7UEa" value="pseudosql" />
-      <node concept="N3Fnw" id="4uIaRgpocLC" role="I7Tlz">
-        <property role="TrG5h" value="ExecuteWindow" />
-        <node concept="3wxxNl" id="4uIaRgppEWy" role="2C2TGm">
-          <node concept="1sgJKr" id="J4FZX377PO" role="2umbIo">
-            <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgpqfNX" role="1UOdpc">
-          <property role="TrG5h" value="msg" />
-          <node concept="3wxxNl" id="4uIaRgpqiLq" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX34kqm" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX34dVw" resolve="RowsMessage" />
-            </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgpqVCh" role="1UOdpc">
-          <property role="TrG5h" value="data" />
-          <node concept="3wxxNl" id="4uIaRgpqY_4" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Ya" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX35CMH" resolve="WindowData" />
-            </node>
-          </node>
-        </node>
-      </node>
-    </node>
-    <node concept="I7Tlx" id="4uIaRgprkNI" role="1hWdPE">
-      <property role="I7UEa" value="pseudosql" />
-      <node concept="N3Fnw" id="4uIaRgprkNK" role="I7Tlz">
-        <property role="TrG5h" value="wProjection" />
-        <node concept="3wxxNl" id="4uIaRgpr_e5" role="2C2TGm">
-          <node concept="1sgJKr" id="J4FZX379Yb" role="2umbIo">
-            <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgprIav" role="1UOdpc">
-          <property role="TrG5h" value="msg" />
-          <node concept="3wxxNl" id="4uIaRgprL8c" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Yc" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX34dVw" resolve="RowsMessage" />
-            </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgps8Sy" role="1UOdpc">
-          <property role="TrG5h" value="data" />
-          <node concept="3wxxNl" id="4uIaRgpskHp" role="2C2TGm">
-            <node concept="19Rifw" id="4uIaRgpsbQH" role="2umbIo" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <node concept="I7Tlx" id="4uIaRgpsKSV" role="1hWdPE">
-      <property role="I7UEa" value="pseudosql" />
-      <node concept="N3Fnw" id="4uIaRgpsKSW" role="I7Tlz">
-        <property role="TrG5h" value="wSelection" />
-        <node concept="3wxxNl" id="4uIaRgpsKSX" role="2C2TGm">
-          <node concept="1sgJKr" id="J4FZX379Yd" role="2umbIo">
-            <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgpsKSZ" role="1UOdpc">
-          <property role="TrG5h" value="msg" />
-          <node concept="3wxxNl" id="4uIaRgpsKT0" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Ye" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX34dVw" resolve="RowsMessage" />
-            </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgpsKT2" role="1UOdpc">
-          <property role="TrG5h" value="data" />
-          <node concept="3wxxNl" id="4uIaRgpsKT3" role="2C2TGm">
-            <node concept="19Rifw" id="4uIaRgpsKT4" role="2umbIo" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <node concept="I7Tlx" id="4uIaRgpt1u_" role="1hWdPE">
-      <property role="I7UEa" value="pseudosql" />
-      <node concept="N3Fnw" id="4uIaRgpt1uA" role="I7Tlz">
-        <property role="TrG5h" value="wJoin" />
-        <node concept="3wxxNl" id="4uIaRgpt1uB" role="2C2TGm">
-          <node concept="1sgJKr" id="J4FZX379Yf" role="2umbIo">
-            <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgpt1uD" role="1UOdpc">
-          <property role="TrG5h" value="msg" />
-          <node concept="3wxxNl" id="4uIaRgpt1uE" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Yg" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX34dVw" resolve="RowsMessage" />
-            </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgpt1uG" role="1UOdpc">
-          <property role="TrG5h" value="data" />
-          <node concept="3wxxNl" id="4uIaRgpt1uH" role="2C2TGm">
-            <node concept="19Rifw" id="4uIaRgpt1uI" role="2umbIo" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <node concept="I7Tlx" id="4uIaRgpxI0y" role="1hWdPE">
-      <property role="I7UEa" value="pseudosql" />
-      <node concept="N3Fnw" id="4uIaRgpxI0z" role="I7Tlz">
-        <property role="TrG5h" value="wGroupBy" />
-        <node concept="3wxxNl" id="4uIaRgpxI0$" role="2C2TGm">
-          <node concept="1sgJKr" id="J4FZX3g6NP" role="2umbIo">
-            <ref role="1sgJKq" node="J4FZX350Tz" resolve="GroupsLinkedList" />
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgpxI0A" role="1UOdpc">
-          <property role="TrG5h" value="msg" />
-          <node concept="3wxxNl" id="4uIaRgpxI0B" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Yi" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX34dVw" resolve="RowsMessage" />
-            </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgpxI0D" role="1UOdpc">
-          <property role="TrG5h" value="data" />
-          <node concept="3wxxNl" id="4uIaRgpxI0E" role="2C2TGm">
-            <node concept="19Rifw" id="4uIaRgpxI0F" role="2umbIo" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <node concept="I7Tlx" id="4uIaRgpy0j$" role="1hWdPE">
-      <property role="I7UEa" value="pseudosql" />
-      <node concept="N3Fnw" id="4uIaRgpy0j_" role="I7Tlz">
-        <property role="TrG5h" value="wOrderBy" />
-        <node concept="3wxxNl" id="4uIaRgpy0jA" role="2C2TGm">
-          <node concept="1sgJKr" id="J4FZX379Yj" role="2umbIo">
-            <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgpy0jC" role="1UOdpc">
-          <property role="TrG5h" value="msg" />
-          <node concept="3wxxNl" id="4uIaRgpy0jD" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Yk" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX34dVw" resolve="RowsMessage" />
-            </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgpy0jF" role="1UOdpc">
-          <property role="TrG5h" value="data" />
-          <node concept="3wxxNl" id="4uIaRgpy0jG" role="2C2TGm">
-            <node concept="19Rifw" id="4uIaRgpy0jH" role="2umbIo" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <node concept="I7Tlx" id="4uIaRgptnFt" role="1hWdPE">
-      <property role="I7UEa" value="pseudosql" />
-      <node concept="N3Fnw" id="4uIaRgptnFu" role="I7Tlz">
-        <property role="TrG5h" value="AggregateFunctionGroupedInput" />
-        <node concept="3wxxNl" id="4uIaRgptnFv" role="2C2TGm">
-          <node concept="1sgJKr" id="J4FZX379Yl" role="2umbIo">
-            <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgptnFx" role="1UOdpc">
-          <property role="TrG5h" value="groups" />
-          <node concept="3wxxNl" id="4uIaRgptnFy" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Ym" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX350Tz" resolve="GroupsLinkedList" />
-            </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgptnF$" role="1UOdpc">
-          <property role="TrG5h" value="data" />
-          <node concept="3wxxNl" id="4uIaRgptnF_" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX2MbNF" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX2GEWD" resolve="AggregateFunctionData" />
-            </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgpvJ03" role="1UOdpc">
-          <property role="TrG5h" value="type" />
-          <node concept="26Vqpq" id="J4FZX3beoH" role="2C2TGm" />
-        </node>
-        <node concept="19RgSI" id="4uIaRgpwlNx" role="1UOdpc">
-          <property role="TrG5h" value="schema" />
-          <node concept="1sgJKr" id="J4FZX379Yn" role="2C2TGm">
-            <ref role="1sgJKq" node="J4FZX36bqB" resolve="Schema" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <node concept="I7Tlx" id="4uIaRgpwANP" role="1hWdPE">
-      <property role="I7UEa" value="pseudosql" />
-      <node concept="N3Fnw" id="4uIaRgpwANR" role="I7Tlz">
-        <property role="TrG5h" value="DeserializeGroupsMessage" />
-        <node concept="3wxxNl" id="4uIaRgpwRdv" role="2C2TGm">
-          <node concept="1sgJKr" id="J4FZX379Yo" role="2umbIo">
-            <ref role="1sgJKq" node="J4FZX350Tz" resolve="GroupsLinkedList" />
-          </node>
-        </node>
-        <node concept="19RgSI" id="4uIaRgpxy9i" role="1UOdpc">
-          <property role="TrG5h" value="msg" />
-          <node concept="3wxxNl" id="4uIaRgpx_5s" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX3bbgm" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX3b1jR" resolve="GroupsMessage" />
-            </node>
-          </node>
-        </node>
-      </node>
-    </node>
-    <node concept="IQpmJ" id="J4FZX18E3S" role="1hWdPE" />
     <node concept="I7Tlx" id="J4FZX17o1N" role="1hWdPE">
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX17o1P" role="I7Tlz">
         <property role="TrG5h" value="ForwardTerminationMessage" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX17tfN" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX17zzz" role="1UOdpc">
           <property role="TrG5h" value="topology" />
           <node concept="3wxxNl" id="J4FZX1LCwi" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Yq" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36iC4" resolve="Topology" />
+            <node concept="2Eb5v8" id="4aai$As91uS" role="2umbIo">
+              <ref role="2Eb5vb" node="4aai$As3vkh" resolve="Topology" />
             </node>
           </node>
         </node>
@@ -30968,17 +30962,18 @@
         </node>
       </node>
     </node>
-    <node concept="IQpmJ" id="J4FZX0WpoF" role="1hWdPE" />
+    <node concept="IQpmJ" id="J4FZX18E3S" role="1hWdPE" />
     <node concept="I7Tlx" id="J4FZX0lMwd" role="1hWdPE">
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX0lMwf" role="I7Tlz">
         <property role="TrG5h" value="WindowInit" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX0m0CN" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX0nHVd" role="1UOdpc">
           <property role="TrG5h" value="topology" />
           <node concept="3wxxNl" id="J4FZX1GZ7g" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Yr" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36iC4" resolve="Topology" />
+            <node concept="2Eb5v8" id="4aai$As91wE" role="2umbIo">
+              <ref role="2Eb5vb" node="4aai$As3vkh" resolve="Topology" />
             </node>
           </node>
         </node>
@@ -30988,24 +30983,19 @@
             <ref role="rcJHT" node="J4FZX0mk2Y" resolve="lp_id_t" />
           </node>
         </node>
-        <node concept="19RgSI" id="J4FZX0n4gE" role="1UOdpc">
-          <property role="TrG5h" value="source" />
-          <node concept="rcJHQ" id="J4FZX0n4gC" role="2C2TGm">
-            <ref role="rcJHT" node="J4FZX0mk2Y" resolve="lp_id_t" />
-          </node>
-        </node>
       </node>
     </node>
     <node concept="I7Tlx" id="J4FZX0UJxR" role="1hWdPE">
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX0UJxT" role="I7Tlz">
         <property role="TrG5h" value="WindowCleanUp" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX0UWYf" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX0V5LW" role="1UOdpc">
           <property role="TrG5h" value="state" />
           <node concept="3wxxNl" id="J4FZX0V7ct" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Ys" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX35CMH" resolve="WindowData" />
+            <node concept="1sgJKr" id="4aai$At2whO" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX2AO" resolve="WindowData" />
             </node>
           </node>
         </node>
@@ -31015,20 +31005,21 @@
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX0VuUX" role="I7Tlz">
         <property role="TrG5h" value="TerminateWindow" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX0VGQh" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX0VMRH" role="1UOdpc">
           <property role="TrG5h" value="topology" />
           <node concept="3wxxNl" id="J4FZX1GT8J" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Yt" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36iC4" resolve="Topology" />
+            <node concept="2Eb5v8" id="4aai$As91yX" role="2umbIo">
+              <ref role="2Eb5vb" node="4aai$As3vkh" resolve="Topology" />
             </node>
           </node>
         </node>
         <node concept="19RgSI" id="J4FZX0VSRK" role="1UOdpc">
           <property role="TrG5h" value="state" />
           <node concept="3wxxNl" id="J4FZX0VVLB" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Yu" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX35CMH" resolve="WindowData" />
+            <node concept="1sgJKr" id="4aai$At2wi7" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX2AO" resolve="WindowData" />
             </node>
           </node>
         </node>
@@ -31046,30 +31037,25 @@
         </node>
         <node concept="19RgSI" id="J4FZX0WgyJ" role="1UOdpc">
           <property role="TrG5h" value="schema" />
-          <node concept="1sgJKr" id="J4FZX379Yv" role="2C2TGm">
-            <ref role="1sgJKq" node="J4FZX36bqB" resolve="Schema" />
+          <node concept="1sgJKr" id="4aai$At2wj9" role="2C2TGm">
+            <ref role="1sgJKq" node="4aai$AsX2AQ" resolve="Schema" />
           </node>
         </node>
       </node>
     </node>
-    <node concept="IQpmJ" id="4uIaRgpsrEO" role="1hWdPE" />
+    <node concept="IQpmJ" id="J4FZX0WpoF" role="1hWdPE" />
     <node concept="I7Tlx" id="J4FZX15mEP" role="1hWdPE">
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX15mER" role="I7Tlz">
         <property role="TrG5h" value="ProjectionInit" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX15_iW" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX15DR7" role="1UOdpc">
           <property role="TrG5h" value="topology" />
           <node concept="3wxxNl" id="J4FZX1GQ8W" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Yw" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36iC4" resolve="Topology" />
+            <node concept="2Eb5v8" id="4aai$As91zC" role="2umbIo">
+              <ref role="2Eb5vb" node="4aai$As3vkh" resolve="Topology" />
             </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="J4FZX15JMR" role="1UOdpc">
-          <property role="TrG5h" value="source" />
-          <node concept="rcJHQ" id="J4FZX15JMP" role="2C2TGm">
-            <ref role="rcJHT" node="J4FZX0mk2Y" resolve="lp_id_t" />
           </node>
         </node>
         <node concept="19RgSI" id="J4FZX15SBS" role="1UOdpc">
@@ -31084,35 +31070,31 @@
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX16eVU" role="I7Tlz">
         <property role="TrG5h" value="ProjectionCleanup" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX16nqq" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX16W4D" role="1UOdpc">
           <property role="TrG5h" value="state" />
           <node concept="3wxxNl" id="J4FZX171TZ" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Yx" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36WKo" resolve="ProjectionData" />
+            <node concept="1sgJKr" id="4aai$ApGzKn" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$ApGxv8" resolve="ProjectionData" />
             </node>
           </node>
         </node>
       </node>
     </node>
-    <node concept="IQpmJ" id="J4FZX1DgkW" role="1hWdPE" />
+    <node concept="IQpmJ" id="4uIaRgpsrEO" role="1hWdPE" />
     <node concept="I7Tlx" id="J4FZX1DgkY" role="1hWdPE">
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX1DgkZ" role="I7Tlz">
         <property role="TrG5h" value="SelectionInit" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX1Dgl0" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX1Dgl1" role="1UOdpc">
           <property role="TrG5h" value="topology" />
           <node concept="3wxxNl" id="J4FZX1GN9l" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Yy" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36iC4" resolve="Topology" />
+            <node concept="2Eb5v8" id="4aai$As91$J" role="2umbIo">
+              <ref role="2Eb5vb" node="4aai$As3vkh" resolve="Topology" />
             </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="J4FZX1Dgl3" role="1UOdpc">
-          <property role="TrG5h" value="source" />
-          <node concept="rcJHQ" id="J4FZX1Dgl4" role="2C2TGm">
-            <ref role="rcJHT" node="J4FZX0mk2Y" resolve="lp_id_t" />
           </node>
         </node>
         <node concept="19RgSI" id="J4FZX1Dgl5" role="1UOdpc">
@@ -31127,35 +31109,31 @@
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX1DJ7f" role="I7Tlz">
         <property role="TrG5h" value="SelectionCleanup" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX1DJ7g" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX1DJ7h" role="1UOdpc">
           <property role="TrG5h" value="state" />
           <node concept="3wxxNl" id="J4FZX1DJ7i" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Yz" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36UNM" resolve="SelectionData" />
+            <node concept="1sgJKr" id="4aai$ApGzLP" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$ApCCTc" resolve="SelectionData" />
             </node>
           </node>
         </node>
       </node>
     </node>
-    <node concept="IQpmJ" id="J4FZX1G0hh" role="1hWdPE" />
+    <node concept="IQpmJ" id="J4FZX1DgkW" role="1hWdPE" />
     <node concept="I7Tlx" id="J4FZX1Ge8u" role="1hWdPE">
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX1Ge8w" role="I7Tlz">
         <property role="TrG5h" value="InitJoin" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX1Gr$Y" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX1G$vU" role="1UOdpc">
           <property role="TrG5h" value="topology" />
           <node concept="3wxxNl" id="J4FZX1H7WU" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Y$" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36iC4" resolve="Topology" />
+            <node concept="2Eb5v8" id="4aai$As91_q" role="2umbIo">
+              <ref role="2Eb5vb" node="4aai$As3vkh" resolve="Topology" />
             </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="J4FZX1HdRa" role="1UOdpc">
-          <property role="TrG5h" value="source" />
-          <node concept="rcJHQ" id="J4FZX1HdR8" role="2C2TGm">
-            <ref role="rcJHT" node="J4FZX0mk2Y" resolve="lp_id_t" />
           </node>
         </node>
         <node concept="19RgSI" id="J4FZX1HiBN" role="1UOdpc">
@@ -31167,8 +31145,8 @@
         <node concept="19RgSI" id="J4FZX1HRc7" role="1UOdpc">
           <property role="TrG5h" value="table_data" />
           <node concept="3wxxNl" id="J4FZX1HU6K" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379Y_" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36Dez" resolve="JoinTableData" />
+            <node concept="1sgJKr" id="4aai$At2wjI" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX2Dq" resolve="JoinTableData" />
             </node>
           </node>
         </node>
@@ -31178,25 +31156,14 @@
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX1IxO2" role="I7Tlz">
         <property role="TrG5h" value="JoinInit" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX1IEiA" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX1IHm6" role="1UOdpc">
           <property role="TrG5h" value="topology" />
           <node concept="3wxxNl" id="J4FZX1IKhJ" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379YA" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36iC4" resolve="Topology" />
+            <node concept="2Eb5v8" id="4aai$As91AB" role="2umbIo">
+              <ref role="2Eb5vb" node="4aai$As3vkh" resolve="Topology" />
             </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="J4FZX1INi5" role="1UOdpc">
-          <property role="TrG5h" value="source1" />
-          <node concept="rcJHQ" id="J4FZX1INi3" role="2C2TGm">
-            <ref role="rcJHT" node="J4FZX0mk2Y" resolve="lp_id_t" />
-          </node>
-        </node>
-        <node concept="19RgSI" id="J4FZX1ITdz" role="1UOdpc">
-          <property role="TrG5h" value="source2" />
-          <node concept="rcJHQ" id="J4FZX1ITdx" role="2C2TGm">
-            <ref role="rcJHT" node="J4FZX0mk2Y" resolve="lp_id_t" />
           </node>
         </node>
         <node concept="19RgSI" id="J4FZX1IZ8v" role="1UOdpc">
@@ -31207,64 +31174,35 @@
         </node>
       </node>
     </node>
-    <node concept="I7Tlx" id="J4FZX1JaRw" role="1hWdPE">
-      <property role="I7UEa" value="pseudosql" />
-      <node concept="N3Fnw" id="J4FZX1JaRy" role="I7Tlz">
-        <property role="TrG5h" value="wJoin" />
-        <node concept="3wxxNl" id="J4FZX1Ju1P" role="2C2TGm">
-          <node concept="1sgJKr" id="J4FZX379YB" role="2umbIo">
-            <ref role="1sgJKq" node="J4FZX34KVT" resolve="RowsLinkedList" />
-          </node>
-        </node>
-        <node concept="19RgSI" id="J4FZX1JxcX" role="1UOdpc">
-          <property role="TrG5h" value="msg" />
-          <node concept="3wxxNl" id="J4FZX1J$7f" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379YC" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX34dVw" resolve="RowsMessage" />
-            </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="J4FZX1JH0y" role="1UOdpc">
-          <property role="TrG5h" value="data" />
-          <node concept="3wxxNl" id="J4FZX1JMT2" role="2C2TGm">
-            <node concept="19Rifw" id="J4FZX1JJY8" role="2umbIo" />
-          </node>
-        </node>
-      </node>
-    </node>
     <node concept="I7Tlx" id="J4FZX1K8kI" role="1hWdPE">
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX1K8kK" role="I7Tlz">
         <property role="TrG5h" value="JoinCleanup" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX1Kfl2" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX1Kilp" role="1UOdpc">
           <property role="TrG5h" value="state" />
           <node concept="3wxxNl" id="J4FZX1L2no" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379YD" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36Nop" resolve="JoinData" />
+            <node concept="1sgJKr" id="4aai$ApGzN9" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$ApGxU1" resolve="JoinData" />
             </node>
           </node>
         </node>
       </node>
     </node>
-    <node concept="IQpmJ" id="J4FZX1XoQy" role="1hWdPE" />
+    <node concept="IQpmJ" id="J4FZX1G0hh" role="1hWdPE" />
     <node concept="I7Tlx" id="J4FZX1Xtde" role="1hWdPE">
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX1Xtdg" role="I7Tlz">
         <property role="TrG5h" value="AggregateFunctionInit" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX1XxFw" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX1XGwZ" role="1UOdpc">
           <property role="TrG5h" value="topology" />
           <node concept="3wxxNl" id="J4FZX1XJte" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX379YE" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36iC4" resolve="Topology" />
+            <node concept="2Eb5v8" id="4aai$As91Bg" role="2umbIo">
+              <ref role="2Eb5vb" node="4aai$As3vkh" resolve="Topology" />
             </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="J4FZX1XMrB" role="1UOdpc">
-          <property role="TrG5h" value="source" />
-          <node concept="rcJHQ" id="J4FZX1XMr_" role="2C2TGm">
-            <ref role="rcJHT" node="J4FZX0mk2Y" resolve="lp_id_t" />
           </node>
         </node>
         <node concept="19RgSI" id="J4FZX1XVhi" role="1UOdpc">
@@ -31279,35 +31217,31 @@
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX1Y5Xi" role="I7Tlz">
         <property role="TrG5h" value="AggFunctionCleanup" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX1Y9cx" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX1YmHg" role="1UOdpc">
           <property role="TrG5h" value="state" />
           <node concept="3wxxNl" id="J4FZX1YpBo" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX37jDB" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX35Q95" resolve="AggregateFunctionData" />
+            <node concept="1sgJKr" id="4aai$ApGzPZ" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
             </node>
           </node>
         </node>
       </node>
     </node>
-    <node concept="IQpmJ" id="J4FZX3hjxN" role="1hWdPE" />
+    <node concept="IQpmJ" id="J4FZX1XoQy" role="1hWdPE" />
     <node concept="I7Tlx" id="J4FZX3hodc" role="1hWdPE">
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX3hode" role="I7Tlz">
         <property role="TrG5h" value="GroupByInit" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX3hqSP" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX3hwgd" role="1UOdpc">
           <property role="TrG5h" value="topology" />
           <node concept="3wxxNl" id="J4FZX3hyL3" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX3hwgc" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36iC4" resolve="Topology" />
+            <node concept="2Eb5v8" id="4aai$As91BV" role="2umbIo">
+              <ref role="2Eb5vb" node="4aai$As3vkh" resolve="Topology" />
             </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="J4FZX3hC5C" role="1UOdpc">
-          <property role="TrG5h" value="source" />
-          <node concept="rcJHQ" id="J4FZX3hC5A" role="2C2TGm">
-            <ref role="rcJHT" node="J4FZX0mk2Y" resolve="lp_id_t" />
           </node>
         </node>
         <node concept="19RgSI" id="J4FZX3hHYz" role="1UOdpc">
@@ -31322,35 +31256,31 @@
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX3hP$3" role="I7Tlz">
         <property role="TrG5h" value="GroupByCleanup" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX3hTBd" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX3iiWU" role="1UOdpc">
           <property role="TrG5h" value="state" />
           <node concept="3wxxNl" id="J4FZX3ikfF" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX3iiWT" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX3i4a3" resolve="GroupByData" />
+            <node concept="1sgJKr" id="4aai$ApGzQi" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$ApGyeA" resolve="GroupByData" />
             </node>
           </node>
         </node>
       </node>
     </node>
-    <node concept="IQpmJ" id="J4FZX3iETm" role="1hWdPE" />
+    <node concept="IQpmJ" id="J4FZX3hjxN" role="1hWdPE" />
     <node concept="I7Tlx" id="J4FZX3iIWe" role="1hWdPE">
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX3iIWg" role="I7Tlz">
         <property role="TrG5h" value="OrderByInit" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX3iJI2" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX3iQo5" role="1UOdpc">
           <property role="TrG5h" value="topology" />
           <node concept="3wxxNl" id="J4FZX3iTiA" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX3iQo4" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36iC4" resolve="Topology" />
+            <node concept="2Eb5v8" id="4aai$As91EO" role="2umbIo">
+              <ref role="2Eb5vb" node="4aai$As3vkh" resolve="Topology" />
             </node>
-          </node>
-        </node>
-        <node concept="19RgSI" id="J4FZX3iWjd" role="1UOdpc">
-          <property role="TrG5h" value="source" />
-          <node concept="rcJHQ" id="J4FZX3iWjb" role="2C2TGm">
-            <ref role="rcJHT" node="J4FZX0mk2Y" resolve="lp_id_t" />
           </node>
         </node>
         <node concept="19RgSI" id="J4FZX3iZgU" role="1UOdpc">
@@ -31365,28 +31295,30 @@
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX3j6NJ" role="I7Tlz">
         <property role="TrG5h" value="OrderByCleanup" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX3j7J$" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX3jexj" role="1UOdpc">
           <property role="TrG5h" value="state" />
           <node concept="3wxxNl" id="J4FZX3jexw" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX3jexi" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX3iuDl" resolve="OrderByData" />
+            <node concept="1sgJKr" id="4aai$ApGzQz" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$ApGyeI" resolve="OrderByData" />
             </node>
           </node>
         </node>
       </node>
     </node>
-    <node concept="IQpmJ" id="J4FZX3kAUz" role="1hWdPE" />
+    <node concept="IQpmJ" id="J4FZX3iETm" role="1hWdPE" />
     <node concept="I7Tlx" id="J4FZX3kEMF" role="1hWdPE">
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX3kEMH" role="I7Tlz">
         <property role="TrG5h" value="DataIngestion" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX3kHjS" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX3kKoy" role="1UOdpc">
           <property role="TrG5h" value="topology" />
           <node concept="3wxxNl" id="J4FZX3kNl0" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX3kKox" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36iC4" resolve="Topology" />
+            <node concept="2Eb5v8" id="4aai$As91F5" role="2umbIo">
+              <ref role="2Eb5vb" node="4aai$As3vkh" resolve="Topology" />
             </node>
           </node>
         </node>
@@ -31405,24 +31337,24 @@
         <node concept="19RgSI" id="J4FZX3lgKf" role="1UOdpc">
           <property role="TrG5h" value="state" />
           <node concept="3wxxNl" id="J4FZX3li1Q" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX3lgKe" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX3l9ar" resolve="DataSourceData" />
+            <node concept="1sgJKr" id="4aai$At2wkp" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX35y" resolve="DataSourceData" />
             </node>
           </node>
         </node>
         <node concept="19RgSI" id="J4FZX3lF4i" role="1UOdpc">
           <property role="TrG5h" value="file" />
           <node concept="3wxxNl" id="J4FZX3lHYs" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX3lF4h" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX3lunN" resolve="FILE" />
+            <node concept="2Eb5v8" id="4aai$As91Ig" role="2umbIo">
+              <ref role="2Eb5vb" node="4aai$As3xu4" resolve="FILE" />
             </node>
           </node>
         </node>
         <node concept="19RgSI" id="J4FZX3lL1A" role="1UOdpc">
           <property role="TrG5h" value="schema" />
           <node concept="3wxxNl" id="J4FZX3lNXQ" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX3lL1_" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36bqB" resolve="Schema" />
+            <node concept="1sgJKr" id="4aai$At2wmG" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX2AQ" resolve="Schema" />
             </node>
           </node>
         </node>
@@ -31432,28 +31364,29 @@
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX3mH6i" role="I7Tlz">
         <property role="TrG5h" value="DataIngestionCleanup" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX3mL9X" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX3mR7T" role="1UOdpc">
           <property role="TrG5h" value="file" />
           <node concept="3wxxNl" id="J4FZX3mU3V" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX3mR7S" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX3lunN" resolve="FILE" />
+            <node concept="2Eb5v8" id="4aai$As91G6" role="2umbIo">
+              <ref role="2Eb5vb" node="4aai$As3xu4" resolve="FILE" />
             </node>
           </node>
         </node>
         <node concept="19RgSI" id="J4FZX3mZZ7" role="1UOdpc">
           <property role="TrG5h" value="state" />
           <node concept="3wxxNl" id="J4FZX3n1f3" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX3mZZ6" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX3l9ar" resolve="DataSourceData" />
+            <node concept="1sgJKr" id="4aai$At2wno" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX35y" resolve="DataSourceData" />
             </node>
           </node>
         </node>
         <node concept="19RgSI" id="J4FZX3n5UX" role="1UOdpc">
           <property role="TrG5h" value="schema" />
           <node concept="3wxxNl" id="J4FZX3n7La" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX3n5UW" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36bqB" resolve="Schema" />
+            <node concept="1sgJKr" id="4aai$At2wnn" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX2AQ" resolve="Schema" />
             </node>
           </node>
         </node>
@@ -31463,6 +31396,7 @@
       <property role="I7UEa" value="pseudosql" />
       <node concept="N3Fnw" id="J4FZX3noEY" role="I7Tlz">
         <property role="TrG5h" value="DataIngestionInit" />
+        <property role="3mNxdG" value="true" />
         <node concept="19Rifw" id="J4FZX3npNX" role="2C2TGm" />
         <node concept="19RgSI" id="J4FZX3nvLh" role="1UOdpc">
           <property role="TrG5h" value="me" />
@@ -31480,8 +31414,8 @@
           <property role="TrG5h" value="file" />
           <node concept="3wxxNl" id="J4FZX3nIE1" role="2C2TGm">
             <node concept="3wxxNl" id="J4FZX3nCMU" role="2umbIo">
-              <node concept="1sgJKr" id="J4FZX3n_SD" role="2umbIo">
-                <ref role="1sgJKq" node="J4FZX3lunN" resolve="FILE" />
+              <node concept="2Eb5v8" id="4aai$As91H7" role="2umbIo">
+                <ref role="2Eb5vb" node="4aai$As3xu4" resolve="FILE" />
               </node>
             </node>
           </node>
@@ -31495,135 +31429,96 @@
         <node concept="19RgSI" id="J4FZX3nV5t" role="1UOdpc">
           <property role="TrG5h" value="schema" />
           <node concept="3wxxNl" id="J4FZX3nY03" role="2C2TGm">
-            <node concept="1sgJKr" id="J4FZX3nV5s" role="2umbIo">
-              <ref role="1sgJKq" node="J4FZX36bqB" resolve="Schema" />
+            <node concept="1sgJKr" id="4aai$At2wqD" role="2umbIo">
+              <ref role="1sgJKq" node="4aai$AsX2AQ" resolve="Schema" />
             </node>
           </node>
         </node>
       </node>
     </node>
+    <node concept="IQpmJ" id="J4FZX3kAUz" role="1hWdPE" />
     <node concept="IQpmJ" id="J4FZX1z5yr" role="1fvW3h" />
-    <node concept="1aDQos" id="J4FZX2GEWB" role="1fvW3h">
+    <node concept="1aDQos" id="4aai$ApCCTc" role="1fvW3h">
+      <property role="TrG5h" value="SelectionData" />
       <property role="1aDQoq" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX2GEWD" role="1aDQ8N">
-        <property role="TrG5h" value="AggregateFunctionData" />
-        <node concept="1dpRTG" id="J4FZX2GOS$" role="HszBJ">
-          <property role="TrG5h" value="can_end" />
-          <node concept="3TlMgk" id="J4FZX2GOSz" role="2C2TGm" />
-        </node>
+      <property role="3mNxdG" value="true" />
+      <node concept="1dpRTG" id="4aai$ApGuW0" role="HszBJ">
+        <property role="TrG5h" value="can_end" />
+        <node concept="3TlMgk" id="4aai$ApGuVZ" role="2C2TGm" />
       </node>
     </node>
-    <node concept="IQpmJ" id="J4FZX36JMX" role="1fvW3h" />
-    <node concept="1aDQos" id="J4FZX36Non" role="1fvW3h">
+    <node concept="IQpmJ" id="4aai$AsyC0g" role="1fvW3h" />
+    <node concept="1aDQos" id="4aai$ApGxv8" role="1fvW3h">
+      <property role="TrG5h" value="ProjectionData" />
       <property role="1aDQoq" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX36Nop" role="1aDQ8N">
-        <property role="TrG5h" value="JoinData" />
-        <node concept="1dpRTG" id="J4FZX36R7A" role="HszBJ">
-          <property role="TrG5h" value="can_end" />
-          <node concept="3TlMgk" id="J4FZX36R7_" role="2C2TGm" />
-        </node>
+      <property role="3mNxdG" value="true" />
+      <node concept="1dpRTG" id="4aai$ApGxv9" role="HszBJ">
+        <property role="TrG5h" value="can_end" />
+        <node concept="3TlMgk" id="4aai$ApGxva" role="2C2TGm" />
+      </node>
+    </node>
+    <node concept="IQpmJ" id="1IMoxTvvM9F" role="1fvW3h" />
+    <node concept="1aDQos" id="4aai$ApGxRn" role="1fvW3h">
+      <property role="TrG5h" value="AggregateFunctionData" />
+      <property role="1aDQoq" value="pseudosql" />
+      <property role="3mNxdG" value="true" />
+      <node concept="1dpRTG" id="4aai$ApGxRo" role="HszBJ">
+        <property role="TrG5h" value="can_end" />
+        <node concept="3TlMgk" id="4aai$ApGxRp" role="2C2TGm" />
       </node>
     </node>
     <node concept="IQpmJ" id="J4FZX1KwYZ" role="1fvW3h" />
-    <node concept="1aDQos" id="J4FZX36UNL" role="1fvW3h">
+    <node concept="1aDQos" id="4aai$ApGxU1" role="1fvW3h">
+      <property role="TrG5h" value="JoinData" />
       <property role="1aDQoq" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX36UNM" role="1aDQ8N">
-        <property role="TrG5h" value="SelectionData" />
-        <node concept="1dpRTG" id="J4FZX36UNN" role="HszBJ">
-          <property role="TrG5h" value="can_end" />
-          <node concept="3TlMgk" id="J4FZX36UNO" role="2C2TGm" />
-        </node>
+      <property role="3mNxdG" value="true" />
+      <node concept="1dpRTG" id="4aai$ApGxU2" role="HszBJ">
+        <property role="TrG5h" value="can_end" />
+        <node concept="3TlMgk" id="4aai$ApGxU3" role="2C2TGm" />
       </node>
     </node>
     <node concept="IQpmJ" id="J4FZX36VhZ" role="1fvW3h" />
-    <node concept="1aDQos" id="J4FZX36WKn" role="1fvW3h">
+    <node concept="1aDQos" id="4aai$ApGyeA" role="1fvW3h">
+      <property role="TrG5h" value="GroupByData" />
       <property role="1aDQoq" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX36WKo" role="1aDQ8N">
-        <property role="TrG5h" value="ProjectionData" />
-        <node concept="1dpRTG" id="J4FZX36WKp" role="HszBJ">
-          <property role="TrG5h" value="can_end" />
-          <node concept="3TlMgk" id="J4FZX36WKq" role="2C2TGm" />
-        </node>
+      <property role="3mNxdG" value="true" />
+      <node concept="1dpRTG" id="4aai$ApGyeB" role="HszBJ">
+        <property role="TrG5h" value="can_end" />
+        <node concept="3TlMgk" id="4aai$ApGyeC" role="2C2TGm" />
       </node>
     </node>
     <node concept="IQpmJ" id="J4FZX3aXPN" role="1fvW3h" />
-    <node concept="1aDQos" id="J4FZX3b1jP" role="1fvW3h">
+    <node concept="1aDQos" id="4aai$ApGyeI" role="1fvW3h">
+      <property role="TrG5h" value="OrderByData" />
       <property role="1aDQoq" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX3b1jR" role="1aDQ8N">
-        <property role="TrG5h" value="GroupsMessage" />
-        <node concept="1dpRTG" id="J4FZX3b5oS" role="HszBJ">
-          <property role="TrG5h" value="schema" />
-          <node concept="1sgJKr" id="J4FZX3b5oR" role="2C2TGm">
-            <ref role="1sgJKq" node="J4FZX36bqB" resolve="Schema" />
-          </node>
+      <property role="3mNxdG" value="true" />
+      <node concept="1dpRTG" id="4aai$ApGyeJ" role="HszBJ">
+        <property role="TrG5h" value="can_end" />
+        <node concept="3TlMgk" id="4aai$ApGyeK" role="2C2TGm" />
+      </node>
+    </node>
+    <node concept="IQpmJ" id="4aai$ApGyzW" role="1fvW3h" />
+    <node concept="1aDQos" id="4aai$ApGyU$" role="1fvW3h">
+      <property role="TrG5h" value="GroupsMessage" />
+      <property role="1aDQoq" value="pseudosql" />
+      <property role="3mNxdG" value="true" />
+      <node concept="1dpRTG" id="4aai$ApGzG1" role="HszBJ">
+        <property role="TrG5h" value="schema" />
+        <node concept="1sgJKr" id="4aai$At2w5O" role="2C2TGm">
+          <ref role="1sgJKq" node="4aai$AsX2AQ" resolve="Schema" />
         </node>
       </node>
     </node>
-    <node concept="IQpmJ" id="J4FZX3hZvx" role="1fvW3h" />
-    <node concept="1aDQos" id="J4FZX3i4a1" role="1fvW3h">
-      <property role="1aDQoq" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX3i4a3" role="1aDQ8N">
-        <property role="TrG5h" value="GroupByData" />
-        <node concept="1dpRTG" id="J4FZX3i8pc" role="HszBJ">
-          <property role="TrG5h" value="can_end" />
-          <node concept="3TlMgk" id="J4FZX3i8pb" role="2C2TGm" />
-        </node>
-      </node>
-    </node>
-    <node concept="IQpmJ" id="J4FZX36WKm" role="1fvW3h" />
-    <node concept="1aDQos" id="J4FZX3iuDk" role="1fvW3h">
-      <property role="1aDQoq" value="pseudosql" />
-      <node concept="1sgJKc" id="J4FZX3iuDl" role="1aDQ8N">
-        <property role="TrG5h" value="OrderByData" />
-        <node concept="1dpRTG" id="J4FZX3iuDm" role="HszBJ">
-          <property role="TrG5h" value="can_end" />
-          <node concept="3TlMgk" id="J4FZX3iuDn" role="2C2TGm" />
-        </node>
-      </node>
-    </node>
-    <node concept="IQpmJ" id="J4FZX3iegL" role="1fvW3h" />
-    <node concept="IQpmJ" id="J4FZX36U47" role="1fvW3h" />
+    <node concept="IQpmJ" id="4aai$AsyIME" role="1fvW3h" />
     <node concept="1frwoX" id="J4FZX0mk2Y" role="1fvW3h">
       <property role="TrG5h" value="lp_id_t" />
+      <property role="3mNxdG" value="true" />
       <node concept="26Vqp1" id="J4FZX0mxwY" role="rcJHR" />
     </node>
     <node concept="1frwoX" id="J4FZX0mLSK" role="1fvW3h">
       <property role="TrG5h" value="simtime_t" />
+      <property role="3mNxdG" value="true" />
       <node concept="2fgwQN" id="J4FZX0mWkI" role="rcJHR" />
-    </node>
-    <node concept="IQpmJ" id="4uIaRgpvOUy" role="1fvW3h" />
-    <node concept="IQpmJ" id="4uIaRgpuB0h" role="1fvW3h" />
-    <node concept="1bAXeO" id="J4FZX3mi2q" role="1bAXeI">
-      <property role="TrG5h" value="file" />
-      <node concept="3wxxNl" id="J4FZX3mk1i" role="2C2TGm">
-        <node concept="1sgJKr" id="J4FZX3mjbq" role="2umbIo">
-          <ref role="1sgJKq" node="J4FZX3lunN" resolve="FILE" />
-        </node>
-      </node>
-      <node concept="Ea8Gl" id="J4FZX3mmXx" role="1cecVj" />
-    </node>
-    <node concept="1bAXeO" id="J4FZX0xgSr" role="1bAXeI">
-      <property role="TrG5h" value="topology" />
-      <node concept="3wxxNl" id="J4FZX1LjUE" role="2C2TGm">
-        <node concept="1sgJKr" id="J4FZX37aR_" role="2umbIo">
-          <ref role="1sgJKq" node="J4FZX36iC4" resolve="Topology" />
-        </node>
-      </node>
-    </node>
-    <node concept="1bAXeO" id="J4FZX145K5" role="1bAXeI">
-      <property role="TrG5h" value="schema" />
-      <node concept="1sgJKr" id="J4FZX37aRA" role="2C2TGm">
-        <ref role="1sgJKq" node="J4FZX36bqB" resolve="Schema" />
-      </node>
-    </node>
-    <node concept="1bAXeO" id="J4FZX3o8xa" role="1bAXeI">
-      <property role="TrG5h" value="INPUT_FILE" />
-      <node concept="3wxxNl" id="J4FZX3o9u1" role="2C2TGm">
-        <node concept="biTqx" id="J4FZX3o9tS" role="2umbIo" />
-      </node>
-      <node concept="PhEJO" id="J4FZX3odeb" role="1cecVj">
-        <property role="PhEJT" value="taxis.txt" />
-      </node>
     </node>
   </node>
   <node concept="13MO4I" id="3hefzVnYDGy">
@@ -31634,6 +31529,7 @@
         <property role="TrG5h" value="projectio" />
         <property role="2iLA8i" value="0" />
         <ref role="1sy604" node="J4FZX1j3lv" resolve="projection" />
+        <ref role="1sy605" node="4aai$ApGxv8" resolve="ProjectionData" />
         <node concept="2uUgHn" id="3hefzVofj7E" role="2LyG1a" />
         <node concept="raruj" id="3hefzVofmnk" role="lGtFl" />
         <node concept="17Uvod" id="3hefzVofmnl" role="lGtFl">
@@ -31690,6 +31586,7 @@
         <property role="TrG5h" value="joi" />
         <property role="2iLA8i" value="0" />
         <ref role="1sy604" node="J4FZX1LVQ$" resolve="join" />
+        <ref role="1sy605" node="4aai$ApGxU1" resolve="JoinData" />
         <node concept="2uUgHn" id="3hefzVofras" role="2LyG1a" />
         <node concept="raruj" id="3hefzVofsMO" role="lGtFl" />
         <node concept="17Uvod" id="3hefzVofsMP" role="lGtFl">
@@ -31739,6 +31636,7 @@
         <property role="TrG5h" value="groupB" />
         <property role="2iLA8i" value="0" />
         <ref role="1sy604" node="J4FZX3ffri" resolve="groupBy" />
+        <ref role="1sy605" node="4aai$ApGyeA" resolve="GroupByData" />
         <node concept="2uUgHn" id="3hefzVofIXQ" role="2LyG1a" />
         <node concept="raruj" id="3hefzVofKve" role="lGtFl" />
         <node concept="17Uvod" id="3hefzVofKvf" role="lGtFl">
@@ -31783,6 +31681,7 @@
         <property role="TrG5h" value="orderB" />
         <property role="2iLA8i" value="0" />
         <ref role="1sy604" node="J4FZX3f$Ii" resolve="orderBy" />
+        <ref role="1sy605" node="4aai$ApGyeI" resolve="OrderByData" />
         <node concept="2uUgHn" id="3hefzVofNEs" role="2LyG1a" />
         <node concept="raruj" id="3hefzVofNEt" role="lGtFl" />
         <node concept="17Uvod" id="3hefzVofNEu" role="lGtFl">
@@ -31827,6 +31726,7 @@
         <property role="TrG5h" value="average" />
         <property role="2iLA8i" value="0" />
         <ref role="1sy604" node="J4FZX386s_" resolve="average" />
+        <ref role="1sy605" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
         <node concept="2uUgHn" id="3hefzVofUZ0" role="2LyG1a" />
         <node concept="raruj" id="3hefzVofXzD" role="lGtFl" />
         <node concept="1W57fq" id="3hefzVofXzP" role="lGtFl">
@@ -31897,6 +31797,7 @@
         <property role="TrG5h" value="sum" />
         <property role="2iLA8i" value="0" />
         <ref role="1sy604" node="J4FZX3do69" resolve="sum" />
+        <ref role="1sy605" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
         <node concept="2uUgHn" id="3hefzVog3vt" role="2LyG1a" />
         <node concept="raruj" id="3hefzVog640" role="lGtFl" />
         <node concept="17Uvod" id="3hefzVog641" role="lGtFl">
@@ -31967,6 +31868,7 @@
         <property role="TrG5h" value="count" />
         <property role="2iLA8i" value="0" />
         <ref role="1sy604" node="J4FZX3e3Ou" resolve="count" />
+        <ref role="1sy605" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
         <node concept="2uUgHn" id="3hefzVogaif" role="2LyG1a" />
         <node concept="raruj" id="3hefzVogaig" role="lGtFl" />
         <node concept="17Uvod" id="3hefzVogaih" role="lGtFl">
@@ -32037,6 +31939,7 @@
         <property role="TrG5h" value="min" />
         <property role="2iLA8i" value="0" />
         <ref role="1sy604" node="J4FZX3dCnb" resolve="min" />
+        <ref role="1sy605" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
         <node concept="2uUgHn" id="3hefzVogbDm" role="2LyG1a" />
         <node concept="raruj" id="3hefzVogbDn" role="lGtFl" />
         <node concept="17Uvod" id="3hefzVogbDo" role="lGtFl">
@@ -32107,6 +32010,7 @@
         <property role="TrG5h" value="max" />
         <property role="2iLA8i" value="0" />
         <ref role="1sy604" node="J4FZX3dO94" resolve="max" />
+        <ref role="1sy605" node="4aai$ApGxRn" resolve="AggregateFunctionData" />
         <node concept="2uUgHn" id="3hefzVogbDQ" role="2LyG1a" />
         <node concept="raruj" id="3hefzVogbDR" role="lGtFl" />
         <node concept="17Uvod" id="3hefzVogbDS" role="lGtFl">

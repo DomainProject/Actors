@@ -53,10 +53,22 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
 
     for (SNode type : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.types$lVcp), CONCEPTS.ExternalType$Bi))) {
+      if (!(ListSequence.fromList(headers).contains(SPropertyOperations.getString(type, PROPS.header$$WII)))) {
+        ListSequence.fromList(headers).addElement(SPropertyOperations.getString(type, PROPS.header$$WII));
+        tgs.append("#include <");
+        tgs.append(SPropertyOperations.getString(type, PROPS.header$$WII));
+        tgs.append(".h>");
+        tgs.newLine();
+      }
     }
+
     for (SNode function : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.externalFunctions$bWTb), CONCEPTS.ExternalFunctionPrototype$n3))) {
       if (!(ListSequence.fromList(headers).contains(SPropertyOperations.getString(function, PROPS.header$7lfc)))) {
         ListSequence.fromList(headers).addElement(SPropertyOperations.getString(function, PROPS.header$7lfc));
+        tgs.append("#include <");
+        tgs.append(SPropertyOperations.getString(function, PROPS.header$7lfc));
+        tgs.append(".h>");
+        tgs.newLine();
       }
     }
 
@@ -79,340 +91,146 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.newLine();
 
-    // todo it would be useful to create some "parameter-related" concepts, in order to input parameters to the simulation
-    tgs.append("#define INPUT_FILE \"taxi.csv\"");
-    tgs.newLine();
-    tgs.newLine();
-
-    // todo the following two variables are model-specific
-    tgs.append("FILE *file = NULL;");
-    tgs.newLine();
-    tgs.append("Schema schema = {0};");
-    tgs.newLine();
-
-    tgs.append("struct topology *topology = NULL;");
+    for (SNode item : SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.configuration$6ery)) {
+      tgs.appendNode(item);
+    }
     tgs.newLine();
 
     tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc));
 
-    tgs.newLine();
-    tgs.newLine();
+    Behaviors.behaviors(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.behaviors$VQhG), CONCEPTS.CreateBehavior$iN), ctx);
 
-    for (SNode item : SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.behaviors$VQhG)) {
-      tgs.appendNode(item);
-    }
-
-    tgs.append("void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *content, __unused unsigned size, void *s)");
+    // ProcessEvent
+    tgs.append("void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *msg, __unused unsigned size, void *state)");
     tgs.newLine();
     tgs.append("{");
     tgs.newLine();
+
     ctx.getBuffer().area().increaseIndent();
-    // todo the following variables are model-specific
-    tgs.indent();
-    tgs.append("WindowData *window_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("SelectionData *selection_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("ProjectionData *projection_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("OrderByData *orderBy_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("GroupByData *groupBy_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("AggregateFunctionData *agg_function_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("OutputProcessData *output_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("JoinData *join_data;");
-    tgs.newLine();
-    tgs.newLine();
 
     tgs.indent();
     tgs.append("switch(me) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
-    // todo DataSource actor is not defined in ActorLanguage
-    tgs.indent();
-    tgs.append("case 0:");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append("/* DATA SOURCE */");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("switch(event_type) {");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append("case LP_INIT:");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append("DataIngestionInit(me, now, &file, INPUT_FILE, &schema);");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("break;");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("case EVENT:");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append("DataIngestion(topology, me, now, (DataSourceData *)s, &file, &schema);");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("break;");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("case LP_FINI:");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append("DataIngestionCleanUp(file, (DataSourceData *)s, &schema);");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("break;");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("default:");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append("fprintf(stderr, \"Unknown event type\");");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("puts(\"\");");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("abort();");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
-    ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("}");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("break;");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
-
-    ctx.getBuffer().area().decreaseIndent();
-
-    // todo in the following code, for each actor's behavior, an hardcoded switch-case is appended (we don't have a way to define the init, cleanup and terminate handlers, for each family of actors)
-
-    for (final SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{}))) {
-      if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("window")) {
-        int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
-        WindowSwitchCase.AppendWindow(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("selection")) {
-        int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
-        SelectionSwitchCase.AppendSelection(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("projection")) {
-        int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
-        ProjectionSwitchCase.AppendProjection(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("groupBy")) {
-        int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
-        GroupBySwitchCase.AppendGroupBy(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("orderBy")) {
-        int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
-        OrderBySwitchCase.AppendOrderBy(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("joinColumns")) {
-        Iterable<SNode> links = ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).where((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_));
-        int[] from = {SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(Sequence.fromIterable(links).toList()).getElement(0), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_), SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(Sequence.fromIterable(links).toList()).getElement(1), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_)};
-        JoinSwitchCase.AppendJoin(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Min")) {
-        int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
-        AggregateFunctionSwitchCase.AppendAggregateFunction(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), "Min", ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Max")) {
-        int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
-        AggregateFunctionSwitchCase.AppendAggregateFunction(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), "Max", ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Average")) {
-        int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
-        AggregateFunctionSwitchCase.AppendAggregateFunction(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), "Average", ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Sum")) {
-        int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
-        AggregateFunctionSwitchCase.AppendAggregateFunction(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), "Sum", ctx);
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Count")) {
-        int from = SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SNodeOperations.getNodeDescendants(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc), CONCEPTS.ActorLink$sB, false, new SAbstractConcept[]{})).findFirst((it) -> SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_) == SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)), LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_);
-        AggregateFunctionSwitchCase.AppendAggregateFunction(from, SPropertyOperations.getInteger(actor, PROPS.address$DqJ_), "Count", ctx);
+    for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{}))) {
+      tgs.indent();
+      tgs.append("case ");
+      tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
+      tgs.append(":");
+      tgs.newLine();
+      ctx.getBuffer().area().increaseIndent();
+      tgs.indent();
+      tgs.append("/* ");
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL));
+      tgs.append(" */");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("switch(event_type) {");
+      tgs.newLine();
+      ctx.getBuffer().area().increaseIndent();
+      tgs.indent();
+      tgs.append("case LP_INIT: {");
+      tgs.newLine();
+      ctx.getBuffer().area().increaseIndent();
+      Handler.handlerFunction(SLinkOperations.getTarget(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), LINKS.initHandler$1yDf), ctx);
+      ctx.getBuffer().area().decreaseIndent();
+      tgs.indent();
+      tgs.append("}");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("case EVENT: {");
+      tgs.newLine();
+      ctx.getBuffer().area().increaseIndent();
+      tgs.indent();
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL));
+      tgs.append("(me, now, msg, state);");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("break;");
+      tgs.newLine();
+      ctx.getBuffer().area().decreaseIndent();
+      tgs.indent();
+      tgs.append("}");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("case LP_FINI: {");
+      tgs.newLine();
+      ctx.getBuffer().area().increaseIndent();
+      Handler.handlerFunction(SLinkOperations.getTarget(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), LINKS.cleanupHandler$1ySg), ctx);
+      ctx.getBuffer().area().decreaseIndent();
+      tgs.indent();
+      tgs.append("}");
+      tgs.newLine();
+      for (final SNode customEvent : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.customEvents$eDRO))) {
+        tgs.indent();
+        tgs.append("case ");
+        tgs.append(SPropertyOperations.getString(customEvent, PROPS.name$MnvL));
+        tgs.append(": {");
+        tgs.newLine();
+        ctx.getBuffer().area().increaseIndent();
+        Handler.handlerFunction(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), LINKS.customEventsHandlers$Ugrs)).findFirst((it) -> SLinkOperations.getTarget(it, LINKS.event$5Bra) == customEvent), LINKS.function$8k$G), ctx);
+        ctx.getBuffer().area().decreaseIndent();
+        tgs.indent();
+        tgs.append("}");
+        tgs.newLine();
       }
+      ctx.getBuffer().area().decreaseIndent();
+      tgs.indent();
+      tgs.append("}");
+      tgs.newLine();
+      tgs.newLine();
+      ctx.getBuffer().area().decreaseIndent();
     }
-
+    ctx.getBuffer().area().decreaseIndent();
     tgs.indent();
     tgs.append("}");
     tgs.newLine();
+
     ctx.getBuffer().area().decreaseIndent();
+
     tgs.append("}");
     tgs.newLine();
-    tgs.newLine();
+
 
     tgs.append("bool CanEnd(lp_id_t me, const void *snapshot) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("DataSourceData *source_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("WindowData *window_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("SelectionData *selection_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("ProjectionData *projection_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("GroupByData *groupBy_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("OrderByData *orderBy_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("OutputProcessData *output_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("JoinData *join_data;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("AggregateFunctionData *agg_function_data;");
-    tgs.newLine();
-
-    tgs.indent();
     tgs.append("switch(me) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
-
-    tgs.indent();
-    tgs.append("case 0:");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append("source_data = (DataSourceData *)snapshot;");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append("return source_data->can_end;");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
     for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{}))) {
-      if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("window")) {
-        tgs.indent();
-        tgs.append("case ");
-        tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
-        tgs.append(":");
-        tgs.newLine();
-        ctx.getBuffer().area().increaseIndent();
-        tgs.indent();
-        tgs.append("window_data = (WindowData *)snapshot;");
-        tgs.newLine();
-        tgs.indent();
-        tgs.append("return window_data->can_end;");
-        tgs.newLine();
-        ctx.getBuffer().area().decreaseIndent();
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("selection")) {
-        tgs.indent();
-        tgs.append("case ");
-        tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
-        tgs.append(":");
-        tgs.newLine();
-        ctx.getBuffer().area().increaseIndent();
-        tgs.indent();
-        tgs.append("selection_data = (SelectionData *)snapshot;");
-        tgs.newLine();
-        tgs.indent();
-        tgs.append("return selection_data->can_end;");
-        tgs.newLine();
-        ctx.getBuffer().area().decreaseIndent();
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("projection")) {
-        tgs.indent();
-        tgs.append("case ");
-        tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
-        tgs.append(":");
-        tgs.newLine();
-        ctx.getBuffer().area().increaseIndent();
-        tgs.indent();
-        tgs.append("projection_data = (ProjectionData *)snapshot;");
-        tgs.newLine();
-        tgs.indent();
-        tgs.append("return projection_data->can_end;");
-        tgs.newLine();
-        ctx.getBuffer().area().decreaseIndent();
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("groupBy")) {
-        tgs.indent();
-        tgs.append("case ");
-        tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
-        tgs.append(":");
-        tgs.newLine();
-        ctx.getBuffer().area().increaseIndent();
-        tgs.indent();
-        tgs.append("groupBy_data = (GroupByData *)snapshot;");
-        tgs.newLine();
-        tgs.indent();
-        tgs.append("return groupBy_data->can_end;");
-        tgs.newLine();
-        ctx.getBuffer().area().decreaseIndent();
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("orderBy")) {
-        tgs.indent();
-        tgs.append("case ");
-        tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
-        tgs.append(":");
-        tgs.newLine();
-        ctx.getBuffer().area().increaseIndent();
-        tgs.indent();
-        tgs.append("orderBy_data = (OrderByData *)snapshot;");
-        tgs.newLine();
-        tgs.indent();
-        tgs.append("return orderBy_data->can_end;");
-        tgs.newLine();
-        ctx.getBuffer().area().decreaseIndent();
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("joinColumns")) {
-        tgs.indent();
-        tgs.append("case ");
-        tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
-        tgs.append(":");
-        tgs.newLine();
-        ctx.getBuffer().area().increaseIndent();
-        tgs.indent();
-        tgs.append("join_data = (JoinData *)snapshot;");
-        tgs.newLine();
-        tgs.indent();
-        tgs.append("return join_data->can_end;");
-        tgs.newLine();
-        ctx.getBuffer().area().decreaseIndent();
-      } else if (SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Min") || SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Max") || SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Average") || SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Sum") || SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL).equals("Count")) {
-        tgs.indent();
-        tgs.append("case ");
-        tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
-        tgs.append(":");
-        tgs.newLine();
-        ctx.getBuffer().area().increaseIndent();
-        tgs.indent();
-        tgs.append("agg_function_data = (AggregateFunctionData *)snapshot;");
-        tgs.newLine();
-        tgs.indent();
-        tgs.append("return agg_function_data->can_end;");
-        tgs.newLine();
-        ctx.getBuffer().area().decreaseIndent();
-      }
+      tgs.indent();
+      tgs.append("case ");
+      tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
+      tgs.append(": {");
+      tgs.newLine();
+      ctx.getBuffer().area().increaseIndent();
+      tgs.indent();
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.stateType$2Mnh), PROPS.name$MnvL));
+      tgs.append(" ");
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL));
+      tgs.append("_data = (");
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.stateType$2Mnh), PROPS.name$MnvL));
+      tgs.append(" *)snapshot;");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("return ");
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$Wafv), PROPS.name$MnvL));
+      tgs.append("_data->can_end;");
+      tgs.newLine();
+      ctx.getBuffer().area().decreaseIndent();
+      tgs.indent();
+      tgs.append("}");
+      tgs.newLine();
     }
     tgs.indent();
     tgs.append("default:");
     tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
     tgs.indent();
     tgs.append("return true;");
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
-    ctx.getBuffer().area().decreaseIndent();
     tgs.indent();
     tgs.append("}");
     tgs.newLine();
@@ -420,7 +238,6 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     tgs.append("}");
     tgs.newLine();
     tgs.newLine();
-
 
     // configure simulation
     tgs.append("struct simulation_configuration conf = {");
@@ -510,6 +327,7 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
 
   private static final class PROPS {
     /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
+    /*package*/ static final SProperty header$$WII = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L, 0xbc4afff42e6671bL, "header");
     /*package*/ static final SProperty header$7lfc = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a5fe9L, 0x6065ca884e7a6002L, "header");
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
@@ -518,18 +336,23 @@ public class ActorScript_TextGen extends TextGenDescriptorBase {
     /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
     /*package*/ static final SConcept ExternalType$Bi = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L, "ActorLanguage.structure.ExternalType");
     /*package*/ static final SConcept ExternalFunctionPrototype$n3 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a5fe9L, "ActorLanguage.structure.ExternalFunctionPrototype");
-    /*package*/ static final SConcept ActorLink$sB = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, "ActorLanguage.structure.ActorLink");
+    /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
     /*package*/ static final SInterfaceConcept UnitConcept$1g = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a4L, "jetbrains.mps.lang.traceable.structure.UnitConcept");
   }
 
   private static final class LINKS {
     /*package*/ static final SContainmentLink types$lVcp = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x754f4cb23a308c63L, "types");
     /*package*/ static final SContainmentLink externalFunctions$bWTb = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x61da6c5c302ab136L, "externalFunctions");
+    /*package*/ static final SContainmentLink configuration$6ery = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0xbc4afff405f7c51L, "configuration");
     /*package*/ static final SContainmentLink topology$GORc = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x262cd812cfe6cc9dL, "topology");
     /*package*/ static final SContainmentLink behaviors$VQhG = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x5d890eb3ebfeaec2L, "behaviors");
-    /*package*/ static final SReferenceLink actorTo$3d9g = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57976L, "actorTo");
-    /*package*/ static final SReferenceLink actor$8xF = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57937L, 0x262cd812cfe57939L, "actor");
-    /*package*/ static final SReferenceLink actorFrom$3cFe = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57938L, 0x262cd812cfe57974L, "actorFrom");
     /*package*/ static final SReferenceLink behavior$Wafv = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x47ae2b741b264b70L, "behavior");
+    /*package*/ static final SContainmentLink initHandler$1yDf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31cL, "initHandler");
+    /*package*/ static final SContainmentLink cleanupHandler$1ySg = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31dL, "cleanupHandler");
+    /*package*/ static final SContainmentLink customEventsHandlers$Ugrs = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a64224bL, "customEventsHandlers");
+    /*package*/ static final SReferenceLink event$5Bra = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1f52820f4a642252L, 0x1f52820f4a642253L, "event");
+    /*package*/ static final SContainmentLink function$8k$G = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1f52820f4a642252L, 0x1f52820f4a64226bL, "function");
+    /*package*/ static final SContainmentLink customEvents$eDRO = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x1f52820f4a642248L, "customEvents");
+    /*package*/ static final SReferenceLink stateType$2Mnh = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x47ae2b741b264b71L, "stateType");
   }
 }

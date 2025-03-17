@@ -19,7 +19,6 @@ public class GetNeighborsFromReceptionist_TextGen extends TextGenDescriptorBase 
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
-    tgs.indent();
     tgs.append("unsigned long num_");
     tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.actorReferences$8P4C), PROPS.name$MnvL));
     tgs.append(";");
