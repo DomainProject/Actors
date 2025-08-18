@@ -31,6 +31,7 @@
         <child id="711157185105040753" name="payload" index="GupN0" />
       </concept>
       <concept id="3865756215865914230" name="ActorLanguage.structure.ActorScript" flags="ng" index="37lXYX">
+        <property id="717550881624455280" name="randomStuff" index="2myNz9" />
         <child id="6739934483257959573" name="receptionist" index="2QtyCA" />
         <child id="6739934483257929410" name="behaviors" index="2QtU1L" />
         <child id="3865756215865914231" name="actorCreation" index="37lXYW" />
@@ -40,6 +41,7 @@
         <child id="2257009365450236488" name="customEvents" index="1ldE17" />
         <child id="2750811047725550749" name="topology" index="3DMxif" />
       </concept>
+      <concept id="847996140701075939" name="ActorLanguage.structure.ExternalTypeDefinition" flags="ng" index="1aDQos" />
       <concept id="847996140684016715" name="ActorLanguage.structure.GlobalVarDecl" flags="ng" index="1bAXeO" />
       <concept id="3352821068295505926" name="ActorLanguage.structure.ExternalType" flags="ng" index="1dH9jT">
         <property id="847996140726413083" name="header" index="198Gz$" />
@@ -85,9 +87,7 @@
       <concept id="4185783222026475861" name="com.mbeddr.core.statements.structure.StatementList" flags="ng" index="3XIRFW">
         <child id="4185783222026475862" name="statements" index="3XIRFZ" />
       </concept>
-      <concept id="2093108837558113914" name="com.mbeddr.core.statements.structure.LocalVarRef" flags="ng" index="3ZVu4v">
-        <reference id="2093108837558124071" name="var" index="3ZVs_2" />
-      </concept>
+      <concept id="4185783222026464515" name="com.mbeddr.core.statements.structure.Statement" flags="ng" index="3XISUE" />
     </language>
     <language id="3bf5377a-e904-4ded-9754-5a516023bfaa" name="com.mbeddr.core.pointers">
       <concept id="5308710777891643206" name="com.mbeddr.core.pointers.structure.NullExpression" flags="ng" index="Ea8Gl" />
@@ -106,6 +106,9 @@
       <concept id="6437088627575722813" name="com.mbeddr.core.modules.structure.Module" flags="ng" index="N3F4X">
         <child id="6437088627575722833" name="contents" index="N3F5h" />
       </concept>
+      <concept id="6437088627575722831" name="com.mbeddr.core.modules.structure.IModuleContent" flags="ngI" index="N3F5f">
+        <property id="6708182213627106114" name="preventNameMangling" index="3mNxdG" />
+      </concept>
       <concept id="6437088627575724000" name="com.mbeddr.core.modules.structure.FunctionPrototype" flags="ng" index="N3Fnw" />
       <concept id="6437088627575724001" name="com.mbeddr.core.modules.structure.Function" flags="ng" index="N3Fnx">
         <child id="4185783222026475860" name="body" index="3XIRFX" />
@@ -114,7 +117,6 @@
       <concept id="7892328519581704407" name="com.mbeddr.core.modules.structure.Argument" flags="ng" index="19RgSI" />
       <concept id="5950410542643524492" name="com.mbeddr.core.modules.structure.FunctionCall" flags="ng" index="3O_q_g">
         <reference id="5950410542643524493" name="function" index="3O_q_h" />
-        <child id="5950410542643524495" name="actuals" index="3O_q_j" />
       </concept>
       <concept id="6610873504380335822" name="com.mbeddr.core.modules.structure.GlobalVariableDeclaration" flags="ng" index="1S7NMz">
         <child id="2771264470558526601" name="init" index="1cecVj" />
@@ -136,6 +138,7 @@
   </registry>
   <node concept="37lXYX" id="1IMoxTthUGS">
     <property role="TrG5h" value="TestScript" />
+    <property role="2myNz9" value=" " />
     <node concept="2NXPZ9" id="1IMoxTthUGT" role="N3F5h">
       <property role="TrG5h" value="empty_1742205412886_5" />
     </node>
@@ -236,6 +239,11 @@
         <property role="TrG5h" value="Topology" />
       </node>
     </node>
+    <node concept="IQpmJ" id="5AAJA6fVQOS" role="1fvW3h" />
+    <node concept="IQpmJ" id="5AAJA6fVQP8" role="1fvW3h" />
+    <node concept="1aDQos" id="5AAJA6fVQPf" role="1fvW3h">
+      <property role="3mNxdG" value="true" />
+    </node>
     <node concept="1bAXeO" id="1IMoxTthUWP" role="1bAXeI">
       <property role="TrG5h" value="topology" />
       <node concept="3wxxNl" id="1IMoxTthUXb" role="2C2TGm">
@@ -269,14 +277,7 @@
               <ref role="3O_q_h" node="1IMoxTthUGY" resolve="Projection" />
             </node>
           </node>
-          <node concept="1_9egQ" id="1IMoxTtlG2X" role="3XIRFZ">
-            <node concept="3O_q_g" id="1IMoxTtlG2V" role="1_9egR">
-              <ref role="3O_q_h" node="1IMoxTthUJ8" resolve="ProcessList" />
-              <node concept="3ZVu4v" id="1IMoxTtlG3b" role="3O_q_j">
-                <ref role="3ZVs_2" node="1IMoxTtlFJ2" resolve="list" />
-              </node>
-            </node>
-          </node>
+          <node concept="3XISUE" id="5AAJA6fW2ev" role="3XIRFZ" />
         </node>
         <node concept="19RgSI" id="1IMoxTtlEZi" role="1UOdpc">
           <property role="TrG5h" value="state" />

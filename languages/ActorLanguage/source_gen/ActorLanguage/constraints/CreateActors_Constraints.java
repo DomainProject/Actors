@@ -7,7 +7,6 @@ import jetbrains.mps.smodel.runtime.base.BasePropertyConstraintsDescriptor;
 import jetbrains.mps.smodel.runtime.ConstraintsDescriptor;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import ActorLanguage.behavior.CreateActors__BehaviorDescriptor;
 import jetbrains.mps.smodel.runtime.CheckingNodeContext;
 import jetbrains.mps.smodel.SNodePointer;
 import java.util.List;
@@ -40,7 +39,6 @@ public class CreateActors_Constraints extends BaseConstraintsDescriptor {
     }
     private static void staticSetPropertyValue(SNode node, int propertyValue) {
       SPropertyOperations.assign(node, PROPS.number$$XD7, propertyValue);
-      CreateActors__BehaviorDescriptor.createActors_idI$NcBTsrE.invoke(node);
     }
     @Override
     public boolean validateValue(SNode node, Object propertyValue, CheckingNodeContext checkingNodeContext) {
@@ -56,15 +54,7 @@ public class CreateActors_Constraints extends BaseConstraintsDescriptor {
   }
   public static class BaseName_Property extends BasePropertyConstraintsDescriptor {
     public BaseName_Property(ConstraintsDescriptor container) {
-      super(PROPS.baseName$$Y79, container, false, true, true);
-    }
-    @Override
-    public void setPropertyValue(SNode node, Object propertyValue) {
-      staticSetPropertyValue(node, SPropertyOperations.castString(propertyValue));
-    }
-    private static void staticSetPropertyValue(SNode node, String propertyValue) {
-      SPropertyOperations.assign(node, PROPS.baseName$$Y79, propertyValue);
-      CreateActors__BehaviorDescriptor.createActors_idI$NcBTsrE.invoke(node);
+      super(PROPS.baseName$$Y79, container, false, false, true);
     }
     @Override
     public boolean validateValue(SNode node, Object propertyValue, CheckingNodeContext checkingNodeContext) {
@@ -94,16 +84,7 @@ public class CreateActors_Constraints extends BaseConstraintsDescriptor {
   }
   @Override
   protected Map<SReferenceLink, ReferenceConstraintsDescriptor> getSpecifiedReferences() {
-    BaseReferenceConstraintsDescriptor d0 = new BaseReferenceConstraintsDescriptor(LINKS.behavior$iAwJ, this, false, true) {
-      @Override
-      public boolean validate(final SNode referenceNode, final SNode oldReferentNode, final SNode newReferentNode) {
-        return true;
-      }
-      @Override
-      public void onReferenceSet(final SNode referenceNode, final SNode oldReferentNode, final SNode newReferentNode) {
-        CreateActors__BehaviorDescriptor.createActors_idI$NcBTsrE.invoke(referenceNode);
-      }
-    };
+    BaseReferenceConstraintsDescriptor d0 = new BaseReferenceConstraintsDescriptor(LINKS.behavior$iAwJ, this, false, false) {};
     Map<SReferenceLink, ReferenceConstraintsDescriptor> references = new HashMap<SReferenceLink, ReferenceConstraintsDescriptor>();
     references.put(d0.getReference(), d0);
     return references;

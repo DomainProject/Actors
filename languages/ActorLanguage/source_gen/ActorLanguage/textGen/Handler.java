@@ -21,8 +21,8 @@ public abstract class Handler {
     for (SNode statement : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(function, LINKS.body$1GE0), LINKS.statements$euTV))) {
       tgs.indent();
       tgs.appendNode(statement);
-      tgs.newLine();
     }
+    tgs.newLine();
     tgs.indent();
     tgs.append("break;");
     tgs.newLine();

@@ -93,9 +93,15 @@ public class CreateBehavior_Constraints extends BaseConstraintsDescriptor {
 
         // set a copy of node.messageArg as function argument, otherwise node.messageArg would always be NULL
         ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(node, LINKS.function$MLkf), LINKS.arguments$6da0)).insertElement(0, SNodeOperations.copyNode(SLinkOperations.getTarget(node, LINKS.messageArg$f47$)));
+        for (SNode handler : ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.customEventsHandlers$Ugrs))) {
+          ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(handler, LINKS.function$8k$G), LINKS.arguments$6da0)).insertElement(0, SNodeOperations.copyNode(SLinkOperations.getTarget(node, LINKS.messageArg$f47$)));
+        }
       } else {
         // todo quite weak, adding more parameters could break the renaming
         SPropertyOperations.assign(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(node, LINKS.function$MLkf), LINKS.arguments$6da0)).getElement(0), PROPS.name$MnvL, propertyValue);
+        for (SNode handler : ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.customEventsHandlers$Ugrs))) {
+          SPropertyOperations.assign(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(handler, LINKS.function$8k$G), LINKS.arguments$6da0)).getElement(0), PROPS.name$MnvL, propertyValue);
+        }
       }
     }
   }
@@ -129,5 +135,7 @@ public class CreateBehavior_Constraints extends BaseConstraintsDescriptor {
     /*package*/ static final SContainmentLink type$sXU3 = MetaAdapterFactory.getContainmentLink(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x46a2a92ac61b183L, 0x46a2a92ac61b184L, "type");
     /*package*/ static final SContainmentLink baseType$zMGV = MetaAdapterFactory.getContainmentLink(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x6bbcdccef5e46755L, 0x6bbcdccef5e46756L, "baseType");
     /*package*/ static final SContainmentLink arguments$6da0 = MetaAdapterFactory.getContainmentLink(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x707ac195dd5d51f2L, 0x4f39f90935e92f45L, "arguments");
+    /*package*/ static final SContainmentLink function$8k$G = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1f52820f4a642252L, 0x1f52820f4a64226bL, "function");
+    /*package*/ static final SContainmentLink customEventsHandlers$Ugrs = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a64224bL, "customEventsHandlers");
   }
 }

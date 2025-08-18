@@ -12,8 +12,9 @@ import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SProperty;
 
@@ -74,6 +75,12 @@ public class ModelListenersDescriptor implements IModelListenersDescriptor {
             SPropertyOperations.assign(globalVarDecl, PROPS.preventNameMangling$DOH5, true);
           }
         }
+        {
+          final SNode globalConstant = child;
+          if (SNodeOperations.isInstanceOf(globalConstant, CONCEPTS.GlobalConstant$pG)) {
+            SPropertyOperations.assign(globalConstant, PROPS.preventNameMangling$DOH5, true);
+          }
+        }
       }
     });
     ListSequence.fromList(listeners).addElement(new ChildListener(CONCEPTS.ActorScript$nz, LINKS.types$lVcp) {
@@ -99,6 +106,14 @@ public class ModelListenersDescriptor implements IModelListenersDescriptor {
         }
       }
     });
+    ListSequence.fromList(listeners).addElement(new ChildListener(CONCEPTS.ActorScript$nz, LINKS.startupCode$I5MT) {
+      @Override
+      public void childAdded(final SNode instance, final SNode child) {
+        SPropertyOperations.assign(SLinkOperations.getTarget(child, LINKS.function$Tpda), PROPS.name$MnvL, "startup");
+        SLinkOperations.setTarget(SLinkOperations.getTarget(child, LINKS.function$Tpda), LINKS.type$sXU3, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x6d872ef9245a0d19L, "com.mbeddr.core.expressions.structure.VoidType")));
+        SPropertyOperations.assign(SLinkOperations.getTarget(child, LINKS.function$Tpda), PROPS.preventNameMangling$DOH5, true);
+      }
+    });
 
     return listeners;
   }
@@ -110,6 +125,7 @@ public class ModelListenersDescriptor implements IModelListenersDescriptor {
     /*package*/ static final SConcept ExternalFunction$kh = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302aacc3L, "ActorLanguage.structure.ExternalFunction");
     /*package*/ static final SConcept ExternalFunctionPrototype$n3 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a5fe9L, "ActorLanguage.structure.ExternalFunctionPrototype");
     /*package*/ static final SConcept GlobalVarDecl$3_ = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbc4afff405f7c4bL, "ActorLanguage.structure.GlobalVarDecl");
+    /*package*/ static final SConcept GlobalConstant$pG = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x32cd46c3579fd9e1L, "ActorLanguage.structure.GlobalConstant");
     /*package*/ static final SConcept ExternalType$Bi = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L, "ActorLanguage.structure.ExternalType");
     /*package*/ static final SConcept ExternalTypeDefinition$1k = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbc4afff4163c9e3L, "ActorLanguage.structure.ExternalTypeDefinition");
     /*package*/ static final SConcept CustomType$VF = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x754f4cb23a214a8fL, "ActorLanguage.structure.CustomType");
@@ -125,9 +141,13 @@ public class ModelListenersDescriptor implements IModelListenersDescriptor {
     /*package*/ static final SContainmentLink configuration$6ery = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0xbc4afff405f7c51L, "configuration");
     /*package*/ static final SContainmentLink types$lVcp = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x754f4cb23a308c63L, "types");
     /*package*/ static final SContainmentLink structDeclaration$Nldq = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L, 0xbc4afff42e69b25L, "structDeclaration");
+    /*package*/ static final SContainmentLink startupCode$I5MT = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x32cd46c35a8fe3fbL, "startupCode");
+    /*package*/ static final SContainmentLink function$Tpda = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x32cd46c35b26dd79L, 0x32cd46c35b26dd7aL, "function");
+    /*package*/ static final SContainmentLink type$sXU3 = MetaAdapterFactory.getContainmentLink(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x46a2a92ac61b183L, 0x46a2a92ac61b184L, "type");
   }
 
   private static final class PROPS {
     /*package*/ static final SProperty preventNameMangling$DOH5 = MetaAdapterFactory.getProperty(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b934fL, 0x5d18402e8bd65342L, "preventNameMangling");
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

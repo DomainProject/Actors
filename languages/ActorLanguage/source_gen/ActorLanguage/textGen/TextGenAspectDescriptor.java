@@ -23,8 +23,8 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
   @Override
   public TextGenDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
     switch (myIndex.index(concept)) {
-      case LanguageConceptSwitch.ActorScript:
-        return new ActorScript_TextGen();
+      case LanguageConceptSwitch.ActorScriptIntermediate:
+        return new ActorScriptIntermediate_TextGen();
       case LanguageConceptSwitch.ActorsGraph:
         return new ActorsGraph_TextGen();
       case LanguageConceptSwitch.CreateActor:
@@ -43,12 +43,16 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new ForEachActorReferenceStatement_TextGen();
       case LanguageConceptSwitch.GetNeighborsFromReceptionist:
         return new GetNeighborsFromReceptionist_TextGen();
+      case LanguageConceptSwitch.GlobalVarDecl:
+        return new GlobalVarDecl_TextGen();
       case LanguageConceptSwitch.Receptionist:
         return new Receptionist_TextGen();
       case LanguageConceptSwitch.SendMessage:
         return new SendMessage_TextGen();
       case LanguageConceptSwitch.SendMessageToNeighbors:
         return new SendMessageToNeighbors_TextGen();
+      case LanguageConceptSwitch.StartupCode:
+        return new StartupCode_TextGen();
       case LanguageConceptSwitch.StringBody:
         return new StringBody_TextGen();
     }
@@ -58,22 +62,22 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
   @Override
   public void breakdownToUnits(@NotNull TextGenModelOutline outline) {
     for (SNode root : outline.getModel().getRootNodes()) {
-      if (root.getConcept().equals(CONCEPTS.ActorScript$nz)) {
-        String fname = getFileName_ActorScript(root);
-        String ext = getFileExtension_ActorScript(root);
+      if (root.getConcept().equals(CONCEPTS.ActorScriptIntermediate$mu)) {
+        String fname = getFileName_ActorScriptIntermediate(root);
+        String ext = getFileExtension_ActorScriptIntermediate(root);
         outline.registerTextUnit((ext == null ? fname : (fname + '.' + ext)), root);
         continue;
       }
     }
   }
-  private static String getFileName_ActorScript(SNode node) {
+  private static String getFileName_ActorScriptIntermediate(SNode node) {
     return node.getName();
   }
-  private static String getFileExtension_ActorScript(SNode node) {
+  private static String getFileExtension_ActorScriptIntermediate(SNode node) {
     return "c";
   }
 
   private static final class CONCEPTS {
-    /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
+    /*package*/ static final SConcept ActorScriptIntermediate$mu = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x46a144cd5bb2ddL, "ActorLanguage.structure.ActorScriptIntermediate");
   }
 }
