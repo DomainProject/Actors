@@ -3,7 +3,7 @@
   <property name="build.dir" location="build" />
   <property name="build.tmp" location="${build.dir}/tmp/Actors" />
   <property name="build.layout" location="${build.dir}/artifacts/Actors" />
-  <property name="mps_home" location="${basedir}/../../MPS/MPS-2024.1" />
+  <property name="mps_home" location="${basedir}/../../.local/share/JetBrains/Toolbox/apps/mps-2" />
   <property name="artifacts.mps" location="${mps_home}" />
   <property name="artifacts.mpsMakePlugin" location="${mps_home}/plugins" />
   <property name="artifacts.mpsCore" location="${mps_home}/plugins" />
@@ -33,7 +33,7 @@
   <property name="com.mbeddr.platform.minor.version" value="${import.mbeddr.com.mbeddr.platform.minor.version}" />
   <property name="com.mbeddr.platform.build" value="${import.mbeddr.com.mbeddr.platform.build}" />
   <property name="com.mbeddr.platform.mbeddr.version" value="${import.mbeddr.com.mbeddr.platform.mbeddr.version}" />
-  <property name="de.itemis.mps.extensions.versionNumber" value="${import.mbeddr.de.itemis.mps.extensions.versionNumber}" />
+  <property name="de.itemis.mps.extensions.version" value="${import.mbeddr.de.itemis.mps.extensions.version}" />
   <property name="com.mbeddr.mpsutil.actionsfilter.major.version" value="${import.mbeddr.com.mbeddr.mpsutil.actionsfilter.major.version}" />
   <property name="com.mbeddr.mpsutil.actionsfilter.minor.version" value="${import.mbeddr.com.mbeddr.mpsutil.actionsfilter.minor.version}" />
   <property name="com.mbeddr.mpsutil.actionsfilter.build" value="${import.mbeddr.com.mbeddr.mpsutil.actionsfilter.build}" />
@@ -46,9 +46,7 @@
   
   <path id="path.mps.ant.path">
     <pathelement location="${artifacts.mps}/lib/ant/lib/ant-mps.jar" />
-    <fileset dir="${artifacts.mps}/lib">
-      <include name="util-8.jar" />
-    </fileset>
+    <pathelement location="${artifacts.mps}/lib/util-8.jar" />
   </path>
   
   <taskdef resource="jetbrains/mps/build/ant/antlib.xml" classpathref="path.mps.ant.path" />
@@ -57,36 +55,39 @@
   
   <target name="assemble" depends="classes, declare-mps-tasks">
     <mkdir dir="${build.layout}" />
-    <mkdir dir="${build.tmp}/default/Actors.zip" />
-    <mkdir dir="${build.tmp}/default/Actors.zip/Actors" />
-    <mkdir dir="${build.tmp}/default/Actors.zip/Actors/lib" />
-    <mkdir dir="${build.tmp}/default/Actors.jar" />
-    <mkdir dir="${build.tmp}/default/Actors.jar/META-INF" />
-    <echoxml file="${build.tmp}/default/Actors.jar/META-INF/plugin.xml">
-      <idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude">
-        <id>Actors</id>
-        <name>Actors</name>
+    <mkdir dir="${build.tmp}/default/ActorLanguage.zip" />
+    <mkdir dir="${build.tmp}/default/ActorLanguage.zip/ActorLanguage" />
+    <mkdir dir="${build.tmp}/default/ActorLanguage.zip/ActorLanguage/lib" />
+    <mkdir dir="${build.tmp}/default/ActorLanguage.jar" />
+    <mkdir dir="${build.tmp}/default/ActorLanguage.jar/META-INF" />
+    <echoxml file="${build.tmp}/default/ActorLanguage.jar/META-INF/plugin.xml">
+      <idea-plugin>
+        <id>ActorLanguage</id>
+        <name>ActorLanguage</name>
         <description>DSL based on the Actor Model</description>
         <version>1.0</version>
         <vendor url="https://domainproject.github.io/">Domain Project</vendor>
-        <depends>com.intellij.modules.platform</depends>
+        <depends>com.intellij.modules.mps</depends>
         <depends>jetbrains.mps.core</depends>
         <depends>com.mbeddr.core</depends>
-        <depends>com.intellij.modules.platform</depends>
+        <depends>com.mbeddr.mpsutil.modellisteners</depends>
+        <depends>          
+          com.intellij.modules.platform
+        </depends>
         
         <extensions defaultExtensionNs="com.intellij">
           <mps.LanguageLibrary dir="/languages" />
         </extensions>
       </idea-plugin>
     </echoxml>
-    <jar destfile="${build.tmp}/default/Actors.zip/Actors/lib/Actors.jar" duplicate="preserve">
-      <fileset dir="${build.tmp}/default/Actors.jar" />
+    <jar destfile="${build.tmp}/default/ActorLanguage.zip/ActorLanguage/lib/ActorLanguage.jar" duplicate="preserve">
+      <fileset dir="${build.tmp}/default/ActorLanguage.jar" />
     </jar>
-    <mkdir dir="${build.tmp}/default/Actors.zip/Actors/languages" />
-    <mkdir dir="${build.tmp}/default/Actors.zip/Actors/languages/Actors" />
-    <mkdir dir="${build.tmp}/default/ActorLanguage.jar" />
-    <mkdir dir="${build.tmp}/default/ActorLanguage.jar/META-INF" />
-    <echoxml file="${build.tmp}/default/ActorLanguage.jar/META-INF/module.xml">
+    <mkdir dir="${build.tmp}/default/ActorLanguage.zip/ActorLanguage/languages" />
+    <mkdir dir="${build.tmp}/default/ActorLanguage.zip/ActorLanguage/languages/Actors" />
+    <mkdir dir="${build.tmp}/default/ActorLanguage.jar1" />
+    <mkdir dir="${build.tmp}/default/ActorLanguage.jar1/META-INF" />
+    <echoxml file="${build.tmp}/default/ActorLanguage.jar1/META-INF/module.xml">
       <module namespace="ActorLanguage" type="language" uuid="10eda999-5898-4cde-9416-196c5eca1268">
         <dependencies>
           <module ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065(JDK)" kind="rt" />
@@ -190,10 +191,10 @@
         <sources jar="ActorLanguage-src.jar" descriptor="ActorLanguage.mpl" />
       </module>
     </echoxml>
-    <jar destfile="${build.tmp}/default/Actors.zip/Actors/languages/Actors/ActorLanguage.jar" duplicate="preserve">
+    <jar destfile="${build.tmp}/default/ActorLanguage.zip/ActorLanguage/languages/Actors/ActorLanguage.jar" duplicate="preserve">
       <fileset dir="${build.tmp}/java/out/ActorLanguage" />
       <fileset dir="${basedir}/languages/ActorLanguage/source_gen" includes="**/trace.info, **/exports, **/*.mps, **/checkpoints" />
-      <fileset dir="${build.tmp}/default/ActorLanguage.jar" />
+      <fileset dir="${build.tmp}/default/ActorLanguage.jar1" />
     </jar>
     <mkdir dir="${build.tmp}/default/ActorLanguage-generator.jar" />
     <mkdir dir="${build.tmp}/default/ActorLanguage-generator.jar/META-INF" />
@@ -208,8 +209,6 @@
           <module ref="9b80526e-f0bf-4992-bdf5-cee39c1833f3(collections.runtime)" kind="rt" />
           <module ref="984f0332-8a86-4f5c-9184-03eae96b5d16(com.mbeddr.core.expressions.runtime)" kind="rt" />
           <module ref="360a4e25-e902-4667-a0a6-0e971c4f3177(com.mbeddr.mpsutil.blutil.rt)" kind="rt" />
-          <module ref="94b17d5e-87d9-4868-8101-157e83e33243(com.mbeddr.mpsutil.editor.querylist.runtime)" kind="rt" />
-          <module ref="eedc5a6f-c2e8-4009-a7ab-5fc307bf77ec(com.mbeddr.mpsutil.multilingual.common.runtime)" kind="rt" />
           <module ref="e78f91af-08a8-4a7a-bed6-b22739ed069a(com.mbeddr.mpsutil.spreferences.runtime)" kind="rt" />
           <module ref="dc038ceb-b7ea-4fea-ac12-55f7400e97ba(de.slisson.mps.editor.multiline.runtime)" kind="rt" />
           <module ref="a3e4657f-a76c-45bb-bbda-c764596ecc65(jetbrains.mps.baseLanguage.logging.runtime)" kind="rt" />
@@ -244,7 +243,7 @@
         <sources jar="ActorLanguage-src.jar" descriptor="ActorLanguage.mpl" />
       </module>
     </echoxml>
-    <jar destfile="${build.tmp}/default/Actors.zip/Actors/languages/Actors/ActorLanguage-generator.jar" duplicate="preserve">
+    <jar destfile="${build.tmp}/default/ActorLanguage.zip/ActorLanguage/languages/Actors/ActorLanguage-generator.jar" duplicate="preserve">
       <fileset dir="${build.tmp}/java/out/ActorLanguage.generator00" />
       <fileset dir="${basedir}/languages/ActorLanguage/generator1/source_gen" includes="**/trace.info, **/exports, **/*.mps, **/checkpoints" />
       <fileset dir="${build.tmp}/default/ActorLanguage-generator.jar" />
@@ -255,7 +254,7 @@
     <copyModels todir="${build.tmp}/customProcessors/copyModels/languages-ActorLanguage-generator1-templates">
       <fileset dir="${basedir}/languages/ActorLanguage/generator1/templates" includes="**/*.mps, **/*.mpsr, **/.model" />
     </copyModels>
-    <jar destfile="${build.tmp}/default/Actors.zip/Actors/languages/Actors/ActorLanguage-src.jar" duplicate="preserve">
+    <jar destfile="${build.tmp}/default/ActorLanguage.zip/ActorLanguage/languages/Actors/ActorLanguage-src.jar" duplicate="preserve">
       <fileset dir="${basedir}/languages/ActorLanguage/generator1/source_gen">
         <exclude name="**/trace.info" />
         <exclude name="**/exports" />
@@ -272,10 +271,10 @@
       <zipfileset dir="${build.tmp}/customProcessors/copyModels/languages-ActorLanguage-models" prefix="module/models" />
       <zipfileset dir="${build.tmp}/customProcessors/copyModels/languages-ActorLanguage-generator1-templates" prefix="module/generator1/templates" />
     </jar>
-    <zip destfile="${build.layout}/Actors.zip">
-      <fileset dir="${build.tmp}/default/Actors.zip" />
+    <zip destfile="${build.layout}/ActorLanguage.zip">
+      <fileset dir="${build.tmp}/default/ActorLanguage.zip" />
     </zip>
-    <echo file="${build.layout}/build.properties">mps.build.number=${mps.build.number}${line.separator}mps.date=${mps.date}${line.separator}mps.build.vcs.number=${mps.build.vcs.number}${line.separator}mps.teamcity.buildConfName=${mps.teamcity.buildConfName}${line.separator}mps.idea.platform.build.number=${mps.idea.platform.build.number}${line.separator}mps.mps.build.counter=${mps.mps.build.counter}${line.separator}mps.runtimeBuild=${mps.runtimeBuild}${line.separator}mpsBootstrapCore.version.major=${mpsBootstrapCore.version.major}${line.separator}mpsBootstrapCore.version.minor=${mpsBootstrapCore.version.minor}${line.separator}mpsBootstrapCore.version.bugfixNr=${mpsBootstrapCore.version.bugfixNr}${line.separator}mpsBootstrapCore.version.eap=${mpsBootstrapCore.version.eap}${line.separator}mpsBootstrapCore.version=${mpsBootstrapCore.version}${line.separator}mbeddr.major.version=${mbeddr.major.version}${line.separator}mbeddr.minor.version=${mbeddr.minor.version}${line.separator}mbeddr.build=${mbeddr.build}${line.separator}mbeddr.mbeddr.version=${mbeddr.mbeddr.version}${line.separator}com.mbeddr.platform.major.version=${com.mbeddr.platform.major.version}${line.separator}com.mbeddr.platform.minor.version=${com.mbeddr.platform.minor.version}${line.separator}com.mbeddr.platform.build=${com.mbeddr.platform.build}${line.separator}com.mbeddr.platform.mbeddr.version=${com.mbeddr.platform.mbeddr.version}${line.separator}de.itemis.mps.extensions.versionNumber=${de.itemis.mps.extensions.versionNumber}${line.separator}com.mbeddr.mpsutil.actionsfilter.major.version=${com.mbeddr.mpsutil.actionsfilter.major.version}${line.separator}com.mbeddr.mpsutil.actionsfilter.minor.version=${com.mbeddr.mpsutil.actionsfilter.minor.version}${line.separator}com.mbeddr.mpsutil.actionsfilter.build=${com.mbeddr.mpsutil.actionsfilter.build}${line.separator}com.mbeddr.mpsutil.actionsfilter.mbeddr.version=${com.mbeddr.mpsutil.actionsfilter.mbeddr.version}</echo>
+    <echo file="${build.layout}/build.properties">mps.build.number=${mps.build.number}${line.separator}mps.date=${mps.date}${line.separator}mps.build.vcs.number=${mps.build.vcs.number}${line.separator}mps.teamcity.buildConfName=${mps.teamcity.buildConfName}${line.separator}mps.idea.platform.build.number=${mps.idea.platform.build.number}${line.separator}mps.mps.build.counter=${mps.mps.build.counter}${line.separator}mps.runtimeBuild=${mps.runtimeBuild}${line.separator}mpsBootstrapCore.version.major=${mpsBootstrapCore.version.major}${line.separator}mpsBootstrapCore.version.minor=${mpsBootstrapCore.version.minor}${line.separator}mpsBootstrapCore.version.bugfixNr=${mpsBootstrapCore.version.bugfixNr}${line.separator}mpsBootstrapCore.version.eap=${mpsBootstrapCore.version.eap}${line.separator}mpsBootstrapCore.version=${mpsBootstrapCore.version}${line.separator}mbeddr.major.version=${mbeddr.major.version}${line.separator}mbeddr.minor.version=${mbeddr.minor.version}${line.separator}mbeddr.build=${mbeddr.build}${line.separator}mbeddr.mbeddr.version=${mbeddr.mbeddr.version}${line.separator}com.mbeddr.platform.major.version=${com.mbeddr.platform.major.version}${line.separator}com.mbeddr.platform.minor.version=${com.mbeddr.platform.minor.version}${line.separator}com.mbeddr.platform.build=${com.mbeddr.platform.build}${line.separator}com.mbeddr.platform.mbeddr.version=${com.mbeddr.platform.mbeddr.version}${line.separator}de.itemis.mps.extensions.version=${de.itemis.mps.extensions.version}${line.separator}com.mbeddr.mpsutil.actionsfilter.major.version=${com.mbeddr.mpsutil.actionsfilter.major.version}${line.separator}com.mbeddr.mpsutil.actionsfilter.minor.version=${com.mbeddr.mpsutil.actionsfilter.minor.version}${line.separator}com.mbeddr.mpsutil.actionsfilter.build=${com.mbeddr.mpsutil.actionsfilter.build}${line.separator}com.mbeddr.mpsutil.actionsfilter.mbeddr.version=${com.mbeddr.mpsutil.actionsfilter.mbeddr.version}</echo>
   </target>
   
   <target name="buildDependents" />
@@ -306,7 +305,6 @@
       <plugin path="${artifacts.com.mbeddr.platform}/MPS.Kotlin" id="MPS.Kotlin" />
       <plugin path="${artifacts.com.mbeddr.platform}/MPS.ThirdParty" id="MPS.ThirdParty" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.common" id="com.mbeddr.mpsutil.common" />
-      <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.compare" id="com.mbeddr.mpsutil.compare" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.contextactions" id="com.mbeddr.mpsutil.contextactions" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.dataflow" id="com.mbeddr.mpsutil.dataflow" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.editor.querylist" id="com.mbeddr.mpsutil.editor.querylist" />
@@ -314,7 +312,6 @@
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.filepicker" id="com.mbeddr.mpsutil.filepicker" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.genreview" id="com.mbeddr.mpsutil.genreview" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.gensupport" id="com.mbeddr.mpsutil.gensupport" />
-      <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.httpsupport" id="com.mbeddr.mpsutil.httpsupport" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.incrementalcomputation" id="com.mbeddr.mpsutil.incrementalcomputation" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.infrastructure.misc" id="com.mbeddr.mpsutil.infrastructure.misc" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.interpreter" id="com.mbeddr.mpsutil.interpreter" />
@@ -324,7 +321,6 @@
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.margincell_review" id="com.mbeddr.mpsutil.margincell_review" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.modellisteners" id="com.mbeddr.mpsutil.modellisteners" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.plantuml" id="com.mbeddr.mpsutil.plantuml" />
-      <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.processwizard" id="com.mbeddr.mpsutil.processwizard" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.projectview" id="com.mbeddr.mpsutil.projectview" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.smodule" id="com.mbeddr.mpsutil.smodule" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.spreferences" id="com.mbeddr.mpsutil.spreferences" />
@@ -333,9 +329,11 @@
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.uisupport" id="com.mbeddr.mpsutil.uisupport" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.userstyles" id="com.mbeddr.mpsutil.userstyles" />
       <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.varscope" id="com.mbeddr.mpsutil.varscope" />
+      <plugin path="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.wizard" id="com.mbeddr.mpsutil.wizard" />
       <plugin path="${artifacts.com.mbeddr.platform}/de-itemis-mps-selection" id="de.itemis.mps.selection" />
       <plugin path="${artifacts.com.mbeddr.platform}/de.itemis.mps.blutil" id="de.itemis.mps.blutil" />
       <plugin path="${artifacts.com.mbeddr.platform}/de.itemis.mps.celllayout" id="de.itemis.mps.celllayout" />
+      <plugin path="${artifacts.com.mbeddr.platform}/de.itemis.mps.compare" id="de.itemis.mps.compare" />
       <plugin path="${artifacts.com.mbeddr.platform}/de.itemis.mps.editor.diagram" id="de.itemis.mps.editor.diagram" />
       <plugin path="${artifacts.com.mbeddr.platform}/de.itemis.mps.editor.widgets" id="de.itemis.mps.editor.widgets" />
       <plugin path="${artifacts.com.mbeddr.platform}/de.itemis.mps.grammarcells" id="de.itemis.mps.grammarcells" />
@@ -368,13 +366,18 @@
       <plugin path="${artifacts.mps}/plugins/mps-ide" id="jetbrains.mps.ide" />
       <plugin path="${artifacts.mps}/plugins/mps-junit5" id="jetbrains.mps.junit5" />
       <plugin path="${artifacts.mps}/plugins/mps-make" id="jetbrains.mps.ide.make" />
+      <plugin path="${artifacts.mps}/plugins/mps-modelchecker" id="jetbrains.mps.ide.modelchecker" />
       <plugin path="${artifacts.mps}/plugins/mps-rcp" id="jetbrains.mps.rcp" />
       <plugin path="${artifacts.mps}/plugins/mps-testing" id="jetbrains.mps.testing" />
       <plugin path="${artifacts.mps}/plugins/mps-tooltips" id="jetbrains.mps.editor.tooltips" />
       <plugin path="${artifacts.mps}/plugins/mps-vcs" id="jetbrains.mps.vcs" />
       <plugin path="${artifacts.mps}/plugins/vcs-git" id="Git4Idea" />
       <plugin path="${artifacts.mps}/plugins/vcs-svn" id="Subversion" />
+      <library file="${artifacts.mps}/languages/editor/jetbrains.mps.ide.editor.jar" />
+      <library file="${artifacts.mps}/languages/plaf/jetbrains.mps.ide.refactoring.platform.jar" />
+      <library file="${artifacts.mps}/languages/plaf/jetbrains.mps.ide.ui.jar" />
       <library file="${artifacts.mps}/languages/workbench-stub.jar" />
+      <library file="${artifacts.mps}/languages/workbench/jetbrains.mps.ide.jar" />
       <chunk>
         <module file="${basedir}/languages/ActorLanguage/ActorLanguage.mpl" />
       </chunk>
@@ -408,7 +411,6 @@
         <fileset file="${artifacts.mps}/lib/mps-problem.jar" />
         <fileset file="${artifacts.mps}/lib/mps-feedback-api.jar" />
         <fileset file="${artifacts.mps}/lib/mps-core.jar" />
-        <fileset file="${artifacts.mps}/plugins/mps-httpsupport/lib/httpsupport.jar" />
         <fileset file="${artifacts.mps}/lib/mps-platform.jar" />
         <fileset file="${artifacts.mps}/lib/mps-messages-api.jar" />
         <fileset file="${artifacts.mps}/lib/mps-messages-for-legacy-constraints.jar" />
@@ -443,9 +445,9 @@
         <fileset file="${artifacts.mps}/lib/testFramework.jar" />
         <fileset file="${artifacts.mps}/lib/stats.jar" />
         <fileset file="${artifacts.mps}/lib/platform-loader.jar" />
-        <fileset file="${artifacts.mps}/lib/trove.jar" />
         <fileset file="${artifacts.com.mbeddr.platform}/mbeddr.platform/languages/com.mbeddr.platform/com.mbeddr.core.base.jar" />
         <fileset file="${artifacts.mbeddr}/mbeddr.core/languages/com.mbeddr.core/com.mbeddr.core.expressions.jar" />
+        <fileset file="${artifacts.mbeddr}/mbeddr.core/languages/com.mbeddr.core/com.mbeddr.core.expressions.runtime.jar" />
         <fileset file="${artifacts.mbeddr}/mbeddr.core/languages/com.mbeddr.core/com.mbeddr.core.modules.jar" />
         <fileset file="${artifacts.mbeddr}/mbeddr.core/languages/com.mbeddr.core/com.mbeddr.core.pointers.jar" />
         <fileset file="${artifacts.mbeddr}/mbeddr.core/languages/com.mbeddr.core/com.mbeddr.core.statements.jar" />
@@ -480,7 +482,6 @@
         <fileset file="${artifacts.mps}/languages/baseLanguage/jetbrains.mps.baseLanguage.regexp.jar" />
         <fileset file="${artifacts.mps}/languages/baseLanguage/jetbrains.mps.baseLanguage.scopes.jar" />
         <fileset file="${artifacts.mps}/languages/runtimes/jetbrains.mps.dataFlow.runtime.jar" />
-        <fileset file="${artifacts.mps}/plugins/mps-httpsupport/solutions/jetbrains.mps.ide.httpsupport.runtime.jar" />
         <fileset file="${artifacts.mps}/languages/languageDesign/jetbrains.mps.lang.access.jar" />
         <fileset file="${artifacts.mps}/languages/languageDesign/jetbrains.mps.lang.core.jar" />
         <fileset file="${artifacts.mps}/languages/languageDesign/jetbrains.mps.lang.descriptor.aspects.jar" />
@@ -510,6 +511,7 @@
         <fileset dir="${artifacts.com.mbeddr.platform}/de.itemis.mps.editor.diagram/lib" includes="org.eclipse.elk.alg.rectpacking.jar" />
         <fileset dir="${artifacts.com.mbeddr.platform}/de.itemis.mps.editor.diagram/lib" includes="org.eclipse.elk.alg.spore.jar" />
         <fileset dir="${artifacts.com.mbeddr.platform}/de.itemis.mps.editor.diagram/lib" includes="org.eclipse.elk.alg.topdownpacking.jar" />
+        <fileset dir="${artifacts.com.mbeddr.platform}/de.itemis.mps.editor.diagram/lib" includes="org.eclipse.xtext.xbase.lib.jar" />
         <fileset dir="${artifacts.com.mbeddr.platform}/mps-multiline/lib" includes="diff_match_patch.jar" />
       </classpath>
     </javac>
@@ -534,7 +536,6 @@
         <fileset file="${artifacts.mps}/lib/mps-problem.jar" />
         <fileset file="${artifacts.mps}/lib/mps-feedback-api.jar" />
         <fileset file="${artifacts.mps}/lib/mps-core.jar" />
-        <fileset file="${artifacts.mps}/plugins/mps-httpsupport/lib/httpsupport.jar" />
         <fileset file="${artifacts.mps}/lib/mps-platform.jar" />
         <fileset file="${artifacts.mps}/lib/mps-messages-api.jar" />
         <fileset file="${artifacts.mps}/lib/mps-messages-for-legacy-constraints.jar" />
@@ -572,20 +573,17 @@
         <fileset file="${artifacts.mps}/lib/testFramework.jar" />
         <fileset file="${artifacts.mps}/lib/stats.jar" />
         <fileset file="${artifacts.mps}/lib/platform-loader.jar" />
-        <fileset file="${artifacts.mps}/lib/trove.jar" />
         <fileset file="${artifacts.com.mbeddr.platform}/mbeddr.platform/languages/com.mbeddr.platform/com.mbeddr.core.base.jar" />
         <fileset file="${artifacts.mbeddr}/mbeddr.core/languages/com.mbeddr.core/com.mbeddr.core.expressions.jar" />
+        <fileset file="${artifacts.mbeddr}/mbeddr.core/languages/com.mbeddr.core/com.mbeddr.core.expressions.runtime.jar" />
         <fileset file="${artifacts.mbeddr}/mbeddr.core/languages/com.mbeddr.core/com.mbeddr.core.modules.jar" />
         <fileset file="${artifacts.mbeddr}/mbeddr.core/languages/com.mbeddr.core/com.mbeddr.core.pointers.jar" />
         <fileset file="${artifacts.mbeddr}/mbeddr.core/languages/com.mbeddr.core/com.mbeddr.core.statements.jar" />
         <fileset file="${artifacts.mbeddr}/mbeddr.core/languages/com.mbeddr.core/com.mbeddr.core.udt.jar" />
         <fileset file="${artifacts.com.mbeddr.platform}/de.itemis.mps.blutil/languages/de.itemis.mps.blutil/com.mbeddr.mpsutil.blutil.jar" />
         <fileset file="${artifacts.com.mbeddr.platform}/de.itemis.mps.blutil/languages/de.itemis.mps.blutil/com.mbeddr.mpsutil.blutil.rt.jar" />
-        <fileset file="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.editor.querylist/languages/group.editor.querylist/com.mbeddr.mpsutil.editor.querylist.runtime.jar" />
-        <fileset file="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.editorsupport/languages/group.editor-support/com.mbeddr.mpsutil.editor.utils.jar" />
         <fileset file="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.filepicker/languages/group.filepicker/com.mbeddr.mpsutil.filepicker.jar" />
         <fileset file="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.jung/languages/group.jung/com.mbeddr.mpsutil.jung.jar" />
-        <fileset file="${artifacts.com.mbeddr.platform}/mbeddr.mpsutil/languages/group.multilingual/com.mbeddr.mpsutil.multilingual.common.runtime.jar" />
         <fileset file="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.plantuml/languages/group.plantuml/com.mbeddr.mpsutil.plantuml.node.jar" />
         <fileset file="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.spreferences/languages/group.spreferences/com.mbeddr.mpsutil.spreferences.runtime.jar" />
         <fileset file="${artifacts.com.mbeddr.platform}/com.mbeddr.mpsutil.suppresswarning/languages/group.suppresswarning/com.mbeddr.mpsutil.suppresswarning.jar" />
@@ -602,7 +600,6 @@
         <fileset file="${artifacts.mps}/languages/baseLanguage/jetbrains.mps.baseLanguage.regexp.jar" />
         <fileset file="${artifacts.mps}/languages/baseLanguage/jetbrains.mps.baseLanguage.regexp.runtime.jar" />
         <fileset file="${artifacts.mps}/languages/baseLanguage/jetbrains.mps.baseLanguage.scopes.jar" />
-        <fileset file="${artifacts.mps}/plugins/mps-httpsupport/solutions/jetbrains.mps.ide.httpsupport.runtime.jar" />
         <fileset file="${artifacts.mps}/languages/languageDesign/jetbrains.mps.lang.core.jar" />
         <fileset file="${artifacts.mps}/languages/languageDesign/jetbrains.mps.lang.modelapi.jar" />
         <fileset file="${artifacts.mps}/languages/languageDesign/jetbrains.mps.lang.scopes.runtime.jar" />

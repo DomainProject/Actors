@@ -18,7 +18,7 @@ public class EnumerationDescriptor_ReceptionistPolicyEnum extends EnumerationDes
   private final EnumerationDescriptor.MemberDescriptor myMember_TOPOLOGY_0 = new EnumerationDescriptor.MemberDescriptor("TOPOLOGY", "TOPOLOGY", 0x262cd812cff7ba9fL, "r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/2750811047726660255");
 
   private final EnumerationLiteralsIndex myIndex = EnumerationLiteralsIndex.build(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681690353L, 0x262cd812cff7ba9fL);
-  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList(myIndex, myMember_TOPOLOGY_0);
+  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList0(myIndex, myMember_TOPOLOGY_0);
 
   @Nullable
   @Override

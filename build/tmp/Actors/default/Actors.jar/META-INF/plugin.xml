@@ -5,9 +5,10 @@
   <description>DSL based on the Actor Model</description>
   <version>1.0</version>
   <vendor url="https://domainproject.github.io/">Domain Project</vendor>
-  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.mps</depends>
   <depends>jetbrains.mps.core</depends>
   <depends>com.mbeddr.core</depends>
+  <depends>com.mbeddr.mpsutil.modellisteners</depends>
   <depends>com.intellij.modules.platform</depends>
   <extensions defaultExtensionNs="com.intellij">
     <mps.LanguageLibrary dir="/languages" />

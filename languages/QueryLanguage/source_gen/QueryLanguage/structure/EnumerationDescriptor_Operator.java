@@ -23,7 +23,7 @@ public class EnumerationDescriptor_Operator extends EnumerationDescriptorBase {
   private final EnumerationDescriptor.MemberDescriptor myMember_NOT_EQUAL_0 = new EnumerationDescriptor.MemberDescriptor("NOT_EQUAL", "!=", 0x11100ee737471019L, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/1229499084499783705");
 
   private final EnumerationLiteralsIndex myIndex = EnumerationLiteralsIndex.build(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737470ff9L, 0x11100ee737470ffaL, 0x11100ee737470ffcL, 0x11100ee737471008L, 0x11100ee73747100dL, 0x11100ee737471013L, 0x11100ee737471019L);
-  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList(myIndex, myMember_EQUALS_0, myMember_GREATER_0, myMember_LOWER_0, myMember_GREATER_EQUAL_0, myMember_LOWER_EQUAL_0, myMember_NOT_EQUAL_0);
+  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList0(myIndex, myMember_EQUALS_0, myMember_GREATER_0, myMember_LOWER_0, myMember_GREATER_EQUAL_0, myMember_LOWER_EQUAL_0, myMember_NOT_EQUAL_0);
 
   @Nullable
   @Override

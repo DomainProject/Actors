@@ -1,8 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debug-info version="2">
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1082485599095:jetbrains.mps.baseLanguage.structure.BlockStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123140:jetbrains.mps.baseLanguage.structure.ConstructorDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123155:jetbrains.mps.baseLanguage.structure.ExpressionStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1144226303539:jetbrains.mps.baseLanguage.structure.ForeachStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123159:jetbrains.mps.baseLanguage.structure.IfStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123165:jetbrains.mps.baseLanguage.structure.InstanceMethodDeclaration" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242864:jetbrains.mps.baseLanguage.structure.LocalVariableDeclarationStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068581242878:jetbrains.mps.baseLanguage.structure.ReturnStatement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1068580123157:jetbrains.mps.baseLanguage.structure.Statement" />
+  <concept fqn="c:f3061a53-9226-4cc5-a443-f952ceaf5816/1070462154015:jetbrains.mps.baseLanguage.structure.StaticFieldDeclaration" />
   <root>
     <file name="TypesystemDescriptor.java">
-      <unit at="7,0,11,0" name="ActorLanguage.typesystem.TypesystemDescriptor" />
+      <unit at="8,0,20,0" name="ActorLanguage.typesystem.TypesystemDescriptor" />
+    </file>
+  </root>
+  <root nodeRef="r:258f263b-4e20-423c-a240-35e904c3f14e(ActorLanguage.typesystem)/1983899845828465524">
+    <file name="TypesystemDescriptor.java">
+      <node id="1983899845828465524" at="10,5,11,96" concept="6" />
+      <node id="1983899845828465524" at="11,96,12,55" concept="2" />
+      <node id="1983899845828465524" at="9,33,13,5" concept="0" />
+      <scope id="1983899845828465524" at="10,5,12,55">
+        <var name="nonTypesystemRule" id="1983899845828465524" />
+      </scope>
+    </file>
+    <file name="check_CreateMessage_NonTypesystemRule.java">
+      <node id="1983899845828478218" at="31,126,32,0" concept="8" />
+      <node id="1983899845832756475" at="33,198,34,13" concept="7" />
+      <node id="8603193828692492684" at="35,5,36,0" concept="8" />
+      <node id="1983899845828478264" at="36,0,37,231" concept="6" />
+      <node id="1983899845828481098" at="37,231,38,169" concept="6" />
+      <node id="1983899845828480068" at="38,169,39,0" concept="8" />
+      <node id="1983899845828497255" at="39,0,40,54" concept="6" />
+      <node id="1983899845828504888" at="41,154,42,100" concept="2" />
+      <node id="1983899845828580476" at="43,5,44,0" concept="8" />
+      <node id="1983899845828605255" at="45,163,46,181" concept="6" />
+      <node id="1983899845828605224" at="47,7,48,66" concept="6" />
+      <node id="1983899845828605224" at="48,66,49,220" concept="6" />
+      <node id="1983899845828465524" at="53,50,54,37" concept="7" />
+      <node id="1983899845828465524" at="56,68,57,102" concept="7" />
+      <node id="1983899845828465524" at="59,30,60,17" concept="7" />
+      <node id="1983899845828465524" at="64,0,65,0" concept="9" trace="receivedMessage$DtsG" />
+      <node id="1983899845828465524" at="65,0,66,0" concept="9" trace="payload$N_RC" />
+      <node id="1983899845828465524" at="66,0,67,0" concept="9" trace="messageDefinition$$rsX" />
+      <node id="1983899845828465524" at="67,0,68,0" concept="9" trace="type$sXU3" />
+      <node id="1983899845828465524" at="68,0,69,0" concept="9" trace="members$C59R" />
+      <node id="1983899845828465524" at="72,0,73,0" concept="9" trace="CreatePayload$Pf" />
+      <node id="1983899845828465524" at="73,0,74,0" concept="9" trace="ActorScript$nz" />
+      <node id="1983899845828465524" at="74,0,75,0" concept="9" trace="Member$J1" />
+      <node id="1983899845828465524" at="75,0,76,0" concept="9" trace="CreateMessage$aX" />
+      <node id="1983899845828465524" at="29,0,31,0" concept="1" trace="check_CreateMessage_NonTypesystemRule#()V" />
+      <node id="1983899845832741414" at="32,0,35,5" concept="4" />
+      <node id="1983899845828499090" at="40,54,43,5" concept="3" />
+      <node id="1983899845828465524" at="53,0,56,0" concept="5" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="1983899845828465524" at="56,0,59,0" concept="5" trace="isApplicableAndPattern#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;" />
+      <node id="1983899845828465524" at="59,0,62,0" concept="5" trace="overrides#()Z" />
+      <node id="1983899845828605224" at="46,181,50,7" concept="0" />
+      <node id="1983899845828580829" at="44,0,51,5" concept="4" />
+      <node id="1983899845828465524" at="31,0,53,0" concept="5" trace="applyRule#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/typesystem/inference/TypeCheckingContext;Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;)V" />
+      <scope id="1983899845828465524" at="29,50,29,50" />
+      <scope id="1983899845832741416" at="33,198,34,13" />
+      <scope id="1983899845828499096" at="41,154,42,100" />
+      <scope id="1983899845828465524" at="53,50,54,37" />
+      <scope id="1983899845828465524" at="56,68,57,102" />
+      <scope id="1983899845828465524" at="59,30,60,17" />
+      <scope id="1983899845828465524" at="29,0,31,0" />
+      <scope id="1983899845828605224" at="47,7,49,220">
+        <var name="_reporter_2309309498" id="1983899845828605224" />
+        <var name="errorTarget" id="1983899845828605224" />
+      </scope>
+      <scope id="1983899845828499090" at="40,54,43,5">
+        <var name="m" id="1983899845828499092" />
+      </scope>
+      <scope id="1983899845828465524" at="53,0,56,0" />
+      <scope id="1983899845828465524" at="56,0,59,0">
+        <var name="argument" id="1983899845828465524" />
+      </scope>
+      <scope id="1983899845828465524" at="59,0,62,0" />
+      <scope id="1983899845828580831" at="45,163,50,7">
+        <var name="errorString" id="1983899845828605258" />
+      </scope>
+      <scope id="1983899845828465525" at="31,126,51,5">
+        <var name="messageStruct" id="1983899845828481101" />
+        <var name="messageTypes" id="1983899845828497258" />
+        <var name="payloadType" id="1983899845828478267" />
+      </scope>
+      <scope id="1983899845828465524" at="31,0,53,0">
+        <var name="createMessage" id="1983899845828465524" />
+        <var name="status" id="1983899845828465524" />
+        <var name="typeCheckingContext" id="1983899845828465524" />
+      </scope>
+      <unit id="1983899845828465524" at="71,0,77,0" name="ActorLanguage.typesystem.check_CreateMessage_NonTypesystemRule$CONCEPTS" />
+      <unit id="1983899845828465524" at="63,0,70,0" name="ActorLanguage.typesystem.check_CreateMessage_NonTypesystemRule$LINKS" />
+      <unit id="1983899845828465524" at="28,0,78,0" name="ActorLanguage.typesystem.check_CreateMessage_NonTypesystemRule" />
+    </file>
+  </root>
+  <root nodeRef="r:258f263b-4e20-423c-a240-35e904c3f14e(ActorLanguage.typesystem)/8603193828686147794">
+    <file name="TypesystemDescriptor.java">
+      <node id="8603193828686147794" at="14,5,15,105" concept="6" />
+      <node id="8603193828686147794" at="15,105,16,55" concept="2" />
+      <node id="8603193828686147794" at="13,5,17,5" concept="0" />
+      <scope id="8603193828686147794" at="14,5,16,55">
+        <var name="nonTypesystemRule" id="8603193828686147794" />
+      </scope>
+    </file>
+    <file name="check_ExternalTypeDefinition_NonTypesystemRule.java">
+      <node id="8603193828686418128" at="31,9,32,68" concept="6" />
+      <node id="8603193828686418128" at="32,68,33,305" concept="6" />
+      <node id="8603193828686147794" at="38,50,39,46" concept="7" />
+      <node id="8603193828686147794" at="41,68,42,102" concept="7" />
+      <node id="8603193828686147794" at="44,30,45,17" concept="7" />
+      <node id="8603193828686147794" at="49,0,50,0" concept="9" trace="ActorScript$nz" />
+      <node id="8603193828686147794" at="50,0,51,0" concept="9" trace="ICreateActor$Ng" />
+      <node id="8603193828686147794" at="51,0,52,0" concept="9" trace="ExternalTypeDefinition$1k" />
+      <node id="8603193828686147794" at="52,0,53,0" concept="9" trace="Member$J1" />
+      <node id="8603193828686147794" at="53,0,54,0" concept="9" trace="StructType$B3" />
+      <node id="8603193828686147794" at="57,0,58,0" concept="9" trace="actorCreation$EA0a" />
+      <node id="8603193828686147794" at="58,0,59,0" concept="9" trace="stateType$2Mnh" />
+      <node id="8603193828686147794" at="59,0,60,0" concept="9" trace="members$C59R" />
+      <node id="8603193828686147794" at="60,0,61,0" concept="9" trace="type$sXU3" />
+      <node id="8603193828686147794" at="61,0,62,0" concept="9" trace="struct$WCsg" />
+      <node id="8603193828686147794" at="65,0,66,0" concept="9" trace="name$MnvL" />
+      <node id="8603193828686147794" at="26,0,28,0" concept="1" trace="check_ExternalTypeDefinition_NonTypesystemRule#()V" />
+      <node id="8603193828686147794" at="38,0,41,0" concept="5" trace="getApplicableConcept#()Lorg/jetbrains/mps/openapi/language/SAbstractConcept;" />
+      <node id="8603193828686147794" at="41,0,44,0" concept="5" trace="isApplicableAndPattern#(Lorg/jetbrains/mps/openapi/model/SNode;)Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;" />
+      <node id="8603193828686147794" at="44,0,47,0" concept="5" trace="overrides#()Z" />
+      <node id="8603193828686418128" at="30,554,34,9" concept="0" />
+      <node id="8603193828686267939" at="29,523,35,7" concept="4" />
+      <node id="8603193828686147805" at="28,135,36,5" concept="4" />
+      <node id="8603193828686147794" at="28,0,38,0" concept="5" trace="applyRule#(Lorg/jetbrains/mps/openapi/model/SNode;Ljetbrains/mps/typesystem/inference/TypeCheckingContext;Ljetbrains/mps/lang/typesystem/runtime/IsApplicableStatus;)V" />
+      <scope id="8603193828686147794" at="26,59,26,59" />
+      <scope id="8603193828686147794" at="38,50,39,46" />
+      <scope id="8603193828686147794" at="41,68,42,102" />
+      <scope id="8603193828686147794" at="44,30,45,17" />
+      <scope id="8603193828686147794" at="26,0,28,0" />
+      <scope id="8603193828686418128" at="31,9,33,305">
+        <var name="_reporter_2309309498" id="8603193828686418128" />
+        <var name="errorTarget" id="8603193828686418128" />
+      </scope>
+      <scope id="8603193828686147794" at="38,0,41,0" />
+      <scope id="8603193828686147794" at="41,0,44,0">
+        <var name="argument" id="8603193828686147794" />
+      </scope>
+      <scope id="8603193828686147794" at="44,0,47,0" />
+      <scope id="8603193828686267941" at="30,554,34,9" />
+      <scope id="8603193828686147807" at="29,523,35,7" />
+      <scope id="8603193828686147795" at="28,135,36,5" />
+      <scope id="8603193828686147794" at="28,0,38,0">
+        <var name="externalTypeDefinition" id="8603193828686147794" />
+        <var name="status" id="8603193828686147794" />
+        <var name="typeCheckingContext" id="8603193828686147794" />
+      </scope>
+      <unit id="8603193828686147794" at="64,0,67,0" name="ActorLanguage.typesystem.check_ExternalTypeDefinition_NonTypesystemRule$PROPS" />
+      <unit id="8603193828686147794" at="48,0,55,0" name="ActorLanguage.typesystem.check_ExternalTypeDefinition_NonTypesystemRule$CONCEPTS" />
+      <unit id="8603193828686147794" at="56,0,63,0" name="ActorLanguage.typesystem.check_ExternalTypeDefinition_NonTypesystemRule$LINKS" />
+      <unit id="8603193828686147794" at="25,0,68,0" name="ActorLanguage.typesystem.check_ExternalTypeDefinition_NonTypesystemRule" />
     </file>
   </root>
 </debug-info>

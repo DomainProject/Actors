@@ -19,7 +19,7 @@ public class EnumerationDescriptor_ConditionOperator extends EnumerationDescript
   private final EnumerationDescriptor.MemberDescriptor myMember_OR_0 = new EnumerationDescriptor.MemberDescriptor("OR", "OR", 0x23d860ebbb7c269cL, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/2582920951876036252");
 
   private final EnumerationLiteralsIndex myIndex = EnumerationLiteralsIndex.build(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x23d860ebbb7c269aL, 0x23d860ebbb7c269bL, 0x23d860ebbb7c269cL);
-  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList(myIndex, myMember_AND_0, myMember_OR_0);
+  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList0(myIndex, myMember_AND_0, myMember_OR_0);
 
   @Nullable
   @Override

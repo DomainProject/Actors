@@ -20,7 +20,7 @@ public class EnumerationDescriptor_FetchPolicy extends EnumerationDescriptorBase
   private final EnumerationDescriptor.MemberDescriptor myMember_NOOP_0 = new EnumerationDescriptor.MemberDescriptor("NOOP", "NOOP", 0x32b6cf5ccd184f0cL, "r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/3654336145142599436");
 
   private final EnumerationLiteralsIndex myIndex = EnumerationLiteralsIndex.build(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x619ceb90241d8976L, 0x619ceb90241d8977L, 0x619ceb90241d8978L, 0x32b6cf5ccd184f0cL);
-  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList(myIndex, myMember_FIFO_0, myMember_HIGHEST_PRIORITY_0, myMember_NOOP_0);
+  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList0(myIndex, myMember_FIFO_0, myMember_HIGHEST_PRIORITY_0, myMember_NOOP_0);
 
   @Nullable
   @Override

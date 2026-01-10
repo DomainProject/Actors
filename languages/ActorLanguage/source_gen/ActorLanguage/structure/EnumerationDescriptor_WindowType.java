@@ -18,7 +18,7 @@ public class EnumerationDescriptor_WindowType extends EnumerationDescriptorBase 
   private final EnumerationDescriptor.MemberDescriptor myMember_TUMBLING_0 = new EnumerationDescriptor.MemberDescriptor("TUMBLING", "TUMBLING", 0x712ee2200f5e5c17L, "r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/8155704602539219991");
 
   private final EnumerationLiteralsIndex myIndex = EnumerationLiteralsIndex.build(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x712ee2200f5e5c16L, 0x712ee2200f5e5c17L);
-  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList(myIndex, myMember_TUMBLING_0);
+  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList0(myIndex, myMember_TUMBLING_0);
 
   @Nullable
   @Override

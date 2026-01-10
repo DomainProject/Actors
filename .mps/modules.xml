@@ -7,8 +7,8 @@
       <modulePath path="$PROJECT_DIR$/languages/ActorLanguage/ActorLanguage.mpl" folder="" />
       <modulePath path="$PROJECT_DIR$/languages/QueryLanguage.sandbox/QueryLanguage.sandbox.msd" folder="" />
       <modulePath path="$PROJECT_DIR$/languages/QueryLanguage/QueryLanguage.mpl" folder="" />
-      <modulePath path="$PROJECT_DIR$/solutions/ActorLanguage.sandbox/ActorLanguage.sandbox.msd" folder="" />
       <modulePath path="$PROJECT_DIR$/solutions/Actors.build/Actors.build.msd" folder="" />
+      <modulePath path="$PROJECT_DIR$/solutions/SimulationModels/SimulationModels.msd" folder="" />
     </projectModules>
   </component>
 </project>

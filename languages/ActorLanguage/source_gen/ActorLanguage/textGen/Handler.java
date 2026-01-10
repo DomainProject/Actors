@@ -7,20 +7,88 @@ import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import ActorLanguage.behavior.IState__BehaviorDescriptor;
+import jetbrains.mps.internal.collections.runtime.Sequence;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public abstract class Handler {
   public static void handlerFunction(SNode function, final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
-    if (ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(function, LINKS.body$1GE0), LINKS.statements$euTV)).isEmpty()) {
+    if (ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(function, LINKS.body$f8RW), LINKS.statements$euTV)).isEmpty()) {
+      tgs.indent();
       tgs.append("break;");
       tgs.newLine();
       return;
     }
-    for (SNode statement : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(function, LINKS.body$1GE0), LINKS.statements$euTV))) {
+    for (SNode statement : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(function, LINKS.body$f8RW), LINKS.statements$euTV))) {
       tgs.indent();
       tgs.appendNode(statement);
+      tgs.newLine();
+    }
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("break;");
+    tgs.newLine();
+  }
+  public static void initHandler(final SNode initHandler, final TextGenContext ctx) {
+    final TextGenSupport tgs = new TextGenSupport(ctx);
+
+    SNode stateDeclaration = IState__BehaviorDescriptor.getStructDeclaration_id7t$FNisxQwi.invoke(SLinkOperations.getTarget(Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(SNodeOperations.getNodeAncestor(initHandler, CONCEPTS.ActorScript$nz, false, false), LINKS.actorCreation$EA0a), CONCEPTS.ICreateActor$Ng)).findFirst((it) -> SLinkOperations.getTarget(it, LINKS.behavior$1pSN) == SNodeOperations.getParent(initHandler)), LINKS.stateType$2Mnh));
+
+    String rngSeedMemberName;
+    SNode rngSeedMember = Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(stateDeclaration, LINKS.members$C59R), CONCEPTS.Member$J1)).findFirst((it) -> SNodeOperations.isInstanceOf(SLinkOperations.getTarget(it, LINKS.type$sXU3), CONCEPTS.StructType$B3) && SPropertyOperations.getString(SLinkOperations.getTarget(SNodeOperations.cast(SLinkOperations.getTarget(it, LINKS.type$sXU3), CONCEPTS.StructType$B3), LINKS.struct$WCsg), PROPS.name$MnvL).equals("rng_t"));
+    if ((rngSeedMember == null)) {
+      rngSeedMemberName = "ctx";
+    } else {
+      rngSeedMemberName = SPropertyOperations.getString(rngSeedMember, PROPS.name$MnvL);
+    }
+
+    tgs.indent();
+    tgs.append("// INITIALIZING STATE");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("struct ");
+    tgs.append(SPropertyOperations.getString(stateDeclaration, PROPS.name$MnvL));
+    tgs.append(" *state_to_init = (struct ");
+    tgs.append(SPropertyOperations.getString(stateDeclaration, PROPS.name$MnvL));
+    tgs.append(" *)state;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("state_to_init = rs_malloc(sizeof(*state_to_init));");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("if (state_to_init == NULL)");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append("abort();");
+    tgs.newLine();
+    ctx.getBuffer().area().decreaseIndent();
+    // todo the seed field should always be named ctx 
+    tgs.indent();
+    tgs.append("initialize_stream(me, &state_to_init->");
+    tgs.append(rngSeedMemberName);
+    tgs.append(");");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("SetState(state_to_init);");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("state = state_to_init;");
+    tgs.newLine();
+    tgs.newLine();
+
+    for (SNode stmt : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(initHandler, LINKS.body$f8RW), LINKS.statements$euTV))) {
+      tgs.indent();
+      tgs.appendNode(stmt);
+      tgs.newLine();
     }
     tgs.newLine();
     tgs.indent();
@@ -29,7 +97,24 @@ public abstract class Handler {
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink body$1GE0 = MetaAdapterFactory.getContainmentLink(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97e1L, 0x3a16e3a9c7ad9954L, "body");
+    /*package*/ static final SContainmentLink body$f8RW = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, 0x3a16e3a9c7ad9954L, "body");
     /*package*/ static final SContainmentLink statements$euTV = MetaAdapterFactory.getContainmentLink(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x3a16e3a9c7ad9955L, 0x3a16e3a9c7ad9956L, "statements");
+    /*package*/ static final SContainmentLink actorCreation$EA0a = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x35a5eccbf2f23377L, "actorCreation");
+    /*package*/ static final SReferenceLink behavior$1pSN = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x344e3e3ed823c988L, "behavior");
+    /*package*/ static final SReferenceLink stateType$2Mnh = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x47ae2b741b264b71L, "stateType");
+    /*package*/ static final SContainmentLink members$C59R = MetaAdapterFactory.getContainmentLink(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x6285e27d4ff6c9f5L, 0x6285e27d4ff7db92L, "members");
+    /*package*/ static final SContainmentLink type$sXU3 = MetaAdapterFactory.getContainmentLink(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x46a2a92ac61b183L, 0x46a2a92ac61b184L, "type");
+    /*package*/ static final SReferenceLink struct$WCsg = MetaAdapterFactory.getReferenceLink(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x58bef62304fc0a38L, 0x58bef62304fc0a39L, "struct");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
+    /*package*/ static final SInterfaceConcept ICreateActor$Ng = MetaAdapterFactory.getInterfaceConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, "ActorLanguage.structure.ICreateActor");
+    /*package*/ static final SConcept Member$J1 = MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x51a277741cc50918L, "com.mbeddr.core.udt.structure.Member");
+    /*package*/ static final SConcept StructType$B3 = MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x58bef62304fc0a38L, "com.mbeddr.core.udt.structure.StructType");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

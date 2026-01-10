@@ -6,12 +6,10 @@ import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
 public class CreateEnvelope_TextGen extends TextGenDescriptorBase {
@@ -19,32 +17,34 @@ public class CreateEnvelope_TextGen extends TextGenDescriptorBase {
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
-    tgs.append("Envelope *e = rs_malloc(sizeof(Envelope));");
+
+
+    tgs.append("Envelope ");
+    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
+    tgs.append(" = {");
     tgs.newLine();
-    tgs.append("CHECK_RSMALLOC(e);");
-    tgs.newLine();
-    tgs.append("e->priority = ");
+    ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append(".priority = ");
     tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.priority$YWiN));
-    tgs.append(";");
+    tgs.append(",");
     tgs.newLine();
-    tgs.append("e->sender = ");
-    tgs.append(String.valueOf(SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.sender$OOPF), LINKS.actor$BImE), PROPS.address$DqJ_)));
-    tgs.append(";");
+    tgs.indent();
+    tgs.append(".sender = me");
     tgs.newLine();
-    tgs.newLine();
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.indent();
+    tgs.append("};");
+
+
     if (tgs.needPositions()) {
       tgs.fillPositionInfo(TraceableConcept__BehaviorDescriptor.getTraceableProperty_id4pl5GY7LKmH.invoke(SNodeOperations.cast(ctx.getPrimaryInput(), CONCEPTS.TraceableConcept$L)));
     }
   }
 
   private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
     /*package*/ static final SProperty priority$YWiN = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, 0x6ac9b580f468d377L, "priority");
-    /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
-  }
-
-  private static final class LINKS {
-    /*package*/ static final SReferenceLink sender$OOPF = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, 0x2176abe574366689L, "sender");
-    /*package*/ static final SReferenceLink actor$BImE = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e9333277ec5d1L, 0x2e9333277ec5d2L, "actor");
   }
 
   private static final class CONCEPTS {

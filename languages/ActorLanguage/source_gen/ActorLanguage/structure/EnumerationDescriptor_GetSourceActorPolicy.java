@@ -19,7 +19,7 @@ public class EnumerationDescriptor_GetSourceActorPolicy extends EnumerationDescr
   private final EnumerationDescriptor.MemberDescriptor myMember_ALL_0 = new EnumerationDescriptor.MemberDescriptor("ALL", "ALL", 0xbc4afff41cf616eL, "r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)/847996140708127086");
 
   private final EnumerationLiteralsIndex myIndex = EnumerationLiteralsIndex.build(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbc4afff41cf616cL, 0xbc4afff41cf616dL, 0xbc4afff41cf616eL);
-  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList(myIndex, myMember_FIRST_0, myMember_ALL_0);
+  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList0(myIndex, myMember_FIRST_0, myMember_ALL_0);
 
   @Nullable
   @Override

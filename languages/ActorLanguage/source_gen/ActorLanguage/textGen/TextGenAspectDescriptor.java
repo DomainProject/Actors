@@ -23,8 +23,10 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
   @Override
   public TextGenDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
     switch (myIndex.index(concept)) {
-      case LanguageConceptSwitch.ActorScriptIntermediate:
-        return new ActorScriptIntermediate_TextGen();
+      case LanguageConceptSwitch.ActorScriptCPU:
+        return new ActorScriptCPU_TextGen();
+      case LanguageConceptSwitch.ActorScriptGPU:
+        return new ActorScriptGPU_TextGen();
       case LanguageConceptSwitch.ActorsGraph:
         return new ActorsGraph_TextGen();
       case LanguageConceptSwitch.CreateActor:
@@ -45,6 +47,8 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new GetNeighborsFromReceptionist_TextGen();
       case LanguageConceptSwitch.GlobalVarDecl:
         return new GlobalVarDecl_TextGen();
+      case LanguageConceptSwitch.MessageStruct:
+        return new MessageStruct_TextGen();
       case LanguageConceptSwitch.Receptionist:
         return new Receptionist_TextGen();
       case LanguageConceptSwitch.SendMessage:
@@ -62,22 +66,35 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
   @Override
   public void breakdownToUnits(@NotNull TextGenModelOutline outline) {
     for (SNode root : outline.getModel().getRootNodes()) {
-      if (root.getConcept().equals(CONCEPTS.ActorScriptIntermediate$mu)) {
-        String fname = getFileName_ActorScriptIntermediate(root);
-        String ext = getFileExtension_ActorScriptIntermediate(root);
+      if (root.getConcept().equals(CONCEPTS.ActorScriptCPU$mu)) {
+        String fname = getFileName_ActorScriptCPU(root);
+        String ext = getFileExtension_ActorScriptCPU(root);
+        outline.registerTextUnit((ext == null ? fname : (fname + '.' + ext)), root);
+        continue;
+      }
+      if (root.getConcept().equals(CONCEPTS.ActorScriptGPU$rx)) {
+        String fname = getFileName_ActorScriptGPU(root);
+        String ext = getFileExtension_ActorScriptGPU(root);
         outline.registerTextUnit((ext == null ? fname : (fname + '.' + ext)), root);
         continue;
       }
     }
   }
-  private static String getFileName_ActorScriptIntermediate(SNode node) {
+  private static String getFileName_ActorScriptCPU(SNode node) {
     return node.getName();
   }
-  private static String getFileExtension_ActorScriptIntermediate(SNode node) {
+  private static String getFileName_ActorScriptGPU(SNode node) {
+    return node.getName();
+  }
+  private static String getFileExtension_ActorScriptCPU(SNode node) {
     return "c";
+  }
+  private static String getFileExtension_ActorScriptGPU(SNode node) {
+    return "cu";
   }
 
   private static final class CONCEPTS {
-    /*package*/ static final SConcept ActorScriptIntermediate$mu = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x46a144cd5bb2ddL, "ActorLanguage.structure.ActorScriptIntermediate");
+    /*package*/ static final SConcept ActorScriptCPU$mu = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x46a144cd5bb2ddL, "ActorLanguage.structure.ActorScriptCPU");
+    /*package*/ static final SConcept ActorScriptGPU$rx = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x52e1a8e2e48dc1a4L, "ActorLanguage.structure.ActorScriptGPU");
   }
 }

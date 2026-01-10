@@ -6,53 +6,39 @@ import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 import jetbrains.mps.internal.collections.runtime.Sequence;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
-import org.jetbrains.mps.openapi.language.SProperty;
 
 public abstract class Behaviors {
   public static void behaviors(Iterable<SNode> behaviors, final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     for (SNode behavior : Sequence.fromIterable(behaviors)) {
 
-      boolean functionContainsNotEmptyStatements = false;
-      for (SNode statement : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(behavior, LINKS.function$MLkf), LINKS.body$1GE0), LINKS.statements$euTV))) {
-        if (!(SNodeOperations.isInstanceOf(statement, CONCEPTS.Statement$zV))) {
-          functionContainsNotEmptyStatements = true;
-          break;
-        }
-      }
-      if (!(functionContainsNotEmptyStatements)) {
-        continue;
-      }
-
-      if ((SLinkOperations.getTarget(SLinkOperations.getTarget(behavior, LINKS.function$MLkf), LINKS.body$1GE0) != null) && ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(behavior, LINKS.function$MLkf), LINKS.body$1GE0), LINKS.statements$euTV)).isNotEmpty()) {
+      if ((SLinkOperations.getTarget(SLinkOperations.getTarget(behavior, LINKS.eventHandler$MLkf), LINKS.body$f8RW) != null) && ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(behavior, LINKS.eventHandler$MLkf), LINKS.body$f8RW), LINKS.statements$euTV)).isNotEmpty()) {
         tgs.append("static void ");
         tgs.append(SPropertyOperations.getString(behavior, PROPS.name$MnvL));
         tgs.append("(lp_id_t me, simtime_t now, void *message, void *state)");
         tgs.newLine();
-        tgs.appendNode(SLinkOperations.getTarget(SLinkOperations.getTarget(behavior, LINKS.function$MLkf), LINKS.body$1GE0));
+        tgs.appendNode(SLinkOperations.getTarget(SLinkOperations.getTarget(behavior, LINKS.eventHandler$MLkf), LINKS.body$f8RW));
         tgs.newLine();
       }
+
+
+
     }
-  }
-
-  private static final class CONCEPTS {
-    /*package*/ static final SConcept Statement$zV = MetaAdapterFactory.getConcept(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x3a16e3a9c7ad6d03L, "com.mbeddr.core.statements.structure.Statement");
-  }
-
-  private static final class LINKS {
-    /*package*/ static final SContainmentLink function$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "function");
-    /*package*/ static final SContainmentLink body$1GE0 = MetaAdapterFactory.getContainmentLink(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97e1L, 0x3a16e3a9c7ad9954L, "body");
-    /*package*/ static final SContainmentLink statements$euTV = MetaAdapterFactory.getContainmentLink(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x3a16e3a9c7ad9955L, 0x3a16e3a9c7ad9956L, "statements");
   }
 
   private static final class PROPS {
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink eventHandler$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "eventHandler");
+    /*package*/ static final SContainmentLink body$f8RW = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, 0x3a16e3a9c7ad9954L, "body");
+    /*package*/ static final SContainmentLink statements$euTV = MetaAdapterFactory.getContainmentLink(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x3a16e3a9c7ad9955L, 0x3a16e3a9c7ad9956L, "statements");
   }
 }

@@ -24,7 +24,7 @@ public class EnumerationDescriptor_TemporalUnit extends EnumerationDescriptorBas
   private final EnumerationDescriptor.MemberDescriptor myMember_YEARS_0 = new EnumerationDescriptor.MemberDescriptor("YEARS", "YEARS", 0x8073cf9a51b760cL, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/578498120054961676");
 
   private final EnumerationLiteralsIndex myIndex = EnumerationLiteralsIndex.build(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x8073cf9a51b7603L, 0x8073cf9a51b7604L, 0x8073cf9a51f0666L, 0x8073cf9a51e1edbL, 0x8073cf9a51b7608L, 0x8073cf9a51b7605L, 0x8073cf9a51b7611L, 0x8073cf9a51b760cL);
-  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList(myIndex, myMember_SECONDS_0, myMember_MINUTES_0, myMember_HOURS_0, myMember_DAYS_0, myMember_WEEKS_0, myMember_MONTHS_0, myMember_YEARS_0);
+  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList0(myIndex, myMember_SECONDS_0, myMember_MINUTES_0, myMember_HOURS_0, myMember_DAYS_0, myMember_WEEKS_0, myMember_MONTHS_0, myMember_YEARS_0);
 
   @Nullable
   @Override

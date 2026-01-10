@@ -9,7 +9,18 @@
   <imports />
   <registry>
     <language id="10eda999-5898-4cde-9416-196c5eca1268" name="ActorLanguage">
+      <concept id="1411682935492097494" name="ActorLanguage.structure.ReceptionistPolicy" flags="ng" index="2iUZJK" />
+      <concept id="1411682935490806610" name="ActorLanguage.structure.GetNeighborsFromReceptionist" flags="ng" index="2iZ$PO">
+        <child id="1411682935492097502" name="policy" index="2iUZJS" />
+        <child id="13109696840883591" name="actorReferences" index="BvGUO" />
+      </concept>
+      <concept id="3715044905897659561" name="ActorLanguage.structure.SendMessageToNeighbors" flags="ng" index="2nav41">
+        <property id="3715044905898602550" name="priority" index="2neSQu" />
+        <reference id="3715044905897659564" name="referenceList" index="2nav44" />
+        <child id="3715044905900233180" name="payload" index="2ngaLO" />
+      </concept>
       <concept id="7694881003795431127" name="ActorLanguage.structure.MessageQueue" flags="ng" index="2uUgHn" />
+      <concept id="4619656042768923827" name="ActorLanguage.structure.ActorReferenceList" flags="ng" index="2_DyK2" />
       <concept id="7724742800286591751" name="ActorLanguage.structure.ActorBoxesList" flags="ng" index="Fpmux">
         <child id="7724742800286591752" name="actorBoxes" index="FpmuI" />
       </concept>
@@ -41,11 +52,16 @@
         <child id="2257009365450236488" name="customEvents" index="1ldE17" />
         <child id="2750811047725550749" name="topology" index="3DMxif" />
       </concept>
-      <concept id="847996140701075939" name="ActorLanguage.structure.ExternalTypeDefinition" flags="ng" index="1aDQos" />
+      <concept id="847996140701075939" name="ActorLanguage.structure.ExternalTypeDefinition" flags="ng" index="1aDQos">
+        <property id="847996140701075941" name="header" index="1aDQoq" />
+      </concept>
       <concept id="847996140684016715" name="ActorLanguage.structure.GlobalVarDecl" flags="ng" index="1bAXeO" />
       <concept id="3352821068295505926" name="ActorLanguage.structure.ExternalType" flags="ng" index="1dH9jT">
         <property id="847996140726413083" name="header" index="198Gz$" />
         <child id="847996140726426405" name="structDeclaration" index="198zjq" />
+      </concept>
+      <concept id="5068928393908140674" name="ActorLanguage.structure.SelectPayload" flags="ng" index="3g$k$6">
+        <reference id="5068928393908140689" name="payload" index="3g$k$l" />
       </concept>
       <concept id="2257009365450236486" name="ActorLanguage.structure.CustomEvent" flags="ng" index="1ldE19" />
       <concept id="2257009365450236498" name="ActorLanguage.structure.CustomEventHandler" flags="ng" index="1ldE1t">
@@ -123,8 +139,42 @@
       </concept>
     </language>
     <language id="ceab5195-25ea-4f22-9b92-103b95ca8c0c" name="jetbrains.mps.lang.core">
+      <concept id="1133920641626" name="jetbrains.mps.lang.core.structure.BaseConcept" flags="ng" index="2VYdi">
+        <child id="5169995583184591170" name="smodelAttribute" index="lGtFl" />
+      </concept>
       <concept id="1169194658468" name="jetbrains.mps.lang.core.structure.INamedConcept" flags="ngI" index="TrEIO">
         <property id="1169194664001" name="name" index="TrG5h" />
+      </concept>
+    </language>
+    <language id="8ca79d43-eb45-4791-bdd4-0d6130ff895b" name="de.itemis.mps.editor.diagram.layout">
+      <concept id="6720495385597071406" name="de.itemis.mps.editor.diagram.layout.structure.Layout_Box" flags="ng" index="gqqVs">
+        <property id="6720495385597071504" name="bounds_height" index="gqqTy" />
+        <property id="6720495385597071502" name="bounds_y" index="gqqTW" />
+        <property id="6720495385597071503" name="bounds_width" index="gqqTX" />
+        <property id="6720495385597071501" name="bounds_x" index="gqqTZ" />
+        <property id="4583510071007917016" name="portTransform" index="TgtnS" />
+      </concept>
+      <concept id="2319506556913310852" name="de.itemis.mps.editor.diagram.layout.structure.Layout_Connection" flags="ng" index="2VclpC">
+        <child id="4767615435799372763" name="labels" index="3ul5Gx" />
+      </concept>
+      <concept id="2319506556913310727" name="de.itemis.mps.editor.diagram.layout.structure.Point" flags="ng" index="2VclrF">
+        <property id="2319506556913310861" name="x" index="2Vclpx" />
+        <property id="2319506556913310863" name="y" index="2Vclpz" />
+      </concept>
+      <concept id="8963411245960991886" name="de.itemis.mps.editor.diagram.layout.structure.LayoutMap" flags="ng" index="37mRI7">
+        <child id="8963411245960991904" name="entries" index="37mRID" />
+      </concept>
+      <concept id="8963411245960991903" name="de.itemis.mps.editor.diagram.layout.structure.LayoutMapEntry" flags="ng" index="37mRIm">
+        <property id="8963411245960998400" name="key" index="37mO49" />
+        <child id="8963411245960998404" name="value" index="37mO4d" />
+      </concept>
+      <concept id="4767615435799372731" name="de.itemis.mps.editor.diagram.layout.structure.Layout_EdgeLabel" flags="ng" index="3ul5H1">
+        <property id="4767615435799372759" name="type" index="3ul5GH" />
+        <child id="4767615435799372761" name="position" index="3ul5Gz" />
+      </concept>
+      <concept id="3253043142928125505" name="de.itemis.mps.editor.diagram.layout.structure.RelativePosition" flags="ng" index="3wpmZ1">
+        <child id="3253043142928125557" name="referencePoint" index="3wpmZP" />
+        <child id="3253043142928125559" name="offset" index="3wpmZR" />
       </concept>
     </language>
     <language id="61c69711-ed61-4850-81d9-7714ff227fb0" name="com.mbeddr.core.expressions">
@@ -243,6 +293,8 @@
     <node concept="IQpmJ" id="5AAJA6fVQP8" role="1fvW3h" />
     <node concept="1aDQos" id="5AAJA6fVQPf" role="1fvW3h">
       <property role="3mNxdG" value="true" />
+      <property role="TrG5h" value="test_struct" />
+      <property role="1aDQoq" value="test" />
     </node>
     <node concept="1bAXeO" id="1IMoxTthUWP" role="1bAXeI">
       <property role="TrG5h" value="topology" />
@@ -277,7 +329,20 @@
               <ref role="3O_q_h" node="1IMoxTthUGY" resolve="Projection" />
             </node>
           </node>
-          <node concept="3XISUE" id="5AAJA6fW2ev" role="3XIRFZ" />
+          <node concept="2iZ$PO" id="6RGKP3iv8j1" role="3XIRFZ">
+            <node concept="2iUZJK" id="6RGKP3iv8j3" role="2iUZJS" />
+            <node concept="2_DyK2" id="6RGKP3iv8j5" role="BvGUO">
+              <property role="TrG5h" value="refs" />
+            </node>
+          </node>
+          <node concept="2nav41" id="6RGKP3iv8m9" role="3XIRFZ">
+            <property role="2neSQu" value="5.0" />
+            <ref role="2nav44" node="6RGKP3iv8j5" resolve="refs" />
+            <node concept="3g$k$6" id="6RGKP3iv8mb" role="2ngaLO">
+              <ref role="3g$k$l" node="1IMoxTtlFJ2" resolve="list" />
+            </node>
+          </node>
+          <node concept="3XISUE" id="6RGKP3iv8Iv" role="3XIRFZ" />
         </node>
         <node concept="19RgSI" id="1IMoxTtlEZi" role="1UOdpc">
           <property role="TrG5h" value="state" />
@@ -328,6 +393,7 @@
               <ref role="3O_q_h" node="1IMoxTthWl_" resolve="CleanupB1" />
             </node>
           </node>
+          <node concept="3XISUE" id="6RGKP3iv8mi" role="3XIRFZ" />
         </node>
         <node concept="19RgSI" id="1IMoxTtlEZw" role="1UOdpc">
           <property role="TrG5h" value="state" />
@@ -538,6 +604,46 @@
       <node concept="3DMq4E" id="1IMoxTtlGd9" role="3DMq5I">
         <ref role="3DMq5A" node="1IMoxTtlGd6" />
         <ref role="3DMq5$" node="1IMoxTtlGd8" />
+      </node>
+      <node concept="37mRI7" id="6RGKP3iv8Jx" role="lGtFl">
+        <node concept="37mRIm" id="6RGKP3iv8Jy" role="37mRID">
+          <property role="37mO49" value="1995765467433059142" />
+          <node concept="gqqVs" id="6RGKP3iv8Jw" role="37mO4d">
+            <property role="gqqTZ" value="63.99995" />
+            <property role="gqqTW" value="12.0001" />
+            <property role="gqqTX" value="58.0" />
+            <property role="gqqTy" value="31.0" />
+            <property role="TgtnS" value="1.0;0.0;0.0;1.0;0.0;0.0" />
+          </node>
+        </node>
+        <node concept="37mRIm" id="6RGKP3iv8J$" role="37mRID">
+          <property role="37mO49" value="1995765467433059144" />
+          <node concept="gqqVs" id="6RGKP3iv8Jz" role="37mO4d">
+            <property role="gqqTZ" value="63.99995" />
+            <property role="gqqTW" value="104.00029836425782" />
+            <property role="gqqTX" value="58.0" />
+            <property role="gqqTy" value="31.0" />
+            <property role="TgtnS" value="1.0;0.0;0.0;1.0;0.0;0.0" />
+          </node>
+        </node>
+        <node concept="37mRIm" id="6RGKP3iv8JA" role="37mRID">
+          <property role="37mO49" value="1995765467433059145" />
+          <node concept="2VclpC" id="6RGKP3iv8J_" role="37mO4d">
+            <node concept="3ul5H1" id="6RGKP3iv8JB" role="3ul5Gx">
+              <property role="3ul5GH" value="label" />
+              <node concept="3wpmZ1" id="6RGKP3iv8JC" role="3ul5Gz">
+                <node concept="2VclrF" id="6RGKP3iv8JD" role="3wpmZR">
+                  <property role="2Vclpx" value="26.0" />
+                  <property role="2Vclpz" value="25.000198364257812" />
+                </node>
+                <node concept="2VclrF" id="6RGKP3iv8JE" role="3wpmZP">
+                  <property role="2Vclpx" value="-14.0" />
+                  <property role="2Vclpz" value="38.0" />
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
       </node>
     </node>
   </node>

@@ -46,6 +46,7 @@ public final class ActorScript__BehaviorDescriptor extends BaseBHDescriptor {
     ListSequence.fromList(added).addSequence(Sequence.fromIterable(SLinkOperations.collect(SNodeOperations.ofConcept(SLinkOperations.getChildren(__thisNode__, LINKS.externalFunctions$bWTb), CONCEPTS.ExternalFunctionPrototype$n3), LINKS.prototype$75Zb)));
     ListSequence.fromList(added).addSequence(Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(__thisNode__, LINKS.configuration$6ery), CONCEPTS.GlobalVarDecl$3_)));
     ListSequence.fromList(added).addSequence(Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(__thisNode__, LINKS.configuration$6ery), CONCEPTS.GlobalConstant$pG)));
+    ListSequence.fromList(added).addElement(SLinkOperations.getTarget(__thisNode__, LINKS.messageDefinition$$rsX));
     ListSequence.fromList(base).addSequence(ListSequence.fromList(added));
     return base;
   }
@@ -103,6 +104,7 @@ public final class ActorScript__BehaviorDescriptor extends BaseBHDescriptor {
     /*package*/ static final SContainmentLink externalFunctions$bWTb = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x61da6c5c302ab136L, "externalFunctions");
     /*package*/ static final SContainmentLink prototype$75Zb = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a5fe9L, 0x6065ca884e7a5febL, "prototype");
     /*package*/ static final SContainmentLink configuration$6ery = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0xbc4afff405f7c51L, "configuration");
+    /*package*/ static final SContainmentLink messageDefinition$$rsX = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x1b883a660b9077f5L, "messageDefinition");
   }
 
   private static final class CONCEPTS {

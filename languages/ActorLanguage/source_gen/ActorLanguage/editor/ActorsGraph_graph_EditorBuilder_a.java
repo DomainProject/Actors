@@ -35,6 +35,7 @@ import de.itemis.mps.editor.diagram.runtime.model.IConnectionEndpoint;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import com.mxgraph.swing.mxGraphComponent;
 import java.awt.Color;
+import de.itemis.mps.editor.diagram.runtime.jgraph.MyGraphComponent;
 import de.itemis.mps.editor.diagram.runtime.model.IPaletteEntryProvider;
 import de.itemis.mps.editor.diagram.runtime.model.CompositePaletteEntryProvider;
 import de.itemis.mps.editor.diagram.runtime.model.SubstituteInfoPaletteEntryProvider;
@@ -164,6 +165,11 @@ import org.jetbrains.mps.openapi.language.SConcept;
 
 
 
+
+
+
+
+
               @Override
               public boolean runAutoLayoutOnInit() {
                 boolean autoLayoutFlag = true;
@@ -233,6 +239,37 @@ import org.jetbrains.mps.openapi.language.SConcept;
               public boolean useGridSnapping() {
                 boolean flag = false;
                 return flag;
+              }
+
+
+              @Override
+              public double getArrowKeyMoveAmount() {
+                double amount = MyGraphComponent.DEFAULT_ARROW_KEY_MOVE_AMOUNT;
+                return amount;
+              }
+
+              @Override
+              public double getArrowKeyMoveAmountSlow() {
+                double amount = MyGraphComponent.DEFAULT_ARROW_KEY_MOVE_AMOUNT_SLOW;
+                return amount;
+              }
+
+              @Override
+              public double getPanAmount() {
+                double amount = MyGraphComponent.DEFAULT_PAN_AMOUNT;
+                return amount;
+              }
+
+              @Override
+              public double getPanAmountSlow() {
+                double amount = MyGraphComponent.DEFAULT_PAN_AMOUNT_SLOW;
+                return amount;
+              }
+
+              @Override
+              public double getMinimumScale() {
+                double scale = MyGraphComponent.DEFAULT_MINIMUM_SCALE;
+                return scale;
               }
             };
 

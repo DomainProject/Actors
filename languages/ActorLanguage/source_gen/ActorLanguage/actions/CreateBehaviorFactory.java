@@ -5,26 +5,31 @@ package ActorLanguage.actions;
 import jetbrains.mps.openapi.actions.descriptor.NodeFactory;
 import org.jetbrains.mps.openapi.model.SNode;
 import org.jetbrains.mps.openapi.model.SModel;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.language.SConcept;
-import org.jetbrains.mps.openapi.language.SProperty;
 
 public class CreateBehaviorFactory {
   public static class NodeFactory_5165113600332958188 implements NodeFactory {
     public void setup(SNode newNode, SNode sampleNode, SNode enclosingNode, int index, SModel model) {
 
-      SLinkOperations.setTarget(newNode, LINKS.function$MLkf, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97e1L, "com.mbeddr.core.modules.structure.Function")));
-      SLinkOperations.setTarget(newNode, LINKS.initHandler$1yDf, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97e1L, "com.mbeddr.core.modules.structure.Function")));
-      SLinkOperations.setTarget(newNode, LINKS.cleanupHandler$1ySg, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97e1L, "com.mbeddr.core.modules.structure.Function")));
+      SPropertyOperations.assign(newNode, PROPS.receivedMessageName$AwKe, "msg");
+
+      SLinkOperations.setTarget(newNode, LINKS.eventHandler$MLkf, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, "ActorLanguage.structure.Handler")));
+      SLinkOperations.setTarget(newNode, LINKS.initHandler$1yDf, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, "ActorLanguage.structure.Handler")));
+      SLinkOperations.setTarget(newNode, LINKS.cleanupHandler$1ySg, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, "ActorLanguage.structure.Handler")));
 
       for (SNode customEvent : ListSequence.fromList(SLinkOperations.getChildren(SNodeOperations.cast(enclosingNode, CONCEPTS.ActorScript$nz), LINKS.customEvents$eDRO))) {
+        if (isEmptyString(SPropertyOperations.getString(customEvent, PROPS.name$MnvL))) {
+          continue;
+        }
         SNode customEventHandler = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1f52820f4a642252L, "ActorLanguage.structure.CustomEventHandler"));
         SLinkOperations.setTarget(customEventHandler, LINKS.event$5Bra, customEvent);
         ListSequence.fromList(SLinkOperations.getChildren(newNode, LINKS.customEventsHandlers$Ugrs)).addElement(customEventHandler);
@@ -34,6 +39,7 @@ public class CreateBehaviorFactory {
       SPropertyOperations.assign(stateArg, PROPS.name$MnvL, "state");
       SLinkOperations.setTarget(stateArg, LINKS.type$sXU3, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x3bf5377ae9044dedL, 0x97545a516023bfaaL, 0x3e0cae5e366d630L, "com.mbeddr.core.pointers.structure.PointerType")));
       SLinkOperations.setTarget(SNodeOperations.cast(SLinkOperations.getTarget(stateArg, LINKS.type$sXU3), CONCEPTS.PointerType$HX), LINKS.baseType$zMGV, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x6d872ef9245a0d19L, "com.mbeddr.core.expressions.structure.VoidType")));
+      SPropertyOperations.assign(SLinkOperations.getTarget(stateArg, LINKS.type$sXU3), PROPS.const$VWr7, true);
 
       SNode meArg = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x6d872ef9245a20d7L, "com.mbeddr.core.modules.structure.Argument"));
       SPropertyOperations.assign(meArg, PROPS.name$MnvL, "me");
@@ -43,9 +49,9 @@ public class CreateBehaviorFactory {
       SPropertyOperations.assign(nowArg, PROPS.name$MnvL, "now");
       SLinkOperations.setTarget(nowArg, LINKS.type$sXU3, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x7b064baaf4444619L, "com.mbeddr.core.expressions.structure.DoubleType")));
 
-      ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(newNode, LINKS.function$MLkf), LINKS.arguments$6da0)).addElement(SNodeOperations.copyNode(stateArg));
-      ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(newNode, LINKS.function$MLkf), LINKS.arguments$6da0)).addElement(SNodeOperations.copyNode(meArg));
-      ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(newNode, LINKS.function$MLkf), LINKS.arguments$6da0)).addElement(SNodeOperations.copyNode(nowArg));
+      ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(newNode, LINKS.eventHandler$MLkf), LINKS.arguments$6da0)).addElement(SNodeOperations.copyNode(stateArg));
+      ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(newNode, LINKS.eventHandler$MLkf), LINKS.arguments$6da0)).addElement(SNodeOperations.copyNode(meArg));
+      ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(newNode, LINKS.eventHandler$MLkf), LINKS.arguments$6da0)).addElement(SNodeOperations.copyNode(nowArg));
 
       ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(newNode, LINKS.initHandler$1yDf), LINKS.arguments$6da0)).addElement(SNodeOperations.copyNode(stateArg));
       ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(newNode, LINKS.initHandler$1yDf), LINKS.arguments$6da0)).addElement(SNodeOperations.copyNode(meArg));
@@ -56,10 +62,19 @@ public class CreateBehaviorFactory {
       ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(newNode, LINKS.cleanupHandler$1ySg), LINKS.arguments$6da0)).addElement(SNodeOperations.copyNode(nowArg));
 
     }
+    private static boolean isEmptyString(String str) {
+      return str == null || str.isEmpty();
+    }
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty receivedMessageName$AwKe = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5ef413f8f5ef4191L, "receivedMessageName");
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SProperty const$VWr7 = MetaAdapterFactory.getProperty(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x7af69e2e83a1ba36L, 0x28d183d9a4cc7da8L, "const");
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink function$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "function");
+    /*package*/ static final SContainmentLink eventHandler$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "eventHandler");
     /*package*/ static final SContainmentLink initHandler$1yDf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31cL, "initHandler");
     /*package*/ static final SContainmentLink cleanupHandler$1ySg = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31dL, "cleanupHandler");
     /*package*/ static final SReferenceLink event$5Bra = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1f52820f4a642252L, 0x1f52820f4a642253L, "event");
@@ -73,9 +88,5 @@ public class CreateBehaviorFactory {
   private static final class CONCEPTS {
     /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
     /*package*/ static final SConcept PointerType$HX = MetaAdapterFactory.getConcept(0x3bf5377ae9044dedL, 0x97545a516023bfaaL, 0x3e0cae5e366d630L, "com.mbeddr.core.pointers.structure.PointerType");
-  }
-
-  private static final class PROPS {
-    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

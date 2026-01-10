@@ -16,8 +16,9 @@ import java.util.ArrayList;
 import de.itemis.mps.editor.diagram.runtime.model.SNodeBoxAccessor;
 import de.itemis.mps.editor.diagram.runtime.model.IDiagramElementAccessor;
 import de.itemis.mps.editor.diagram.runtime.model.IAccessorFactory;
-import de.itemis.mps.editor.diagram.runtime.jgraph.ElkLayouter;
+import de.itemis.mps.editor.diagram.runtime.jgraph.MyGraph;
 import de.itemis.mps.editor.diagram.runtime.jgraph.DiagramCreationContext;
+import de.itemis.mps.editor.diagram.runtime.jgraph.ElkLayouter;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
 import jetbrains.mps.nodeEditor.cellLayout.CellLayout_Indent;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
@@ -114,8 +115,11 @@ import org.jetbrains.mps.openapi.language.SConcept;
       setCellContext(editorCell.value);
 
       editorCell.value.addEditorCell(contentCell);
-      ElkLayouter layouter = (ElkLayouter) DiagramCreationContext.getRootGraph().getRootDiagramModel().getLayouter();
-      layouter.addNodesStyle(editorCell.value.getStyle(), accessor.getId());
+      MyGraph rootGraph = DiagramCreationContext.getRootGraph();
+      if (rootGraph != null) {
+        ElkLayouter layouter = (ElkLayouter) rootGraph.getRootDiagramModel().getLayouter();
+        layouter.addNodesStyle(editorCell.value.getStyle(), accessor.getId());
+      }
     });
 
     return editorCell.value;

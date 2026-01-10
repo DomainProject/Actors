@@ -25,7 +25,7 @@ public class ModelListenersDescriptor implements IModelListenersDescriptor {
   public Iterable<IModelListener> getListeners() {
     List<IModelListener> listeners = ListSequence.fromList(new ArrayList<IModelListener>());
 
-    ListSequence.fromList(listeners).addElement(new ChildListener(CONCEPTS.CreateBehavior$iN, LINKS.function$MLkf) {
+    ListSequence.fromList(listeners).addElement(new ChildListener(CONCEPTS.CreateBehavior$iN, LINKS.eventHandler$MLkf) {
       @Override
       public void childAdded(final SNode instance, final SNode child) {
         SPropertyOperations.assign(child, PROPS.preventNameMangling$DOH5, true);
@@ -132,7 +132,7 @@ public class ModelListenersDescriptor implements IModelListenersDescriptor {
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink function$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "function");
+    /*package*/ static final SContainmentLink eventHandler$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "eventHandler");
     /*package*/ static final SContainmentLink initHandler$1yDf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31cL, "initHandler");
     /*package*/ static final SContainmentLink cleanupHandler$1ySg = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31dL, "cleanupHandler");
     /*package*/ static final SContainmentLink function$8k$G = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1f52820f4a642252L, 0x1f52820f4a64226bL, "function");

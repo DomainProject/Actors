@@ -24,8 +24,9 @@ import java.util.List;
 import de.itemis.mps.editor.diagram.runtime.model.IDiagramElementAccessor;
 import de.itemis.mps.editor.diagram.runtime.model.IAccessorFactory;
 import java.util.ArrayList;
-import de.itemis.mps.editor.diagram.runtime.jgraph.ElkLayouter;
+import de.itemis.mps.editor.diagram.runtime.jgraph.MyGraph;
 import de.itemis.mps.editor.diagram.runtime.jgraph.DiagramCreationContext;
+import de.itemis.mps.editor.diagram.runtime.jgraph.ElkLayouter;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
 import jetbrains.mps.nodeEditor.cellLayout.CellLayout_Indent;
 import jetbrains.mps.lang.editor.cellProviders.SingleRoleCellProvider;
@@ -64,7 +65,7 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
     ContextVariables.withValue("thisNode", node, () -> {
       final ContextVariables _variablesContext = ContextVariables.getCurrent();
-      SNodeEdgeAccessor accessor = new SNodeEdgeAccessor(node) {
+      SNodeEdgeAccessor accessor = new SNodeEdgeAccessor(node, null) {
         private EditorCell startRoleCell = DiagramUtil.getCellIfNotEmpty(null);
         private EditorCell endRoleCell = DiagramUtil.getCellIfNotEmpty(null);
         private IShape endShape = null;
@@ -150,8 +151,9 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
       EditorCell label = DiagramUtil.getCellIfNotEmpty(new Inline_Builder_thpcfr_a0(editorContext, node).createCell());
 
       EditorCell editorCell = label;
-      if (editorCell != null) {
-        ElkLayouter layouter = (ElkLayouter) DiagramCreationContext.getRootGraph().getRootDiagramModel().getLayouter();
+      MyGraph rootGraph = DiagramCreationContext.getRootGraph();
+      if (editorCell != null && rootGraph != null) {
+        ElkLayouter layouter = (ElkLayouter) rootGraph.getRootDiagramModel().getLayouter();
         layouter.addLabelsStyle(editorCell.getStyle(), accessor.getId());
       }
 
@@ -163,8 +165,10 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
       editorCell.setBig(true);
       setCellContext(editorCell);
 
-      ElkLayouter layouter = (ElkLayouter) DiagramCreationContext.getRootGraph().getRootDiagramModel().getLayouter();
-      layouter.addEdgesStyle(diagramCell.value.getStyle(), accessor.getId());
+      if (rootGraph != null) {
+        ElkLayouter layouter = (ElkLayouter) rootGraph.getRootDiagramModel().getLayouter();
+        layouter.addEdgesStyle(diagramCell.value.getStyle(), accessor.getId());
+      }
 
       if (accessor.getLabelCell() != null) {
         diagramCell.value.addEditorCell(accessor.getLabelCell());

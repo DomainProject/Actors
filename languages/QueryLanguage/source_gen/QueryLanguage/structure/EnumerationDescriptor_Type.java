@@ -22,7 +22,7 @@ public class EnumerationDescriptor_Type extends EnumerationDescriptorBase {
   private final EnumerationDescriptor.MemberDescriptor myMember_DateTime_0 = new EnumerationDescriptor.MemberDescriptor("DateTime", "DateTime", 0x70944e8a10e1451L, "r:e2175f5d-85fc-4bdd-8ae1-8b72b7f266cc(QueryLanguage.structure)/507012198981047377");
 
   private final EnumerationLiteralsIndex myIndex = EnumerationLiteralsIndex.build(0x26d1395b1ee643adL, 0xb522c0cdd699ded3L, 0x11100ee737443b39L, 0x11100ee737443b3aL, 0x11100ee737443b3bL, 0x11100ee737443b3fL, 0x11100ee737443b43L, 0x70944e8a10e1451L);
-  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList(myIndex, myMember_Integer_0, myMember_String_0, myMember_Date_0, myMember_Float_0, myMember_DateTime_0);
+  private final List<EnumerationDescriptor.MemberDescriptor> myMembers = new EnumerationDescriptorBase.MembersList0(myIndex, myMember_Integer_0, myMember_String_0, myMember_Date_0, myMember_Float_0, myMember_DateTime_0);
 
   @Nullable
   @Override

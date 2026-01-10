@@ -12,11 +12,21 @@ import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
 import jetbrains.mps.smodel.adapter.ids.MetaIdFactory;
 
 public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor {
-  private final BHDescriptor myActorScriptIntermediate__BehaviorDescriptor = new ActorScriptIntermediate__BehaviorDescriptor();
+  private final BHDescriptor myActorScriptCPU__BehaviorDescriptor = new ActorScriptCPU__BehaviorDescriptor();
+  private final BHDescriptor mySelectEnvelope__BehaviorDescriptor = new SelectEnvelope__BehaviorDescriptor();
   private final BHDescriptor myExternalTypeDefinition__BehaviorDescriptor = new ExternalTypeDefinition__BehaviorDescriptor();
+  private final BHDescriptor myEnvelope__BehaviorDescriptor = new Envelope__BehaviorDescriptor();
+  private final BHDescriptor myPayload__BehaviorDescriptor = new Payload__BehaviorDescriptor();
+  private final BHDescriptor myHandler__BehaviorDescriptor = new Handler__BehaviorDescriptor();
+  private final BHDescriptor myMessageStruct__BehaviorDescriptor = new MessageStruct__BehaviorDescriptor();
+  private final BHDescriptor myCreateEnvelope__BehaviorDescriptor = new CreateEnvelope__BehaviorDescriptor();
   private final BHDescriptor myCreatePayload__BehaviorDescriptor = new CreatePayload__BehaviorDescriptor();
   private final BHDescriptor myActorsGraph__BehaviorDescriptor = new ActorsGraph__BehaviorDescriptor();
+  private final BHDescriptor myExternalType__BehaviorDescriptor = new ExternalType__BehaviorDescriptor();
+  private final BHDescriptor myIState__BehaviorDescriptor = new IState__BehaviorDescriptor();
   private final BHDescriptor myActorScript__BehaviorDescriptor = new ActorScript__BehaviorDescriptor();
+  private final BHDescriptor mySelectPayload__BehaviorDescriptor = new SelectPayload__BehaviorDescriptor();
+  private final BHDescriptor myActorScriptGPU__BehaviorDescriptor = new ActorScriptGPU__BehaviorDescriptor();
   private final BHDescriptor myCreateActors__BehaviorDescriptor = new CreateActors__BehaviorDescriptor();
 
   public BehaviorAspectDescriptor() {
@@ -29,18 +39,38 @@ public final class BehaviorAspectDescriptor extends BaseBehaviorAspectDescriptor
       case 0:
         return myActorScript__BehaviorDescriptor;
       case 1:
-        return myActorScriptIntermediate__BehaviorDescriptor;
+        return myActorScriptCPU__BehaviorDescriptor;
       case 2:
-        return myActorsGraph__BehaviorDescriptor;
+        return myActorScriptGPU__BehaviorDescriptor;
       case 3:
-        return myCreateActors__BehaviorDescriptor;
+        return myActorsGraph__BehaviorDescriptor;
       case 4:
-        return myCreatePayload__BehaviorDescriptor;
+        return myCreateActors__BehaviorDescriptor;
       case 5:
+        return myCreateEnvelope__BehaviorDescriptor;
+      case 6:
+        return myCreatePayload__BehaviorDescriptor;
+      case 7:
+        return myEnvelope__BehaviorDescriptor;
+      case 8:
+        return myExternalType__BehaviorDescriptor;
+      case 9:
         return myExternalTypeDefinition__BehaviorDescriptor;
+      case 10:
+        return myHandler__BehaviorDescriptor;
+      case 11:
+        return myIState__BehaviorDescriptor;
+      case 12:
+        return myMessageStruct__BehaviorDescriptor;
+      case 13:
+        return myPayload__BehaviorDescriptor;
+      case 14:
+        return mySelectEnvelope__BehaviorDescriptor;
+      case 15:
+        return mySelectPayload__BehaviorDescriptor;
       default:
     }
     return null;
   }
-  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x46a144cd5bb2ddL), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57936L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbc4afff4163c9e3L)).seal();
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x46a144cd5bb2ddL), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x52e1a8e2e48dc1a4L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x262cd812cfe57936L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e268151b855L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbc4afff4163c9e3L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x344e3e3ed7a7a58fL), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a660b9077f6L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e2681521590L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x9de89b125bf6283L), MetaIdFactory.conceptId(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L)).seal();
 }

@@ -90,7 +90,7 @@
   <node concept="jA7cl" id="4aai$ApTLHH">
     <ref role="1M2myG" to="o1mc:25QEYlOeItj" resolve="CreateBehavior" />
     <node concept="j_Nyg" id="4aai$ApTLHI" role="j$A37">
-      <ref role="j_u2Y" to="o1mc:3m_VcJMYehj" />
+      <ref role="j_u2Y" to="o1mc:3m_VcJMYehj" resolve="eventHandler" />
       <node concept="3clFbS" id="4aai$ApTLHJ" role="2VODD2">
         <node concept="3clFbF" id="4aai$ApTLIy" role="3cqZAp">
           <node concept="37vLTI" id="4aai$ApTSuQ" role="3clFbG">
@@ -108,7 +108,7 @@
       </node>
     </node>
     <node concept="j_Nyg" id="4aai$ApTV3v" role="j$A37">
-      <ref role="j_u2Y" to="o1mc:1XiwwXa6acs" />
+      <ref role="j_u2Y" to="o1mc:1XiwwXa6acs" resolve="initHandler" />
       <node concept="3clFbS" id="4aai$ApTV3x" role="2VODD2">
         <node concept="3clFbF" id="4aai$ApTV44" role="3cqZAp">
           <node concept="37vLTI" id="4aai$ApU0xa" role="3clFbG">
@@ -126,7 +126,7 @@
       </node>
     </node>
     <node concept="j_Nyg" id="4aai$ApU0WQ" role="j$A37">
-      <ref role="j_u2Y" to="o1mc:1XiwwXa6act" />
+      <ref role="j_u2Y" to="o1mc:1XiwwXa6act" resolve="cleanupHandler" />
       <node concept="3clFbS" id="4aai$ApU0WS" role="2VODD2">
         <node concept="3clFbF" id="4aai$ApU0Xr" role="3cqZAp">
           <node concept="37vLTI" id="4aai$ApU6wR" role="3clFbG">
@@ -147,7 +147,7 @@
   <node concept="jA7cl" id="4aai$ApU6y3">
     <ref role="1M2myG" to="o1mc:1XiwwXap29i" resolve="CustomEventHandler" />
     <node concept="j_Nyg" id="4aai$ApU6y4" role="j$A37">
-      <ref role="j_u2Y" to="o1mc:1XiwwXap29F" />
+      <ref role="j_u2Y" to="o1mc:1XiwwXap29F" resolve="function" />
       <node concept="3clFbS" id="4aai$ApU6y5" role="2VODD2">
         <node concept="3clFbF" id="4aai$ApU6yB" role="3cqZAp">
           <node concept="37vLTI" id="4aai$ApUc5n" role="3clFbG">
@@ -168,7 +168,7 @@
   <node concept="jA7cl" id="4aai$AqgKnY">
     <ref role="1M2myG" to="o1mc:3m_VcJMWzdQ" resolve="ActorScript" />
     <node concept="j_Nyg" id="4aai$AqgKnZ" role="j$A37">
-      <ref role="j_u2Y" to="o1mc:67qr5KKaF4Q" />
+      <ref role="j_u2Y" to="o1mc:67qr5KKaF4Q" resolve="externalFunctions" />
       <node concept="3clFbS" id="4aai$AqgKo0" role="2VODD2">
         <node concept="Jncv_" id="4aai$AqgOR4" role="3cqZAp">
           <ref role="JncvD" to="o1mc:67qr5KKaEN3" resolve="ExternalFunction" />
@@ -228,7 +228,7 @@
       </node>
     </node>
     <node concept="j_Nyg" id="4aai$Ardqp9" role="j$A37">
-      <ref role="j_u2Y" to="o1mc:J4FZX0nRLh" />
+      <ref role="j_u2Y" to="o1mc:J4FZX0nRLh" resolve="configuration" />
       <node concept="3clFbS" id="4aai$Ardqpb" role="2VODD2">
         <node concept="Jncv_" id="4aai$ArdqpH" role="3cqZAp">
           <ref role="JncvD" to="o1mc:J4FZX0nRLb" resolve="GlobalVarDecl" />
@@ -283,7 +283,7 @@
       </node>
     </node>
     <node concept="j_Nyg" id="4aai$ArKfnm" role="j$A37">
-      <ref role="j_u2Y" to="o1mc:7lfjb8Uc8Lz" />
+      <ref role="j_u2Y" to="o1mc:7lfjb8Uc8Lz" resolve="types" />
       <node concept="3clFbS" id="4aai$ArKfno" role="2VODD2">
         <node concept="Jncv_" id="4aai$ArKfnU" role="3cqZAp">
           <ref role="JncvD" to="o1mc:2U7BfXzcKw6" resolve="ExternalType" />
@@ -368,7 +368,7 @@
       </node>
     </node>
     <node concept="j_Nyg" id="3bdhGdqM33x" role="j$A37">
-      <ref role="j_u2Y" to="o1mc:3bdhGdqzYfV" />
+      <ref role="j_u2Y" to="o1mc:3bdhGdqzYfV" resolve="startupCode" />
       <node concept="3clFbS" id="3bdhGdqM33z" role="2VODD2">
         <node concept="3clFbF" id="3bdhGdqM346" role="3cqZAp">
           <node concept="37vLTI" id="3bdhGdqM8E6" role="3clFbG">

@@ -5,6 +5,7 @@
     <use id="798100da-4f0a-421a-b991-71f8c50ce5d2" name="jetbrains.mps.build" version="0" />
     <use id="0cf935df-4699-4e9c-a132-fa109541cba3" name="jetbrains.mps.build.mps" version="8" />
     <use id="d5033cee-f632-44b6-b308-89d4fbde34ff" name="jetbrains.mps.build.startup" version="0" />
+    <use id="10eda999-5898-4cde-9416-196c5eca1268" name="ActorLanguage" version="0" />
   </languages>
   <imports>
     <import index="ffeo" ref="r:874d959d-e3b4-4d04-b931-ca849af130dd(jetbrains.mps.ide.build)" />
@@ -144,21 +145,22 @@
     <property role="2DA0ip" value="../.." />
     <property role="TrG5h" value="Actors" />
     <node concept="m$_wf" id="1S3pF_JleBr" role="3989C9">
-      <property role="m$_wk" value="Actors" />
+      <property role="m$_wk" value="ActorLanguage" />
       <node concept="2pNNFK" id="1S3pF_JleCF" role="20twgj">
         <property role="2pNNFO" value="depends" />
+        <node concept="3o6iSG" id="4TSwfsH6xr5" role="3o6s8t" />
         <node concept="3o6iSG" id="1S3pF_JleCG" role="3o6s8t">
           <property role="3o6i5n" value="com.intellij.modules.platform" />
         </node>
       </node>
       <node concept="3_J27D" id="1S3pF_JleBt" role="m$_yQ">
         <node concept="3Mxwew" id="1S3pF_JleBz" role="3MwsjC">
-          <property role="3MwjfP" value="Actors" />
+          <property role="3MwjfP" value="ActorLanguage" />
         </node>
       </node>
       <node concept="3_J27D" id="1S3pF_JleBv" role="m_cZH">
         <node concept="3Mxwew" id="1S3pF_JleB$" role="3MwsjC">
-          <property role="3MwjfP" value="Actors" />
+          <property role="3MwjfP" value="ActorLanguage" />
         </node>
       </node>
       <node concept="3_J27D" id="1S3pF_JleBx" role="m$_w8">
@@ -182,7 +184,10 @@
         <ref role="m$_y1" to="ffeo:4k71ibbKLe8" resolve="jetbrains.mps.core" />
       </node>
       <node concept="m$_yC" id="1S3pF_JleCE" role="m$_yJ">
-        <ref role="m$_y1" to="p6ld:7uZw0yZ43Jz" />
+        <ref role="m$_y1" to="p6ld:7uZw0yZ43Jz" resolve="com.mbeddr.core" />
+      </node>
+      <node concept="m$_yC" id="4TSwfsHaM7Q" role="m$_yJ">
+        <ref role="m$_y1" to="90a9:hCVXosGNJH" resolve="com.mbeddr.mpsutil.modellisteners" />
       </node>
     </node>
     <node concept="2G$12M" id="1S3pF_JleBE" role="3989C9">
@@ -413,11 +418,11 @@
       <node concept="3981dG" id="1S3pF_JleCH" role="39821P">
         <node concept="3_J27D" id="1S3pF_JleCI" role="Nbhlr">
           <node concept="3Mxwew" id="1S3pF_JleCJ" role="3MwsjC">
-            <property role="3MwjfP" value="Actors.zip" />
+            <property role="3MwjfP" value="ActorLanguage.zip" />
           </node>
         </node>
         <node concept="m$_wl" id="1S3pF_JleCK" role="39821P">
-          <ref role="m_rDy" node="1S3pF_JleBr" />
+          <ref role="m_rDy" node="1S3pF_JleBr" resolve="ActorLanguage" />
           <node concept="pUk6x" id="1S3pF_JleCM" role="pUk7w" />
         </node>
       </node>
@@ -427,14 +432,26 @@
     <node concept="398rNT" id="1S3pF_JleAy" role="1l3spd">
       <property role="TrG5h" value="mps_home" />
       <node concept="55IIr" id="1S3pF_JleAz" role="398pKh">
-        <node concept="2Ry0Ak" id="1S3pF_JleA_" role="iGT6I">
+        <node concept="2Ry0Ak" id="6RGKP3ivgz7" role="iGT6I">
           <property role="2Ry0Am" value=".." />
-          <node concept="2Ry0Ak" id="1S3pF_JleAB" role="2Ry0An">
+          <node concept="2Ry0Ak" id="6RGKP3ivgz9" role="2Ry0An">
             <property role="2Ry0Am" value=".." />
-            <node concept="2Ry0Ak" id="1S3pF_JleAH" role="2Ry0An">
-              <property role="2Ry0Am" value="MPS" />
-              <node concept="2Ry0Ak" id="1S3pF_JleAK" role="2Ry0An">
-                <property role="2Ry0Am" value="MPS-2024.1" />
+            <node concept="2Ry0Ak" id="6RGKP3ivgzc" role="2Ry0An">
+              <property role="2Ry0Am" value=".local" />
+              <node concept="2Ry0Ak" id="6RGKP3ivgzf" role="2Ry0An">
+                <property role="2Ry0Am" value="share" />
+                <node concept="2Ry0Ak" id="6RGKP3ivgzl" role="2Ry0An">
+                  <property role="2Ry0Am" value="JetBrains" />
+                  <node concept="2Ry0Ak" id="6RGKP3ivgzo" role="2Ry0An">
+                    <property role="2Ry0Am" value="Toolbox" />
+                    <node concept="2Ry0Ak" id="6RGKP3ivgzr" role="2Ry0An">
+                      <property role="2Ry0Am" value="apps" />
+                      <node concept="2Ry0Ak" id="4PHz6DzO70v" role="2Ry0An">
+                        <property role="2Ry0Am" value="mps-2" />
+                      </node>
+                    </node>
+                  </node>
+                </node>
               </node>
             </node>
           </node>
