@@ -23,6 +23,10 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
   @Override
   public TextGenDescriptor getDescriptor(@NotNull SAbstractConcept concept) {
     switch (myIndex.index(concept)) {
+      case LanguageConceptSwitch.ActorReference:
+        return new ActorReference_TextGen();
+      case LanguageConceptSwitch.ActorReferenceRef:
+        return new ActorReferenceRef_TextGen();
       case LanguageConceptSwitch.ActorScriptCPU:
         return new ActorScriptCPU_TextGen();
       case LanguageConceptSwitch.ActorScriptGPU:

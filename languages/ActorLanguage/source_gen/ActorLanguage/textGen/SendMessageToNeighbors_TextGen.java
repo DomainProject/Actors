@@ -6,14 +6,19 @@ import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
+import jetbrains.mps.internal.collections.runtime.Sequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import org.jetbrains.mps.openapi.language.SProperty;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import java.util.Objects;
+import com.mbeddr.core.expressions.behavior.IVariableDeclaration__BehaviorDescriptor;
+import ActorLanguage.behavior.Payload__BehaviorDescriptor;
+import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
+import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
-import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class SendMessageToNeighbors_TextGen extends TextGenDescriptorBase {
   @Override
@@ -21,37 +26,128 @@ public class SendMessageToNeighbors_TextGen extends TextGenDescriptorBase {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
 
-    tgs.append("CreateAndSendMessage(me, ");
-    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.priority$Ypjc));
-    tgs.append(", (void *)");
-    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$OqHH), LINKS.payload$ZT3H), PROPS.name$MnvL));
-    tgs.append(", now, ");
+    String payloadMemberName = SPropertyOperations.getString(Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScript$nz, false, false), LINKS.messageDefinition$$rsX), LINKS.members$C59R), CONCEPTS.Member$J1)).findFirst((it) -> Objects.equals(SNodeOperations.getConcept(SLinkOperations.getTarget(it, LINKS.type$sXU3)), SNodeOperations.getConcept(IVariableDeclaration__BehaviorDescriptor.getDeclaredType_id1LDGRqyYkTX.invoke(Payload__BehaviorDescriptor.getPayload_id1I8eAobiPlC.invoke(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$OqHH)))))), PROPS.name$MnvL);
+    String iteratorName = "i" + String.valueOf(SNodeOperations.getIndexInParent(ctx.getPrimaryInput()));
+
+    tgs.append("for (int ");
+    tgs.append(iteratorName);
+    tgs.append(" = 0; ");
+    tgs.append(iteratorName);
+    tgs.append(" < num_");
     tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
-    tgs.append(", num_");
-    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
-    tgs.append(");");
+    tgs.append("; ");
+    tgs.append(iteratorName);
+    tgs.append("++) {");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+
+    tgs.indent();
+    tgs.append("// create envelope");
     tgs.newLine();
     tgs.indent();
-    tgs.append("free(");
+    tgs.append("Envelope env");
+    tgs.append(String.valueOf(SNodeOperations.getIndexInParent(ctx.getPrimaryInput())));
+    tgs.append(" = {");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append(".priority = ");
+    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.priority$Ypjc));
+    tgs.append(",");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append(".sender = me");
+    tgs.newLine();
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.indent();
+    tgs.append("};");
+    tgs.newLine();
+
+    tgs.newLine();
+
+    tgs.indent();
+    tgs.append("// create message");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScript$nz, false, false), LINKS.messageDefinition$$rsX), PROPS.name$MnvL));
+    tgs.append(" msg_to_neighbors");
+    tgs.append(String.valueOf(SNodeOperations.getIndexInParent(ctx.getPrimaryInput())));
+    tgs.append(" = {");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append(".envelope = env");
+    tgs.append(String.valueOf(SNodeOperations.getIndexInParent(ctx.getPrimaryInput())));
+    tgs.append(",");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append(".");
+    tgs.append(payloadMemberName);
+    tgs.append(" = ");
+    tgs.append(SPropertyOperations.getString(Payload__BehaviorDescriptor.getPayload_id1I8eAobiPlC.invoke(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$OqHH)), PROPS.name$MnvL));
+    tgs.newLine();
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.indent();
+    tgs.append("};");
+    tgs.newLine();
+
+    tgs.newLine();
+
+    tgs.indent();
+    tgs.append("// send message");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("ScheduleNewEvent(");
     tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
-    tgs.append(");");
+    tgs.append("[");
+    tgs.append(iteratorName);
+    tgs.append("], ");
+    if ((SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.when$LfBf) == null)) {
+      tgs.append("now + 10");
+    } else {
+      tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.when$LfBf));
+    }
+    tgs.append(", ");
+    if ((SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.event$Gn03) == null)) {
+      tgs.append("EVENT");
+    } else {
+      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.event$Gn03), PROPS.name$MnvL));
+    }
+    tgs.append(", &msg_to_neighbors");
+    tgs.append(String.valueOf(SNodeOperations.getIndexInParent(ctx.getPrimaryInput())));
+    tgs.append(", sizeof(Message));");
+
+
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.append("}");
+    tgs.newLine();
+
+
+
+
     if (tgs.needPositions()) {
       tgs.fillPositionInfo(TraceableConcept__BehaviorDescriptor.getTraceableProperty_id4pl5GY7LKmH.invoke(SNodeOperations.cast(ctx.getPrimaryInput(), CONCEPTS.TraceableConcept$L)));
     }
   }
 
-  private static final class PROPS {
-    /*package*/ static final SProperty priority$Ypjc = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, 0x338e7da8a4b5f036L, "priority");
-    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
+    /*package*/ static final SConcept Member$J1 = MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x51a277741cc50918L, "com.mbeddr.core.udt.structure.Member");
+    /*package*/ static final SInterfaceConcept TraceableConcept$L = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a3L, "jetbrains.mps.lang.traceable.structure.TraceableConcept");
   }
 
   private static final class LINKS {
+    /*package*/ static final SContainmentLink messageDefinition$$rsX = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x1b883a660b9077f5L, "messageDefinition");
+    /*package*/ static final SContainmentLink members$C59R = MetaAdapterFactory.getContainmentLink(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x6285e27d4ff6c9f5L, 0x6285e27d4ff7db92L, "members");
+    /*package*/ static final SContainmentLink type$sXU3 = MetaAdapterFactory.getContainmentLink(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x46a2a92ac61b183L, 0x46a2a92ac61b184L, "type");
     /*package*/ static final SContainmentLink payload$OqHH = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, 0x338e7da8a4ced1dcL, "payload");
-    /*package*/ static final SReferenceLink payload$ZT3H = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L, 0x4658738496c93a91L, "payload");
     /*package*/ static final SReferenceLink referenceList$9FRc = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, 0x338e7da8a4a78cacL, "referenceList");
+    /*package*/ static final SContainmentLink when$LfBf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, 0x52e1a8e2e4e48581L, "when");
+    /*package*/ static final SReferenceLink event$Gn03 = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, 0x312f45f939fe4d8aL, "event");
   }
 
-  private static final class CONCEPTS {
-    /*package*/ static final SInterfaceConcept TraceableConcept$L = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a3L, "jetbrains.mps.lang.traceable.structure.TraceableConcept");
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SProperty priority$Ypjc = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, 0x338e7da8a4b5f036L, "priority");
   }
 }

@@ -65,7 +65,7 @@ public class SendMessageToNeighbors_Constraints extends BaseConstraintsDescripto
         }
         @Override
         public Scope createScope(final ReferenceConstraintsContext _context) {
-          final Iterable<SNode> list = SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.Function$K8, false, false), CONCEPTS.ActorReferenceList$4g, false, new SAbstractConcept[]{});
+          final Iterable<SNode> list = SNodeOperations.getNodeDescendants(SNodeOperations.getNodeAncestor(_context.getReferenceNode(), CONCEPTS.Handler$Y4, false, false), CONCEPTS.ActorReferenceList$4g, false, new SAbstractConcept[]{});
           return ListScope.forNamedElements(list);
         }
       };
@@ -74,7 +74,7 @@ public class SendMessageToNeighbors_Constraints extends BaseConstraintsDescripto
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept SendMessageToNeighbors$yl = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x338e7da8a4a78ca9L, "ActorLanguage.structure.SendMessageToNeighbors");
-    /*package*/ static final SConcept Function$K8 = MetaAdapterFactory.getConcept(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97e1L, "com.mbeddr.core.modules.structure.Function");
+    /*package*/ static final SConcept Handler$Y4 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, "ActorLanguage.structure.Handler");
     /*package*/ static final SConcept ActorReferenceList$4g = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x401c50b1e5ba7cb3L, "ActorLanguage.structure.ActorReferenceList");
   }
 

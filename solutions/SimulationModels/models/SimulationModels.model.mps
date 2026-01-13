@@ -7,11 +7,27 @@
   <imports />
   <registry>
     <language id="10eda999-5898-4cde-9416-196c5eca1268" name="ActorLanguage">
+      <concept id="3544128368497520585" name="ActorLanguage.structure.ActorReferenceRef" flags="ng" index="bwECK">
+        <reference id="3544128368497520586" name="actorReference" index="bwECN" />
+      </concept>
       <concept id="1983899845811795958" name="ActorLanguage.structure.MessageStruct" flags="ng" index="g64Qg" />
       <concept id="1983899845785107890" name="ActorLanguage.structure.Handler" flags="ng" index="isgvk">
         <child id="4185783222026475860" name="body" index="3XIRFX" />
       </concept>
+      <concept id="1411682935492097494" name="ActorLanguage.structure.ReceptionistPolicy" flags="ng" index="2iUZJK" />
+      <concept id="1411682935490806610" name="ActorLanguage.structure.GetNeighborsFromReceptionist" flags="ng" index="2iZ$PO">
+        <child id="1411682935492097502" name="policy" index="2iUZJS" />
+        <child id="13109696840883591" name="actorReferences" index="BvGUO" />
+      </concept>
       <concept id="7694881003795431127" name="ActorLanguage.structure.MessageQueue" flags="ng" index="2uUgHn" />
+      <concept id="4619656042768923827" name="ActorLanguage.structure.ActorReferenceList" flags="ng" index="2_DyK2" />
+      <concept id="4619656042771117415" name="ActorLanguage.structure.ForEachActorReferenceStatement" flags="ng" index="2_LUnm">
+        <property id="3544128368503285080" name="iteratorName" index="aaE2x" />
+        <reference id="4619656042771117416" name="actorReferenceList" index="2_LUnp" />
+        <child id="4619656042772348181" name="actorReference" index="2_WIQ$" />
+        <child id="6946180687082990280" name="body" index="J9Q10" />
+      </concept>
+      <concept id="13109696843924945" name="ActorLanguage.structure.ActorReference" flags="ng" index="Bk5ry" />
       <concept id="711157185106633347" name="ActorLanguage.structure.SelectEnvelope" flags="ng" index="GouGM">
         <reference id="711157185106633348" name="envelope" index="GouGP" />
       </concept>
@@ -37,6 +53,7 @@
         <child id="1983899845773215812" name="when" index="iMZ8y" />
       </concept>
       <concept id="3865756215865914225" name="ActorLanguage.structure.CreateMessage" flags="ng" index="37lXYU">
+        <reference id="8603193828694661130" name="event" index="3EijsY" />
         <child id="711157185105040753" name="payload" index="GupN0" />
         <child id="3269545992594456658" name="envelope" index="34eGaj" />
       </concept>
@@ -708,6 +725,148 @@
       <property role="2LyTFQ" value="phold" />
       <ref role="3GrvuQ" node="7t$FNitjmi0" resolve="phold" />
       <ref role="1sy605" node="5bxEeb$LvC3" resolve="phold_state" />
+    </node>
+  </node>
+  <node concept="37lXYX" id="34Jhv$TNxwA">
+    <property role="TrG5h" value="test" />
+    <node concept="1ldE19" id="34Jhv$U5a5p" role="1ldE17">
+      <property role="TrG5h" value="EVENT" />
+    </node>
+    <node concept="2NXPZ9" id="34Jhv$TNxwB" role="N3F5h">
+      <property role="TrG5h" value="empty_1768324198422_7" />
+    </node>
+    <node concept="2QtU1Q" id="34Jhv$TNxwC" role="2QtyCA">
+      <property role="2iLIH0" value="0" />
+      <property role="TrG5h" value="receptionist" />
+      <node concept="2uUgHn" id="34Jhv$TNxwD" role="2QtU1V" />
+    </node>
+    <node concept="g64Qg" id="34Jhv$TNxwE" role="g64Qj">
+      <property role="TrG5h" value="Message" />
+      <property role="3mNxdG" value="true" />
+      <node concept="1dpRTG" id="34Jhv$TNx$U" role="HszBJ">
+        <property role="TrG5h" value="value" />
+        <node concept="26Vqph" id="34Jhv$TNx$T" role="2C2TGm" />
+      </node>
+    </node>
+    <node concept="1lj4MQ" id="34Jhv$TNx_5" role="2QtU1L">
+      <property role="2F6P9D" value="msg" />
+      <property role="TrG5h" value="b" />
+      <node concept="37lXYU" id="34Jhv$TNx_6" role="2F2NYG">
+        <property role="TrG5h" value="msg" />
+        <node concept="1lgcPH" id="34Jhv$TNx_7" role="GupN0">
+          <property role="TrG5h" value="msg.payload" />
+        </node>
+      </node>
+      <node concept="19RgSI" id="34Jhv$TNx_8" role="1u8EhB">
+        <property role="TrG5h" value="msg" />
+        <node concept="3wxxNl" id="34Jhv$TNx_9" role="2C2TGm">
+          <node concept="19Rifw" id="34Jhv$TNx_a" role="2umbIo" />
+        </node>
+      </node>
+      <node concept="isgvk" id="34Jhv$TNx_e" role="37ngyo">
+        <property role="TrG5h" value="bHandler" />
+        <node concept="19Rifw" id="34Jhv$TNx_f" role="2C2TGm" />
+        <node concept="3XIRFW" id="34Jhv$TNx_g" role="3XIRFX">
+          <node concept="3XIRlf" id="34Jhv$UA1Vb" role="3XIRFZ">
+            <property role="TrG5h" value="value" />
+            <node concept="26Vqph" id="34Jhv$UA1V9" role="2C2TGm" />
+            <node concept="3TlMh9" id="34Jhv$UA1VC" role="3XIe9u">
+              <property role="2hmy$m" value="10" />
+            </node>
+          </node>
+          <node concept="2iZ$PO" id="34Jhv$TNxHG" role="3XIRFZ">
+            <node concept="2iUZJK" id="34Jhv$TNxHI" role="2iUZJS" />
+            <node concept="2_DyK2" id="34Jhv$TNxHK" role="BvGUO">
+              <property role="TrG5h" value="refs" />
+            </node>
+          </node>
+          <node concept="2_LUnm" id="34Jhv$V79Jo" role="3XIRFZ">
+            <property role="aaE2x" value="iteratorAR-1" />
+            <ref role="2_LUnp" node="34Jhv$TNxHK" resolve="refs" />
+            <node concept="Bk5ry" id="34Jhv$V79Jq" role="2_WIQ$">
+              <property role="TrG5h" value="ref" />
+            </node>
+            <node concept="3XIRFW" id="34Jhv$V79Js" role="J9Q10">
+              <node concept="37lXYU" id="34Jhv$UA1Le" role="3XIRFZ">
+                <property role="TrG5h" value="m" />
+                <ref role="3EijsY" node="1ozcQ5AP8i2" resolve="EVENT" />
+                <node concept="3g$k$6" id="34Jhv$UA1Li" role="GupN0">
+                  <ref role="3g$k$l" node="34Jhv$UA1Vb" resolve="value" />
+                </node>
+                <node concept="1lgcPy" id="34Jhv$UA1Ll" role="34eGaj">
+                  <property role="TrG5h" value="env" />
+                  <property role="2uCmrR" value="5.0" />
+                  <node concept="bwECK" id="34Jhv$UVT8Y" role="2RMc64">
+                    <ref role="bwECN" node="34Jhv$V79Jq" resolve="ref" />
+                  </node>
+                </node>
+              </node>
+              <node concept="3XISUE" id="34Jhv$V79JH" role="3XIRFZ" />
+              <node concept="37lS4T" id="34Jhv$UVTj4" role="3XIRFZ">
+                <ref role="37lS4Y" node="34Jhv$UA1Le" resolve="m" />
+                <node concept="3ZUYvv" id="34Jhv$UVTjd" role="iMZ8y">
+                  <ref role="3ZUYvu" node="34Jhv$TNx_z" resolve="now" />
+                </node>
+              </node>
+            </node>
+          </node>
+        </node>
+        <node concept="19RgSI" id="34Jhv$TNx_u" role="1UOdpc">
+          <property role="TrG5h" value="state" />
+          <node concept="3wxxNl" id="34Jhv$TNx_v" role="2C2TGm">
+            <property role="2c7vTL" value="true" />
+            <node concept="19Rifw" id="34Jhv$TNx_w" role="2umbIo" />
+          </node>
+        </node>
+        <node concept="19RgSI" id="34Jhv$TNx_x" role="1UOdpc">
+          <property role="TrG5h" value="me" />
+          <node concept="26Vqp1" id="34Jhv$TNx_y" role="2C2TGm" />
+        </node>
+        <node concept="19RgSI" id="34Jhv$TNx_z" role="1UOdpc">
+          <property role="TrG5h" value="now" />
+          <node concept="2fgwQN" id="34Jhv$TNx_$" role="2C2TGm" />
+        </node>
+      </node>
+      <node concept="isgvk" id="34Jhv$TNx_h" role="1liy4j">
+        <property role="TrG5h" value="bInit" />
+        <node concept="19Rifw" id="34Jhv$TNx_i" role="2C2TGm" />
+        <node concept="3XIRFW" id="34Jhv$TNx_j" role="3XIRFX" />
+        <node concept="19RgSI" id="34Jhv$TNx__" role="1UOdpc">
+          <property role="TrG5h" value="state" />
+          <node concept="3wxxNl" id="34Jhv$TNx_A" role="2C2TGm">
+            <property role="2c7vTL" value="true" />
+            <node concept="19Rifw" id="34Jhv$TNx_B" role="2umbIo" />
+          </node>
+        </node>
+        <node concept="19RgSI" id="34Jhv$TNx_C" role="1UOdpc">
+          <property role="TrG5h" value="me" />
+          <node concept="26Vqp1" id="34Jhv$TNx_D" role="2C2TGm" />
+        </node>
+        <node concept="19RgSI" id="34Jhv$TNx_E" role="1UOdpc">
+          <property role="TrG5h" value="now" />
+          <node concept="2fgwQN" id="34Jhv$TNx_F" role="2C2TGm" />
+        </node>
+      </node>
+      <node concept="isgvk" id="34Jhv$TNx_k" role="1liy4i">
+        <property role="TrG5h" value="bCleanup" />
+        <node concept="19Rifw" id="34Jhv$TNx_l" role="2C2TGm" />
+        <node concept="3XIRFW" id="34Jhv$TNx_m" role="3XIRFX" />
+        <node concept="19RgSI" id="34Jhv$TNx_G" role="1UOdpc">
+          <property role="TrG5h" value="state" />
+          <node concept="3wxxNl" id="34Jhv$TNx_H" role="2C2TGm">
+            <property role="2c7vTL" value="true" />
+            <node concept="19Rifw" id="34Jhv$TNx_I" role="2umbIo" />
+          </node>
+        </node>
+        <node concept="19RgSI" id="34Jhv$TNx_J" role="1UOdpc">
+          <property role="TrG5h" value="me" />
+          <node concept="26Vqp1" id="34Jhv$TNx_K" role="2C2TGm" />
+        </node>
+        <node concept="19RgSI" id="34Jhv$TNx_L" role="1UOdpc">
+          <property role="TrG5h" value="now" />
+          <node concept="2fgwQN" id="34Jhv$TNx_M" role="2C2TGm" />
+        </node>
+      </node>
     </node>
   </node>
 </model>

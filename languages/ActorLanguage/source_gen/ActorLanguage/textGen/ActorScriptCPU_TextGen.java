@@ -508,7 +508,9 @@ public class ActorScriptCPU_TextGen extends TextGenDescriptorBase {
 
     if ((SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$GORc) != null)) {
       tgs.indent();
-      tgs.append("InitTopology();");
+      tgs.append("topology = InitializeTopology(TOPOLOGY_GRAPH, ");
+      tgs.append(String.valueOf(maxAddress + 1));
+      tgs.append(");");
       tgs.newLine();
     }
 

@@ -298,6 +298,8 @@
     <property role="EcuMT" value="2411303652489357139" />
     <property role="TrG5h" value="CreateBehavior" />
     <property role="3GE5qa" value="behavior" />
+    <property role="34LRSv" value="CreateBehavior" />
+    <property role="R4oN_" value="create a new behavior" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="1TJgyj" id="3m_VcJMYehj" role="1TKVEi">
       <property role="IQ2ns" value="3865756215866352723" />
@@ -703,7 +705,7 @@
     <property role="EcuMT" value="4619656042771117415" />
     <property role="3GE5qa" value="statement" />
     <property role="TrG5h" value="ForEachActorReferenceStatement" />
-    <property role="34LRSv" value="for each actor reference" />
+    <property role="34LRSv" value="ForeachActorReference" />
     <property role="R4oN_" value="iterate on a list of actor references" />
     <ref role="1TJDcQ" to="c4fa:3CmSUB7FmO3" resolve="Statement" />
     <node concept="1TJgyj" id="40skb7_QZlC" role="1TKVEi">
@@ -725,6 +727,11 @@
       <property role="20kJfa" value="body" />
       <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" to="c4fa:3CmSUB7Fp_l" resolve="StatementList" />
+    </node>
+    <node concept="1TJgyi" id="34Jhv$V1ulo" role="1TKVEl">
+      <property role="IQ2nx" value="3544128368503285080" />
+      <property role="TrG5h" value="iteratorName" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
     </node>
   </node>
   <node concept="1TIwiD" id="5dAUsbpsTbf">
@@ -829,6 +836,12 @@
       <property role="20kJfa" value="referenceList" />
       <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" node="40skb7_IBMN" resolve="ActorReferenceList" />
+    </node>
+    <node concept="1TJgyj" id="34Jhv$TZ$Qa" role="1TKVEi">
+      <property role="IQ2ns" value="3544128368486010250" />
+      <property role="20kJfa" value="event" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="1XiwwXap296" resolve="CustomEvent" />
     </node>
     <node concept="1TJgyi" id="3eevqy$Hv0Q" role="1TKVEl">
       <property role="IQ2nx" value="3715044905898602550" />
@@ -1274,6 +1287,18 @@
   <node concept="PlHQZ" id="1I8eAod9Vy7">
     <property role="EcuMT" value="1983899845838485639" />
     <property role="TrG5h" value="IActorScript" />
+  </node>
+  <node concept="1TIwiD" id="34Jhv$UFuZ9">
+    <property role="EcuMT" value="3544128368497520585" />
+    <property role="3GE5qa" value="actor.actorReference" />
+    <property role="TrG5h" value="ActorReferenceRef" />
+    <ref role="1TJDcQ" to="mj1l:7FQByU3CrCM" resolve="Expression" />
+    <node concept="1TJgyj" id="34Jhv$UFuZa" role="1TKVEi">
+      <property role="IQ2ns" value="3544128368497520586" />
+      <property role="20kJfa" value="actorReference" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="I$NcBvGnh" resolve="ActorReference" />
+    </node>
   </node>
 </model>
 

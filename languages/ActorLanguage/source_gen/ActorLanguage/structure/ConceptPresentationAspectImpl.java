@@ -15,6 +15,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_ActorLinksList;
   private ConceptPresentation props_ActorReference;
   private ConceptPresentation props_ActorReferenceList;
+  private ConceptPresentation props_ActorReferenceRef;
   private ConceptPresentation props_ActorScript;
   private ConceptPresentation props_ActorScriptCPU;
   private ConceptPresentation props_ActorScriptGPU;
@@ -120,6 +121,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ActorReferenceList = cpb.create();
         }
         return props_ActorReferenceList;
+      case LanguageConceptSwitch.ActorReferenceRef:
+        if (props_ActorReferenceRef == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByReference(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x312f45f93aadefc9L, 0x312f45f93aadefcaL, "actorReference", "", "");
+          props_ActorReferenceRef = cpb.create();
+        }
+        return props_ActorReferenceRef;
       case LanguageConceptSwitch.ActorScript:
         if (props_ActorScript == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -193,6 +201,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
       case LanguageConceptSwitch.CreateBehavior:
         if (props_CreateBehavior == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.shortDesc("create a new behavior");
           cpb.presentationByName();
           props_CreateBehavior = cpb.create();
         }
@@ -287,7 +296,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
         if (props_ForEachActorReferenceStatement == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
           cpb.shortDesc("iterate on a list of actor references");
-          cpb.rawPresentation("for each actor reference");
+          cpb.rawPresentation("ForeachActorReference");
           props_ForEachActorReferenceStatement = cpb.create();
         }
         return props_ForEachActorReferenceStatement;

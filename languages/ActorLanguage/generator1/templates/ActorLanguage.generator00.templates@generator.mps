@@ -82,6 +82,9 @@
       <concept id="1137021947720" name="jetbrains.mps.baseLanguage.structure.ConceptFunction" flags="in" index="2VMwT0">
         <child id="1137022507850" name="body" index="2VODD2" />
       </concept>
+      <concept id="1070475926800" name="jetbrains.mps.baseLanguage.structure.StringLiteral" flags="nn" index="Xl_RD">
+        <property id="1070475926801" name="value" index="Xl_RC" />
+      </concept>
       <concept id="1081236700937" name="jetbrains.mps.baseLanguage.structure.StaticMethodCall" flags="nn" index="2YIFZM">
         <reference id="1144433194310" name="classConcept" index="1Pybhc" />
       </concept>
@@ -201,6 +204,7 @@
       <concept id="8934095934011938595" name="com.mbeddr.core.modules.structure.EmptyModuleContent" flags="ng" index="2NXPZ9" />
     </language>
     <language id="7866978e-a0f0-4cc7-81bc-4d213d9375e1" name="jetbrains.mps.lang.smodel">
+      <concept id="1179168000618" name="jetbrains.mps.lang.smodel.structure.Node_GetIndexInParentOperation" flags="nn" index="2bSWHS" />
       <concept id="1177026924588" name="jetbrains.mps.lang.smodel.structure.RefConcept_Reference" flags="nn" index="chp4Y">
         <reference id="1177026940964" name="conceptDeclaration" index="cht4Q" />
       </concept>
@@ -414,6 +418,50 @@
                 </node>
               </node>
             </node>
+            <node concept="3clFbH" id="34Jhv$V7hsM" role="3cqZAp" />
+            <node concept="2Gpval" id="34Jhv$V7hEo" role="3cqZAp">
+              <node concept="2GrKxI" id="34Jhv$V7hEq" role="2Gsz3X">
+                <property role="TrG5h" value="forEachAR" />
+              </node>
+              <node concept="2OqwBi" id="34Jhv$V7ii2" role="2GsD0m">
+                <node concept="2GrUjf" id="34Jhv$V7hKZ" role="2Oq$k0">
+                  <ref role="2Gs0qQ" node="16CkjdnEuP" resolve="script" />
+                </node>
+                <node concept="2Rf3mk" id="34Jhv$V7lG4" role="2OqNvi">
+                  <node concept="1xMEDy" id="34Jhv$V7lG6" role="1xVPHs">
+                    <node concept="chp4Y" id="34Jhv$V7ns1" role="ri$Ld">
+                      <ref role="cht4Q" to="o1mc:40skb7_QZlB" resolve="ForEachActorReferenceStatement" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+              <node concept="3clFbS" id="34Jhv$V7hEu" role="2LFqv$">
+                <node concept="3clFbF" id="34Jhv$V7nvr" role="3cqZAp">
+                  <node concept="37vLTI" id="34Jhv$V7rUb" role="3clFbG">
+                    <node concept="3cpWs3" id="34Jhv$V7s5d" role="37vLTx">
+                      <node concept="2OqwBi" id="34Jhv$V7srp" role="3uHU7w">
+                        <node concept="2GrUjf" id="34Jhv$V7s5P" role="2Oq$k0">
+                          <ref role="2Gs0qQ" node="34Jhv$V7hEq" resolve="forEachAR" />
+                        </node>
+                        <node concept="2bSWHS" id="34Jhv$V7ugJ" role="2OqNvi" />
+                      </node>
+                      <node concept="Xl_RD" id="34Jhv$V7s2v" role="3uHU7B">
+                        <property role="Xl_RC" value="iteratorAR" />
+                      </node>
+                    </node>
+                    <node concept="2OqwBi" id="34Jhv$V7olF" role="37vLTJ">
+                      <node concept="2GrUjf" id="34Jhv$V7nvq" role="2Oq$k0">
+                        <ref role="2Gs0qQ" node="34Jhv$V7hEq" resolve="forEachAR" />
+                      </node>
+                      <node concept="3TrcHB" id="34Jhv$V7qDN" role="2OqNvi">
+                        <ref role="3TsBF5" to="o1mc:34Jhv$V1ulo" resolve="iteratorName" />
+                      </node>
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+            <node concept="3clFbH" id="34Jhv$V7hwa" role="3cqZAp" />
             <node concept="2Gpval" id="7OUT8FEPAbt" role="3cqZAp">
               <node concept="2GrKxI" id="7OUT8FEPAbv" role="2Gsz3X">
                 <property role="TrG5h" value="actorBatch" />
