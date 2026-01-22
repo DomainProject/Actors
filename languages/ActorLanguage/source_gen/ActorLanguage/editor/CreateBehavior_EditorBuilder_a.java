@@ -9,8 +9,6 @@ import jetbrains.mps.openapi.editor.EditorContext;
 import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Collection;
 import jetbrains.mps.nodeEditor.cellLayout.CellLayout_Indent;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.nodeEditor.cells.EditorCell_Constant;
 import jetbrains.mps.openapi.editor.style.Style;
 import jetbrains.mps.editor.runtime.style.StyleImpl;
@@ -97,7 +95,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
     return editorCell;
   }
   private boolean nodeCondition_6o6lrj_a61a() {
-    return ListSequence.fromList(SLinkOperations.getChildren(myNode, LINKS.customEventsHandlers$Ugrs)).isNotEmpty();
+    return true;
   }
   private EditorCell createConstant_0() {
     EditorCell_Constant editorCell = new EditorCell_Constant(getEditorContext(), myNode, "CreateBehavior");
@@ -755,15 +753,6 @@ import org.jetbrains.mps.openapi.language.SConcept;
     return editorCell;
   }
 
-  private static final class LINKS {
-    /*package*/ static final SContainmentLink customEventsHandlers$Ugrs = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a64224bL, "customEventsHandlers");
-    /*package*/ static final SContainmentLink eventHandler$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "eventHandler");
-    /*package*/ static final SContainmentLink body$f8RW = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, 0x3a16e3a9c7ad9954L, "body");
-    /*package*/ static final SContainmentLink initHandler$1yDf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31cL, "initHandler");
-    /*package*/ static final SContainmentLink cleanupHandler$1ySg = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31dL, "cleanupHandler");
-    /*package*/ static final SContainmentLink become$KDXz = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5366e9c2d9745d61L, "become");
-  }
-
   private static final class PROPS {
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
     /*package*/ static final SProperty receivedMessageName$AwKe = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5ef413f8f5ef4191L, "receivedMessageName");
@@ -773,5 +762,14 @@ import org.jetbrains.mps.openapi.language.SConcept;
     /*package*/ static final SConcept PropertyAttribute$Gb = MetaAdapterFactory.getConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x2eb1ad060897da56L, "jetbrains.mps.lang.core.structure.PropertyAttribute");
     /*package*/ static final SConcept Handler$Y4 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, "ActorLanguage.structure.Handler");
     /*package*/ static final SConcept CustomEventHandler$qp = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1f52820f4a642252L, "ActorLanguage.structure.CustomEventHandler");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink eventHandler$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "eventHandler");
+    /*package*/ static final SContainmentLink body$f8RW = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, 0x3a16e3a9c7ad9954L, "body");
+    /*package*/ static final SContainmentLink initHandler$1yDf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31cL, "initHandler");
+    /*package*/ static final SContainmentLink cleanupHandler$1ySg = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31dL, "cleanupHandler");
+    /*package*/ static final SContainmentLink customEventsHandlers$Ugrs = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a64224bL, "customEventsHandlers");
+    /*package*/ static final SContainmentLink become$KDXz = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5366e9c2d9745d61L, "become");
   }
 }

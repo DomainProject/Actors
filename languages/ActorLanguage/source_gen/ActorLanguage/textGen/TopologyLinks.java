@@ -57,7 +57,8 @@ public abstract class TopologyLinks {
     tgs.append(", 1);");
     tgs.newLine();
 
-    if (SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorTo$3d9g), LINKS.actor$8xF), LINKS.behavior$1pSN), PROPS.name$MnvL).equals("window")) {
+
+    if ((SLinkOperations.getTarget(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorTo$3d9g), LINKS.actor$8xF), LINKS.behavior$1pSN) != null) && SPropertyOperations.getString(SLinkOperations.getTarget(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorTo$3d9g), LINKS.actor$8xF), LINKS.behavior$1pSN), PROPS.name$MnvL).equals("window")) {
       String sizeName = "window" + SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorFrom$3cFe), LINKS.actor$8xF), PROPS.address$DqJ_) + "to" + SPropertyOperations.getInteger(SLinkOperations.getTarget(SLinkOperations.getTarget(actorLink, LINKS.actorTo$3d9g), LINKS.actor$8xF), PROPS.address$DqJ_);
       tgs.indent();
       tgs.append("static int ");

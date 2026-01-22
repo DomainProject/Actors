@@ -25,7 +25,6 @@ public class SendMessageToNeighbors_TextGen extends TextGenDescriptorBase {
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
-
     String payloadMemberName = SPropertyOperations.getString(Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScript$nz, false, false), LINKS.messageDefinition$$rsX), LINKS.members$C59R), CONCEPTS.Member$J1)).findFirst((it) -> Objects.equals(SNodeOperations.getConcept(SLinkOperations.getTarget(it, LINKS.type$sXU3)), SNodeOperations.getConcept(IVariableDeclaration__BehaviorDescriptor.getDeclaredType_id1LDGRqyYkTX.invoke(Payload__BehaviorDescriptor.getPayload_id1I8eAobiPlC.invoke(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$OqHH)))))), PROPS.name$MnvL);
     String iteratorName = "i" + String.valueOf(SNodeOperations.getIndexInParent(ctx.getPrimaryInput()));
 
@@ -42,81 +41,27 @@ public class SendMessageToNeighbors_TextGen extends TextGenDescriptorBase {
     ctx.getBuffer().area().increaseIndent();
 
     tgs.indent();
-    tgs.append("// create envelope");
+    tgs.append("/* create envelope */");
     tgs.newLine();
+    String envelopeName = "env" + String.valueOf(SNodeOperations.getIndexInParent(ctx.getPrimaryInput()));
     tgs.indent();
-    tgs.append("Envelope env");
-    tgs.append(String.valueOf(SNodeOperations.getIndexInParent(ctx.getPrimaryInput())));
-    tgs.append(" = {");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append(".priority = ");
-    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.priority$Ypjc));
-    tgs.append(",");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append(".sender = me");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("};");
-    tgs.newLine();
-
+    Message.createEnvelope(envelopeName, SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.priority$Ypjc), ctx);
     tgs.newLine();
 
     tgs.indent();
-    tgs.append("// create message");
+    tgs.append("/* create message */");
     tgs.newLine();
+    String messageName = "msg_to_neighbors" + String.valueOf(SNodeOperations.getIndexInParent(ctx.getPrimaryInput()));
+    String messageStructName = ((SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScriptGPU$rx, false, false) != null) ? "Event" : SPropertyOperations.getString(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScript$nz, false, false), LINKS.messageDefinition$$rsX), PROPS.name$MnvL));
     tgs.indent();
-    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScript$nz, false, false), LINKS.messageDefinition$$rsX), PROPS.name$MnvL));
-    tgs.append(" msg_to_neighbors");
-    tgs.append(String.valueOf(SNodeOperations.getIndexInParent(ctx.getPrimaryInput())));
-    tgs.append(" = {");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append(".envelope = env");
-    tgs.append(String.valueOf(SNodeOperations.getIndexInParent(ctx.getPrimaryInput())));
-    tgs.append(",");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append(".");
-    tgs.append(payloadMemberName);
-    tgs.append(" = ");
-    tgs.append(SPropertyOperations.getString(Payload__BehaviorDescriptor.getPayload_id1I8eAobiPlC.invoke(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$OqHH)), PROPS.name$MnvL));
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("};");
-    tgs.newLine();
-
-    tgs.newLine();
+    Message.createMessage(messageStructName, messageName, envelopeName, payloadMemberName, SPropertyOperations.getString(Payload__BehaviorDescriptor.getPayload_id1I8eAobiPlC.invoke(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$OqHH)), PROPS.name$MnvL), ctx);
 
     tgs.indent();
-    tgs.append("// send message");
+    tgs.append("/* send message */");
     tgs.newLine();
     tgs.indent();
-    tgs.append("ScheduleNewEvent(");
-    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL));
-    tgs.append("[");
-    tgs.append(iteratorName);
-    tgs.append("], ");
-    if ((SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.when$LfBf) == null)) {
-      tgs.append("now + 10");
-    } else {
-      tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.when$LfBf));
-    }
-    tgs.append(", ");
-    if ((SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.event$Gn03) == null)) {
-      tgs.append("EVENT");
-    } else {
-      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.event$Gn03), PROPS.name$MnvL));
-    }
-    tgs.append(", &msg_to_neighbors");
-    tgs.append(String.valueOf(SNodeOperations.getIndexInParent(ctx.getPrimaryInput())));
-    tgs.append(", sizeof(Message));");
-
+    Message.sendMessage(messageName, SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.referenceList$9FRc), PROPS.name$MnvL) + "[" + iteratorName + "]", SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.when$LfBf), SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.event$Gn03), (SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScriptCPU$mu, false, false) != null), ctx);
+    tgs.newLine();
 
     ctx.getBuffer().area().decreaseIndent();
     tgs.append("}");
@@ -133,6 +78,8 @@ public class SendMessageToNeighbors_TextGen extends TextGenDescriptorBase {
   private static final class CONCEPTS {
     /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
     /*package*/ static final SConcept Member$J1 = MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x51a277741cc50918L, "com.mbeddr.core.udt.structure.Member");
+    /*package*/ static final SConcept ActorScriptGPU$rx = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x52e1a8e2e48dc1a4L, "ActorLanguage.structure.ActorScriptGPU");
+    /*package*/ static final SConcept ActorScriptCPU$mu = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x46a144cd5bb2ddL, "ActorLanguage.structure.ActorScriptCPU");
     /*package*/ static final SInterfaceConcept TraceableConcept$L = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a3L, "jetbrains.mps.lang.traceable.structure.TraceableConcept");
   }
 

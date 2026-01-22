@@ -45,6 +45,10 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new CreatePayload_TextGen();
       case LanguageConceptSwitch.EmptyLine:
         return new EmptyLine_TextGen();
+      case LanguageConceptSwitch.Expent:
+        return new Expent_TextGen();
+      case LanguageConceptSwitch.ExternalFunction:
+        return new ExternalFunction_TextGen();
       case LanguageConceptSwitch.ForEachActorReferenceStatement:
         return new ForEachActorReferenceStatement_TextGen();
       case LanguageConceptSwitch.GetNeighborsFromReceptionist:
@@ -53,6 +57,8 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new GlobalVarDecl_TextGen();
       case LanguageConceptSwitch.MessageStruct:
         return new MessageStruct_TextGen();
+      case LanguageConceptSwitch.Random:
+        return new Random_TextGen();
       case LanguageConceptSwitch.Receptionist:
         return new Receptionist_TextGen();
       case LanguageConceptSwitch.SendMessage:
@@ -63,6 +69,8 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new StartupCode_TextGen();
       case LanguageConceptSwitch.StringBody:
         return new StringBody_TextGen();
+      case LanguageConceptSwitch.StringValue:
+        return new StringValue_TextGen();
     }
     return null;
   }

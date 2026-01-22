@@ -14,9 +14,11 @@ import java.util.List;
 import java.util.ArrayList;
 import jetbrains.mps.internal.collections.runtime.Sequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import ActorLanguage.behavior.IState__BehaviorDescriptor;
 import jetbrains.mps.lang.traceable.behavior.UnitConcept__BehaviorDescriptor;
 import org.jetbrains.mps.openapi.language.SProperty;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
@@ -36,7 +38,18 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
 
     // includes
     List<String> headers = ListSequence.fromList(new ArrayList<String>());
-    for (SNode type : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.types$l07d), CONCEPTS.ExternalType$Bi))) {
+
+    ListSequence.fromList(headers).addElement("ROOT-Sim");
+    ListSequence.fromList(headers).addElement("ROOT-Sim/random");
+
+    tgs.append("#include <cuda/cuda_gpu.h>\n#include <cuda/queues.h>\n#include <cuda/kernels.h>\n#include <cuda/random.h>");
+    tgs.newLine();
+    ListSequence.fromList(headers).addElement("cuda/cuda_gpu");
+    ListSequence.fromList(headers).addElement("cuda/queues");
+    ListSequence.fromList(headers).addElement("cuda/kernels");
+    ListSequence.fromList(headers).addElement("cuda/random");
+
+    for (SNode type : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.types$lVcp), CONCEPTS.ExternalType$Bi))) {
       if (!(ListSequence.fromList(headers).contains(SPropertyOperations.getString(type, PROPS.header$$WII)))) {
         ListSequence.fromList(headers).addElement(SPropertyOperations.getString(type, PROPS.header$$WII));
         tgs.append("#include <");
@@ -45,8 +58,7 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
         tgs.newLine();
       }
     }
-
-    for (SNode function : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.externalFunctions$kZSc), CONCEPTS.ExternalFunctionPrototype$n3))) {
+    for (SNode function : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.externalFunctions$bWTb), CONCEPTS.ExternalFunctionPrototype$n3))) {
       if (!(ListSequence.fromList(headers).contains(SPropertyOperations.getString(function, PROPS.header$7lfc)))) {
         ListSequence.fromList(headers).addElement(SPropertyOperations.getString(function, PROPS.header$7lfc));
         tgs.append("#include <");
@@ -55,43 +67,454 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
         tgs.newLine();
       }
     }
-
-    // define number of LPs
-    tgs.append("#ifndef NUM_LPS");
-    tgs.newLine();
-    tgs.append("#define NUM_LPS ");
-    tgs.append(String.valueOf(maxAddress + 1));
-    tgs.newLine();
-    tgs.append("#endif");
-    tgs.newLine();
     tgs.newLine();
 
-    // define number of threads to 0 (max threads available)
-    tgs.append("#ifndef NUM_THREADS");
-    tgs.newLine();
-    tgs.append("#define NUM_THREADS 0");
-    tgs.newLine();
-    tgs.append("#endif");
-    tgs.newLine();
+    /*
+      EVENTS DEFINITION (for events != LP_INIT, LP_FINI)
+
+    */
+
+    int i = 1;
+    for (SNode eventDefinition : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.customEvents$eDRO)).where((it) -> !(SPropertyOperations.getString(it, PROPS.name$MnvL).equals("LP_INIT")) && !(SPropertyOperations.getString(it, PROPS.name$MnvL).equals("LP_FINI")))) {
+      tgs.append("#define ");
+      tgs.append(SPropertyOperations.getString(eventDefinition, PROPS.name$MnvL));
+      tgs.append(" ");
+      tgs.append(String.valueOf(i++));
+      tgs.newLine();
+    }
     tgs.newLine();
 
-    for (SNode item : SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.configuration$kYH7)) {
+    /*
+      STATE DEFINITION 
+      define a struct (called structName + "Nodes") to hold the state variables for each LP
+      define the state struct, adding to the defined state variables a field of type curandState_t called cr_state
+
+    */
+
+    List<SNode> stateStructs = new ArrayList<SNode>();
+    for (final SNode createActors : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actorCreation$EA0a), CONCEPTS.ICreateActor$Ng))) {
+      if (SNodeOperations.isInstanceOf(SLinkOperations.getTarget(createActors, LINKS.stateType$2Mnh), CONCEPTS.ExternalTypeDefinition$1k) && ListSequence.fromList(stateStructs).where((it) -> SPropertyOperations.getString(it, PROPS.name$MnvL).equals(SPropertyOperations.getString(SLinkOperations.getTarget(createActors, LINKS.stateType$2Mnh), PROPS.name$MnvL))).isEmpty()) {
+
+        // create new struct declaration removing rng_t member
+        SNode struct = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x58bef62304fc0a2fL, "com.mbeddr.core.udt.structure.StructDeclaration"));
+        SPropertyOperations.assign(struct, PROPS.name$MnvL, SPropertyOperations.getString(SLinkOperations.getTarget(createActors, LINKS.stateType$2Mnh), PROPS.name$MnvL));
+
+        for (SNode member : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(IState__BehaviorDescriptor.getStructDeclaration_id7t$FNisxQwi.invoke(SLinkOperations.getTarget(createActors, LINKS.stateType$2Mnh)), LINKS.members$C59R), CONCEPTS.Member$J1))) {
+          if (SNodeOperations.isInstanceOf(SLinkOperations.getTarget(member, LINKS.type$sXU3), CONCEPTS.StructType$B3) && SPropertyOperations.getString(SLinkOperations.getTarget(SNodeOperations.cast(SLinkOperations.getTarget(member, LINKS.type$sXU3), CONCEPTS.StructType$B3), LINKS.struct$WCsg), PROPS.name$MnvL).equals("rng_t")) {
+            continue;
+          }
+          ListSequence.fromList(SLinkOperations.getChildren(struct, LINKS.members$C59R)).addElement(SNodeOperations.copyNode(member));
+        }
+
+        ListSequence.fromList(stateStructs).addElement(struct);
+      }
+    }
+
+    for (SNode stateStruct : ListSequence.fromList(stateStructs)) {
+      // define state struct
+      tgs.append("typedef struct {");
+      tgs.newLine();
+      ctx.getBuffer().area().increaseIndent();
+      tgs.indent();
+      tgs.append("curandState_t cr_state;");
+      tgs.newLine();
+      for (SNode member : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(stateStruct, LINKS.members$C59R), CONCEPTS.Member$J1))) {
+        tgs.indent();
+        tgs.appendNode(member);
+      }
+      ctx.getBuffer().area().decreaseIndent();
+      tgs.append("} ");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append(";");
+      tgs.newLine();
+      tgs.newLine();
+
+      tgs.append("typedef struct {");
+      tgs.newLine();
+      ctx.getBuffer().area().increaseIndent();
+      tgs.indent();
+      tgs.append("curandState_t *cr_state;");
+      tgs.newLine();
+      for (SNode member : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(stateStruct, LINKS.members$C59R), CONCEPTS.Member$J1))) {
+        tgs.indent();
+        tgs.appendNode(SLinkOperations.getTarget(member, LINKS.type$sXU3));
+        tgs.append(" *");
+        tgs.append(SPropertyOperations.getString(member, PROPS.name$MnvL));
+        tgs.append(";");
+        tgs.newLine();
+      }
+      ctx.getBuffer().area().decreaseIndent();
+      tgs.append("} ");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("Nodes;");
+      tgs.newLine();
+      tgs.newLine();
+    }
+
+
+    /*
+      CONFIGURATION (global constants + global variables)
+
+    */
+
+    for (SNode item : SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.configuration$6ery), CONCEPTS.GlobalConstant$pG)) {
       tgs.appendNode(item);
     }
     tgs.newLine();
+    tgs.append("__device__ static uint population;");
+    tgs.newLine();
+    for (SNode item : SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.configuration$6ery), CONCEPTS.GlobalVarDecl$3_)) {
+      tgs.appendNode(item);
+    }
+    tgs.newLine();
+    tgs.append("extern uint events_per_node;\nextern __device__ EQs\teq;\nextern \"C\" uint get_n_nodes();\nextern \"C\" uint get_n_lps();\nextern \"C\" uint get_n_nodes_per_lp();\nextern \"C\" uint get_n_blocks();");
+    tgs.newLine();
+    tgs.newLine();
 
-    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.randomStuff$l5J_));
+    for (SNode stateStruct : ListSequence.fromList(stateStructs)) {
+      tgs.append("__device__ static ");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("Nodes ");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("_nodes;");
+      tgs.newLine();
+      tgs.append("curandState_t *rand_state_");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append(";");
+      tgs.newLine();
+      for (SNode member : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(stateStruct, LINKS.members$C59R), CONCEPTS.Member$J1))) {
+        tgs.appendNode(SLinkOperations.getTarget(member, LINKS.type$sXU3));
+        tgs.append(" *");
+        tgs.append(SPropertyOperations.getString(member, PROPS.name$MnvL));
+        tgs.append(";");
+        tgs.newLine();
+      }
+    }
+
+    tgs.append("uint *sim_bo;\nuint *sim_so;\nuint *sim_uo;\nuint *sim_ql;");
+    tgs.newLine();
+    tgs.append("Event *sim_events;");
+    tgs.newLine();
     tgs.newLine();
 
 
-    if ((SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$kZqa) != null)) {
-      tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.topology$kZqa));
+    /*
+      RANDOM STUFF
+
+    */
+
+    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.randomStuff$BMch));
+    tgs.newLine();
+
+
+    /*
+      FUNCTIONS DEFINITIONS
+
+    */
+
+
+    // malloc_nodes
+    tgs.append("char malloc_nodes(uint n_nodes) {");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append("cudaError_t err;");
+    tgs.newLine();
+
+    for (SNode stateStruct : ListSequence.fromList(stateStructs)) {
+
+      tgs.indent();
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("Nodes h_");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("_nodes;");
+      tgs.newLine();
+      tgs.newLine();
+
+      tgs.indent();
+      tgs.append("// allocate state for each LP");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("rand_state_");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append(" = (curandState_t *)malloc(sizeof(curandState_t) * n_nodes);");
+      tgs.newLine();
+      for (SNode member : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(stateStruct, LINKS.members$C59R), CONCEPTS.Member$J1))) {
+        tgs.indent();
+        tgs.append(SPropertyOperations.getString(member, PROPS.name$MnvL));
+        tgs.append(" = (");
+        tgs.appendNode(SLinkOperations.getTarget(member, LINKS.type$sXU3));
+        tgs.append(" *)malloc(sizeof(");
+        tgs.appendNode(SLinkOperations.getTarget(member, LINKS.type$sXU3));
+        tgs.append(") * n_nodes);");
+        tgs.newLine();
+      }
+      tgs.newLine();
+
+      tgs.indent();
+      tgs.append("if(!sim_bo) sim_bo = (uint*)malloc(sizeof(uint) * n_nodes);");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("if(!sim_so) sim_so = (uint*)malloc(sizeof(uint) * n_nodes);");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("if(!sim_uo) sim_uo = (uint*)malloc(sizeof(uint) * n_nodes);");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("if(!sim_ql) sim_ql = (uint*)malloc(sizeof(uint) * n_nodes);");
+      tgs.newLine();
+      tgs.newLine();
+
+      tgs.indent();
+      tgs.append("// allocate messages for each LP");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("if(!sim_events) sim_events = (Event*)malloc(sizeof(Event) * n_nodes * events_per_node);");
+      tgs.newLine();
+      tgs.newLine();
+
+      tgs.indent();
+      tgs.append("if (!rand_state_");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      for (SNode member : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(stateStruct, LINKS.members$C59R), CONCEPTS.Member$J1))) {
+        tgs.append(" || !");
+        tgs.append(SPropertyOperations.getString(member, PROPS.name$MnvL));
+      }
+      tgs.append(" || !sim_events) {printf(\"no memory for HOST side model state\"); exit(1); }");
+      tgs.newLine();
+      tgs.newLine();
+
+      tgs.indent();
+      tgs.append("err = cudaMalloc(&(h_");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("_nodes.cr_state), sizeof(curandState_t) * n_nodes);");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("if (err != cudaSuccess) { return 0; }");
+      tgs.newLine();
+      for (SNode member : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(stateStruct, LINKS.members$C59R), CONCEPTS.Member$J1))) {
+        tgs.indent();
+        tgs.append("err = cudaMalloc(&(h_");
+        tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+        tgs.append("_nodes.");
+        tgs.append(SPropertyOperations.getString(member, PROPS.name$MnvL));
+        tgs.append("), sizeof(");
+        tgs.appendNode(SLinkOperations.getTarget(member, LINKS.type$sXU3));
+        tgs.append(") * n_nodes);");
+        tgs.newLine();
+        tgs.indent();
+        tgs.append("if (err != cudaSuccess) { return 0; }");
+        tgs.newLine();
+      }
+      tgs.indent();
+      tgs.append("cudaMemcpyToSymbol(");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("_nodes, &h_");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("_nodes, sizeof(");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("Nodes));");
+      tgs.newLine();
+      tgs.newLine();
     }
 
-    Behaviors.behaviors(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.behaviors$kYu6), CONCEPTS.CreateBehavior$iN), ctx);
+    tgs.indent();
+    tgs.append("return 1;");
+    tgs.newLine();
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.append("}");
+    tgs.newLine();
+    tgs.newLine();
 
-    // ProcessEvent
-    tgs.append("void ProcessEvent(lp_id_t me, simtime_t now, unsigned event_type, const void *msg, unsigned size, void *state)");
+    // free_nodes
+    tgs.append("void free_nodes() {");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+    for (SNode stateStruct : ListSequence.fromList(stateStructs)) {
+      tgs.indent();
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("Nodes h_");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("_nodes;");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("cudaMemcpyFromSymbol(&h_");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("_nodes, ");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("_nodes, sizeof(");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("Nodes));");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append("cudaFree(h_");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("_nodes.cr_state);");
+      tgs.newLine();
+      for (SNode member : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(stateStruct, LINKS.members$C59R), CONCEPTS.Member$J1))) {
+        tgs.indent();
+        tgs.append("cudaFree(h_");
+        tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+        tgs.append("_nodes.");
+        tgs.append(SPropertyOperations.getString(member, PROPS.name$MnvL));
+        tgs.append(");");
+        tgs.newLine();
+      }
+    }
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.append("}");
+    tgs.newLine();
+    tgs.newLine();
+
+    // set_model_params
+    tgs.append("__device__\nvoid set_model_params(int params[], uint n_params) {}");
+    tgs.newLine();
+    tgs.newLine();
+
+    // todo serve?
+    tgs.append("__device__\nint get_lookahead() {\n\treturn 0;\n}");
+    tgs.newLine();
+    tgs.newLine();
+
+    // statistics
+    tgs.append("__device__\nvoid collect_statistics(uint nid) {\n\treturn;\n}");
+    tgs.newLine();
+    tgs.newLine();
+    tgs.append("__device__\nvoid print_statistics() {\n\tprintf(\"STATISTICS NOT AVAILABLE\");\n}");
+    tgs.newLine();
+    tgs.newLine();
+
+
+    // reverse 
+    tgs.append("#if OPTM_SYNC == 1\n__device__ // private\nvoid reverse_event_type_1(Event *event) {}\n\n__device__\nvoid roll_back_event(Event *event) {}\n\n__device__\nuint get_number_states(Event *event) {\n\treturn 1;\n}\n\n__device__\nuint get_number_antimsgs(Event *event) {\n\treturn 1;\n}\n#endif");
+    tgs.newLine();
+    tgs.newLine();
+
+    // todo topology
+
+    // external functions
+    {
+      Iterable<SNode> collection = SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.externalFunctions$bWTb), CONCEPTS.ExternalFunction$kh);
+      final SNode lastItem = Sequence.fromIterable(collection).last();
+      for (SNode item : collection) {
+        tgs.appendNode(item);
+        if (item != lastItem) {
+          tgs.append("\n");
+        }
+      }
+    }
+
+    /*
+      BEHAVIORS
+
+    */
+
+    Behaviors.behaviors(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.behaviors$VQhG), CONCEPTS.CreateBehavior$iN), ctx);
+
+    /*
+      INIT FUNCTIONS
+
+    */
+
+    for (final SNode behavior : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.behaviors$VQhG), CONCEPTS.CreateBehavior$iN)).where((it) -> ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(it, LINKS.initHandler$1yDf), LINKS.body$f8RW), LINKS.statements$euTV)).isNotEmpty())) {
+
+      SNode stateStruct = IState__BehaviorDescriptor.getStructDeclaration_id7t$FNisxQwi.invoke(SLinkOperations.getTarget(Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actorCreation$EA0a), CONCEPTS.ICreateActor$Ng)).findFirst((it) -> SLinkOperations.getTarget(it, LINKS.behavior$1pSN) == behavior), LINKS.stateType$2Mnh));
+
+      tgs.append("__device__");
+      tgs.newLine();
+      tgs.append("void init_node(uint nid) {");
+      tgs.newLine();
+      ctx.getBuffer().area().increaseIndent();
+      tgs.indent();
+      tgs.append("lp_id_t me = nid;");
+      tgs.newLine();
+
+      // init rand 
+      tgs.indent();
+      tgs.append("curand_init(nid, 0, 0, &(");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("_nodes.cr_state[nid]));");
+      tgs.newLine();
+
+      // get random context
+      tgs.indent();
+      tgs.append("curandState_t *cr_state = &(");
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append("_nodes.cr_state[me]);");
+      tgs.newLine();
+      tgs.newLine();
+
+      // load state
+      tgs.indent();
+      tgs.append("/* load state */");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+      tgs.append(" state = {");
+      tgs.newLine();
+      ctx.getBuffer().area().increaseIndent();
+      for (SNode m : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(stateStruct, LINKS.members$C59R), CONCEPTS.Member$J1))) {
+        if (SNodeOperations.isInstanceOf(SLinkOperations.getTarget(m, LINKS.type$sXU3), CONCEPTS.StructType$B3) && SPropertyOperations.getString(SLinkOperations.getTarget(SNodeOperations.cast(SLinkOperations.getTarget(m, LINKS.type$sXU3), CONCEPTS.StructType$B3), LINKS.struct$WCsg), PROPS.name$MnvL).equals("rng_t")) {
+          continue;
+        }
+        tgs.indent();
+        tgs.append(".");
+        tgs.append(SPropertyOperations.getString(m, PROPS.name$MnvL));
+        tgs.append(" = ");
+        tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+        tgs.append("_nodes.");
+        tgs.append(SPropertyOperations.getString(m, PROPS.name$MnvL));
+        tgs.append("[me],");
+        tgs.newLine();
+      }
+      ctx.getBuffer().area().decreaseIndent();
+      tgs.indent();
+      tgs.append("};");
+      tgs.newLine();
+
+
+      for (SNode stmt : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(behavior, LINKS.initHandler$1yDf), LINKS.body$f8RW), LINKS.statements$euTV))) {
+        tgs.indent();
+        tgs.appendNode(stmt);
+        tgs.newLine();
+      }
+
+      // write state
+      tgs.indent();
+      tgs.append("/* store state */");
+      tgs.newLine();
+      for (SNode m : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(stateStruct, LINKS.members$C59R), CONCEPTS.Member$J1))) {
+        if (SNodeOperations.isInstanceOf(SLinkOperations.getTarget(m, LINKS.type$sXU3), CONCEPTS.StructType$B3) && SPropertyOperations.getString(SLinkOperations.getTarget(SNodeOperations.cast(SLinkOperations.getTarget(m, LINKS.type$sXU3), CONCEPTS.StructType$B3), LINKS.struct$WCsg), PROPS.name$MnvL).equals("rng_t")) {
+          continue;
+        }
+        tgs.indent();
+        tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+        tgs.append("_nodes.");
+        tgs.append(SPropertyOperations.getString(m, PROPS.name$MnvL));
+        tgs.append("[me] = ");
+        tgs.append("state.");
+        tgs.append(SPropertyOperations.getString(m, PROPS.name$MnvL));
+        tgs.append(";");
+        tgs.newLine();
+      }
+
+      ctx.getBuffer().area().decreaseIndent();
+      tgs.append("}");
+      tgs.newLine();
+    }
+    tgs.newLine();
+
+    // reinit
+    tgs.append("__device__\nvoid reinit_node(uint nid, int gvt) {}");
+    tgs.newLine();
+    tgs.newLine();
+
+    /*
+      EVENT HANDLING FUNCTION
+
+    */
+
+    tgs.append("__device__\nchar handle_event(Event *message)");
     tgs.newLine();
     tgs.append("{");
     tgs.newLine();
@@ -99,322 +522,165 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
     ctx.getBuffer().area().increaseIndent();
 
     tgs.indent();
-    tgs.append("switch(me) {");
+    tgs.append("switch(message->receiver) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
-
-    for (SNode actorsBatch : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActors$rc, false, new SAbstractConcept[]{}))) {
-      tgs.indent();
-      tgs.append("case ");
-      tgs.append(String.valueOf(SPropertyOperations.getInteger(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(0), PROPS.address$DqJ_)));
-      tgs.append(" ... ");
-      tgs.append(String.valueOf(SPropertyOperations.getInteger(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).count() - 1), PROPS.address$DqJ_)));
-      tgs.append(": {");
-      tgs.newLine();
-      ctx.getBuffer().area().increaseIndent();
-      tgs.indent();
-      tgs.append("/* ");
-      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(0), LINKS.behavior$1pSN), PROPS.name$MnvL));
-      tgs.append(" */");
-      tgs.newLine();
-      tgs.indent();
-      tgs.append("switch(event_type) {");
-      tgs.newLine();
-      ctx.getBuffer().area().increaseIndent();
-      tgs.indent();
-      tgs.append("case LP_INIT: {");
-      tgs.newLine();
-      ctx.getBuffer().area().increaseIndent();
-      Handler.handlerFunction(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(0), LINKS.behavior$1pSN), LINKS.initHandler$1yDf), ctx);
-      ctx.getBuffer().area().decreaseIndent();
-      tgs.indent();
-      tgs.append("}");
-      tgs.newLine();
-
-      boolean functionContainsNotEmptyStatements = false;
-      for (SNode statement : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(0), LINKS.behavior$1pSN), LINKS.eventHandler$MLkf), LINKS.body$f8RW), LINKS.statements$euTV))) {
-        if (!(SNodeOperations.isInstanceOf(statement, CONCEPTS.Statement$zV))) {
-          functionContainsNotEmptyStatements = true;
-          break;
-        }
-      }
-      if (functionContainsNotEmptyStatements) {
-        tgs.indent();
-        tgs.append("case EVENT: {");
-        tgs.newLine();
-        ctx.getBuffer().area().increaseIndent();
-        tgs.indent();
-        tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(0), LINKS.behavior$1pSN), PROPS.name$MnvL));
-        tgs.append("(me, now, msg, state);");
-        tgs.newLine();
-        tgs.indent();
-        tgs.append("break;");
-        tgs.newLine();
-        ctx.getBuffer().area().decreaseIndent();
-        tgs.indent();
-        tgs.append("}");
-        tgs.newLine();
-      }
-
-      tgs.indent();
-      tgs.append("case LP_FINI: {");
-      tgs.newLine();
-      ctx.getBuffer().area().increaseIndent();
-      Handler.handlerFunction(SLinkOperations.getTarget(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(0), LINKS.behavior$1pSN), LINKS.cleanupHandler$1ySg), ctx);
-      ctx.getBuffer().area().decreaseIndent();
-      tgs.indent();
-      tgs.append("}");
-      tgs.newLine();
-      for (final SNode customEvent : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.customEvents$l5hz))) {
-        tgs.indent();
-        tgs.append("case ");
-        tgs.append(SPropertyOperations.getString(customEvent, PROPS.name$MnvL));
-        tgs.append(": {");
-        tgs.newLine();
-        ctx.getBuffer().area().increaseIndent();
-        Handler.handlerFunction(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(0), LINKS.behavior$1pSN), LINKS.customEventsHandlers$Ugrs)).findFirst((it) -> SLinkOperations.getTarget(it, LINKS.event$5Bra) == customEvent), LINKS.function$8k$G), ctx);
-        ctx.getBuffer().area().decreaseIndent();
-        tgs.indent();
-        tgs.append("}");
-        tgs.newLine();
-      }
-      ctx.getBuffer().area().decreaseIndent();
-      tgs.indent();
-      tgs.append("default:");
-      tgs.newLine();
-      ctx.getBuffer().area().increaseIndent();
-      tgs.indent();
-      tgs.append("fprintf(stderr, \"[ERROR]: EVENT TYPE %u UNKNOWN\", event_type);");
-      tgs.newLine();
-      tgs.indent();
-      tgs.append("puts(\"\");");
-      tgs.newLine();
-      tgs.indent();
-      tgs.append("abort();");
-      tgs.newLine();
-      ctx.getBuffer().area().decreaseIndent();
-
-      tgs.indent();
-      tgs.append("}");
-      tgs.newLine();
-      ctx.getBuffer().area().decreaseIndent();
-      tgs.indent();
-      tgs.append("}");
-      tgs.newLine();
+    for (SNode createActor : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{})).where((it) -> !(SNodeOperations.isInstanceOf(SNodeOperations.getParent(it), CONCEPTS.CreateActors$rc)))) {
+      ProcessEvent.handleReceivedEvent(SPropertyOperations.getInteger(createActor, PROPS.address$DqJ_), -1, SLinkOperations.getTarget(createActor, LINKS.behavior$1pSN), SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.customEvents$eDRO), false, ctx);
     }
-
-    for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{})).where((it) -> !(SNodeOperations.isInstanceOf(SNodeOperations.getParent(it), CONCEPTS.CreateActors$rc)))) {
-      tgs.indent();
-      tgs.append("case ");
-      tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
-      tgs.append(": {");
-      tgs.newLine();
-      ctx.getBuffer().area().increaseIndent();
-      tgs.indent();
-      tgs.append("/* ");
-      tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$1pSN), PROPS.name$MnvL));
-      tgs.append(" */");
-      tgs.newLine();
-      tgs.indent();
-      tgs.append("switch(event_type) {");
-      tgs.newLine();
-      ctx.getBuffer().area().increaseIndent();
-      tgs.indent();
-      tgs.append("case LP_INIT: {");
-      tgs.newLine();
-      ctx.getBuffer().area().increaseIndent();
-      Handler.handlerFunction(SLinkOperations.getTarget(SLinkOperations.getTarget(actor, LINKS.behavior$1pSN), LINKS.initHandler$1yDf), ctx);
-      ctx.getBuffer().area().decreaseIndent();
-      tgs.indent();
-      tgs.append("}");
-      tgs.newLine();
-
-      boolean functionContainsNotEmptyStatements = false;
-      for (SNode statement : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(SLinkOperations.getTarget(actor, LINKS.behavior$1pSN), LINKS.eventHandler$MLkf), LINKS.body$f8RW), LINKS.statements$euTV))) {
-        if (!(SNodeOperations.isInstanceOf(statement, CONCEPTS.Statement$zV))) {
-          functionContainsNotEmptyStatements = true;
-          break;
-        }
-      }
-      if (functionContainsNotEmptyStatements) {
-        tgs.indent();
-        tgs.append("case EVENT: {");
-        tgs.newLine();
-        ctx.getBuffer().area().increaseIndent();
-        tgs.indent();
-        tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$1pSN), PROPS.name$MnvL));
-        tgs.append("(me, now, msg, state);");
-        tgs.newLine();
-        tgs.indent();
-        tgs.append("break;");
-        tgs.newLine();
-        ctx.getBuffer().area().decreaseIndent();
-        tgs.indent();
-        tgs.append("}");
-        tgs.newLine();
-      }
-
-      tgs.indent();
-      tgs.append("case LP_FINI: {");
-      tgs.newLine();
-      ctx.getBuffer().area().increaseIndent();
-      Handler.handlerFunction(SLinkOperations.getTarget(SLinkOperations.getTarget(actor, LINKS.behavior$1pSN), LINKS.cleanupHandler$1ySg), ctx);
-      ctx.getBuffer().area().decreaseIndent();
-      tgs.indent();
-      tgs.append("}");
-      tgs.newLine();
-      for (final SNode customEvent : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.customEvents$l5hz))) {
-        tgs.indent();
-        tgs.append("case ");
-        tgs.append(SPropertyOperations.getString(customEvent, PROPS.name$MnvL));
-        tgs.append(": {");
-        tgs.newLine();
-        ctx.getBuffer().area().increaseIndent();
-        Handler.handlerFunction(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(actor, LINKS.behavior$1pSN), LINKS.customEventsHandlers$Ugrs)).findFirst((it) -> SLinkOperations.getTarget(it, LINKS.event$5Bra) == customEvent), LINKS.function$8k$G), ctx);
-        ctx.getBuffer().area().decreaseIndent();
-        tgs.indent();
-        tgs.append("}");
-        tgs.newLine();
-      }
-      ctx.getBuffer().area().decreaseIndent();
-      tgs.indent();
-      tgs.append("default:");
-      tgs.newLine();
-      ctx.getBuffer().area().increaseIndent();
-      tgs.indent();
-      tgs.append("fprintf(stderr, \"[ERROR]: EVENT TYPE %u UNKNOWN\", event_type);");
-      tgs.newLine();
-      tgs.indent();
-      tgs.append("puts(\"\");");
-      tgs.newLine();
-      tgs.indent();
-      tgs.append("abort();");
-      tgs.newLine();
-      ctx.getBuffer().area().decreaseIndent();
-      tgs.indent();
-      tgs.append("}");
-      tgs.newLine();
-      ctx.getBuffer().area().decreaseIndent();
-      tgs.indent();
-      tgs.append("break;");
-      tgs.newLine();
-      tgs.indent();
-      tgs.append("}");
-      tgs.newLine();
+    for (SNode createActors : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActors$rc, false, new SAbstractConcept[]{}))) {
+      ProcessEvent.handleReceivedEvent(SPropertyOperations.getInteger(ListSequence.fromList(SLinkOperations.getChildren(createActors, LINKS.actors$HQEA)).getElement(0), PROPS.address$DqJ_), SPropertyOperations.getInteger(ListSequence.fromList(SLinkOperations.getChildren(createActors, LINKS.actors$HQEA)).getElement(ListSequence.fromList(SLinkOperations.getChildren(createActors, LINKS.actors$HQEA)).count() - 1), PROPS.address$DqJ_), SLinkOperations.getTarget(createActors, LINKS.behavior$1pSN), SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.customEvents$eDRO), false, ctx);
     }
     ctx.getBuffer().area().decreaseIndent();
     tgs.indent();
     tgs.append("}");
     tgs.newLine();
-
     ctx.getBuffer().area().decreaseIndent();
-
-
     tgs.append("}");
     tgs.newLine();
+    tgs.newLine();
 
+    // other functions
 
-    tgs.append("bool CanEnd(lp_id_t me, const void *snapshot) {");
+    tgs.append("extern \"C\" {\n#include <core/core.h>\n#include <lp/expose_lp_state.h>\nextern void process_device_align_msg(unsigned lid, simtime_t time);\n\n}");
+    tgs.newLine();
+    tgs.newLine();
+
+    tgs.append("void copy_nodes_from_host(uint n_nodes) {}");
+    tgs.newLine();
+    tgs.append("void copy_nodes_to_host(uint n_nodes) {}");
+    tgs.newLine();
+    tgs.newLine();
+
+    tgs.append("extern \"C\" int pack_and_insert_gpu_event(unsigned des_node, unsigned sen_node, int ts, unsigned type){\n\tuint gpu_lp = des_node/get_n_nodes_per_lp();\n\tuint idx = __sync_fetch_and_add(sim_ql + gpu_lp, 1);\n\n\tif(idx >= get_n_nodes_per_lp()*events_per_node){\n\t\tprintf(\"adding more events that queue capacity\");\n\t\texit(1);\n\t}\n\n\tuint base = get_n_nodes_per_lp()*events_per_node*gpu_lp;\n\n\tEvent *tgt = sim_events+base+idx;\n\ttgt->receiver = des_node;\n\ttgt->sender   = sen_node;\n\ttgt->timestamp = ts;\n\ttgt->type = type;\n\treturn 1;\n}");
+    tgs.newLine();
+    tgs.newLine();
+
+    tgs.append("extern \"C\" void align_device_to_host_parallel_states(unsigned rid, simtime_t gvt){");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
     tgs.indent();
-    tgs.append("switch(me) {");
+    tgs.append("unsigned start;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("unsigned i;");
+    tgs.newLine();
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("start = global_config.lps+1;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("for(i=0;i<global_config.lps;i++){");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
-
-    for (SNode actorsBatch : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActors$rc, false, new SAbstractConcept[]{}))) {
-      tgs.indent();
-      tgs.append("case ");
-      tgs.append(String.valueOf(SPropertyOperations.getInteger(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(0), PROPS.address$DqJ_)));
-      tgs.append(" ... ");
-      tgs.append(String.valueOf(SPropertyOperations.getInteger(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).count() - 1), PROPS.address$DqJ_)));
-      tgs.append(": {");
-      tgs.newLine();
-
-      if ((SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(0), LINKS.stateType$2Mnh) != null)) {
-        ctx.getBuffer().area().increaseIndent();
-        tgs.indent();
-        tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(0), LINKS.stateType$2Mnh), PROPS.name$MnvL));
-        tgs.append(" ");
-        tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(0), LINKS.behavior$1pSN), PROPS.name$MnvL));
-        tgs.append("_data = (");
-        tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(0), LINKS.stateType$2Mnh), PROPS.name$MnvL));
-        tgs.append(" *)snapshot;");
-        tgs.newLine();
-        tgs.indent();
-        tgs.append("return ");
-        tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(actorsBatch, LINKS.actors$HQEA)).getElement(0), LINKS.behavior$1pSN), PROPS.name$MnvL));
-        tgs.append("_data->can_end;");
-        tgs.newLine();
-        ctx.getBuffer().area().decreaseIndent();
-      } else {
-        tgs.indent();
-        tgs.indent();
-        tgs.append("return false;");
-        tgs.newLine();
-      }
-      tgs.indent();
-      tgs.append("}");
-      tgs.newLine();
-    }
-
-
-    for (SNode actor : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{})).where((it) -> !(SNodeOperations.isInstanceOf(SNodeOperations.getParent(it), CONCEPTS.CreateActors$rc)))) {
-      tgs.indent();
-      tgs.append("case ");
-      tgs.append(String.valueOf(SPropertyOperations.getInteger(actor, PROPS.address$DqJ_)));
-      tgs.append(": {");
-      tgs.newLine();
-      if ((SLinkOperations.getTarget(actor, LINKS.stateType$2Mnh) != null)) {
-
-        ctx.getBuffer().area().increaseIndent();
-        tgs.indent();
-        tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.stateType$2Mnh), PROPS.name$MnvL));
-        tgs.append(" ");
-        tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$1pSN), PROPS.name$MnvL));
-        tgs.append("_data = (");
-        tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.stateType$2Mnh), PROPS.name$MnvL));
-        tgs.append(" *)snapshot;");
-        tgs.newLine();
-        tgs.indent();
-        tgs.append("return ");
-        tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(actor, LINKS.behavior$1pSN), PROPS.name$MnvL));
-        tgs.append("_data->can_end;");
-        tgs.newLine();
-        ctx.getBuffer().area().decreaseIndent();
-        tgs.indent();
-        tgs.append("}");
-        tgs.newLine();
-
-      } else {
-        tgs.indent();
-        tgs.indent();
-        tgs.append("return false;");
-        tgs.newLine();
-        tgs.indent();
-        tgs.append("}");
-        tgs.newLine();
-      }
-    }
-
     tgs.indent();
-    tgs.append("default:");
+    tgs.append("if(lid_to_rid(i) != rid && start == (global_config.lps+1)) continue;");
     tgs.newLine();
     tgs.indent();
+    tgs.append("if(lid_to_rid(i) != rid && start != (global_config.lps+1)) break;");
+    tgs.newLine();
     tgs.indent();
-    tgs.append("return true;");
+    tgs.append("if(start == (global_config.lps+1)) start = i;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("align_lp_state_to_gvt(gvt,i);");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("curandState_t *state = (curandState_t*) get_lp_state_base_pointer(i);");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("rand_state_");
+    tgs.append(SPropertyOperations.getString(IState__BehaviorDescriptor.getStructDeclaration_id7t$FNisxQwi.invoke(SLinkOperations.getTarget(Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actorCreation$EA0a), CONCEPTS.ICreateActor$Ng)).first(), LINKS.stateType$2Mnh)), PROPS.name$MnvL));
+    tgs.append("[i] = *state;");
+    tgs.newLine();
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.indent();
+    tgs.append("}");
+    tgs.newLine();
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("clean_per_thread_queue();");
+    tgs.newLine();
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("if(!rid){");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append("bzero(sim_events, sizeof(Event) * get_n_nodes() * events_per_node);");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("bzero(sim_bo, sizeof(uint) * get_n_nodes());");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("bzero(sim_so, sizeof(uint) * get_n_nodes());");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("bzero(sim_uo, sizeof(uint) * get_n_nodes());");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("bzero(sim_ql, sizeof(uint) * get_n_nodes());");
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     tgs.indent();
     tgs.append("}");
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
-
     tgs.append("}");
     tgs.newLine();
     tgs.newLine();
 
+    tgs.append("extern \"C\" void align_device_to_host_parallel_events(unsigned rid, simtime_t gvt){\n\tunsigned cnt_a = 0;\n\tunsigned cnt_c = 0;\n\tunsigned start = (global_config.lps+1);\n\tunsigned i;\n\n\tstart = global_config.lps+1;\n\tcnt_a = 0;\n\tcnt_c = 0;\n\tfor(i=0;i<global_config.lps;i++){\n\t\tif(lid_to_rid(i) != rid && start == (global_config.lps+1)) continue;\n\t\tif(lid_to_rid(i) != rid && start != (global_config.lps+1)) break;\n\t\tif(start == (global_config.lps+1)) start = i;\n\n\t\tcnt_a += estimate_transfer_per_lp_events_without_filter(i);\n\t\tcnt_c += transfer_per_lp_events(i,gvt);\n\t}\n\n//\tprintf(\"B - copying events from SIM to HOST by %u from %u to %u : #events %u(%u)overall capacity %u\", rid, start, i-1, cnt_c, cnt_a, events_per_node*get_n_nodes());\n\n\ttransfer_per_thread_events(gvt);\n\n}");
+    tgs.newLine();
+    tgs.newLine();
 
+    tgs.append("extern \"C\" void align_device_to_host(unsigned threads_per_block){\n\n\tcopy_nodes_from_host(global_config.lps);\n\n\tcudaDeviceSynchronize();\n\t//printf(\"aligned memory from HOST to DEVICE\");\n\n\tkernel_sort_event_queues<<<get_n_blocks(), threads_per_block>>>();\n\tcudaDeviceSynchronize();\n\t//printf(\"sort queues \");\n\n}\n\nextern \"C\" void align_host_to_device(){\n\tcopy_nodes_to_host(global_config.lps);\n\tcudaDeviceSynchronize();\n}");
+    tgs.newLine();
+    tgs.newLine();
+
+    tgs.append("extern \"C\" void align_host_to_device_parallel(simtime_t gvt){");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append("unsigned start = (global_config.lps+1);");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("unsigned i;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("for(i=0;i<global_config.lps;i++){");
+    tgs.newLine();
+    ctx.getBuffer().area().increaseIndent();
+    tgs.indent();
+    tgs.append("if(lid_to_rid(i) != rid && start == (global_config.lps+1)) continue;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("if(lid_to_rid(i) != rid && start != (global_config.lps+1)) break;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("if(start == (global_config.lps+1)) start = i;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("curandState_t *state = (curandState_t*) get_lp_state_base_pointer(i);");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("*state = rand_state_");
+    tgs.append(SPropertyOperations.getString(IState__BehaviorDescriptor.getStructDeclaration_id7t$FNisxQwi.invoke(SLinkOperations.getTarget(Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.actorCreation$EA0a), CONCEPTS.ICreateActor$Ng)).first(), LINKS.stateType$2Mnh)), PROPS.name$MnvL));
+    tgs.append("[i];");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("process_device_align_msg(i, gvt);");
+    tgs.newLine();
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.indent();
+    tgs.append("}");
+    tgs.newLine();
+    tgs.newLine();
+    tgs.append("uint pushed_events= 0;\n\tif(rid < get_n_lps()){\n\t\tfor(i=0;i<get_n_lps()/global_config.n_threads;i++){\n\t\t\tuint lp = rid * (get_n_lps()/global_config.n_threads) + i;\n\t\t\tuint zero_idx  = lp*get_n_nodes_per_lp()*events_per_node;\n\t\t\tuint base_idx  = sim_bo[lp];\n\t\t\tuint start_idx = sim_so[lp];\n\t\t\tuint end_idx   = sim_uo[lp];\n\t\t\t//if(rid == 0) printf(\"base %u start %u end %u size %u\", base_idx, start_idx, end_idx, get_n_nodes_per_lp()*events_per_node);\n\t\t\twhile(start_idx != end_idx){\n\t\t\t\tuint effective = (base_idx+start_idx) % (get_n_nodes_per_lp()*events_per_node);\n\t\t\t\tEvent *cur = sim_events+zero_idx+effective;\n\t\t\t\t//printf(\"A scheduling for %u a message from %u at %u\", cur->receiver, cur->sender, cur->timestamp);\n\t\t\t\tcustom_schedule_from_gpu(gvt, cur->sender, cur->receiver, (simtime_t) cur->timestamp, cur->type, NULL, 0);\n\t\t\t\tstart_idx++;\n\t\t\t\tpushed_events++;\n\t\t\t}\n\t\t}\n\t\t//printf(\"copying events from HOST to SIM by %u from %u to %u GPU #LPS %u -- events pushed %u\",\n\t\t//\trid, rid * (get_n_lps()/global_config.n_threads),rid * (get_n_lps()/global_config.n_threads)+get_n_lps()/global_config.n_threads-1, get_n_lps(), pushed_events);\n\t}");
+    tgs.newLine();
+    ctx.getBuffer().area().decreaseIndent();
+    tgs.append("}");
+    tgs.newLine();
     if (tgs.needPositions()) {
       tgs.fillUnitInfo(UnitConcept__BehaviorDescriptor.getUnitName_id4pl5GY7LKmR.invoke(SNodeOperations.cast(ctx.getPrimaryInput(), CONCEPTS.UnitConcept$1g)));
     }
@@ -424,37 +690,41 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
     /*package*/ static final SProperty address$DqJ_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, 0x13974e2681512c34L, "address");
     /*package*/ static final SProperty header$$WII = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L, 0xbc4afff42e6671bL, "header");
     /*package*/ static final SProperty header$7lfc = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a5fe9L, 0x6065ca884e7a6002L, "header");
-    /*package*/ static final SProperty randomStuff$l5J_ = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x52e1a8e2e48dc1a4L, 0x1b883a660aaf20e8L, "randomStuff");
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SProperty randomStuff$BMch = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x9f540b99f7e7870L, "randomStuff");
   }
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept CreateActor$Uv = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23364L, "ActorLanguage.structure.CreateActor");
     /*package*/ static final SConcept ExternalType$Bi = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L, "ActorLanguage.structure.ExternalType");
     /*package*/ static final SConcept ExternalFunctionPrototype$n3 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a5fe9L, "ActorLanguage.structure.ExternalFunctionPrototype");
+    /*package*/ static final SConcept ExternalTypeDefinition$1k = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbc4afff4163c9e3L, "ActorLanguage.structure.ExternalTypeDefinition");
+    /*package*/ static final SConcept StructType$B3 = MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x58bef62304fc0a38L, "com.mbeddr.core.udt.structure.StructType");
+    /*package*/ static final SConcept Member$J1 = MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x51a277741cc50918L, "com.mbeddr.core.udt.structure.Member");
+    /*package*/ static final SInterfaceConcept ICreateActor$Ng = MetaAdapterFactory.getInterfaceConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, "ActorLanguage.structure.ICreateActor");
+    /*package*/ static final SConcept GlobalConstant$pG = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x32cd46c3579fd9e1L, "ActorLanguage.structure.GlobalConstant");
+    /*package*/ static final SConcept GlobalVarDecl$3_ = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbc4afff405f7c4bL, "ActorLanguage.structure.GlobalVarDecl");
+    /*package*/ static final SConcept ExternalFunction$kh = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x61da6c5c302aacc3L, "ActorLanguage.structure.ExternalFunction");
     /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
-    /*package*/ static final SConcept Statement$zV = MetaAdapterFactory.getConcept(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x3a16e3a9c7ad6d03L, "com.mbeddr.core.statements.structure.Statement");
     /*package*/ static final SConcept CreateActors$rc = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, "ActorLanguage.structure.CreateActors");
     /*package*/ static final SInterfaceConcept UnitConcept$1g = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a4L, "jetbrains.mps.lang.traceable.structure.UnitConcept");
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink types$l07d = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x52e1a8e2e48dc1a4L, 0x1b883a660aaf20e5L, "types");
-    /*package*/ static final SContainmentLink externalFunctions$kZSc = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x52e1a8e2e48dc1a4L, 0x1b883a660aaf20e4L, "externalFunctions");
-    /*package*/ static final SContainmentLink configuration$kYH7 = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x52e1a8e2e48dc1a4L, 0x1b883a660aaf20dfL, "configuration");
-    /*package*/ static final SContainmentLink topology$kZqa = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x52e1a8e2e48dc1a4L, 0x1b883a660aaf20e2L, "topology");
-    /*package*/ static final SContainmentLink behaviors$kYu6 = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x52e1a8e2e48dc1a4L, 0x1b883a660aaf20deL, "behaviors");
-    /*package*/ static final SContainmentLink actors$HQEA = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x2e933327a36608L, "actors");
+    /*package*/ static final SContainmentLink types$lVcp = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x754f4cb23a308c63L, "types");
+    /*package*/ static final SContainmentLink externalFunctions$bWTb = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x61da6c5c302ab136L, "externalFunctions");
+    /*package*/ static final SContainmentLink customEvents$eDRO = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x1f52820f4a642248L, "customEvents");
+    /*package*/ static final SReferenceLink stateType$2Mnh = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x47ae2b741b264b71L, "stateType");
+    /*package*/ static final SContainmentLink type$sXU3 = MetaAdapterFactory.getContainmentLink(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x46a2a92ac61b183L, 0x46a2a92ac61b184L, "type");
+    /*package*/ static final SReferenceLink struct$WCsg = MetaAdapterFactory.getReferenceLink(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x58bef62304fc0a38L, 0x58bef62304fc0a39L, "struct");
+    /*package*/ static final SContainmentLink members$C59R = MetaAdapterFactory.getContainmentLink(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x6285e27d4ff6c9f5L, 0x6285e27d4ff7db92L, "members");
+    /*package*/ static final SContainmentLink actorCreation$EA0a = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x35a5eccbf2f23377L, "actorCreation");
+    /*package*/ static final SContainmentLink configuration$6ery = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0xbc4afff405f7c51L, "configuration");
+    /*package*/ static final SContainmentLink behaviors$VQhG = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x5d890eb3ebfeaec2L, "behaviors");
     /*package*/ static final SReferenceLink behavior$1pSN = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x344e3e3ed823c988L, "behavior");
     /*package*/ static final SContainmentLink initHandler$1yDf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31cL, "initHandler");
-    /*package*/ static final SContainmentLink eventHandler$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "eventHandler");
     /*package*/ static final SContainmentLink body$f8RW = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, 0x3a16e3a9c7ad9954L, "body");
     /*package*/ static final SContainmentLink statements$euTV = MetaAdapterFactory.getContainmentLink(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x3a16e3a9c7ad9955L, 0x3a16e3a9c7ad9956L, "statements");
-    /*package*/ static final SContainmentLink cleanupHandler$1ySg = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31dL, "cleanupHandler");
-    /*package*/ static final SContainmentLink customEventsHandlers$Ugrs = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a64224bL, "customEventsHandlers");
-    /*package*/ static final SReferenceLink event$5Bra = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1f52820f4a642252L, 0x1f52820f4a642253L, "event");
-    /*package*/ static final SContainmentLink function$8k$G = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1f52820f4a642252L, 0x1f52820f4a64226bL, "function");
-    /*package*/ static final SContainmentLink customEvents$l5hz = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x52e1a8e2e48dc1a4L, 0x1b883a660aaf20e6L, "customEvents");
-    /*package*/ static final SReferenceLink stateType$2Mnh = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x47ae2b741b264b71L, "stateType");
+    /*package*/ static final SContainmentLink actors$HQEA = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x2e933327a36608L, "actors");
   }
 }

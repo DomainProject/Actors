@@ -25,9 +25,6 @@ public class CreateMessage_TextGen extends TextGenDescriptorBase {
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
-
-
-
     if (SNodeOperations.isInstanceOf(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.envelope$eoPh), CONCEPTS.CreateEnvelope$OK)) {
       tgs.appendNode(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.envelope$eoPh));
       tgs.newLine();
@@ -37,29 +34,9 @@ public class CreateMessage_TextGen extends TextGenDescriptorBase {
 
     String payloadMemberName = SPropertyOperations.getString(Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScript$nz, false, false), LINKS.messageDefinition$$rsX), LINKS.members$C59R), CONCEPTS.Member$J1)).findFirst((it) -> Objects.equals(SNodeOperations.getConcept(SLinkOperations.getTarget(it, LINKS.type$sXU3)), SNodeOperations.getConcept(IVariableDeclaration__BehaviorDescriptor.getDeclaredType_id1LDGRqyYkTX.invoke(Payload__BehaviorDescriptor.getPayload_id1I8eAobiPlC.invoke(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$N_RC)))))), PROPS.name$MnvL);
 
-    tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScript$nz, false, false), LINKS.messageDefinition$$rsX), PROPS.name$MnvL));
-    tgs.append(" ");
-    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
-    tgs.append(" = {");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append(".envelope = ");
-    tgs.append(SPropertyOperations.getString(Envelope__BehaviorDescriptor.getEnvelope_id5bxEeb_cNb0.invoke(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.envelope$eoPh)), PROPS.name$MnvL));
-    tgs.append(",");
-    tgs.newLine();
-    if ((payloadMemberName != null && payloadMemberName.length() > 0)) {
-      tgs.indent();
-      tgs.append(".");
-      tgs.append(payloadMemberName);
-      tgs.append(" = ");
-      tgs.append(SPropertyOperations.getString(Payload__BehaviorDescriptor.getPayload_id1I8eAobiPlC.invoke(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$N_RC)), PROPS.name$MnvL));
-      tgs.newLine();
-    }
-    ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("};");
-    tgs.newLine();
+    String messageStructName = ((SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScriptGPU$rx, false, false) != null) ? "Event" : SPropertyOperations.getString(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScript$nz, false, false), LINKS.messageDefinition$$rsX), PROPS.name$MnvL));
+    Message.createMessage(messageStructName, SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL), SPropertyOperations.getString(Envelope__BehaviorDescriptor.getEnvelope_id5bxEeb_cNb0.invoke(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.envelope$eoPh)), PROPS.name$MnvL), payloadMemberName, SPropertyOperations.getString(Payload__BehaviorDescriptor.getPayload_id1I8eAobiPlC.invoke(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.payload$N_RC)), PROPS.name$MnvL), ctx);
+
     if (tgs.needPositions()) {
       tgs.fillPositionInfo(TraceableConcept__BehaviorDescriptor.getTraceableProperty_id4pl5GY7LKmH.invoke(SNodeOperations.cast(ctx.getPrimaryInput(), CONCEPTS.TraceableConcept$L)));
     }
@@ -77,6 +54,7 @@ public class CreateMessage_TextGen extends TextGenDescriptorBase {
     /*package*/ static final SConcept CreateEnvelope$OK = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366687L, "ActorLanguage.structure.CreateEnvelope");
     /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
     /*package*/ static final SConcept Member$J1 = MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x51a277741cc50918L, "com.mbeddr.core.udt.structure.Member");
+    /*package*/ static final SConcept ActorScriptGPU$rx = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x52e1a8e2e48dc1a4L, "ActorLanguage.structure.ActorScriptGPU");
     /*package*/ static final SInterfaceConcept TraceableConcept$L = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a3L, "jetbrains.mps.lang.traceable.structure.TraceableConcept");
   }
 

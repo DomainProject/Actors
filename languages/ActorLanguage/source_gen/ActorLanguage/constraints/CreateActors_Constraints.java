@@ -15,18 +15,15 @@ import jetbrains.mps.internal.collections.runtime.ListSequence;
 import java.util.ArrayList;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import jetbrains.mps.smodel.runtime.base.BaseReferenceConstraintsDescriptor;
 import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SProperty;
-import org.jetbrains.mps.openapi.language.SReferenceLink;
 
 public class CreateActors_Constraints extends BaseConstraintsDescriptor {
   /*package*/ CreateActors_Constraints(ConstraintsDescriptorInitContext initContext) {
     super(CONCEPTS.CreateActors$rc, initContext);
     record(new Number_PD(this));
     record(new BaseName_PD(this));
-    record(new RD1(this));
   }
 
   /*package*/ static final class Number_PD extends BasePropertyConstraintsDescriptor {
@@ -75,11 +72,6 @@ public class CreateActors_Constraints extends BaseConstraintsDescriptor {
       return true;
     }
   }
-  /*package*/ static final class RD1 extends BaseReferenceConstraintsDescriptor {
-    /*package*/ RD1(ConstraintsDescriptor container) {
-      super(LINKS.behavior$1pSN, container, false, false);
-    }
-  }
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept CreateActors$rc = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, "ActorLanguage.structure.CreateActors");
@@ -89,9 +81,5 @@ public class CreateActors_Constraints extends BaseConstraintsDescriptor {
   private static final class PROPS {
     /*package*/ static final SProperty number$$XD7 = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x5d890eb3ec029443L, "number");
     /*package*/ static final SProperty baseName$$Y79 = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x5d890eb3ec029445L, "baseName");
-  }
-
-  private static final class LINKS {
-    /*package*/ static final SReferenceLink behavior$1pSN = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x344e3e3ed823c988L, "behavior");
   }
 }

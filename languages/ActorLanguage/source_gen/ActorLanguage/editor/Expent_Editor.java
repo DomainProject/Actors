@@ -7,8 +7,8 @@ import jetbrains.mps.openapi.editor.cells.EditorCell;
 import jetbrains.mps.openapi.editor.EditorContext;
 import org.jetbrains.mps.openapi.model.SNode;
 
-public class ActorScriptGPU_Editor extends DefaultNodeEditor {
+public class Expent_Editor extends DefaultNodeEditor {
   public EditorCell createEditorCell(EditorContext editorContext, SNode node) {
-    return new ActorScriptGPU_EditorBuilder_a(editorContext, node).createCell();
+    return new Expent_EditorBuilder_a(editorContext, node).createCell();
   }
 }

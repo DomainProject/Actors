@@ -5,6 +5,7 @@ package ActorLanguage.textGen;
 import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.Sequence;
 import com.mbeddr.core.statements.behavior.IHasPrefixes__BehaviorDescriptor;
@@ -15,17 +16,22 @@ import com.mbeddr.core.expressions.textGen.TokenTextGen;
 import com.mbeddr.core.base.behavior.IIdentifierNamedConcept__BehaviorDescriptor;
 import com.mbeddr.core.modules.behavior.IModuleContent__BehaviorDescriptor;
 import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
-import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class GlobalVarDecl_TextGen extends TextGenDescriptorBase {
   @Override
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
+
+    if (SNodeOperations.isInstanceOf(SNodeOperations.getParent(ctx.getPrimaryInput()), CONCEPTS.ActorScriptGPU$rx)) {
+      tgs.append("__device__ ");
+    }
+
     for (SNode p : Sequence.fromIterable(IHasPrefixes__BehaviorDescriptor.beforePrefixes_id8PQYytRYmo.invoke(ctx.getPrimaryInput()))) {
       tgs.append(Prefix__BehaviorDescriptor.beforeText_id8PQYytSnuo.invoke(p));
       tgs.newLine();
@@ -62,6 +68,11 @@ public class GlobalVarDecl_TextGen extends TextGenDescriptorBase {
     }
   }
 
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept ActorScriptGPU$rx = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x52e1a8e2e48dc1a4L, "ActorLanguage.structure.ActorScriptGPU");
+    /*package*/ static final SInterfaceConcept TraceableConcept$L = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a3L, "jetbrains.mps.lang.traceable.structure.TraceableConcept");
+  }
+
   private static final class LINKS {
     /*package*/ static final SContainmentLink init$BXpk = MetaAdapterFactory.getContainmentLink(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x5bbe8a6d23a1b6ceL, 0x2675825a6a4d4c89L, "init");
     /*package*/ static final SContainmentLink type$sXU3 = MetaAdapterFactory.getContainmentLink(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x46a2a92ac61b183L, 0x46a2a92ac61b184L, "type");
@@ -70,9 +81,5 @@ public class GlobalVarDecl_TextGen extends TextGenDescriptorBase {
   private static final class PROPS {
     /*package*/ static final SProperty extern$WI8W = MetaAdapterFactory.getProperty(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x5d18402e8bd5672eL, 0x5d18402e8bd56731L, "extern");
     /*package*/ static final SProperty storeInRegister$k44L = MetaAdapterFactory.getProperty(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x509503be9ecc5d25L, 0x509503be9ecc5d27L, "storeInRegister");
-  }
-
-  private static final class CONCEPTS {
-    /*package*/ static final SInterfaceConcept TraceableConcept$L = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a3L, "jetbrains.mps.lang.traceable.structure.TraceableConcept");
   }
 }

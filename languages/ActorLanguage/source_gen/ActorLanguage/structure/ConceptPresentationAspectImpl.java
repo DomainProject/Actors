@@ -34,6 +34,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_CustomType;
   private ConceptPresentation props_EmptyLine;
   private ConceptPresentation props_Envelope;
+  private ConceptPresentation props_Expent;
   private ConceptPresentation props_ExternalFunction;
   private ConceptPresentation props_ExternalFunctionPrototype;
   private ConceptPresentation props_ExternalType;
@@ -61,6 +62,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_MessageStruct;
   private ConceptPresentation props_OpaqueTypeDeclaration;
   private ConceptPresentation props_Payload;
+  private ConceptPresentation props_Random;
   private ConceptPresentation props_RandomActor;
   private ConceptPresentation props_Receptionist;
   private ConceptPresentation props_ReceptionistPolicy;
@@ -71,6 +73,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_SendMessageToNeighbors;
   private ConceptPresentation props_StartupCode;
   private ConceptPresentation props_StringBody;
+  private ConceptPresentation props_StringValue;
   private ConceptPresentation props_SwitchPolicy;
   private ConceptPresentation props_Window;
 
@@ -264,6 +267,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Envelope = cpb.create();
         }
         return props_Envelope;
+      case LanguageConceptSwitch.Expent:
+        if (props_Expent == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Expent");
+          props_Expent = cpb.create();
+        }
+        return props_Expent;
       case LanguageConceptSwitch.ExternalFunction:
         if (props_ExternalFunction == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -445,6 +455,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Payload = cpb.create();
         }
         return props_Payload;
+      case LanguageConceptSwitch.Random:
+        if (props_Random == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Random");
+          props_Random = cpb.create();
+        }
+        return props_Random;
       case LanguageConceptSwitch.RandomActor:
         if (props_RandomActor == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -516,6 +533,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_StringBody = cpb.create();
         }
         return props_StringBody;
+      case LanguageConceptSwitch.StringValue:
+        if (props_StringValue == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("StringValue");
+          props_StringValue = cpb.create();
+        }
+        return props_StringValue;
       case LanguageConceptSwitch.SwitchPolicy:
         if (props_SwitchPolicy == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();

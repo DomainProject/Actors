@@ -17,26 +17,7 @@ public class CreateEnvelope_TextGen extends TextGenDescriptorBase {
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
-
-
-    tgs.append("Envelope ");
-    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL));
-    tgs.append(" = {");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
-    tgs.indent();
-    tgs.append(".priority = ");
-    tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.priority$YWiN));
-    tgs.append(",");
-    tgs.newLine();
-    tgs.indent();
-    tgs.append(".sender = me");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("};");
-
-
+    Message.createEnvelope(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.name$MnvL), SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.priority$YWiN), ctx);
     if (tgs.needPositions()) {
       tgs.fillPositionInfo(TraceableConcept__BehaviorDescriptor.getTraceableProperty_id4pl5GY7LKmH.invoke(SNodeOperations.cast(ctx.getPrimaryInput(), CONCEPTS.TraceableConcept$L)));
     }

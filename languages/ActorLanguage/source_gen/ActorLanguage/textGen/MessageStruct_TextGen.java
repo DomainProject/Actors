@@ -25,6 +25,15 @@ public class MessageStruct_TextGen extends TextGenDescriptorBase {
     tgs.indent();
     tgs.append("Envelope envelope;");
     tgs.newLine();
+    tgs.indent();
+    tgs.append("uint64_t receiver;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("uint32_t type;");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("double timestamp;");
+    tgs.newLine();
     for (SNode m : ListSequence.fromList(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.members$C59R))) {
       tgs.indent();
       tgs.appendNode(m);
