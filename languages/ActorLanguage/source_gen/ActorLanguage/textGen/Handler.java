@@ -72,11 +72,14 @@ public abstract class Handler {
     tgs.newLine();
     ctx.getBuffer().area().decreaseIndent();
     // todo the seed field should always be named ctx 
-    tgs.indent();
-    tgs.append("initialize_stream(me, &state_to_init->");
-    tgs.append(rngSeedMemberName);
-    tgs.append(");");
-    tgs.newLine();
+    // TODO application specific
+    if (!(SPropertyOperations.getString(SNodeOperations.getNodeAncestor(initHandler, CONCEPTS.ActorScript$nz, false, false), PROPS.name$MnvL).contains("COMPADS"))) {
+      tgs.indent();
+      tgs.append("initialize_stream(me, &state_to_init->");
+      tgs.append(rngSeedMemberName);
+      tgs.append(");");
+      tgs.newLine();
+    }
     tgs.indent();
     tgs.append("SetState(state_to_init);");
     tgs.newLine();

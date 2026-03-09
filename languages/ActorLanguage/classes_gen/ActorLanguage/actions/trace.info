@@ -37,24 +37,23 @@
   </root>
   <root nodeRef="r:4117b66e-6773-4ea8-8d65-4682755ba8ec(ActorLanguage.actions)/5165113600332958187">
     <file name="CreateBehaviorFactory.java">
-      <node id="847996140691583195" at="21,102,22,0" concept="8" />
-      <node id="8603193828700564628" at="22,0,23,81" concept="1" />
-      <node id="8603193828700576315" at="23,81,24,0" concept="8" />
-      <node id="5165113600332958208" at="24,0,25,229" concept="1" />
-      <node id="847996140689590204" at="25,229,26,228" concept="1" />
-      <node id="847996140691245374" at="26,228,27,231" concept="1" />
-      <node id="1983899845787727550" at="27,231,28,0" concept="8" />
-      <node id="2297533189246666436" at="30,89,31,19" concept="0" />
-      <node id="2257009365457577282" at="32,9,33,208" concept="5" />
-      <node id="2257009365457577440" at="33,208,34,85" concept="1" />
-      <node id="2257009365457581544" at="34,85,35,132" concept="1" />
-      <node id="847996140691351197" at="36,7,37,0" concept="8" />
-      <node id="5165113600332976263" at="37,0,38,196" concept="5" />
-      <node id="5165113600332976739" at="38,196,39,69" concept="1" />
-      <node id="5165113600332985634" at="39,69,40,236" concept="1" />
-      <node id="5165113600332989727" at="40,236,41,332" concept="1" />
-      <node id="6212592999536572741" at="41,332,42,111" concept="1" />
-      <node id="2257009365457567202" at="42,111,43,0" concept="8" />
+      <node id="847996140691583195" at="22,102,23,0" concept="8" />
+      <node id="8603193828700564628" at="23,0,24,81" concept="1" />
+      <node id="8603193828700576315" at="24,81,25,0" concept="8" />
+      <node id="5165113600332958208" at="25,0,26,229" concept="1" />
+      <node id="847996140689590204" at="26,229,27,228" concept="1" />
+      <node id="847996140691245374" at="27,228,28,231" concept="1" />
+      <node id="1983899845787727550" at="28,231,29,0" concept="8" />
+      <node id="2297533189246666436" at="31,89,32,19" concept="0" />
+      <node id="2257009365457577282" at="33,9,34,208" concept="5" />
+      <node id="2257009365457577440" at="34,208,35,85" concept="1" />
+      <node id="2257009365457581544" at="35,85,36,132" concept="1" />
+      <node id="847996140691351197" at="37,7,38,0" concept="8" />
+      <node id="5165113600332976263" at="38,0,39,196" concept="5" />
+      <node id="5165113600332976739" at="39,196,40,69" concept="1" />
+      <node id="5165113600332985634" at="40,69,41,236" concept="1" />
+      <node id="5165113600332989727" at="41,236,42,332" concept="1" />
+      <node id="2257009365457567202" at="42,332,43,0" concept="8" />
       <node id="847996140688006983" at="43,0,44,193" concept="5" />
       <node id="847996140688010061" at="44,193,45,63" concept="1" />
       <node id="847996140688022051" at="45,63,46,244" concept="1" />
@@ -62,66 +61,86 @@
       <node id="847996140691257980" at="47,0,48,194" concept="5" />
       <node id="847996140691265559" at="48,194,49,65" concept="1" />
       <node id="847996140691287185" at="49,65,50,237" concept="1" />
-      <node id="847996140688032359" at="50,237,51,0" concept="8" />
-      <node id="5165113600333003092" at="51,0,52,187" concept="1" />
-      <node id="847996140691362738" at="52,187,53,184" concept="1" />
-      <node id="847996140691485816" at="53,184,54,185" concept="1" />
-      <node id="847996140691360934" at="54,185,55,0" concept="8" />
-      <node id="847996140688035282" at="55,0,56,186" concept="1" />
-      <node id="847996140691491996" at="56,186,57,183" concept="1" />
-      <node id="847996140691492007" at="57,183,58,184" concept="1" />
-      <node id="847996140691489510" at="58,184,59,0" concept="8" />
-      <node id="847996140691309590" at="59,0,60,189" concept="1" />
-      <node id="847996140691573054" at="60,189,61,186" concept="1" />
-      <node id="847996140691573065" at="61,186,62,187" concept="1" />
-      <node id="847996140691579318" at="62,187,63,0" concept="8" />
-      <node id="2297533189246666025" at="65,54,66,42" concept="6" />
-      <node id="5165113600332958187" at="71,0,72,0" concept="9" trace="receivedMessageName$AwKe" />
-      <node id="5165113600332958187" at="72,0,73,0" concept="9" trace="name$MnvL" />
-      <node id="5165113600332958187" at="73,0,74,0" concept="9" trace="const$VWr7" />
-      <node id="5165113600332958187" at="77,0,78,0" concept="9" trace="eventHandler$MLkf" />
-      <node id="5165113600332958187" at="78,0,79,0" concept="9" trace="initHandler$1yDf" />
-      <node id="5165113600332958187" at="79,0,80,0" concept="9" trace="cleanupHandler$1ySg" />
-      <node id="5165113600332958187" at="80,0,81,0" concept="9" trace="event$5Bra" />
-      <node id="5165113600332958187" at="81,0,82,0" concept="9" trace="customEventsHandlers$Ugrs" />
-      <node id="5165113600332958187" at="82,0,83,0" concept="9" trace="customEvents$eDRO" />
-      <node id="5165113600332958187" at="83,0,84,0" concept="9" trace="type$sXU3" />
-      <node id="5165113600332958187" at="84,0,85,0" concept="9" trace="baseType$zMGV" />
-      <node id="5165113600332958187" at="85,0,86,0" concept="9" trace="arguments$6da0" />
-      <node id="5165113600332958187" at="89,0,90,0" concept="9" trace="ActorScript$nz" />
-      <node id="5165113600332958187" at="90,0,91,0" concept="9" trace="PointerType$HX" />
-      <node id="2297533189246656412" at="29,171,32,9" concept="3" />
-      <node id="2297533189246666025" at="65,0,68,0" concept="10" trace="isEmptyString#(Ljava/lang/String;)Z" />
-      <node id="2257009365457568253" at="28,0,36,7" concept="2" />
-      <node id="5165113600332958188" at="21,0,65,0" concept="4" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
-      <scope id="2297533189246656414" at="30,89,31,19" />
-      <scope id="2297533189246666025" at="65,54,66,42" />
-      <scope id="2297533189246666025" at="65,0,68,0">
+      <node id="3713858565515893901" at="50,237,51,0" concept="8" />
+      <node id="3713858565515896945" at="51,0,52,194" concept="5" />
+      <node id="3713858565515903917" at="52,194,53,65" concept="1" />
+      <node id="3713858565515916544" at="53,65,54,234" concept="1" />
+      <node id="3713858565515926679" at="54,234,55,341" concept="1" />
+      <node id="847996140688032359" at="55,341,56,0" concept="8" />
+      <node id="5165113600333003092" at="56,0,57,187" concept="1" />
+      <node id="847996140691362738" at="57,187,58,184" concept="1" />
+      <node id="847996140691485816" at="58,184,59,185" concept="1" />
+      <node id="3713858565515984282" at="59,185,60,185" concept="1" />
+      <node id="847996140691360934" at="60,185,61,0" concept="8" />
+      <node id="847996140688035282" at="61,0,62,186" concept="1" />
+      <node id="847996140691491996" at="62,186,63,183" concept="1" />
+      <node id="847996140691492007" at="63,183,64,184" concept="1" />
+      <node id="3713858565515991654" at="64,184,65,184" concept="1" />
+      <node id="847996140691489510" at="65,184,66,0" concept="8" />
+      <node id="847996140691309590" at="66,0,67,189" concept="1" />
+      <node id="847996140691573054" at="67,189,68,186" concept="1" />
+      <node id="847996140691573065" at="68,186,69,187" concept="1" />
+      <node id="3713858565515995358" at="69,187,70,187" concept="1" />
+      <node id="847996140691579318" at="70,187,71,0" concept="8" />
+      <node id="3713858565516000033" at="71,0,72,0" concept="8" />
+      <node id="3713858565516013141" at="73,128,74,191" concept="1" />
+      <node id="3713858565516094135" at="74,191,75,188" concept="1" />
+      <node id="3713858565516094492" at="75,188,76,189" concept="1" />
+      <node id="3713858565516094832" at="76,189,77,189" concept="1" />
+      <node id="2297533189246666025" at="80,54,81,42" concept="6" />
+      <node id="5165113600332958187" at="86,0,87,0" concept="9" trace="receivedMessageName$AwKe" />
+      <node id="5165113600332958187" at="87,0,88,0" concept="9" trace="name$MnvL" />
+      <node id="5165113600332958187" at="91,0,92,0" concept="9" trace="eventHandler$MLkf" />
+      <node id="5165113600332958187" at="92,0,93,0" concept="9" trace="initHandler$1yDf" />
+      <node id="5165113600332958187" at="93,0,94,0" concept="9" trace="cleanupHandler$1ySg" />
+      <node id="5165113600332958187" at="94,0,95,0" concept="9" trace="event$5Bra" />
+      <node id="5165113600332958187" at="95,0,96,0" concept="9" trace="customEventsHandlers$Ugrs" />
+      <node id="5165113600332958187" at="96,0,97,0" concept="9" trace="customEvents$eDRO" />
+      <node id="5165113600332958187" at="97,0,98,0" concept="9" trace="type$sXU3" />
+      <node id="5165113600332958187" at="98,0,99,0" concept="9" trace="baseType$zMGV" />
+      <node id="5165113600332958187" at="99,0,100,0" concept="9" trace="messageDefinition$$rsX" />
+      <node id="5165113600332958187" at="100,0,101,0" concept="9" trace="arguments$6da0" />
+      <node id="5165113600332958187" at="101,0,102,0" concept="9" trace="function$8k$G" />
+      <node id="5165113600332958187" at="105,0,106,0" concept="9" trace="ActorScript$nz" />
+      <node id="5165113600332958187" at="106,0,107,0" concept="9" trace="PointerType$HX" />
+      <node id="2297533189246656412" at="30,171,33,9" concept="3" />
+      <node id="2297533189246666025" at="80,0,83,0" concept="10" trace="isEmptyString#(Ljava/lang/String;)Z" />
+      <node id="3713858565516004024" at="72,0,78,7" concept="2" />
+      <node id="2257009365457568253" at="29,0,37,7" concept="2" />
+      <node id="5165113600332958188" at="22,0,80,0" concept="4" trace="setup#(Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;Lorg/jetbrains/mps/openapi/model/SNode;ILorg/jetbrains/mps/openapi/model/SModel;)V" />
+      <scope id="2297533189246656414" at="31,89,32,19" />
+      <scope id="2297533189246666025" at="80,54,81,42" />
+      <scope id="2297533189246666025" at="80,0,83,0">
         <var name="str" id="2297533189246666025" />
       </scope>
-      <scope id="2257009365457568259" at="29,171,35,132">
+      <scope id="3713858565516004030" at="73,128,77,189" />
+      <scope id="2257009365457568259" at="30,171,36,132">
         <var name="customEventHandler" id="2257009365457577285" />
       </scope>
-      <scope id="2257009365457568253" at="28,0,36,7">
+      <scope id="3713858565516004024" at="72,0,78,7">
+        <var name="customHandler" id="3713858565516004026" />
+      </scope>
+      <scope id="2257009365457568253" at="29,0,37,7">
         <var name="customEvent" id="2257009365457568255" />
       </scope>
-      <scope id="5165113600332958188" at="21,102,63,0">
+      <scope id="5165113600332958188" at="22,102,78,7">
         <var name="meArg" id="847996140688006986" />
+        <var name="msgArg" id="3713858565515896948" />
         <var name="nowArg" id="847996140691257983" />
         <var name="stateArg" id="5165113600332976266" />
       </scope>
-      <scope id="5165113600332958188" at="21,0,65,0">
+      <scope id="5165113600332958188" at="22,0,80,0">
         <var name="enclosingNode" id="5165113600332958188" />
         <var name="index" id="5165113600332958188" />
         <var name="model" id="5165113600332958188" />
         <var name="newNode" id="5165113600332958188" />
         <var name="sampleNode" id="5165113600332958188" />
       </scope>
-      <unit id="5165113600332958187" at="88,0,92,0" name="ActorLanguage.actions.CreateBehaviorFactory$CONCEPTS" />
-      <unit id="5165113600332958187" at="70,0,75,0" name="ActorLanguage.actions.CreateBehaviorFactory$PROPS" />
-      <unit id="5165113600332958187" at="76,0,87,0" name="ActorLanguage.actions.CreateBehaviorFactory$LINKS" />
-      <unit id="5165113600332958188" at="20,0,69,0" name="ActorLanguage.actions.CreateBehaviorFactory$NodeFactory_5165113600332958188" />
-      <unit id="5165113600332958187" at="19,0,93,0" name="ActorLanguage.actions.CreateBehaviorFactory" />
+      <unit id="5165113600332958187" at="85,0,89,0" name="ActorLanguage.actions.CreateBehaviorFactory$PROPS" />
+      <unit id="5165113600332958187" at="104,0,108,0" name="ActorLanguage.actions.CreateBehaviorFactory$CONCEPTS" />
+      <unit id="5165113600332958187" at="90,0,103,0" name="ActorLanguage.actions.CreateBehaviorFactory$LINKS" />
+      <unit id="5165113600332958188" at="21,0,84,0" name="ActorLanguage.actions.CreateBehaviorFactory$NodeFactory_5165113600332958188" />
+      <unit id="5165113600332958187" at="20,0,109,0" name="ActorLanguage.actions.CreateBehaviorFactory" />
     </file>
   </root>
   <root nodeRef="r:4117b66e-6773-4ea8-8d65-4682755ba8ec(ActorLanguage.actions)/6739934483259132150">

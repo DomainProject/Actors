@@ -10,8 +10,8 @@
     <import index="wyt6" ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065/java:java.lang(JDK/)" />
     <import index="c4fa" ref="r:9f0e84b6-2ec7-4f9e-83e0-feedc77b63a3(com.mbeddr.core.statements.structure)" implicit="true" />
     <import index="tpck" ref="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" implicit="true" />
-    <import index="x27k" ref="r:75ecab8a-8931-4140-afc6-4b46398710fc(com.mbeddr.core.modules.structure)" implicit="true" />
     <import index="mj1l" ref="r:c371cf98-dcc8-4a43-8eb8-8a8096de18b2(com.mbeddr.core.expressions.structure)" implicit="true" />
+    <import index="x27k" ref="r:75ecab8a-8931-4140-afc6-4b46398710fc(com.mbeddr.core.modules.structure)" implicit="true" />
     <import index="clbe" ref="r:61d840b4-12c1-49ea-b142-b2a1550a9b15(com.mbeddr.core.udt.structure)" implicit="true" />
   </imports>
   <registry>
@@ -112,6 +112,12 @@
       <property role="20kJfa" value="envelope" />
       <ref role="20lvS9" node="1enjyq1krxl" resolve="Envelope" />
     </node>
+    <node concept="1TJgyj" id="7m82ZvrpGBl" role="1TKVEi">
+      <property role="IQ2ns" value="8469032258435992021" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="arraySize" />
+      <ref role="20lvS9" to="mj1l:7FQByU3CrCM" resolve="Expression" />
+    </node>
     <node concept="PrWs8" id="3y5SEGa8Es" role="PzmwI">
       <ref role="PrY4T" node="3y5SEGa8Ep" resolve="InitializerAction" />
     </node>
@@ -125,6 +131,11 @@
       <property role="IQ2ns" value="8603193828694661130" />
       <property role="20kJfa" value="event" />
       <ref role="20lvS9" node="1XiwwXap296" resolve="CustomEvent" />
+    </node>
+    <node concept="1TJgyi" id="4IAND1eD4ZR" role="1TKVEl">
+      <property role="IQ2nx" value="5451271518168567799" />
+      <property role="TrG5h" value="eventName" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
     </node>
   </node>
   <node concept="1TIwiD" id="3m_VcJMWzdQ">
@@ -394,11 +405,12 @@
     <property role="3GE5qa" value="payload" />
     <property role="TrG5h" value="SelectPayload" />
     <ref role="1TJDcQ" node="1enjyq1kxmg" resolve="Payload" />
-    <node concept="1TJgyj" id="4posSimMjEh" role="1TKVEi">
-      <property role="IQ2ns" value="5068928393908140689" />
+    <node concept="1TJgyj" id="7m82ZvrxvCG" role="1TKVEi">
+      <property role="IQ2ns" value="8469032258438036012" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="payload" />
       <property role="20lbJX" value="fLJekj4/_1" />
-      <ref role="20lvS9" to="mj1l:1LDGRqyYkTP" resolve="IVariableDeclaration" />
+      <ref role="20lvS9" to="mj1l:7FQByU3CrCM" resolve="Expression" />
     </node>
   </node>
   <node concept="1TIwiD" id="6F9Ho3O8bVn">
@@ -512,7 +524,7 @@
     <property role="3GE5qa" value="payload" />
     <property role="R5$K7" value="true" />
     <property role="TrG5h" value="Payload" />
-    <ref role="1TJDcQ" to="c4fa:3CmSUB7FmO3" resolve="Statement" />
+    <ref role="1TJDcQ" to="mj1l:7FQByU3CrCM" resolve="Expression" />
     <node concept="PrWs8" id="3y5SEGa8Ew" role="PzmwI">
       <ref role="PrY4T" node="3y5SEGa8Ep" resolve="InitializerAction" />
     </node>
@@ -853,6 +865,11 @@
       <property role="TrG5h" value="priority" />
       <ref role="AX2Wp" to="tpee:gc$lTUB" resolve="_FPNumber_String" />
     </node>
+    <node concept="1TJgyi" id="4IAND1eDh4a" role="1TKVEl">
+      <property role="IQ2nx" value="5451271518168617226" />
+      <property role="TrG5h" value="eventName" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
+    </node>
     <node concept="1TJgyj" id="3eevqy$NH7s" role="1TKVEi">
       <property role="IQ2ns" value="3715044905900233180" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
@@ -864,6 +881,12 @@
       <property role="IQ2ns" value="5972240273326245249" />
       <property role="20lmBu" value="fLJjDmT/aggregation" />
       <property role="20kJfa" value="when" />
+      <ref role="20lvS9" to="mj1l:7FQByU3CrCM" resolve="Expression" />
+    </node>
+    <node concept="1TJgyj" id="7m82ZvrSyFt" role="1TKVEi">
+      <property role="IQ2ns" value="8469032258444077789" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="arraySize" />
       <ref role="20lvS9" to="mj1l:7FQByU3CrCM" resolve="Expression" />
     </node>
     <node concept="PrWs8" id="1I8eAo9_Ous" role="PzmwI">
@@ -1197,6 +1220,11 @@
       <property role="IQ2ns" value="4185783222026475860" />
       <ref role="20lvS9" to="c4fa:3CmSUB7Fp_l" resolve="StatementList" />
     </node>
+    <node concept="1TJgyi" id="4IAND1dERzQ" role="1TKVEl">
+      <property role="IQ2nx" value="5451271518152259830" />
+      <property role="TrG5h" value="eventName" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
+    </node>
   </node>
   <node concept="1TIwiD" id="1I8eAob$7vQ">
     <property role="EcuMT" value="1983899845811795958" />
@@ -1249,6 +1277,23 @@
       <property role="20kJfa" value="mean" />
       <property role="20lbJX" value="fLJekj4/_1" />
       <ref role="20lvS9" to="mj1l:7FQByU3CrCM" resolve="Expression" />
+    </node>
+  </node>
+  <node concept="1TIwiD" id="Jj6lbDt09L">
+    <property role="EcuMT" value="852052598397862513" />
+    <property role="3GE5qa" value="payload" />
+    <property role="TrG5h" value="NullPayload" />
+    <ref role="1TJDcQ" node="1enjyq1kxmg" resolve="Payload" />
+  </node>
+  <node concept="1TIwiD" id="4IAND1fjnJV">
+    <property role="EcuMT" value="5451271518179654651" />
+    <property role="3GE5qa" value="actions" />
+    <property role="TrG5h" value="Print" />
+    <ref role="1TJDcQ" to="c4fa:3CmSUB7FmO3" resolve="Statement" />
+    <node concept="1TJgyi" id="4IAND1fjnJW" role="1TKVEl">
+      <property role="IQ2nx" value="5451271518179654652" />
+      <property role="TrG5h" value="string" />
+      <ref role="AX2Wp" to="tpck:fKAOsGN" resolve="string" />
     </node>
   </node>
 </model>

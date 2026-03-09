@@ -9,8 +9,12 @@ import jetbrains.mps.typesystem.inference.TypeCheckingContext;
 import jetbrains.mps.lang.typesystem.runtime.IsApplicableStatus;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import com.mbeddr.core.expressions.behavior.IVariableDeclaration__BehaviorDescriptor;
+import jetbrains.mps.baseLanguage.closures.runtime.Wrappers;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import ActorLanguage.behavior.Payload__BehaviorDescriptor;
+import com.mbeddr.core.expressions.behavior.IVariableDeclaration__BehaviorDescriptor;
+import com.mbeddr.core.expressions.behavior.IVariableReference__BehaviorDescriptor;
 import java.util.List;
 import java.util.ArrayList;
 import jetbrains.mps.internal.collections.runtime.Sequence;
@@ -22,19 +26,40 @@ import jetbrains.mps.errors.messageTargets.NodeMessageTarget;
 import jetbrains.mps.errors.IErrorReporter;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
 public class check_CreateMessage_NonTypesystemRule extends AbstractNonTypesystemRule_Runtime implements NonTypesystemRule_Runtime {
   public check_CreateMessage_NonTypesystemRule() {
   }
   public void applyRule(final SNode createMessage, final TypeCheckingContext typeCheckingContext, IsApplicableStatus status) {
 
-    if (SNodeOperations.hasRole(createMessage, LINKS.receivedMessage$DtsG) || SNodeOperations.isInstanceOf(SLinkOperations.getTarget(createMessage, LINKS.payload$N_RC), CONCEPTS.CreatePayload$Pf)) {
+    if (SNodeOperations.hasRole(createMessage, LINKS.receivedMessage$DtsG) || SNodeOperations.isInstanceOf(SLinkOperations.getTarget(createMessage, LINKS.payload$N_RC), CONCEPTS.CreatePayload$Pf) || SNodeOperations.isInstanceOf(SLinkOperations.getTarget(createMessage, LINKS.payload$N_RC), CONCEPTS.NullPayload$JN)) {
       return;
     }
 
-    final SNode payloadType = IVariableDeclaration__BehaviorDescriptor.getDeclaredType_id1LDGRqyYkTX.invoke(Payload__BehaviorDescriptor.getPayload_id1I8eAobiPlC.invoke(SLinkOperations.getTarget(createMessage, LINKS.payload$N_RC)));
+    final Wrappers._T<SNode> payloadType = new Wrappers._T<SNode>(SConceptOperations.createNewNode(SNodeOperations.asInstanceConcept(MetaAdapterFactory.getInterfaceConcept(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x11f8a0774f2L, "jetbrains.mps.lang.core.structure.IType"))));
+    {
+      final SNode varDecl = Payload__BehaviorDescriptor.getPayload_id1I8eAobiPlC.invoke(SLinkOperations.getTarget(createMessage, LINKS.payload$N_RC));
+      if (SNodeOperations.isInstanceOf(varDecl, CONCEPTS.IVariableDeclaration$O)) {
+        payloadType.value = IVariableDeclaration__BehaviorDescriptor.getDeclaredType_id1LDGRqyYkTX.invoke(varDecl);
+      }
+    }
+    {
+      final SNode gde = Payload__BehaviorDescriptor.getPayload_id1I8eAobiPlC.invoke(SLinkOperations.getTarget(createMessage, LINKS.payload$N_RC));
+      if (SNodeOperations.isInstanceOf(gde, CONCEPTS.GenericDotExpression$uQ)) {
+        payloadType.value = SLinkOperations.getTarget(SLinkOperations.getTarget(SNodeOperations.cast(SLinkOperations.getTarget(gde, LINKS.target$CEPF), CONCEPTS.GenericMemberRef$bk), LINKS.member$wUNL), LINKS.type$sXU3);
+      }
+    }
+    {
+      final SNode gde = Payload__BehaviorDescriptor.getPayload_id1I8eAobiPlC.invoke(SLinkOperations.getTarget(createMessage, LINKS.payload$N_RC));
+      if (SNodeOperations.isInstanceOf(gde, CONCEPTS.IVariableReference$WR)) {
+        payloadType.value = IVariableDeclaration__BehaviorDescriptor.getDeclaredType_id1LDGRqyYkTX.invoke(IVariableReference__BehaviorDescriptor.getVariable_id1LDGRqyQFAf.invoke(gde));
+      }
+    }
+
+
     SNode messageStruct = SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(createMessage, CONCEPTS.ActorScript$nz, false, false), LINKS.messageDefinition$$rsX);
 
     List<SNode> messageTypes = new ArrayList<SNode>();
@@ -42,8 +67,8 @@ public class check_CreateMessage_NonTypesystemRule extends AbstractNonTypesystem
       ListSequence.fromList(messageTypes).addElement(SLinkOperations.getTarget(m, LINKS.type$sXU3));
     }
 
-    if ((ListSequence.fromList(messageTypes).findFirst((it) -> Objects.equals(SNodeOperations.getConcept(it), SNodeOperations.getConcept(payloadType))) == null)) {
-      String errorString = "Element of type " + BaseConcept__BehaviorDescriptor.getDetailedPresentation_id22G2W3WJ92t.invoke(payloadType) + "not found in struct message definition";
+    if ((ListSequence.fromList(messageTypes).findFirst((it) -> Objects.equals(SNodeOperations.getConcept(it), SNodeOperations.getConcept(payloadType.value))) == null)) {
+      String errorString = "Element of type " + BaseConcept__BehaviorDescriptor.getDetailedPresentation_id22G2W3WJ92t.invoke(payloadType.value) + " not found in struct message definition";
       {
         final MessageTarget errorTarget = new NodeMessageTarget();
         IErrorReporter _reporter_2309309498 = typeCheckingContext.reportTypeError(createMessage, errorString, "r:258f263b-4e20-423c-a240-35e904c3f14e(ActorLanguage.typesystem)", "1983899845828605224", null, errorTarget);
@@ -61,15 +86,22 @@ public class check_CreateMessage_NonTypesystemRule extends AbstractNonTypesystem
   }
 
   private static final class LINKS {
-    /*package*/ static final SContainmentLink receivedMessage$DtsG = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5ef413f8f5ff2c54L, "receivedMessage");
     /*package*/ static final SContainmentLink payload$N_RC = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x9de89b125a71571L, "payload");
-    /*package*/ static final SContainmentLink messageDefinition$$rsX = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x1b883a660b9077f5L, "messageDefinition");
+    /*package*/ static final SContainmentLink receivedMessage$DtsG = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5ef413f8f5ff2c54L, "receivedMessage");
+    /*package*/ static final SContainmentLink target$CEPF = MetaAdapterFactory.getContainmentLink(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x401df715da462c0cL, 0x619e8ce80b7ff48bL, "target");
+    /*package*/ static final SReferenceLink member$wUNL = MetaAdapterFactory.getReferenceLink(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x619e8ce80b8d18e4L, 0x619e8ce80b8d18e6L, "member");
     /*package*/ static final SContainmentLink type$sXU3 = MetaAdapterFactory.getContainmentLink(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x46a2a92ac61b183L, 0x46a2a92ac61b184L, "type");
+    /*package*/ static final SContainmentLink messageDefinition$$rsX = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x1b883a660b9077f5L, "messageDefinition");
     /*package*/ static final SContainmentLink members$C59R = MetaAdapterFactory.getContainmentLink(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x6285e27d4ff6c9f5L, 0x6285e27d4ff7db92L, "members");
   }
 
   private static final class CONCEPTS {
+    /*package*/ static final SConcept NullPayload$JN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbd31952e9740271L, "ActorLanguage.structure.NullPayload");
     /*package*/ static final SConcept CreatePayload$Pf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, "ActorLanguage.structure.CreatePayload");
+    /*package*/ static final SInterfaceConcept IVariableDeclaration$O = MetaAdapterFactory.getInterfaceConcept(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x1c69b376a2f94e75L, "com.mbeddr.core.expressions.structure.IVariableDeclaration");
+    /*package*/ static final SConcept GenericDotExpression$uQ = MetaAdapterFactory.getConcept(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x401df715da462c0cL, "com.mbeddr.core.expressions.structure.GenericDotExpression");
+    /*package*/ static final SConcept GenericMemberRef$bk = MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x619e8ce80b8d18e4L, "com.mbeddr.core.udt.structure.GenericMemberRef");
+    /*package*/ static final SInterfaceConcept IVariableReference$WR = MetaAdapterFactory.getInterfaceConcept(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x1c69b376a2dab98aL, "com.mbeddr.core.expressions.structure.IVariableReference");
     /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
     /*package*/ static final SConcept Member$J1 = MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x51a277741cc50918L, "com.mbeddr.core.udt.structure.Member");
     /*package*/ static final SConcept CreateMessage$aX = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage");

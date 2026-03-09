@@ -9,31 +9,18 @@ import jetbrains.mps.smodel.runtime.ConstraintContext_CanBeChild;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.smodel.runtime.CheckingNodeContext;
-import jetbrains.mps.smodel.runtime.base.BaseReferenceConstraintsDescriptor;
-import jetbrains.mps.smodel.runtime.ConstraintsDescriptor;
-import jetbrains.mps.smodel.runtime.ReferenceScopeProvider;
-import jetbrains.mps.smodel.runtime.base.BaseScopeProvider;
-import org.jetbrains.mps.openapi.model.SNodeReference;
-import jetbrains.mps.smodel.SNodePointer;
-import jetbrains.mps.scope.Scope;
-import jetbrains.mps.smodel.runtime.ReferenceConstraintsContext;
-import java.util.List;
 import org.jetbrains.mps.openapi.model.SNode;
-import java.util.ArrayList;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
-import jetbrains.mps.internal.collections.runtime.ListSequence;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
-import jetbrains.mps.scope.ListScope;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
-import org.jetbrains.mps.openapi.language.SReferenceLink;
 
 public class SelectPayload_Constraints extends BaseConstraintsDescriptor {
   /*package*/ SelectPayload_Constraints(ConstraintsDescriptorInitContext initContext) {
     super(CONCEPTS.SelectPayload$Hf, initContext);
-    record(new RD1(this));
     setCanBeChildConstraint(new ConstraintFunction<ConstraintContext_CanBeChild, Boolean>() {
       @NotNull
       public Boolean invoke(@NotNull ConstraintContext_CanBeChild context, @Nullable CheckingNodeContext checkingNodeContext) {
@@ -48,35 +35,6 @@ public class SelectPayload_Constraints extends BaseConstraintsDescriptor {
     });
   }
 
-  /*package*/ static final class RD1 extends BaseReferenceConstraintsDescriptor {
-    /*package*/ RD1(ConstraintsDescriptor container) {
-      super(LINKS.payload$ZT3H, container, true, false);
-    }
-    @Nullable
-    @Override
-    public ReferenceScopeProvider getScopeProvider() {
-      return new BaseScopeProvider() {
-        @Override
-        public SNodeReference getSearchScopeValidatorNode() {
-          return new SNodePointer("r:ae140228-36a4-4270-a859-e66d990ac219(ActorLanguage.constraints)", "5068928393908488180");
-        }
-        @Override
-        public Scope createScope(final ReferenceConstraintsContext _context) {
-          List<SNode> payloads = new ArrayList<SNode>();
-
-          SNode handlerAncestor = (SNodeOperations.isInstanceOf(SNodeOperations.getParent(_context.getContextNode()), CONCEPTS.Handler$Y4) ? SNodeOperations.cast(SNodeOperations.getParent(_context.getContextNode()), CONCEPTS.Handler$Y4) : SNodeOperations.getNodeAncestor(_context.getContextNode(), CONCEPTS.Handler$Y4, false, false));
-
-          SNode behaviorAncestor = (SNodeOperations.isInstanceOf(SNodeOperations.getParent(_context.getContextNode()), CONCEPTS.CreateBehavior$iN) ? SNodeOperations.cast(SNodeOperations.getParent(_context.getContextNode()), CONCEPTS.CreateBehavior$iN) : SNodeOperations.getNodeAncestor(_context.getContextNode(), CONCEPTS.CreateBehavior$iN, false, false));
-
-          ListSequence.fromList(payloads).addSequence(ListSequence.fromList(SNodeOperations.getNodeDescendants(handlerAncestor, CONCEPTS.CreatePayload$Pf, false, new SAbstractConcept[]{})));
-          ListSequence.fromList(payloads).addSequence(ListSequence.fromList(SNodeOperations.getNodeDescendants(behaviorAncestor, CONCEPTS.CreatePayload$Pf, false, new SAbstractConcept[]{})));
-          ListSequence.fromList(payloads).addSequence(ListSequence.fromList(SNodeOperations.getNodeDescendants(handlerAncestor, CONCEPTS.IVariableDeclaration$O, false, new SAbstractConcept[]{})).where((it) -> !(SNodeOperations.isInstanceOf(it, CONCEPTS.Argument$9m))));
-
-          return ListScope.forNamedElements(payloads);
-        }
-      };
-    }
-  }
   private static boolean staticCanBeAChild(SNode node, SNode parentNode, SAbstractConcept childConcept, SContainmentLink link) {
     return SNodeOperations.isInstanceOf(parentNode, CONCEPTS.IMessageCreation$ll);
   }
@@ -84,15 +42,6 @@ public class SelectPayload_Constraints extends BaseConstraintsDescriptor {
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept SelectPayload$Hf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L, "ActorLanguage.structure.SelectPayload");
-    /*package*/ static final SConcept Handler$Y4 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, "ActorLanguage.structure.Handler");
-    /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
-    /*package*/ static final SConcept CreatePayload$Pf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, "ActorLanguage.structure.CreatePayload");
-    /*package*/ static final SInterfaceConcept IVariableDeclaration$O = MetaAdapterFactory.getInterfaceConcept(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x1c69b376a2f94e75L, "com.mbeddr.core.expressions.structure.IVariableDeclaration");
-    /*package*/ static final SConcept Argument$9m = MetaAdapterFactory.getConcept(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x6d872ef9245a20d7L, "com.mbeddr.core.modules.structure.Argument");
     /*package*/ static final SInterfaceConcept IMessageCreation$ll = MetaAdapterFactory.getInterfaceConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a660997479aL, "ActorLanguage.structure.IMessageCreation");
-  }
-
-  private static final class LINKS {
-    /*package*/ static final SReferenceLink payload$ZT3H = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L, 0x4658738496c93a91L, "payload");
   }
 }

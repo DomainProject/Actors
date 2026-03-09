@@ -6,12 +6,26 @@ import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import ActorLanguage.behavior.Envelope__BehaviorDescriptor;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import ActorLanguage.behavior.IState__BehaviorDescriptor;
+import jetbrains.mps.internal.collections.runtime.Sequence;
 import org.jetbrains.mps.openapi.language.SProperty;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
+import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SReferenceLink;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
 public abstract class Message {
-  public static void sendMessage(String messageName, String receiverName, SNode when, SNode event, boolean cpu, final TextGenContext ctx) {
+  public static void sendMessage(SNode msg, SNode when, boolean cpu, final SNode behavior, final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
+
+    String messageName = SPropertyOperations.getString(msg, PROPS.name$MnvL);
+    String receiverName = SPropertyOperations.getString(Envelope__BehaviorDescriptor.getEnvelope_id5bxEeb_cNb0.invoke(SLinkOperations.getTarget(msg, LINKS.envelope$eoPh)), PROPS.receiverName$sscf);
+    String eventName = SPropertyOperations.getString(msg, PROPS.eventName$ylB4);
+
     if (cpu) {
 
       tgs.append("ScheduleNewEvent(");
@@ -23,16 +37,23 @@ public abstract class Message {
         tgs.appendNode(when);
       }
       tgs.append(", ");
-      if ((event == null)) {
+      if ((eventName == null || eventName.length() == 0)) {
         tgs.append("EVENT");
       } else {
-        tgs.appendNode(event);
+        tgs.append(eventName);
       }
-      tgs.append(", &");
-      tgs.append(messageName);
-      tgs.append(", sizeof(Message));");
+      if (SNodeOperations.isInstanceOf(SLinkOperations.getTarget(msg, LINKS.payload$N_RC), CONCEPTS.NullPayload$JN)) {
+        tgs.append(", NULL, 0);");
+      } else {
+        tgs.append(", &");
+        tgs.append(messageName);
+        tgs.append(", sizeof(Message));");
+      }
 
     } else {
+
+      // todo this may not be unique
+      String resultName = "append_res";
 
       tgs.append(messageName);
       tgs.append(".receiver = ");
@@ -49,7 +70,7 @@ public abstract class Message {
       tgs.append(messageName);
       tgs.append(".sender = me;");
       tgs.newLine();
-      if ((event == null)) {
+      if ((eventName == null || eventName.length() == 0)) {
         tgs.indent();
         tgs.append(messageName);
         tgs.append(".type = EVENT;");
@@ -58,15 +79,57 @@ public abstract class Message {
         tgs.indent();
         tgs.append(messageName);
         tgs.append(".type = ");
-        tgs.append(SPropertyOperations.getString(event, PROPS.name$MnvL));
+        tgs.append(eventName);
         tgs.append(";");
         tgs.newLine();
       }
       tgs.indent();
-      tgs.append("append_event_to_queue(&");
+      tgs.append("char ");
+      tgs.append(resultName);
+      tgs.append(" = append_event_to_queue(&");
       tgs.append(messageName);
       tgs.append(");");
       tgs.newLine();
+
+      // if result is 0, the old state must be restored and the function must return 11 (only for handlers != LP_INIT handler)
+      if (!(SNodeOperations.hasRole(SNodeOperations.getNodeAncestor(when, CONCEPTS.Handler$Y4, false, false), LINKS.initHandler$1yDf))) {
+        SNode stateStruct = IState__BehaviorDescriptor.getStructDeclaration_id7t$FNisxQwi.invoke(SLinkOperations.getTarget(Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(SNodeOperations.cast(SNodeOperations.getParent(behavior), CONCEPTS.ActorScript$nz), LINKS.actorCreation$EA0a), CONCEPTS.ICreateActor$Ng)).findFirst((it) -> SLinkOperations.getTarget(it, LINKS.behavior$1pSN) == behavior), LINKS.stateType$2Mnh));
+
+        tgs.indent();
+        tgs.append("if (");
+        tgs.append(resultName);
+        tgs.append(" == 0) {");
+        tgs.newLine();
+        ctx.getBuffer().area().increaseIndent();
+        tgs.indent();
+        tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+        tgs.append("_nodes.cr_state[me] = ");
+        tgs.append(SPropertyOperations.getString(behavior, PROPS.name$MnvL));
+        tgs.append("_old_state.cr_state;");
+        tgs.newLine();
+        for (SNode m : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(stateStruct, LINKS.members$C59R), CONCEPTS.Member$J1))) {
+          if (SNodeOperations.isInstanceOf(SLinkOperations.getTarget(m, LINKS.type$sXU3), CONCEPTS.StructType$B3) && SPropertyOperations.getString(SLinkOperations.getTarget(SNodeOperations.cast(SLinkOperations.getTarget(m, LINKS.type$sXU3), CONCEPTS.StructType$B3), LINKS.struct$WCsg), PROPS.name$MnvL).equals("rng_t")) {
+            continue;
+          }
+          tgs.indent();
+          tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
+          tgs.append("_nodes.");
+          tgs.append(SPropertyOperations.getString(m, PROPS.name$MnvL));
+          tgs.append("[me] = ");
+          tgs.append(SPropertyOperations.getString(behavior, PROPS.name$MnvL));
+          tgs.append("_old_state.");
+          tgs.append(SPropertyOperations.getString(m, PROPS.name$MnvL));
+          tgs.append(";");
+          tgs.newLine();
+        }
+        tgs.indent();
+        tgs.append("return 11;");
+        tgs.newLine();
+        ctx.getBuffer().area().decreaseIndent();
+        tgs.indent();
+        tgs.append("}");
+        tgs.newLine();
+      }
 
     }
   }
@@ -89,7 +152,7 @@ public abstract class Message {
     tgs.indent();
     tgs.append("};");
   }
-  public static void createMessage(String messageStructName, String messageName, String envelopeName, String payloadMemberName, String payloadName, final TextGenContext ctx) {
+  public static void createMessage(String messageStructName, String messageName, String envelopeName, String payloadMemberName, String payloadName, SNode size, final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.append(messageStructName);
     tgs.append(" ");
@@ -102,7 +165,7 @@ public abstract class Message {
     tgs.append(envelopeName);
     tgs.append(",");
     tgs.newLine();
-    if ((payloadMemberName != null && payloadMemberName.length() > 0)) {
+    if ((payloadMemberName != null && payloadMemberName.length() > 0) && (size == null)) {
       tgs.indent();
       tgs.append(".");
       tgs.append(payloadMemberName);
@@ -114,9 +177,61 @@ public abstract class Message {
     tgs.indent();
     tgs.append("};");
     tgs.newLine();
+
+    if ((size != null)) {
+      tgs.indent();
+      tgs.append("for (int i = 0; i < ");
+      tgs.appendNode(size);
+      tgs.append("; i++) {");
+      tgs.newLine();
+      ctx.getBuffer().area().increaseIndent();
+      tgs.indent();
+      tgs.append(messageName);
+      tgs.append(".");
+      tgs.append(payloadMemberName);
+      tgs.append("[i] = ");
+      tgs.append(payloadName);
+      tgs.append("[i];");
+      tgs.newLine();
+      ctx.getBuffer().area().decreaseIndent();
+      tgs.indent();
+      tgs.append("}");
+      tgs.newLine();
+      tgs.indent();
+      tgs.append(messageName);
+      tgs.append(".");
+      tgs.append(payloadMemberName);
+      tgs.append("_size = ");
+      tgs.appendNode(size);
+      tgs.append(";");
+      tgs.newLine();
+    }
   }
 
   private static final class PROPS {
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
+    /*package*/ static final SProperty receiverName$sscf = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e268151b855L, 0x49203814fba1c063L, "receiverName");
+    /*package*/ static final SProperty eventName$ylB4 = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x4ba6ce904ea44ff7L, "eventName");
+  }
+
+  private static final class LINKS {
+    /*package*/ static final SContainmentLink envelope$eoPh = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x2d5fc2c1e9650052L, "envelope");
+    /*package*/ static final SContainmentLink payload$N_RC = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x9de89b125a71571L, "payload");
+    /*package*/ static final SContainmentLink actorCreation$EA0a = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x35a5eccbf2f23377L, "actorCreation");
+    /*package*/ static final SReferenceLink behavior$1pSN = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x344e3e3ed823c988L, "behavior");
+    /*package*/ static final SReferenceLink stateType$2Mnh = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, 0x47ae2b741b264b71L, "stateType");
+    /*package*/ static final SContainmentLink type$sXU3 = MetaAdapterFactory.getContainmentLink(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x46a2a92ac61b183L, 0x46a2a92ac61b184L, "type");
+    /*package*/ static final SReferenceLink struct$WCsg = MetaAdapterFactory.getReferenceLink(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x58bef62304fc0a38L, 0x58bef62304fc0a39L, "struct");
+    /*package*/ static final SContainmentLink members$C59R = MetaAdapterFactory.getContainmentLink(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x6285e27d4ff6c9f5L, 0x6285e27d4ff7db92L, "members");
+    /*package*/ static final SContainmentLink initHandler$1yDf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31cL, "initHandler");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept NullPayload$JN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbd31952e9740271L, "ActorLanguage.structure.NullPayload");
+    /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
+    /*package*/ static final SInterfaceConcept ICreateActor$Ng = MetaAdapterFactory.getInterfaceConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884ef595cdL, "ActorLanguage.structure.ICreateActor");
+    /*package*/ static final SConcept StructType$B3 = MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x58bef62304fc0a38L, "com.mbeddr.core.udt.structure.StructType");
+    /*package*/ static final SConcept Member$J1 = MetaAdapterFactory.getConcept(0xefda956e491e4f00L, 0xba1436af2f213ecfL, 0x51a277741cc50918L, "com.mbeddr.core.udt.structure.Member");
+    /*package*/ static final SConcept Handler$Y4 = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, "ActorLanguage.structure.Handler");
   }
 }

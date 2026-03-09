@@ -111,7 +111,7 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
     }
 
     for (SNode stateStruct : ListSequence.fromList(stateStructs)) {
-      // define state struct
+      // The state is a struct struct that is specified in the DSL and defined in the actor model by means of the M2M transformation. It represents how the state of an actor is modeled (dynamic set of information associated to each actor)
       tgs.append("typedef struct {");
       tgs.newLine();
       ctx.getBuffer().area().increaseIndent();
@@ -128,6 +128,12 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
       tgs.append(";");
       tgs.newLine();
       tgs.newLine();
+
+
+      /*
+        note that the GPU runtime environment requires to preallocate state and messages for each LP. In the CPU runtime environment this is not required
+
+      */
 
       tgs.append("typedef struct {");
       tgs.newLine();
@@ -151,26 +157,7 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
       tgs.newLine();
     }
 
-
-    /*
-      CONFIGURATION (global constants + global variables)
-
-    */
-
-    for (SNode item : SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.configuration$6ery), CONCEPTS.GlobalConstant$pG)) {
-      tgs.appendNode(item);
-    }
-    tgs.newLine();
-    tgs.append("__device__ static uint population;");
-    tgs.newLine();
-    for (SNode item : SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.configuration$6ery), CONCEPTS.GlobalVarDecl$3_)) {
-      tgs.appendNode(item);
-    }
-    tgs.newLine();
-    tgs.append("extern uint events_per_node;\nextern __device__ EQs\teq;\nextern \"C\" uint get_n_nodes();\nextern \"C\" uint get_n_lps();\nextern \"C\" uint get_n_nodes_per_lp();\nextern \"C\" uint get_n_blocks();");
-    tgs.newLine();
-    tgs.newLine();
-
+    // ROOT-Sim requires memory preallocation for each stateStruct (see comment above): we need, for each stateStruct, a global struct, named stateStruct.name + "Nodes" containing, for each member of stateStruct, a pointer having as base type the same type of that member. Each LP will use the resulting struct to access to its own state. This struct will be allocated in the function malloc_nodes (see below).
     for (SNode stateStruct : ListSequence.fromList(stateStructs)) {
       tgs.append("__device__ static ");
       tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
@@ -191,15 +178,37 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
       }
     }
 
+    /*
+      CONFIGURATION (global constants + global variables specified in the overlying DSL and then defined in the actor model, by means of the M2M transformation). It refers to configuration variables and constants to be used during execution by all the actors (a kind of global shared state among all the actors)
+
+    */
+
+    for (SNode item : SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.configuration$6ery), CONCEPTS.GlobalConstant$pG)) {
+      tgs.appendNode(item);
+    }
+    tgs.newLine();
+    tgs.append("__device__ static uint population;");
+    tgs.newLine();
+    for (SNode item : SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.configuration$6ery), CONCEPTS.GlobalVarDecl$3_)) {
+      tgs.appendNode(item);
+    }
+    tgs.newLine();
+
+    // ROOT-Sim specific global variables
+    tgs.append("extern uint events_per_node;\nextern __device__ EQs\teq;\nextern \"C\" uint get_n_nodes();\nextern \"C\" uint get_n_lps();\nextern \"C\" uint get_n_nodes_per_lp();\nextern \"C\" uint get_n_blocks();");
+    tgs.newLine();
+    tgs.newLine();
     tgs.append("uint *sim_bo;\nuint *sim_so;\nuint *sim_uo;\nuint *sim_ql;");
     tgs.newLine();
+
+    // pointer to the global array of events (or messages), similarly to what is done with the stateStruct
     tgs.append("Event *sim_events;");
     tgs.newLine();
     tgs.newLine();
 
 
     /*
-      RANDOM STUFF
+      RANDOM STUFF (utility code can be added here)
 
     */
 
@@ -213,7 +222,7 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
     */
 
 
-    // malloc_nodes
+    // malloc_nodes is the function that allocates memory for the global struct named stateStruct.name + "Nodes" (see comment above)
     tgs.append("char malloc_nodes(uint n_nodes) {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
@@ -239,6 +248,8 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
       tgs.append(SPropertyOperations.getString(stateStruct, PROPS.name$MnvL));
       tgs.append(" = (curandState_t *)malloc(sizeof(curandState_t) * n_nodes);");
       tgs.newLine();
+
+      // for each member of the stateStruct, allocate memory for that member, multiplied by the number of LPs (actors) having that stateStruct as state. n_nodes is the number of LPs (actors in the actor model)
       for (SNode member : Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(stateStruct, LINKS.members$C59R), CONCEPTS.Member$J1))) {
         tgs.indent();
         tgs.append(SPropertyOperations.getString(member, PROPS.name$MnvL));
@@ -326,7 +337,7 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.newLine();
 
-    // free_nodes
+    // free_nodes is the function that frees the memory allocated for the global struct named stateStruct.name + "Nodes", at the end of the execution
     tgs.append("void free_nodes() {");
     tgs.newLine();
     ctx.getBuffer().area().increaseIndent();
@@ -366,6 +377,7 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.newLine();
 
+
     // set_model_params
     tgs.append("__device__\nvoid set_model_params(int params[], uint n_params) {}");
     tgs.newLine();
@@ -390,9 +402,9 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
     tgs.newLine();
     tgs.newLine();
 
-    // todo topology
+    // todo topology (manca)
 
-    // external functions
+    // external functions (C libraries referred by elements of the actor model or in the DSL)
     {
       Iterable<SNode> collection = SNodeOperations.ofConcept(SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.externalFunctions$bWTb), CONCEPTS.ExternalFunction$kh);
       final SNode lastItem = Sequence.fromIterable(collection).last();
@@ -406,6 +418,7 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
 
     /*
       BEHAVIORS
+      The behaviors are mapped to CUDA functions 
 
     */
 
@@ -413,6 +426,7 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
 
     /*
       INIT FUNCTIONS
+      Each behavior can specify some initialization steps. These steps are mapped to CUDA functions as follows
 
     */
 
@@ -444,7 +458,7 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
       tgs.newLine();
       tgs.newLine();
 
-      // load state
+      // load state from the global struct named stateStruct.name + "Nodes"
       tgs.indent();
       tgs.append("/* load state */");
       tgs.newLine();
@@ -472,14 +486,14 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
       tgs.append("};");
       tgs.newLine();
 
-
+      // initialization steps (see above)
       for (SNode stmt : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(behavior, LINKS.initHandler$1yDf), LINKS.body$f8RW), LINKS.statements$euTV))) {
         tgs.indent();
         tgs.appendNode(stmt);
         tgs.newLine();
       }
 
-      // write state
+      // write state to the global struct named stateStruct.name + "Nodes"
       tgs.indent();
       tgs.append("/* store state */");
       tgs.newLine();
@@ -511,6 +525,7 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
 
     /*
       EVENT HANDLING FUNCTION
+      This function contains the steps defined in each behavior to process messages
 
     */
 
@@ -521,27 +536,22 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
 
     ctx.getBuffer().area().increaseIndent();
 
-    tgs.indent();
-    tgs.append("switch(message->receiver) {");
-    tgs.newLine();
-    ctx.getBuffer().area().increaseIndent();
+    // invoke the specific behavior based on the address of the actor (i.e., the ID of the LP) that has received this message
+    // Each message in the actor model has an associated event type (e.g., Event); the "append handle received event" operation executes a set of actions - defined in the actor model - based on such event type.
+
     for (SNode createActor : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActor$Uv, false, new SAbstractConcept[]{})).where((it) -> !(SNodeOperations.isInstanceOf(SNodeOperations.getParent(it), CONCEPTS.CreateActors$rc)))) {
       ProcessEvent.handleReceivedEvent(SPropertyOperations.getInteger(createActor, PROPS.address$DqJ_), -1, SLinkOperations.getTarget(createActor, LINKS.behavior$1pSN), SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.customEvents$eDRO), false, ctx);
     }
     for (SNode createActors : ListSequence.fromList(SNodeOperations.getNodeDescendants(ctx.getPrimaryInput(), CONCEPTS.CreateActors$rc, false, new SAbstractConcept[]{}))) {
-      ProcessEvent.handleReceivedEvent(SPropertyOperations.getInteger(ListSequence.fromList(SLinkOperations.getChildren(createActors, LINKS.actors$HQEA)).getElement(0), PROPS.address$DqJ_), SPropertyOperations.getInteger(ListSequence.fromList(SLinkOperations.getChildren(createActors, LINKS.actors$HQEA)).getElement(ListSequence.fromList(SLinkOperations.getChildren(createActors, LINKS.actors$HQEA)).count() - 1), PROPS.address$DqJ_), SLinkOperations.getTarget(createActors, LINKS.behavior$1pSN), SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.customEvents$eDRO), false, ctx);
+      ProcessEvent.handleReceivedEvent(SPropertyOperations.getInteger(ListSequence.fromList(SLinkOperations.getChildren(createActors, LINKS.actors$HQEA)).getElement(0), PROPS.address$DqJ_), SPropertyOperations.getInteger(ListSequence.fromList(SLinkOperations.getChildren(createActors, LINKS.actors$HQEA)).getElement(0), PROPS.address$DqJ_) + SPropertyOperations.getInteger(createActors, PROPS.number$$XD7) - 1, SLinkOperations.getTarget(createActors, LINKS.behavior$1pSN), SLinkOperations.getChildren(ctx.getPrimaryInput(), LINKS.customEvents$eDRO), false, ctx);
     }
     ctx.getBuffer().area().decreaseIndent();
-    tgs.indent();
-    tgs.append("}");
-    tgs.newLine();
-    ctx.getBuffer().area().decreaseIndent();
     tgs.append("}");
     tgs.newLine();
     tgs.newLine();
 
-    // other functions
 
+    // other functions needed by the ROOT-Sim runtime environment
     tgs.append("extern \"C\" {\n#include <core/core.h>\n#include <lp/expose_lp_state.h>\nextern void process_device_align_msg(unsigned lid, simtime_t time);\n\n}");
     tgs.newLine();
     tgs.newLine();
@@ -692,6 +702,7 @@ public class ActorScriptGPU_TextGen extends TextGenDescriptorBase {
     /*package*/ static final SProperty header$7lfc = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x6065ca884e7a5fe9L, 0x6065ca884e7a6002L, "header");
     /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
     /*package*/ static final SProperty randomStuff$BMch = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x9f540b99f7e7870L, "randomStuff");
+    /*package*/ static final SProperty number$$XD7 = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x5d890eb3ec029424L, 0x5d890eb3ec029443L, "number");
   }
 
   private static final class CONCEPTS {

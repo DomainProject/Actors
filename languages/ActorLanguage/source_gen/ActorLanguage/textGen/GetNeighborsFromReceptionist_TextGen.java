@@ -21,15 +21,20 @@ public class GetNeighborsFromReceptionist_TextGen extends TextGenDescriptorBase 
     tgs.createPositionInfo();
     tgs.append("unsigned long num_");
     tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.actorReferences$8P4C), PROPS.name$MnvL));
-    tgs.append(";");
+    tgs.append(" = CountDirections(topology, me);");
     tgs.newLine();
     tgs.indent();
     tgs.append("lp_id_t *");
     tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.actorReferences$8P4C), PROPS.name$MnvL));
-    tgs.append(" = GetAllNeighbors(topology, me, &num_");
+    tgs.append(";");
+    tgs.newLine();
+    tgs.indent();
+    tgs.append("GetAllReceivers(topology, me, ");
     tgs.append(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.actorReferences$8P4C), PROPS.name$MnvL));
     tgs.append(");");
     tgs.newLine();
+
+
     if (tgs.needPositions()) {
       tgs.fillPositionInfo(TraceableConcept__BehaviorDescriptor.getTraceableProperty_id4pl5GY7LKmH.invoke(SNodeOperations.cast(ctx.getPrimaryInput(), CONCEPTS.TraceableConcept$L)));
     }

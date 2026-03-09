@@ -6,22 +6,22 @@ import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.IAttributeDescriptor;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import org.jetbrains.mps.openapi.model.SNode;
 import jetbrains.mps.internal.collections.runtime.Sequence;
 import com.mbeddr.core.statements.behavior.IHasPrefixes__BehaviorDescriptor;
 import com.mbeddr.core.statements.behavior.Prefix__BehaviorDescriptor;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.IAttributeDescriptor;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import com.mbeddr.core.modules.behavior.IModuleContent__BehaviorDescriptor;
 import jetbrains.mps.internal.collections.runtime.ListSequence;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
 import org.jetbrains.mps.openapi.language.SConcept;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
-import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public class ExternalFunction_TextGen extends TextGenDescriptorBase {
   @Override
@@ -31,26 +31,6 @@ public class ExternalFunction_TextGen extends TextGenDescriptorBase {
     if (SNodeOperations.isInstanceOf(SNodeOperations.getParent(ctx.getPrimaryInput()), CONCEPTS.ActorScriptGPU$rx)) {
       tgs.append("__device__");
       tgs.newLine();
-    }
-
-    for (SNode p : Sequence.fromIterable(IHasPrefixes__BehaviorDescriptor.beforePrefixes_id8PQYytRYmo.invoke(ctx.getPrimaryInput()))) {
-      tgs.append(Prefix__BehaviorDescriptor.beforeText_id8PQYytSnuo.invoke(p));
-      tgs.newLine();
-    }
-    if (SPropertyOperations.getBoolean(ctx.getPrimaryInput(), PROPS.extern$WI8W)) {
-      tgs.append("extern ");
-    }
-
-    if (!(SPropertyOperations.getBoolean(ctx.getPrimaryInput(), PROPS.exported$V4am)) && !(SPropertyOperations.getBoolean(ctx.getPrimaryInput(), PROPS.extern$WI8W)) && (new IAttributeDescriptor.NodeAttribute(CONCEPTS.ImplementsExternalFunction$fm).get(ctx.getPrimaryInput()) == null)) {
-      tgs.append("static ");
-    }
-
-    if (SPropertyOperations.getBoolean(ctx.getPrimaryInput(), PROPS.inline$4E$D)) {
-      if (SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.__inlinetext$W2kw) != null) {
-        tgs.append(SPropertyOperations.getString(ctx.getPrimaryInput(), PROPS.__inlinetext$W2kw) + " ");
-      } else {
-        tgs.append("inline ");
-      }
     }
 
     if ((new IAttributeDescriptor.NodeAttribute(CONCEPTS.ImplementsExternalFunction$fm).get(ctx.getPrimaryInput()) != null)) {
@@ -107,18 +87,14 @@ public class ExternalFunction_TextGen extends TextGenDescriptorBase {
     /*package*/ static final SInterfaceConcept TraceableConcept$L = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a3L, "jetbrains.mps.lang.traceable.structure.TraceableConcept");
   }
 
-  private static final class PROPS {
-    /*package*/ static final SProperty extern$WI8W = MetaAdapterFactory.getProperty(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x5d18402e8bd5672eL, 0x5d18402e8bd56731L, "extern");
-    /*package*/ static final SProperty exported$V4am = MetaAdapterFactory.getProperty(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b934fL, 0x124a1a47a69807f0L, "exported");
-    /*package*/ static final SProperty __inlinetext$W2kw = MetaAdapterFactory.getProperty(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97ddL, 0x46b83c17820d6f3aL, "__inlinetext");
-    /*package*/ static final SProperty inline$4E$D = MetaAdapterFactory.getProperty(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97ddL, 0x4ed16d83a1ce8819L, "inline");
-    /*package*/ static final SProperty hasEllipsis$_cUk = MetaAdapterFactory.getProperty(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97ddL, 0x7dd23a0da5529c45L, "hasEllipsis");
-  }
-
   private static final class LINKS {
     /*package*/ static final SReferenceLink implements$zcVY = MetaAdapterFactory.getReferenceLink(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x784970cb60159ea5L, 0x784970cb6015f70dL, "implements");
     /*package*/ static final SContainmentLink type$sXU3 = MetaAdapterFactory.getContainmentLink(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x46a2a92ac61b183L, 0x46a2a92ac61b184L, "type");
     /*package*/ static final SContainmentLink arguments$6da0 = MetaAdapterFactory.getContainmentLink(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x707ac195dd5d51f2L, 0x4f39f90935e92f45L, "arguments");
     /*package*/ static final SContainmentLink body$1GE0 = MetaAdapterFactory.getContainmentLink(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97e1L, 0x3a16e3a9c7ad9954L, "body");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty hasEllipsis$_cUk = MetaAdapterFactory.getProperty(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x595522006a5b97ddL, 0x7dd23a0da5529c45L, "hasEllipsis");
   }
 }

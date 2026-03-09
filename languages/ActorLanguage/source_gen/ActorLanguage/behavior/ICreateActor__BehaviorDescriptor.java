@@ -52,11 +52,11 @@ public final class ICreateActor__BehaviorDescriptor extends BaseBHDescriptor {
     }
 
     SNode stateType = ITypeDeclaration__BehaviorDescriptor.createType_id3o2OLGv7CoR.invoke(IState__BehaviorDescriptor.getStructDeclaration_id7t$FNisxQwi.invoke(SLinkOperations.getTarget(__thisNode__, LINKS.stateType$2Mnh)));
-    SLinkOperations.setTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(__thisNode__, LINKS.behavior$1pSN), LINKS.initHandler$1yDf), LINKS.arguments$6da0)).findFirst((it) -> SPropertyOperations.getString(it, PROPS.name$MnvL).equals("state")), LINKS.type$sXU3, SNodeOperations.copyNode(stateType));
-    SLinkOperations.setTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(__thisNode__, LINKS.behavior$1pSN), LINKS.eventHandler$MLkf), LINKS.arguments$6da0)).findFirst((it) -> SPropertyOperations.getString(it, PROPS.name$MnvL).equals("state")), LINKS.type$sXU3, SNodeOperations.copyNode(stateType));
-    SLinkOperations.setTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(__thisNode__, LINKS.behavior$1pSN), LINKS.cleanupHandler$1ySg), LINKS.arguments$6da0)).findFirst((it) -> SPropertyOperations.getString(it, PROPS.name$MnvL).equals("state")), LINKS.type$sXU3, SNodeOperations.copyNode(stateType));
+    SLinkOperations.setTarget(SNodeOperations.cast(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(__thisNode__, LINKS.behavior$1pSN), LINKS.initHandler$1yDf), LINKS.arguments$6da0)).findFirst((it) -> SPropertyOperations.getString(it, PROPS.name$MnvL).equals("state")), LINKS.type$sXU3), CONCEPTS.PointerType$HX), LINKS.baseType$zMGV, SNodeOperations.copyNode(stateType));
+    SLinkOperations.setTarget(SNodeOperations.cast(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(__thisNode__, LINKS.behavior$1pSN), LINKS.eventHandler$MLkf), LINKS.arguments$6da0)).findFirst((it) -> SPropertyOperations.getString(it, PROPS.name$MnvL).equals("state")), LINKS.type$sXU3), CONCEPTS.PointerType$HX), LINKS.baseType$zMGV, SNodeOperations.copyNode(stateType));
+    SLinkOperations.setTarget(SNodeOperations.cast(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(SLinkOperations.getTarget(__thisNode__, LINKS.behavior$1pSN), LINKS.cleanupHandler$1ySg), LINKS.arguments$6da0)).findFirst((it) -> SPropertyOperations.getString(it, PROPS.name$MnvL).equals("state")), LINKS.type$sXU3), CONCEPTS.PointerType$HX), LINKS.baseType$zMGV, SNodeOperations.copyNode(stateType));
     for (SNode handler : ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(__thisNode__, LINKS.behavior$1pSN), LINKS.customEventsHandlers$Ugrs))) {
-      SLinkOperations.setTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(handler, LINKS.function$8k$G), LINKS.arguments$6da0)).findFirst((it) -> SPropertyOperations.getString(it, PROPS.name$MnvL).equals("state")), LINKS.type$sXU3, SNodeOperations.copyNode(stateType));
+      SLinkOperations.setTarget(SNodeOperations.cast(SLinkOperations.getTarget(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(handler, LINKS.function$8k$G), LINKS.arguments$6da0)).findFirst((it) -> SPropertyOperations.getString(it, PROPS.name$MnvL).equals("state")), LINKS.type$sXU3), CONCEPTS.PointerType$HX), LINKS.baseType$zMGV, SNodeOperations.copyNode(stateType));
     }
   }
 
@@ -115,6 +115,7 @@ public final class ICreateActor__BehaviorDescriptor extends BaseBHDescriptor {
     /*package*/ static final SContainmentLink initHandler$1yDf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31cL, "initHandler");
     /*package*/ static final SContainmentLink arguments$6da0 = MetaAdapterFactory.getContainmentLink(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x707ac195dd5d51f2L, 0x4f39f90935e92f45L, "arguments");
     /*package*/ static final SContainmentLink type$sXU3 = MetaAdapterFactory.getContainmentLink(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x46a2a92ac61b183L, 0x46a2a92ac61b184L, "type");
+    /*package*/ static final SContainmentLink baseType$zMGV = MetaAdapterFactory.getContainmentLink(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x6bbcdccef5e46755L, 0x6bbcdccef5e46756L, "baseType");
     /*package*/ static final SContainmentLink eventHandler$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "eventHandler");
     /*package*/ static final SContainmentLink cleanupHandler$1ySg = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31dL, "cleanupHandler");
     /*package*/ static final SContainmentLink function$8k$G = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1f52820f4a642252L, 0x1f52820f4a64226bL, "function");
@@ -124,6 +125,7 @@ public final class ICreateActor__BehaviorDescriptor extends BaseBHDescriptor {
   private static final class CONCEPTS {
     /*package*/ static final SConcept ExternalType$Bi = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2e879cff63330806L, "ActorLanguage.structure.ExternalType");
     /*package*/ static final SConcept ExternalTypeDefinition$1k = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0xbc4afff4163c9e3L, "ActorLanguage.structure.ExternalTypeDefinition");
+    /*package*/ static final SConcept PointerType$HX = MetaAdapterFactory.getConcept(0x3bf5377ae9044dedL, 0x97545a516023bfaaL, 0x3e0cae5e366d630L, "com.mbeddr.core.pointers.structure.PointerType");
   }
 
   private static final class PROPS {

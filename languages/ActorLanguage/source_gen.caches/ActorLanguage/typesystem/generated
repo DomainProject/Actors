@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<product version="3" modelHash="-esdvyfk1u8ujf2dzuc107dgna69nfgv">
+<product version="3" modelHash="-akh1fpedcy4jolfyojzvr4apzfkp96v">
   <files names="TypesystemDescriptor.java:check_CreateMessage_NonTypesystemRule.java:check_ExternalTypeDefinition_NonTypesystemRule.java:check_MessageStruct_NonTypesystemRule.java" />
 </product>
 

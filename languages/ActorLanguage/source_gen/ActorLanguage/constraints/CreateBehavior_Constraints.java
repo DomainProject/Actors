@@ -15,9 +15,8 @@ import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.ArrayList;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
-import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SConcept;
+import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
 
@@ -73,44 +72,13 @@ public class CreateBehavior_Constraints extends BaseConstraintsDescriptor {
     private static void staticSetPropertyValue(SNode node, String propertyValue) {
       SPropertyOperations.assign(node, PROPS.receivedMessageName$AwKe, propertyValue);
 
-      if ((SLinkOperations.getTarget(node, LINKS.receivedMessage$DtsG) == null)) {
-        SNode receivedMessage = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, "ActorLanguage.structure.CreateMessage"));
-        SPropertyOperations.assign(receivedMessage, PROPS.name$MnvL, propertyValue);
-        SNode payload = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, "ActorLanguage.structure.CreatePayload"));
-        SPropertyOperations.assign(payload, PROPS.name$MnvL, propertyValue + ".payload");
-        SLinkOperations.setTarget(receivedMessage, LINKS.payload$N_RC, payload);
-        SLinkOperations.setTarget(node, LINKS.receivedMessage$DtsG, receivedMessage);
-      } else {
-        SPropertyOperations.assign(SLinkOperations.getTarget(node, LINKS.receivedMessage$DtsG), PROPS.name$MnvL, propertyValue);
-        SPropertyOperations.assign(SNodeOperations.cast(SLinkOperations.getTarget(SLinkOperations.getTarget(node, LINKS.receivedMessage$DtsG), LINKS.payload$N_RC), CONCEPTS.CreatePayload$Pf), PROPS.name$MnvL, propertyValue + ".payload");
-      }
 
-      if ((SLinkOperations.getTarget(node, LINKS.messageArg$f47$) == null)) {
-        SLinkOperations.setTarget(node, LINKS.messageArg$f47$, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x6d872ef9245a20d7L, "com.mbeddr.core.modules.structure.Argument")));
-        SPropertyOperations.assign(SLinkOperations.getTarget(node, LINKS.messageArg$f47$), PROPS.name$MnvL, propertyValue);
-        SLinkOperations.setTarget(SLinkOperations.getTarget(node, LINKS.messageArg$f47$), LINKS.type$sXU3, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x3bf5377ae9044dedL, 0x97545a516023bfaaL, 0x3e0cae5e366d630L, "com.mbeddr.core.pointers.structure.PointerType")));
-        SLinkOperations.setTarget(SNodeOperations.cast(SLinkOperations.getTarget(SLinkOperations.getTarget(node, LINKS.messageArg$f47$), LINKS.type$sXU3), CONCEPTS.PointerType$HX), LINKS.baseType$zMGV, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x6d872ef9245a0d19L, "com.mbeddr.core.expressions.structure.VoidType")));
-
-        // set a copy of node.messageArg as function argument, otherwise node.messageArg would always be NULL
-        ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(node, LINKS.eventHandler$MLkf), LINKS.arguments$6da0)).insertElement(0, SNodeOperations.copyNode(SLinkOperations.getTarget(node, LINKS.messageArg$f47$)));
-        for (SNode handler : ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.customEventsHandlers$Ugrs))) {
-          ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(handler, LINKS.function$8k$G), LINKS.arguments$6da0)).insertElement(0, SNodeOperations.copyNode(SLinkOperations.getTarget(node, LINKS.messageArg$f47$)));
-        }
-      } else {
-        // todo adding more parameters could break the renaming
-        SPropertyOperations.assign(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(node, LINKS.eventHandler$MLkf), LINKS.arguments$6da0)).getElement(0), PROPS.name$MnvL, propertyValue);
-        for (SNode handler : ListSequence.fromList(SLinkOperations.getChildren(node, LINKS.customEventsHandlers$Ugrs))) {
-          SPropertyOperations.assign(ListSequence.fromList(SLinkOperations.getChildren(SLinkOperations.getTarget(handler, LINKS.function$8k$G), LINKS.arguments$6da0)).getElement(0), PROPS.name$MnvL, propertyValue);
-        }
-      }
     }
   }
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
     /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
-    /*package*/ static final SConcept CreatePayload$Pf = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe574366688L, "ActorLanguage.structure.CreatePayload");
-    /*package*/ static final SConcept PointerType$HX = MetaAdapterFactory.getConcept(0x3bf5377ae9044dedL, 0x97545a516023bfaaL, 0x3e0cae5e366d630L, "com.mbeddr.core.pointers.structure.PointerType");
   }
 
   private static final class PROPS {
@@ -122,13 +90,5 @@ public class CreateBehavior_Constraints extends BaseConstraintsDescriptor {
     /*package*/ static final SContainmentLink eventHandler$MLkf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x35a5eccbf2f8e453L, "eventHandler");
     /*package*/ static final SContainmentLink initHandler$1yDf = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31cL, "initHandler");
     /*package*/ static final SContainmentLink cleanupHandler$1ySg = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a18a31dL, "cleanupHandler");
-    /*package*/ static final SContainmentLink payload$N_RC = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x9de89b125a71571L, "payload");
-    /*package*/ static final SContainmentLink receivedMessage$DtsG = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x5ef413f8f5ff2c54L, "receivedMessage");
-    /*package*/ static final SContainmentLink messageArg$f47$ = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x47ae2b74198c8f13L, "messageArg");
-    /*package*/ static final SContainmentLink type$sXU3 = MetaAdapterFactory.getContainmentLink(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x46a2a92ac61b183L, 0x46a2a92ac61b184L, "type");
-    /*package*/ static final SContainmentLink baseType$zMGV = MetaAdapterFactory.getContainmentLink(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x6bbcdccef5e46755L, 0x6bbcdccef5e46756L, "baseType");
-    /*package*/ static final SContainmentLink arguments$6da0 = MetaAdapterFactory.getContainmentLink(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x707ac195dd5d51f2L, 0x4f39f90935e92f45L, "arguments");
-    /*package*/ static final SContainmentLink function$8k$G = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1f52820f4a642252L, 0x1f52820f4a64226bL, "function");
-    /*package*/ static final SContainmentLink customEventsHandlers$Ugrs = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, 0x1f52820f4a64224bL, "customEventsHandlers");
   }
 }

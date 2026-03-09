@@ -15,17 +15,26 @@ import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SConceptOperations;
+import jetbrains.mps.internal.collections.runtime.Sequence;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
+import java.util.Objects;
+import com.mbeddr.core.modules.behavior.ITypeDeclaration__BehaviorDescriptor;
+import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
+import jetbrains.mps.internal.collections.runtime.ListSequence;
 import jetbrains.mps.core.aspects.behaviour.api.SConstructor;
 import org.jetbrains.annotations.Nullable;
 import jetbrains.mps.core.aspects.behaviour.api.BHMethodNotFoundException;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
+import org.jetbrains.mps.openapi.language.SConcept;
+import org.jetbrains.mps.openapi.language.SProperty;
 
 public final class Handler__BehaviorDescriptor extends BaseBHDescriptor {
   private static final SAbstractConcept CONCEPT = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, "ActorLanguage.structure.Handler");
 
   public static final SMethod<SNode> getStatementList_id71UKpntnl7S = new SMethodBuilder<SNode>(new SJavaCompoundTypeImpl((Class<SNode>) ((Class) Object.class))).name("getStatementList").modifiers(8, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(8105003328814797304L).languageId(0x8efc09336c1b0001L, 0x6d11763d483d4b2bL).build2();
+  public static final SMethod<Void> updateMessageArgument_id3eahF0Z_UdU = new SMethodBuilder<Void>(new SJavaCompoundTypeImpl(Void.class)).name("updateMessageArgument").modifiers(0, AccessPrivileges.PUBLIC).concept(CONCEPT).baseMethodId(3713858565515486074L).languageId(0x9416196c5eca1268L, 0x10eda99958984cdeL).build2(SMethodBuilder.createJavaParameter(String.class, ""));
 
-  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getStatementList_id71UKpntnl7S);
+  private static final List<SMethod<?>> BH_METHODS = Arrays.<SMethod<?>>asList(getStatementList_id71UKpntnl7S, updateMessageArgument_id3eahF0Z_UdU);
 
   private static void ___init___(@NotNull SNode __thisNode__) {
     SLinkOperations.setTarget(__thisNode__, LINKS.type$sXU3, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x6d872ef9245a0d19L, "com.mbeddr.core.expressions.structure.VoidType")));
@@ -34,6 +43,19 @@ public final class Handler__BehaviorDescriptor extends BaseBHDescriptor {
 
   /*package*/ static SNode getStatementList_id71UKpntnl7S(@NotNull SNode __thisNode__) {
     return SLinkOperations.getTarget(__thisNode__, LINKS.body$f8RW);
+  }
+  /*package*/ static void updateMessageArgument_id3eahF0Z_UdU(@NotNull final SNode __thisNode__, String newName) {
+    SNode arg = Sequence.fromIterable(SNodeOperations.ofConcept(SLinkOperations.getChildren(__thisNode__, LINKS.arguments$6da0), CONCEPTS.Argument$9m)).findFirst((it) -> SNodeOperations.isInstanceOf(SLinkOperations.getTarget(it, LINKS.type$sXU3), CONCEPTS.PointerType$HX) && Objects.equals(SNodeOperations.getConcept(SLinkOperations.getTarget(SNodeOperations.cast(SLinkOperations.getTarget(it, LINKS.type$sXU3), CONCEPTS.PointerType$HX), LINKS.baseType$zMGV)), SNodeOperations.getConcept(ITypeDeclaration__BehaviorDescriptor.createType_id3o2OLGv7CoR.invoke(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(__thisNode__, CONCEPTS.ActorScript$nz, false, false), LINKS.messageDefinition$$rsX)))));
+
+    if ((arg != null)) {
+      SPropertyOperations.assign(arg, PROPS.name$MnvL, newName);
+    } else {
+      SNode newArg = SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x6d872ef9245a20d7L, "com.mbeddr.core.modules.structure.Argument"));
+      SPropertyOperations.assign(newArg, PROPS.name$MnvL, newName);
+      SLinkOperations.setTarget(newArg, LINKS.type$sXU3, SConceptOperations.createNewNode(MetaAdapterFactory.getConcept(0x3bf5377ae9044dedL, 0x97545a516023bfaaL, 0x3e0cae5e366d630L, "com.mbeddr.core.pointers.structure.PointerType")));
+      SLinkOperations.setTarget(SNodeOperations.cast(SLinkOperations.getTarget(newArg, LINKS.type$sXU3), CONCEPTS.PointerType$HX), LINKS.baseType$zMGV, ITypeDeclaration__BehaviorDescriptor.createType_id3o2OLGv7CoR.invoke(SLinkOperations.getTarget(SNodeOperations.getNodeAncestor(__thisNode__, CONCEPTS.ActorScript$nz, false, false), LINKS.messageDefinition$$rsX)));
+      ListSequence.fromList(SLinkOperations.getChildren(__thisNode__, LINKS.arguments$6da0)).addElement(newArg);
+    }
   }
 
   /*package*/ Handler__BehaviorDescriptor() {
@@ -53,6 +75,9 @@ public final class Handler__BehaviorDescriptor extends BaseBHDescriptor {
     switch (methodIndex) {
       case 0:
         return (T) ((SNode) getStatementList_id71UKpntnl7S(node));
+      case 1:
+        updateMessageArgument_id3eahF0Z_UdU(node, (String) parameters[0]);
+        return null;
       default:
         throw new BHMethodNotFoundException(this, method);
     }
@@ -85,5 +110,18 @@ public final class Handler__BehaviorDescriptor extends BaseBHDescriptor {
   private static final class LINKS {
     /*package*/ static final SContainmentLink type$sXU3 = MetaAdapterFactory.getContainmentLink(0x61c69711ed614850L, 0x81d97714ff227fb0L, 0x46a2a92ac61b183L, 0x46a2a92ac61b184L, "type");
     /*package*/ static final SContainmentLink body$f8RW = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x1b883a6609f93db2L, 0x3a16e3a9c7ad9954L, "body");
+    /*package*/ static final SContainmentLink arguments$6da0 = MetaAdapterFactory.getContainmentLink(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x707ac195dd5d51f2L, 0x4f39f90935e92f45L, "arguments");
+    /*package*/ static final SContainmentLink baseType$zMGV = MetaAdapterFactory.getContainmentLink(0xa9d696470840491eL, 0xbf392eb0805d2011L, 0x6bbcdccef5e46755L, 0x6bbcdccef5e46756L, "baseType");
+    /*package*/ static final SContainmentLink messageDefinition$$rsX = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, 0x1b883a660b9077f5L, "messageDefinition");
+  }
+
+  private static final class CONCEPTS {
+    /*package*/ static final SConcept Argument$9m = MetaAdapterFactory.getConcept(0x6d11763d483d4b2bL, 0x8efc09336c1b0001L, 0x6d872ef9245a20d7L, "com.mbeddr.core.modules.structure.Argument");
+    /*package*/ static final SConcept PointerType$HX = MetaAdapterFactory.getConcept(0x3bf5377ae9044dedL, 0x97545a516023bfaaL, 0x3e0cae5e366d630L, "com.mbeddr.core.pointers.structure.PointerType");
+    /*package*/ static final SConcept ActorScript$nz = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23376L, "ActorLanguage.structure.ActorScript");
+  }
+
+  private static final class PROPS {
+    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
   }
 }

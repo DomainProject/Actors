@@ -57,6 +57,10 @@ public class TextGenAspectDescriptor extends TextGenAspectBase {
         return new GlobalVarDecl_TextGen();
       case LanguageConceptSwitch.MessageStruct:
         return new MessageStruct_TextGen();
+      case LanguageConceptSwitch.NullPayload:
+        return new NullPayload_TextGen();
+      case LanguageConceptSwitch.Print:
+        return new Print_TextGen();
       case LanguageConceptSwitch.Random:
         return new Random_TextGen();
       case LanguageConceptSwitch.Receptionist:

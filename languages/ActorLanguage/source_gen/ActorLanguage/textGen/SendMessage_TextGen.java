@@ -5,15 +5,12 @@ package ActorLanguage.textGen;
 import jetbrains.mps.text.rt.TextGenDescriptorBase;
 import jetbrains.mps.text.rt.TextGenContext;
 import jetbrains.mps.text.impl.TextGenSupport;
-import jetbrains.mps.lang.smodel.generator.smodelAdapter.SPropertyOperations;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SLinkOperations;
-import ActorLanguage.behavior.Envelope__BehaviorDescriptor;
 import jetbrains.mps.lang.smodel.generator.smodelAdapter.SNodeOperations;
 import jetbrains.mps.lang.traceable.behavior.TraceableConcept__BehaviorDescriptor;
 import org.jetbrains.mps.openapi.language.SReferenceLink;
 import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 import org.jetbrains.mps.openapi.language.SContainmentLink;
-import org.jetbrains.mps.openapi.language.SProperty;
 import org.jetbrains.mps.openapi.language.SConcept;
 import org.jetbrains.mps.openapi.language.SInterfaceConcept;
 
@@ -22,7 +19,7 @@ public class SendMessage_TextGen extends TextGenDescriptorBase {
   public void generateText(final TextGenContext ctx) {
     final TextGenSupport tgs = new TextGenSupport(ctx);
     tgs.createPositionInfo();
-    Message.sendMessage(SPropertyOperations.getString(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.message$4GHG), PROPS.name$MnvL), SPropertyOperations.getString(Envelope__BehaviorDescriptor.getEnvelope_id5bxEeb_cNb0.invoke(SLinkOperations.getTarget(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.message$4GHG), LINKS.envelope$eoPh)), PROPS.receiverName$sscf), SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.when$gxoM), SLinkOperations.getTarget(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.message$4GHG), LINKS.event$gTPl), (SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScriptCPU$mu, false, false) != null), ctx);
+    Message.sendMessage(SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.message$4GHG), SLinkOperations.getTarget(ctx.getPrimaryInput(), LINKS.when$gxoM), (SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.ActorScriptCPU$mu, false, false) != null), SNodeOperations.getNodeAncestor(ctx.getPrimaryInput(), CONCEPTS.CreateBehavior$iN, false, false), ctx);
     if (tgs.needPositions()) {
       tgs.fillPositionInfo(TraceableConcept__BehaviorDescriptor.getTraceableProperty_id4pl5GY7LKmH.invoke(SNodeOperations.cast(ctx.getPrimaryInput(), CONCEPTS.TraceableConcept$L)));
     }
@@ -30,18 +27,12 @@ public class SendMessage_TextGen extends TextGenDescriptorBase {
 
   private static final class LINKS {
     /*package*/ static final SReferenceLink message$4GHG = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, 0x35a5eccbf2f26df5L, "message");
-    /*package*/ static final SContainmentLink envelope$eoPh = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x2d5fc2c1e9650052L, "envelope");
     /*package*/ static final SContainmentLink when$gxoM = MetaAdapterFactory.getContainmentLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f26df2L, 0x1b883a660943c844L, "when");
-    /*package*/ static final SReferenceLink event$gTPl = MetaAdapterFactory.getReferenceLink(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x35a5eccbf2f23371L, 0x7764af349d2d980aL, "event");
-  }
-
-  private static final class PROPS {
-    /*package*/ static final SProperty name$MnvL = MetaAdapterFactory.getProperty(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L, 0x110396ec041L, "name");
-    /*package*/ static final SProperty receiverName$sscf = MetaAdapterFactory.getProperty(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x13974e268151b855L, 0x49203814fba1c063L, "receiverName");
   }
 
   private static final class CONCEPTS {
     /*package*/ static final SConcept ActorScriptCPU$mu = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x46a144cd5bb2ddL, "ActorLanguage.structure.ActorScriptCPU");
+    /*package*/ static final SConcept CreateBehavior$iN = MetaAdapterFactory.getConcept(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x2176abe5743ae753L, "ActorLanguage.structure.CreateBehavior");
     /*package*/ static final SInterfaceConcept TraceableConcept$L = MetaAdapterFactory.getInterfaceConcept(0x9ded098bad6a4657L, 0xbfd948636cfe8bc3L, 0x465516cf87c705a3L, "jetbrains.mps.lang.traceable.structure.TraceableConcept");
   }
 }

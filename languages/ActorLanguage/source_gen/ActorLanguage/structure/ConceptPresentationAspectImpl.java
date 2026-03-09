@@ -60,8 +60,10 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   private ConceptPresentation props_MessageQueue;
   private ConceptPresentation props_MessageRef;
   private ConceptPresentation props_MessageStruct;
+  private ConceptPresentation props_NullPayload;
   private ConceptPresentation props_OpaqueTypeDeclaration;
   private ConceptPresentation props_Payload;
+  private ConceptPresentation props_Print;
   private ConceptPresentation props_Random;
   private ConceptPresentation props_RandomActor;
   private ConceptPresentation props_Receptionist;
@@ -441,6 +443,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_MessageStruct = cpb.create();
         }
         return props_MessageStruct;
+      case LanguageConceptSwitch.NullPayload:
+        if (props_NullPayload == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("NullPayload");
+          props_NullPayload = cpb.create();
+        }
+        return props_NullPayload;
       case LanguageConceptSwitch.OpaqueTypeDeclaration:
         if (props_OpaqueTypeDeclaration == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -455,6 +464,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_Payload = cpb.create();
         }
         return props_Payload;
+      case LanguageConceptSwitch.Print:
+        if (props_Print == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Print");
+          props_Print = cpb.create();
+        }
+        return props_Print;
       case LanguageConceptSwitch.Random:
         if (props_Random == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -500,7 +516,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
       case LanguageConceptSwitch.SelectPayload:
         if (props_SelectPayload == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.presentationByReference(0x10eda99958984cdeL, 0x9416196c5eca1268L, 0x4658738496c93a82L, 0x4658738496c93a91L, "payload", "", "");
+          cpb.rawPresentation("SelectPayload");
           props_SelectPayload = cpb.create();
         }
         return props_SelectPayload;

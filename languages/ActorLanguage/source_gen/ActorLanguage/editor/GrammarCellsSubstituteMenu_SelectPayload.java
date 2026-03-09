@@ -4,7 +4,6 @@ package ActorLanguage.editor;
 
 import jetbrains.mps.nodeEditor.menus.substitute.SubstituteMenuBase;
 import jetbrains.mps.lang.editor.menus.EditorMenuDescriptorBase;
-import jetbrains.mps.smodel.SNodePointer;
 import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import jetbrains.mps.lang.editor.menus.MenuPart;
@@ -21,7 +20,7 @@ import jetbrains.mps.smodel.adapter.structure.MetaAdapterFactory;
 
 public class GrammarCellsSubstituteMenu_SelectPayload extends SubstituteMenuBase {
   public GrammarCellsSubstituteMenu_SelectPayload() {
-    super(true, new EditorMenuDescriptorBase("default substitute menu for SelectPayload. Generated from implicit smart reference attribute.", new SNodePointer("r:a6f544b3-65b6-4da8-ad8a-228799e10ea8(ActorLanguage.structure)", "5068928393908140674")));
+    super(true, new EditorMenuDescriptorBase("contribution to the " + "default substitute menu for " + "SelectPayload", null));
   }
   @NotNull
   @Override
